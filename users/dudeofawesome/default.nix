@@ -68,6 +68,16 @@
           src = fish-doa-tide-settings;
         }
       ];
+
+      shellAbbrs = {
+        "l" = "ls -lha";
+        "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
+        "k" = "kubectl";
+      };
+
+      functions = {
+        "_tide_item_gcloud.fish" = builtins.readFile "${dotfiles}/home/.config/fish/functions/_tide_item_gcloud.fish";
+      };
     };
 
     atuin = {
@@ -109,6 +119,18 @@
       };
     };
 
+    gh = {
+      enable = true;
+      settings.git_protocol = "ssh";
+    };
+
+    tmux = {
+      enable = true;
+
+      # clock24 = true;
+      extraConfig = builtins.readFile "${dotfiles}/home/.config/tmux/tmux.conf";
+    };
+
     vim = {
       enable = true;
 
@@ -124,6 +146,31 @@
         editorconfig-vim
         vim-lumen
       ];
+    };
+
+    # firefox = {
+    #   enable = true;
+    #   profiles = {
+    #     "???" = {
+    #       search.engines = { };
+    #     };
+    #   };
+    # };
+  };
+
+  editorconfig = {
+    enable = true;
+    # TODO: convince editorconfig.settings to accept a string, or write an ini-to-set parser
+    # settings = builtins.readFile "${dotfiles}/home/.editorconfig";
+  };
+
+  # services.home-manager.autoUpgrade.enable = true;
+  # specialisation.linux.configuration = {};
+
+  targets = {
+    darwin = {
+      # keybindings = { };
+      search = "DuckDuckGo";
     };
   };
 }
