@@ -3,6 +3,14 @@
 {
   home = {
     stateVersion = "23.05";
+
+    packages = with pkgs; [
+      atuin
+      bat
+      bottom
+      most
+      ripgrep
+    ];
   };
 
   programs = {

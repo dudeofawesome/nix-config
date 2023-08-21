@@ -19,28 +19,23 @@
       act
       ansible
       awscli2
-      bat
       bind
-      bottom
       curl
       dive
       eternal-terminal
       git
       htop
       jq
-      most
       ncdu
       nodePackages.prettier
       pciutils
-      ripgrep
       rnix-lsp
       tmux
+      vim
       wget
 
       # Shells
       fish
-      fishPlugins.tide
-      fishPlugins.autopair
 
       # Languages
       deno
