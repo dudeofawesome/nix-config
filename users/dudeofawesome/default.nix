@@ -1,4 +1,13 @@
-{ pkgs, ... }:
+{ pkgs
+, lib
+, dotfiles
+, vim-lumen
+, fish-node-binpath
+, fish-node-version
+, fish-shell-integrations
+, fish-doa-tide-settings
+, ...
+}:
 
 {
   home = {
@@ -11,11 +20,24 @@
       most
       ripgrep
     ];
+
+    file = {
+      prettierrc = {
+        target = ".config/.prettierrc.js";
+        source = "${dotfiles}/home/.config/.prettierrc.js";
+      };
+    };
+
+    keyboard = {
+      layout = "us";
+      variant = "workman";
+    };
   };
 
   programs = {
     fish = {
       enable = true;
+
       plugins = [
         {
           name = "tide";
@@ -27,34 +49,38 @@
         }
         {
           name = "node-binpath";
-          src = pkgs.fetchFromGitHub {
-            owner = "dudeofawesome";
-            repo = "plugin-node-binpath";
-            rev = "3d190054a4eb49b1cf656de4e3893ded33ce3023";
-            sha256 = "8MQQ6LUBNgvUkgXu7ZWmfo2wRghCML4jXVxYUAXiwRc=";
-          };
-          # src = fish-plugin-node-binpath;
+          src = fish-node-binpath;
         }
-        {
-          name = "node-version";
-          src = pkgs.fetchFromGitHub {
-            owner = "dudeofawesome";
-            repo = "fish-plugin-node-version";
-            rev = "9dbebdb2494852a7a95b8b8bfb20477fce69a51d";
-            sha256 = "vuc4OqUtMMvL61lFhwNVT0zcnwpTNG6U6o/BDBTsXhs=";
-          };
-          # src = fish-plugin-node-version;
-        }
+        # {
+        #   name = "node-version";
+        #   src = fish-node-version;
+        # }
         {
           name = "fishtape";
-          src = pkgs.fetchFromGitHub {
-            owner = "jorgebucaran";
-            repo = "fishtape";
-            rev = "e6e5fc23dd062ee5ed11828951bf2c85d6798db5";
-            sha256 = "Sp2IarJe2SVBH1pD7pdDnXrndG4h3b5G4f3SMBceShw=";
-          };
+          src = pkgs.fishPlugins.fishtape_3.src;
+        }
+        {
+          name = "shell-integrations";
+          src = fish-shell-integrations;
+        }
+        {
+          name = "doa-tide-settings";
+          src = fish-doa-tide-settings;
         }
       ];
+    };
+
+    atuin = {
+      enable = true;
+
+      enableFishIntegration = true;
+      enableBashIntegration = true;
+
+      settings = {
+        sync_address = "https://atuin.orleans.io";
+        style = "compact";
+        # word_jump_mode = "subl";
+      };
     };
 
     git = {
@@ -81,6 +107,23 @@
           program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         };
       };
+    };
+
+    vim = {
+      enable = true;
+
+      defaultEditor = true;
+      extraConfig = builtins.readFile "${dotfiles}/home/.vim/vimrc";
+      plugins = with pkgs.vimPlugins; [
+        papercolor-theme
+        vim-airline
+        dash-vim
+        nerdtree
+        rainbow
+        vim-prettier
+        editorconfig-vim
+        vim-lumen
+      ];
     };
   };
 }

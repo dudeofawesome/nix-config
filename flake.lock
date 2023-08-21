@@ -20,6 +20,86 @@
         "type": "github"
       }
     },
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1690239995,
+        "narHash": "sha256-bkjCMvbhhbyziONtyQI8r+DDwWtn0dzgl8/e0ia3yiw=",
+        "owner": "dudeofawesome",
+        "repo": "dotfiles",
+        "rev": "24e7e5e86c13a9c22440f2c0e40a01892d8fa615",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dudeofawesome",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
+    "fish-doa-tide-settings": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1692649041,
+        "narHash": "sha256-/0mII9mRnJJEezYPsiTl9GZJA/tdm+5uWKOQp9xr6+E=",
+        "owner": "dudeofawesome",
+        "repo": "fish-plugin-doa-tide-settings",
+        "rev": "fca72771414463e73da57e338683b8729f2afae9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dudeofawesome",
+        "repo": "fish-plugin-doa-tide-settings",
+        "type": "github"
+      }
+    },
+    "fish-node-binpath": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1611812622,
+        "narHash": "sha256-8MQQ6LUBNgvUkgXu7ZWmfo2wRghCML4jXVxYUAXiwRc=",
+        "owner": "dudeofawesome",
+        "repo": "plugin-node-binpath",
+        "rev": "3d190054a4eb49b1cf656de4e3893ded33ce3023",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dudeofawesome",
+        "repo": "plugin-node-binpath",
+        "type": "github"
+      }
+    },
+    "fish-node-version": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1686870747,
+        "narHash": "sha256-WD7Kgn2WIg4jBIvN/nFGx5Qeo2JkL2o74e4+HJKi8y8=",
+        "owner": "dudeofawesome",
+        "repo": "fish-plugin-node-version",
+        "rev": "d135a01b32473e7978d22d071e5704a8964159e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dudeofawesome",
+        "repo": "fish-plugin-node-version",
+        "type": "github"
+      }
+    },
+    "fish-shell-integrations": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1692437586,
+        "narHash": "sha256-EKBxt5ENSDpXWzexknYcrEVNGbEpHtcuY9+X4vQYJi0=",
+        "owner": "dudeofawesome",
+        "repo": "fish-plugin-shell-integrations",
+        "rev": "1fd292267dfa611d057443e53e19cf6ff69040c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dudeofawesome",
+        "repo": "fish-plugin-shell-integrations",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -75,9 +155,31 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "dotfiles": "dotfiles",
+        "fish-doa-tide-settings": "fish-doa-tide-settings",
+        "fish-node-binpath": "fish-node-binpath",
+        "fish-node-version": "fish-node-version",
+        "fish-shell-integrations": "fish-shell-integrations",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-stable": "nixpkgs-stable"
+        "nixpkgs-stable": "nixpkgs-stable",
+        "vim-lumen": "vim-lumen"
+      }
+    },
+    "vim-lumen": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1692223819,
+        "narHash": "sha256-jApVvMIIuRPzLmack1eccBZDiBDupr+1ysxzPL85CgU=",
+        "owner": "vimpostor",
+        "repo": "vim-lumen",
+        "rev": "1e3f9c81ae04498dd5f9b38915b88c47485904f1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vimpostor",
+        "repo": "vim-lumen",
+        "type": "github"
       }
     }
   },

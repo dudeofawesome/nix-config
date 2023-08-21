@@ -1,4 +1,15 @@
-{ lib, inputs, nixpkgs, home-manager, ... }: {
+{ lib
+, inputs
+, nixpkgs
+, home-manager
+, dotfiles
+, vim-lumen
+, fish-node-binpath
+, fish-node-version
+, fish-shell-integrations
+, fish-doa-tide-settings
+, ...
+}: {
   kings-canyon = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = { inherit inputs; };
@@ -9,7 +20,18 @@
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
+
         home-manager.users.dudeofawesome = import ../../users/dudeofawesome;
+        home-manager.extraSpecialArgs = {
+          inherit
+            dotfiles
+            vim-lumen
+            fish-node-binpath
+            fish-node-version
+            fish-shell-integrations
+            fish-doa-tide-settings
+            ;
+        };
       }
     ];
   };
@@ -24,7 +46,18 @@
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
+
         home-manager.users.dudeofawesome = import ../../users/dudeofawesome;
+        home-manager.extraSpecialArgs = {
+          inherit
+            dotfiles
+            vim-lumen
+            fish-node-binpath
+            fish-node-version
+            fish-shell-integrations
+            fish-doa-tide-settings
+            ;
+        };
       }
     ];
   };
