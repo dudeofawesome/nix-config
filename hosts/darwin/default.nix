@@ -3,11 +3,7 @@
 , nixpkgs
 , home-manager
 , dotfiles
-, vim-lumen
-, fish-node-binpath
-, fish-node-version
-, fish-shell-integrations
-, fish-doa-tide-settings
+, pluginOverlay
 , darwin
 , ...
 }: {
@@ -15,6 +11,8 @@
     system = "aarch64-darwin";
     specialArgs = { inherit inputs; };
     modules = [
+      pluginOverlay
+
       ./crater-lake
 
       home-manager.darwinModules.home-manager
@@ -24,14 +22,7 @@
 
         home-manager.users.dudeofawesome = import ../../users/dudeofawesome;
         home-manager.extraSpecialArgs = {
-          inherit
-            dotfiles
-            vim-lumen
-            fish-node-binpath
-            fish-node-version
-            fish-shell-integrations
-            fish-doa-tide-settings
-            ;
+          inherit dotfiles;
         };
       }
     ];

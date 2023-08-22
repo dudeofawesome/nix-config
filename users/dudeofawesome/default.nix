@@ -1,11 +1,6 @@
 { pkgs
 , lib
 , dotfiles
-, vim-lumen
-, fish-node-binpath
-, fish-node-version
-, fish-shell-integrations
-, fish-doa-tide-settings
 , ...
 }:
 
@@ -38,34 +33,34 @@
     fish = {
       enable = true;
 
-      plugins = [
+      plugins = with pkgs.fishPlugins; [
         {
           name = "tide";
-          src = pkgs.fishPlugins.tide.src;
+          src = tide.src;
         }
         {
           name = "autopair.fish";
-          src = pkgs.fishPlugins.autopair-fish.src;
+          src = autopair.src;
         }
         {
           name = "node-binpath";
-          src = fish-node-binpath;
+          src = node-binpath.src;
         }
         # {
         #   name = "node-version";
-        #   src = fish-node-version;
+        #   src = node-version.src;
         # }
         {
           name = "fishtape";
-          src = pkgs.fishPlugins.fishtape_3.src;
+          src = fishtape_3.src;
         }
         {
           name = "shell-integrations";
-          src = fish-shell-integrations;
+          src = shell-integrations.src;
         }
         {
           name = "doa-tide-settings";
-          src = fish-doa-tide-settings;
+          src = doa-tide-settings.src;
         }
       ];
 

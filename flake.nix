@@ -59,7 +59,34 @@
     , fish-doa-tide-settings
     , ...
     }:
-    let location = "$HOME/git/dudeofawesome/nix-config"; in
+    let
+      location = "$HOME/git/dudeofawesome/nix-config";
+      pluginOverlay =
+        ({ config, pkgs, ... }: {
+          nixpkgs.config.packageOverrides = super: {
+            fishPlugins = super.fishPlugins // {
+              node-binpath = {
+                name = "node-binpath";
+                src = fish-node-binpath;
+              };
+              node-version = {
+                name = "node-version";
+                src = fish-node-version;
+              };
+              shell-integrations = {
+                name = "shell-integrations";
+                src = fish-shell-integrations;
+              };
+              doa-tide-settings = {
+                name = "doa-tide-settings";
+                src = fish-doa-tide-settings;
+              };
+            };
+
+            vimPlugins = super.vimPlugins // { vim-lumen = vim-lumen; };
+          };
+        });
+    in
     {
       nixosConfigurations = (
         import ./hosts/nixos {
@@ -70,11 +97,7 @@
             nixpkgs-stable
             home-manager
             dotfiles
-            vim-lumen
-            fish-node-binpath
-            fish-node-version
-            fish-shell-integrations
-            fish-doa-tide-settings
+            pluginOverlay
             location;
         }
       );
@@ -88,11 +111,7 @@
             nixpkgs-stable
             home-manager
             dotfiles
-            vim-lumen
-            fish-node-binpath
-            fish-node-version
-            fish-shell-integrations
-            fish-doa-tide-settings
+            pluginOverlay
             darwin;
         }
       );
