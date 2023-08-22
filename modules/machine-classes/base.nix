@@ -31,7 +31,7 @@
       pciutils
       rnix-lsp
       tmux
-      vim
+      vim-full
       wget
 
       # Shells
