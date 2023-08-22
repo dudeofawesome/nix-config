@@ -33,35 +33,21 @@
     fish = {
       enable = true;
 
-      plugins = with pkgs.fishPlugins; [
-        {
-          name = "tide";
-          src = tide.src;
-        }
-        {
-          name = "autopair.fish";
-          src = autopair.src;
-        }
-        {
-          name = "node-binpath";
-          src = node-binpath.src;
-        }
-        # {
-        #   name = "node-version";
-        #   src = node-version.src;
-        # }
-        {
-          name = "fishtape";
-          src = fishtape_3.src;
-        }
-        {
-          name = "shell-integrations";
-          src = shell-integrations.src;
-        }
-        {
-          name = "doa-tide-settings";
-          src = doa-tide-settings.src;
-        }
+      plugins = with pkgs.fishPlugins; let
+        cleanse = (pkg:
+          {
+            name = pkg.name;
+            src = pkg.src;
+          });
+      in
+      [
+        (cleanse tide)
+        (cleanse autopair)
+        (cleanse node-binpath)
+        # (cleanse node-version)
+        (cleanse fishtape_3)
+        (cleanse shell-integrations)
+        (cleanse doa-tide-settings)
       ];
 
       shellAbbrs = {
