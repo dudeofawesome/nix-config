@@ -1,14 +1,10 @@
-{ config, pkgs, ... }: {
+{ lib, pkgs, users, ... }:
+{
   imports = [
     ../configuration.nix
     ../../../modules/machine-classes/base.nix
     ../../../modules/machine-classes/pc.nix
   ];
-
-  users.users.dudeofawesome = {
-    home = "/Users/dudeofawesome";
-    shell = pkgs.fish;
-  };
 
   networking = {
     hostName = "crater-lake";

@@ -1,6 +1,15 @@
-{ pkgs, ... }:
+{ users, ... }:
 {
-  users.mutableUsers = false;
+  users = {
+    mutableUsers = false;
+
+    users = builtins.mapAttrs
+      (key: val: {
+        home = "/Users/${key}";
+        shell = pkgs.${val.shell};
+      })
+      users;
+  };
 
   # Don't require password for sudo.
   security.sudo.wheelNeedsPassword = false;

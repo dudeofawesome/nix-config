@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, users, ... }: {
+  users.users = builtins.mapAttrs
+    (key: val: {
+      home = "/Users/${key}";
+      shell = pkgs.${val.shell};
+    })
+    users;
 
-{
   security.pam.enableSudoTouchIdAuth = true;
 
   environment = {
@@ -199,6 +204,7 @@
       enableKeyMapping = true;
       remapCapsLockToEscape = true;
     };
+
     # Since it's not possible to declare default shell, run this command after build
     activationScripts.postActivation.text = ''sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
 
