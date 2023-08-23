@@ -205,9 +205,6 @@
       remapCapsLockToEscape = true;
     };
 
-    # Since it's not possible to declare default shell, run this command after build
-    activationScripts.postActivation.text = ''sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
-
     # Used for backwards compatibility, please read the changelog before changing.
     stateVersion = 4;
   };
