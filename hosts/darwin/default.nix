@@ -2,6 +2,7 @@
 , inputs
 , nixpkgs
 , home-manager
+, nix-vscode-extensions
 , dotfiles
 , pluginOverlay
 , darwin
@@ -32,7 +33,10 @@
 
           home-manager.users = builtins.mapAttrs (key: val: val.settings) users;
           home-manager.extraSpecialArgs = {
-            inherit dotfiles;
+            inherit
+              nix-vscode-extensions
+              dotfiles
+              ;
           };
         }
       ];
@@ -63,7 +67,10 @@
 
           home-manager.users = builtins.mapAttrs (key: val: val.settings) users;
           home-manager.extraSpecialArgs = {
-            inherit dotfiles;
+            inherit
+              nix-vscode-extensions
+              dotfiles
+              ;
           };
         }
       ];

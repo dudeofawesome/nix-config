@@ -1,0 +1,747 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.productIconTheme": "material-product-icons",
+  "workbench.colorTheme": "Community Material Theme Lighter",
+  "workbench.preferredDarkColorTheme": "Community Material Theme",
+  "workbench.preferredLightColorTheme": "Community Material Theme Lighter",
+  "workbench.colorThemeAutoSwitch": "true",
+  "window.autoDetectColorScheme": true,
+  "workbench.colorCustomizations": {
+    "[Material Night]": {
+      "editor.findMatchBackground": "#fff17695"
+    },
+    "[Community Material Theme Lighter]": {
+      // "terminal.foreground": "#CCCCCC",
+      // "terminal.background": "#243239",
+      "terminal.findMatchBorder": "#ff00FF88",
+      "terminal.findMatchBackground": "#ff00FF88",
+      "terminal.findMatchHighlightBackground": "#ff00FF88",
+      "terminal.findMatchHighlightBorder": "#ff00FF88",
+      // "debugConsole.sourceForeground": "#ff0000",
+      // "debugConsole.infoForeground": "#ff0000",
+      "debugConsole.warningForeground": "#FFB62C",
+      "debugConsole.errorForeground": "#F76D47"
+    },
+    "[Community Material Theme]": {
+      // "terminal.foreground": "#CCCCCC",
+      // "terminal.background": "#243239",
+      "terminal.findMatchBorder": "#ff00FF88",
+      "terminal.findMatchBackground": "#ff00FF88",
+      "terminal.findMatchHighlightBackground": "#ff00FF88",
+      "terminal.findMatchHighlightBorder": "#ff00FF88",
+      // "debugConsole.sourceForeground": "#ff0000",
+      // "debugConsole.infoForeground": "#ff0000",
+      "debugConsole.warningForeground": "#FFB62C",
+      "debugConsole.errorForeground": "#F76D47"
+    },
+    "terminal.selectionBackground": "#ff00FF88"
+  },
+  "editor.tokenColorCustomizations": {
+    "[Community Material Theme]": {
+      "textMateRules": [
+        {
+          "scope": "keyword.control",
+          "settings": {
+            "fontStyle": ""
+          }
+        }
+      ]
+    },
+    "[Community Material Theme Lighter]": {
+      "textMateRules": [
+        {
+          "scope": "keyword.control",
+          "settings": {
+            "fontStyle": ""
+          }
+        },
+        {
+          "scope": "string.quoted.other",
+          "settings": {
+            "foreground": "#91B859",
+            "fontStyle": "bold"
+          }
+        }
+      ]
+    },
+    "[Community Material Theme Lighter High Contrast]": {
+      "textMateRules": [
+        {
+          "scope": "keyword.control",
+          "settings": {
+            "fontStyle": ""
+          }
+        }
+      ]
+    }
+  },
+
+  "workbench.list.horizontalScrolling": true,
+  "workbench.editor.enablePreview": true,
+  "workbench.commandPalette.preserveInput": true,
+  "workbench.editor.revealIfOpen": true,
+
+  "editor.fontFamily": "'FiraCode Nerd Font', 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 12,
+  "editor.fontLigatures": "'ss01', 'ss04', 'ss06', 'ss07', 'zero'",
+
+  "editor.cursorBlinking": "smooth",
+
+  "editor.tabSize": 2,
+  "editor.rulers": [80, 120, 140],
+  "editor.autoIndent": "full",
+
+  "editor.minimap.enabled": false,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.showSlider": "always",
+  "editor.smoothScrolling": true,
+  "editor.scrollbar.scrollByPage": false,
+  "editor.stickyScroll.enabled": true,
+
+  "editor.snippetSuggestions": "inline",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.indentation": true,
+  "editor.colorDecorators": true,
+
+  "explorer.openEditors.visible": 0,
+  "window.restoreWindows": "folders",
+  "window.clickThroughInactive": false,
+
+  "debug.enableAllHovers": true,
+  "debug.toolBarLocation": "docked",
+  "debug.node.autoAttach": "on",
+  "debug.focusWindowOnBreak": false,
+  "debug.console.acceptSuggestionOnEnter": "on",
+
+  // "remote.SSH.useLocalServer": false,
+  "remote.SSH.remoteServerListenOnSocket": true,
+  "remote.SSH.remotePlatform": {
+    "oc.orleans.io": "linux",
+    "doa-server.local": "linux",
+    "doa-server": "linux",
+    "doa-miner": "linux",
+    "edgar-plotter": "linux",
+    "doa-plotter": "linux",
+    "doa-desktop-plotter": "linux",
+    "edgar-desktop-plotter": "linux",
+    "printer-pi": "linux",
+    "home.saldivar.io": "linux",
+    "doa-pi-lights": "linux",
+    "powell.place": "linux"
+  },
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/build": true,
+    "**/typings": true
+  },
+
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.external.windowsExec": "C:\\Users\\DudeOfAwesome\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+  "terminal.integrated.rightClickBehavior": "default",
+  "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.shell.windows": "arch.exe",
+  "terminal.integrated.shellArgs.windows": ["run"],
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.smoothScrolling": false,
+  "terminal.integrated.enableBell": true,
+  "terminal.integrated.macOptionClickForcesSelection": true,
+  "terminal.integrated.fontFamily": "'FiraCode Nerd Font', 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.minimumContrastRatio": 4.5,
+  // "terminal.integrated.mouseWheelScrollSensitivity": 1,
+
+  "extensions.autoUpdate": true,
+
+  "files.associations": {
+    ".env": "dotenv",
+    ".npmignore": "gitignore",
+    "*.grule": "go",
+    "*.mustache": "handlebars",
+    "*.ign": "json",
+    ".htmlhintrc": "jsonc",
+    "**/sites-available/*.*": "NGINX",
+    "**/sites-enabled/*.*": "NGINX",
+    "**/snippets/*.*": "NGINX",
+    "Appfile": "ruby",
+    "Fastfile": "ruby",
+    "*.bu": "yaml",
+    ".prettierrc": "yaml",
+    "*.travis": "yaml",
+    "*.graphqlrc": "yaml"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "dist": true
+  },
+
+  "testing.openTesting": "neverOpen",
+
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+
+  "git.confirmSync": false,
+
+  "liveshare.featureSet": "insiders",
+  "liveshare.allowGuestDebugControl": true,
+
+  "diffEditor.ignoreTrimWhitespace": false,
+
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.format.enable": false,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "jest.autoRun": "off",
+  "jest.autoRevealOutput": "off",
+  // "eslint.validate": [
+  //   "javascript",
+  //   "javascriptreact",
+  //   "typescript",
+  //   "typescriptreact"
+  // ],
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.format.enable": false,
+
+  "[ruby]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "ruby.useLanguageServer": true,
+  "ruby.useBundler": true,
+  "ruby.pathToBundler": "${userHome}/.rbenv/shims/bundler",
+
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["tsconfig.*.json"],
+      "url": "https://json.schemastore.org/tsconfig"
+    },
+    {
+      "fileMatch": [".angular-cli.json"],
+      "url": "./node_modules/@angular/cli/lib/config/schema.json"
+    },
+    {
+      "fileMatch": [".stylelintrc*"],
+      "url": "https://json.schemastore.org/stylelintrc"
+    }
+  ],
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "html.suggest.html5": true,
+  "htmlhint.documentSelector": ["html", "htm", "mustache"],
+
+  "[xml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[handlebars]": {
+    "editor.defaultFormatter": "mfeckies.handlebars-formatter"
+  },
+
+  "[python]": {
+    "editor.formatOnPaste": false,
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.formatOnType": true
+  },
+  "python.languageServer": "Pylance",
+  "python.jediEnabled": false,
+  "python.defaultInterpreterPath": "python3",
+  "python.showStartPage": false,
+
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+
+  "[markdown]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "editor.wordWrap": "bounded",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.wrappingIndent": "indent"
+  },
+  "markdown.extension.orderedList.marker": "one",
+  "markdown.preview.doubleClickToSwitchToEditor": false,
+  "markdown.styles": [
+    "https://use.fontawesome.com/releases/v6.1.2/css/all.css"
+  ],
+
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  },
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "/run/current-system/sw/bin/rnix-lsp",
+
+  "[fish]": {
+    "editor.defaultFormatter": "bmalehorn.vscode-fish",
+    "editor.tabSize": 4,
+    "editor.formatOnPaste": false
+  },
+
+  "[sql]": {
+    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
+  },
+  "Prettier-SQL.SQLFlavourOverride": "postgresql",
+
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false,
+    "editor.defaultFormatter": "Dart-Code.dart-code"
+  },
+  "dart.sdkPath": "/Users/dudeofawesome/Library/Developer/flutter/bin/cache/dart-sdk",
+  "dart.flutterHotReloadOnSave": "always",
+  "dart.debugSdkLibraries": true,
+  "dart.debugExternalLibraries": false,
+  "dart.showTodos": true,
+  "dart.previewFlutterUiGuides": true,
+  // "dart.previewFlutterUiGuidesCustomTracking": true,
+  "dart.openDevTools": "never",
+  "dart.devToolsTheme": "dark",
+  "dart.debugExternalPackageLibraries": true,
+
+  "stylelint.enable": true,
+  "css.validate": false,
+  "scss.validate": false,
+
+  "arduino.path": "/Applications",
+  "arduino.commandPath": "Contents/MacOS/Arduino",
+  "arduino.logLevel": "info",
+  "arduino.enableUSBDetection": true,
+  "arduino.disableTestingOpen": false,
+  "arduino.skipHeaderProvider": false,
+  "arduino.additionalUrls": [
+    "https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json",
+    "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
+  ],
+  "arduino.defaultBaudRate": 115200,
+
+  "csharp.referencesCodeLens.enabled": false,
+
+  "openscad.launchPath": "/Applications/OpenSCAD Beta.app/Contents/MacOS/OpenSCAD",
+
+  "java.configuration.checkProjectSettingsExclusions": false,
+
+  "kotlin.languageServer.enabled": false,
+  "kotlin.debugAdapter.enabled": false,
+
+  "lua.format.linebreakMultipleAssignments": true,
+  "lua.format.lineWidth": 80,
+  "lua.format.singleQuote": true,
+  "lua.targetVersion": "5.2",
+
+  "gcode.general.machineType": "3D Printer",
+  "gcode.general.hovers.enabled": true,
+
+  "color-highlight.enable": true,
+  "color-highlight.markerType": "underline",
+  "color-highlight.markRuler": false,
+  "todo-tree.highlights.defaultHighlight": {
+    "foreground": "#FFF",
+    "background": "#FFBD2A",
+    "type": "tag-and-subTag"
+  },
+  "material-icon-theme.showUpdateMessage": false,
+  "material-icon-theme.files.associations": {
+    "tsconfig.*.json": "tsconfig"
+  },
+  "map.preview.defaultBaseLayer": "osm",
+
+  "dash.fileNameToDocsetMap": {
+    "*.test.js": [
+      "chai",
+      "express",
+      "gulp",
+      "javascript",
+      "jest",
+      "jsdoc",
+      "lodash",
+      "marionette",
+      "moment",
+      "nodejs",
+      "rxjs"
+    ],
+    "*.test.ts": [
+      "chai",
+      "express",
+      "gulp",
+      "javascript",
+      "jest",
+      "jsdoc",
+      "lodash",
+      "marionette",
+      "moment",
+      "nodejs",
+      "rxjs",
+      "typescript"
+    ]
+  },
+  "dash.languageIdToDocsetMap": {
+    "typescript": [
+      "angularjs",
+      "angularts",
+      "awsjs",
+      "backbone",
+      "bootstrap",
+      "chai",
+      "coffee",
+      "cordova",
+      "css",
+      "date-fns",
+      "dojo",
+      "d3",
+      "ember",
+      "express",
+      "extjs",
+      "foundation",
+      "gulp",
+      "grunt",
+      "html",
+      "ionic",
+      "jasmine",
+      "javascript",
+      "jquery",
+      "jquerym",
+      "jqueryui",
+      "jsdoc",
+      "knex",
+      "knockout",
+      "lodash",
+      "loopback",
+      "marionette",
+      "meteor",
+      "mongoose",
+      "moment",
+      "moo",
+      "nodejs",
+      "phonegap",
+      "prototype",
+      "require",
+      "rxjs",
+      "sails",
+      "sencha",
+      "sinon",
+      "sproutcore",
+      "svg",
+      "titanium",
+      "typescript",
+      "underscore",
+      "unity3d",
+      "yui",
+      "zepto"
+    ],
+    "yaml": ["yaml", "chef", "ansible", "jinja"],
+    "scss": ["sass", "compass", "bourbon", "neat", "susy", "css"],
+    "cpp": ["arduino", "cpp", "c", "manpages"],
+    "fish": ["fish"],
+    "scad": ["OpenSCAD", "openscad", "scad"],
+    "java": [
+      "java",
+      "javafx",
+      "grails",
+      "groovy",
+      "playjava",
+      "spring",
+      "cvj",
+      "processing",
+      "spigotmc-1.12.2:"
+    ],
+    "dockerfile": ["docker"]
+  },
+
+  "cSpell.enabled": true,
+  "cSpell.dictionaries": [
+    "en_us",
+    "companies",
+    "filetypes",
+    "misc",
+    "softwareTerms",
+    "typescript",
+    "node",
+    "html",
+    "css",
+    "fonts"
+  ],
+  "cSpell.allowCompoundWords": true,
+  "cSpell.userWords": [
+    "Absar",
+    "algo",
+    "angularjs",
+    "ansible",
+    "arduino",
+    "autocorrect",
+    "autofocus",
+    "Bayburtsyan",
+    "BTRFS",
+    "BYOC",
+    "checkboxes",
+    "Checkin",
+    "checkins",
+    "checkmark",
+    "codelyzer",
+    "curr",
+    "datasource",
+    "datetime",
+    "debuggable",
+    "dedent",
+    "denormalize",
+    "denormalized",
+    "devtools",
+    "docset",
+    "downvote",
+    "downvoted",
+    "dudeofawesome",
+    "Ecommerce",
+    "ethnicities",
+    "frameborder",
+    "Geofence",
+    "Geofences",
+    "geolocation",
+    "geopoint",
+    "Geoposition",
+    "gitignore",
+    "gmail",
+    "Haptic",
+    "hass",
+    "horiz",
+    "imagemagick",
+    "injectable",
+    "intellisense",
+    "ionicon",
+    "ionicons",
+    "iunu",
+    "Kubernetes",
+    "lerp",
+    "LTRB",
+    "luxon",
+    "mailto",
+    "manpages",
+    "Menlo",
+    "mikro",
+    "millis",
+    "Minecraft",
+    "minimap",
+    "Miras",
+    "mobileweb",
+    "monospace",
+    "msapplication",
+    "multiline",
+    "Multipart",
+    "nestjs",
+    "ngdoc",
+    "ngrx",
+    "normalizr",
+    "nospace",
+    "npmignore",
+    "npmjs",
+    "Objs",
+    "onboarded",
+    "onboarding",
+    "onesignal",
+    "parameterize",
+    "pdfs",
+    "perc",
+    "plex",
+    "polyfills",
+    "portrayable",
+    "POSTGRES",
+    "quotemark",
+    "Rect",
+    "repo",
+    "RGBO",
+    "Roboarc",
+    "Searchbar",
+    "Serializable",
+    "Signup",
+    "splashscreen",
+    "Stateful",
+    "strikethrough",
+    "stylelint",
+    "Tigran",
+    "timeago",
+    "timestamptz",
+    "timezones",
+    "toolbars",
+    "Transcoder",
+    "tsdk",
+    "typeof",
+    "typeorm",
+    "unstarted",
+    "uploader",
+    "Upsert",
+    "upvote",
+    "upvoted",
+    "Validators",
+    "vals",
+    "venmo",
+    "videocam",
+    "vsync",
+    "xmlns"
+  ],
+  "cSpell.enableFiletypes": [
+    "c",
+    "cpp",
+    "csharp",
+    "dart",
+    "go",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "latex",
+    "markdown",
+    "php",
+    "plaintext",
+    "python",
+    "text",
+    "typescript",
+    "typescriptreact",
+    "yaml"
+  ],
+
+  "sqlite.sqlite3": "/usr/bin/sqlite3",
+  "peacock.favoriteColors": [
+    {
+      "name": "Angular Red",
+      "value": "#b52e31"
+    },
+    {
+      "name": "Auth0 Orange",
+      "value": "#eb5424"
+    },
+    {
+      "name": "Azure Blue",
+      "value": "#007fff"
+    },
+    {
+      "name": "C# Purple",
+      "value": "#68217A"
+    },
+    {
+      "name": "Gatsby Purple",
+      "value": "#639"
+    },
+    {
+      "name": "Go Cyan",
+      "value": "#5dc9e2"
+    },
+    {
+      "name": "Java Blue-Gray",
+      "value": "#557c9b"
+    },
+    {
+      "name": "JavaScript Yellow",
+      "value": "#f9e64f"
+    },
+    {
+      "name": "Mandalorian Blue",
+      "value": "#1857a4"
+    },
+    {
+      "name": "Node Green",
+      "value": "#215732"
+    },
+    {
+      "name": "React Blue",
+      "value": "#00b3e6"
+    },
+    {
+      "name": "Something Different",
+      "value": "#832561"
+    },
+    {
+      "name": "Vue Green",
+      "value": "#42b883"
+    }
+  ],
+  "reduxdev.hostname": "localhost",
+  "angular.experimental-ivy": true,
+  "jupyter.askForKernelRestart": false,
+  "redhat.telemetry.enabled": false,
+  "license.author": "Louis Orleans",
+  "license.year": "auto",
+  "leetcode.workspaceFolder": "~/Github/dudeofawesome/leetcode",
+  "leetcode.defaultLanguage": "typescript",
+  "leetcode.hint.commandShortcut": false,
+  "leetcode.hint.configWebviewMarkdown": false,
+  // "reduxdev.port": 8000
+  "gitlens.statusBar.enabled": false,
+  "gitlens.menus": {
+    "editor": {
+      "blame": false,
+      "clipboard": true,
+      "compare": true,
+      "history": false,
+      "remote": false
+    },
+    "editorGroup": false,
+    "explorer": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": true
+    },
+    "scm": {
+      "authors": true
+    },
+    "scmGroupInline": {
+      "stash": true
+    },
+    "scmGroup": {
+      "compare": true,
+      "openClose": true,
+      "stash": true
+    },
+    "scmItem": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": false,
+      "stash": true
+    }
+  }
+}

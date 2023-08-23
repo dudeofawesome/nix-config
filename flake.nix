@@ -20,6 +20,8 @@
       flake = false;
     };
 
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
     vim-lumen = {
       url = "github:vimpostor/vim-lumen";
       flake = false;
@@ -52,6 +54,7 @@
     , home-manager
     , darwin
     , dotfiles
+    , nix-vscode-extensions
     , vim-lumen
     , fish-node-binpath
     , fish-node-version
@@ -96,6 +99,7 @@
             nixpkgs
             nixpkgs-stable
             home-manager
+            nix-vscode-extensions
             dotfiles
             pluginOverlay
             location;
@@ -110,6 +114,7 @@
             nixpkgs
             nixpkgs-stable
             home-manager
+            nix-vscode-extensions
             dotfiles
             pluginOverlay
             darwin;
