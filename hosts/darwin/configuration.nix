@@ -2,7 +2,7 @@
   users.users = builtins.mapAttrs
     (key: val: {
       home = "/Users/${key}";
-      shell = pkgs.${val.shell};
+      shell = val.shell;
     })
     users;
 

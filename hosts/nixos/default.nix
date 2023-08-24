@@ -15,7 +15,7 @@
         users = {
           "lorleans" = {
             settings = import ../../users/dudeofawesome;
-            shell = "fish";
+            shell = nixpkgs.fish;
           };
         };
       in
@@ -49,7 +49,7 @@
         users = {
           "lorleans" = {
             settings = import ../../users/dudeofawesome;
-            shell = "fish";
+            shell = nixpkgs.fish;
           };
         };
       in

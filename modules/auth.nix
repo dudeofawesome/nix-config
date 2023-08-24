@@ -5,8 +5,8 @@
 
     users = builtins.mapAttrs
       (key: val: {
-        home = "/Users/${key}";
-        shell = pkgs.${val.shell};
+        home = "/home/${key}";
+        shell = val.shell;
       })
       users;
   };
