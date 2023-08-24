@@ -50,10 +50,14 @@
       enableFishIntegration = true;
       enableBashIntegration = true;
 
+      flags = [
+        "--disable-up-arrow"
+      ];
       settings = {
         sync_address = "https://atuin.orleans.io";
         style = "compact";
         # word_jump_mode = "subl";
+        filter_mode_shell_up_key_binding = "session";
       };
     };
   };
