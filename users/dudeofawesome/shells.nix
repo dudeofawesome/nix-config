@@ -3,22 +3,20 @@
     fish = {
       enable = true;
 
-      plugins = with pkgs.fishPlugins; let
-        cleanse = (pkg:
-          {
+      plugins = with pkgs.fishPlugins;
+        map
+          (pkg: {
             name = pkg.name;
             src = pkg.src;
-          });
-      in
-      [
-        (cleanse tide)
-        (cleanse autopair)
-        (cleanse node-binpath)
-        # (cleanse node-version)
-        (cleanse fishtape_3)
-        (cleanse shell-integrations)
-        (cleanse doa-tide-settings)
-      ];
+          }) [
+          tide
+          autopair
+          node-binpath
+          # node-version
+          fishtape_3
+          shell-integrations
+          doa-tide-settings
+        ];
 
       shellAbbrs = {
         "l" = "ls -lha";
