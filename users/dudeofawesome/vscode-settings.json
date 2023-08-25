@@ -101,6 +101,7 @@
   "editor.snippetSuggestions": "inline",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "vsintellicode.modelDownloadPath": "/var/lib/vsintellicode/",
 
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
@@ -196,6 +197,7 @@
   },
 
   "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
 
   "liveshare.featureSet": "insiders",
   "liveshare.allowGuestDebugControl": true,
@@ -277,6 +279,7 @@
   "python.jediEnabled": false,
   "python.defaultInterpreterPath": "python3",
   "python.showStartPage": false,
+  "jupyter.askForKernelRestart": false,
 
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
@@ -644,6 +647,7 @@
   ],
 
   "sqlite.sqlite3": "/usr/bin/sqlite3",
+
   "peacock.favoriteColors": [
     {
       "name": "Angular Red",
@@ -698,17 +702,22 @@
       "value": "#42b883"
     }
   ],
+
   "reduxdev.hostname": "localhost",
+  // "reduxdev.port": 8000
+
   "angular.experimental-ivy": true,
-  "jupyter.askForKernelRestart": false,
+
   "redhat.telemetry.enabled": false,
+
   "license.author": "Louis Orleans",
   "license.year": "auto",
+
   "leetcode.workspaceFolder": "~/Github/dudeofawesome/leetcode",
   "leetcode.defaultLanguage": "typescript",
   "leetcode.hint.commandShortcut": false,
   "leetcode.hint.configWebviewMarkdown": false,
-  // "reduxdev.port": 8000
+
   "gitlens.statusBar.enabled": false,
   "gitlens.menus": {
     "editor": {
