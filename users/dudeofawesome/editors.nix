@@ -1,11 +1,14 @@
 { pkgs, lib, osConfig, dotfiles, nix-vscode-extensions, ... }: {
+  home.packages = with pkgs; [
+    rubyPackages.solargraph
+  ];
+
   programs = {
     vscode = {
       enable = true;
 
       mutableExtensionsDir = true;
-      # TODO: get the system from flake-utils or something
-      extensions = with nix-vscode-extensions.extensions.${"aarch64-darwin"}.vscode-marketplace; [
+      extensions = with nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
         alefragnani.bookmarks
         antyos.openscad
         bmalehorn.vscode-fish
@@ -56,7 +59,7 @@
         orta.vscode-jest
         pkief.material-icon-theme
         pkief.material-product-icons
-        rebornix.ruby
+        shopify.ruby-lsp
         redhat.ansible
         redhat.vscode-yaml
         ryu1kn.partial-diff
