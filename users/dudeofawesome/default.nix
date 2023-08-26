@@ -115,4 +115,7 @@
       search = "DuckDuckGo";
     };
   };
+
+  # TODO: only run this on darwin
+  home.activation.killDock = ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD killall Dock'';
 }

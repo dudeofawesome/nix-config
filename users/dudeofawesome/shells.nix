@@ -63,7 +63,6 @@
   };
 
   # Since it's not possible to declare default shell, run this command after build
-  home.activation = {
-    setShell = ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
-  };
+  # TODO: only run this on darwin
+  home.activation.setShell = ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
 }

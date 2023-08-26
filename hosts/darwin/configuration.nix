@@ -103,6 +103,7 @@
         KeyRepeat = 2;
         ApplePressAndHoldEnabled = false;
         AppleShowScrollBars = "WhenScrolling";
+        AppleKeyboardUIMode = 3;
 
         AppleEnableMouseSwipeNavigateWithScrolls = true;
 
@@ -161,6 +162,8 @@
 
       CustomUserPreferences = {
         NSGlobalDomain = {
+          NSQuitAlwaysKeepsWindows = 1;
+
           # NSUserDictionaryReplacementItems =
           #   map
           #     (input:
