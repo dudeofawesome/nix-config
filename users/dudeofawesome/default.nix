@@ -113,6 +113,15 @@
     darwin = {
       # keybindings = { };
       search = "DuckDuckGo";
+
+      defaults = {
+        "com.apple.finder" = {
+          # When performing a search, search the current folder by default
+          FXDefaultSearchScope = "SCcf";
+        };
+
+        "com.spotify.client".AutoStartSettingIsHidden = 0;
+      };
     };
   };
 
