@@ -1,4 +1,4 @@
-{ config, pkgs, users, ... }: {
+{ pkgs, users, ... }: {
   users.users = builtins.mapAttrs
     (key: val: {
       home = "/Users/${key}";
