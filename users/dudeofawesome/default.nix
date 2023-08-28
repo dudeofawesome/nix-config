@@ -169,6 +169,8 @@
       echo "    <integer>$4</integer>"
       echo "    <key>showas</key>"
       echo "    <integer>$5</integer>"
+      echo "    <key>arrangement</key>"
+      echo "    <integer>$6</integer>"
       echo "  </dict>"
       echo "  <key>tile-type</key>"
       echo "  <string>directory-tile</string>"
@@ -222,9 +224,9 @@
       defaults write com.apple.dock persistent-others -array ""
 
       # /Applications
-      defaults write com.apple.dock persistent-others -array-add "$(createDirTile '/Applications/' 1 1 1 2)"
+      defaults write com.apple.dock persistent-others -array-add "$(createDirTile '/Applications/' 1 1 1 2 1)"
       # ~/Downloads
-      defaults write com.apple.dock persistent-others -array-add "$(createDirTile '/Users/'$(whoami)'/Downloads/' 2 1 0 0)"
+      defaults write com.apple.dock persistent-others -array-add "$(createDirTile '/Users/'$(whoami)'/Downloads/' 2 1 0 1 2)"
     }
 
     PATH="/usr/bin:$PATH" $DRY_RUN_CMD setDock
