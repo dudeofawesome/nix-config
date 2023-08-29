@@ -15,12 +15,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
     dotfiles = {
       url = "github:dudeofawesome/dotfiles";
       flake = false;
     };
-
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     vim-lumen = {
       url = "github:vimpostor/vim-lumen";

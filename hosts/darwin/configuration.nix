@@ -82,6 +82,7 @@
         "sublime-merge"
         "sublime-text"
         "tableplus"
+        "typora"
         "utm"
         "visual-studio-code"
         "workman"

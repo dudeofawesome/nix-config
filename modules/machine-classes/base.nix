@@ -30,6 +30,10 @@
       nodePackages.prettier
       pciutils
       rnix-lsp
+      rubyPackages.prettier_print
+      rubyPackages.syntax_tree
+      rubyPackages.syntax_tree-haml
+      rubyPackages.syntax_tree-rbs
       tmux
       vim-full
       wget
@@ -40,13 +44,8 @@
       # Languages
       deno
       ruby
-      nodejs-18_x
+      nodejs
     ];
-  };
-
-  programs = {
-    fish.enable = true;
-    zsh.enable = true;
   };
 
   services = {
