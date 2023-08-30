@@ -13,6 +13,7 @@
       # Utilities
       coreutils-prefixed
       darwin.lsusb
+      openconnect
     ];
   };
 
