@@ -22,11 +22,11 @@
       bind
       curl
       dive
+      dua
       eternal-terminal
       git
       htop
       jq
-      ncdu
       nodePackages.prettier
       pciutils
       rnix-lsp
