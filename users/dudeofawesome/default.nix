@@ -121,6 +121,39 @@
 
         "com.apple.Siri".StatusMenuVisible = 0;
 
+        "com.apple.dock" = {
+          showAppExposeGestureEnabled = 1;
+          showDesktopGestureEnabled = 1;
+          showLaunchpadGestureEnabled = 1;
+          showMissionControlGestureEnabled = 1;
+        };
+
+        "com.apple.iCal".ShowDeclinedEvents = 1;
+
+        "com.apple.mail" = {
+          # Set left swipe to archive
+          SwipeAction = 1;
+
+          "NSToolbar Configuration MainWindow" = {
+            "TB Item Identifiers" = [
+              "saveSearch:"
+              "toggleMessageListFilter:"
+              "SeparatorToolbarItem"
+              "checkNewMail:"
+              "showComposeWindow:"
+              "NSToolbarFlexibleSpaceItem"
+              "archiveMessages:"
+              "deleteMessages:"
+              "reply_replyAll_forward"
+              "FlaggedStatus"
+              "toggleAllHeaders:"
+              "NSToolbarFlexibleSpaceItem"
+              "Search"
+            ];
+          };
+
+        };
+
         "com.apple.Spotlight" = {
           orderedItems = [
             {
@@ -232,6 +265,7 @@
           ShowDayOfWeek = 1;
           ShowSeconds = 1;
         };
+
         "com.spotify.client".AutoStartSettingIsHidden = 0;
       };
     };
