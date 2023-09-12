@@ -97,6 +97,7 @@
   "editor.smoothScrolling": true,
   "editor.scrollbar.scrollByPage": false,
   "editor.stickyScroll.enabled": true,
+  "editor.mouseWheelScrollSensitivity": 0.4,
 
   "editor.snippetSuggestions": "inline",
   "editor.suggestSelection": "first",
@@ -585,6 +586,7 @@
     "onboarded",
     "onboarding",
     "onesignal",
+    "paciolan",
     "parameterize",
     "pdfs",
     "perc",
