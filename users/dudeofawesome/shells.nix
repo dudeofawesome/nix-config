@@ -62,7 +62,16 @@
     };
   };
 
-  # Since it's not possible to declare default shell, run this command after build
-  home.activation.setShell = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin
-    ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
+  home = {
+    # Since it's not possible to declare default shell, run this command after build
+    activation.setShell = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin
+      ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
+
+    file = {
+      dockerFishCompletion = {
+        target = ".config/fish/completions/docker.fish";
+        source = "${pkgs.docker}/share/fish/vendor_completions.d/docker.fish";
+      };
+    };
+  };
 }
