@@ -13,6 +13,8 @@
       # Utilities
       coreutils-prefixed
       darwin.lsusb
+
+      iina
     ];
   };
 
@@ -58,7 +60,6 @@
         "google-chrome"
         "hammerspoon"
         "hex-fiend"
-        "iina"
         "inkscape"
         "iterm2"
         "keka"
@@ -69,6 +70,7 @@
         "podman-desktop"
         "postico"
         "postman"
+        "private-internet-access"
         (noQuarantine "qlcolorcode")
         (noQuarantine "qlmarkdown")
         (noQuarantine "qlstephen")
@@ -89,6 +91,7 @@
       ];
     masApps = {
       "1password for Safari" = 1569813296;
+      "AdGuard for Safari" = 1440147259;
       "Amphetamine" = 937984704;
       # "Ubiquiti WiFiman" = 1385561119; # I keep on getting an error about the latest version being incompatible…
       "Xcode" = 497799835;

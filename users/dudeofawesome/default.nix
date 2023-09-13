@@ -122,11 +122,33 @@
 
         "com.apple.Siri".StatusMenuVisible = 0;
 
+        # "com.apple.Terminal" = { };
+
         "com.apple.dock" = {
           showAppExposeGestureEnabled = 1;
           showDesktopGestureEnabled = 1;
           showLaunchpadGestureEnabled = 1;
           showMissionControlGestureEnabled = 1;
+        };
+        # dock = {
+        #   showAppExposeGestureEnabled = 1;
+        #   showMissionControlGestureEnabled = 1;
+        # };
+
+        "com.apple.screensaver" = {
+          # Require password immediately after sleep or screen saver begins
+          askForPassword = 1;
+          askForPasswordDelay = 1;
+        };
+
+        "com.apple.driver.AppleBluetoothMultitouch.trackpad" = {
+          TrackpadFiveFingerPinchGesture = 2;
+          TrackpadFourFingerHorizSwipeGesture = 2;
+          TrackpadFourFingerPinchGesture = 2;
+          TrackpadFourFingerVertSwipeGesture = 2;
+          TrackpadThreeFingerHorizSwipeGesture = 1;
+          TrackpadThreeFingerTapGesture = 0;
+          TrackpadThreeFingerVertSwipeGesture = 1;
         };
 
         "com.apple.iCal".ShowDeclinedEvents = 1;
