@@ -36,6 +36,27 @@
   };
 
   programs = {
+    ssh = {
+      enable = true;
+
+      matchBlocks = {
+        # git hosts
+        "github.com".user = "git";
+        "gitlab.com".user = "git";
+        "gitlabdev.paciolan.info".user = "git";
+
+        "home.powell.place".user = "louis";
+        "home.saldivar.io" = {
+          user = "edgar";
+          port = 69;
+        };
+      };
+
+      extraConfig = ''
+        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+      '';
+    };
+
     git = {
       enable = true;
 
@@ -48,7 +69,7 @@
 
       signing = {
         signByDefault = true;
-        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN2YSc/BayEsyCgPLWQZ17/WElA5UI5bChLzMHeXYCXb";
+        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGD3VYzXLFPEC25hK7o5+NrV9cvNlyV7Y93UyAQospbw";
       };
 
       extraConfig = {
