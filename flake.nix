@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    nur.url = "github:nix-community/NUR";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -51,6 +52,7 @@
   outputs =
     inputs@{ nixpkgs
     , nixpkgs-stable
+    , nur
     , home-manager
     , darwin
     , dotfiles
@@ -88,6 +90,8 @@
 
             vimPlugins = super.vimPlugins // { vim-lumen = vim-lumen; };
           };
+
+          nixpkgs.overlays = [ nur.overlay ];
         });
     in
     {

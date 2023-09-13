@@ -222,6 +222,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1694641044,
+        "narHash": "sha256-EKsQVzLUHGnXVSKmpOjMrYz1mbpEAbg5jU+e9+Y9MCE=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "0df988a75e476dcfea1827d2baeaf35247ca8964",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "darwin": "darwin",
@@ -234,6 +249,7 @@
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
+        "nur": "nur",
         "vim-lumen": "vim-lumen"
       }
     },

@@ -1,8 +1,9 @@
 { pkgs, lib, osConfig, dotfiles, ... }:
 {
   imports = [
-    ./shells.nix
+    ./browsers.nix
     ./editors.nix
+    ./shells.nix
   ];
 
   home = {
