@@ -14,6 +14,8 @@
       coreutils-prefixed
       darwin.lsusb
 
+      glab
+      gitlab-runner
       iina
     ];
   };

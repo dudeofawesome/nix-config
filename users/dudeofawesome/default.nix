@@ -13,7 +13,6 @@
       atuin
       bat
       bottom
-      glab
       most
       ripgrep
     ];
