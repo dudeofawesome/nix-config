@@ -28,6 +28,14 @@
         _tide_item_gcloud = builtins.readFile "${dotfiles}/home/.config/fish/functions/_tide_item_gcloud.fish";
       };
 
+      interactiveShellInit = ''
+        # TODO: convert this to a plugin
+        set op_plugin_path "$HOME/.config/op/plugins.sh"
+        if test -f "$op_plugin_path"
+          source "$op_plugin_path"
+        end
+      '';
+
       # HACK: fix fish PATH: https://github.com/LnL7/nix-darwin/issues/122
       loginShellInit =
         let
