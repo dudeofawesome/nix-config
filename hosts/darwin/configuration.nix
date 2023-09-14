@@ -18,7 +18,7 @@
       glab
       gitlab-runner
       iina
-      pulumi
+      pulumi-bin
     ];
   };
 
