@@ -14,9 +14,11 @@
       coreutils-prefixed
       darwin.lsusb
 
+      # TODO: move these tools to home-manager, in a "work" module
       glab
       gitlab-runner
       iina
+      pulumi
     ];
   };
 
