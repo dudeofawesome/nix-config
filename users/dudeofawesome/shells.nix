@@ -80,6 +80,11 @@
         target = ".config/fish/completions/docker.fish";
         source = "${pkgs.docker}/share/fish/vendor_completions.d/docker.fish";
       };
+
+      podmanFishCompletion = {
+        target = ".config/fish/completions/podman.fish";
+        source = "${pkgs.podman}/share/fish/vendor_completions.d/podman.fish";
+      };
     };
   };
 }

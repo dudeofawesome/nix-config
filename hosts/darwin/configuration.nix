@@ -14,11 +14,13 @@
       coreutils-prefixed
       darwin.lsusb
 
-      # TODO: move these tools to home-manager, in a "work" module
+      # TODO: move some of these tools to home-manager, in a "work" module
       glab
       gitlab-runner
       iina
       pulumi-bin
+      podman
+      podman-compose
     ];
   };
 
