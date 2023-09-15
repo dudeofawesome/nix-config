@@ -13,6 +13,7 @@
       atuin
       bat
       bottom
+      fd
       most
       ripgrep
     ];
