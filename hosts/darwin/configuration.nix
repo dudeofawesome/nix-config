@@ -15,6 +15,7 @@
       darwin.lsusb
 
       # TODO: move some of these tools to home-manager, in a "work" module
+      docker
       glab
       gitlab-runner
       iina
@@ -51,6 +52,7 @@
         "1password"
         "aerial"
         "affinity-photo"
+        "balenaetcher"
         "bartender"
         "bettertouchtool"
         "cyberduck"
