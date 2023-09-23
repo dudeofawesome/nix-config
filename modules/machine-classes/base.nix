@@ -20,16 +20,21 @@
       act
       ansible
       awscli2
+      bat
       bind
+      bottom
       curl
       dive
       dua
       eternal-terminal
+      fd
       git
       htop
       jq
+      most
       nodePackages.prettier
       pciutils
+      ripgrep
       rnix-lsp
       rubyPackages.prettier_print
       rubyPackages.syntax_tree
@@ -42,8 +47,8 @@
       # Shells
       fish
 
-      # Languages
-      deno
+      # Runtimes
+      bun
       ruby
       nodejs
     ];
