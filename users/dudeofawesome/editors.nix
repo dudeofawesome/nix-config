@@ -57,6 +57,7 @@
         naumovs.color-highlight
         novy.vsc-gcode
         orta.vscode-jest
+        oven.bun-vscode
         pkief.material-icon-theme
         pkief.material-product-icons
         shopify.ruby-lsp
