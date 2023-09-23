@@ -4,6 +4,7 @@
     ../configuration.nix
     ../../../modules/machine-classes/base.nix
     ../../../modules/machine-classes/pc.nix
+    ../../../users/dudeofawesome/darwin.nix
   ];
 
   networking = {

@@ -16,6 +16,7 @@
     shells = with pkgs; [ fish ];
     systemPackages = with pkgs; [
       # Utilities
+      _1password
       act
       ansible
       awscli2

@@ -48,62 +48,29 @@
         };
       in
       [
-        "1password-cli"
-        "1password"
-        "aerial"
-        "affinity-photo"
         "balenaetcher"
-        "bartender"
-        "bettertouchtool"
-        "cyberduck"
         "dash"
         "discord"
         "displaylink"
-        "docker"
-        "figma"
         "finicky"
         "firefox"
         "fork"
         "gitup"
         "google-chrome"
-        "hammerspoon"
         "hex-fiend"
-        "inkscape"
         "iterm2"
         "keka"
-        "lulu"
-        "parsec"
-        "plex"
-        "plexamp"
-        "podman-desktop"
-        "postico"
-        "postman"
-        "private-internet-access"
         (noQuarantine "qlcolorcode")
         (noQuarantine "qlmarkdown")
         (noQuarantine "qlstephen")
         (noQuarantine "qlvideo")
         "quicklook-json"
-        "rectangle"
-        "signal"
-        "slack"
-        "spotify"
-        "stay"
-        "sublime-merge"
         "sublime-text"
-        "tableplus"
-        "typora"
-        "utm"
-        "visual-studio-code"
         "workman"
       ];
     masApps = {
-      "1password for Safari" = 1569813296;
-      "AdGuard for Safari" = 1440147259;
       "Amphetamine" = 937984704;
-      # "Ubiquiti WiFiman" = 1385561119; # I keep on getting an error about the latest version being incompatible…
       "Xcode" = 497799835;
-      "Microsoft Remote Desktop" = 1295203466;
     };
   };
 
