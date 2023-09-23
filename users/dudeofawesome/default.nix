@@ -11,11 +11,6 @@
 
     packages = with pkgs; [
       atuin
-      bat
-      bottom
-      fd
-      most
-      ripgrep
     ];
 
     file = {
