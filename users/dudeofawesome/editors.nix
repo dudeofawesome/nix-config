@@ -196,6 +196,22 @@
           key = "cmd+numpad0";
           command = "-workbench.action.zoomReset";
         }
+        {
+          key = "cmd+k cmd+u";
+          command = "-editor.action.removeCommentLine";
+        }
+        {
+          key = "cmd+k cmd+l";
+          command = "-editor.toggleFold";
+        }
+        {
+          key = "cmd+k cmd+u";
+          command = "editor.action.transformToUppercase";
+        }
+        {
+          key = "cmd+k cmd+l";
+          command = "editor.action.transformToLowercase";
+        }
       ];
 
       userSettings = lib.importJSON "${pkgs.runCommand "remove-comments"
