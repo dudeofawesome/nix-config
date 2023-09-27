@@ -29,6 +29,7 @@
         fabiospampinato.vscode-diff
         firefox-devtools.vscode-firefox-debug
         flesler.url-encode
+        ghmcadams.lintlens
         github.vscode-github-actions
         github.vscode-pull-request-github
         gitlab.gitlab-workflow
@@ -36,6 +37,7 @@
         gracefulpotato.rbs-syntax
         graphql.vscode-graphql
         graphql.vscode-graphql-execution
+        graphql.vscode-graphql-syntax
         gruntfuggly.todo-tree
         hashicorp.terraform
         inferrinizzard.prettier-sql-vscode
@@ -80,6 +82,26 @@
         wingrunr21.vscode-ruby
         wmaurer.change-case
         yzhang.markdown-all-in-one
+
+        # angular.ng-template
+        # dineug.vuerd-vscode
+        # fwcd.kotlin
+        # johnpapa.angular2
+        # juanblanco.solidity
+        # ms-dotnettools.csharp
+        # xadillax.viml
+        # leetcode.vscode-leetcode
+        # wangtao0101.debug-leetcode
+        # vsciot-vscode.vscode-arduino
+        # vinnyjames.vscode-autohotkey-vj
+        # zero-plusplus.vscode-autohotkey-debug
+        # trixnz.vscode-lua
+        # actboy168.lua-debug
+
+        # grapecity.gc-excelviewer
+        # johnpapa.vscode-peacock
+        # jumpinjackie.vscode-map-preview
+        # jsayol.firebase-explorer
       ];
 
       keybindings = [
