@@ -104,136 +104,163 @@
         # jsayol.firebase-explorer
       ];
 
-      keybindings = [
-        {
-          key = "ctrl+c";
-          command = "editor.action.clipboardCopyAction";
-          when = "textInputFocus";
-        }
-        {
-          key = "cmd+,";
-          command = "workbench.action.openSettingsJson";
-        }
-        {
-          key = "cmd+shift+,";
-          command = "workbench.action.openWorkspaceSettingsFile";
-        }
-        {
-          key = "ctrl+cmd+up";
-          command = "editor.action.moveLinesUpAction";
-          when = "editorTextFocus";
-        }
-        {
-          key = "ctrl+cmd+down";
-          command = "editor.action.moveLinesDownAction";
-          when = "editorTextFocus";
-        }
-        {
-          key = "cmd+\\";
-          command = "workbench.action.toggleSidebarVisibility";
-        }
-        {
-          key = "cmd+b";
-          command = "workbench.action.splitEditor";
-        }
-        {
-          key = "ctrl+tab";
-          command = "workbench.action.nextEditor";
-        }
-        {
-          key = "ctrl+shift+tab";
-          command = "workbench.action.previousEditor";
-        }
-        {
-          key = "cmd+down";
-          command = "list.select";
-          when = "listFocus";
-        }
-        {
-          key = "cmd+k cmd+s";
-          command = "workbench.action.files.saveAll";
-        }
-        {
-          key = "alt+cmd+s";
-          command = "-workbench.action.files.saveAll";
-        }
-        {
-          key = "up";
-          command = "-showPrevParameterHint";
-        }
-        {
-          key = "down";
-          command = "-showNextParameterHint";
-        }
-        # {
-        #   key = "up";
-        #   command = "-selectPrevSuggestion";
-        # }
-        # {
-        #   key = "down";
-        #   command = "-selectNextSuggestion";
-        # }
-        {
-          key = "cmd+shift+c";
-          command = "workbench.action.terminal.toggleTerminal";
-        }
-        {
-          key = "alt+cmd+m";
-          command = "workbench.action.toggleMaximizedPanel";
-        }
-        {
-          key = "cmd+alt+left";
-          command = "workbench.action.terminal.focusPrevious";
-          when = "terminalFocus";
-        }
-        {
-          key = "cmd+alt+right";
-          command = "workbench.action.terminal.focusNext";
-          when = "terminalFocus";
-        }
-        {
-          key = "cmd+t";
-          command = "workbench.action.terminal.new";
-          when = "terminalFocus";
-        }
-        {
-          key = "cmd+=";
-          when = "editorTextFocus";
-          command = "editor.action.fontZoomIn";
-        }
-        {
-          key = "cmd+-";
-          when = "editorTextFocus";
-          command = "editor.action.fontZoomOut";
-        }
-        {
-          key = "cmd+0";
-          command = "workbench.action.zoomReset";
-        }
-        {
-          key = "cmd+0";
-          command = "editor.action.fontZoomReset";
-        }
-        {
-          key = "cmd+numpad0";
-          command = "-workbench.action.zoomReset";
-        }
-        {
-          key = "cmd+k cmd+u";
-          command = "-editor.action.removeCommentLine";
-        }
-        {
-          key = "cmd+k cmd+l";
-          command = "-editor.toggleFold";
-        }
-        {
-          key = "cmd+k cmd+u";
-          command = "editor.action.transformToUppercase";
-        }
-        {
-          key = "cmd+k cmd+l";
-          command = "editor.action.transformToLowercase";
-        }
+      keybindings = lib.concatLists [
+        # misc
+        [
+          {
+            key = "ctrl+c";
+            command = "editor.action.clipboardCopyAction";
+            when = "textInputFocus";
+          }
+          {
+            key = "cmd+,";
+            command = "workbench.action.openSettingsJson";
+          }
+          {
+            key = "cmd+shift+,";
+            command = "workbench.action.openWorkspaceSettingsFile";
+          }
+          {
+            key = "ctrl+cmd+up";
+            command = "editor.action.moveLinesUpAction";
+            when = "editorTextFocus";
+          }
+          {
+            key = "ctrl+cmd+down";
+            command = "editor.action.moveLinesDownAction";
+            when = "editorTextFocus";
+          }
+          {
+            key = "cmd+down";
+            command = "list.select";
+            when = "listFocus";
+          }
+          {
+            key = "cmd+k cmd+s";
+            command = "workbench.action.files.saveAll";
+          }
+          {
+            key = "alt+cmd+s";
+            command = "-workbench.action.files.saveAll";
+          }
+          {
+            key = "up";
+            command = "-showPrevParameterHint";
+          }
+          {
+            key = "down";
+            command = "-showNextParameterHint";
+          }
+          # {
+          #   key = "up";
+          #   command = "-selectPrevSuggestion";
+          # }
+          # {
+          #   key = "down";
+          #   command = "-selectNextSuggestion";
+          # }
+        ]
+        # tab control
+        [
+          {
+            key = "cmd+\\";
+            command = "workbench.action.toggleSidebarVisibility";
+          }
+          {
+            key = "cmd+b";
+            command = "workbench.action.splitEditor";
+          }
+          {
+            key = "ctrl+tab";
+            command = "workbench.action.nextEditor";
+          }
+          {
+            key = "ctrl+shift+tab";
+            command = "workbench.action.previousEditor";
+          }
+        ]
+        # terminal control
+        [
+          {
+            key = "cmd+shift+c";
+            command = "workbench.action.terminal.toggleTerminal";
+          }
+          {
+            key = "alt+cmd+m";
+            command = "workbench.action.toggleMaximizedPanel";
+          }
+          {
+            key = "cmd+alt+left";
+            command = "workbench.action.terminal.focusPrevious";
+            when = "terminalFocus";
+          }
+          {
+            key = "cmd+alt+right";
+            command = "workbench.action.terminal.focusNext";
+            when = "terminalFocus";
+          }
+          {
+            key = "cmd+t";
+            command = "workbench.action.terminal.new";
+            when = "terminalFocus";
+          }
+        ]
+        # zoom control
+        [
+          {
+            key = "cmd+=";
+            when = "editorTextFocus";
+            command = "editor.action.fontZoomIn";
+          }
+          {
+            key = "cmd+-";
+            when = "editorTextFocus";
+            command = "editor.action.fontZoomOut";
+          }
+          {
+            key = "cmd+0";
+            command = "workbench.action.zoomReset";
+          }
+          {
+            key = "cmd+0";
+            command = "editor.action.fontZoomReset";
+          }
+
+          {
+            key = "cmd+=";
+            command = "-workbench.action.zoomIn";
+          }
+          {
+            key = "cmd+-";
+            command = "-workbench.action.zoomOut";
+          }
+          {
+            key = "cmd+numpad0";
+            command = "-workbench.action.zoomReset";
+          }
+        ]
+        # text case transform
+        [
+          {
+            key = "cmd+k cmd+u";
+            when = "editorTextFocus";
+            command = "editor.action.transformToUppercase";
+          }
+          {
+            key = "cmd+k cmd+l";
+            when = "editorTextFocus";
+            command = "editor.action.transformToLowercase";
+          }
+
+          {
+            key = "cmd+k cmd+u";
+            command = "-editor.action.removeCommentLine";
+          }
+          {
+            key = "cmd+k cmd+l";
+            command = "-editor.toggleFold";
+          }
+        ]
       ];
 
       userSettings = lib.importJSON "${pkgs.runCommand "remove-comments"
