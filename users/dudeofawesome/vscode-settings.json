@@ -1,4 +1,6 @@
 {
+  "$schema": "vscode://schemas/settings/user",
+
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "material-product-icons",
   "workbench.colorTheme": "Community Material Theme Lighter",
