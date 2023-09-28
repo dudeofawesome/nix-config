@@ -78,11 +78,18 @@
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
           "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
           "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
+          "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+          "browser.urlbar.suggest.quicksuggest.sponsored" = false;
 
+          # highlight all search results
+          "findbar.highlightAll" = true;
           # disable auto-search on type
           "accessibility.typeaheadfind" = false;
 
           "browser.shell.checkDefaultBrowser" = false;
+
+          # disable built-in password manager
+          "signon.rememberSignons" = false;
         };
       };
     };
