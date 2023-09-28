@@ -120,6 +120,7 @@
   "debug.node.autoAttach": "on",
   "debug.focusWindowOnBreak": false,
   "debug.console.acceptSuggestionOnEnter": "on",
+  "debug.javascript.autoAttachFilter": "smart",
 
   // "remote.SSH.useLocalServer": false,
   "remote.SSH.remoteServerListenOnSocket": true,
