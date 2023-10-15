@@ -4,7 +4,7 @@
 , home-manager
 , nix-vscode-extensions
 , dotfiles
-, pluginOverlay
+, packageOverlays
 , darwin
 , ...
 }: {
@@ -21,7 +21,7 @@
         };
       in
       [
-        pluginOverlay
+        packageOverlays
 
         ./crater-lake
         { _module.args.users = users; }
@@ -55,7 +55,7 @@
         };
       in
       [
-        pluginOverlay
+        packageOverlays
 
         ./badlands
         { _module.args.users = users; }

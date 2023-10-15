@@ -4,7 +4,7 @@
 , home-manager
 , nix-vscode-extensions
 , dotfiles
-, pluginOverlay
+, packageOverlays
 , ...
 }: {
   kings-canyon = lib.nixosSystem {
@@ -20,7 +20,7 @@
         };
       in
       [
-        pluginOverlay
+        packageOverlays
 
         ./kings-canyon
         { _module.args.users = users; }
@@ -54,7 +54,7 @@
         };
       in
       [
-        pluginOverlay
+        packageOverlays
 
         ./crater-lake-vm
         { _module.args.users = users; }

@@ -66,7 +66,7 @@
     }:
     let
       location = "$HOME/git/dudeofawesome/nix-config";
-      pluginOverlay =
+      packageOverlays =
         ({ config, pkgs, ... }: {
           nixpkgs.config.packageOverrides = super: {
             fishPlugins = super.fishPlugins // {
@@ -91,7 +91,15 @@
             vimPlugins = super.vimPlugins // { vim-lumen = vim-lumen; };
           };
 
-          nixpkgs.overlays = [ nur.overlay ];
+          nixpkgs.overlays = [
+            nur.overlay
+            (
+              final: prev: {
+                # TODO: this might have issues with non-free packages?
+                stable = nixpkgs-stable.legacyPackages.${prev.system};
+              }
+            )
+          ];
         });
     in
     {
@@ -105,7 +113,7 @@
             home-manager
             nix-vscode-extensions
             dotfiles
-            pluginOverlay
+            packageOverlays
             location;
         }
       );
@@ -120,7 +128,7 @@
             home-manager
             nix-vscode-extensions
             dotfiles
-            pluginOverlay
+            packageOverlays
             darwin;
         }
       );
