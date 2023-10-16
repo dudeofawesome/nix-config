@@ -113,35 +113,9 @@
             when = "textInputFocus";
           }
           {
-            key = "cmd+,";
-            command = "workbench.action.openSettingsJson";
-          }
-          {
-            key = "cmd+shift+,";
-            command = "workbench.action.openWorkspaceSettingsFile";
-          }
-          {
-            key = "ctrl+cmd+up";
-            command = "editor.action.moveLinesUpAction";
-            when = "editorTextFocus";
-          }
-          {
-            key = "ctrl+cmd+down";
-            command = "editor.action.moveLinesDownAction";
-            when = "editorTextFocus";
-          }
-          {
             key = "cmd+down";
             command = "list.select";
             when = "listFocus";
-          }
-          {
-            key = "cmd+k cmd+s";
-            command = "workbench.action.files.saveAll";
-          }
-          {
-            key = "alt+cmd+s";
-            command = "-workbench.action.files.saveAll";
           }
           {
             key = "up";
@@ -177,6 +151,24 @@
           {
             key = "ctrl+shift+tab";
             command = "workbench.action.previousEditor";
+          }
+
+          {
+            key = "cmd+k cmd+s";
+            command = "workbench.action.files.saveAll";
+          }
+          {
+            key = "alt+cmd+s";
+            command = "-workbench.action.files.saveAll";
+          }
+
+          {
+            key = "cmd+,";
+            command = "workbench.action.openSettingsJson";
+          }
+          {
+            key = "cmd+shift+,";
+            command = "workbench.action.openWorkspaceSettingsFile";
           }
         ]
         # terminal control
@@ -239,17 +231,36 @@
             command = "-workbench.action.zoomReset";
           }
         ]
+        # text control
+        [
+          {
+            key = "ctrl+cmd+up";
+            command = "editor.action.moveLinesUpAction";
+            when = "editorTextFocus && !editorReadonly";
+          }
+          {
+            key = "ctrl+cmd+down";
+            command = "editor.action.moveLinesDownAction";
+            when = "editorTextFocus && !editorReadonly";
+          }
+
+          {
+            key = "cmd+alt+/";
+            command = "editor.action.blockComment";
+            when = "editorTextFocus && !editorReadonly";
+          }
+        ]
         # text case transform
         [
           {
             key = "cmd+k cmd+u";
-            when = "editorTextFocus";
             command = "editor.action.transformToUppercase";
+            when = "editorTextFocus && !editorReadonly";
           }
           {
             key = "cmd+k cmd+l";
-            when = "editorTextFocus";
             command = "editor.action.transformToLowercase";
+            when = "editorTextFocus && !editorReadonly";
           }
 
           {
