@@ -79,7 +79,6 @@
         visualstudioexptteam.vscodeintellicode
         wallabyjs.quokka-vscode
         weaveworks.vscode-gitops-tools
-        wingrunr21.vscode-ruby
         wmaurer.change-case
         yzhang.markdown-all-in-one
 
