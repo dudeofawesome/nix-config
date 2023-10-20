@@ -19,7 +19,6 @@
 
   homebrew = {
     casks = [
-      "balenaetcher"
       "zoom"
     ];
   };

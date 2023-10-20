@@ -19,7 +19,6 @@
       glab
       gitlab-runner
       iina
-      pulumi-bin
       podman
       podman-compose
     ];
@@ -48,7 +47,6 @@
         };
       in
       [
-        "balenaetcher"
         "dash"
         "discord"
         "displaylink"
