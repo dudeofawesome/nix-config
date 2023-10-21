@@ -76,4 +76,39 @@
         }
       ];
   };
+
+  joshs-paciolan-laptop = darwin.lib.darwinSystem {
+    system = "aarch64-darwin";
+    specialArgs = { inherit inputs; };
+    modules =
+      let
+        users = {
+          "joshuagibbs" = {
+            settings = import ../../users/josh;
+            shell = nixpkgs.fish;
+          };
+        };
+      in
+      [
+        packageOverlays
+
+        ./joshs-paciolan-laptop
+        { _module.args.users = users; }
+
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          home-manager.users = builtins.mapAttrs (key: val: val.settings) users;
+          home-manager.extraSpecialArgs = {
+            inherit
+              nix-vscode-extensions
+              dudeofawesome_dotfiles
+              upaymeifixit_dotfiles
+              ;
+          };
+        }
+      ];
+  };
 }
