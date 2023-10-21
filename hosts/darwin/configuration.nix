@@ -112,13 +112,6 @@
         Clicking = true;
         TrackpadRightClick = true;
       };
-      # menuExtraClock = {
-      #   Show24Hour = true;
-      #   ShowDate = 0;
-      #   ShowDayOfMonth = true;
-      #   ShowDayOfWeek = true;
-      #   ShowSeconds = true;
-      # };
 
       CustomSystemPreferences = {
         NSGlobalDomain = {
