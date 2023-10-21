@@ -62,7 +62,7 @@
         (noQuarantine "qlmarkdown")
         (noQuarantine "qlstephen")
         (noQuarantine "qlvideo")
-        "quicklook-json"
+        (noQuarantine "quicklook-json")
         "sublime-text"
         "workman"
       ];
