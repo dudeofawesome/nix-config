@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, dotfiles, ... }:
+{ pkgs, lib, osConfig, dudeofawesome_dotfiles, ... }:
 {
   imports = [
     ./browsers.nix
@@ -16,11 +16,11 @@
     file = {
       finicky = {
         target = ".config/finicky.js";
-        source = "${dotfiles}/settings/.finicky.js";
+        source = "${dudeofawesome_dotfiles}/settings/.finicky.js";
       };
       prettierrc = {
         target = ".config/.prettierrc.js";
-        source = "${dotfiles}/home/.config/.prettierrc.js";
+        source = "${dudeofawesome_dotfiles}/home/.config/.prettierrc.js";
       };
     };
 
@@ -87,7 +87,7 @@
       enable = true;
 
       # clock24 = true;
-      extraConfig = builtins.readFile "${dotfiles}/home/.config/tmux/tmux.conf";
+      extraConfig = builtins.readFile "${dudeofawesome_dotfiles}/home/.config/tmux/tmux.conf";
     };
 
     # firefox = {

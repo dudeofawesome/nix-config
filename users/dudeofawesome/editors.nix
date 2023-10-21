@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, dotfiles, nix-vscode-extensions, ... }: {
+{ pkgs, lib, osConfig, dudeofawesome_dotfiles, nix-vscode-extensions, ... }: {
   home.packages = with pkgs; [
     rubyPackages.solargraph
   ];
@@ -286,7 +286,7 @@
       packageConfigurable = pkgs.vim-full;
 
       defaultEditor = true;
-      extraConfig = builtins.readFile "${dotfiles}/home/.vim/vimrc";
+      extraConfig = builtins.readFile "${dudeofawesome_dotfiles}/home/.vim/vimrc";
       plugins = with pkgs.vimPlugins; [
         papercolor-theme
         vim-airline

@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, dotfiles, ... }: {
+{ pkgs, lib, osConfig, dudeofawesome_dotfiles, ... }: {
   programs = {
     fish = {
       enable = true;
@@ -25,7 +25,7 @@
       };
 
       functions = {
-        _tide_item_gcloud = builtins.readFile "${dotfiles}/home/.config/fish/functions/_tide_item_gcloud.fish";
+        _tide_item_gcloud = builtins.readFile "${dudeofawesome_dotfiles}/home/.config/fish/functions/_tide_item_gcloud.fish";
       };
 
       interactiveShellInit = ''

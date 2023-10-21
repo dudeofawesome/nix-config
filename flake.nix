@@ -18,8 +18,13 @@
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
-    dotfiles = {
+    dudeofawesome_dotfiles = {
       url = "github:dudeofawesome/dotfiles";
+      flake = false;
+    };
+
+    upaymeifixit_dotfiles = {
+      url = "github:upaymeifixit/dotfiles";
       flake = false;
     };
 
@@ -55,7 +60,8 @@
     , nur
     , home-manager
     , darwin
-    , dotfiles
+    , dudeofawesome_dotfiles
+    , upaymeifixit_dotfiles
     , nix-vscode-extensions
     , vim-lumen
     , fish-node-binpath
@@ -112,7 +118,8 @@
             nixpkgs-stable
             home-manager
             nix-vscode-extensions
-            dotfiles
+            dudeofawesome_dotfiles
+            upaymeifixit_dotfiles
             packageOverlays
             location;
         }
@@ -127,7 +134,8 @@
             nixpkgs-stable
             home-manager
             nix-vscode-extensions
-            dotfiles
+            dudeofawesome_dotfiles
+            upaymeifixit_dotfiles
             packageOverlays
             darwin;
         }

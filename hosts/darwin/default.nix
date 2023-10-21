@@ -3,7 +3,8 @@
 , nixpkgs
 , home-manager
 , nix-vscode-extensions
-, dotfiles
+, dudeofawesome_dotfiles
+, upaymeifixit_dotfiles
 , packageOverlays
 , darwin
 , ...
@@ -35,7 +36,7 @@
           home-manager.extraSpecialArgs = {
             inherit
               nix-vscode-extensions
-              dotfiles
+              dudeofawesome_dotfiles
               ;
           };
         }
@@ -69,7 +70,7 @@
           home-manager.extraSpecialArgs = {
             inherit
               nix-vscode-extensions
-              dotfiles
+              dudeofawesome_dotfiles
               ;
           };
         }
