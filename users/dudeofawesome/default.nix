@@ -37,6 +37,7 @@
       matchBlocks = {
         # git hosts
         "github.com".user = "git";
+        "gist.github.com".user = "git";
         "gitlab.com".user = "git";
         "gitlabdev.paciolan.info".user = "git";
 
