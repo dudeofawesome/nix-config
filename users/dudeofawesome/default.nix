@@ -90,15 +90,6 @@
       # clock24 = true;
       extraConfig = builtins.readFile "${dudeofawesome_dotfiles}/home/.config/tmux/tmux.conf";
     };
-
-    # firefox = {
-    #   enable = true;
-    #   profiles = {
-    #     "???" = {
-    #       search.engines = { };
-    #     };
-    #   };
-    # };
   };
 
   # services.home-manager.autoUpgrade.enable = true;
