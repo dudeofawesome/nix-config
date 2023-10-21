@@ -300,6 +300,29 @@
     };
   };
 
+  editorconfig = {
+    enable = true;
+
+    settings = {
+      "*" = {
+        indent_style = "space";
+        indent_size = 2;
+        # We recommend you to keep these unchanged
+        end_of_line = "lf";
+        charset = "utf-8";
+        trim_trailing_whitespace = true;
+        insert_final_newline = true;
+      };
+      "*.md" = {
+        trim_trailing_whitespace = false;
+        indent_size = 4;
+      };
+      "Makefile" = {
+        indent_style = "tab";
+      };
+    };
+  };
+
   home.activation.createVSCodeIntellicodeDir = ''
     path="/var/lib/vsintellicode/"
     PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo mkdir -p "$path"
