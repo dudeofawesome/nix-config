@@ -1,4 +1,4 @@
-{ pkgs, users, ... }: {
+{ pkgs, lib, ... }: {
   homebrew = {
     casks = [
       "android-file-transfer"
@@ -52,17 +52,17 @@
   system = {
     defaults = {
       dock = {
-        minimize-to-application = false;
+        minimize-to-application = lib.mkForce false;
 
         wvous-br-corner = 14; # Quick Note
       };
       finder = {
-        AppleShowAllFiles = false;
+        AppleShowAllFiles = lib.mkForce false;
       };
     };
 
     keyboard = {
-      remapCapsLockToEscape = false;
+      remapCapsLockToEscape = lib.mkForce false;
     };
-  }
+  };
 }

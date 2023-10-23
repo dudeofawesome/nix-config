@@ -27,9 +27,11 @@
         "Joshs-Notebook.local".user = "Josh";
         "router" = {
           user = "root";
-          hostName = "10.0.0.1";
-          hostKeyAlgorithms = "+ssh-rsa";
-          hostKeyAlgorithms.pubkeyAcceptedAlgorithms = "+ssh-rsa";
+          hostname = "10.0.0.1";
+          extraOptions = {
+            hostKeyAlgorithms = "+ssh-rsa";
+            "hostKeyAlgorithms.pubkeyAcceptedAlgorithms" = "+ssh-rsa";
+          };
         };
         "home.powell.place".user = "josh";
       };
