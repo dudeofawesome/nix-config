@@ -319,7 +319,8 @@
   },
 
   "[sql]": {
-    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
+    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode",
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|\\(\\*|--)\\s*($TAGS)"
   },
   "Prettier-SQL.SQLFlavourOverride": "postgresql",
 

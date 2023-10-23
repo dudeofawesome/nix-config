@@ -15,7 +15,7 @@
       let
         users = {
           "lorleans" = {
-            settings = import ../../users/dudeofawesome;
+            settings = import ../../users/dudeofawesome/settings;
             shell = nixpkgs.fish;
           };
         };
@@ -50,7 +50,7 @@
       let
         users = {
           "lorleans" = {
-            settings = import ../../users/dudeofawesome;
+            settings = import ../../users/dudeofawesome/settings;
             shell = nixpkgs.fish;
           };
         };

@@ -1,4 +1,8 @@
 { pkgs, lib, osConfig, dudeofawesome_dotfiles, ... }: {
+  home.packages = with pkgs; [
+    atuin
+  ];
+
   programs = {
     fish = {
       enable = true;
@@ -53,8 +57,6 @@
     };
 
     atuin = {
-      enable = true;
-
       enableFishIntegration = true;
       enableBashIntegration = true;
 
@@ -62,7 +64,6 @@
         "--disable-up-arrow"
       ];
       settings = {
-        sync_address = "https://atuin.orleans.io";
         style = "compact";
         # word_jump_mode = "subl";
         filter_mode_shell_up_key_binding = "session";
