@@ -73,7 +73,7 @@
     let
       location = "$HOME/git/dudeofawesome/nix-config";
       packageOverlays =
-        ({ config, pkgs, ... }: {
+        ({ config, pkgs, system, ... }: {
           nixpkgs.config.packageOverrides = super: {
             fishPlugins = super.fishPlugins // {
               node-binpath = {
@@ -101,8 +101,10 @@
             nur.overlay
             (
               final: prev: {
-                # TODO: this might have issues with non-free packages?
-                stable = nixpkgs-stable.legacyPackages.${prev.system};
+                stable = import nixpkgs-stable {
+                  inherit system;
+                  config.allowUnfree = true;
+                };
               }
             )
           ];
