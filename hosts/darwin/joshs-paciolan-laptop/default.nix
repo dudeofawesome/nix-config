@@ -4,7 +4,7 @@
     ../configuration.nix
     ../../../modules/machine-classes/base.nix
     ../../../modules/machine-classes/pc.nix
-    ../../../users/josh/darwin.nix
+    ../../../users/josh/os/darwin.nix
   ];
 
   homebrew = {

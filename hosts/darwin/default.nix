@@ -84,7 +84,7 @@
       let
         users = {
           "joshuagibbs" = {
-            settings = import ../../users/josh;
+            settings = import ../../users/josh/settings;
             shell = nixpkgs.fish;
           };
         };

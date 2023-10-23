@@ -1,28 +1,12 @@
-{ pkgs, lib, osConfig, upaymeifixit_dotfiles, dudeofawesome_dotfiles ... }:
+{ pkgs, lib, osConfig, upaymeifixit_dotfiles, dudeofawesome_dotfiles, ... }:
 {
   imports = [
-    ../dudeofawesome/browsers.nix
-    ./editors.nix
-    ../dudeofawesome/shells.nix
+    ../../base
+    ../../dudeofawesome/settings/browsers.nix
   ];
 
   home = {
     stateVersion = "23.05";
-
-    packages = with pkgs; [
-      atuin
-    ];
-
-    file = {
-      finicky = {
-        target = ".config/finicky.js";
-        source = "${dudeofawesome_dotfiles}/settings/.finicky.js";
-      };
-      prettierrc = {
-        target = ".config/.prettierrc.js";
-        source = "${dudeofawesome_dotfiles}/home/.config/.prettierrc.js";
-      };
-    };
 
     keyboard = {
       layout = "us";
@@ -32,14 +16,7 @@
 
   programs = {
     ssh = {
-      enable = true;
-
       matchBlocks = {
-        # git hosts
-        "github.com".user = "git";
-        "gist.github.com".user = "git";
-        "gitlab.com".user = "git";
-
         "gitlabdev.paciolan.info".user = "git";
         "gitlabaws.paciolan.info".user = "git";
         "sftp-aws.paciolan.info".user = "pacsftp-shift4";
@@ -56,48 +33,13 @@
         };
         "home.powell.place".user = "josh";
       };
-
-      extraConfig = ''
-        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-      '';
     };
 
     git = {
-      enable = true;
-
       userName = "Josh Gibbs";
       userEmail = "josh@gibbs.tk";
 
-      ignores = [
-        ".DS_Store"
-      ];
-
-      signing = {
-        signByDefault = true;
-        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICWpH2swLUhFYS8ffRP7bviAwTroqaCACeAcp6kAtyO0";
-      };
-
-      extraConfig = {
-        gpg = {
-          format = "ssh";
-        };
-
-        "gpg \"ssh\"" = {
-          program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-        };
-      };
-    };
-
-    gh = {
-      enable = true;
-      settings.git_protocol = "ssh";
-    };
-
-    tmux = {
-      enable = true;
-
-      # clock24 = true;
-      extraConfig = builtins.readFile "${dudeofawesome_dotfiles}/home/.config/tmux/tmux.conf";
+      signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICWpH2swLUhFYS8ffRP7bviAwTroqaCACeAcp6kAtyO0";
     };
   };
 
@@ -106,193 +48,9 @@
 
   targets = {
     darwin = {
-      # keybindings = { };
       search = "Google";
-
-      defaults = {
-        "com.apple.finder" = {
-          # When performing a search, search the current folder by default
-          FXDefaultSearchScope = "SCcf";
-        };
-
-        "com.apple.Siri".StatusMenuVisible = 0;
-
-        # "com.apple.Terminal" = { };
-
-        "com.apple.dock" = {
-          showAppExposeGestureEnabled = 1;
-          showDesktopGestureEnabled = 1;
-          showLaunchpadGestureEnabled = 1;
-          showMissionControlGestureEnabled = 1;
-        };
-        # dock = {
-        #   showAppExposeGestureEnabled = 1;
-        #   showMissionControlGestureEnabled = 1;
-        # };
-
-        "com.apple.screensaver" = {
-          # Require password immediately after sleep or screen saver begins
-          askForPassword = 1;
-          askForPasswordDelay = 1;
-        };
-
-        "com.apple.driver.AppleBluetoothMultitouch.trackpad" = {
-          TrackpadFiveFingerPinchGesture = 2;
-          TrackpadFourFingerHorizSwipeGesture = 2;
-          TrackpadFourFingerPinchGesture = 2;
-          TrackpadFourFingerVertSwipeGesture = 2;
-          TrackpadThreeFingerHorizSwipeGesture = 1;
-          TrackpadThreeFingerTapGesture = 0;
-          TrackpadThreeFingerVertSwipeGesture = 1;
-        };
-
-        "com.apple.iCal".ShowDeclinedEvents = 1;
-
-        "com.apple.mail" = {
-          # Set left swipe to archive
-          SwipeAction = 1;
-
-          "NSToolbar Configuration MainWindow" = {
-            "TB Item Identifiers" = [
-              "saveSearch:"
-              "toggleMessageListFilter:"
-              "SeparatorToolbarItem"
-              "checkNewMail:"
-              "showComposeWindow:"
-              "NSToolbarFlexibleSpaceItem"
-              "archiveMessages:"
-              "deleteMessages:"
-              "reply_replyAll_forward"
-              "FlaggedStatus"
-              "toggleAllHeaders:"
-              "NSToolbarFlexibleSpaceItem"
-              "Search"
-            ];
-          };
-
-        };
-
-        "com.apple.Spotlight" = {
-          orderedItems = [
-            {
-              enabled = 1;
-              name = "APPLICATIONS";
-            }
-            {
-              enabled = 1;
-              name = "BOOKMARKS";
-            }
-            {
-              enabled = 1;
-              name = "MENU_EXPRESSION";
-            }
-            {
-              enabled = 1;
-              name = "CONTACT";
-            }
-            {
-              enabled = 1;
-              name = "MENU_CONVERSION";
-            }
-            {
-              enabled = 1;
-              name = "MENU_DEFINITION";
-            }
-            {
-              enabled = 1;
-              name = "SOURCE";
-            }
-            {
-              enabled = 1;
-              name = "DOCUMENTS";
-            }
-            {
-              enabled = 1;
-              name = "EVENT_TODO";
-            }
-            {
-              enabled = 1;
-              name = "DIRECTORIES";
-            }
-            {
-              enabled = 1;
-              name = "FONTS";
-            }
-            {
-              enabled = 1;
-              name = "IMAGES";
-            }
-            {
-              enabled = 1;
-              name = "MESSAGES";
-            }
-            {
-              enabled = 1;
-              name = "MOVIES";
-            }
-            {
-              enabled = 1;
-              name = "MUSIC";
-            }
-            {
-              enabled = 1;
-              name = "MENU_OTHER";
-            }
-            {
-              enabled = 1;
-              name = "PDF";
-            }
-            {
-              enabled = 1;
-              name = "PRESENTATIONS";
-            }
-            {
-              enabled = 0;
-              name = "MENU_SPOTLIGHT_SUGGESTIONS";
-            }
-            {
-              enabled = 1;
-              name = "SPREADSHEETS";
-            }
-            {
-              enabled = 1;
-              name = "SYSTEM_PREFS";
-            }
-            {
-              enabled = 1;
-              name = "TIPS";
-            }
-          ];
-        };
-
-        "com.apple.networkConnect" = {
-          VPNShowTime = 1;
-        };
-
-        "com.apple.systemuiserver" = {
-          "NSStatusItem Visible com.apple.menuextra.vpn" = 1;
-          "NSStatusItem Visible Bluetooth" = 1;
-          menuExtras = (
-            "/System/Library/CoreServices/Menu Extras/VPN.menu"
-          );
-        };
-
-        "com.apple.menuextra.clock" = {
-          Show24Hour = 1;
-          ShowDate = 1;
-          ShowDayOfWeek = 1;
-          ShowSeconds = 1;
-        };
-
-        "com.spotify.client".AutoStartSettingIsHidden = 0;
-      };
     };
   };
-
-  home.activation.zActivateSettings = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin ''
-    $DRY_RUN_CMD /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-    PATH="/usr/bin:$PATH" $DRY_RUN_CMD killall Dock
-  '';
 
   home.activation.setDockApps = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin ''
     function createTile() {
