@@ -108,13 +108,13 @@
       defaults write com.apple.dock persistent-apps -array ""
 
       # add Chrome
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Chrome.app')"
+      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Google Chrome.app')"
       # add Spotify
       defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Spotify.app')"
       # add Outlook
       defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Outlook.app')"
       # add Zoom
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Zoom.app')"
+      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/zoom.us.app')"
       # add Slack
       defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Slack.app')"
       # add Messenger
@@ -126,7 +126,7 @@
       # add Sublime Text
       defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Sublime Text.app')"
       # add VS Code
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/VS Code.app')"
+      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Visual Studio Code.app')"
       # add TablePlus
       defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/TablePlus.app')"
       # add iTerm
@@ -138,7 +138,7 @@
       # add Todoist
       defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Todoist.app')"
       # add Stickies
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Stickies.app')"
+      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/System/Applications/Stickies.app')"
     }
 
     function setDockDirs() {

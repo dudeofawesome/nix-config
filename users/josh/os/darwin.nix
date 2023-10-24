@@ -46,6 +46,7 @@
       "AdGuard for Safari" = 1440147259;
       # "Ubiquiti WiFiman" = 1385561119; # I keep on getting an error about the latest version being incompatible…
       "Microsoft Remote Desktop" = 1295203466;
+      "Microsoft Outlook" = 985367838;
     };
   };
 
