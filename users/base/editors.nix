@@ -195,16 +195,6 @@
           }
         ]
       ];
-
-      # TODO: make this file mutable
-      #   https://github.com/andyrichardson/dotfiles/blob/28c3630e71d65d92b88cf83b2f91121432be0068/nix/home/vscode.nix#L5
-      #   https://gist.github.com/piousdeer/b29c272eaeba398b864da6abf6cb5daa
-      # userSettings = lib.importJSON "${pkgs.runCommand "remove-comments"
-      #   { input = builtins.readFile ./vscode-settings.json; }
-      #   ''
-      #     mkdir "$out"
-      #     echo "$input" | sed 's/\/\/ .*$//g' > "$out/message"
-      #   ''}/message";
     };
 
     vim = {

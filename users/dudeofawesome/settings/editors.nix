@@ -1,7 +1,24 @@
-{ pkgs, lib, osConfig, nix-vscode-extensions, ... }: {
+{ pkgs, lib, config, nix-vscode-extensions, ... }:
+let
+  userDir =
+    if pkgs.stdenv.hostPlatform.isDarwin then
+      "Library/Application Support/Code/User"
+    else
+      "${config.xdg.configHome}/Code/User";
+  configFilePath = "${userDir}/settings.json";
+in
+{
   home.packages = with pkgs; [
     rubyPackages.solargraph
   ];
+
+  # home.file.vscode_settings = {
+  #   target = configFilePath;
+  #   source = config.lib.file.mkOutOfStoreSymlink ./vscode-settings.json;
+  # };
+  home.activation.createMutableVSCodeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    cp -f "${./vscode-settings.json}" ~/"${configFilePath}"
+  '';
 
   programs = {
     vscode = {
@@ -106,12 +123,15 @@
       # TODO: make this file mutable
       #   https://github.com/andyrichardson/dotfiles/blob/28c3630e71d65d92b88cf83b2f91121432be0068/nix/home/vscode.nix#L5
       #   https://gist.github.com/piousdeer/b29c272eaeba398b864da6abf6cb5daa
-      userSettings = lib.importJSON "${pkgs.runCommand "remove-comments"
-        { input = builtins.readFile ./vscode-settings.json; }
-        ''
-          mkdir "$out"
-          echo "$input" | sed 's/\/\/ .*$//g' > "$out/message"
-        ''}/message";
+      #   https://github.com/nix-community/home-manager/pull/2743/files
+      # userSettings = lib.importJSON "${pkgs.runCommand "remove-comments"
+      #   { input = builtins.readFile ./vscode-settings.json; }
+      #   ''
+      #     mkdir "$out"
+      #     echo "$input" \
+      #       | sed 's/\/\/ .*$//g' \
+      #       > "$out/message"
+      #   ''}/message";
     };
   };
 }
