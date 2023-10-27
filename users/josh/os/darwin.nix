@@ -1,6 +1,7 @@
 { pkgs, lib, ... }: {
   homebrew = {
     casks = [
+      "1password"
       "android-file-transfer"
       "background-music"
       "balenaetcher"
