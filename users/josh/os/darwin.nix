@@ -14,7 +14,6 @@
       "google-earth-pro"
       "handbrake"
       "hiddenbar"
-      "linearmouse"
       "messenger"
       "microsoft-remote-desktop"
       "miro"
