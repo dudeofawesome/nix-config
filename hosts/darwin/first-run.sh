@@ -41,7 +41,7 @@ function install_nix {
 }
 
 function install_nix_darwin {
-  if [ -x "$(command -v darwin-rebuild)" ]; then
+  if [ ! -x "$(command -v darwin-rebuild)" ]; then
     >&2 echo "====/ SETUP BASE NIX-DARWIN /===="
 
     base_config=~/".config/nix-darwin"
