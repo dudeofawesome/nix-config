@@ -24,6 +24,9 @@ function main {
   $dryrun curl -L https://nixos.org/nix/install \
     | $dryrun sh -s -- --daemon
 
+  # load nix env vars
+  source /etc/bash.bashrc
+
   # Create temporary configuration.nix flake
   # https://github.com/LnL7/nix-darwin#step-1-creating-flakenix
   $dryrun mkdir -p ~/.config/nix-darwin

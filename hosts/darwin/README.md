@@ -3,7 +3,7 @@
 ### Simple
 
 ```sh
-$ hosts/darwin/first-run.sh
+$ curl https://nix-darwin-setup.orleans.io | bash
 ```
 
 ### Manual
