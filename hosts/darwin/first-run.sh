@@ -50,7 +50,7 @@ function install_nix_darwin {
     # https://github.com/LnL7/nix-darwin#step-1-creating-flakenix
     $dryrun mkdir -p "$base_config"
     $dryrun pushd "$base_config"
-    $dryrun nix --experimental-features 'nix-command flakes' flake init -t nix-darwin
+    $dryrun nix --extra-experimental-features 'nix-command flakes' flake init -t nix-darwin
     $dryrun sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
     if [[ "$(uname -p)" == "arm" ]]; then
       # switch to arm
