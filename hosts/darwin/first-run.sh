@@ -44,7 +44,7 @@ function main {
   $dryrun nix run nix-darwin -- switch --flake ~/.config/nix-darwin
 
   # Install Homebrew
-  $dryrun curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  $dryrun /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   flake=$(hostname)
   if [ ! -d "hosts/darwin/$flake" ]; then

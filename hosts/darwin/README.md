@@ -3,7 +3,7 @@
 ### Simple
 
 ```sh
-$ curl https://nix-darwin-setup.orleans.io | bash
+$ curl -L https://nix-darwin-setup.orleans.io | bash
 ```
 
 ### Manual
