@@ -89,6 +89,9 @@ function main {
 
   install_nix_darwin
 
+  # load nix-darwin env vars
+  source /etc/bash.bashrc
+
   install_brew
 
   >&2 echo "====/ APPLY FLAKE /===="
