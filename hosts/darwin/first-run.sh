@@ -24,7 +24,7 @@ function cd_git_root {
 function clone_repo {
   >&2 echo "Cloning nix-config"
 
-  git_dir = ~/"git/dudeofawesome"
+  git_dir=~/"git/dudeofawesome"
   mkdir -p "$git_dir"
   cd "$git_dir"
   git clone "https://github.com/dudeofawesome/nix-config"
