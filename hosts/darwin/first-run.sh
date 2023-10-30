@@ -60,10 +60,8 @@ function main {
   $dryrun nix run nix-darwin -- switch --flake ~/.config/nix-darwin
 
   >&2 echo "====/ INSTALL HOMEBREW /===="
-  brew_install="/tmp/brew-install.sh"
-  $dryrun curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh" > "$brew_install"
-  $dryrun chmod +x "$brew_install"
-  INTERACTIVE=1 $dryrun "$brew_install"
+  sudo --validate
+  $dryrun /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   >&2 echo "====/ APPLY FLAKE /===="
   flake=$(hostname)
