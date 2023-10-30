@@ -51,8 +51,7 @@ function install_nix_darwin {
     $dryrun mkdir -p "$base_config"
     $dryrun pushd "$base_config"
     $dryrun nix \
-      --extra-experimental-features 'nix-command' \
-      --extra-experimental-features 'flakes' \
+      --experimental-features 'nix-command flakes' \
       flake init -t nix-darwin
     $dryrun sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
     if [[ "$(uname -p)" == "arm" ]]; then
@@ -63,7 +62,9 @@ function install_nix_darwin {
 
     # Install nix-darwin
     # https://github.com/LnL7/nix-darwin#step-2-installing-nix-darwin
-    $dryrun nix run nix-darwin -- switch --flake "$base_config"
+    $dryrun nix \
+      --experimental-features 'nix-command flakes' \
+      run nix-darwin -- switch --flake "$base_config"
 
     # clean up
     $dryrun rm -rf "$base_config"
