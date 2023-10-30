@@ -85,12 +85,12 @@ function main {
   install_nix
 
   # load nix env vars
-  source /etc/bash.bashrc
+  source /etc/bashrc
 
   install_nix_darwin
 
   # load nix-darwin env vars
-  source /etc/bash.bashrc
+  source /etc/bashrc
 
   install_brew
 
