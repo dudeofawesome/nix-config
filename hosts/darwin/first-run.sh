@@ -97,7 +97,7 @@ function main {
   >&2 echo "====/ APPLY FLAKE /===="
   flake=$(hostname)
   if [ ! -d "hosts/darwin/$flake" ]; then
-    read -p 'What host would you like to apply?' flake
+    read -p 'What host would you like to apply? ' flake
   fi
   # Apply flake
   $dryrun darwin-rebuild switch --flake ".#$flake"
