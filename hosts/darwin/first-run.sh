@@ -61,7 +61,7 @@ function main {
 
   >&2 echo "====/ INSTALL HOMEBREW /===="
   brew_install="/tmp/brew-install.sh"
-  $dryrun wget --output-document "$brew_install" "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+  $dryrun curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh" > "$brew_install"
   $dryrun chmod +x "$brew_install"
   INTERACTIVE=1 $dryrun "$brew_install"
 
