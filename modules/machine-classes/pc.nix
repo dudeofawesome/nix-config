@@ -8,6 +8,7 @@
 
       docker
       kubectl
+      kubectx
     ];
   };
 }

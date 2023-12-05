@@ -26,6 +26,8 @@
         "l" = "ls -lha";
         "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
         "k" = "kubectl";
+        "ktx" = "kubectx";
+        "kns" = "kubens";
       };
 
       functions = {
@@ -85,6 +87,16 @@
       podmanFishCompletion = {
         target = ".config/fish/completions/podman.fish";
         source = "${pkgs.podman}/share/fish/vendor_completions.d/podman.fish";
+      };
+
+      kubectxFishCompletion = {
+        target = ".config/fish/completions/kubectx.fish";
+        source = "${pkgs.kubectx}/share/fish/vendor_completions.d/kubectx.fish";
+      };
+
+      kubensFishCompletion = {
+        target = ".config/fish/completions/kubens.fish";
+        source = "${pkgs.kubectx}/share/fish/vendor_completions.d/kubens.fish";
       };
     };
   };
