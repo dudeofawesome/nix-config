@@ -57,8 +57,10 @@ in
         graphql.vscode-graphql-syntax
         gruntfuggly.todo-tree
         hashicorp.terraform
+        idleberg.applescript
         inferrinizzard.prettier-sql-vscode
         jnoortheen.nix-ide
+        mads-hartmann.bash-ide-vscode
         mikestead.dotenv
         mrmlnc.vscode-scss
         ms-azuretools.vscode-docker
