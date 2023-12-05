@@ -16,8 +16,9 @@
 
       # TODO: move some of these tools to home-manager, in a "work" module
       docker
-      glab
       gitlab-runner
+      glab
+      gnused
       iina
       podman
       podman-compose
