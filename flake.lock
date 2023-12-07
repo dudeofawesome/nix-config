@@ -84,6 +84,22 @@
         "type": "github"
       }
     },
+    "fish-osx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1547481988,
+        "narHash": "sha256-jSUIk3ewM6QnfoAtp16l96N1TlX6vR0d99dvEH53Xgw=",
+        "owner": "oh-my-fish",
+        "repo": "plugin-osx",
+        "rev": "27039b251201ec2e70d8e8052cbc59fa0ac3b3cd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oh-my-fish",
+        "repo": "plugin-osx",
+        "type": "github"
+      }
+    },
     "fish-shell-integrations": {
       "flake": false,
       "locked": {
@@ -244,6 +260,7 @@
         "fish-doa-tide-settings": "fish-doa-tide-settings",
         "fish-node-binpath": "fish-node-binpath",
         "fish-node-version": "fish-node-version",
+        "fish-osx": "fish-osx",
         "fish-shell-integrations": "fish-shell-integrations",
         "home-manager": "home-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",

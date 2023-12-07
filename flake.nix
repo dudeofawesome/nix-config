@@ -33,6 +33,11 @@
       flake = false;
     };
 
+    fish-osx = {
+      url = "github:oh-my-fish/plugin-osx";
+      flake = false;
+    };
+
     fish-node-binpath = {
       url = "github:dudeofawesome/plugin-node-binpath";
       flake = false;
@@ -64,6 +69,7 @@
     , upaymeifixit_dotfiles
     , nix-vscode-extensions
     , vim-lumen
+    , fish-osx
     , fish-node-binpath
     , fish-node-version
     , fish-shell-integrations
@@ -76,6 +82,10 @@
         ({ config, pkgs, system, ... }: {
           nixpkgs.config.packageOverrides = super: {
             fishPlugins = super.fishPlugins // {
+              osx = {
+                name = "osx";
+                src = fish-osx;
+              };
               node-binpath = {
                 name = "node-binpath";
                 src = fish-node-binpath;

@@ -15,6 +15,7 @@
           }) [
           tide
           autopair
+          osx
           node-binpath
           # node-version
           fishtape_3
