@@ -11,7 +11,7 @@
   };
 
   networking = {
-    hostName = "crater-lake-vm";
+    hostName = "badlands-vm";
     firewall.enable = false;
   };
 

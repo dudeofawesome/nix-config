@@ -43,13 +43,13 @@
       ];
   };
 
-  crater-lake-vm = lib.nixosSystem {
+  badlands-vm = lib.nixosSystem {
     system = "aarch64-linux";
     specialArgs = { inherit inputs; };
     modules =
       let
         users = {
-          "lorleans" = {
+          "dudeofawesome" = {
             settings = import ../../users/dudeofawesome/settings;
             shell = nixpkgs.fish;
           };
@@ -58,7 +58,7 @@
       [
         packageOverlays
 
-        ./crater-lake-vm
+        ./badlands-vm
         { _module.args.users = users; }
 
         home-manager.nixosModules.home-manager
@@ -71,7 +71,6 @@
             inherit
               nix-vscode-extensions
               dudeofawesome_dotfiles
-              upaymeifixit_dotfiles
               ;
           };
         }
