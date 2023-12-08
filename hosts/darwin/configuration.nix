@@ -16,9 +16,11 @@
 
       # TODO: move some of these tools to home-manager, in a "work" module
       docker
+      findutils
       gitlab-runner
       glab
       gnused
+      gnutar
       iina
       podman
       podman-compose
