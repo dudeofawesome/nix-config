@@ -30,6 +30,7 @@
           hostname = "10.0.0.1";
           extraOptions = {
             hostKeyAlgorithms = "+ssh-rsa";
+            # TODO: this is wrong
             "hostKeyAlgorithms.pubkeyAcceptedAlgorithms" = "+ssh-rsa";
           };
         };
