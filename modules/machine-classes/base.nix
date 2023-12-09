@@ -65,10 +65,6 @@
       automatic = true;
       options = "--delete-older-than 7d";
     };
-    gc = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
-      # TODO: how do we specify GC interval for nixos?
-      interval.Day = 7;
-    };
     extraOptions = ''
       auto-optimise-store = true
       experimental-features = nix-command flakes

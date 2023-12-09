@@ -27,6 +27,13 @@
     ];
   };
 
+  nix = {
+    gc = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+      # TODO: how do we specify GC interval for nixos?
+      interval.Day = 7;
+    };
+  };
+
   homebrew = {
     # Declare Homebrew using Nix-Darwin
     enable = true;
