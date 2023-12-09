@@ -27,6 +27,10 @@
     ];
   };
 
+  services = {
+    nix-daemon.enable = true; # Auto upgrade daemon
+  };
+
   nix = {
     gc = {
       # TODO: how do we specify GC interval for nixos?

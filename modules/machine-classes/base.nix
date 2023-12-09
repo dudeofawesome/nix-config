@@ -54,10 +54,6 @@
     ];
   };
 
-  services = {
-    nix-daemon.enable = true; # Auto upgrade daemon
-  };
-
   nix = {
     package = pkgs.nix;
     gc = {
