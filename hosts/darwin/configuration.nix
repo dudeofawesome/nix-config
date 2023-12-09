@@ -28,7 +28,7 @@
   };
 
   nix = {
-    gc = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+    gc = {
       # TODO: how do we specify GC interval for nixos?
       interval.Day = 7;
     };
