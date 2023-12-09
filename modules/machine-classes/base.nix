@@ -54,6 +54,8 @@
     ];
   };
 
+  programs.fish.enable = true;
+
   nix = {
     package = pkgs.nix;
     gc = {
