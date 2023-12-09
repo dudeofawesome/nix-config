@@ -8,5 +8,4 @@
   };
 
   services.qemuGuest.enable = true;
-  virtualisation.qemu.guestAgent.enable = true;
 }
