@@ -64,7 +64,7 @@
       # Garbage collection
       automatic = true;
       # TODO: how do we specify GC interval for nixos?
-      interval.Day = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin 7;
+      interval = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin { Day = 7; };
       options = "--delete-older-than 7d";
     };
     extraOptions = ''
