@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   fonts = {
@@ -63,7 +63,8 @@
     gc = {
       # Garbage collection
       automatic = true;
-      interval.Day = 7;
+      # TODO: how do we specify GC interval for nixos?
+      interval.Day = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin 7;
       options = "--delete-older-than 7d";
     };
     extraOptions = ''
