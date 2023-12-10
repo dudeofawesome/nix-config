@@ -25,6 +25,11 @@
         user = "edgar";
         port = 69;
       };
+      "terracompute" = {
+        hostname = "192.168.4.115";
+        user = "vast";
+        proxyJump = "home.saldivar.io";
+      };
     };
 
     git = {
