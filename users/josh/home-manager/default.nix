@@ -25,16 +25,15 @@
 
         "gibbs.tk".user = "upaymeifixit";
         "Joshs-Notebook.local".user = "Josh";
+        "home.powell.place".user = "josh";
         "router" = {
           user = "root";
           hostname = "10.0.0.1";
-          extraOptions = {
-            hostKeyAlgorithms = "+ssh-rsa";
-            # TODO: this is wrong
-            "hostKeyAlgorithms.pubkeyAcceptedAlgorithms" = "+ssh-rsa";
-          };
         };
-        "home.powell.place".user = "josh";
+        "terracompute" = {
+          user = "vast";
+          hostname = "192.168.4.115";
+        };
       };
     };
 
