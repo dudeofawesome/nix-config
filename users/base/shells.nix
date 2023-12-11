@@ -14,16 +14,19 @@ with pkgs.stdenv.targetPlatform;
           (pkg: {
             name = pkg.name;
             src = pkg.src;
-          }) [
-          tide
-          autopair
-          osx
-          node-binpath
-          # node-version
-          fishtape_3
-          shell-integrations
-          doa-tide-settings
-        ];
+          })
+          ([
+            tide
+            autopair
+            node-binpath
+            # node-version
+            fishtape_3
+            shell-integrations
+            doa-tide-settings
+          ]
+          ++ (if isDarwin then [
+            osx
+          ] else [ ]));
 
       shellAbbrs = {
         "l" = "ls -lha";
