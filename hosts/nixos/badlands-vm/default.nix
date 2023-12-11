@@ -1,5 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
+    ./hardware-configuration.nix
     ../configuration.nix
     ../../../modules/boot/systemd-boot.nix
     ../../../modules/machine-classes/base.nix
