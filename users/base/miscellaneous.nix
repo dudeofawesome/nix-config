@@ -72,7 +72,7 @@
   # specialisation.linux.configuration = {};
 
   targets = {
-    darwin = {
+    darwin = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
       # keybindings = {
       #   "~f" = "moveWordForward:";
       # };
