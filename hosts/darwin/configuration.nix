@@ -1,10 +1,7 @@
 { pkgs, users, ... }: {
-  users.users = builtins.mapAttrs
-    (key: val: {
-      home = "/Users/${key}";
-      shell = val.shell;
-    })
-    users;
+  imports = [
+    ../../modules/auth.nix
+  ];
 
   security.pam.enableSudoTouchIdAuth = true;
 

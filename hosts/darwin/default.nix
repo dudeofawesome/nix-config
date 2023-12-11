@@ -15,10 +15,7 @@
     modules =
       let
         users = {
-          "dudeofawesome" = {
-            settings = import ../../users/dudeofawesome/settings;
-            shell = nixpkgs.fish;
-          };
+          "dudeofawesome" = import ../../users/dudeofawesome { };
         };
       in
       [
@@ -49,10 +46,7 @@
     modules =
       let
         users = {
-          "lorleans" = {
-            settings = import ../../users/dudeofawesome/settings;
-            shell = nixpkgs.fish;
-          };
+          "lorleans" = import ../../users/dudeofawesome { };
         };
       in
       [
@@ -83,10 +77,7 @@
     modules =
       let
         users = {
-          "joshuagibbs" = {
-            settings = import ../../users/josh/settings;
-            shell = nixpkgs.fish;
-          };
+          "joshuagibbs" = import ../../users/josh { };
         };
       in
       [

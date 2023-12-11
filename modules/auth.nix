@@ -1,45 +1,55 @@
-{ users, pkgs, ... }:
+{ users, lib, pkgs, ... }:
+with lib;
+with pkgs.stdenv.targetPlatform;
 {
   users = {
-    mutableUsers = false;
+    mutableUsers = mkIf isLinux false;
 
     users = builtins.mapAttrs
       (key: val: {
         description = val.fullName;
-        isNormalUser = true;
+        isNormalUser = mkIf isLinux true;
 
-        home = "/home/${key}";
+        home = "/${if isLinux then "home" else "Users"}/${key}";
         shell = if (val ? shell) then pkgs."${val.shell}" else pkgs.fish;
-        group = key;
-        extraGroups = if (val ? groups) then val.groups else [
-          "wheel"
-          "docker"
-        ];
+        group = mkIf isLinux key;
+        extraGroups =
+          if (val ? groups) then
+            mkIf isLinux val.groups else
+            mkIf isLinux [
+              "wheel"
+              "docker"
+            ];
 
         openssh.authorizedKeys.keys = val.openssh.authorizedKeys.keys;
       })
       users;
 
-    groups = builtins.mapAttrs (key: val: { }) users;
+    groups = mkIf isLinux builtins.mapAttrs (key: val: { }) users;
   };
 
   # Don't require password for sudo.
-  security.sudo.wheelNeedsPassword = false;
+  security = mkIf isLinux {
+    sudo.wheelNeedsPassword = false;
+  };
 
   # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
+  services = mkIf isLinux {
+    openssh = {
+      enable = true;
 
-    settings = {
-      PermitRootLogin = "no";
+      settings = {
+        PermitRootLogin = "no";
 
-      # disable password authentication
-      PasswordAuthentication = false;
-      # challengeResponseAuthentication = false;
-      KbdInteractiveAuthentication = false;
+        # disable password authentication
+        PasswordAuthentication = false;
+        # challengeResponseAuthentication = false;
+        KbdInteractiveAuthentication = false;
 
-      X11Forwarding = false;
+        X11Forwarding = false;
+      };
     };
+
+    eternal-terminal.enable = true;
   };
-  services.eternal-terminal.enable = true;
 }
