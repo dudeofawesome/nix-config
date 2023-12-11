@@ -1,14 +1,26 @@
-{ users, ... }:
+{ users, pkgs, ... }:
 {
   users = {
     mutableUsers = false;
 
     users = builtins.mapAttrs
       (key: val: {
+        description = val.fullName;
+        isNormalUser = true;
+
         home = "/home/${key}";
-        shell = val.shell;
+        shell = if (val ? shell) then pkgs."${val.shell}" else pkgs.fish;
+        group = key;
+        extraGroups = if (val ? groups) then val.groups else [
+          "wheel"
+          "docker"
+        ];
+
+        openssh.authorizedKeys.keys = val.openssh.authorizedKeys.keys;
       })
       users;
+
+    groups = builtins.mapAttrs (key: val: { }) users;
   };
 
   # Don't require password for sudo.

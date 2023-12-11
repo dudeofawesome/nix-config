@@ -14,10 +14,7 @@
     modules =
       let
         users = {
-          "lorleans" = {
-            settings = import ../../users/dudeofawesome/settings;
-            shell = nixpkgs.fish;
-          };
+          "dudeofawesome" = import ../../users/dudeofawesome { };
         };
       in
       [
@@ -49,10 +46,7 @@
     modules =
       let
         users = {
-          "dudeofawesome" = {
-            settings = import ../../users/dudeofawesome/settings;
-            shell = nixpkgs.fish;
-          };
+          "dudeofawesome" = import ../../users/dudeofawesome { };
         };
       in
       [

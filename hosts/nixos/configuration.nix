@@ -1,4 +1,4 @@
-{ users, ... }: {
+{ ... }: {
   imports = [
     ../../modules/auth.nix
   ];

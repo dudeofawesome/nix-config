@@ -7,11 +7,6 @@
     ../../../modules/machine-classes/vm.nix
   ];
 
-  users.users.dudeofawesome = {
-    home = "/home/dudeofawesome";
-    shell = pkgs.fish;
-  };
-
   networking = {
     hostName = "badlands-vm";
     firewall.enable = false;
