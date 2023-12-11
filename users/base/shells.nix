@@ -1,4 +1,6 @@
-{ pkgs, lib, osConfig, dudeofawesome_dotfiles, ... }: {
+{ pkgs, lib, osConfig, dudeofawesome_dotfiles, ... }:
+with pkgs.stdenv.targetPlatform;
+{
   home.packages = with pkgs; [
     atuin
   ];
@@ -53,10 +55,11 @@
 
           makeBinPathList = map (path: path + "/bin");
         in
-        ''
-          fish_add_path --move --prepend --path ${lib.concatMapStringsSep " " dquote (makeBinPathList osConfig.environment.profiles)}
-          set fish_user_paths $fish_user_paths
-        '';
+        lib.mkIf isDarwin
+          ''
+            fish_add_path --move --prepend --path ${lib.concatMapStringsSep " " dquote (makeBinPathList osConfig.environment.profiles)}
+            set fish_user_paths $fish_user_paths
+          '';
     };
 
     atuin = {
