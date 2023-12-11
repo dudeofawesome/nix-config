@@ -37,6 +37,10 @@ with pkgs.stdenv.targetPlatform;
         _tide_item_gcloud = builtins.readFile "${dudeofawesome_dotfiles}/home/.config/fish/functions/_tide_item_gcloud.fish";
       };
 
+      shellInit = ''
+        ${builtins.readFile "${dudeofawesome_dotfiles}/home/.config/fish/tide.config.fish"}
+      '';
+
       interactiveShellInit = ''
         # TODO: convert this to a plugin
         set op_plugin_path "$HOME/.config/op/plugins.sh"
