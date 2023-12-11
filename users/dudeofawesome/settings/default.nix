@@ -30,6 +30,11 @@
         user = "vast";
         proxyJump = "home.saldivar.io";
       };
+
+      "nixos-vm" = {
+        hostname = "192.168.64.4";
+        user = "dudeofawesome";
+      };
     };
 
     git = {
