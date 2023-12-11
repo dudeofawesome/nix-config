@@ -18,14 +18,14 @@
   services.openssh = {
     enable = true;
 
-    permitRootLogin = "no";
+    PermitRootLogin = "no";
 
     # disable password authentication
-    passwordAuthentication = false;
+    PasswordAuthentication = false;
     # challengeResponseAuthentication = false;
-    kbdInteractiveAuthentication = false;
+    KbdInteractiveAuthentication = false;
 
-    forwardX11 = false;
+    X11Forwarding = false;
   };
   services.eternal-terminal.enable = true;
 }
