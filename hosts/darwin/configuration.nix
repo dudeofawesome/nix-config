@@ -1,6 +1,6 @@
 { pkgs, users, ... }: {
   imports = [
-    ../../modules/auth.nix
+    ../../modules/auth.darwin.nix
   ];
 
   security.pam.enableSudoTouchIdAuth = true;

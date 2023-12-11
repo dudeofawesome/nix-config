@@ -1,22 +1,21 @@
 { users, lib, pkgs, ... }:
-with lib;
 with pkgs.stdenv.targetPlatform;
 {
   users = {
-    mutableUsers = mkIf isLinux false;
+    mutableUsers = false;
 
     users = builtins.mapAttrs
       (key: val: {
         description = val.fullName;
-        isNormalUser = mkIf isLinux true;
+        isNormalUser = true;
 
         home = "/${if isLinux then "home" else "Users"}/${key}";
         shell = if (val ? shell) then pkgs."${val.shell}" else pkgs.fish;
-        group = mkIf isLinux key;
+        group = key;
         extraGroups =
           if (val ? groups) then
-            mkIf isLinux val.groups else
-            mkIf isLinux [
+            val.groups else
+            [
               "wheel"
               "docker"
             ];
@@ -25,16 +24,14 @@ with pkgs.stdenv.targetPlatform;
       })
       users;
 
-    groups = mkIf isLinux builtins.mapAttrs (key: val: { }) users;
+    groups = builtins.mapAttrs (key: val: { }) users;
   };
 
   # Don't require password for sudo.
-  security = mkIf isLinux {
-    sudo.wheelNeedsPassword = false;
-  };
+  security.sudo.wheelNeedsPassword = false;
 
   # Enable the OpenSSH daemon.
-  services = mkIf isLinux {
+  services = {
     openssh = {
       enable = true;
 

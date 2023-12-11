@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ../../modules/auth.nix
+    ../../modules/auth.linux.nix
   ];
 
   system = {
