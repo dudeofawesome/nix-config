@@ -23,11 +23,11 @@
     "dudeofawesome_dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1692686628,
-        "narHash": "sha256-/oP00RLrLbuP/6aQXVr79SRY+iqfgyfxpDx7ln/d4FA=",
+        "lastModified": 1702324255,
+        "narHash": "sha256-FehOJZjS8mBxKb0mr0obSDlvdudgDsdFrAlOx/42aBU=",
         "owner": "dudeofawesome",
         "repo": "dotfiles",
-        "rev": "f1fae5510eac5283ee4a03d18a97b977aee4f895",
+        "rev": "55fe7748db24f14148c5d3b59096921c6d7431b7",
         "type": "github"
       },
       "original": {
@@ -240,11 +240,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1702316726,
-        "narHash": "sha256-SQKEw/VhhyWUHATFXMsvvvZAHts02gVVQz9l1OTbpYg=",
+        "lastModified": 1702323951,
+        "narHash": "sha256-8Wjstf6vBTK6+YFNbKTzffIsF9EV/En1sKkxXl3W/gg=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "dbd6b276563c591fb4951d6766f552ab71ab59fd",
+        "rev": "a7203c4adab66958fa6b16e3bbe230b6e492eb9f",
         "type": "github"
       },
       "original": {
