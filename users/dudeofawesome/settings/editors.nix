@@ -17,6 +17,7 @@ in
   #   source = config.lib.file.mkOutOfStoreSymlink ./vscode-settings.json;
   # };
   home.activation.createMutableVSCodeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "$(dirname ~/"${configFilePath}")"
     cp -f "${./vscode-settings.json}" ~/"${configFilePath}"
   '';
 
