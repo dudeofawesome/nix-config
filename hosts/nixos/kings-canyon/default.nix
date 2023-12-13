@@ -3,6 +3,7 @@
     ../configuration.nix
     ../../../modules/machine-classes/base.nix
     ../../../modules/machine-classes/server.nix
+    ../../../users/dudeofawesome/os/linux.nix
   ];
 
   users.users.dudeofawesome = {

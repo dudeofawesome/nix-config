@@ -5,6 +5,7 @@
     ../../../modules/boot/systemd-boot.nix
     ../../../modules/machine-classes/base.nix
     ../../../modules/machine-classes/local-vm.nix
+    ../../../users/dudeofawesome/os/linux.nix
   ];
 
   networking = {
