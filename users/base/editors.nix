@@ -133,11 +133,11 @@
           }
           {
             key = "cmd+0";
-            command = "workbench.action.zoomReset";
-          }
-          {
-            key = "cmd+0";
-            command = "editor.action.fontZoomReset";
+            command = "runCommands";
+            args.commands = [
+              "workbench.action.zoomReset"
+              "editor.action.fontZoomReset"
+            ];
           }
 
           {

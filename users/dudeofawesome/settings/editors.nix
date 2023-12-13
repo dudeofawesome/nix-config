@@ -123,6 +123,8 @@ in
         # jsayol.firebase-explorer
       ];
 
+      # See `home.activation.createMutableVSCodeSettings` for my workaround to
+      #   have mutable settings.
       # TODO: make this file mutable
       #   https://github.com/andyrichardson/dotfiles/blob/28c3630e71d65d92b88cf83b2f91121432be0068/nix/home/vscode.nix#L5
       #   https://gist.github.com/piousdeer/b29c272eaeba398b864da6abf6cb5daa
