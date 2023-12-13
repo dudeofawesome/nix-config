@@ -4,7 +4,7 @@
     ../configuration.nix
     ../../../modules/boot/systemd-boot.nix
     ../../../modules/machine-classes/base.nix
-    ../../../modules/machine-classes/vm.nix
+    ../../../modules/machine-classes/local-vm.nix
   ];
 
   networking = {
