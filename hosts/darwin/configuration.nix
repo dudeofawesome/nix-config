@@ -21,6 +21,7 @@
       iina
       podman
       podman-compose
+      watch
     ];
   };
 
