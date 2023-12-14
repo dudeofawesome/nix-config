@@ -1,4 +1,4 @@
-{ users, builtins, ... }: with builtins {
+{ users, builtins, ... }: with builtins; {
   boot.initrd = {
     # Enable SSH in initrd. Useful for unlocking LUKS remotely.
     network.enable = true;
