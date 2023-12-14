@@ -23,5 +23,5 @@ $ curl -sSL https://nix-darwin-setup.orleans.io | bash
 1. Apply flake
 
    ```sh
-   $ darwin-rebuild switch --flake ".#$(hostname)"
+   $ darwin-rebuild switch --flake ".#$hostname"
    ```
