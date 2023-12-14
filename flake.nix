@@ -16,6 +16,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "";
+    };
+
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     dudeofawesome_dotfiles = {
