@@ -40,7 +40,7 @@
       };
 
       "nixos-vm" = {
-        hostname = "192.168.64.4";
+        hostname = "192.168.67.2";
         user = "dudeofawesome";
       };
     };
