@@ -3,13 +3,6 @@ with pkgs.stdenv.targetPlatform;
 {
   fonts = {
     fontDir.enable = true;
-    packages = with pkgs; [
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-        ];
-      })
-    ];
   };
 
   environment = {
