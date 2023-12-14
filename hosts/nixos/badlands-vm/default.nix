@@ -3,7 +3,7 @@
     ./hardware-configuration.nix
     ../configuration.nix
     ../../../modules/boot/systemd-boot.nix
-    ../../../modules/machine-classes/base.nix
+    ../../../modules/machine-classes/base.linux.nix
     ../../../modules/machine-classes/local-vm.nix
     ../../../modules/fs/zfs.nix
     ../../../users/dudeofawesome/os/linux.nix

@@ -1,5 +1,5 @@
 { pkgs, lib, ... }:
-
+with pkgs.stdenv.targetPlatform;
 {
   fonts = {
     fontDir.enable = true;
@@ -56,13 +56,6 @@
 
   programs.fish.enable = true;
 
-  console = {
-    # TODO: set custom console font
-    #   https://github.com/Anomalocaridid/dotfiles/blob/fcd37335d9799a9efd5e0c9aacdd12ab6283a259/modules/theming.nix#L4
-    # enable setting TTY keybaord layout
-    useXkbConfig = true;
-  };
-
   nix = {
     package = pkgs.nix;
     gc = {
@@ -76,7 +69,10 @@
     '';
 
     settings = {
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users =
+        if (isLinux) then [ "root" "@wheel" ]
+        else if (isDarwin) then [ "admin" ]
+        else [ ];
     };
   };
   # Allow proprietary software.

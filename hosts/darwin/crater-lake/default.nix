@@ -2,7 +2,7 @@
 {
   imports = [
     ../configuration.nix
-    ../../../modules/machine-classes/base.nix
+    ../../../modules/machine-classes/base.darwin.nix
     ../../../modules/machine-classes/pc.nix
     ../../../users/dudeofawesome/os/darwin.nix
   ];
