@@ -1,5 +1,6 @@
-{ pkgs, users, ... }: {
+{ pkgs, ... }: {
   imports = [
+    ../../modules/machine-classes/base.darwin.nix
     ../../modules/auth.darwin.nix
   ];
 

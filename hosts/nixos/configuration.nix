@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ../../modules/machine-classes/base.linux.nix
     ../../modules/auth.linux.nix
   ];
 

@@ -1,7 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
     ../configuration.nix
-    ../../../modules/machine-classes/base.linux.nix
     ../../../modules/machine-classes/server.nix
     ../../../users/dudeofawesome/os/linux.nix
   ];
