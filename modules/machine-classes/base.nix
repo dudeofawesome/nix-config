@@ -1,6 +1,10 @@
 { pkgs, lib, ... }:
 with pkgs.stdenv.targetPlatform;
 {
+  imports = [
+    ../sops.nix
+  ];
+
   fonts = {
     fontDir.enable = true;
   };

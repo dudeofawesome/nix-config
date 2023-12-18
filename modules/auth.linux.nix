@@ -1,6 +1,16 @@
-{ users, lib, pkgs, ... }:
+{ users, config, lib, pkgs, ... }:
 with pkgs.stdenv.targetPlatform;
 {
+  # TODO: automatically detect user password hashes
+  sops.secrets.${"users/dudeofawesome/hashedPassword"} = {
+    sopsFile = ../users/dudeofawesome/secrets.yaml;
+    neededForUsers = true;
+  };
+  # sops.secrets.${"users/josh/hashedPassword"} = {
+  #   sopsFile = ../users/josh/secrets.yaml;
+  #   neededForUsers = true;
+  # };
+
   users = {
     mutableUsers = false;
 
@@ -8,6 +18,7 @@ with pkgs.stdenv.targetPlatform;
       (key: val: {
         description = val.fullName;
         isNormalUser = true;
+        hashedPasswordFile = config.sops.secrets.${"users/${key}/hashedPassword"}.path;
 
         home = "/${if isLinux then "home" else "Users"}/${key}";
         shell = if (val ? shell) then pkgs."${val.shell}" else pkgs.fish;

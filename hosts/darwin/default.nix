@@ -2,6 +2,7 @@
 , inputs
 , nixpkgs
 , home-manager
+, sops
 , nix-vscode-extensions
 , dudeofawesome_dotfiles
 , upaymeifixit_dotfiles
@@ -23,6 +24,8 @@
 
         ./crater-lake
         { _module.args.users = users; }
+
+        sops.nixosModules.sops
 
         home-manager.darwinModules.home-manager
         {
@@ -55,6 +58,8 @@
         ./badlands
         { _module.args.users = users; }
 
+        sops.nixosModules.sops
+
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -85,6 +90,8 @@
 
         ./joshs-paciolan-laptop
         { _module.args.users = users; }
+
+        sops.nixosModules.sops
 
         home-manager.darwinModules.home-manager
         {

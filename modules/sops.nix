@@ -8,4 +8,6 @@ with pkgs.stdenv.targetPlatform;
       ssh-to-age
     ];
   };
+
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
 }

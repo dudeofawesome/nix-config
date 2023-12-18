@@ -1,20 +1,56 @@
-# This example uses YAML anchors which allows reuse of multiple keys
+# This file uses YAML anchors which allows reuse of multiple keys
 # without having to repeat yourself.
 # Also see https://github.com/Mic92/dotfiles/blob/master/nixos/.sops.yaml
 # for a more complex example.
 keys:
-  - &admin_dudeofawesome 'age17dnfg660q6f6xv634dlsqzt9arungk5k3xytd68m2c94tqa3wqtqv7ew0d'
-  - &system_badlands 'age16juvzqnt7qs5pkssaqltlwn9e4chk3w9zf8gcazmcj7uu3tmcg9q3f2yp7'
-  - &system_badlands-vm 'age1awen96u8f7c288rs9l3l3k290s79u8tf788235e4tg2en49h7pvqsrheuy'
+  # In order to generate a new key set for a new user, run the following commands:
+  # ```sh
+  # $ # on linux:
+  # $ sops_dir=~/".config/sops/age"
+  # $ # on macOS:
+  # $ sops_dir=~/"Library/Application Support/sops/age"
+  # $ mkdir -p "$sops_dir"
+  # $ age-keygen -o "$sops_dir/keys.txt"
+  # $ cat "$sops_dir/keys.txt" | sed -nEe 's/.+public key:\s+(.*)$/\1/mip'
+  # ```
+  # Then add that value to a new key here:
+  users:
+    - &user_dudeofawesome 'age17dnfg660q6f6xv634dlsqzt9arungk5k3xytd68m2c94tqa3wqtqv7ew0d'
+    - &user_josh 'age1nu45m5ht7x7h59t4x8kalx9j084tqty27rw97xl63fp85l8w45qspgdqt0'
+
+  # In order to generate a new public key for a new system, run the following commands:
+  # ```sh
+  # $ ssh-keyscan DEVICE_HOSTNAME 2> /dev/null | ssh-to-age 2> /dev/null | sed -nEe 's/(age.+)/\1/mip'
+  # ```
+  # Then add that value to a new key here:
+  systems:
+    - &system_badlands 'age16juvzqnt7qs5pkssaqltlwn9e4chk3w9zf8gcazmcj7uu3tmcg9q3f2yp7'
+    - &system_badlands-vm 'age1awen96u8f7c288rs9l3l3k290s79u8tf788235e4tg2en49h7pvqsrheuy'
+    - &system_joshs-paciolan-laptop 'age1ct6h645xhzamd5mfhs5ze8uza2k23tjat8wrrrn7k6sakr5uecjs7u8j35'
 creation_rules:
   - path_regex: 'secrets/[^/]+\.(yaml|json|env|ini)$'
     key_groups:
       - age:
-          - *admin_dudeofawesome
+          - *user_dudeofawesome
+          - *user_josh
           - *system_badlands
           - *system_badlands-vm
+          - *system_joshs-paciolan-laptop
+
+  - path_regex: users/dudeofawesome/secrets.yaml$
+    key_groups:
+      - age:
+          - *user_dudeofawesome
+          - *system_badlands
+          - *system_badlands-vm
+  - path_regex: users/josh/secrets.yaml$
+    key_groups:
+      - age:
+          - *user_josh
+          - *system_joshs-paciolan-laptop
+
   # - path_regex: secrets/badlands/[^/]+\.(yaml|json|env|ini)$
   #   key_groups:
   #     - age:
-  #         - *admin_dudeofawesome
+  #         - *user_dudeofawesome
   #         - *system_badlands

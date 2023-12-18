@@ -76,6 +76,7 @@
     , nur
     , home-manager
     , darwin
+    , sops
     , dudeofawesome_dotfiles
     , upaymeifixit_dotfiles
     , nix-vscode-extensions
@@ -145,6 +146,7 @@
             nixpkgs
             nixpkgs-stable
             home-manager
+            sops
             nix-vscode-extensions
             dudeofawesome_dotfiles
             upaymeifixit_dotfiles
@@ -161,6 +163,7 @@
             nixpkgs
             nixpkgs-stable
             home-manager
+            sops
             nix-vscode-extensions
             dudeofawesome_dotfiles
             upaymeifixit_dotfiles

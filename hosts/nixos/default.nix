@@ -2,6 +2,7 @@
 , inputs
 , nixpkgs
 , home-manager
+, sops
 , nix-vscode-extensions
 , dudeofawesome_dotfiles
 , upaymeifixit_dotfiles
@@ -22,6 +23,8 @@
 
         ./kings-canyon
         { _module.args.users = users; }
+
+        sops.nixosModules.sops
 
         home-manager.nixosModules.home-manager
         {
@@ -54,6 +57,8 @@
 
         ./badlands-vm
         { _module.args.users = users; }
+
+        sops.nixosModules.sops
 
         home-manager.nixosModules.home-manager
         {
