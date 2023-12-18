@@ -23,6 +23,7 @@ with pkgs.stdenv.targetPlatform;
             fishtape_3
             shell-integrations
             doa-tide-settings
+            editor-updater
           ]
           ++ (if isDarwin then [
             osx

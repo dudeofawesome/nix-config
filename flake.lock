@@ -52,6 +52,22 @@
         "type": "github"
       }
     },
+    "fish-editor-updater": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702875288,
+        "narHash": "sha256-cS95OGrq0u9/VS19wTpzx/d8nMZqzxZt7Lzj0M/9Yp0=",
+        "owner": "dudeofawesome",
+        "repo": "fish-plugin-editor-updater",
+        "rev": "0fb6a8f3c3405ee232c6aec92e2c5151d78fe2f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dudeofawesome",
+        "repo": "fish-plugin-editor-updater",
+        "type": "github"
+      }
+    },
     "fish-node-binpath": {
       "flake": false,
       "locked": {
@@ -103,11 +119,11 @@
     "fish-shell-integrations": {
       "flake": false,
       "locked": {
-        "lastModified": 1692437586,
-        "narHash": "sha256-EKBxt5ENSDpXWzexknYcrEVNGbEpHtcuY9+X4vQYJi0=",
+        "lastModified": 1702667764,
+        "narHash": "sha256-fvtimmdxFDA+MQkZODMMQTnH7ICVHtsofPSk0fl7nm0=",
         "owner": "dudeofawesome",
         "repo": "fish-plugin-shell-integrations",
-        "rev": "1fd292267dfa611d057443e53e19cf6ff69040c0",
+        "rev": "72c9c7a6d1e2923c8d70da02a0e440c24744e9e4",
         "type": "github"
       },
       "original": {
@@ -258,6 +274,7 @@
         "darwin": "darwin",
         "dudeofawesome_dotfiles": "dudeofawesome_dotfiles",
         "fish-doa-tide-settings": "fish-doa-tide-settings",
+        "fish-editor-updater": "fish-editor-updater",
         "fish-node-binpath": "fish-node-binpath",
         "fish-node-version": "fish-node-version",
         "fish-osx": "fish-osx",

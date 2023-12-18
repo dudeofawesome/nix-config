@@ -63,6 +63,11 @@
       url = "github:dudeofawesome/fish-plugin-doa-tide-settings";
       flake = false;
     };
+
+    fish-editor-updater = {
+      url = "github:dudeofawesome/fish-plugin-editor-updater";
+      flake = false;
+    };
   };
 
   outputs =
@@ -80,6 +85,7 @@
     , fish-node-version
     , fish-shell-integrations
     , fish-doa-tide-settings
+    , fish-editor-updater
     , ...
     }:
     let
@@ -107,6 +113,10 @@
               doa-tide-settings = {
                 name = "doa-tide-settings";
                 src = fish-doa-tide-settings;
+              };
+              editor-updater = {
+                name = "editor-updater";
+                src = fish-editor-updater;
               };
             };
 
