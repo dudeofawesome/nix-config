@@ -40,7 +40,7 @@
         };
         "terracompute" = {
           user = "vast";
-          hostname = "192.168.4.115";
+          hostname = "192.168.4.225";
         };
       };
     };
