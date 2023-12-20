@@ -28,6 +28,7 @@ keys:
     - &system_badlands-vm 'age1awen96u8f7c288rs9l3l3k290s79u8tf788235e4tg2en49h7pvqsrheuy'
     - &system_monongahela 'age1r3z0gd3fmq5vu73l7k7jsseaz5ec8f88qq5sw0zvlexug6uzf4wsadjrhx'
     - &system_joshs-paciolan-laptop 'age1ct6h645xhzamd5mfhs5ze8uza2k23tjat8wrrrn7k6sakr5uecjs7u8j35'
+    - &system_soto-server 'age1a4z2qgdtv8aaqe0892clncuz4kpdqn9ph2qqg6k850hxl2lqrd2shu7mgs'
 
   # When adding new keys, make sure to update the encrypted files:
   # `sops updatekeys ENCRYPTED_FILE`
@@ -45,6 +46,7 @@ creation_rules:
           - *system_badlands-vm
           - *system_monongahela
           - *system_joshs-paciolan-laptop
+          - *system_soto-server
 
   # Users
   - path_regex: 'users/dudeofawesome/secrets.yaml$'
@@ -59,6 +61,7 @@ creation_rules:
       - age:
           - *user_josh
           - *system_joshs-paciolan-laptop
+          - *system_soto-server
 
   # Systems
   - path_regex: 'hosts/nixos/badlands-vm/secrets.yaml$'
@@ -71,6 +74,11 @@ creation_rules:
       - age:
           - *user_dudeofawesome
           - *system_monongahela
+  - path_regex: 'hosts/nixos/soto-server/secrets.yaml$'
+    key_groups:
+      - age:
+          - *user_josh
+          - *system_soto-server
 
 stores:
   yaml:
