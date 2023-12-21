@@ -15,6 +15,7 @@
         "1password"
         "aerial"
         "affinity-photo"
+        "arduino"
         "bartender"
         "bettertouchtool"
         "cyberduck"
