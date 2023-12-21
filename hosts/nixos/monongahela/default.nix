@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ../configuration.nix
     ../../../modules/boot/systemd-boot.nix
+    ../../../modules/wireless.nix
     ../../../users/dudeofawesome/os/linux.nix
   ];
 
