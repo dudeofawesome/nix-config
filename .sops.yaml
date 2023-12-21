@@ -56,6 +56,7 @@ creation_rules:
           - *system_badlands
           - *system_badlands-vm
           - *system_monongahela
+          - *system_soto-server
   - path_regex: 'users/josh/secrets.yaml$'
     key_groups:
       - age:
