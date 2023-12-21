@@ -29,15 +29,13 @@
 
         home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager = import ../../modules/host-home-manager.nix {
+            inputs = inputs;
+            users = users;
 
-          home-manager.users = builtins.mapAttrs (key: val: val.settings) users;
-          home-manager.extraSpecialArgs = {
-            inherit
-              nix-vscode-extensions
-              dudeofawesome_dotfiles
-              ;
+            nix-vscode-extensions = nix-vscode-extensions;
+            dudeofawesome_dotfiles = dudeofawesome_dotfiles;
+            upaymeifixit_dotfiles = upaymeifixit_dotfiles;
           };
         }
       ];
@@ -62,15 +60,13 @@
 
         home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager = import ../../modules/host-home-manager.nix {
+            inputs = inputs;
+            users = users;
 
-          home-manager.users = builtins.mapAttrs (key: val: val.settings) users;
-          home-manager.extraSpecialArgs = {
-            inherit
-              nix-vscode-extensions
-              dudeofawesome_dotfiles
-              ;
+            nix-vscode-extensions = nix-vscode-extensions;
+            dudeofawesome_dotfiles = dudeofawesome_dotfiles;
+            upaymeifixit_dotfiles = upaymeifixit_dotfiles;
           };
         }
       ];
@@ -95,16 +91,13 @@
 
         home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager = import ../../modules/host-home-manager.nix {
+            inputs = inputs;
+            users = users;
 
-          home-manager.users = builtins.mapAttrs (key: val: val.settings) users;
-          home-manager.extraSpecialArgs = {
-            inherit
-              nix-vscode-extensions
-              dudeofawesome_dotfiles
-              upaymeifixit_dotfiles
-              ;
+            nix-vscode-extensions = nix-vscode-extensions;
+            dudeofawesome_dotfiles = dudeofawesome_dotfiles;
+            upaymeifixit_dotfiles = upaymeifixit_dotfiles;
           };
         }
       ];
