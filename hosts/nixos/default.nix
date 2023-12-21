@@ -95,15 +95,17 @@
 
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
 
-          home-manager.users = builtins.mapAttrs (key: val: val.settings) users;
-          home-manager.extraSpecialArgs = {
-            inherit
-              nix-vscode-extensions
-              dudeofawesome_dotfiles
-              ;
+            users = builtins.mapAttrs (key: val: val.settings) users;
+            extraSpecialArgs = {
+              inherit
+                nix-vscode-extensions
+                dudeofawesome_dotfiles
+                ;
+            };
           };
         }
       ];
