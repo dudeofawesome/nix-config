@@ -26,6 +26,7 @@ with pkgs.stdenv.targetPlatform;
       eternal-terminal
       fd
       git
+      gnumake
       htop
       jq
       most
@@ -48,6 +49,7 @@ with pkgs.stdenv.targetPlatform;
       bun
       ruby
       nodejs
+      python3
     ];
   };
 
