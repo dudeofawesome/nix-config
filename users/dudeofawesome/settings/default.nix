@@ -39,6 +39,8 @@
         proxyJump = "home.saldivar.io";
       };
 
+      "monongahela".user = "dudeofawesome";
+
       "badlands-vm" = {
         hostname = "192.168.67.2";
         user = "dudeofawesome";
