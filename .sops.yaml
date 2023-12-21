@@ -34,7 +34,7 @@ keys:
   # `sops updatekeys ENCRYPTED_FILE`
   # https://github.com/getsops/sops#27adding-and-removing-keys
   # or, to update all files:
-  # `sops updatekeys (find . \( -wholename "*/secrets/*.yaml" -o -name "secrets.yaml" \) -type f)`
+  # `find . \( -wholename "*/secrets/*.yaml" -o -name "secrets.yaml" \) -type f -exec sops updatekeys --yes {} \;`
 
 creation_rules:
   - path_regex: 'secrets/[^/]+\.(yaml|json|env|ini)$'
