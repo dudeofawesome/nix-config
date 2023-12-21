@@ -16,4 +16,7 @@
       upaymeifixit_dotfiles
       ;
   };
+  sharedModules = [
+    inputs.sops.homeManagerModules.sops
+  ];
 }
