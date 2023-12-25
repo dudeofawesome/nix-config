@@ -1,7 +1,9 @@
-{ ... }: {
+{ machine-class, owner, os, ... }: {
   imports = [
-    ../../modules/machine-classes/base.linux.nix
-    ../../modules/auth.linux.nix
+    ../../modules/machine-classes/base.${os}.nix
+    ../../modules/machine-classes/${machine-class}.nix
+    ../../modules/auth.${os}.nix
+    ../../users/${owner}/os/${os}.nix
   ];
 
   system = {

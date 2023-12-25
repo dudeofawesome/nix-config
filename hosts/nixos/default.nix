@@ -11,7 +11,13 @@
 }: {
   kings-canyon = lib.nixosSystem {
     system = "x86_64-linux";
-    specialArgs = { inherit inputs; };
+    specialArgs = {
+      inherit inputs;
+      hostname = "kings-canyon";
+      os = "linux";
+      owner = "dudeofawesome";
+      machine-class = "server";
+    };
     modules =
       let
         users = {
@@ -42,7 +48,13 @@
 
   badlands-vm = lib.nixosSystem {
     system = "aarch64-linux";
-    specialArgs = { inherit inputs; };
+    specialArgs = {
+      inherit inputs;
+      hostname = "badlands-vm";
+      os = "linux";
+      owner = "dudeofawesome";
+      machine-class = "local-vm";
+    };
     modules =
       let
         users = {
@@ -73,7 +85,13 @@
 
   monongahela = lib.nixosSystem {
     system = "x86_64-linux";
-    specialArgs = { inherit inputs; };
+    specialArgs = {
+      inherit inputs;
+      hostname = "monongahela";
+      os = "linux";
+      owner = "dudeofawesome";
+      machine-class = "scratch";
+    };
     modules =
       let
         users = {

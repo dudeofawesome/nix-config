@@ -1,15 +1,15 @@
-{ config, pkgs, ... }: {
+{ hostname, config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../configuration.nix
     ../../../modules/boot/systemd-boot.nix
-    ../../../modules/machine-classes/local-vm.nix
     ../../../modules/fs/zfs.nix
-    ../../../users/dudeofawesome/os/linux.nix
+    ../../../modules/time-machine-server.nix
+    ../../../modules/samba-users.nix
   ];
 
   networking = {
-    hostName = "badlands-vm";
+    hostName = hostname;
     hostId = "503a29b9"; # head -c 8 /etc/machine-id
     firewall.enable = false;
   };
