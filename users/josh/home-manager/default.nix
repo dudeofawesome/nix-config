@@ -51,6 +51,48 @@
 
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICWpH2swLUhFYS8ffRP7bviAwTroqaCACeAcp6kAtyO0";
     };
+
+    dock = {
+      enable = true;
+
+      apps = [
+        "/Applications/Google Chrome.app"
+        "/Applications/Spotify.app"
+        "/Applications/Outlook.app"
+        "/Applications/zoom.us.app"
+        "/Applications/Slack.app"
+        "/Applications/Messenger.app"
+        "/Applications/Signal.app"
+        "/Applications/Discord.app"
+        "/Applications/Sublime Text.app"
+        "/Applications/Visual Studio Code.app"
+        "/Applications/TablePlus.app"
+        "/Applications/iTerm.app"
+        "/Applications/Fork.app"
+        "/Applications/Postman.app"
+        "/Applications/Todoist.app"
+        "/System/Applications/Stickies.app"
+      ];
+
+      others = {
+        # /Applications
+        "/Applications/" = {
+          fileType = "1";
+          arrangement = "1";
+          displayAs = "1";
+          showAs = "2";
+          arrangement2 = "1";
+        };
+        # ~/Downloads
+        "/Users/'$(whoami)'/Downloads/" = {
+          fileType = "2";
+          arrangement = "1";
+          displayAs = "0";
+          showAs = "1";
+          arrangement2 = "2";
+        };
+      };
+    };
   };
 
   # services.home-manager.autoUpgrade.enable = true;
@@ -61,106 +103,6 @@
       search = "Google";
     };
   };
-
-  home.activation.setDockApps = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin ''
-    function createTile() {
-      echo "<dict>"
-      echo "  <key>tile-data</key>"
-      echo "  <dict>"
-      echo "    <key>file-data</key>"
-      echo "    <dict>"
-      echo "      <key>_CFURLString</key>"
-      echo "      <string>$1</string>"
-      echo "      <key>_CFURLStringType</key><integer>0</integer>"
-      echo "    </dict>"
-      echo "  </dict>"
-      echo "</dict>"
-    }
-
-    function createDirTile() {
-      echo "<dict>"
-      echo "  <key>tile-data</key>"
-      echo "  <dict>"
-      echo "    <key>file-data</key>"
-      echo "    <dict>"
-      echo "      <key>_CFURLString</key>"
-      echo "      <string>$1</string>"
-      echo "      <key>_CFURLStringType</key><integer>0</integer>"
-      echo "    </dict>"
-      echo "    <key>file-type</key>"
-      echo "    <integer>$2</integer>"
-      echo "    <key>arrangement</key>"
-      echo "    <integer>$3</integer>"
-      echo "    <key>displayas</key>"
-      echo "    <integer>$4</integer>"
-      echo "    <key>showas</key>"
-      echo "    <integer>$5</integer>"
-      echo "    <key>arrangement</key>"
-      echo "    <integer>$6</integer>"
-      echo "  </dict>"
-      echo "  <key>tile-type</key>"
-      echo "  <string>directory-tile</string>"
-      echo "</dict>"
-    }
-
-    function setDock() {
-      setDockApps
-      setDockDirs
-
-      # restart Dock to show updates
-      killall Dock
-    }
-
-    function setDockApps() {
-      # clear dock
-      defaults write com.apple.dock persistent-apps -array ""
-
-      # add Chrome
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Google Chrome.app')"
-      # add Spotify
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Spotify.app')"
-      # add Outlook
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Outlook.app')"
-      # add Zoom
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/zoom.us.app')"
-      # add Slack
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Slack.app')"
-      # add Messenger
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Messenger.app')"
-      # add Signal
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Signal.app')"
-      # add Discord
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Discord.app')"
-      # add Sublime Text
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Sublime Text.app')"
-      # add VS Code
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Visual Studio Code.app')"
-      # add TablePlus
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/TablePlus.app')"
-      # add iTerm
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/iTerm.app')"
-      # add Fork
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Fork.app')"
-      # add Postman
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Postman.app')"
-      # add Todoist
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/Applications/Todoist.app')"
-      # add Stickies
-      defaults write com.apple.dock persistent-apps -array-add "$(createTile '/System/Applications/Stickies.app')"
-    }
-
-    function setDockDirs() {
-      # clear dock
-      defaults write com.apple.dock persistent-others -array ""
-
-      # /Applications
-      defaults write com.apple.dock persistent-others -array-add "$(createDirTile '/Applications/' 1 1 1 2 1)"
-      # ~/Downloads
-      defaults write com.apple.dock persistent-others -array-add "$(createDirTile '/Users/'$(whoami)'/Downloads/' 2 1 0 1 2)"
-    }
-
-    PATH="/usr/bin:$PATH" $DRY_RUN_CMD setDock
-  '';
 
   home.activation.setFinickyConfigLoc = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin ''
     # set Finicky's config location here, instead of above because home-manager doesn't support plist's type "data"
