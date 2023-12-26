@@ -12,7 +12,7 @@
   useGlobalPkgs = true;
   useUserPackages = true;
 
-  users = builtins.mapAttrs (key: val: val.settings) users;
+  users = builtins.mapAttrs (key: val: val.home-manager) users;
   extraSpecialArgs = {
     inherit
       nix-vscode-extensions

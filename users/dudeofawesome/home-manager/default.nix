@@ -1,7 +1,8 @@
-{ pkgs, lib, osConfig, ... }:
+{ machine-class, pkgs, lib, osConfig, config, ... }:
 {
   imports = [
     ../../base
+    # (lib.mkIf (machine-class == "pc") ./browsers.nix)
     ./browsers.nix
     ./editors.nix
     ./shells.nix
@@ -24,6 +25,12 @@
     };
   };
 
+  # sops.secrets."hosts/nixos/monongahela/ssh-keys/dudeofawesome_nix-config/private" = {
+  #   format = "yaml";
+  #   sopsFile = ../../../hosts/nixos/monongahela/secrets.yaml;
+  #   # path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
+  # };
+
   programs = {
     ssh.matchBlocks = {
       "gitlabdev.paciolan.info".user = "git";
@@ -45,6 +52,13 @@
         hostname = "192.168.67.2";
         user = "dudeofawesome";
       };
+
+      # "github.com_dudeofawesome_nix-config" = {
+      #   hostname = "github.com";
+      #   user = "git";
+      #   identityFile = config.sops.secrets."hosts/nixos/monongahela/ssh-keys/dudeofawesome_nix-config/private".path;
+      #   identitiesOnly = true;
+      # };
     };
 
     git = {
