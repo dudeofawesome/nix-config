@@ -4,7 +4,6 @@
 , home-manager
 , sops
 , packageOverlays
-, nix-vscode-extensions
 , dudeofawesome_dotfiles
 , upaymeifixit_dotfiles
 , hostname
@@ -51,7 +50,6 @@ in
           owner
           machine-class
 
-          nix-vscode-extensions
           dudeofawesome_dotfiles
           upaymeifixit_dotfiles
           ;

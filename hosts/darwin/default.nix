@@ -3,7 +3,6 @@
 , nixpkgs
 , home-manager
 , sops
-, nix-vscode-extensions
 , dudeofawesome_dotfiles
 , upaymeifixit_dotfiles
 , packageOverlays
@@ -18,7 +17,6 @@
       home-manager
       sops
       packageOverlays
-      nix-vscode-extensions
       dudeofawesome_dotfiles
       upaymeifixit_dotfiles
       ;
@@ -40,7 +38,6 @@
       home-manager
       sops
       packageOverlays
-      nix-vscode-extensions
       dudeofawesome_dotfiles
       upaymeifixit_dotfiles
       ;
@@ -62,7 +59,6 @@
       home-manager
       sops
       packageOverlays
-      nix-vscode-extensions
       dudeofawesome_dotfiles
       upaymeifixit_dotfiles
       ;

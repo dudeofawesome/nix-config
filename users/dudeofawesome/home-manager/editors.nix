@@ -1,4 +1,5 @@
-{ pkgs, lib, config, nix-vscode-extensions, ... }:
+{ pkgs, lib, machine-class, config, ... }:
+with lib;
 let
   userDir =
     if pkgs.stdenv.hostPlatform.isDarwin then
@@ -25,7 +26,7 @@ in
     vscode = {
       enable = true;
 
-      extensions = with nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+      extensions = with pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace; [
         alefragnani.bookmarks
         antyos.openscad
         bmalehorn.vscode-fish

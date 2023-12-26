@@ -4,7 +4,6 @@
 , os
 , owner
 , machine-class
-, nix-vscode-extensions
 , dudeofawesome_dotfiles
 , upaymeifixit_dotfiles
 , ...
@@ -15,7 +14,6 @@
   users = builtins.mapAttrs (key: val: val.home-manager) users;
   extraSpecialArgs = {
     inherit
-      nix-vscode-extensions
       dudeofawesome_dotfiles
       upaymeifixit_dotfiles
       hostname

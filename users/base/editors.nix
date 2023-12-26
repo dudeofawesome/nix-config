@@ -1,4 +1,4 @@
-{ pkgs, lib, dudeofawesome_dotfiles, nix-vscode-extensions, ... }: {
+{ pkgs, lib, dudeofawesome_dotfiles, ... }: {
   editorconfig = {
     enable = true;
 
