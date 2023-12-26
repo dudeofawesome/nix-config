@@ -1,5 +1,9 @@
 { inputs
 , users
+, hostname
+, os
+, owner
+, machine-class
 , nix-vscode-extensions
 , dudeofawesome_dotfiles
 , upaymeifixit_dotfiles
@@ -14,6 +18,10 @@
       nix-vscode-extensions
       dudeofawesome_dotfiles
       upaymeifixit_dotfiles
+      hostname
+      os
+      owner
+      machine-class
       ;
   };
   sharedModules = [

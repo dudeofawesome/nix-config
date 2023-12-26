@@ -9,25 +9,33 @@
 , packageOverlays
 , ...
 }: {
-  kings-canyon = lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = {
-      inherit inputs;
+  kings-canyon =
+    let
       hostname = "kings-canyon";
+      arch = "x86_64";
       os = "linux";
       owner = "dudeofawesome";
       machine-class = "server";
-    };
-    modules =
-      let
-        users = {
-          "dudeofawesome" = import ../../users/dudeofawesome { };
-        };
-      in
-      [
+      users = {
+        "dudeofawesome" = import ../../users/dudeofawesome { };
+      };
+    in
+    lib.nixosSystem {
+      system = "${arch}-${os}";
+      specialArgs = {
+        inherit
+          inputs
+          hostname
+          arch
+          os
+          owner
+          machine-class
+          ;
+      };
+      modules = [
         packageOverlays
 
-        ./kings-canyon
+        ./${hostname}
         { _module.args.users = users; }
 
         sops.nixosModules.sops
@@ -35,36 +43,51 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = import ../../modules/host-home-manager.nix {
-            inputs = inputs;
-            users = users;
+            inherit
+              inputs
 
-            nix-vscode-extensions = nix-vscode-extensions;
-            dudeofawesome_dotfiles = dudeofawesome_dotfiles;
-            upaymeifixit_dotfiles = upaymeifixit_dotfiles;
+              users
+              hostname
+              os
+              owner
+              machine-class
+
+              nix-vscode-extensions
+              dudeofawesome_dotfiles
+              upaymeifixit_dotfiles
+              ;
           };
         }
       ];
-  };
+    };
 
-  badlands-vm = lib.nixosSystem {
-    system = "aarch64-linux";
-    specialArgs = {
-      inherit inputs;
+  badlands-vm =
+    let
       hostname = "badlands-vm";
+      arch = "x86_64";
       os = "linux";
       owner = "dudeofawesome";
       machine-class = "local-vm";
-    };
-    modules =
-      let
-        users = {
-          "dudeofawesome" = import ../../users/dudeofawesome { };
-        };
-      in
-      [
+      users = {
+        "dudeofawesome" = import ../../users/dudeofawesome { };
+      };
+    in
+    lib.nixosSystem {
+      system = "${arch}-${os}";
+      specialArgs = {
+        inherit
+          inputs
+          hostname
+          arch
+          os
+          owner
+          machine-class
+          ;
+      };
+      modules = [
         packageOverlays
 
-        ./badlands-vm
+        ./${hostname}
         { _module.args.users = users; }
 
         sops.nixosModules.sops
@@ -72,36 +95,51 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = import ../../modules/host-home-manager.nix {
-            inputs = inputs;
-            users = users;
+            inherit
+              inputs
 
-            nix-vscode-extensions = nix-vscode-extensions;
-            dudeofawesome_dotfiles = dudeofawesome_dotfiles;
-            upaymeifixit_dotfiles = upaymeifixit_dotfiles;
+              users
+              hostname
+              os
+              owner
+              machine-class
+
+              nix-vscode-extensions
+              dudeofawesome_dotfiles
+              upaymeifixit_dotfiles
+              ;
           };
         }
       ];
-  };
+    };
 
-  monongahela = lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = {
-      inherit inputs;
+  monongahela =
+    let
       hostname = "monongahela";
+      arch = "x86_64";
       os = "linux";
       owner = "dudeofawesome";
       machine-class = "scratch";
-    };
-    modules =
-      let
-        users = {
-          "dudeofawesome" = import ../../users/dudeofawesome { };
-        };
-      in
-      [
+      users = {
+        "dudeofawesome" = import ../../users/dudeofawesome { };
+      };
+    in
+    lib.nixosSystem {
+      system = "${arch}-${os}";
+      specialArgs = {
+        inherit
+          inputs
+          hostname
+          arch
+          os
+          owner
+          machine-class
+          ;
+      };
+      modules = [
         packageOverlays
 
-        ./monongahela
+        ./${hostname}
         { _module.args.users = users; }
 
         sops.nixosModules.sops
@@ -109,14 +147,21 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = import ../../modules/host-home-manager.nix {
-            inputs = inputs;
-            users = users;
+            inherit
+              inputs
 
-            nix-vscode-extensions = nix-vscode-extensions;
-            dudeofawesome_dotfiles = dudeofawesome_dotfiles;
-            upaymeifixit_dotfiles = upaymeifixit_dotfiles;
+              users
+              hostname
+              os
+              owner
+              machine-class
+
+              nix-vscode-extensions
+              dudeofawesome_dotfiles
+              upaymeifixit_dotfiles
+              ;
           };
         }
       ];
-  };
+    };
 }
