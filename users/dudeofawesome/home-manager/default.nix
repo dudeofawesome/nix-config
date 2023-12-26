@@ -69,7 +69,7 @@
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGD3VYzXLFPEC25hK7o5+NrV9cvNlyV7Y93UyAQospbw";
     };
 
-    dock = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+    dock = {
       enable = true;
 
       apps = [
