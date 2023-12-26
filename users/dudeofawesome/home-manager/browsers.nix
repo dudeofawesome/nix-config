@@ -1,6 +1,6 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, machine-class, ... }: {
   programs.firefox = {
-    enable = true;
+    enable = machine-class == "pc";
     package = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin null;
 
     profiles = {

@@ -4,9 +4,11 @@ let
   userDir =
     if pkgs.stdenv.hostPlatform.isDarwin then
       "Library/Application Support/Code/User"
+    else if pkgs.stdenv.hostPlatform.isLinux then
+      ".config/Code/User"
     else
-      ".config/Code/User";
-  configFilePath = "${userDir}/settings.json";
+      abort;
+  vscodeConfigFilePath = "${userDir}/settings.json";
 in
 {
   home.packages = with pkgs; [
@@ -14,17 +16,19 @@ in
   ];
 
   # home.file.vscode_settings = {
-  #   target = configFilePath;
+  #   target = vscodeConfigFilePath;
   #   source = config.lib.file.mkOutOfStoreSymlink ./vscode-settings.json;
   # };
-  home.activation.createMutableVSCodeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "$(dirname ~/"${configFilePath}")"
-    cp -f "${./vscode-settings.json}" ~/"${configFilePath}"
-  '';
+  home.activation.createMutableVSCodeSettings = mkIf config.programs.vscode.enable (
+    hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p "$(dirname ~/"${vscodeConfigFilePath}")"
+      cp -f "${./vscode-settings.json}" ~/"${vscodeConfigFilePath}"
+    ''
+  );
 
   programs = {
     vscode = {
-      enable = true;
+      enable = machine-class == "pc";
 
       extensions = with pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace; [
         alefragnani.bookmarks

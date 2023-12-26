@@ -2,7 +2,7 @@
 {
   imports = [
     ../../base
-    # (lib.mkIf (machine-class == "pc") ./browsers.nix)
+    ./browsers.nix
     ./browsers.nix
     ./editors.nix
     ./shells.nix

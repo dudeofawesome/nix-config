@@ -1,4 +1,4 @@
-{ pkgs, lib, dudeofawesome_dotfiles, ... }: {
+{ pkgs, lib, dudeofawesome_dotfiles, config, ... }: {
   editorconfig = {
     enable = true;
 
@@ -216,7 +216,7 @@
     };
   };
 
-  home.activation.createVSCodeIntellicodeDir = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin ''
+  home.activation.createVSCodeIntellicodeDir = lib.mkIf (config.programs.vscode.enable && pkgs.stdenv.targetPlatform.isDarwin) ''
     path="/var/lib/vsintellicode/"
     PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo mkdir -p "$path"
     PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chown $(whoami) "$path"
