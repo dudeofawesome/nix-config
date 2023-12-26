@@ -3,8 +3,6 @@
 , nixpkgs
 , home-manager
 , sops
-, dudeofawesome_dotfiles
-, upaymeifixit_dotfiles
 , packageOverlays
 , darwin
 , ...
@@ -17,8 +15,6 @@
       home-manager
       sops
       packageOverlays
-      dudeofawesome_dotfiles
-      upaymeifixit_dotfiles
       ;
     hostname = "crater-lake";
     arch = "aarch64";
@@ -38,8 +34,6 @@
       home-manager
       sops
       packageOverlays
-      dudeofawesome_dotfiles
-      upaymeifixit_dotfiles
       ;
     hostname = "badlands";
     arch = "aarch64";
@@ -59,8 +53,6 @@
       home-manager
       sops
       packageOverlays
-      dudeofawesome_dotfiles
-      upaymeifixit_dotfiles
       ;
     hostname = "badlands";
     arch = "aarch64";

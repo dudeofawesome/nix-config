@@ -4,8 +4,6 @@
 , home-manager
 , sops
 , packageOverlays
-, dudeofawesome_dotfiles
-, upaymeifixit_dotfiles
 , hostname
 , arch
 , os
@@ -49,9 +47,6 @@ in
           os
           owner
           machine-class
-
-          dudeofawesome_dotfiles
-          upaymeifixit_dotfiles
           ;
       };
     }

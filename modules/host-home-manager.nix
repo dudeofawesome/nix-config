@@ -4,8 +4,6 @@
 , os
 , owner
 , machine-class
-, dudeofawesome_dotfiles
-, upaymeifixit_dotfiles
 , ...
 }: {
   useGlobalPkgs = true;
@@ -14,8 +12,6 @@
   users = builtins.mapAttrs (key: val: val.home-manager) users;
   extraSpecialArgs = {
     inherit
-      dudeofawesome_dotfiles
-      upaymeifixit_dotfiles
       hostname
       os
       owner

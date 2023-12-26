@@ -3,8 +3,6 @@
 , nixpkgs
 , home-manager
 , sops
-, dudeofawesome_dotfiles
-, upaymeifixit_dotfiles
 , packageOverlays
 , ...
 }: {
@@ -16,8 +14,6 @@
       home-manager
       sops
       packageOverlays
-      dudeofawesome_dotfiles
-      upaymeifixit_dotfiles
       ;
     hostname = "kings-canyon";
     arch = "x86_64";
@@ -37,8 +33,6 @@
       home-manager
       sops
       packageOverlays
-      dudeofawesome_dotfiles
-      upaymeifixit_dotfiles
       ;
     hostname = "badlands-vm";
     arch = "x86_64";
@@ -58,8 +52,6 @@
       home-manager
       sops
       packageOverlays
-      dudeofawesome_dotfiles
-      upaymeifixit_dotfiles
       ;
     hostname = "monongahela";
     arch = "x86_64";

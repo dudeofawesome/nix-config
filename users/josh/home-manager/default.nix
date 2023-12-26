@@ -1,8 +1,8 @@
-{ pkgs, lib, osConfig, upaymeifixit_dotfiles, dudeofawesome_dotfiles, ... }:
+{ pkgs, lib, osConfig, ... }:
 {
   imports = [
     ../../base
-    ../../dudeofawesome/settings/browsers.nix
+    ../../dudeofawesome/home-manager/browsers.nix
   ];
 
   home = {

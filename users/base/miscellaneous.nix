@@ -1,4 +1,4 @@
-{ pkgs, lib, dudeofawesome_dotfiles, ... }:
+{ pkgs, lib, ... }:
 {
   home = {
     # This option defines the first version of NixOS you have installed on this particular machine,
@@ -24,11 +24,11 @@
     file = {
       finicky = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
         target = ".config/finicky.js";
-        source = "${dudeofawesome_dotfiles}/settings/.finicky.js";
+        source = "${pkgs.dotfiles.dudeofawesome}/settings/.finicky.js";
       };
       prettierrc = {
         target = ".config/.prettierrc.js";
-        source = "${dudeofawesome_dotfiles}/home/.config/.prettierrc.js";
+        source = "${pkgs.dotfiles.dudeofawesome}/home/.config/.prettierrc.js";
       };
     };
   };
@@ -80,7 +80,7 @@
       enable = true;
 
       # clock24 = true;
-      extraConfig = builtins.readFile "${dudeofawesome_dotfiles}/home/.config/tmux/tmux.conf";
+      extraConfig = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/tmux/tmux.conf";
     };
   };
 

@@ -124,6 +124,11 @@
             vimPlugins = super.vimPlugins // { vim-lumen = vim-lumen; };
 
             vscodeExtensions = nix-vscode-extensions;
+
+            dotfiles = {
+              dudeofawesome = dudeofawesome_dotfiles;
+              upaymeifixit = upaymeifixit_dotfiles;
+            };
           };
 
           nixpkgs.overlays = [
@@ -149,8 +154,6 @@
             nixpkgs-stable
             home-manager
             sops
-            dudeofawesome_dotfiles
-            upaymeifixit_dotfiles
             packageOverlays
             location;
         }
@@ -165,8 +168,6 @@
             nixpkgs-stable
             home-manager
             sops
-            dudeofawesome_dotfiles
-            upaymeifixit_dotfiles
             packageOverlays
             darwin;
         }

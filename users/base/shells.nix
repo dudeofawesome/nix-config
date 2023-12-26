@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, dudeofawesome_dotfiles, ... }:
+{ pkgs, lib, osConfig, ... }:
 with pkgs.stdenv.targetPlatform;
 {
   home.packages = with pkgs; [
@@ -38,11 +38,11 @@ with pkgs.stdenv.targetPlatform;
       };
 
       functions = {
-        _tide_item_gcloud = builtins.readFile "${dudeofawesome_dotfiles}/home/.config/fish/functions/_tide_item_gcloud.fish";
+        _tide_item_gcloud = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/fish/functions/_tide_item_gcloud.fish";
       };
 
       shellInit = ''
-        ${builtins.readFile "${dudeofawesome_dotfiles}/home/.config/fish/tide.config.fish"}
+        ${builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/fish/tide.config.fish"}
       '';
 
       interactiveShellInit = ''

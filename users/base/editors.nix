@@ -1,4 +1,4 @@
-{ pkgs, lib, dudeofawesome_dotfiles, config, ... }: {
+{ pkgs, lib, config, ... }: {
   editorconfig = {
     enable = true;
 
@@ -202,7 +202,7 @@
       packageConfigurable = pkgs.vim-full;
 
       defaultEditor = true;
-      extraConfig = builtins.readFile "${dudeofawesome_dotfiles}/home/.vim/vimrc";
+      extraConfig = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.vim/vimrc";
       plugins = with pkgs.vimPlugins; [
         papercolor-theme
         vim-airline
