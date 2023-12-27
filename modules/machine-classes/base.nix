@@ -30,6 +30,8 @@ with pkgs.stdenv.targetPlatform;
       htop
       jq
       most
+      nixd
+      nixpkgs-fmt
       nodePackages.prettier
       pciutils
       ripgrep
