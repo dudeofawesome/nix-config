@@ -25,6 +25,7 @@
         "firefox"
         "hammerspoon"
         "inkscape"
+        "insomnia"
         "lulu"
         "parsec"
         "plex"
