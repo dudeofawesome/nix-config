@@ -758,5 +758,7 @@
       "remote": false,
       "stash": true
     }
-  }
+  },
+
+  "gitlab.aiAssistedCodeSuggestions.enabled": false
 }
