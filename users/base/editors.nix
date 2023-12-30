@@ -55,6 +55,16 @@
           #   key = "down";
           #   command = "-selectNextSuggestion";
           # }
+          {
+            key = "cmd+f";
+            command = "-list.find";
+            when = "listFocus && listSupportsFind";
+          }
+          {
+            key = "cmd+f";
+            command = "list.find";
+            when = "!filesExplorerFocus && listFocus && listSupportsFind";
+          }
         ]
         # tab control
         [
