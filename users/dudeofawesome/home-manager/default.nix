@@ -34,7 +34,6 @@
 
   programs = {
     ssh.matchBlocks = {
-      "gitlabdev.paciolan.info".user = "git";
 
       "home.powell.place".user = "louis";
       "home.saldivar.io" = {

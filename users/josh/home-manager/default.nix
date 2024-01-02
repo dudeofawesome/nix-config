@@ -25,10 +25,7 @@
   programs = {
     ssh = {
       matchBlocks = {
-        "gitlabdev.paciolan.info".user = "git";
-        "gitlabaws.paciolan.info".user = "git";
         "sftp-aws.paciolan.info".user = "pacsftp-shift4";
-        "bitbucket.org".user = "git";
         "files.shift4.com".user = "joshuagibbs";
 
         "gibbs.tk".user = "upaymeifixit";

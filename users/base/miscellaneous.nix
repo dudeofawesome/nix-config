@@ -38,10 +38,10 @@
       enable = true;
 
       matchBlocks = {
-        # git hosts
-        "github.com".user = "git";
-        "gist.github.com".user = "git";
-        "gitlab.com".user = "git";
+        "git" = {
+          match = "host *git*,*bitbucket*";
+          user = "git";
+        };
       };
 
       extraConfig = ''
