@@ -33,33 +33,44 @@
   # };
 
   programs = {
-    ssh.matchBlocks = {
+    ssh.matchBlocks =
+      let
+        hostUnreachable = (host: ''host ${host} !exec "ping -c1 -q -t1 '%h' 2> /dev/null"'');
+      in
+      {
+        "unifi".user = "root";
+        "unifi-remote" = {
+          match = hostUnreachable "unifi";
+          hostname = "oc.orleans.io";
+        };
+        "monongahela".user = "dudeofawesome";
+        "monongahela-remote" = {
+          match = hostUnreachable "monongahela";
+          proxyJump = "oc.orleans.io";
+        };
+        "steamdeck".user = "deck";
 
-      "home.powell.place".user = "louis";
-      "home.saldivar.io" = {
-        user = "edgar";
-        port = 69;
+        "badlands-vm".user = "dudeofawesome";
+        "badlands-vm-by-ip" = {
+          match = hostUnreachable "badlands-vm";
+          hostname = "192.168.67.2";
+        };
+
+        "home.powell.place".user = "louis";
+
+        "home.saldivar.io" = {
+          user = "edgar";
+          port = 69;
+        };
+        "terracompute" = {
+          hostname = "192.168.4.225";
+          user = "vast";
+        };
+        "terracompute-remote" = {
+          match = hostUnreachable "192.168.4.225";
+          proxyJump = "home.saldivar.io";
+        };
       };
-      "terracompute" = {
-        hostname = "192.168.4.115";
-        user = "vast";
-        proxyJump = "home.saldivar.io";
-      };
-
-      "monongahela".user = "dudeofawesome";
-
-      "badlands-vm" = {
-        hostname = "192.168.67.2";
-        user = "dudeofawesome";
-      };
-
-      # "github.com_dudeofawesome_nix-config" = {
-      #   hostname = "github.com";
-      #   user = "git";
-      #   identityFile = config.sops.secrets."hosts/nixos/monongahela/ssh-keys/dudeofawesome_nix-config/private".path;
-      #   identitiesOnly = true;
-      # };
-    };
 
     git = {
       userName = "Louis Orleans";
