@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ hostname, pkgs, ... }:
 {
   imports = [
     ../configuration.nix
@@ -7,7 +7,7 @@
   ];
 
   networking = {
-    hostName = "badlands";
+    hostName = hostname;
   };
 
   environment = {
