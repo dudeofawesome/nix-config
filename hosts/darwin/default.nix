@@ -54,10 +54,10 @@
       sops
       packageOverlays
       ;
-    hostname = "badlands";
+    hostname = "joshs-paciolan-laptop";
     arch = "aarch64";
     os = "darwin";
-    owner = "dudeofawesome";
+    owner = "josh";
     machine-class = "pc";
     users = {
       "joshuagibbs" = import ../../users/josh { };
