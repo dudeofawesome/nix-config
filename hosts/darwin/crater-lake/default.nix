@@ -1,4 +1,4 @@
-{ lib, pkgs, users, ... }:
+{ hostname, pkgs, ... }:
 {
   imports = [
     ../configuration.nix
@@ -7,7 +7,7 @@
   ];
 
   networking = {
-    hostName = "crater-lake";
+    hostName = hostname;
   };
 
   environment = {
