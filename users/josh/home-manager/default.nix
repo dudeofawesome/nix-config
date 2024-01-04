@@ -3,6 +3,7 @@
   imports = [
     ../../base
     ../../dudeofawesome/home-manager/browsers.nix
+    ../../../modules/dock.nix
   ];
 
   home = {
@@ -65,7 +66,7 @@
       apps = [
         "/Applications/Google Chrome.app"
         "/Applications/Spotify.app"
-        "/Applications/Outlook.app"
+        "/Applications/Microsoft Outlook.app"
         "/Applications/zoom.us.app"
         "/Applications/Slack.app"
         "/Applications/Messenger.app"
@@ -106,7 +107,7 @@
   # specialisation.linux.configuration = {};
 
   targets = {
-    darwin = {
+    darwin = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
       search = "Google";
     };
   };
