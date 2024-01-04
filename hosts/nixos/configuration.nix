@@ -1,10 +1,12 @@
-{ machine-class, owner, os, ... }: {
+{ machine-class, owner, os, lib, ... }: {
   imports = [
     ../../modules/machine-classes/base.${os}.nix
     ../../modules/machine-classes/${machine-class}.nix
     ../../modules/auth.${os}.nix
-    ../../users/${owner}/os/${os}.nix
-  ];
+  ] ++
+  lib.optional
+    (builtins.pathExists ../../users/${owner}/os/${os}.nix) ../../users/${owner}/os/${os}.nix
+  ;
 
   system = {
     # This option defines the first version of NixOS you have installed on this particular machine,
