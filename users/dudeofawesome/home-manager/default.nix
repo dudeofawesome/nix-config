@@ -3,7 +3,6 @@
   imports = [
     ../../base
     ./browsers.nix
-    ./browsers.nix
     ./editors.nix
     ./shells.nix
     ../../../modules/dock.nix
