@@ -3,6 +3,7 @@
 , nixpkgs
 , home-manager
 , sops
+, vscode-server
 , packageOverlays
 , darwin
 , ...
@@ -14,6 +15,7 @@
       nixpkgs
       home-manager
       sops
+      vscode-server
       packageOverlays
       ;
     hostname = "crater-lake";
@@ -33,6 +35,7 @@
       nixpkgs
       home-manager
       sops
+      vscode-server
       packageOverlays
       ;
     hostname = "badlands";
@@ -52,6 +55,7 @@
       nixpkgs
       home-manager
       sops
+      vscode-server
       packageOverlays
       ;
     hostname = "joshs-paciolan-laptop";

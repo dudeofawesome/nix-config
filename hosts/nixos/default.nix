@@ -3,6 +3,7 @@
 , nixpkgs
 , home-manager
 , sops
+, vscode-server
 , packageOverlays
 , ...
 }: {
@@ -13,6 +14,7 @@
       nixpkgs
       home-manager
       sops
+      vscode-server
       packageOverlays
       ;
     hostname = "kings-canyon";
@@ -32,6 +34,7 @@
       nixpkgs
       home-manager
       sops
+      vscode-server
       packageOverlays
       ;
     hostname = "badlands-vm";
@@ -51,6 +54,7 @@
       nixpkgs
       home-manager
       sops
+      vscode-server
       packageOverlays
       ;
     hostname = "monongahela";

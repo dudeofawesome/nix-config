@@ -23,6 +23,10 @@
     };
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    vscode-server = {
+      url = "github:nix-community/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     dudeofawesome_dotfiles = {
       url = "github:dudeofawesome/dotfiles";
@@ -80,6 +84,7 @@
     , dudeofawesome_dotfiles
     , upaymeifixit_dotfiles
     , nix-vscode-extensions
+    , vscode-server
     , vim-lumen
     , fish-osx
     , fish-node-binpath
@@ -154,6 +159,7 @@
             nixpkgs-stable
             home-manager
             sops
+            vscode-server
             packageOverlays
             location;
         }
@@ -168,6 +174,7 @@
             nixpkgs-stable
             home-manager
             sops
+            vscode-server
             packageOverlays
             darwin;
         }

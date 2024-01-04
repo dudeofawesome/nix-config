@@ -3,6 +3,7 @@
 , nixpkgs
 , home-manager
 , sops
+, vscode-server
 , packageOverlays
 , hostname
 , arch
@@ -35,6 +36,7 @@ in
     { _module.args.users = users; }
 
     sops.nixosModules.sops
+    (if (os == "nixos") then vscode-server.nixosModules.default else { })
 
     home-manager.${modules}.home-manager
     {
