@@ -16,6 +16,7 @@
         "aerial"
         "affinity-photo"
         "arduino"
+        "balenaetcher"
         "bartender"
         "bettertouchtool"
         "cyberduck"
