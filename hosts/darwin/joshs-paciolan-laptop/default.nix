@@ -31,6 +31,7 @@
   homebrew = {
     casks = [
       "battery"
+      "zoom"
     ];
   };
 }
