@@ -25,8 +25,14 @@
   programs = {
     ssh = {
       matchBlocks = {
-        "sftp-aws.paciolan.info".user = "pacsftp-shift4";
-        "files.shift4.com".user = "joshuagibbs";
+        "sftp-aws.paciolan.info" = {
+          user = "pacsftp-shift4";
+          identityFile = "~/.ssh/sftp-aws.paciolan.com_rsa";
+        };
+        "files.shift4.com" = {
+          user = "joshuagibbs";
+          identityFile = "~/.ssh/files.shift4.com_rsa";
+        };
 
         "gibbs.tk".user = "upaymeifixit";
         "Joshs-Notebook.local".user = "Josh";
@@ -38,6 +44,10 @@
         "terracompute" = {
           user = "vast";
           hostname = "192.168.4.225";
+        };
+        "soto-server" = {
+          user = "josh";
+          hostname = "10.0.15.144";
         };
       };
     };
