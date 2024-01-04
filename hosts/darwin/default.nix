@@ -2,6 +2,7 @@
 , inputs
 , nixpkgs
 , home-manager
+, usersModule
 , sops
 , vscode-server
 , packageOverlays
@@ -23,9 +24,7 @@
     os = "darwin";
     owner = "dudeofawesome";
     machine-class = "pc";
-    users = {
-      "dudeofawesome" = import ../../users/dudeofawesome { };
-    };
+    users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
   });
 
   badlands = darwin.lib.darwinSystem (import ../system.nix {
@@ -43,9 +42,7 @@
     os = "darwin";
     owner = "dudeofawesome";
     machine-class = "pc";
-    users = {
-      "lorleans" = import ../../users/dudeofawesome { };
-    };
+    users = usersModule.filterMap { dudeofawesome = "lorleans"; } usersModule.users;
   });
 
   joshs-paciolan-laptop = darwin.lib.darwinSystem (import ../system.nix {
@@ -63,8 +60,6 @@
     os = "darwin";
     owner = "josh";
     machine-class = "pc";
-    users = {
-      "joshuagibbs" = import ../../users/josh { };
-    };
+    users = usersModule.filterMap { joshuagibbs = "josh"; } usersModule.users;
   });
 }

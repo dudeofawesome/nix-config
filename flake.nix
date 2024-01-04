@@ -148,6 +148,7 @@
             )
           ];
         });
+      usersModule = import ./users { inherit (nixpkgs) lib; };
     in
     {
       nixosConfigurations = (
@@ -158,6 +159,7 @@
             nixpkgs
             nixpkgs-stable
             home-manager
+            usersModule
             sops
             vscode-server
             packageOverlays
@@ -173,6 +175,7 @@
             nixpkgs
             nixpkgs-stable
             home-manager
+            usersModule
             sops
             vscode-server
             packageOverlays

@@ -2,6 +2,7 @@
 , inputs
 , nixpkgs
 , home-manager
+, usersModule
 , sops
 , vscode-server
 , packageOverlays
@@ -22,9 +23,7 @@
     os = "linux";
     owner = "dudeofawesome";
     machine-class = "server";
-    users = {
-      "dudeofawesome" = import ../../users/dudeofawesome { };
-    };
+    users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
   });
 
   badlands-vm = lib.nixosSystem (import ../system.nix {
@@ -42,9 +41,7 @@
     os = "linux";
     owner = "dudeofawesome";
     machine-class = "local-vm";
-    users = {
-      "dudeofawesome" = import ../../users/dudeofawesome { };
-    };
+    users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
   });
 
   monongahela = lib.nixosSystem (import ../system.nix {
@@ -62,9 +59,7 @@
     os = "linux";
     owner = "dudeofawesome";
     machine-class = "scratch";
-    users = {
-      "dudeofawesome" = import ../../users/dudeofawesome { };
-    };
+    users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
   });
 
   soto-server = lib.nixosSystem (import ../system.nix {
@@ -81,8 +76,6 @@
     os = "linux";
     owner = "josh";
     machine-class = "server";
-    users = {
-      "josh" = import ../../users/josh { };
-    };
+    users = usersModule.filterMap [ "josh" ] usersModule.users;
   });
 }
