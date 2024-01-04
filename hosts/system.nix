@@ -36,7 +36,7 @@ in
     { _module.args.users = users; }
 
     sops.nixosModules.sops
-    (if (os == "nixos") then vscode-server.nixosModules.default else { })
+    (if (os == "linux") then vscode-server.nixosModules.default else { })
 
     home-manager.${modules}.home-manager
     {
