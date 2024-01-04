@@ -62,4 +62,23 @@
       "dudeofawesome" = import ../../users/dudeofawesome { };
     };
   });
+
+  soto-server = lib.nixosSystem (import ../system.nix {
+    inherit
+      inputs
+      lib
+      nixpkgs
+      home-manager
+      sops
+      packageOverlays
+      ;
+    hostname = "soto-server";
+    arch = "x86_64";
+    os = "linux";
+    owner = "josh";
+    machine-class = "server";
+    users = {
+      "josh" = import ../../users/josh { };
+    };
+  });
 }
