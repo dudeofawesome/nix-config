@@ -57,7 +57,7 @@ in
         drknoxy.eslint-disable-snippets
         eamodio.gitlens
         editorconfig.editorconfig
-        equinusocio.vsc-community-material-theme
+        equinusocio.vsc-material-theme
         esbenp.prettier-vscode
         fabiospampinato.vscode-diff
         firefox-devtools.vscode-firefox-debug
