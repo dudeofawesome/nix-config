@@ -20,6 +20,7 @@
   };
 
   services = {
+    automatic-timezoned.enable = true;
     vscode-server.enable = true;
   };
 
