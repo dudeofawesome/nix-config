@@ -15,7 +15,7 @@
 }:
 let
   distro = { "linux" = "nixos"; "darwin" = "darwin"; }."${os}";
-  modules = "${distro}Modules";
+  distroModules = "${distro}Modules";
 in
 {
   system = "${arch}-${os}";
@@ -38,7 +38,7 @@ in
     sops.nixosModules.sops
     (if (os == "linux") then vscode-server.nixosModules.default else { })
 
-    home-manager.${modules}.home-manager
+    home-manager.${distroModules}.home-manager
     {
       home-manager = import ../modules/host-home-manager.nix {
         inherit
