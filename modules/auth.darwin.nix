@@ -1,6 +1,8 @@
-{ users, lib, pkgs, ... }:
-with lib;
+{ users, pkgs, ... }:
 with pkgs.stdenv.targetPlatform;
+let
+  userSettings = (builtins.mapAttrs (key: val: val.user) users);
+in
 {
   users = {
     users = builtins.mapAttrs
@@ -12,6 +14,6 @@ with pkgs.stdenv.targetPlatform;
 
         openssh.authorizedKeys.keys = val.openssh.authorizedKeys.keys;
       })
-      users;
+      userSettings;
   };
 }

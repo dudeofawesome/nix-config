@@ -1,63 +1,69 @@
 { users, config, lib, pkgs, ... }:
-with pkgs.stdenv.targetPlatform;
+let
+  userSettings = (builtins.mapAttrs (key: val: val.user) users);
+in
 {
-  # TODO: automatically detect user password hashes
-  sops.secrets.${"users/dudeofawesome/hashedPassword"} = {
-    sopsFile = ../users/dudeofawesome/secrets.yaml;
-    neededForUsers = true;
-  };
-  # sops.secrets.${"users/josh/hashedPassword"} = {
-  #   sopsFile = ../users/josh/secrets.yaml;
-  #   neededForUsers = true;
-  # };
+  config =
+    with pkgs.stdenv.targetPlatform;
+    {
+      # TODO: automatically detect user password hashes
+      sops.secrets.${"users/dudeofawesome/hashedPassword"} = {
+        sopsFile = ../users/dudeofawesome/secrets.yaml;
+        neededForUsers = true;
+      };
+      # sops.secrets.${"users/josh/hashedPassword"} = {
+      #   sopsFile = ../users/josh/secrets.yaml;
+      #   neededForUsers = true;
+      # };
 
-  users = {
-    mutableUsers = false;
+      users = {
+        mutableUsers = false;
 
-    users = builtins.mapAttrs
-      (key: val: {
-        description = val.fullName;
-        isNormalUser = true;
-        hashedPasswordFile = config.sops.secrets.${"users/${key}/hashedPassword"}.path;
+        users = builtins.mapAttrs
+          (key: val: {
+            description = val.fullName;
+            isNormalUser = true;
+            hashedPasswordFile = config.sops.secrets.${"users/${key}/hashedPassword"}.path;
 
-        home = "/${if isLinux then "home" else "Users"}/${key}";
-        shell = if (val ? shell) then pkgs."${val.shell}" else pkgs.fish;
-        group = key;
-        extraGroups =
-          if (val ? groups) then
-            val.groups else
-            [
-              "wheel"
-              "docker"
-            ];
+            home = "/${if isLinux then "home" else "Users"}/${key}";
+            shell = if (val ? shell) then pkgs."${val.shell}" else pkgs.fish;
+            group = key;
+            extraGroups =
+              if (val ? groups) then
+                val.groups else
+                [
+                  "wheel"
+                  "docker"
+                ];
 
-        openssh.authorizedKeys.keys = val.openssh.authorizedKeys.keys;
-      })
-      users;
+            openssh.authorizedKeys.keys = val.openssh.authorizedKeys.keys;
+          })
+          userSettings;
 
-    groups = builtins.mapAttrs (key: val: { }) users;
-  };
+        groups = builtins.mapAttrs (key: val: { }) userSettings;
+      };
 
-  # Don't require password for sudo.
-  security.sudo.wheelNeedsPassword = false;
+      # Don't require password for sudo.
+      security.sudo.wheelNeedsPassword = false;
 
-  # Enable the OpenSSH daemon.
-  services = {
-    openssh = {
-      enable = true;
+      # Enable the OpenSSH daemon.
+      services = {
+        openssh = {
+          enable = true;
 
-      settings = {
-        PermitRootLogin = "no";
+          settings = {
+            PermitRootLogin = "no";
 
-        # disable password authentication
-        PasswordAuthentication = false;
-        # challengeResponseAuthentication = false;
-        KbdInteractiveAuthentication = false;
+            # disable password authentication
+            PasswordAuthentication = false;
+            # challengeResponseAuthentication = false;
+            KbdInteractiveAuthentication = false;
 
-        X11Forwarding = false;
+            X11Forwarding = false;
+          };
+        };
+
+        eternal-terminal.enable = true;
       };
     };
-
-    eternal-terminal.enable = true;
-  };
 }
