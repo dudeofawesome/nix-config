@@ -98,8 +98,8 @@
       location = "$HOME/git/dudeofawesome/nix-config";
       packageOverlays =
         ({ config, pkgs, system, ... }: {
-          nixpkgs.config.packageOverrides = super: {
-            fishPlugins = super.fishPlugins // {
+          nixpkgs.config.packageOverrides = prev: {
+            fishPlugins = prev.fishPlugins // {
               osx = {
                 name = "osx";
                 src = fish-osx;
@@ -126,7 +126,7 @@
               };
             };
 
-            vimPlugins = super.vimPlugins // { vim-lumen = vim-lumen; };
+            vimPlugins = prev.vimPlugins // { vim-lumen = vim-lumen; };
 
             vscodeExtensions = nix-vscode-extensions;
 
