@@ -8,6 +8,7 @@
       "barrier"
       "bettertouchtool"
       "cyberduck"
+      "docker"
       "electrum"
       "figma"
       "gifox"
