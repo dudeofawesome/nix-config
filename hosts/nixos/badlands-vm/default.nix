@@ -4,8 +4,8 @@
     ../configuration.nix
     ../../../modules/boot/systemd-boot.nix
     ../../../modules/fs/zfs.nix
-    ../../../modules/time-machine-server.nix
-    ../../../modules/samba-users.nix
+    ../../../modules/home-manager/time-machine-server.nix
+    ../../../modules/home-manager/samba-users.nix
   ];
 
   networking = {
