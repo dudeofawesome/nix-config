@@ -1,7 +1,8 @@
-{ pkgs, lib, ... }:
+{ os, pkgs, lib, ... }:
 with pkgs.stdenv.targetPlatform;
 {
   imports = [
+    ./base.${os}.nix
     ../sops.nix
   ];
 

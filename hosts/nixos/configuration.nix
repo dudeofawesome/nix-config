@@ -1,6 +1,6 @@
 { machine-class, owner, os, lib, ... }: {
   imports = [
-    ../../modules/machine-classes/base.${os}.nix
+    ../../modules/machine-classes/base.nix
     ../../modules/machine-classes/${machine-class}.nix
     ../../modules/auth.nix
   ] ++

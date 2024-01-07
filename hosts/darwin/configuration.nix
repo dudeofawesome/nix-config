@@ -1,7 +1,7 @@
-{ pkgs, ... }: {
+{ machine-class, owner, os, pkgs, ... }: {
   imports = [
-    ../../modules/machine-classes/base.darwin.nix
-    ../../modules/auth.darwin.nix
+    ../../modules/machine-classes/base.nix
+    ../../modules/auth.nix
   ];
 
   security.pam.enableSudoTouchIdAuth = true;
