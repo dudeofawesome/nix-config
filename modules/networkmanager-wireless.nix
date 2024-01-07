@@ -1,16 +1,11 @@
 { config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  enabled = config.networking.networkmanager.enabled && config.networking.wireless.enabled;
+with lib; let
+  enable = config.networking.networkmanager.enable && config.networking.wireless.enable;
 
   getFileName = stringAsChars (x: if x == " " then "-" else x);
 
   createWifi = ssid: opt: {
-    name = ''
-      NetworkManager/system-connections/${getFileName ssid}.nmconnection
-    '';
+    name = "NetworkManager/system-connections/${getFileName ssid}.nmconnection";
     value = {
       mode = "0400";
       source = pkgs.writeText "${ssid}.nmconnection" ''
@@ -46,5 +41,7 @@ in
       reloadIfChanged = true;
       wantedBy = [ "multi-user.target" ];
     };
+
+    networking.networkmanager.unmanaged = [ "make networkmanager work with nix" ];
   };
 }
