@@ -2,7 +2,7 @@
   imports = [
     ../../modules/machine-classes/base.${os}.nix
     ../../modules/machine-classes/${machine-class}.nix
-    ../../modules/auth.${os}.nix
+    ../../modules/auth.nix
   ] ++
   lib.optional
     (builtins.pathExists ../../users/${owner}/os/${os}.nix) ../../users/${owner}/os/${os}.nix

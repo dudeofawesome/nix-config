@@ -47,6 +47,10 @@
           match = hostUnreachable "monongahela";
           proxyJump = "oc.orleans.io";
         };
+        "haleakala" = {
+          user = "dudeofawesome";
+          hostname = "192.168.254.49";
+        };
         "steamdeck".user = "deck";
 
         "badlands-vm".user = "dudeofawesome";
