@@ -6,7 +6,6 @@
   "workbench.colorTheme": "Material Theme Lighter",
   "workbench.preferredDarkColorTheme": "Material Theme",
   "workbench.preferredLightColorTheme": "Material Theme Lighter",
-  "workbench.colorThemeAutoSwitch": "true",
   "window.autoDetectColorScheme": true,
   "workbench.colorCustomizations": {
     "[Material Night]": {
@@ -117,7 +116,6 @@
 
   "debug.enableAllHovers": true,
   "debug.toolBarLocation": "docked",
-  "debug.node.autoAttach": "on",
   "debug.focusWindowOnBreak": false,
   "debug.console.acceptSuggestionOnEnter": "on",
   "debug.javascript.autoAttachFilter": "smart",
@@ -397,6 +395,7 @@
   "material-icon-theme.files.associations": {
     "tsconfig.*.json": "tsconfig"
   },
+
   "map.preview.defaultBaseLayer": "osm",
 
   "dash.fileNameToDocsetMap": {
@@ -502,6 +501,7 @@
   },
 
   "cSpell.enabled": true,
+  "cSpell.enableFiletypes": ["*"],
   "cSpell.dictionaries": [
     "en_us",
     "companies",
@@ -630,26 +630,6 @@
     "videocam",
     "vsync",
     "xmlns"
-  ],
-  "cSpell.enableFiletypes": [
-    "c",
-    "cpp",
-    "csharp",
-    "dart",
-    "go",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "latex",
-    "markdown",
-    "php",
-    "plaintext",
-    "python",
-    "text",
-    "typescript",
-    "typescriptreact",
-    "yaml"
   ],
 
   "sqlite.sqlite3": "/usr/bin/sqlite3",
