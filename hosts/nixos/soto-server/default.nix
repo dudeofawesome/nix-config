@@ -1,8 +1,5 @@
 { hostname, config, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
-    ../configuration.nix
-    # ../../../modules/machine-classes/server.nix
     ../../../modules/boot/systemd-boot.nix
   ];
 

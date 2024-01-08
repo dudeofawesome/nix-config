@@ -1,3 +1,7 @@
+# This is an OS & distribution agnostic file that is used as the root of a
+# system configuration. It defines the system based on a series of parameters
+# that are passed to it.
+
 { inputs
 , lib
 , nixpkgs
@@ -27,13 +31,19 @@ in
       os
       owner
       machine-class
+      users
       ;
   };
   modules = [
     packageOverlays
 
     ./${distro}/${hostname}
-    { _module.args.users = users; }
+    (if (os == "linux") then ./${distro}/${hostname}/hardware-configuration.nix else { })
+    ./${distro}/configuration.nix
+    ../modules/machine-classes/base.nix
+    ../modules/machine-classes/${machine-class}.nix
+    (if (builtins.pathExists ../users/${owner}/os/${os}.nix) then ../users/${owner}/os/${os}.nix else { })
+    ../modules/auth.nix
 
     sops.nixosModules.sops
     (if (os == "linux") then vscode-server.nixosModules.default else { })
@@ -44,11 +54,12 @@ in
         inherit
           inputs
 
-          users
           hostname
+          arch
           os
           owner
           machine-class
+          users
           ;
       };
     }

@@ -37,7 +37,7 @@
       packageOverlays
       ;
     hostname = "badlands-vm";
-    arch = "x86_64";
+    arch = "aarch64";
     os = "linux";
     owner = "dudeofawesome";
     machine-class = "local-vm";

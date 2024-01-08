@@ -1,9 +1,6 @@
 { hostname, pkgs, ... }:
 {
   imports = [
-    ../configuration.nix
-    ../../../modules/machine-classes/pc.nix
-    ../../../users/dudeofawesome/os/darwin.nix
   ];
 
   networking = {

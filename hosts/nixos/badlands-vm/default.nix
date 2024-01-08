@@ -1,7 +1,5 @@
 { hostname, config, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
-    ../configuration.nix
     ../../../modules/boot/systemd-boot.nix
     ../../../modules/fs/zfs.nix
     ../../../modules/home-manager/time-machine-server.nix

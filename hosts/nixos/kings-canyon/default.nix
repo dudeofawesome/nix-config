@@ -1,6 +1,5 @@
 { hostname, config, pkgs, ... }: {
   imports = [
-    ../configuration.nix
   ];
 
   networking = {

@@ -1,7 +1,5 @@
 { config, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
-    ../configuration.nix
     ../../../modules/boot/systemd-boot.nix
     ../../../modules/wireless.nix
   ];
