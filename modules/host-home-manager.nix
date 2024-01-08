@@ -1,9 +1,10 @@
 { inputs
-, users
 , hostname
+, arch
 , os
 , owner
 , machine-class
+, users
 , ...
 }: {
   useGlobalPkgs = true;
@@ -13,9 +14,11 @@
   extraSpecialArgs = {
     inherit
       hostname
+      arch
       os
       owner
       machine-class
+      users
       ;
   };
   sharedModules = [

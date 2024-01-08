@@ -26,6 +26,7 @@ in
   specialArgs = {
     inherit
       inputs
+
       hostname
       arch
       os
