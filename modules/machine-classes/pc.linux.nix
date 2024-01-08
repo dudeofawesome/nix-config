@@ -5,6 +5,7 @@
 
   environment = {
     systemPackages = with pkgs; [
+      _1password-gui
       cider
       spotify
       # sublime4
