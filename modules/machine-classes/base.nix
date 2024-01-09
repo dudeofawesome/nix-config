@@ -3,7 +3,7 @@ with pkgs.stdenv.targetPlatform;
 {
   imports = [
     ./base.${os}.nix
-    ../sops.nix
+    ../defaults/sops.nix
   ];
 
   fonts = {

@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   imports = [
-    ../containers/docker.nix
-    ../containers/podman.nix
-    ../containers/k8s/k3s.nix
+    ../defaults/containers/docker.nix
+    ../defaults/containers/podman.nix
+    ../defaults/containers/k8s/k3s.nix
   ];
 
   environment = {

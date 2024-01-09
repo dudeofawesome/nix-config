@@ -1,6 +1,6 @@
 { pkgs, lib, os, ... }: with lib; {
   imports = [
-    ../gnome.nix
+    ../defaults/headful/gnome.nix
   ];
 
   environment = {

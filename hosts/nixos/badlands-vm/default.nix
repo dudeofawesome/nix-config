@@ -1,9 +1,7 @@
 { hostname, config, pkgs, ... }: {
   imports = [
-    ../../../modules/boot/systemd-boot.nix
-    ../../../modules/fs/zfs.nix
-    ../../../modules/home-manager/time-machine-server.nix
-    ../../../modules/home-manager/samba-users.nix
+    ../../../modules/defaults/boot/systemd-boot.nix
+    ../../../modules/defaults/fs/zfs.nix
   ];
 
   networking = {

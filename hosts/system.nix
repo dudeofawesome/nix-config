@@ -44,7 +44,7 @@ in
     ../modules/machine-classes/base.nix
     ../modules/machine-classes/${machine-class}.nix
     (if (builtins.pathExists ../users/${owner}/os/${os}.nix) then ../users/${owner}/os/${os}.nix else { })
-    ../modules/auth.nix
+    ../modules/defaults/auth
 
     sops.nixosModules.sops
     (if (os == "linux") then vscode-server.nixosModules.default else { })

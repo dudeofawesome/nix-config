@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
-    ../../../modules/boot/systemd-boot.nix
-    ../../../modules/wireless.nix
+    ../../../modules/defaults/boot/systemd-boot.nix
+    ../../../modules/defaults/wireless.nix
   ];
 
   networking = {

@@ -1,6 +1,6 @@
 { hostname, config, pkgs, ... }: {
   imports = [
-    ../../../modules/boot/systemd-boot.nix
+    ../../../modules/defaults/boot/systemd-boot.nix
   ];
 
   networking = {

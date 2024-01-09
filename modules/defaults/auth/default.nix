@@ -1,6 +1,6 @@
 { os, pkgs, ... }:
 {
   imports = [
-    ./auth.${os}.nix
+    ./${os}.nix
   ];
 }

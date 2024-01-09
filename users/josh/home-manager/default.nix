@@ -1,9 +1,9 @@
 { pkgs, lib, osConfig, ... }:
 {
   imports = [
-    ../../base
+    ../../../modules/defaults/home-manager
     ../../dudeofawesome/home-manager/browsers.nix
-    ../../../modules/dock.nix
+    ../../../modules/configurable/home-manager/dock.nix
   ];
 
   home = {

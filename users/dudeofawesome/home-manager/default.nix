@@ -1,11 +1,11 @@
 { machine-class, pkgs, lib, osConfig, config, ... }:
 {
   imports = [
-    ../../base
+    ../../../modules/defaults/home-manager
     ./browsers.nix
     ./editors.nix
     ./shells.nix
-    ../../../modules/dock.nix
+    ../../../modules/configurable/home-manager/dock.nix
   ];
 
   home = {

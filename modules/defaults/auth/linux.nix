@@ -8,11 +8,11 @@ in
     {
       # TODO: automatically detect user password hashes
       sops.secrets.${"users/dudeofawesome/hashedPassword"} = {
-        sopsFile = ../users/dudeofawesome/secrets.yaml;
+        sopsFile = ../../../users/dudeofawesome/secrets.yaml;
         neededForUsers = true;
       };
       # sops.secrets.${"users/josh/hashedPassword"} = {
-      #   sopsFile = ../users/josh/secrets.yaml;
+      #   sopsFile = ../../../users/josh/secrets.yaml;
       #   neededForUsers = true;
       # };
 

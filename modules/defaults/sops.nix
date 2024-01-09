@@ -9,5 +9,5 @@ with pkgs.stdenv.targetPlatform;
     ];
   };
 
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
 }

@@ -1,11 +1,11 @@
 { hostname, config, pkgs, ... }: {
   imports = [
-    ../../../modules/boot/systemd-boot.nix
-    # ../../../modules/wireless.nix
-    # ../../../modules/networkmanager-wireless.nix
-    ../../../modules/nvidia.nix
-    ../../../modules/roles/gaming.nix
-    ../../../modules/fingerprint.nix
+    ../../../modules/defaults/boot/systemd-boot.nix
+    # ../../../modules/defaults/wireless.nix
+    # ../../../modules/defaults/networkmanager-wireless.nix
+    ../../../modules/defaults/nvidia.nix
+    ../../../modules/defaults/headful/gaming.nix
+    ../../../modules/defaults/headful/fingerprint.nix
   ];
 
   # sops.secrets."hosts/nixos/haleakala/ssh-keys/dudeofawesome_nix-config/private" = {

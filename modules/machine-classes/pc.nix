@@ -1,7 +1,8 @@
 { pkgs, lib, os, ... }: with lib; {
   imports = [
-    (if (os == "linux") then ./pc.linux.nix else { })
-  ];
+  ]
+  ++ (if (os == "linux") then [ ./pc.linux.nix ] else [ ])
+  ;
 
   environment = {
     systemPackages = with pkgs; [
