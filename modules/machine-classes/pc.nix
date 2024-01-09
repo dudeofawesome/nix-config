@@ -13,6 +13,7 @@
       kubectl
       kubectx
       moonlight-qt
+      sunshine
     ];
   };
 }

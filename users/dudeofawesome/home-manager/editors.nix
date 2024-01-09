@@ -22,7 +22,6 @@ in
   home.activation.createMutableVSCodeSettings = mkIf config.programs.vscode.enable (
     hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir -p "$(dirname ~/"${vscodeConfigFilePath}")"
-      # $DRY_RUN_CMD cp -f "${./vscode-settings.json}" ~/"${vscodeConfigFilePath}"
 
       # Detect OS theme setting
       os_theme="$(/usr/bin/defaults read -g AppleInterfaceStyle 2> /dev/null || echo "Light")"
@@ -32,7 +31,7 @@ in
         `# Modify the selected theme to prevent jerk` \
         | sed -Ee 's/("workbench.colorTheme"): "(.+)"/\1: "'"$theme"'"/i' \
         `# Overwrite VS Code settings` \
-        > ~/"${vscodeConfigFilePath}"
+        | $DRY_RUN_CMD tee ~/"${vscodeConfigFilePath}" > /dev/null
     ''
   );
 

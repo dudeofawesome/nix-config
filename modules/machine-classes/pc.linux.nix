@@ -1,4 +1,4 @@
-{ pkgs, lib, os, ... }: with lib; {
+{ pkgs, lib, arch, os, ... }: with lib; {
   imports = [
     ../defaults/headful/gnome.nix
   ];
@@ -6,9 +6,12 @@
   environment = {
     systemPackages = with pkgs; [
       _1password-gui
-      cider
-      spotify
       # sublime4
-    ];
+    ]
+    ++ (if (arch == "x86_64") then [
+      spotify
+      cider
+    ] else [ ])
+    ;
   };
 }

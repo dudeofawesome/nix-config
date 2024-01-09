@@ -1,4 +1,4 @@
-{ pkgs, config, users, ... }: {
+{ pkgs, lib, config, owner, ... }: {
   environment = {
     systemPackages = with pkgs; [
       spice-vdagent
@@ -14,7 +14,10 @@
         >>> Welcome to NixOS ${config.system.nixos.label} (\m) - \l
         >>> \n \4
       '';
-      autologinUser = builtins.elemAt (builtins.attrNames users) 0;
+      autologinUser =
+        if (config.services.xserver.desktopManager.gnome.enable) then
+          lib.mkDefault owner
+        else null;
     };
   };
 }

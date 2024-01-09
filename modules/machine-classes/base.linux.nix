@@ -16,8 +16,11 @@
       graphviz
       nix-du
       usbutils
-      (if (machine-class == "pc") then zgrviewer else { })
-    ];
+    ]
+    ++ (if (machine-class == "pc") then [
+      zgrviewer
+    ] else [ ])
+    ;
   };
 
   services = {
