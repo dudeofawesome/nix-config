@@ -22,4 +22,10 @@
     systemPackages = with pkgs; [
     ];
   };
+
+  programs = {
+    gnome = {
+      autoLoginEnable = true;
+    };
+  };
 }
