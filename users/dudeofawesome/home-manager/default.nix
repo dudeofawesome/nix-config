@@ -6,6 +6,7 @@
     ./editors.nix
     ./shells.nix
     ../../../modules/configurable/home-manager/dock.nix
+    ../../../modules/defaults/home-manager/gnome.nix
   ];
 
   home = {
