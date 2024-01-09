@@ -1,10 +1,9 @@
-{ hostname, config, pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../../../modules/defaults/boot/systemd-boot.nix
   ];
 
   networking = {
-    hostName = hostname;
     hostId = "2fad05b5"; # head -c 8 /etc/machine-id
   };
 

@@ -1,4 +1,4 @@
-{ machine-class, owner, os, arch, lib, ... }: {
+{ hostname, machine-class, owner, os, arch, lib, ... }: {
   system = {
     # This option defines the first version of NixOS you have installed on this particular machine,
     # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -17,6 +17,10 @@
     #
     # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
     stateVersion = lib.mkDefault "23.05"; # Did you read the comment?
+  };
+
+  networking = {
+    hostName = hostname;
   };
 
   services = {

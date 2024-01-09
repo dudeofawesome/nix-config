@@ -1,10 +1,6 @@
-{ hostname, config, pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
   ];
-
-  networking = {
-    hostName = hostname;
-  };
 
   environment = {
     systemPackages = with pkgs; [

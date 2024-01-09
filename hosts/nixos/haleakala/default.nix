@@ -1,4 +1,4 @@
-{ hostname, config, pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ../../../modules/defaults/boot/systemd-boot.nix
     # ../../../modules/defaults/wireless.nix
@@ -14,7 +14,6 @@
   # };
 
   networking = {
-    hostName = hostname;
     hostId = "1b29410c"; # head -c 8 /etc/machine-id
     firewall.enable = false;
   };
