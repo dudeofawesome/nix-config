@@ -1,5 +1,5 @@
-{ pkgs, osConfig, ... }: {
-  dconf.settings = {
+{ pkgs, lib, osConfig, ... }: {
+  dconf.settings = lib.mkIf pkgs.stdenv.targetPlatform.isLinux {
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
