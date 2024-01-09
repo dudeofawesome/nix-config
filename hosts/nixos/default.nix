@@ -80,6 +80,24 @@
     users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
   });
 
+  haleakala-sim = lib.nixosSystem (import ../system.nix {
+    inherit
+      inputs
+      lib
+      nixpkgs
+      home-manager
+      sops
+      vscode-server
+      packageOverlays
+      ;
+    hostname = "haleakala-sim";
+    arch = "aarch64";
+    os = "linux";
+    owner = "dudeofawesome";
+    machine-class = "pc";
+    users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
+  });
+
   soto-server = lib.nixosSystem (import ../system.nix {
     inherit
       inputs
