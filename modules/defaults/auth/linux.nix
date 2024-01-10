@@ -6,16 +6,6 @@ in
   config =
     with pkgs.stdenv.targetPlatform;
     {
-      # TODO: automatically detect user password hashes
-      sops.secrets.${"users/dudeofawesome/hashedPassword"} = {
-        sopsFile = ../../../users/dudeofawesome/secrets.yaml;
-        neededForUsers = true;
-      };
-      # sops.secrets.${"users/josh/hashedPassword"} = {
-      #   sopsFile = ../../../users/josh/secrets.yaml;
-      #   neededForUsers = true;
-      # };
-
       users = {
         mutableUsers = false;
 
