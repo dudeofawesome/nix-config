@@ -43,7 +43,7 @@ in
     (if (builtins.pathExists ../users/${owner}/os/${os}.nix) then ../users/${owner}/os/${os}.nix else { })
     ../modules/defaults/auth
 
-    inputs.sops.nixosModules.sops
+    (if (os == "linux") then inputs.sops.nixosModules.sops else { })
     (if (os == "linux") then inputs.vscode-server.nixosModules.default else { })
 
     inputs.home-manager.${distroModules}.home-manager
