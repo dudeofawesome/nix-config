@@ -1,10 +1,7 @@
 { lib
 , inputs
 , nixpkgs
-, home-manager
 , usersModule
-, sops
-, vscode-server
 , packageOverlays
 , ...
 }: {
@@ -13,9 +10,6 @@
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
-      vscode-server
       packageOverlays
       ;
     hostname = "kings-canyon";
@@ -31,9 +25,6 @@
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
-      vscode-server
       packageOverlays
       ;
     hostname = "badlands-vm";
@@ -49,9 +40,6 @@
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
-      vscode-server
       packageOverlays
       ;
     hostname = "monongahela";
@@ -67,9 +55,6 @@
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
-      vscode-server
       packageOverlays
       ;
     hostname = "haleakala";
@@ -85,9 +70,6 @@
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
-      vscode-server
       packageOverlays
       ;
     hostname = "haleakala-sim";
@@ -103,8 +85,6 @@
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
       packageOverlays
       ;
     hostname = "soto-server";

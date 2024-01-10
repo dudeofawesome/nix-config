@@ -1,22 +1,15 @@
 { lib
 , inputs
 , nixpkgs
-, home-manager
 , usersModule
-, sops
-, vscode-server
 , packageOverlays
-, darwin
 , ...
 }: {
-  crater-lake = darwin.lib.darwinSystem (import ../system.nix {
+  crater-lake = inputs.darwin.lib.darwinSystem (import ../system.nix {
     inherit
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
-      vscode-server
       packageOverlays
       ;
     hostname = "crater-lake";
@@ -27,14 +20,11 @@
     users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
   });
 
-  badlands = darwin.lib.darwinSystem (import ../system.nix {
+  badlands = inputs.darwin.lib.darwinSystem (import ../system.nix {
     inherit
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
-      vscode-server
       packageOverlays
       ;
     hostname = "badlands";
@@ -45,14 +35,11 @@
     users = usersModule.filterMap { dudeofawesome = "lorleans"; } usersModule.users;
   });
 
-  joshs-paciolan-laptop = darwin.lib.darwinSystem (import ../system.nix {
+  joshs-paciolan-laptop = inputs.darwin.lib.darwinSystem (import ../system.nix {
     inherit
       inputs
       lib
       nixpkgs
-      home-manager
-      sops
-      vscode-server
       packageOverlays
       ;
     hostname = "joshs-paciolan-laptop";

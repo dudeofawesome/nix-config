@@ -107,12 +107,10 @@
             inputs
             nixpkgs
             nixpkgs-stable
-            home-manager
             usersModule
-            sops
-            vscode-server
             packageOverlays
-            location;
+            location
+            ;
         }
       );
 
@@ -123,12 +121,9 @@
             inputs
             nixpkgs
             nixpkgs-stable
-            home-manager
             usersModule
-            sops
-            vscode-server
             packageOverlays
-            darwin;
+            ;
         }
       );
     };

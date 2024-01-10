@@ -5,9 +5,6 @@
 { inputs
 , lib
 , nixpkgs
-, home-manager
-, sops
-, vscode-server
 , packageOverlays
 , hostname
 , arch
@@ -46,10 +43,10 @@ in
     (if (builtins.pathExists ../users/${owner}/os/${os}.nix) then ../users/${owner}/os/${os}.nix else { })
     ../modules/defaults/auth
 
-    sops.nixosModules.sops
-    (if (os == "linux") then vscode-server.nixosModules.default else { })
+    inputs.sops.nixosModules.sops
+    (if (os == "linux") then inputs.vscode-server.nixosModules.default else { })
 
-    home-manager.${distroModules}.home-manager
+    inputs.home-manager.${distroModules}.home-manager
     {
       home-manager = import ../modules/host-home-manager.nix {
         inherit
