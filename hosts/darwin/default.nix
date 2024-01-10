@@ -1,6 +1,5 @@
 { lib
 , inputs
-, nixpkgs
 , usersModule
 , packageOverlays
 , ...
@@ -9,7 +8,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "crater-lake";
@@ -24,7 +22,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "badlands";
@@ -39,7 +36,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "joshs-paciolan-laptop";

@@ -105,8 +105,6 @@
           inherit (nixpkgs) lib;
           inherit
             inputs
-            nixpkgs
-            nixpkgs-stable
             usersModule
             packageOverlays
             location
@@ -119,8 +117,6 @@
           inherit (nixpkgs) lib;
           inherit
             inputs
-            nixpkgs
-            nixpkgs-stable
             usersModule
             packageOverlays
             ;

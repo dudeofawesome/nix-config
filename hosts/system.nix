@@ -4,7 +4,6 @@
 
 { inputs
 , lib
-, nixpkgs
 , packageOverlays
 , hostname
 , arch

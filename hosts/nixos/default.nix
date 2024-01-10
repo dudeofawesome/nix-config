@@ -1,6 +1,5 @@
 { lib
 , inputs
-, nixpkgs
 , usersModule
 , packageOverlays
 , ...
@@ -9,7 +8,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "kings-canyon";
@@ -24,7 +22,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "badlands-vm";
@@ -39,7 +36,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "monongahela";
@@ -54,7 +50,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "haleakala";
@@ -69,7 +64,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "haleakala-sim";
@@ -84,7 +78,6 @@
     inherit
       inputs
       lib
-      nixpkgs
       packageOverlays
       ;
     hostname = "soto-server";
