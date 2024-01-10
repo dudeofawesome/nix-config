@@ -4,26 +4,40 @@
     nvidia-vaapi-driver
   ];
 
+  boot = {
+    kernelModules = [ "nvidia" ];
+    blacklistedKernelModules = [ "nouveau" ];
+  };
+
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
+    extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
   };
 
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services = {
+    xserver = {
+      # Load nvidia driver for Xorg and Wayland
+      videoDrivers = [ "nvidia" ];
+      # Nvidia doesn't want to work well with Wayland
+      displayManager.gdm.wayland = false;
+    };
+  };
 
   hardware.nvidia = {
-
     # Modesetting is required.
     modesetting.enable = true;
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    powerManagement.enable = false;
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
+    powerManagement = {
+      enable = false;
+      # Fine-grained power management. Turns off GPU when not in use.
+      # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+      finegrained = false;
+    };
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
