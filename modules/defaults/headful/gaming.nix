@@ -1,4 +1,8 @@
 { pkgs, config, ... }: {
+  imports = [
+    ../8bitdo.nix
+  ];
+
   environment = {
     systemPackages = with pkgs; [
       antimicrox
