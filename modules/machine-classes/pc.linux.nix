@@ -7,6 +7,7 @@
     systemPackages = with pkgs; [
       _1password-gui
       # sublime4
+      sunshine
     ]
     ++ (if (arch == "x86_64") then [
       spotify
