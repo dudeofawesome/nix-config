@@ -1,5 +1,9 @@
 {}: {
   config = {
+    sops.secrets.${"users/josh/hashedPassword"} = {
+      sopsFile = ./secrets.yaml;
+      neededForUsers = true;
+    };
   };
   user = {
     fullName = "Josh Gibbs";
