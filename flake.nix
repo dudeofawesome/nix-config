@@ -96,58 +96,7 @@
     }:
     let
       location = "$HOME/git/dudeofawesome/nix-config";
-      packageOverlays =
-        ({ config, pkgs, system, ... }: {
-          nixpkgs.config.packageOverrides = prev: {
-            fishPlugins = prev.fishPlugins // {
-              osx = {
-                name = "osx";
-                src = fish-osx;
-              };
-              node-binpath = {
-                name = "node-binpath";
-                src = fish-node-binpath;
-              };
-              node-version = {
-                name = "node-version";
-                src = fish-node-version;
-              };
-              shell-integrations = {
-                name = "shell-integrations";
-                src = fish-shell-integrations;
-              };
-              doa-tide-settings = {
-                name = "doa-tide-settings";
-                src = fish-doa-tide-settings;
-              };
-              editor-updater = {
-                name = "editor-updater";
-                src = fish-editor-updater;
-              };
-            };
-
-            vimPlugins = prev.vimPlugins // { vim-lumen = vim-lumen; };
-
-            vscodeExtensions = nix-vscode-extensions;
-
-            dotfiles = {
-              dudeofawesome = dudeofawesome_dotfiles;
-              upaymeifixit = upaymeifixit_dotfiles;
-            };
-          };
-
-          nixpkgs.overlays = [
-            nur.overlay
-            (
-              final: prev: {
-                stable = import nixpkgs-stable {
-                  inherit system;
-                  config.allowUnfree = true;
-                };
-              }
-            )
-          ];
-        });
+      packageOverlays = ./overlays;
       usersModule = import ./users { inherit (nixpkgs) lib; };
     in
     {
