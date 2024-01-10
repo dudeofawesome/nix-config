@@ -33,6 +33,7 @@ in
     environment = {
       systemPackages = with pkgs; [
         gnome.dconf-editor
+        gnomeExtensions.wayland-or-x11
       ];
 
       gnome.excludePackages = (with pkgs; [
