@@ -13,6 +13,8 @@
   #   path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
   # };
 
+  boot.extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
+
   networking = {
     hostId = "1b29410c"; # head -c 8 /etc/machine-id
     firewall.enable = false;
