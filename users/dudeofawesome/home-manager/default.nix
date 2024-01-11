@@ -81,6 +81,17 @@
       userEmail = "louis@orleans.io";
 
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGD3VYzXLFPEC25hK7o5+NrV9cvNlyV7Y93UyAQospbw";
+
+      includes = [
+        {
+          condition = "gitdir:~/git/paciolan/";
+          contents = {
+            user = {
+              email = "lorleans@paciolan.com";
+            };
+          };
+        }
+      ];
     };
 
     dock = {
