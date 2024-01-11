@@ -96,10 +96,5 @@ in
         # libinput.enable = true;
       };
     };
-
-    # TODO: make this work for other users
-    users.users.dudeofawesome = {
-      extraGroups = [ "networkmanager" "wheel" ];
-    };
   };
 }

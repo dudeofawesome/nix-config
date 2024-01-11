@@ -18,13 +18,12 @@ in
             home = "/${if isLinux then "home" else "Users"}/${key}";
             shell = if (val ? shell) then pkgs."${val.shell}" else pkgs.fish;
             group = key;
-            extraGroups =
-              if (val ? groups) then
-                val.groups else
-                [
-                  "wheel"
-                  "docker"
-                ];
+            extraGroups = (if (val ? groups) then
+              val.groups else
+              [ "wheel" ])
+            ++ lib.optionals config.virtualisation.docker.enable [ "docker" ]
+            ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
+            ;
 
             openssh.authorizedKeys.keys = val.openssh.authorizedKeys.keys;
           })
