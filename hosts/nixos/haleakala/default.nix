@@ -1,8 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
     ../../../modules/defaults/boot/systemd-boot.nix
-    # ../../../modules/defaults/wireless.nix
-    # ../../../modules/defaults/networkmanager-wireless.nix
+    ../../../modules/defaults/wireless.nix
     ../../../modules/defaults/nvidia.nix
     ../../../modules/defaults/headful/gaming.nix
     ../../../modules/defaults/headful/fingerprint.nix
