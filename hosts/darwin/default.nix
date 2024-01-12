@@ -43,6 +43,6 @@
     os = "darwin";
     owner = "josh";
     machine-class = "pc";
-    users = usersModule.filterMap { joshuagibbs = "josh"; } usersModule.users;
+    users = usersModule.filterMap { josh = "joshuagibbs"; } usersModule.users;
   });
 }
