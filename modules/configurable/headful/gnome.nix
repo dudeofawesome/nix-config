@@ -84,7 +84,7 @@ in
           enable = true;
 
           settings = {
-            daemon = {
+            daemon = mkIf cfg.autoLoginEnable {
               AutomaticLoginEnable = cfg.autoLoginEnable;
               AutomaticLogin = cfg.autoLoginUser;
             };
