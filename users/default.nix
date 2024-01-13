@@ -1,7 +1,7 @@
 { lib }: {
   users = {
-    "dudeofawesome" = import ./dudeofawesome { };
-    "josh" = import ./josh { };
+    "dudeofawesome" = import ./dudeofawesome;
+    "josh" = import ./josh;
   };
 
   filterMap = names: users: (

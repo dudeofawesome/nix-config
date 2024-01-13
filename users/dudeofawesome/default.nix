@@ -1,4 +1,4 @@
-{}: {
+{
   config = {
     linux = {
       sops.secrets.${"users/dudeofawesome/hashedPassword"} = {
