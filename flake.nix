@@ -74,26 +74,7 @@
     };
   };
 
-  outputs =
-    inputs@{ nixpkgs
-    , nixpkgs-stable
-    , nur
-    , home-manager
-    , darwin
-    , sops
-    , dudeofawesome_dotfiles
-    , upaymeifixit_dotfiles
-    , nix-vscode-extensions
-    , vscode-server
-    , vim-lumen
-    , fish-osx
-    , fish-node-binpath
-    , fish-node-version
-    , fish-shell-integrations
-    , fish-doa-tide-settings
-    , fish-editor-updater
-    , ...
-    }:
+  outputs = inputs@{ nixpkgs, ... }:
     let
       location = "$HOME/git/dudeofawesome/nix-config";
       packageOverlays = ./overlays;
