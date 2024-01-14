@@ -6,6 +6,11 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nur.url = "github:nix-community/NUR";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

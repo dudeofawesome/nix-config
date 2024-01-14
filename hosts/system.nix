@@ -36,12 +36,14 @@ in
 
     ./${distro}/${hostname}
     (if (os == "linux") then ./${distro}/${hostname}/hardware-configuration.nix else { })
+    (if (builtins.pathExists ./${distro}/${hostname}/disko.nix) then ./${distro}/${hostname}/disko.nix else { })
     ./${distro}/configuration.nix
     ../modules/machine-classes/base.nix
     ../modules/machine-classes/${machine-class}.nix
     (if (builtins.pathExists ../users/${owner}/os/${os}.nix) then ../users/${owner}/os/${os}.nix else { })
     ../modules/defaults/auth
 
+    (if (os == "linux") then inputs.disko.nixosModules.disko else { })
     (if (os == "linux") then inputs.sops.nixosModules.sops else { })
     (if (os == "linux") then inputs.vscode-server.nixosModules.default else { })
 

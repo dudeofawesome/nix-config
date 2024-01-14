@@ -1,4 +1,4 @@
-{ lib }:
+{ lib, ... }:
 let
   esp = import ../../../modules/defaults/disko/esp.nix;
   root = import ../../../modules/defaults/disko/root.nix {
@@ -14,7 +14,7 @@ in
         device = "/dev/vda";
         content = {
           type = "gpt";
-          partitions = esp // root;
+          partitions = esp // root.partition;
         };
       };
       storage_1 = import ../../../modules/defaults/disko/zfs_disk.nix { device = "/dev/vdb"; };
@@ -24,7 +24,7 @@ in
     zpool = {
       storage = {
         type = "zpool";
-        mode = "raidz1";
+        mode = "raidz";
         # mountpoint = "/mnt/storage";
         rootFsOptions = {
           canmount = "off";
@@ -49,11 +49,13 @@ in
             # '';
           };
           "encrypted/time-machine" = import ../../../modules/defaults/disko/zfs_dataset.nix {
+            inherit lib;
             name = "storage/time-machine";
             mountpoint = "/mnt/time-machine";
             snapshot = true;
           };
           "encrypted/linux-isos" = import ../../../modules/defaults/disko/zfs_dataset.nix {
+            inherit lib;
             name = "storage/linux-isos";
             mountpoint = "/mnt/linux-isos";
             snapshot = true;

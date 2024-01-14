@@ -20,6 +20,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1705075138,
+        "narHash": "sha256-0slYsXoR1Sd5FwTfFZLYxAsI015+J4lvgvo55u4Gw1A=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "f78b6498f69e04514cb84393e5daba669198c1c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "dudeofawesome_dotfiles": {
       "flake": false,
       "locked": {
@@ -290,6 +310,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "disko": "disko",
         "dudeofawesome_dotfiles": "dudeofawesome_dotfiles",
         "fish-doa-tide-settings": "fish-doa-tide-settings",
         "fish-editor-updater": "fish-editor-updater",

@@ -1,4 +1,4 @@
-{ lib, snapshot ? true, mountpoint, compression, name ? null }:
+{ lib, snapshot ? true, mountpoint, compression ? true, name ? null }:
 let
   a = (if (snapshot != true || name == null) then { } else abort);
 in
