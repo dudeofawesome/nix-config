@@ -8,6 +8,7 @@
       antimicrox
       discord
       # gamescope
+      game-devices-udev-rules
       heroic
       parsec-bin
       protontricks
@@ -23,8 +24,11 @@
   # boot.extraModulePackages = with config.boot.kernelPackages; [
   #   xpadneo
   # ];
-  hardware.xpadneo.enable = true;
-  hardware.xone.enable = true;
+  hardware = {
+    xpadneo.enable = true;
+    xone.enable = true;
+    uinput.enable = true;
+  };
 
   programs = {
     steam = {
