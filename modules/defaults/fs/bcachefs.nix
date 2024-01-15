@@ -1,4 +1,4 @@
-{ pkgs, lib, config }:
+{ pkgs, lib, config, ... }:
 let
   # TODO: figure out a way to detect if a linuxPackage is LTS
   prefer_lts = false;
