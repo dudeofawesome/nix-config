@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   environment.systemPackages = with pkgs; [
     gwe
     nvidia-vaapi-driver
@@ -14,8 +14,8 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
-    extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
+    extraPackages = [ config.boot.kernelPackages.nvidia_x11.out ];
+    extraPackages32 = [ config.boot.kernelPackages.nvidia_x11.lib32 ];
   };
 
   services = {
@@ -23,7 +23,7 @@
       # Load nvidia driver for Xorg and Wayland
       videoDrivers = [ "nvidia" ];
       # Nvidia doesn't want to work well with Wayland
-      displayManager.gdm.wayland = false;
+      displayManager.gdm.wayland = lib.mkIf config.services.xserver.displayManager.gdm.enabled false;
     };
   };
 
