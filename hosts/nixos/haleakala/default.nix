@@ -26,7 +26,7 @@
 
   programs = {
     gnome = {
-      autoLoginEnable = true;
+      # autoLoginEnable = true;
     };
   };
 }
