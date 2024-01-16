@@ -97,6 +97,8 @@
         "com.apple.finder" = {
           # When performing a search, search the current folder by default
           FXDefaultSearchScope = "SCcf";
+          # Use columns view
+          FXPreferredViewStyle = "clmv";
         };
 
         "com.apple.Siri".StatusMenuVisible = 0;
