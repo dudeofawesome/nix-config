@@ -19,7 +19,9 @@ with pkgs.stdenv.targetPlatform;
         else if (isDarwin) then [ "root" "@admin" ]
         else abort;
     };
-  };
+  }
+  // (if (isDarwin) then { linux-builder.enable = true; } else { })
+  ;
   # Allow proprietary software.
   nixpkgs.config.allowUnfree = true;
 }
