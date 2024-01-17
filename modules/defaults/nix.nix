@@ -20,8 +20,14 @@ with pkgs.stdenv.targetPlatform;
         else abort;
     };
   }
-  // (if (isDarwin) then { linux-builder.enable = true; } else { })
+  // (if (isDarwin) then {
+    linux-builder = {
+      enable = true;
+      maxJobs = 10;
+    };
+  } else { })
   ;
+
   # Allow proprietary software.
   nixpkgs.config.allowUnfree = true;
 }
