@@ -18,6 +18,18 @@ with pkgs.stdenv.targetPlatform;
         if (isLinux) then [ "root" "@wheel" ]
         else if (isDarwin) then [ "root" "@admin" ]
         else abort;
+
+      substituters = [
+        "https://cache.nixos.org/"
+        # nix-node by fontis
+        "https://fontis.cachix.org/"
+      ];
+    };
+
+    registry."node".to = {
+      type = "github";
+      owner = "fontis";
+      repo = "nix-node";
     };
   }
   // (if (isDarwin) then {
