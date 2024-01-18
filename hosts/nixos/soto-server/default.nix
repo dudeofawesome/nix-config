@@ -1,7 +1,5 @@
 { config, pkgs, ... }: {
-  imports = [
-    ../../../modules/defaults/boot/systemd-boot.nix
-  ];
+  imports = [ ];
 
   networking = {
     hostId = "2fad05b5"; # head -c 8 /etc/machine-id

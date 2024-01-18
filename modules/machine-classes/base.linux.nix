@@ -1,6 +1,20 @@
-{ machine-class, pkgs, lib, ... }: {
-  # Let's live life on the edge
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+{ machine-class, hostname, pkgs, lib, config, ... }: {
+  imports = [
+    ../defaults/boot/systemd-boot.nix
+  ];
+
+  boot = {
+    # Let's live life on the edge
+    kernelPackages = pkgs.linuxPackages_latest;
+
+    loader.systemd-boot.enable = lib.mkDefault (
+      !(
+        config.boot.loader.grub.enable
+        || config.boot.loader.raspberryPi.enable
+        || config.boot.loader.external.enable
+      )
+    );
+  };
 
   fonts = {
     # TODO: bring this back in to base.nix once [this issue](https://github.com/LnL7/nix-darwin/issues/752) is closed.

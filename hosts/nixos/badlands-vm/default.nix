@@ -1,6 +1,5 @@
 { config, pkgs, ... }: {
   imports = [
-    ../../../modules/defaults/boot/systemd-boot.nix
     ../../../modules/defaults/fs/zfs.nix
     ../../../modules/defaults/fs/bcachefs.nix
   ];
