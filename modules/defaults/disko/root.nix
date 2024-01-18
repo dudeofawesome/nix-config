@@ -1,4 +1,8 @@
-{ fs ? "ext4", encrypted ? false, lib }: with builtins;
+{ fs ? "ext4"
+, encrypted ? false
+, passwordFile ? null
+, lib
+}: with builtins;
 if (!encrypted) then
   ({
     partition = {
@@ -25,7 +29,7 @@ else
               type = "luks";
               name = "cryptroot";
               settings.allowDiscards = true;
-              passwordFile = "/tmp/secret.key";
+              passwordFile = passwordFile;
               content = {
                 type = "filesystem";
                 format = fs;
@@ -44,7 +48,7 @@ else
             size = "100%";
             content = {
               type = "filesystem";
-              format = "bcachefs";
+              format = "zfs";
               mountpoint = "/";
             };
           };

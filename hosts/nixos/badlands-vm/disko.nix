@@ -1,12 +1,17 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   esp = import ../../../modules/defaults/disko/esp.nix;
   root = import ../../../modules/defaults/disko/root.nix {
     inherit lib;
-    fs = "bcachefs";
+    encrypted = true;
+    passwordFile = config.sops.secrets."hosts/nixos/badlands-vm/fde_password".path;
   };
 in
 {
+  sops.secrets."hosts/nixos/badlands-vm/fde_password" = {
+    sopsFile = ./secrets.yaml;
+  };
+
   disko.devices = {
     disk = {
       primary = {
@@ -16,52 +21,9 @@ in
           type = "gpt";
           partitions = esp // root.partition;
         };
+        imageSize = "25G";
       };
-      storage_1 = import ../../../modules/defaults/disko/zfs_disk.nix { device = "/dev/vdb"; };
-      storage_2 = import ../../../modules/defaults/disko/zfs_disk.nix { device = "/dev/vdc"; };
-      storage_3 = import ../../../modules/defaults/disko/zfs_disk.nix { device = "/dev/vdd"; };
     };
-    zpool = {
-      storage = {
-        type = "zpool";
-        mode = "raidz";
-        # mountpoint = "/mnt/storage";
-        rootFsOptions = {
-          canmount = "off";
-          atime = "off";
-          compression = "zstd";
-          reservation = "10M";
-          "com.sun:auto-snapshot" = "false";
-        };
 
-        datasets = {
-          encrypted = {
-            type = "zfs_fs";
-            options = {
-              mountpoint = "none";
-              encryption = "aes-256-gcm";
-              keyformat = "passphrase";
-              keylocation = "file:///tmp/secret.key";
-            };
-            # use this to read the key during boot
-            # postCreateHook = ''
-            #   zfs set keylocation="prompt" "zroot/$name";
-            # '';
-          };
-          "encrypted/time-machine" = import ../../../modules/defaults/disko/zfs_dataset.nix {
-            inherit lib;
-            name = "storage/time-machine";
-            mountpoint = "/mnt/time-machine";
-            snapshot = true;
-          };
-          "encrypted/linux-isos" = import ../../../modules/defaults/disko/zfs_dataset.nix {
-            inherit lib;
-            name = "storage/linux-isos";
-            mountpoint = "/mnt/linux-isos";
-            snapshot = true;
-          };
-        };
-      };
-    };
   };
 }
