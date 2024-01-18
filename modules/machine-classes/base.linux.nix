@@ -7,13 +7,7 @@
     # Let's live life on the edge
     kernelPackages = pkgs.linuxPackages_latest;
 
-    loader.systemd-boot.enable = lib.mkDefault (
-      !(
-        config.boot.loader.grub.enable
-        || config.boot.loader.raspberryPi.enable
-        || config.boot.loader.external.enable
-      )
-    );
+    loader.systemd-boot.enable = lib.mkDefault true;
   };
 
   fonts = {
