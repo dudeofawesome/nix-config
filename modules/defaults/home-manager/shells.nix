@@ -39,6 +39,21 @@ with pkgs.stdenv.targetPlatform;
 
       functions = {
         _tide_item_gcloud = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/fish/functions/_tide_item_gcloud.fish";
+        doa-ssh-keygen = {
+          description = ''
+            Create SSH ed25519 keys with no passphrase, in ~/.ssh
+          '';
+          body = ''
+            set name "$argv[1]"
+
+            if string match --regex '\/' "$name"
+            else
+              set name ~/".ssh/$name"
+            end
+
+            ssh-keygen -t ed25519 -N "" -f "$name"
+          '';
+        };
       };
 
       shellInit = ''
