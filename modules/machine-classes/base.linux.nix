@@ -25,6 +25,7 @@
     systemPackages = with pkgs; [
       cryptsetup
       graphviz
+      lshw
       nix-du
       usbutils
     ]
