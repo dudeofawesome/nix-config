@@ -1,7 +1,7 @@
 {
   config = {
     linux = {
-      sops.secrets.${"users/josh/hashedPassword"} = {
+      sops.secrets."users/josh/hashedPassword" = {
         sopsFile = ./secrets.yaml;
         neededForUsers = true;
       };
