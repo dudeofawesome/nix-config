@@ -1,6 +1,7 @@
 { machine-class, hostname, pkgs, lib, config, ... }: {
   imports = [
     ../defaults/boot/systemd-boot.nix
+    ../defaults/boot/ssh.nix
   ];
 
   boot = {
