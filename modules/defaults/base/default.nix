@@ -2,9 +2,9 @@
 with pkgs.stdenv.targetPlatform;
 {
   imports = [
-    ./base.${os}.nix
-    ../defaults/sops.nix
-    ../defaults/nix.nix
+    ./${os}.nix
+    ../../defaults/sops.nix
+    ../../defaults/nix.nix
   ];
 
   fonts = {

@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ../configurable/hosts.darwin.nix
+    ../../configurable/hosts.darwin.nix
   ];
 
   fonts = {
