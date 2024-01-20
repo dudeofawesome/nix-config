@@ -1,8 +1,10 @@
-{ machine-class, hostname, pkgs, lib, config, ... }: {
+{ machine-class, arch, os, hostname, pkgs, lib, config, ... }: {
   imports = [
     ../../defaults/boot/systemd-boot.nix
     ../../defaults/boot/ssh.nix
   ];
+
+  nixpkgs.hostPlatform = "${arch}-${os}";
 
   boot = {
     # Let's live life on the edge
