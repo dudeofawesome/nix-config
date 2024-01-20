@@ -13,6 +13,7 @@
   config = lib.mkIf
     (
       config ? "disko"
+      && config.disko.devices.disk ? "primary"
       && config.disko.devices.disk.primary.content.partitions ? "luks"
     )
     {
