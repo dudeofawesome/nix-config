@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }: {
   environment.systemPackages = with pkgs; [
     gwe
     nvidia-vaapi-driver
@@ -19,7 +19,7 @@
   };
 
   services = {
-    xserver = {
+    xserver = lib.mkIf config.services.xserver.enable {
       # Load nvidia driver for Xorg and Wayland
       videoDrivers = [ "nvidia" ];
       # Nvidia doesn't want to work well with Wayland
@@ -46,7 +46,7 @@
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
-    open = false;
+    open = lib.mkDefault false;
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
