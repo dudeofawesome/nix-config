@@ -2,9 +2,9 @@
 with lib;
 let
   userDir =
-    if pkgs.stdenv.hostPlatform.isDarwin then
+    if pkgs.stdenv.targetPlatform.isDarwin then
       "Library/Application Support/Code/User"
-    else if pkgs.stdenv.hostPlatform.isLinux then
+    else if pkgs.stdenv.targetPlatform.isLinux then
       ".config/Code/User"
     else
       abort;
