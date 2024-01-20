@@ -55,10 +55,6 @@
         "steamdeck".user = "deck";
 
         "badlands-vm".user = "dudeofawesome";
-        "badlands-vm-by-ip" = {
-          match = hostUnreachable "badlands-vm";
-          hostname = "192.168.69.2";
-        };
 
         "home.powell.place".user = "louis";
 
