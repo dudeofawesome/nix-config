@@ -25,7 +25,7 @@ keys:
   # Then add that value to a new key here:
   systems:
     - &system_badlands 'age16juvzqnt7qs5pkssaqltlwn9e4chk3w9zf8gcazmcj7uu3tmcg9q3f2yp7'
-    - &system_badlands-vm 'age1awen96u8f7c288rs9l3l3k290s79u8tf788235e4tg2en49h7pvqsrheuy'
+    - &system_badlands-vm 'age1dfekdgq7ksy6v96a2h2p5ml09emrgdlwxmcsm2d3c0am49y2vynqak40ss'
     - &system_monongahela 'age1r3z0gd3fmq5vu73l7k7jsseaz5ec8f88qq5sw0zvlexug6uzf4wsadjrhx'
     - &system_haleakala 'age1wy9vrp4k3w69dtjfeskayrn4m4m6fntjcj480junfvpjflnd0p8sg078qc'
     - &system_joshs-paciolan-laptop 'age1ct6h645xhzamd5mfhs5ze8uza2k23tjat8wrrrn7k6sakr5uecjs7u8j35'
