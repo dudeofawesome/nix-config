@@ -4,5 +4,6 @@
     ./editors.nix
     ./miscellaneous.nix
     ./shells.nix
+    ./nix.nix
   ];
 }
