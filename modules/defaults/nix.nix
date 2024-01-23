@@ -24,6 +24,12 @@ with pkgs.stdenv.targetPlatform;
         # nix-node by fontis
         "https://fontis.cachix.org/"
       ];
+
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        # nix-node by fontis
+        "fontis.cachix.org-1:r6CU2oXo4iozCVo09V+hjJSpFlbUxQW/rDHYlLJ03Og="
+      ];
     };
 
     registry."node".to = {
