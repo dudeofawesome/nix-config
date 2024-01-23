@@ -42,7 +42,9 @@ in
       extensions = with pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace; [
         alefragnani.bookmarks
         antyos.openscad
+        bierner.markdown-mermaid
         bmalehorn.vscode-fish
+        bpruitt-goddard.mermaid-markdown-syntax-highlighting
         bradlc.vscode-tailwindcss
         castwide.solargraph
         codezombiech.gitignore
@@ -106,6 +108,7 @@ in
         stylelint.vscode-stylelint
         tamasfe.even-better-toml
         tomoki1207.pdf
+        tomoyukim.vscode-mermaid-editor
         tusaeff.vscode-iterm2-theme-sync
         tyriar.lorem-ipsum
         ultram4rine.vscode-choosealicense
