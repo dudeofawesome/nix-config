@@ -43,18 +43,27 @@ in
       };
   };
 
-  services.k3s = {
-    # https://github.com/NixOS/nixpkgs/pull/176520
-    # package = k3s;
-    enable = true;
-    role = lib.mkDefault "server";
-    # tokenFile = config.sops.
-    extraFlags = toString [
-      "--flannel-backend=host-gw"
-      "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
-    ];
-  };
+  services = {
+    k3s = {
+      # https://github.com/NixOS/nixpkgs/pull/176520
+      # package = k3s;
+      enable = true;
+      role = lib.mkDefault "server";
+      # tokenFile = config.sops.
+      extraFlags = toString [
+        "--flannel-backend=host-gw"
+        "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
+      ];
+    };
 
+    dnsmasq = {
+      enable = true;
+      settings = {
+        # use CoreDNS to resolve cluster resources
+        server = [ "/cluster.local/10.42.0.8" ];
+      };
+    };
+  };
   systemd.services.k3s = {
     wants = [
       "containerd.service"
@@ -84,5 +93,7 @@ in
         8472 # k3s, flannel: required if using multi-node for inter-node networking
       ];
     };
+
+    networkmanager.dns = "dnsmasq";
   };
 }
