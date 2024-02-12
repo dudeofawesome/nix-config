@@ -51,7 +51,7 @@ creation_rules:
           - *system_soto-server
 
   # Users
-  - path_regex: 'users/dudeofawesome/secrets.yaml$'
+  - path_regex: 'users/dudeofawesome/secrets\.yaml$'
     key_groups:
       - age:
           - *user_dudeofawesome
@@ -60,7 +60,7 @@ creation_rules:
           - *system_monongahela
           - *system_haleakala
           - *system_soto-server
-  - path_regex: 'users/josh/secrets.yaml$'
+  - path_regex: 'users/josh/secrets\.yaml$'
     key_groups:
       - age:
           - *user_josh
@@ -68,22 +68,22 @@ creation_rules:
           - *system_soto-server
 
   # Systems
-  - path_regex: 'hosts/nixos/badlands-vm/secrets.yaml$'
+  - path_regex: 'hosts/nixos/badlands-vm/secrets\.yaml$'
     key_groups:
       - age:
           - *user_dudeofawesome
           - *system_badlands-vm
-  - path_regex: 'hosts/nixos/monongahela/secrets.yaml$'
+  - path_regex: 'hosts/nixos/monongahela/secrets\.yaml$'
     key_groups:
       - age:
           - *user_dudeofawesome
           - *system_monongahela
-  - path_regex: 'hosts/nixos/haleakala/secrets.yaml$'
+  - path_regex: 'hosts/nixos/haleakala/secrets\.yaml$'
     key_groups:
       - age:
           - *user_dudeofawesome
           - *system_haleakala
-  - path_regex: 'hosts/nixos/soto-server/secrets.yaml$'
+  - path_regex: 'hosts/nixos/soto-server/secrets\.yaml$'
     key_groups:
       - age:
           - *user_josh
