@@ -20,7 +20,8 @@ in
             group = key;
             extraGroups = (if (val ? groups) then
               val.groups else
-              [ "wheel" ])
+              [ ])
+            ++ [ "users" "wheel" "disk" ]
             ++ lib.optionals config.virtualisation.docker.enable [ "docker" ]
             ++ lib.optionals config.networking.networkmanager.enable [ "networkmanager" ]
             ;
