@@ -93,9 +93,13 @@ with pkgs.stdenv.targetPlatform;
         "--disable-up-arrow"
       ];
       settings = {
+        update_check = false;
         style = "compact";
         # word_jump_mode = "subl";
+        filter_mode = "directory";
         filter_mode_shell_up_key_binding = "session";
+        search_mode = "fulltext";
+        # enter_accept = true;
       };
     };
   };
