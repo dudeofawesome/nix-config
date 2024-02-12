@@ -39,106 +39,109 @@ in
     vscode = {
       enable = machine-class == "pc";
 
-      extensions = with pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace; [
-        alefragnani.bookmarks
-        antyos.openscad
-        bierner.markdown-mermaid
-        bmalehorn.vscode-fish
-        bpruitt-goddard.mermaid-markdown-syntax-highlighting
-        bradlc.vscode-tailwindcss
-        castwide.solargraph
-        codezombiech.gitignore
-        connor4312.nodejs-testing
-        coolbear.systemd-unit-file
-        dart-code.dart-code
-        dart-code.flutter
-        dbaeumer.vscode-eslint
-        deerawan.vscode-dash
-        donjayamanne.githistory
-        drknoxy.eslint-disable-snippets
-        eamodio.gitlens
-        editorconfig.editorconfig
-        equinusocio.vsc-material-theme
-        esbenp.prettier-vscode
-        fabiospampinato.vscode-diff
-        firefox-devtools.vscode-firefox-debug
-        flesler.url-encode
-        ghmcadams.lintlens
-        github.vscode-github-actions
-        github.vscode-pull-request-github
-        gitlab.gitlab-workflow
-        golang.go
-        gracefulpotato.rbs-syntax
-        graphql.vscode-graphql
-        graphql.vscode-graphql-execution
-        graphql.vscode-graphql-syntax
-        gruntfuggly.todo-tree
-        hashicorp.terraform
-        idleberg.applescript
-        inferrinizzard.prettier-sql-vscode
-        jnoortheen.nix-ide
-        mads-hartmann.bash-ide-vscode
-        mikestead.dotenv
-        mrmlnc.vscode-scss
-        ms-azuretools.vscode-docker
-        ms-kubernetes-tools.vscode-kubernetes-tools
-        ms-python.python
-        ms-python.vscode-pylance
-        ms-toolsai.jupyter
-        ms-vscode-remote.remote-ssh
-        ms-vscode-remote.remote-ssh-edit
-        ms-vscode-remote.remote-wsl
-        ms-vscode.hexeditor
-        ms-vscode.remote-explorer
-        # ms-vscode.sublime-keybindings # TODO: do I need this?
-        ms-vsliveshare.vsliveshare
-        naumovs.color-highlight
-        novy.vsc-gcode
-        orta.vscode-jest
-        oven.bun-vscode
-        pkief.material-icon-theme
-        pkief.material-product-icons
-        shopify.ruby-lsp
-        redhat.ansible
-        redhat.vscode-yaml
-        ryu1kn.partial-diff
-        seeker-dk.node-modules-viewer
-        shd101wyy.markdown-preview-enhanced
-        streetsidesoftware.code-spell-checker
-        stylelint.vscode-stylelint
-        tamasfe.even-better-toml
-        tomoki1207.pdf
-        tomoyukim.vscode-mermaid-editor
-        tusaeff.vscode-iterm2-theme-sync
-        tyriar.lorem-ipsum
-        ultram4rine.vscode-choosealicense
-        visualstudioexptteam.intellicode-api-usage-examples
-        visualstudioexptteam.vscodeintellicode
-        wallabyjs.quokka-vscode
-        weaveworks.vscode-gitops-tools
-        wmaurer.change-case
-        yzhang.markdown-all-in-one
+      extensions =
+        with pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace;
+        [
+          pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace."1password".op-vscode
+          alefragnani.bookmarks
+          antyos.openscad
+          bierner.markdown-mermaid
+          bmalehorn.vscode-fish
+          bpruitt-goddard.mermaid-markdown-syntax-highlighting
+          bradlc.vscode-tailwindcss
+          castwide.solargraph
+          codezombiech.gitignore
+          connor4312.nodejs-testing
+          coolbear.systemd-unit-file
+          dart-code.dart-code
+          dart-code.flutter
+          dbaeumer.vscode-eslint
+          deerawan.vscode-dash
+          donjayamanne.githistory
+          drknoxy.eslint-disable-snippets
+          eamodio.gitlens
+          editorconfig.editorconfig
+          equinusocio.vsc-material-theme
+          esbenp.prettier-vscode
+          fabiospampinato.vscode-diff
+          firefox-devtools.vscode-firefox-debug
+          flesler.url-encode
+          ghmcadams.lintlens
+          github.vscode-github-actions
+          github.vscode-pull-request-github
+          gitlab.gitlab-workflow
+          golang.go
+          gracefulpotato.rbs-syntax
+          graphql.vscode-graphql
+          graphql.vscode-graphql-execution
+          graphql.vscode-graphql-syntax
+          gruntfuggly.todo-tree
+          hashicorp.terraform
+          idleberg.applescript
+          inferrinizzard.prettier-sql-vscode
+          jnoortheen.nix-ide
+          mads-hartmann.bash-ide-vscode
+          mikestead.dotenv
+          mrmlnc.vscode-scss
+          ms-azuretools.vscode-docker
+          ms-kubernetes-tools.vscode-kubernetes-tools
+          ms-python.python
+          ms-python.vscode-pylance
+          ms-toolsai.jupyter
+          ms-vscode-remote.remote-ssh
+          ms-vscode-remote.remote-ssh-edit
+          ms-vscode-remote.remote-wsl
+          ms-vscode.hexeditor
+          ms-vscode.remote-explorer
+          # ms-vscode.sublime-keybindings # TODO: do I need this?
+          ms-vsliveshare.vsliveshare
+          naumovs.color-highlight
+          novy.vsc-gcode
+          orta.vscode-jest
+          oven.bun-vscode
+          pkief.material-icon-theme
+          pkief.material-product-icons
+          shopify.ruby-lsp
+          redhat.ansible
+          redhat.vscode-yaml
+          ryu1kn.partial-diff
+          seeker-dk.node-modules-viewer
+          shd101wyy.markdown-preview-enhanced
+          streetsidesoftware.code-spell-checker
+          stylelint.vscode-stylelint
+          tamasfe.even-better-toml
+          tomoki1207.pdf
+          tomoyukim.vscode-mermaid-editor
+          tusaeff.vscode-iterm2-theme-sync
+          tyriar.lorem-ipsum
+          ultram4rine.vscode-choosealicense
+          visualstudioexptteam.intellicode-api-usage-examples
+          visualstudioexptteam.vscodeintellicode
+          wallabyjs.quokka-vscode
+          weaveworks.vscode-gitops-tools
+          wmaurer.change-case
+          yzhang.markdown-all-in-one
 
-        # angular.ng-template
-        # dineug.vuerd-vscode
-        # fwcd.kotlin
-        # johnpapa.angular2
-        # juanblanco.solidity
-        # ms-dotnettools.csharp
-        # xadillax.viml
-        # leetcode.vscode-leetcode
-        # wangtao0101.debug-leetcode
-        # vsciot-vscode.vscode-arduino
-        # vinnyjames.vscode-autohotkey-vj
-        # zero-plusplus.vscode-autohotkey-debug
-        # trixnz.vscode-lua
-        # actboy168.lua-debug
+          # angular.ng-template
+          # dineug.vuerd-vscode
+          # fwcd.kotlin
+          # johnpapa.angular2
+          # juanblanco.solidity
+          # ms-dotnettools.csharp
+          # xadillax.viml
+          # leetcode.vscode-leetcode
+          # wangtao0101.debug-leetcode
+          # vsciot-vscode.vscode-arduino
+          # vinnyjames.vscode-autohotkey-vj
+          # zero-plusplus.vscode-autohotkey-debug
+          # trixnz.vscode-lua
+          # actboy168.lua-debug
 
-        # grapecity.gc-excelviewer
-        # johnpapa.vscode-peacock
-        # jumpinjackie.vscode-map-preview
-        # jsayol.firebase-explorer
-      ];
+          # grapecity.gc-excelviewer
+          # johnpapa.vscode-peacock
+          # jumpinjackie.vscode-map-preview
+          # jsayol.firebase-explorer
+        ];
 
       # See `home.activation.createMutableVSCodeSettings` for my workaround to
       #   have mutable settings.
