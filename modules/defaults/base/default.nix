@@ -1,4 +1,4 @@
-{ os, pkgs, lib, ... }:
+{ os, hostname, pkgs, lib, ... }:
 with pkgs.stdenv.targetPlatform;
 {
   imports = [
@@ -55,6 +55,10 @@ with pkgs.stdenv.targetPlatform;
       nodejs
       python3
     ];
+  };
+
+  networking = {
+    hostName = hostname;
   };
 
   programs.fish.enable = true;

@@ -19,10 +19,6 @@
     stateVersion = lib.mkDefault "23.05"; # Did you read the comment?
   };
 
-  networking = {
-    hostName = hostname;
-  };
-
   services = {
     avahi.enable = true;
   };
