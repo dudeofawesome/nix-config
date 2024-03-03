@@ -20,6 +20,15 @@
     # such as data conversion or moving files.
     stateVersion = "23.05"; # Did you read the comment?
 
+    packages = with pkgs; [
+      opentofu
+      terraform
+      krew
+      watchman
+    ];
+
+    sessionPath = [ "$HOME/.krew/bin" ];
+
     keyboard = {
       layout = "us";
       variant = "workman";
