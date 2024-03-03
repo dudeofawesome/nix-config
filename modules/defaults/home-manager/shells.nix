@@ -93,6 +93,7 @@ with pkgs.stdenv.targetPlatform;
         "--disable-up-arrow"
       ];
       settings = {
+        sync_address = "https://atuin.orleans.io";
         update_check = false;
         style = "compact";
         # word_jump_mode = "subl";
