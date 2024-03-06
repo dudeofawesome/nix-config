@@ -39,6 +39,7 @@
         "signal"
         "slack"
         "spotify"
+        "steam"
         "stay"
         "tableplus"
         "typora"
