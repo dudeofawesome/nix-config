@@ -12,6 +12,7 @@
   };
 
   homebrew.casks = [
+    "android-studio"
     "zoom"
   ];
 }
