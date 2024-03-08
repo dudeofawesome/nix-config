@@ -42,7 +42,7 @@
     arch = "x86_64";
     os = "linux";
     owner = "dudeofawesome";
-    machine-class = "scratch";
+    machine-class = "server";
     users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
   });
 
