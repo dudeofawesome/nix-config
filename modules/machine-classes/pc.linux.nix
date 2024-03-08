@@ -8,6 +8,7 @@
       _1password-gui
       # sublime4
       sunshine
+      vscode
     ]
     ++ (if (arch == "x86_64") then [
       spotify
