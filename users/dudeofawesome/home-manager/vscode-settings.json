@@ -246,7 +246,7 @@
   "json.schemas": [
     {
       "fileMatch": ["tsconfig.*.json"],
-      "url": "https://json.schemastore.org/tsconfig"
+      "url": "https://json.schemastore.org/tsconfig.json"
     },
     {
       "fileMatch": [".angular-cli.json"],
@@ -254,7 +254,7 @@
     },
     {
       "fileMatch": [".stylelintrc*"],
-      "url": "https://json.schemastore.org/stylelintrc"
+      "url": "https://json.schemastore.org/stylelintrc.json"
     }
   ],
 
