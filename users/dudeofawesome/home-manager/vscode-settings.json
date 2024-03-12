@@ -740,5 +740,7 @@
     }
   },
 
-  "gitlab.aiAssistedCodeSuggestions.enabled": false
+  "gitlab.aiAssistedCodeSuggestions.enabled": false,
+
+  "1password.editor.suggestStorage": false
 }
