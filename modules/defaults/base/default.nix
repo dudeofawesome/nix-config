@@ -32,12 +32,13 @@ with pkgs.stdenv.targetPlatform;
       htop
       jq
       most
-      nixd
+      nil
+      nix-tree
+      # nixd
       nixpkgs-fmt
       nodePackages.prettier
       pciutils
       ripgrep
-      rnix-lsp
       rubyPackages.prettier_print
       rubyPackages.syntax_tree
       rubyPackages.syntax_tree-haml
