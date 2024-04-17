@@ -1,6 +1,6 @@
 {
   "nix.enableLanguageServer": true,
-  "nix.serverPath": "nixd",
+  "nix.serverPath": "nil",
   "nix.serverSettings": {
     "nixd": {
       "options": {
@@ -10,6 +10,11 @@
           "args": [],
           // Example of NixOS options.
           "installable": "<flakeref>#nixosConfigurations.badlands-vm.options"
+        }
+      },
+      "nil": {
+        "formatting": {
+          "command": ["nixpkgs-fmt"]
         }
       }
     }

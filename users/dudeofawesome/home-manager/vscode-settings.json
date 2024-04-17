@@ -308,7 +308,14 @@
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
   "nix.enableLanguageServer": true,
-  "nix.serverPath": "/run/current-system/sw/bin/rnix-lsp",
+  "nix.serverPath": "nil",
+  "nix.serverSettings": {
+    "nil": {
+      "formatting": {
+        "command": ["nixpkgs-fmt"]
+      }
+    }
+  },
 
   "[fish]": {
     "editor.defaultFormatter": "bmalehorn.vscode-fish",
