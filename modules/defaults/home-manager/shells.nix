@@ -54,6 +54,11 @@ with pkgs.stdenv.targetPlatform;
             ssh-keygen -t ed25519 -N "" -f "$name"
           '';
         };
+
+        nix-env = {
+          description = "Hide nix-env since it shouldn't ever be used";
+          body = ''printf "🙅 Don't use nix-env!\n💁 Use `nix shell 'nixpkgs#your_pkg'` instead"'';
+        };
       };
 
       shellInit = ''
