@@ -216,14 +216,30 @@
   },
   "typescript.format.enable": false,
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
-  "jest.autoRun": "off",
-  "jest.autoRevealOutput": "off",
   // "eslint.validate": [
   //   "javascript",
   //   "javascriptreact",
   //   "typescript",
   //   "typescriptreact"
   // ],
+  "jest.runMode": {
+    "type": "on-demand"
+  },
+  "jest.outputConfig": {
+    "revealOn": "demand",
+    "revealWithFocus": "none",
+    "clearOnRun": "none"
+  },
+  "nodejs-testing.extensions": [
+    {
+      "extensions": ["mjs", "cjs", "js"],
+      "parameters": []
+    },
+    {
+      "extensions": ["mts", "cts", "ts"],
+      "parameters": ["--loader", "tsm"]
+    }
+  ],
 
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
