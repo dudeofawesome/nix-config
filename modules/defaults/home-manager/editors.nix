@@ -102,6 +102,22 @@
             key = "cmd+shift+,";
             command = "workbench.action.openWorkspaceSettingsFile";
           }
+          {
+            key = "cmd+k left";
+            command = "workbench.action.moveEditorToLeftGroup";
+          }
+          {
+            key = "cmd+k down";
+            command = "workbench.action.moveEditorToBelowGroup";
+          }
+          {
+            key = "cmd+k up";
+            command = "workbench.action.moveEditorToAboveGroup";
+          }
+          {
+            key = "cmd+k right";
+            command = "workbench.action.moveEditorToRightGroup";
+          }
         ]
         # terminal control
         [
