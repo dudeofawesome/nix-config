@@ -81,7 +81,9 @@ in
           inferrinizzard.prettier-sql-vscode
           jnoortheen.nix-ide
           mads-hartmann.bash-ide-vscode
+          mathiasfrohlich.kotlin
           mikestead.dotenv
+          mrmlnc.vscode-json5
           mrmlnc.vscode-scss
           ms-azuretools.vscode-docker
           ms-kubernetes-tools.vscode-kubernetes-tools
