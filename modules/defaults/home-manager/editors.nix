@@ -197,6 +197,24 @@
             command = "editor.action.blockComment";
             when = "editorTextFocus && !editorReadonly";
           }
+
+          {
+            key = "F3";
+            command = "-editor.action.nextMatchFindAction";
+          }
+          {
+            key = "F3";
+            command = "-workbench.action.terminal.findNext";
+          }
+          {
+            key = "F3";
+            command = "-list.find";
+          }
+
+          {
+            key = "F1";
+            command = "-workbench.action.showCommands";
+          }
         ]
         # text case transform
         [
