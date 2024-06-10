@@ -32,13 +32,22 @@
           force = true;
 
           engines = {
+            "Kagi" = {
+              urls = [{
+                template = "https://kagi.com/search";
+                params = [{ name = "q"; value = "{searchTerms}"; }];
+              }];
+
+              iconUpdateURL = "https://kagi.com/favicon.ico";
+            };
+
             "NPM" = {
               urls = [{
                 template = "https://www.npmjs.com/search";
                 params = [{ name = "q"; value = "{searchTerms}"; }];
               }];
 
-              icon = "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png";
+              iconUpdateURL = "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png";
               definedAliases = [ "@npm" ];
             };
             "Glassdoor" = {
@@ -47,7 +56,7 @@
                 params = [{ name = "keyword"; value = "{searchTerms}"; }];
               }];
 
-              icon = "https://www.glassdoor.com/favicon.ico";
+              iconUpdateURL = "https://www.glassdoor.com/favicon.ico";
               definedAliases = [ "@gd" ];
             };
             # "Crunchbase" = {
@@ -59,6 +68,30 @@
             #   icon = "";
             #   definedAliases = [ "@cb" ];
             # };
+            "Nix Packages" = {
+              urls = [{
+                template = "https://search.nixos.org/packages";
+                params = [
+                  { name = "channel"; value = "unstable"; }
+                  { name = "query"; value = "{searchTerms}"; }
+                ];
+              }];
+
+              icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@nix" "@nixp" ];
+            };
+            "Nix Options" = {
+              urls = [{
+                template = "https://search.nixos.org/options";
+                params = [
+                  { name = "channel"; value = "unstable"; }
+                  { name = "query"; value = "{searchTerms}"; }
+                ];
+              }];
+
+              icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@nixo" ];
+            };
 
             "Amazon".metaData.hidden = true;
             "Bing".metaData.hidden = true;
