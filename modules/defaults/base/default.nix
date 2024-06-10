@@ -28,7 +28,6 @@ with pkgs.stdenv.targetPlatform;
       eternal-terminal
       fd
       git
-      gnumake
       htop
       jq
       most
@@ -55,6 +54,11 @@ with pkgs.stdenv.targetPlatform;
       ruby
       nodejs_20 # this should always use the latest LTS
       python3
+
+      # Libraries
+      gcc
+      gnumake
+      libllvm
     ];
   };
 
