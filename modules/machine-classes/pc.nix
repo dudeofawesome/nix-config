@@ -12,6 +12,8 @@
 
       docker
       moonlight-qt
+      gcc
+      llvm
     ];
   };
 }
