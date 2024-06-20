@@ -264,10 +264,10 @@
         };
 
         "com.apple.menuextra.clock" = {
-          Show24Hour = 1;
+          Show24Hour = true;
           ShowDate = 1;
-          ShowDayOfWeek = 1;
-          ShowSeconds = 1;
+          ShowDayOfWeek = true;
+          ShowSeconds = true;
         };
 
         "com.spotify.client".AutoStartSettingIsHidden = 0;

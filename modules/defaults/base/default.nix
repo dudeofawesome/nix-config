@@ -7,10 +7,6 @@ with pkgs.stdenv.targetPlatform;
     ../../defaults/nix.nix
   ];
 
-  fonts = {
-    fontDir.enable = true;
-  };
-
   environment = {
     shells = with pkgs; [ fish ];
     systemPackages = with pkgs; [
