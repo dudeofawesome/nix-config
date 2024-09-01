@@ -6,6 +6,7 @@
     ./editors.nix
     ./shells.nix
     ../../../modules/configurable/home-manager/dock.nix
+    ../../../modules/configurable/home-manager/awscli.nix
     ../../../modules/defaults/home-manager/gnome.nix
   ];
 
@@ -137,6 +138,33 @@
           arrangement2 = "2";
         };
       };
+    };
+
+    awscli = {
+      enable = true;
+      settings =
+        let
+          op_aws = "${config.home.homeDirectory}/${config.home.file._1password-awscli.target}";
+        in
+        {
+          default = {
+            region = "us-west-2";
+            output = "json";
+            credential_process = "${op_aws} 'AWS Access Key' 'Paciolan'";
+          };
+
+          "profile cicd" = {
+            region = "us-west-2";
+            output = "json";
+            credential_process = "${op_aws} 'AWS Access Key' 'Paciolan (Shared)'";
+          };
+
+          "profile prod-readonly" = {
+            source_profile = "default";
+            region = "us-west-1";
+            role_arn = "arn:aws:iam::046314659632:role/AssumeRole-Dev-ReadOnly";
+          };
+        };
     };
   };
 
