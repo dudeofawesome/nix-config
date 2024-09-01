@@ -7,6 +7,7 @@
     ./shells.nix
     ../../../modules/configurable/home-manager/dock.nix
     ../../../modules/configurable/home-manager/awscli.nix
+    ../../../modules/configurable/home-manager/process-compose.nix
     ../../../modules/defaults/home-manager/gnome.nix
   ];
 
