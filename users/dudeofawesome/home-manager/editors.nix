@@ -45,6 +45,7 @@ in
           pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace."1password".op-vscode
           alefragnani.bookmarks
           antyos.openscad
+          beardedbear.beardedtheme
           bierner.markdown-mermaid
           bmalehorn.vscode-fish
           bpruitt-goddard.mermaid-markdown-syntax-highlighting
@@ -61,11 +62,13 @@ in
           drknoxy.eslint-disable-snippets
           eamodio.gitlens
           editorconfig.editorconfig
+          effectful-tech.effect-vscode
           equinusocio.vsc-material-theme
           esbenp.prettier-vscode
           fabiospampinato.vscode-diff
           firefox-devtools.vscode-firefox-debug
           flesler.url-encode
+          fwcd.kotlin
           ghmcadams.lintlens
           github.vscode-github-actions
           github.vscode-pull-request-github
@@ -87,6 +90,7 @@ in
           mrmlnc.vscode-scss
           ms-azuretools.vscode-docker
           ms-kubernetes-tools.vscode-kubernetes-tools
+          ms-python.black-formatter
           ms-python.python
           ms-python.vscode-pylance
           ms-toolsai.jupyter
@@ -95,7 +99,6 @@ in
           ms-vscode-remote.remote-wsl
           ms-vscode.hexeditor
           ms-vscode.remote-explorer
-          # ms-vscode.sublime-keybindings # TODO: do I need this?
           ms-vsliveshare.vsliveshare
           naumovs.color-highlight
           novy.vsc-gcode
@@ -108,7 +111,9 @@ in
           redhat.vscode-yaml
           ryu1kn.partial-diff
           seeker-dk.node-modules-viewer
+          semanticdiff.semanticdiff
           shd101wyy.markdown-preview-enhanced
+          shopify.ruby-lsp
           streetsidesoftware.code-spell-checker
           stylelint.vscode-stylelint
           tamasfe.even-better-toml
@@ -122,6 +127,7 @@ in
           wallabyjs.quokka-vscode
           weaveworks.vscode-gitops-tools
           wmaurer.change-case
+          yoavbls.pretty-ts-errors
           yzhang.markdown-all-in-one
 
           # angular.ng-template
