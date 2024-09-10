@@ -141,6 +141,15 @@
       };
     };
 
+    _1password-shell-plugins = {
+      enable = true;
+      plugins = with pkgs; [
+        cachix
+        gh
+        glab
+      ];
+    };
+
     awscli = {
       enable = true;
       settings =

@@ -80,6 +80,11 @@
       url = "github:dudeofawesome/fish-plugin-editor-updater";
       flake = false;
     };
+
+    _1password-shell-plugins = {
+      url = "github:1Password/shell-plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ nixpkgs, ... }:

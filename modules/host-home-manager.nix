@@ -23,5 +23,6 @@
   };
   sharedModules = [
     inputs.sops.homeManagerModules.sops
+    inputs._1password-shell-plugins.hmModules.default
   ];
 }
