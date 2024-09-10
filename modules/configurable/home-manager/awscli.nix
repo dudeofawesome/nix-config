@@ -5,6 +5,7 @@ in
   options = { };
 
   config = mkIf (cfg.enable) {
+    # An awscli2 [credential_process](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sourcing-external.html)
     home.file._1password-awscli = {
       enable = true;
       executable = true;
@@ -15,13 +16,13 @@ in
         op=${pkgs._1password}/bin/op
         jq=${pkgs.jq}/bin/jq
 
-        item_name="$1"
+        item_id="$1"
         vault="$2"
 
         echo $(
           $op item get \
             --vault "$vault" \
-            "$item_name" \
+            "$item_id" \
             --fields label='access key id','secret access key' \
             --format json \
           | $jq '{

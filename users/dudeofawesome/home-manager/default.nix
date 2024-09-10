@@ -115,7 +115,7 @@
         "/System/Applications/Calendar.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Reminders.app"
-        "/Applications/Visual Studio Code.app"
+        "${config.programs.vscode.package}/Applications/Visual Studio Code.app"
         "/Applications/Fork.app"
         "/Applications/iTerm.app"
         "/System/Applications/System Settings.app"
@@ -160,13 +160,19 @@
           default = {
             region = "us-west-2";
             output = "json";
-            credential_process = "${op_aws} 'AWS Access Key' 'Paciolan'";
+            credential_process = "${op_aws} 'rlfhru5fnw3crzq6be4dsx3qfu' 'Paciolan'";
           };
 
-          "profile cicd" = {
+          "profile api1" = {
             region = "us-west-2";
             output = "json";
-            credential_process = "${op_aws} 'AWS Access Key' 'Paciolan (Shared)'";
+            credential_process = "${op_aws} 'vaw35vurdty442jpy3npbm6osi' 'Paciolan (Shared)'";
+          };
+
+          "profile srd" = {
+            region = "us-west-2";
+            output = "json";
+            credential_process = "${op_aws} 'v6viem5ekz2v66eu5snwpyjtaq' 'Paciolan (Shared)'";
           };
 
           "profile prod-readonly" = {
