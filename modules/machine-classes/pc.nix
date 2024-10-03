@@ -7,10 +7,8 @@
 
   environment = {
     systemPackages = with pkgs; [
-      # Utilities
-      mitmproxy
-
       docker
+      # mitmproxy
       moonlight-qt
       gcc
       llvm
