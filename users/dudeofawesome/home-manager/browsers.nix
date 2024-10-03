@@ -1,4 +1,5 @@
-{ lib, pkgs, machine-class, ... }: {
+# https://github.com/Kreyren/nixos-config/blob/central/src/nixos/users/kreyren/home/modules/web-browsers/firefox/firefox.nix
+{ lib, pkgs, machine-class, config, ... }: {
   programs.firefox = {
     enable = machine-class == "pc";
     package = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin null;
@@ -120,6 +121,9 @@
           "accessibility.typeaheadfind" = false;
 
           "browser.shell.checkDefaultBrowser" = false;
+
+          "browser.urlbar.placeholderName" = config.programs.firefox.profiles.dudeofawesome.search.default;
+          "browser.urlbar.placeholderName.private" = config.programs.firefox.profiles.dudeofawesome.search.default;
 
           # disable built-in password manager
           "signon.rememberSignons" = false;
