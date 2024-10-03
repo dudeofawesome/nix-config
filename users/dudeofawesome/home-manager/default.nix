@@ -9,6 +9,7 @@
     ../../../modules/configurable/home-manager/awscli.nix
     ../../../modules/configurable/home-manager/process-compose.nix
     ../../../modules/defaults/home-manager/gnome.nix
+    ../../../modules/defaults/home-manager/hammerspoon.nix
   ];
 
   home = {
