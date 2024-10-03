@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "_1password-shell-plugins": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716464653,
+        "narHash": "sha256-7ABtcvZf8P2axZNVV3m9LiKy1VW0lumu60sSuUOYG0o=",
+        "owner": "1Password",
+        "repo": "shell-plugins",
+        "rev": "d36189bf486ff2c4d9275c9ce29ec1aa92eaa4a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "1Password",
+        "repo": "shell-plugins",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -191,6 +212,24 @@
         "systems": "systems_2"
       },
       "locked": {
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_3": {
+      "inputs": {
+        "systems": "systems_3"
+      },
+      "locked": {
         "lastModified": 1681202837,
         "narHash": "sha256-H+Rh19JDwRtpVPAWp64F+rlEtxUWBAQW28eAi3SRSzg=",
         "owner": "numtide",
@@ -227,7 +266,7 @@
     "nix-vscode-extensions": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -295,6 +334,7 @@
     },
     "root": {
       "inputs": {
+        "_1password-shell-plugins": "_1password-shell-plugins",
         "darwin": "darwin",
         "disko": "disko",
         "dudeofawesome_dotfiles": "dudeofawesome_dotfiles",
@@ -366,6 +406,21 @@
         "type": "github"
       }
     },
+    "systems_3": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "upaymeifixit_dotfiles": {
       "flake": false,
       "locked": {
@@ -400,7 +455,7 @@
     },
     "vscode-server": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "nixpkgs"
         ]
