@@ -23,6 +23,8 @@
         process_screen.shortcut = "F3";
         process_scale.shortcut = "F20";
         process_info.shortcut = "F7";
+        process_start.shortcut = "F8";
+        process_stop.shortcut = "F9";
       };
     };
   };
