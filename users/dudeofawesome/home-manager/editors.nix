@@ -45,11 +45,13 @@ in
           pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace."1password".op-vscode
           alefragnani.bookmarks
           antyos.openscad
+          ashrafhadden.dracula-dot-min
           beardedbear.beardedtheme
           bierner.markdown-mermaid
           bmalehorn.vscode-fish
           bpruitt-goddard.mermaid-markdown-syntax-highlighting
           bradlc.vscode-tailwindcss
+          bruno-api-client.bruno
           castwide.solargraph
           codezombiech.gitignore
           connor4312.nodejs-testing
@@ -64,6 +66,7 @@ in
           editorconfig.editorconfig
           effectful-tech.effect-vscode
           equinusocio.vsc-material-theme
+          equinusocio.vsc-material-theme-icons
           esbenp.prettier-vscode
           fabiospampinato.vscode-diff
           firefox-devtools.vscode-firefox-debug
@@ -100,6 +103,7 @@ in
           ms-vscode.hexeditor
           ms-vscode.remote-explorer
           ms-vsliveshare.vsliveshare
+          msjsdiag.vscode-react-native
           naumovs.color-highlight
           novy.vsc-gcode
           orta.vscode-jest
@@ -119,11 +123,11 @@ in
           tamasfe.even-better-toml
           tomoki1207.pdf
           tomoyukim.vscode-mermaid-editor
-          tusaeff.vscode-iterm2-theme-sync
           tyriar.lorem-ipsum
           ultram4rine.vscode-choosealicense
           visualstudioexptteam.intellicode-api-usage-examples
           visualstudioexptteam.vscodeintellicode
+          vitest.explorer
           wallabyjs.quokka-vscode
           weaveworks.vscode-gitops-tools
           wmaurer.change-case

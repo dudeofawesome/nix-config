@@ -187,7 +187,9 @@
     "**/node_modules/": true,
     "**/build": true,
     "**/dist/": true,
-    "**/coverage/": true
+    "**/coverage/": true,
+    "**/*.eslintcache": true,
+    "**/.devenv/": true
   },
 
   "testing.openTesting": "neverOpen",
