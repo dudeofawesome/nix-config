@@ -10,6 +10,7 @@
     ../../../modules/configurable/home-manager/process-compose.nix
     ../../../modules/defaults/home-manager/gnome.nix
     ../../../modules/defaults/home-manager/hammerspoon.nix
+    ../../../modules/defaults/home-manager/middleclick.nix
   ];
 
   home = {
