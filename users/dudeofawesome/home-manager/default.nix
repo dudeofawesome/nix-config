@@ -26,6 +26,7 @@
     packages = with pkgs; [
       opentofu
       terraform
+      kitty
       krew
       watchman
     ];

@@ -32,6 +32,7 @@
         "logitech-g-hub"
         "losslesscut"
         "lulu"
+        (noQuarantine "middleclick")
         "mitmproxy"
         "moonlight"
         "parsec"
