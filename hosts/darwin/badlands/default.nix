@@ -5,6 +5,7 @@
 
   environment.systemPackages = with pkgs; [
     k6
+    zoom-us
   ];
 
   networking.hosts = {
@@ -13,6 +14,5 @@
 
   homebrew.casks = [
     "android-studio"
-    "zoom"
   ];
 }

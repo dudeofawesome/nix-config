@@ -6,13 +6,12 @@
   environment = {
     systemPackages = with pkgs; [
       k6
+      zoom-us
     ];
   };
 
   homebrew = {
-    casks = [
-      "zoom"
-    ];
+    casks = [ ];
   };
 
   nix = {
