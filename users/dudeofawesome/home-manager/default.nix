@@ -8,8 +8,10 @@
     ../../../modules/configurable/home-manager/dock.nix
     ../../../modules/configurable/home-manager/awscli.nix
     ../../../modules/configurable/home-manager/process-compose.nix
+    ../../../modules/defaults/home-manager/fork.nix
     ../../../modules/defaults/home-manager/gnome.nix
     ../../../modules/defaults/home-manager/hammerspoon.nix
+    ../../../modules/defaults/home-manager/ice.nix
     ../../../modules/defaults/home-manager/middleclick.nix
   ];
 
