@@ -13,6 +13,7 @@
     ../../../modules/defaults/home-manager/hammerspoon.nix
     ../../../modules/defaults/home-manager/ice.nix
     ../../../modules/defaults/home-manager/middleclick.nix
+    ../../../modules/defaults/home-manager/postico.nix
   ];
 
   home = {
