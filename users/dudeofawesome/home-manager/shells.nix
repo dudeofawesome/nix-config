@@ -1,5 +1,10 @@
 { pkgs, lib, osConfig, ... }: {
   programs = {
+    wezterm = {
+      enable = true;
+      extraConfig = builtins.readFile ./wezterm.lua;
+    };
+
     atuin = {
       enable = true;
       settings.sync_address = "https://atuin.orleans.io";

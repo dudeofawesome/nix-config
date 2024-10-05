@@ -448,7 +448,8 @@
       "nodejs",
       "rxjs",
       "typescript"
-    ]
+    ],
+    "wezterm.lua": ["lua", "wezterm"],
   },
   "dash.languageIdToDocsetMap": {
     "typescript": [
