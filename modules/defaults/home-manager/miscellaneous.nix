@@ -22,10 +22,6 @@
     packages = with pkgs; [ ];
 
     file = {
-      finicky = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
-        target = ".config/finicky.js";
-        source = "${pkgs.dotfiles.dudeofawesome}/settings/.finicky.js";
-      };
       prettierrc = {
         target = ".config/.prettierrc.js";
         source = "${pkgs.dotfiles.dudeofawesome}/home/.config/.prettierrc.js";

@@ -45,6 +45,18 @@
         config.allowUnfree = true;
       };
     })
+
+    (final: prev: {
+      mkalias = prev.mkalias.overrideAttrs (old: {
+        src = prev.fetchFromGitHub {
+          owner = "dudeofawesome";
+          repo = "mkalias";
+          rev = "feat/stdout-hex-data";
+          hash = "sha256-pPIMLnbpx8A9nvKsrOFFcsSu2v260dLr+4HQAc8A9xc=";
+        };
+      });
+    })
+
     # TODO: create overlays to make programs recognize configs in XDG's ~/.config
     # (final: prev: {
     #   # Respect XDG conventions, damn it!
