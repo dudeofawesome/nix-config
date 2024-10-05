@@ -126,6 +126,7 @@
         "/System/Applications/Reminders.app"
         "${config.programs.vscode.package}/Applications/Visual Studio Code.app"
         "/Applications/Fork.app"
+        "${config.programs.wezterm.package}/Applications/WezTerm.app"
         "/Applications/iTerm.app"
         "/System/Applications/System Settings.app"
       ];
