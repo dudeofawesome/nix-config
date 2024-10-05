@@ -39,6 +39,7 @@
 
   nixpkgs.overlays = [
     inputs.nur.overlay
+
     (final: prev: {
       stable = import inputs.nixpkgs-stable {
         inherit system;
