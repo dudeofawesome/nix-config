@@ -48,6 +48,13 @@
     })
 
     (final: prev: {
+      nixcasks = (inputs.nixcasks.output {
+        # TODO: make this value per-host
+        osVersion = "sonoma";
+      }).packages.${system};
+    })
+
+    (final: prev: {
       mkalias = prev.mkalias.overrideAttrs (old: {
         src = prev.fetchFromGitHub {
           owner = "dudeofawesome";
