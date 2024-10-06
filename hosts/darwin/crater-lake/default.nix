@@ -11,7 +11,9 @@
   };
 
   homebrew = {
-    casks = [ ];
+    casks = [
+      "google-earth-pro"
+    ];
   };
 
   nix = {

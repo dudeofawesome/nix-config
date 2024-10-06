@@ -11,6 +11,7 @@
     ../../../modules/defaults/home-manager/finicky.nix
     ../../../modules/defaults/home-manager/fork.nix
     ../../../modules/defaults/home-manager/gnome.nix
+    ../../../modules/defaults/home-manager/google-earth-pro.nix
     ../../../modules/defaults/home-manager/hammerspoon.nix
     ../../../modules/defaults/home-manager/ice.nix
     ../../../modules/defaults/home-manager/middleclick.nix
