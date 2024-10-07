@@ -14,10 +14,13 @@
         deleteStashAfterApply = false;
         trackBranchSheetStashAndReapply = true;
 
+        # fetching
         fetchAllTags = true;
         fetchSheetFetchAllRemotes = false;
         createBranchSheetCheckout = true;
+        fetchRemotesAutomatically = false;
 
+        # diff
         diffIgnoreWhitespaces = true;
         diffShowHiddenSymbols = true;
       };
