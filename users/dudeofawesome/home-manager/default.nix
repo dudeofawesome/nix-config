@@ -8,6 +8,7 @@
     ../../../modules/configurable/home-manager/dock.nix
     ../../../modules/configurable/home-manager/awscli.nix
     ../../../modules/configurable/home-manager/process-compose.nix
+    ../../../modules/defaults/home-manager/apple-calendar.nix
     ../../../modules/defaults/home-manager/finicky.nix
     ../../../modules/defaults/home-manager/fork.nix
     ../../../modules/defaults/home-manager/gnome.nix
