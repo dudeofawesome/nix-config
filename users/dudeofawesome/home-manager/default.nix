@@ -7,6 +7,7 @@
     ./shells.nix
     ../../../modules/configurable/home-manager/dock.nix
     ../../../modules/configurable/home-manager/awscli.nix
+    ../../../modules/configurable/home-manager/moar.nix
     ../../../modules/configurable/home-manager/process-compose.nix
     ../../../modules/defaults/home-manager/apple-calendar.nix
     ../../../modules/defaults/home-manager/finicky.nix
@@ -171,19 +172,18 @@
         {
           default = {
             region = "us-west-2";
-            output = "json";
+            output = "yaml";
             credential_process = "${op_aws} 'rlfhru5fnw3crzq6be4dsx3qfu' 'Paciolan'";
+            cli_pager = "${pkgs.moar}/bin/moar --lang=yaml";
           };
 
           "profile api1" = {
             region = "us-west-2";
-            output = "json";
             credential_process = "${op_aws} 'vaw35vurdty442jpy3npbm6osi' 'Paciolan (Shared)'";
           };
 
           "profile srd" = {
             region = "us-west-2";
-            output = "json";
             credential_process = "${op_aws} 'v6viem5ekz2v66eu5snwpyjtaq' 'Paciolan (Shared)'";
           };
 

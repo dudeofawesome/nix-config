@@ -1,14 +1,11 @@
 { pkgs, lib, osConfig, ... }: {
   programs = {
-    wezterm = {
-      enable = true;
-      extraConfig = builtins.readFile ./wezterm.lua;
-    };
-
     atuin = {
       enable = true;
       settings.sync_address = "https://atuin.orleans.io";
     };
+
+    moar.enable = true;
 
     process-compose = {
       enable = true;
@@ -31,6 +28,11 @@
         process_start.shortcut = "F8";
         process_stop.shortcut = "F9";
       };
+    };
+
+    wezterm = {
+      enable = true;
+      extraConfig = builtins.readFile ./wezterm.lua;
     };
   };
 }

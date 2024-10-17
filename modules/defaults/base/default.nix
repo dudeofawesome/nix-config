@@ -26,6 +26,7 @@ with pkgs.stdenv.targetPlatform;
       git
       htop
       jq
+      moar
       most
       nil
       nix-tree
