@@ -104,6 +104,7 @@ in
           ms-vscode.remote-explorer
           ms-vsliveshare.vsliveshare
           msjsdiag.vscode-react-native
+          mxsdev.typescript-explorer
           naumovs.color-highlight
           novy.vsc-gcode
           orta.vscode-jest
