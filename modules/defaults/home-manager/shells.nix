@@ -104,6 +104,10 @@ with pkgs.stdenv.targetPlatform;
         filter_mode_shell_up_key_binding = "session";
         search_mode = "fulltext";
         # enter_accept = true;
+
+        keys.scroll_exits = false;
+
+        sync.records = true;
       };
     };
   };
