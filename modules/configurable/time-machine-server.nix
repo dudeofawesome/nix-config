@@ -34,7 +34,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && pkgs.stdenv.targetPlatform.isLinux) {
     environment.systemPackages = with pkgs; [
       # Add the samba CLI utils to enable debugging.
       samba
