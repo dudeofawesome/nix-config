@@ -52,7 +52,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     networking.hosts =
       let
         hasHostName = cfg.hostName != null && cfg.hostName != "";

@@ -3,6 +3,8 @@ with pkgs.stdenv.targetPlatform;
 {
   imports = [
     ./${os}.nix
+    ../../configurable/default.${os}.nix
+
     ../../defaults/sops.nix
     ../../defaults/nix.nix
   ];
