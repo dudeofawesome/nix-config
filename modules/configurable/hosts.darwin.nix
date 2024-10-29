@@ -84,7 +84,6 @@ in
       mkBefore [ localhostHosts stringHosts extraHosts ];
 
     environment.etc.hosts = {
-      copy = true;
       source = pkgs.concatText "hosts" cfg.hostFiles;
     };
   };
