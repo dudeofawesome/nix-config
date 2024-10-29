@@ -159,6 +159,12 @@
         # text control
         [
           {
+            key = "shift+delete";
+            command = "deleteRight";
+            when = "textInputFocus";
+          }
+
+          {
             key = "ctrl+cmd+up";
             command = "editor.action.moveLinesUpAction";
             when = "editorTextFocus && !editorReadonly";
