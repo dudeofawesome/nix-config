@@ -13,7 +13,6 @@
       in
       [
         "1password"
-        "aerial"
         "affinity-photo"
         "arduino"
         "balenaetcher"
