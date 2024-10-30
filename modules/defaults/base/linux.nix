@@ -29,7 +29,6 @@
       cryptsetup
       graphviz
       lshw
-      nix-du
       usbutils
     ]
     ++ (if (machine-class == "pc") then [

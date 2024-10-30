@@ -31,6 +31,7 @@ with pkgs.stdenv.targetPlatform;
       moar
       most
       nil
+      nix-du
       nix-tree
       # nixd
       nixpkgs-fmt
