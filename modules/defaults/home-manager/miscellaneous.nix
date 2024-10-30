@@ -78,6 +78,8 @@
       # clock24 = true;
       extraConfig = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/tmux/tmux.conf";
     };
+
+    doa-system-clock.enable = true;
   };
 
   # services.home-manager.autoUpgrade.enable = true;
@@ -257,13 +259,6 @@
           menuExtras = (
             "/System/Library/CoreServices/Menu Extras/VPN.menu"
           );
-        };
-
-        "com.apple.menuextra.clock" = {
-          Show24Hour = true;
-          ShowDate = 1;
-          ShowDayOfWeek = true;
-          ShowSeconds = true;
         };
 
         "com.spotify.client".AutoStartSettingIsHidden = 0;
