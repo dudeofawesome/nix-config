@@ -39,7 +39,8 @@ in
     (if (builtins.pathExists ./${distro}/${hostname}/disko.nix) then ./${distro}/${hostname}/disko.nix else { })
     ./${distro}/configuration.nix
     ../modules/machine-classes/${machine-class}.nix
-    ../modules/defaults/base
+    ../modules/presets/base
+    (if (builtins.pathExists ../users/${owner}/os/default.nix) then ../users/${owner}/os/default.nix else { })
     (if (builtins.pathExists ../users/${owner}/os/${os}.nix) then ../users/${owner}/os/${os}.nix else { })
     ../modules/defaults/auth
 
