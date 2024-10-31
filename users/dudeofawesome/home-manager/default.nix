@@ -19,6 +19,7 @@
     ../../../modules/defaults/home-manager/middleclick.nix
     ../../../modules/defaults/home-manager/postico.nix
     ../../../modules/defaults/home-manager/script-editor.nix
+    ../../../modules/defaults/home-manager/wezterm.nix
   ];
 
   home = {

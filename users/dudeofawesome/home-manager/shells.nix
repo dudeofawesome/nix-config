@@ -29,10 +29,5 @@
         process_stop.shortcut = "F9";
       };
     };
-
-    wezterm = {
-      enable = true;
-      extraConfig = builtins.readFile ./wezterm.lua;
-    };
   };
 }
