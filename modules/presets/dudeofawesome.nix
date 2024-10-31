@@ -5,7 +5,7 @@ with pkgs.stdenv.targetPlatform;
     shells = with pkgs; [ fish ];
     systemPackages = with pkgs; [
       # Utilities
-      _1password
+      _1password-cli
       act
       ansible
       awscli2

@@ -38,7 +38,6 @@
       kitty
       krew
       watchman
-      wezterm
     ];
 
     sessionPath = [ "$HOME/.krew/bin" ];

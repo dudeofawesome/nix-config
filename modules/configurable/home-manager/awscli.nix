@@ -13,7 +13,7 @@ in
       text = ''
         #!${pkgs.bash}/bin/bash
 
-        op=${pkgs._1password}/bin/op
+        op=${pkgs._1password-cli}/bin/op
         jq=${pkgs.jq}/bin/jq
 
         item_id="$1"

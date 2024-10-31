@@ -7,8 +7,10 @@ local system_appearance_light = string.match(system_appearance, 'Light')
 
 config.color_scheme =
 system_appearance_light
-and 'Ocean (light) (terminal.sexy)'
-or 'Oceanic-Next'
+  and 'Ocean (light) (terminal.sexy)'
+  or 'Oceanic-Next'
+
+config.front_end = "WebGpu"
 
 local act = wezterm.action
 config.keys = {
