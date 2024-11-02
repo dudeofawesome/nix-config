@@ -10,6 +10,7 @@
       "*" = {
         indent_style = "space";
         indent_size = 2;
+        max_line_length = 80;
         # We recommend you to keep these unchanged
         end_of_line = "lf";
         charset = "utf-8";
