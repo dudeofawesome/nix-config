@@ -16,4 +16,6 @@ in
       })
       userSettings;
   };
+
+  security.pam.enableSudoTouchIdAuth = true;
 }

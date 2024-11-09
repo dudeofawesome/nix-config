@@ -2,11 +2,9 @@
 with pkgs.stdenv.targetPlatform;
 {
   imports = [
-    ./${os}.nix
-    ../../configurable/default.${os}.nix
-
-    ../../defaults/sops.nix
-    ../../defaults/nix.nix
+    ./default.${os}.nix
+    ../../../configurable/os
+    ../../../defaults
   ];
 
   environment = {
@@ -39,7 +37,6 @@ with pkgs.stdenv.targetPlatform;
       rubyPackages.syntax_tree-haml
       rubyPackages.syntax_tree-rbs
       tmux
-      vim-full
       wget
 
       # Shells
@@ -63,4 +60,13 @@ with pkgs.stdenv.targetPlatform;
   };
 
   programs.fish.enable = true;
+
+  fonts.packages = with pkgs; [
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode"
+      ];
+    })
+  ];
+
 }

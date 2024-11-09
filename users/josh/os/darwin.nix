@@ -51,17 +51,6 @@
   };
 
   system = {
-    defaults = {
-      dock = {
-        minimize-to-application = lib.mkForce false;
-
-        wvous-br-corner = 14; # Quick Note
-      };
-      finder = {
-        AppleShowAllFiles = lib.mkForce false;
-      };
-    };
-
     keyboard = {
       remapCapsLockToEscape = lib.mkForce false;
     };

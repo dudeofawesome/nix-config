@@ -1,25 +1,24 @@
 { machine-class, pkgs, lib, osConfig, config, ... }:
 {
   imports = [
+    ../../../modules/presets/home-manager/paciolan.nix
+
     ../../../modules/defaults/home-manager
-    ./browsers.nix
-    ./editors.nix
-    ./shells.nix
-    ../../../modules/configurable/home-manager/dock.nix
-    ../../../modules/configurable/home-manager/awscli.nix
-    ../../../modules/configurable/home-manager/moar.nix
-    ../../../modules/configurable/home-manager/process-compose.nix
-    ../../../modules/defaults/home-manager/apple-calendar.nix
     ../../../modules/defaults/home-manager/finicky.nix
     ../../../modules/defaults/home-manager/fork.nix
     ../../../modules/defaults/home-manager/gnome.nix
+    ../../../modules/defaults/home-manager/gitup.nix
     ../../../modules/defaults/home-manager/google-earth-pro.nix
     ../../../modules/defaults/home-manager/hammerspoon.nix
     ../../../modules/defaults/home-manager/ice.nix
     ../../../modules/defaults/home-manager/middleclick.nix
     ../../../modules/defaults/home-manager/postico.nix
-    ../../../modules/defaults/home-manager/script-editor.nix
+    ../../../modules/defaults/home-manager/typora.nix
     ../../../modules/defaults/home-manager/wezterm.nix
+
+    ./browsers.nix
+    ./vscode.nix
+    ./shells.nix
   ];
 
   home = {
@@ -34,10 +33,13 @@
     stateVersion = "23.05"; # Did you read the comment?
 
     packages = with pkgs; [
-      opentofu
-      terraform
-      kitty
+      _1password-cli
+      act
+      awscli2
+      d2
+      eternal-terminal
       krew
+      opentofu
       watchman
     ];
 
@@ -130,28 +132,8 @@
         "${config.programs.vscode.package}/Applications/Visual Studio Code.app"
         "/Applications/Fork.app"
         "${config.programs.wezterm.package}/Applications/WezTerm.app"
-        "/Applications/iTerm.app"
         "/System/Applications/System Settings.app"
       ];
-
-      others = {
-        # /Applications
-        "/Applications/" = {
-          fileType = "1";
-          arrangement = "1";
-          displayAs = "1";
-          showAs = "2";
-          arrangement2 = "1";
-        };
-        # ~/Downloads
-        "/Users/'$(whoami)'/Downloads/" = {
-          fileType = "2";
-          arrangement = "1";
-          displayAs = "0";
-          showAs = "1";
-          arrangement2 = "2";
-        };
-      };
     };
 
     _1password-shell-plugins = {

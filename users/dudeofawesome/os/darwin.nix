@@ -51,7 +51,6 @@
         "tableplus"
         "tailscale"
         "typora"
-        "utm"
         "visual-studio-code"
         "workman"
       ];

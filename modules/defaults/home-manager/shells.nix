@@ -1,10 +1,10 @@
-{ pkgs, lib, osConfig, ... }:
+{ pkgs, lib, config, osConfig, ... }:
 with pkgs.stdenv.targetPlatform;
+let
+  has_pkg = needle: builtins.any (pkg: pkg == needle) osConfig.environment.systemPackages;
+  uses_k8s = has_pkg pkgs.kubectl;
+in
 {
-  home.packages = with pkgs; [
-    atuin
-  ];
-
   programs = {
     fish = {
       enable = true;
@@ -31,11 +31,14 @@ with pkgs.stdenv.targetPlatform;
 
       shellAbbrs = {
         "l" = "ls -lha";
+      } // (if (isLinux) then {
         "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
+      } else { })
+      // (if (uses_k8s) then {
         "k" = "kubectl";
         "ktx" = "kubectx";
         "kns" = "kubens";
-      };
+      } else { });
 
       functions = {
         _tide_item_gcloud = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/fish/functions/_tide_item_gcloud.fish";
@@ -89,6 +92,8 @@ with pkgs.stdenv.targetPlatform;
     };
 
     atuin = {
+      enable = true;
+
       enableFishIntegration = true;
       enableBashIntegration = true;
 
@@ -96,7 +101,6 @@ with pkgs.stdenv.targetPlatform;
         "--disable-up-arrow"
       ];
       settings = {
-        sync_address = "https://atuin.orleans.io";
         update_check = false;
         style = "compact";
         # word_jump_mode = "subl";
@@ -112,31 +116,33 @@ with pkgs.stdenv.targetPlatform;
     };
   };
 
-  home = {
-    # Since it's not possible to declare default shell, run this command after build
-    activation.setShell = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin
-      ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
+  # Since it's not possible to declare default shell, run this command after build
+  home.activation.setShell = lib.mkIf isDarwin
+    ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
 
-    file = {
-      dockerFishCompletion = {
-        target = ".config/fish/completions/docker.fish";
-        source = "${pkgs.docker}/share/fish/vendor_completions.d/docker.fish";
-      };
+  xdg.configFile = lib.mkIf (config.programs.fish.enable) {
+    dockerFishCompletion = {
+      enable = has_pkg pkgs.docker;
+      target = "fish/completions/docker.fish";
+      source = "${pkgs.docker}/share/fish/vendor_completions.d/docker.fish";
+    };
 
-      podmanFishCompletion = {
-        target = ".config/fish/completions/podman.fish";
-        source = "${pkgs.podman}/share/fish/vendor_completions.d/podman.fish";
-      };
+    podmanFishCompletion = {
+      enable = has_pkg pkgs.podman;
+      target = "fish/completions/podman.fish";
+      source = "${pkgs.podman}/share/fish/vendor_completions.d/podman.fish";
+    };
 
-      kubectxFishCompletion = {
-        target = ".config/fish/completions/kubectx.fish";
-        source = "${pkgs.kubectx}/share/fish/vendor_completions.d/kubectx.fish";
-      };
+    kubectxFishCompletion = {
+      enable = uses_k8s;
+      target = "fish/completions/kubectx.fish";
+      source = "${pkgs.kubectx}/share/fish/vendor_completions.d/kubectx.fish";
+    };
 
-      kubensFishCompletion = {
-        target = ".config/fish/completions/kubens.fish";
-        source = "${pkgs.kubectx}/share/fish/vendor_completions.d/kubens.fish";
-      };
+    kubensFishCompletion = {
+      enable = uses_k8s;
+      target = "fish/completions/kubens.fish";
+      source = "${pkgs.kubectx}/share/fish/vendor_completions.d/kubens.fish";
     };
   };
 }

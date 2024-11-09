@@ -16,11 +16,14 @@ sops \
   --output "$fde_password_file" \
   "hosts/nixos/$flake/secrets.yaml"
 
-nix run github:nix-community/nixos-anywhere -- \
+# nix run github:nix-community/nixos-anywhere -- \
+nix run github:dudeofawesome/nixos-anywhere/fix/create-encryption-keys-dir -- \
   --flake .#"$flake" \
+  --build-on-remote \
+  --copy-host-keys \
   --disk-encryption-keys \
     `# remote path` \
-    "/tmp/fde_password" \
+    "$fde_password_file" \
     `# local path` \
     "$fde_password_file" \
   --debug \

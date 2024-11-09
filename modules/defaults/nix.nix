@@ -1,17 +1,38 @@
-{ pkgs, ... }:
+{ pkgs, os, ... }:
 with pkgs.stdenv.targetPlatform;
 {
+  imports = [ (if (builtins.pathExists ./nix.${os}.nix) then ./nix.${os}.nix else { }) ];
+
   nix = {
     package = pkgs.nix;
+
     gc = {
-      # Garbage collection
       automatic = true;
-      options = "--delete-older-than 7d";
-    };
+      options = "--delete-older-than 30d";
+    } // (if (isLinux) then {
+      dates = "weekly";
+    } else {
+      interval.Day = 7;
+    });
+
+    optimise = {
+      automatic = true;
+    } // (if (isLinux) then {
+      dates = [ "03:45" ];
+    } else {
+      interval = {
+        Hour = 4;
+        Minute = 15;
+      };
+    });
+
     extraOptions = ''
       auto-optimise-store = true
       experimental-features = nix-command flakes
     '';
+
+    # disable the nix-channel command, which leads to non-reproducible envs
+    channel.enable = false;
 
     settings = {
       trusted-users =
@@ -37,14 +58,7 @@ with pkgs.stdenv.targetPlatform;
       owner = "fontis";
       repo = "nix-node";
     };
-  }
-  // (if (isDarwin) then {
-    linux-builder = {
-      enable = true;
-      maxJobs = 10;
-    };
-  } else { })
-  ;
+  };
 
   # Allow proprietary software.
   nixpkgs.config.allowUnfree = true;

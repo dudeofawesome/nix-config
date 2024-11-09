@@ -7,6 +7,7 @@
         "number of hours displayed" = 10;
         "Default duration in minutes for new event" = 30.0;
         CalUICanvasOccurrenceFontSize = 10.0;
+        ShowDeclinedEvents = 1;
       };
     };
   };

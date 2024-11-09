@@ -1,7 +1,7 @@
 { os, users, pkgs, lib, ... }:
 {
   imports = [
-    ./${os}.nix
+    ./default.${os}.nix
   ];
 
   config = lib.concatMapAttrs
