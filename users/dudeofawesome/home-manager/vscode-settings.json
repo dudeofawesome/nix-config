@@ -210,6 +210,7 @@
   "editor.formatOnType": true,
   "editor.formatOnPaste": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.prettierPath": "this should be replaced by nix",
 
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -449,7 +450,7 @@
       "rxjs",
       "typescript"
     ],
-    "wezterm.lua": ["lua", "wezterm"],
+    "wezterm.lua": ["lua", "wezterm"]
   },
   "dash.languageIdToDocsetMap": {
     "typescript": [
@@ -764,7 +765,8 @@
     }
   },
 
-  "gitlab.aiAssistedCodeSuggestions.enabled": false,
+  "gitlab.duoCodeSuggestions.enabled": false,
+  "gitlab.duoChat.enabled": false,
 
   "1password.editor.suggestStorage": false
 }
