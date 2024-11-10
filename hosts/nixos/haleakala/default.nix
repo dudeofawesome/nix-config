@@ -18,11 +18,6 @@
     firewall.enable = false;
   };
 
-  environment = {
-    systemPackages = with pkgs; [
-    ];
-  };
-
   programs = {
     gnome = {
       # autoLoginEnable = true;

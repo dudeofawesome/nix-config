@@ -20,10 +20,7 @@ with pkgs.stdenv.targetPlatform;
     # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
     stateVersion = lib.mkDefault "23.05"; # Did you read the comment?
 
-    packages = with pkgs; [ ];
-
     preferXdgDirectories = true;
-
   };
 
   xdg.configFile.prettier = {
