@@ -5,6 +5,7 @@ with pkgs.stdenv.targetPlatform;
     # Utilities
     awscli2
     glab
+    k6
     terraform
   ] ++ (if (machine-class == "pc") then [
     ansible
@@ -12,5 +13,6 @@ with pkgs.stdenv.targetPlatform;
     postman
     slack
     tableplus
+    zoom-us
   ] else [ ]);
 }

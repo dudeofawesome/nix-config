@@ -1,15 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [
-  ];
-
-  environment = {
-    systemPackages = with pkgs; [
-      k6
-      zoom-us
-    ];
-  };
-
   homebrew = {
     casks = [
       "google-earth-pro"
