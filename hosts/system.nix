@@ -17,10 +17,8 @@ let
   doa-lib = import ../lib;
   distro = { "linux" = "nixos"; "darwin" = "darwin"; }."${os}";
   distroModules = "${distro}Modules";
-in
-{
-  system = "${arch}-${os}";
-  specialArgs = {
+
+  args = {
     inherit
       inputs
 
@@ -32,6 +30,10 @@ in
       users
       ;
   };
+in
+{
+  system = "${arch}-${os}";
+  specialArgs = args;
   modules = [
     packageOverlays
 
@@ -49,19 +51,6 @@ in
     (if (os == "linux") then inputs.vscode-server.nixosModules.default else { })
 
     inputs.home-manager.${distroModules}.home-manager
-    {
-      home-manager = import ../modules/host-home-manager.nix {
-        inherit
-          inputs
-
-          hostname
-          arch
-          os
-          owner
-          machine-class
-          users
-          ;
-      };
-    }
+    { home-manager = import ../modules/host-home-manager.nix args; }
   ];
 }
