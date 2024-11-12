@@ -1,8 +1,9 @@
 { pkgs, lib, config, osConfig, ... }:
 with pkgs.stdenv.targetPlatform;
 let
-  has_pkg = needle: builtins.any (pkg: pkg == needle) osConfig.environment.systemPackages;
-  uses_k8s = has_pkg pkgs.kubectl;
+  doa-lib = import ../../../lib;
+  pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
+  uses_k8s = pkg-installed pkgs.kubectl;
 in
 {
   programs = {
@@ -122,13 +123,13 @@ in
 
   xdg.configFile = lib.mkIf (config.programs.fish.enable) {
     dockerFishCompletion = {
-      enable = has_pkg pkgs.docker;
+      enable = pkg-installed pkgs.docker;
       target = "fish/completions/docker.fish";
       source = "${pkgs.docker}/share/fish/vendor_completions.d/docker.fish";
     };
 
     podmanFishCompletion = {
-      enable = has_pkg pkgs.podman;
+      enable = pkg-installed pkgs.podman;
       target = "fish/completions/podman.fish";
       source = "${pkgs.podman}/share/fish/vendor_completions.d/podman.fish";
     };

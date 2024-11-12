@@ -1,5 +1,11 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, osConfig, ... }:
 with pkgs.stdenv.targetPlatform;
+let
+  doa-lib = import ../../../lib;
+  pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
+  has_1password = pkg-installed pkgs._1password-cli || pkg-installed pkgs._1password-gui;
+  has_docker_desktop = pkg-installed pkgs.docker;
+in
 {
   home = {
     # This option defines the first version of NixOS you have installed on this particular machine,
@@ -39,7 +45,7 @@ with pkgs.stdenv.targetPlatform;
         };
       };
 
-      extraConfig = lib.mkIf isDarwin ''
+      extraConfig = lib.mkIf (isDarwin && has_1password) ''
         IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
       '';
     };
@@ -57,7 +63,7 @@ with pkgs.stdenv.targetPlatform;
 
       extraConfig = {
         gpg.format = "ssh";
-        "gpg \"ssh\"".program = lib.mkIf isDarwin "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+        "gpg \"ssh\"".program = lib.mkIf (isDarwin && has_1password) "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       };
     };
 
@@ -122,7 +128,7 @@ with pkgs.stdenv.targetPlatform;
   # TODO: figure out a better solution
   # This cleans up a bunch of symlinks the macOS Docker Desktop app makes which
   #   override the versions we install with Nix
-  home.activation.cleanupDockerDesktop = lib.mkIf isDarwin ''
+  home.activation.cleanupDockerDesktop = lib.mkIf (isDarwin && has_docker_desktop) ''
     cd /usr/local/bin/
     PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo rm -f \
       docker \

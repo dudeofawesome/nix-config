@@ -1,4 +1,8 @@
 { pkgs, lib, osConfig, config, machine-class, os, ... }:
+let
+  doa-lib = import ../../../lib;
+  pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
+in
 {
   imports = [
     ../../../modules/presets/home-manager/paciolan.nix
@@ -59,8 +63,6 @@
       tailscale
     ] ++ (if (os == "linux") then cider else [ ])
     else [ ]);
-
-    sessionPath = [ "$HOME/.krew/bin" ];
 
     keyboard = {
       layout = "us";
