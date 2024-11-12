@@ -1,10 +1,5 @@
 { os, hostname, pkgs, lib, config, ... }:
 with pkgs.stdenv.targetPlatform;
-let
-  doa-lib = import ../../../../lib;
-  pkg-installed = doa-lib.pkg-installed { osConfig = config; };
-  has_docker = pkg-installed pkgs.docker;
-in
 {
   imports = [
     ./default.${os}.nix
@@ -52,7 +47,7 @@ in
       gcc
       gnumake
       libllvm
-    ] ++ (if (has_docker) then [ dive ] else [ ]);
+    ];
   };
 
   networking.hostName = hostname;

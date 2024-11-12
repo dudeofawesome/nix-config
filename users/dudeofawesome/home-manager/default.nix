@@ -2,6 +2,7 @@
 let
   doa-lib = import ../../../lib;
   pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
+  has_docker = pkg-installed pkgs.docker;
 in
 {
   imports = [
@@ -62,7 +63,7 @@ in
       tableplus
       tailscale
     ] ++ (if (os == "linux") then cider else [ ])
-    else [ ]);
+    else [ ]) ++ (if (has_docker) then [ dive ] else [ ]);
 
     keyboard = {
       layout = "us";
