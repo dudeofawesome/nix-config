@@ -1,7 +1,8 @@
 { os, ... }:
+let doa-lib = import ../../../lib; in
 {
   imports = [
-    (if (builtins.pathExists ./default.${os}.nix) then ./default.${os}.nix else { })
+    (doa-lib.try-import ./default.${os}.nix)
 
     ./editors.nix
     ./miscellaneous.nix

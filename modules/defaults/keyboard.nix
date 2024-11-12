@@ -1,4 +1,7 @@
 { os, ... }:
+let doa-lib = import ../../lib; in
 {
-  imports = [ (if (builtins.pathExists ./keyboard.${os}.nix) then ./keyboard.${os}.nix else { }) ];
+  imports = [
+    (doa-lib.try-import ./keyboard.${os}.nix)
+  ];
 }

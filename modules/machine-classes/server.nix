@@ -1,7 +1,8 @@
 { pkgs, os, ... }:
+let doa-lib = import ../../lib; in
 {
   imports = [
-    (if (builtins.pathExists ./server.${os}.nix) then ./server.${os}.nix else { })
+    (doa-lib.try-import ./server.${os}.nix)
     ../defaults/containers/docker.nix
     ../defaults/containers/podman.nix
     ../defaults/containers/k8s/k3s.nix

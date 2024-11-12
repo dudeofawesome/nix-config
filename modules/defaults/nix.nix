@@ -1,7 +1,8 @@
 { pkgs, os, ... }:
 with pkgs.stdenv.targetPlatform;
+let doa-lib = import ../../lib; in
 {
-  imports = [ (if (builtins.pathExists ./nix.${os}.nix) then ./nix.${os}.nix else { }) ];
+  imports = [ (doa-lib.try-import ./nix.${os}.nix) ];
 
   nix = {
     package = pkgs.nix;

@@ -1,6 +1,9 @@
-{ pkgs, lib, os, ... }: with lib; {
+{ pkgs, lib, os, ... }:
+with lib;
+let doa-lib = import ../../lib; in
+{
   imports = [
-    (if (builtins.pathExists ./pc.${os}.nix) then ./pc.${os}.nix else { })
+    (doa-lib.try-import ./pc.${os}.nix)
     ../defaults/containers/k8s/user-utils.nix
   ];
 
