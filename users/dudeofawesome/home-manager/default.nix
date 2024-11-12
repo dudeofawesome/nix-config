@@ -42,7 +42,6 @@ in
       d2
       eternal-terminal
       krew
-      opentofu
       watchman
     ] ++ (if (machine-class == "pc") then [
       # https://github.com/NixOS/nixpkgs/issues/254944
@@ -55,6 +54,7 @@ in
       drawio
       inkscape
       losslesscut-bin
+      opentofu
       raycast
       rectangle
       signal-desktop
