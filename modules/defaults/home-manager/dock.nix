@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }: {
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin.defaults = {
       "com.apple.dock" = {
@@ -23,7 +23,7 @@
           arrangement2 = "1";
         };
         # ~/Downloads
-        "/Users/'$(whoami)'/Downloads/" = {
+        "${config.home.homeDirectory}/Downloads/" = {
           fileType = "2";
           arrangement = "1";
           displayAs = "0";

@@ -3,7 +3,7 @@
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin = {
       defaults."com.DanPristupov.Fork" = {
-        defaultSourceFolder = "/Users/${config.home.username}/git";
+        defaultSourceFolder = "${config.home.homeDirectory}/git";
         NSNavLastRootDirectory = "~/git";
 
         # rebase + stash & apply

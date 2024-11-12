@@ -15,9 +15,9 @@ in
     {
       age.keyFile =
         if pkgs.stdenv.targetPlatform.isLinux
-        then "/home/${config.home.username}/.config/sops/age/keys.txt"
+        then "${config.home.homeDirectory}/.config/sops/age/keys.txt"
         else if pkgs.stdenv.targetPlatform.isDarwin
-        then "/Users/${config.home.username}/Library/Application Support/sops/age/keys.txt"
+        then "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt"
         else abort;
 
       defaultSymlinkPath = "${secrets_base}/secrets";
