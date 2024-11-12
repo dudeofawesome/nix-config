@@ -1,4 +1,4 @@
-{ machine-class, pkgs, lib, osConfig, config, ... }:
+{ pkgs, lib, osConfig, config, machine-class, os, ... }:
 {
   imports = [
     ../../../modules/presets/home-manager/paciolan.nix
@@ -33,7 +33,6 @@
     stateVersion = "23.05"; # Did you read the comment?
 
     packages = with pkgs; [
-      _1password-cli
       act
       awscli2
       d2
@@ -41,7 +40,25 @@
       krew
       opentofu
       watchman
-    ];
+    ] ++ (if (machine-class == "pc") then [
+      # https://github.com/NixOS/nixpkgs/issues/254944
+      # TODO: investigate using an activation script to copy the .app to /Applications
+      # _1password-gui
+      _1password-cli
+      bruno
+      cyberduck
+      discord
+      drawio
+      inkscape
+      losslesscut-bin
+      raycast
+      rectangle
+      signal-desktop
+      spotify
+      tableplus
+      tailscale
+    ] ++ (if (os == "linux") then cider else [ ])
+    else [ ]);
 
     sessionPath = [ "$HOME/.krew/bin" ];
 
@@ -122,16 +139,16 @@
         "/Applications/Firefox.app"
         "/System/Applications/Music.app"
         "/System/Applications/Messages.app"
-        "/Applications/Signal.app"
-        "/Applications/Slack.app"
-        "/Applications/Discord.app"
+        "${pkgs.signal-desktop}/Applications/Signal.app"
+        "${pkgs.slack}/Applications/Slack.app"
+        "${pkgs.discord}/Applications/Discord.app"
         "/System/Applications/Mail.app"
         "/System/Applications/Calendar.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Reminders.app"
-        "${config.programs.vscode.package}/Applications/Visual Studio Code.app"
+        "${pkgs.vscode}/Applications/Visual Studio Code.app"
         "/Applications/Fork.app"
-        "${config.programs.wezterm.package}/Applications/WezTerm.app"
+        "${pkgs.wezterm}/Applications/WezTerm.app"
         "/System/Applications/System Settings.app"
       ];
     };

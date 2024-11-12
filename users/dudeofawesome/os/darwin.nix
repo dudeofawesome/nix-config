@@ -1,4 +1,8 @@
-{ pkgs, users, ... }: {
+{ pkgs, users, machine-class, ... }: {
+  imports = [ ] ++ (if (machine-class == "pc") then [
+    ../../../modules/presets/os/paciolan.nix
+  ] else [ ]);
+
   homebrew = {
     casks =
       let
@@ -17,41 +21,26 @@
         "arduino"
         "balenaetcher"
         "bettertouchtool"
-        "bruno"
-        "cyberduck"
+        "dash"
         "displaylink"
         "docker"
-        "drawio"
         "figma"
         "firefox"
         "hammerspoon"
-        "inkscape"
-        "insomnia"
         "jordanbaird-ice"
         "logitech-g-hub"
-        "losslesscut"
         "lulu"
         (noQuarantine "middleclick")
         "mitmproxy"
-        "moonlight"
         "parsec"
         "plex"
         "plexamp"
         "podman-desktop"
         "postico"
-        "postman"
         "private-internet-access"
-        "raycast"
-        "rectangle"
-        "signal"
-        "slack"
-        "spotify"
         "steam"
         "stay"
-        "tableplus"
-        "tailscale"
         "typora"
-        "visual-studio-code"
         "workman"
       ];
     masApps = {

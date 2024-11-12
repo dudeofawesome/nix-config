@@ -1,12 +1,16 @@
-{ os, hostname, pkgs, lib, ... }:
+{ pkgs, lib, os, hostname, machine-class, ... }:
 with pkgs.stdenv.targetPlatform;
 {
   home.packages = with pkgs; [
     # Utilities
-    ansible
     awscli2
     glab
-    gitlab-runner
     terraform
-  ];
+  ] ++ (if (machine-class == "pc") then [
+    ansible
+    gitlab-runner
+    postman
+    slack
+    tableplus
+  ] else [ ]);
 }

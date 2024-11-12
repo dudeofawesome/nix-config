@@ -19,8 +19,6 @@
         };
       in
       [
-        "dash"
-        "discord"
         "displaylink"
         "finicky"
         "firefox"
