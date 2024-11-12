@@ -1,7 +1,19 @@
 { pkgs, lib, config, ... }: {
+  home.packages = with pkgs; [
+    python3
+    python3Packages.ipykernel
+    python3Packages.jupyterlab
+    python3Packages.pyzmq # Adding pyzmq explicitly
+    python3Packages.venvShellHook
+    python3Packages.pip
+    python3Packages.numpy
+    python3Packages.pandas
+    python3Packages.requests
+  ];
+
   programs = {
     vscode = {
-      mutableExtensionsDir = true;
+      mutableExtensionsDir = lib.mkDefault false;
 
       keybindings = lib.concatLists [
         # misc

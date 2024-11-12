@@ -1,8 +1,8 @@
-{ ... }: {
+{ lib, ... }: {
   nix = {
     linux-builder = {
       enable = true;
-      maxJobs = 10;
+      maxJobs = lib.mkDefault 10;
     };
   };
 

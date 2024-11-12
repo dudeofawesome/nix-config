@@ -1,4 +1,4 @@
-{ pkgs, os, ... }:
+{ pkgs, lib, os, ... }:
 with pkgs.stdenv.targetPlatform;
 let doa-lib = import ../../lib; in
 {
@@ -9,37 +9,35 @@ let doa-lib = import ../../lib; in
 
     gc = {
       automatic = true;
-      options = "--delete-older-than 30d";
+      options = lib.mkDefault "--delete-older-than 30d";
     } // (if (isLinux) then {
-      dates = "weekly";
+      dates = lib.mkDefault "weekly";
     } else {
-      interval.Day = 7;
+      interval.Day = lib.mkDefault 7;
     });
 
     optimise = {
       automatic = true;
     } // (if (isLinux) then {
-      dates = [ "03:45" ];
+      dates = lib.mkDefault [ "03:45" ];
     } else {
-      interval = {
+      interval = lib.mkDefault {
         Hour = 4;
         Minute = 15;
       };
     });
 
-    extraOptions = ''
-      auto-optimise-store = true
-      experimental-features = nix-command flakes
-    '';
-
     # disable the nix-channel command, which leads to non-reproducible envs
     channel.enable = false;
 
     settings = {
-      trusted-users =
-        if (isLinux) then [ "root" "@wheel" ]
-        else if (isDarwin) then [ "root" "@admin" ]
-        else abort;
+      experimental-features = "nix-command flakes";
+
+      trusted-users = [ "root" ] ++ (
+        if (isLinux) then [ "@wheel" ]
+        else if (isDarwin) then [ "@admin" ]
+        else abort
+      );
 
       substituters = [
         "https://cache.nixos.org/"
@@ -52,6 +50,13 @@ let doa-lib = import ../../lib; in
         # nix-node by fontis
         "fontis.cachix.org-1:r6CU2oXo4iozCVo09V+hjJSpFlbUxQW/rDHYlLJ03Og="
       ];
+
+      auto-optimise-store = lib.mkDefault true;
+
+      min-free = lib.mkDefault (512 * 1024 * 1024);
+      max-free = lib.mkDefault (3000 * 1024 * 1024);
+
+      builders-use-substitutes = lib.mkDefault true;
     };
 
     registry."node".to = {
