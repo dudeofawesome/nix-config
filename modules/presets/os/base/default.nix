@@ -1,5 +1,10 @@
-{ os, hostname, pkgs, lib, ... }:
+{ os, hostname, pkgs, lib, config, ... }:
 with pkgs.stdenv.targetPlatform;
+let
+  doa-lib = import ../../../../lib;
+  pkg-installed = doa-lib.pkg-installed { osConfig = config; };
+  has_docker = pkg-installed pkgs.docker;
+in
 {
   imports = [
     ./default.${os}.nix
@@ -15,7 +20,6 @@ with pkgs.stdenv.targetPlatform;
       bind
       bottom
       curl
-      dive
       dua
       eternal-terminal
       fd
@@ -32,10 +36,6 @@ with pkgs.stdenv.targetPlatform;
       nodePackages.prettier
       pciutils
       ripgrep
-      rubyPackages.prettier_print
-      rubyPackages.syntax_tree
-      rubyPackages.syntax_tree-haml
-      rubyPackages.syntax_tree-rbs
       tmux
       wget
 
@@ -52,12 +52,10 @@ with pkgs.stdenv.targetPlatform;
       gcc
       gnumake
       libllvm
-    ];
+    ] ++ (if (has_docker) then [ dive ] else [ ]);
   };
 
-  networking = {
-    hostName = hostname;
-  };
+  networking.hostName = hostname;
 
   programs.fish.enable = true;
 

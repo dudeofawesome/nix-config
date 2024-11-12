@@ -9,6 +9,11 @@
     python3Packages.numpy
     python3Packages.pandas
     python3Packages.requests
+
+    rubyPackages.prettier_print
+    rubyPackages.syntax_tree
+    rubyPackages.syntax_tree-haml
+    rubyPackages.syntax_tree-rbs
   ];
 
   programs = {
