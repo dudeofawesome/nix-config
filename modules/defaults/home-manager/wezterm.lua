@@ -13,6 +13,7 @@ config.color_scheme = system_appearance_light
 config.initial_rows = 60
 config.initial_cols = 200
 
+-- https://github.com/wez/wezterm/issues/5990
 config.front_end = "WebGpu"
 
 local act = wezterm.action
