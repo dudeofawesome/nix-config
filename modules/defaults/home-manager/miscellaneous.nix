@@ -3,7 +3,7 @@ with pkgs.stdenv.targetPlatform;
 let
   doa-lib = import ../../../lib;
   pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
-  has_1password = pkg-installed pkgs._1password-cli || pkg-installed pkgs._1password-gui;
+  has_1password = pkg-installed pkgs._1password-cli || (!isDarwin && pkg-installed pkgs._1password-gui);
   has_docker_desktop = pkg-installed pkgs.docker;
 in
 {
