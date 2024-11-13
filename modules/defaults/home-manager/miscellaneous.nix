@@ -1,4 +1,4 @@
-{ pkgs, lib, config, osConfig, ... }:
+{ pkgs, lib, config, osConfig, hostname, ... }:
 with pkgs.stdenv.targetPlatform;
 let
   doa-lib = import ../../../lib;
@@ -43,6 +43,7 @@ in
           match = "host *git*,*bitbucket*";
           user = "git";
         };
+        "*".identityFile = lib.mkDefault "~/.ssh/${hostname}_ed25519";
       };
 
       extraConfig = ''
