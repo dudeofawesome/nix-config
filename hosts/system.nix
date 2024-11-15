@@ -47,10 +47,10 @@ in
     ../modules/defaults/auth
 
     (if (os == "linux") then inputs.disko.nixosModules.disko else { })
-    (if (os == "linux") then inputs.sops.nixosModules.sops else { })
     (if (os == "linux") then inputs.vscode-server.nixosModules.default else { })
 
+    (if (os == "linux") then inputs.sops.${distroModules}.sops else { })
     inputs.home-manager.${distroModules}.home-manager
-    { home-manager = import ../modules/host-home-manager.nix args; }
+    (import ../modules/host-home-manager.nix args)
   ];
 }

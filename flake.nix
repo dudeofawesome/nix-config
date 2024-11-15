@@ -89,32 +89,19 @@
 
   outputs = inputs@{ nixpkgs, ... }:
     let
-      location = "$HOME/git/dudeofawesome/nix-config";
-      packageOverlays = ./overlays;
-      usersModule = import ./users { inherit (nixpkgs) lib; };
+      lib = nixpkgs.lib;
+      params = {
+        inherit
+          inputs
+          lib
+          ;
+        location = "$HOME/git/dudeofawesome/nix-config";
+        usersModule = import ./users { inherit lib; };
+        packageOverlays = ./overlays;
+      };
     in
     {
-      nixosConfigurations = (
-        import ./hosts/nixos {
-          inherit (nixpkgs) lib;
-          inherit
-            inputs
-            usersModule
-            packageOverlays
-            location
-            ;
-        }
-      );
-
-      darwinConfigurations = (
-        import ./hosts/darwin {
-          inherit (nixpkgs) lib;
-          inherit
-            inputs
-            usersModule
-            packageOverlays
-            ;
-        }
-      );
+      nixosConfigurations = import ./hosts/nixos params;
+      darwinConfigurations = import ./hosts/darwin params;
     };
 }
