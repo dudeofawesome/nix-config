@@ -17,7 +17,7 @@ let doa-lib = import ../../lib; in
     });
 
     optimise = {
-      automatic = true;
+      automatic = lib.mkDefault true;
     } // (if (isLinux) then {
       dates = lib.mkDefault [ "03:45" ];
     } else {
@@ -33,25 +33,23 @@ let doa-lib = import ../../lib; in
     settings = {
       experimental-features = "nix-command flakes";
 
-      trusted-users = [ "root" ] ++ (
+      trusted-users = lib.mkDefault ([ "root" ] ++ (
         if (isLinux) then [ "@wheel" ]
         else if (isDarwin) then [ "@admin" ]
         else abort
-      );
+      ));
 
-      substituters = [
+      substituters = lib.mkDefault [
         "https://cache.nixos.org/"
         # nix-node by fontis
         "https://fontis.cachix.org/"
       ];
 
-      trusted-public-keys = [
+      trusted-public-keys = lib.mkDefault [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         # nix-node by fontis
         "fontis.cachix.org-1:r6CU2oXo4iozCVo09V+hjJSpFlbUxQW/rDHYlLJ03Og="
       ];
-
-      auto-optimise-store = lib.mkDefault true;
 
       min-free = lib.mkDefault (512 * 1024 * 1024);
       max-free = lib.mkDefault (3000 * 1024 * 1024);
@@ -67,5 +65,5 @@ let doa-lib = import ../../lib; in
   };
 
   # Allow proprietary software.
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = lib.mkDefault true;
 }
