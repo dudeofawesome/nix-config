@@ -39,21 +39,34 @@ in
       enable = true;
 
       matchBlocks = {
+        "*" =
+          if (has_1password) then {
+            # TODO: switch to this (instead of `extraConfig`) once https://github.com/nix-community/home-manager/issues/4134 is solved
+            # IdentityAgent = lib.mkDefault (
+            #   if (isDarwin) then "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+            #   else if (isLinux) then "~/.1password/agent.sock"
+            #   else abort
+            # );
+          }
+          else {
+            identityFile = lib.mkDefault "~/.ssh/${hostname}_ed25519";
+            identitiesOnly = lib.mkDefault true;
+          };
+
         "git" = {
           match = "host *git*,*bitbucket*";
           user = "git";
         };
-        "*".identityFile = lib.mkDefault "~/.ssh/${hostname}_ed25519";
       };
 
       extraConfig = ''
         ${if (has_1password) then (
-          if (isDarwin) then ''
-              IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-            ''
-          else if (isLinux) then "IdentityAgent ~/.1password/agent.sock"
-          else abort
-        ) else "IdentitiesOnly yes"}
+          "IdentityAgent = ${
+            if (isDarwin) then ''"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"''
+            else if (isLinux) then ''"~/.1password/agent.sock"''
+            else abort
+          }"
+        ) else ""}
       '';
     };
 
