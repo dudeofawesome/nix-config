@@ -6,6 +6,6 @@ with pkgs.stdenv.targetPlatform;
     sops
     ssh-to-age
   ];
-} // (if (os == "linux") then {
+
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
-} else { })
+}

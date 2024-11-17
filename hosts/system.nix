@@ -49,7 +49,7 @@ in
     (if (os == "linux") then inputs.disko.nixosModules.disko else { })
     (if (os == "linux") then inputs.vscode-server.nixosModules.default else { })
 
-    (if (os == "linux") then inputs.sops.${distroModules}.sops else { })
+    inputs.sops.${distroModules}.sops
     inputs.home-manager.${distroModules}.home-manager
     (import ../modules/host-home-manager.nix args)
   ];
