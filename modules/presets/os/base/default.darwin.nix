@@ -39,7 +39,7 @@
     # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
     # and migrated your data accordingly.
     #
-    # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+    # For more information, see https://daiderd.com/nix-darwin/manual/index.html#opt-system.stateVersion
     stateVersion = lib.mkDefault 4; # Did you read the comment?
   };
 }
