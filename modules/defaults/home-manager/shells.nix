@@ -42,8 +42,6 @@ in
       } else { });
 
       functions = {
-        _tide_item_gcloud = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/fish/functions/_tide_item_gcloud.fish";
-
         doa-ssh-keygen = {
           description = ''
             Create SSH ed25519 keys with no passphrase, in ~/.ssh
@@ -72,7 +70,21 @@ in
       };
 
       shellInit = ''
-        ${builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/fish/tide.config.fish"}
+        tide configure --auto \
+          --style=Rainbow \
+          --prompt_colors='True color' \
+          --show_time='24-hour format' \
+          --rainbow_prompt_separators=Vertical \
+          --powerline_prompt_heads=Sharp \
+          --powerline_prompt_tails=Flat \
+          --powerline_prompt_style='Two lines, character' \
+          --prompt_connection=Solid \
+          --powerline_right_prompt_frame=No \
+          --prompt_connection_andor_frame_color=Dark \
+          --prompt_spacing=Sparse \
+          --icons='Many icons' \
+          --transient=Yes \
+        ;
       '';
 
       # HACK: fix fish PATH: https://github.com/LnL7/nix-darwin/issues/122
