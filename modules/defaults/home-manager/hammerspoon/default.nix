@@ -9,8 +9,8 @@
 
     home = {
       file.hammerspoon = {
-        target = ".config/hammerspoon/";
-        source = "${pkgs.dotfiles.dudeofawesome}/settings/hammerspoon/";
+        target = ".config/hammerspoon/init.lua";
+        source = ./init.lua;
       };
     };
   };
