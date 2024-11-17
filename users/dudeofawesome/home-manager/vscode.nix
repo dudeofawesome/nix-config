@@ -16,7 +16,7 @@ in
   ];
 
   programs.vscode = {
-    enable = machine-class == "pc";
+    enable = lib.mkDefault (machine-class == "pc");
 
     extensions =
       with pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace;

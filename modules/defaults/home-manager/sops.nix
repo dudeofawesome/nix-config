@@ -22,6 +22,9 @@ in
         else abort
       );
 
+      defaultSopsFile = let path = ../../../users/${config.home.username}/secrets.yaml; in
+        lib.mkIf (builtins.pathExists path) path;
+
       defaultSymlinkPath = "${secrets_base}/secrets";
       defaultSecretsMountPoint = "${secrets_base}/secrets.d";
     };
