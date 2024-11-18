@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }: {
   targets.darwin.defaults = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     NSGlobalDomain = {
       AppleShowAllExtensions = true;
@@ -13,6 +13,14 @@
       FXDefaultSearchScope = "SCcf";
       # Use columns view
       FXPreferredViewStyle = "clmv";
+
+      SidebarWidth = 158;
+
+      ShowRemovableMediaOnDesktop = true;
+      ShowHardDrivesOnDesktop = false;
+      ShowExternalHardDrivesOnDesktop = true;
+
+      NewWindowTargetPath = "file://${config.home.homeDirectory}/";
     };
   };
 }

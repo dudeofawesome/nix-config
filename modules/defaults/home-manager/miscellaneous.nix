@@ -105,8 +105,6 @@ in
       # };
 
       defaults = {
-        "com.apple.Siri".StatusMenuVisible = 0;
-
         # "com.apple.Terminal" = { };
 
         "com.apple.screensaver" = {
@@ -119,21 +117,9 @@ in
           VPNShowTime = 1;
         };
 
-        "com.apple.systemuiserver" = {
-          "NSStatusItem Visible com.apple.menuextra.vpn" = 1;
-          "NSStatusItem Visible Bluetooth" = 1;
-          menuExtras = (
-            "/System/Library/CoreServices/Menu Extras/VPN.menu"
-          );
-        };
-
         "com.spotify.client".AutoStartSettingIsHidden = 0;
 
         "com.apple.Safari".IncludeDevelopMenu = true;
-      };
-
-      currentHostDefaults = {
-        "com.apple.controlcenter".BatteryShowPercentage = true;
       };
     };
   };
