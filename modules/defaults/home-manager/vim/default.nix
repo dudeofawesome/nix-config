@@ -4,7 +4,7 @@
     packageConfigurable = pkgs.vim-full;
 
     defaultEditor = true;
-    extraConfig = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.vim/vimrc";
+    extraConfig = builtins.readFile ./.vimrc;
     plugins = with pkgs.vimPlugins; [
       papercolor-theme
       vim-airline

@@ -9,5 +9,6 @@ let doa-lib = import ../../../lib; in
     ./nix.nix
     ./shells.nix
     ./sops.nix
+    ./tmux
   ];
 }

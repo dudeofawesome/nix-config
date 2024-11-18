@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./vscode.nix
-    ./vim.nix
+    ./vim
   ];
 
   editorconfig = {

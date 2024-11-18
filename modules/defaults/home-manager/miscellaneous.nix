@@ -92,13 +92,6 @@ in
       settings.git_protocol = "ssh";
     };
 
-    tmux = {
-      enable = true;
-
-      # clock24 = true;
-      extraConfig = builtins.readFile "${pkgs.dotfiles.dudeofawesome}/home/.config/tmux/tmux.conf";
-    };
-
     doa-system-clock.enable = true;
   };
 
