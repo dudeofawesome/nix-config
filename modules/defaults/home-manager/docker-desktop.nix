@@ -19,7 +19,8 @@ in
         disableHardwareAcceleration = false;
         disableTips = true;
         disableUpdate = true;
-        diskSizeMiB = lib.mkDefault 61035;
+        # diskSizeMiB = lib.mkDefault 61035;
+        diskSizeMiB = 61035;
         displayedOnboarding = true;
         dockerBinInstallPath = "user";
         enableDefaultDockerSocket = true;
