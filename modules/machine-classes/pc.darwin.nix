@@ -36,6 +36,7 @@
         "sublime-text"
       ];
     masApps = {
+      "AdGuard for Safari" = 1440147259;
       "Amphetamine" = 937984704;
       "Xcode" = 497799835;
     };
