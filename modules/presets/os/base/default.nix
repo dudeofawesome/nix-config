@@ -31,6 +31,7 @@ with pkgs.stdenv.targetPlatform;
       nodePackages.prettier
       pciutils
       ripgrep
+      rsync
       tmux
       wget
 
