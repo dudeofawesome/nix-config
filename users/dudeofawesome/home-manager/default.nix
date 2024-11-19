@@ -9,6 +9,8 @@ in
     ../../../modules/presets/home-manager/paciolan.nix
 
     ../../../modules/defaults/home-manager
+    ../../../modules/defaults/home-manager/1password-gui.nix
+    ../../../modules/defaults/home-manager/docker-desktop.nix
     ../../../modules/defaults/home-manager/finicky
     ../../../modules/defaults/home-manager/fork.nix
     ../../../modules/defaults/home-manager/gnome.nix
