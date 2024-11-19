@@ -71,11 +71,6 @@
       flake = false;
     };
 
-    fish-doa-tide-settings = {
-      url = "github:dudeofawesome/fish-plugin-doa-tide-settings";
-      flake = false;
-    };
-
     fish-editor-updater = {
       url = "github:dudeofawesome/fish-plugin-editor-updater";
       flake = false;

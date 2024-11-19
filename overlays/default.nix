@@ -17,10 +17,6 @@
         name = "shell-integrations";
         src = inputs.fish-shell-integrations;
       };
-      doa-tide-settings = {
-        name = "doa-tide-settings";
-        src = inputs.fish-doa-tide-settings;
-      };
       editor-updater = {
         name = "editor-updater";
         src = inputs.fish-editor-updater;

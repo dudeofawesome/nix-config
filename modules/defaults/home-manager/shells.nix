@@ -23,7 +23,6 @@ in
             # node-version
             fishtape_3
             shell-integrations
-            doa-tide-settings
             editor-updater
           ]
           ++ (if isDarwin then [
@@ -83,7 +82,7 @@ in
           --prompt_connection_andor_frame_color=Dark \
           --prompt_spacing=Sparse \
           --icons='Many icons' \
-          --transient=Yes \
+          --transient=No \
         ;
       '';
 

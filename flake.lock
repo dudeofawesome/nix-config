@@ -77,22 +77,6 @@
         "type": "github"
       }
     },
-    "fish-doa-tide-settings": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704501786,
-        "narHash": "sha256-kOk3L6LJw45704AkTIQeMBUxlGu5qHiH2n1dI2swb1k=",
-        "owner": "dudeofawesome",
-        "repo": "fish-plugin-doa-tide-settings",
-        "rev": "7b4a964e373736beb31d0438cb6a357006faefb1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dudeofawesome",
-        "repo": "fish-plugin-doa-tide-settings",
-        "type": "github"
-      }
-    },
     "fish-editor-updater": {
       "flake": false,
       "locked": {
@@ -338,7 +322,6 @@
         "darwin": "darwin",
         "disko": "disko",
         "dudeofawesome_dotfiles": "dudeofawesome_dotfiles",
-        "fish-doa-tide-settings": "fish-doa-tide-settings",
         "fish-editor-updater": "fish-editor-updater",
         "fish-node-binpath": "fish-node-binpath",
         "fish-node-version": "fish-node-version",
