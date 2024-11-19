@@ -29,6 +29,7 @@ in
             osx
           ] else [ ]));
 
+      preferAbbrs = true;
       shellAbbrs = {
         "l" = "ls -lha";
       } // (if (isLinux) then {
@@ -58,7 +59,7 @@ in
               set name ~/".ssh/$name"
             end
 
-            ssh-keygen -t ed25519 -N "" -f "$name"
+            ${pkgs.openssh}/bin/ssh-keygen -t ed25519 -N "" -f "$name"
           '';
         };
 
@@ -128,7 +129,8 @@ in
     };
   };
 
-  # Since it's not possible to declare default shell, run this command after build
+  # nix-darwin won't set an already-existing user's shell
+  # https://daiderd.com/nix-darwin/manual/index.html#opt-users.users._name_.shell
   home.activation.setShell = lib.mkIf isDarwin
     ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
 
