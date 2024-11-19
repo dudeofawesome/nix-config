@@ -69,7 +69,7 @@ in
         };
       };
 
-      shellInit = ''
+      interactiveShellInit = ''
         tide configure --auto \
           --style=Rainbow \
           --prompt_colors='True color' \
