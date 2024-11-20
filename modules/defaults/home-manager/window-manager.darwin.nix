@@ -1,9 +1,9 @@
-{ machine-class, owner, os, pkgs, lib, ... }: {
+{ pkgs, lib, ... }: {
   targets.darwin.defaults = {
     NSGlobalDomain = {
       AppleEnableMouseSwipeNavigateWithScrolls = true;
       AppleSpacesSwitchOnActivate = true;
-      NSQuitAlwaysKeepsWindows = 1;
+      NSQuitAlwaysKeepsWindows = true;
     };
 
     "com.apple.dock" = {

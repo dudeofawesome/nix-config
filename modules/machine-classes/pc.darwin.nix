@@ -47,12 +47,6 @@
       NSGlobalDomain = {
         AppleInterfaceStyleSwitchesAutomatically = true;
       };
-
-      CustomUserPreferences = {
-        NSGlobalDomain = {
-          NSQuitAlwaysKeepsWindows = 1;
-        };
-      };
     };
   };
 }
