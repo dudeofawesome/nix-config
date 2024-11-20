@@ -4,6 +4,8 @@
       AppleEnableMouseSwipeNavigateWithScrolls = true;
       AppleSpacesSwitchOnActivate = true;
       NSQuitAlwaysKeepsWindows = true;
+      # use ctrl+cmd to drag windows from anywhere
+      NSWindowShouldDragOnGesture = true;
     };
 
     "com.apple.dock" = {
