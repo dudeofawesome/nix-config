@@ -46,12 +46,14 @@ in
       (filter (v: v.enable))
       (map (value:
         ''
+          # jq will fail if the original file doesn't exist
+          $DRY_RUN_CMD ${pkgs.coreutils}/bin/touch '${value.target}'
           $DRY_RUN_CMD ${pkgs.jq}/bin/jq \
             --raw-output \
             --null-input \
             --slurpfile original '${value.target}' \
             --argjson patch '${builtins.toJSON value.extraConfig}' \
-            '$original[0] * $patch' \
+            '($original[0] // {}) * $patch' \
           | $DRY_RUN_CMD ${pkgs.moreutils}/bin/sponge '${value.target}'
         ''
       ))
