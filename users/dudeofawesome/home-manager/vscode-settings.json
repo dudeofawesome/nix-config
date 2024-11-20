@@ -200,6 +200,7 @@
 
   "git.confirmSync": false,
   "git.openRepositoryInParentFolders": "never",
+  "scm.diffDecorationsIgnoreTrimWhitespace": "true",
 
   "liveshare.featureSet": "insiders",
   "liveshare.allowGuestDebugControl": true,
