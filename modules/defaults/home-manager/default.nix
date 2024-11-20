@@ -6,7 +6,7 @@ let doa-lib = import ../../../lib; in
 
     ./editors.nix
     ./miscellaneous.nix
-    ./nix.nix
+    ./nix
     ./shells.nix
     ./sops.nix
     ./tmux
