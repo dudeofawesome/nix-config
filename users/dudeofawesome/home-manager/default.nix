@@ -9,6 +9,7 @@ in
     ../../../modules/presets/home-manager/paciolan.nix
 
     ../../../modules/defaults/home-manager
+    ../../../modules/defaults/home-manager/aerospace.nix
     ../../../modules/defaults/home-manager/1password-gui.nix
     ../../../modules/defaults/home-manager/docker-desktop.nix
     ../../../modules/defaults/home-manager/finicky

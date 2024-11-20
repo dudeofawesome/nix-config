@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./aerospace.nix
     ./awscli.nix
     ./clock.nix
     ./dock.nix

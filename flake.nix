@@ -6,6 +6,8 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nur.url = "github:nix-community/NUR";
 
+    nix-std.url = "github:chessai/nix-std";
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";

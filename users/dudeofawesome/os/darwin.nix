@@ -4,6 +4,9 @@
   ] else [ ]);
 
   homebrew = {
+    taps = [
+      "nikitabobko/tap"
+    ];
     casks =
       let
         skipSha = name: {
@@ -17,6 +20,7 @@
       in
       [
         "1password"
+        "nikitabobko/tap/aerospace"
         "affinity-photo"
         "arduino"
         "balenaetcher"
