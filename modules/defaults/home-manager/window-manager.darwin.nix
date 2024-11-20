@@ -10,10 +10,12 @@
 
     "com.apple.dock" = {
       mru-spaces = false; # don't automatically rearrange spaces
-      expose-group-by-app = false;
+      expose-group-apps = false;
 
       wvous-tl-corner = 4; # Desktop
       wvous-br-corner = 14; # Quick Note
     };
+
+    "com.apple.spaces".spans-displays = false;
   };
 }

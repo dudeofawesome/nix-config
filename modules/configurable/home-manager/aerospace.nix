@@ -20,5 +20,19 @@ in
       target = "aerospace/aerospace.toml";
       text = inputs.nix-std.lib.serde.toTOML cfg.extraConfig;
     };
+
+    home.activation.aerospace = "/opt/homebrew/bin/aerospace reload-config";
+
+    targets.darwin.defaults = {
+      "com.apple.dock" = {
+        # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-mission-control
+        expose-group-apps = mkForce true;
+      };
+
+      "com.apple.spaces" = {
+        # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-displays-have-separate-spaces
+        spans-displays = mkForce true;
+      };
+    };
   };
 }
