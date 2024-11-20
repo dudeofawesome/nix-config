@@ -21,7 +21,8 @@ in
       text = inputs.nix-std.lib.serde.toTOML cfg.extraConfig;
     };
 
-    home.activation.aerospace = "/opt/homebrew/bin/aerospace reload-config";
+    home.activation.aerospace = lib.hm.dag.entryAfter [ "writeBoundary" ]
+      "/opt/homebrew/bin/aerospace reload-config";
 
     targets.darwin.defaults = {
       "com.apple.dock" = {
