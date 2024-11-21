@@ -14,6 +14,7 @@
       "barrier"
       "bettertouchtool"
       "cyberduck"
+      "discord"
       "docker"
       "electrum"
       "figma"
