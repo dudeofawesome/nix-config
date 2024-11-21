@@ -21,7 +21,9 @@ in
             browser = "workspace browser";
             code = "workspace code";
             misc = "workspace misc";
+            tmp = "workspace tmp";
             social = "workspace social";
+            music = "workspace music";
           };
 
           workman_layout = {
@@ -103,7 +105,7 @@ in
           # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
           # The 'accordion-padding' specifies the size of accordion padding
           # You can set 0 to disable the padding feature
-          accordion-padding = 22;
+          accordion-padding = 18;
 
           # 'main' binding mode declaration
           # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -167,17 +169,17 @@ in
             alt-1 = workspaces.browser;
             alt-2 = workspaces.code;
             alt-3 = workspaces.misc;
-            alt-4 = workspaces.social;
-            alt-5 = "workspace 5";
-            alt-6 = "workspace 6";
+            alt-4 = workspaces.tmp;
+            alt-5 = workspaces.social;
+            alt-6 = workspaces.music;
 
             # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
             alt-shift-1 = "move-node-to-${workspaces.browser}";
             alt-shift-2 = "move-node-to-${workspaces.code}";
             alt-shift-3 = "move-node-to-${workspaces.misc}";
-            alt-shift-4 = "move-node-to-${workspaces.social}";
-            alt-shift-5 = "move-node-to-workspace 5";
-            alt-shift-6 = "move-node-to-workspace 6";
+            alt-shift-4 = "move-node-to-${workspaces.tmp}";
+            alt-shift-5 = "move-node-to-${workspaces.social}";
+            alt-shift-6 = "move-node-to-${workspaces.music}";
 
             # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
             alt-tab = "workspace-back-and-forth";
@@ -252,6 +254,13 @@ in
                   "com.tinyspeck.slackmacgap"
                 ]
                 workspaces.social
+              )
+              (apps-to-workspace
+                [
+                  "com.apple.Music"
+                  "com.spotify.client"
+                ]
+                workspaces.music
               )
 
               # Automatically accordion new browser windows
