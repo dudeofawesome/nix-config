@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, ... }:
+{ pkgs, lib, machine-class, ... }:
 {
   imports = [
     ../../../modules/defaults/home-manager
@@ -18,6 +18,10 @@
     # higher state version typically requires performing some manual steps,
     # such as data conversion or moving files.
     stateVersion = "23.05"; # Did you read the comment?
+
+    packages = with pkgs; [
+      (if (machine-class == "pc") then _1password-cli else { })
+    ];
 
     keyboard = {
       layout = "us";
