@@ -2,13 +2,13 @@
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin.defaults = {
       "com.apple.dock" = {
-        autohide = true;
-        orientation = "bottom";
-        showhidden = true;
-        tilesize = 40;
-        magnification = false;
+        autohide = lib.mkDefault true;
+        orientation = lib.mkDefault "bottom";
+        showhidden = lib.mkDefault true;
+        tilesize = lib.mkDefault 40;
+        magnification = lib.mkDefault false;
         size-immutable = true;
-        minimize-to-application = true;
+        minimize-to-application = lib.mkDefault true;
       };
     };
 

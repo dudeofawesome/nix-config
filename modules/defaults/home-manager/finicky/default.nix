@@ -9,7 +9,7 @@
 
     xdg.configFile.finicky = {
       target = "finicky.js";
-      source = ./finicky.js;
+      source = lib.mkDefault ./finicky.js;
       onChange = ''
         PATH="/usr/bin:$PATH" $DRY_RUN_CMD defaults write \
           net.kassett.finicky config_location_bookmark \
