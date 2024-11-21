@@ -125,6 +125,22 @@
         "type": "github"
       }
     },
+    "fish-nvm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714310042,
+        "narHash": "sha256-7JxIQSseBv81SSpWH1pufx8fh9EQhbo3r2nVVREwc58=",
+        "owner": "jorgebucaran",
+        "repo": "nvm.fish",
+        "rev": "b8edb1ee24cbbf7259196b0cb3c6c4ab65b07929",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jorgebucaran",
+        "repo": "nvm.fish",
+        "type": "github"
+      }
+    },
     "fish-osx": {
       "flake": false,
       "locked": {
@@ -340,6 +356,7 @@
         "fish-editor-updater": "fish-editor-updater",
         "fish-node-binpath": "fish-node-binpath",
         "fish-node-version": "fish-node-version",
+        "fish-nvm": "fish-nvm",
         "fish-osx": "fish-osx",
         "fish-shell-integrations": "fish-shell-integrations",
         "home-manager": "home-manager",

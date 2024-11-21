@@ -1,4 +1,10 @@
 { pkgs, lib, ... }: {
+  environment = {
+    systemPackages = with pkgs; [
+      ntfs3g
+    ];
+  };
+
   homebrew = {
     casks = [
       "1password"
@@ -16,9 +22,11 @@
       "google-earth-pro"
       "handbrake"
       "jordanbaird-ice"
+      "macfuse"
       "messenger"
       "microsoft-remote-desktop"
       "miro"
+      "mounty"
       "obs"
       "omnidisksweeper"
       "openra"

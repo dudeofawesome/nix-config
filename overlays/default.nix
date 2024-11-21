@@ -21,6 +21,10 @@
         name = "editor-updater";
         src = inputs.fish-editor-updater;
       };
+      nvm-fish = {
+        name = "nvm.fish";
+        src = inputs.fish-nvm;
+      };
     };
 
     vimPlugins = prev.vimPlugins // { vim-lumen = inputs.vim-lumen; };

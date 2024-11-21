@@ -3,6 +3,7 @@
   imports = [
     ../../../modules/defaults/home-manager
     ../../dudeofawesome/home-manager/browsers.nix
+    ./shells.nix
   ];
 
   home = {
@@ -80,6 +81,17 @@
         "/Applications/Todoist.app"
         "/System/Applications/Stickies.app"
       ];
+
+      others = {
+        # ~/Downloads
+        "/Users/'$(whoami)'/Downloads/" = {
+          fileType = "2";
+          arrangement = "1";
+          displayAs = "0";
+          showAs = "1";
+          arrangement2 = "2";
+        };
+      };
     };
   };
 

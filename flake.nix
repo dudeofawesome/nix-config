@@ -78,6 +78,11 @@
       flake = false;
     };
 
+    fish-nvm = {
+      url = "github:jorgebucaran/nvm.fish";
+      flake = false;
+    };
+
     _1password-shell-plugins = {
       url = "github:1Password/shell-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
