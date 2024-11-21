@@ -31,6 +31,9 @@ keys:
     - &system_haleakala 'age1wy9vrp4k3w69dtjfeskayrn4m4m6fntjcj480junfvpjflnd0p8sg078qc'
     - &system_joshs-paciolan-laptop 'age1ct6h645xhzamd5mfhs5ze8uza2k23tjat8wrrrn7k6sakr5uecjs7u8j35'
     - &system_soto-server 'age1a4z2qgdtv8aaqe0892clncuz4kpdqn9ph2qqg6k850hxl2lqrd2shu7mgs'
+    # - &system_starling-vm 'age1nm4qzu0srzff2zylgr46j7fjpr5kprz7huvzwwwqxny42nr6ydvskejjx4' # Qemu VM
+    # - &system_starling-vm 'age1w7ny9w9v5p5g4d6lcdcg2eayxm2gjrnvn55g6syrjkkqg98c9y6syz88ty' # Parallels VM (NixOS)
+    - &system_starling-vm 'age12zmhesaygdrw509e78wgpcut8f96cmjyvmequcwz5kl5wwfhgd0skr7a2n' # Parallels VM (NixOS-Anywhere Demo)
 
   # When adding new keys, make sure to update the encrypted files:
   # `sops updatekeys ENCRYPTED_FILE`
@@ -51,6 +54,7 @@ creation_rules:
           - *system_haleakala
           - *system_joshs-paciolan-laptop
           - *system_soto-server
+          - *system_starling-vm
 
   # Users
   - path_regex: 'users/dudeofawesome/secrets\.yaml$'
@@ -69,6 +73,7 @@ creation_rules:
           - *user_josh
           - *system_joshs-paciolan-laptop
           - *system_soto-server
+          - *system_starling-vm
 
   # Systems
   - path_regex: 'hosts/nixos/badlands-vm/secrets\.yaml$'
@@ -91,6 +96,11 @@ creation_rules:
       - age:
           - *user_josh
           - *system_soto-server
+  - path_regex: 'hosts/nixos/starling-vm/secrets\.yaml$'
+    key_groups:
+      - age:
+          - *user_josh
+          - *system_starling-vm
 
 stores:
   yaml:

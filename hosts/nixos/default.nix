@@ -63,4 +63,12 @@ in
     machine-class = "server";
     users = usersModule.filterMap [ "josh" ] usersModule.users;
   } // base));
+
+  starling-vm = lib.nixosSystem (import ../system.nix ({
+    hostname = "starling-vm";
+    arch = "aarch64";
+    owner = "josh";
+    machine-class = "local-vm";
+    users = usersModule.filterMap [ "josh" ] usersModule.users;
+  } // base));
 }
