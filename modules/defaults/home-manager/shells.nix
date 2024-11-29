@@ -1,6 +1,7 @@
 { pkgs, lib, config, osConfig, ... }:
 with pkgs.stdenv.targetPlatform;
 let
+  user = osConfig.users.users.${config.home.username};
   doa-lib = import ../../../lib;
   pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
   uses_k8s = pkg-installed pkgs.kubectl;
@@ -132,7 +133,11 @@ in
   # nix-darwin won't set an already-existing user's shell
   # https://daiderd.com/nix-darwin/manual/index.html#opt-users.users._name_.shell
   home.activation.setShell = lib.mkIf isDarwin
-    ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s ${pkgs.fish}/bin/fish $(whoami)'';
+    ''
+      PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s \
+        "${user.shell}${user.shell.shellPath}" \
+        "${config.home.username}"
+    '';
 
   xdg.configFile = lib.mkIf (config.programs.fish.enable) {
     dockerFishCompletion = {
