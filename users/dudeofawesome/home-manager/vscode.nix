@@ -13,6 +13,7 @@ in
 {
   home.packages = with pkgs; [
     rubyPackages.solargraph
+    gitlab-ci-ls
   ];
 
   programs.vscode = {
@@ -23,6 +24,7 @@ in
       [
         pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace."1password".op-vscode
         alefragnani.bookmarks
+        alesbrelih.gitlab-ci-ls
         antyos.openscad
         ashrafhadden.dracula-dot-min
         beardedbear.beardedtheme
