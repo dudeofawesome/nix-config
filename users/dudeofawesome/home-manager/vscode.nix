@@ -46,7 +46,7 @@ in
         eamodio.gitlens
         editorconfig.editorconfig
         effectful-tech.effect-vscode
-        equinusocio.vsc-material-theme
+        # equinusocio.vsc-material-theme
         equinusocio.vsc-material-theme-icons
         esbenp.prettier-vscode
         fabiospampinato.vscode-diff

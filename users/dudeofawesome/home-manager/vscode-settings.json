@@ -3,9 +3,9 @@
 
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "material-product-icons",
-  "workbench.colorTheme": "Material Theme Lighter",
+  "workbench.colorTheme": "Bearded Themanopia (Experimental)",
   "workbench.preferredDarkColorTheme": "Bearded Themanopia (Experimental)",
-  "workbench.preferredLightColorTheme": "Material Theme Lighter",
+  "workbench.preferredLightColorTheme": "Bearded Theme Light",
   "window.autoDetectColorScheme": true,
   "workbench.colorCustomizations": {
     "[Material Night]": {
