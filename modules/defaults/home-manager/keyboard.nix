@@ -43,6 +43,10 @@
         #   "Show Previous Tab" = "@~\\U2190";
         # };
       };
+
+      "com.apple.HIToolbox" = {
+        AppleFnUsageType = 1; # Change Input Source
+      };
     };
   };
 }
