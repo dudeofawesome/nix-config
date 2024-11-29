@@ -91,6 +91,11 @@ creation_rules:
       - age:
           - *user_dudeofawesome
           - *system_haleakala
+  - path_regex: 'hosts/darwin/crater-lake/secrets\.yaml$'
+    key_groups:
+      - age:
+          - *user_dudeofawesome
+          - *system_crater-lake
   - path_regex: 'hosts/nixos/soto-server/secrets\.yaml$'
     key_groups:
       - age:
