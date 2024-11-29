@@ -22,5 +22,20 @@
 
   "[yaml]": {
     "editor.tabSize": 4
-  }
+  },
+  "cSpell.words": [
+    "atuin",
+    "awscli",
+    "cachix",
+    "disko",
+    "krew",
+    "mkalias",
+    "moar",
+    "nixos",
+    "nixpkgs",
+    "pkgs",
+    "stdenv",
+    "upaymeifixit",
+    "wezterm"
+  ]
 }
