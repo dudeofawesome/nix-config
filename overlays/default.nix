@@ -29,7 +29,7 @@
 
     vimPlugins = prev.vimPlugins // { vim-lumen = inputs.vim-lumen; };
 
-    vscodeExtensions = inputs.nix-vscode-extensions;
+    vscodeExtensions = inputs.vscode-extensions;
 
     dotfiles = {
       dudeofawesome = inputs.dudeofawesome_dotfiles;
