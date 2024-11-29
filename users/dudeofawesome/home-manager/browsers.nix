@@ -8,8 +8,7 @@
       dudeofawesome = {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           onepassword-password-manager
-          # search-engines-helper
-          clearurls
+          # clearurls
           darkreader
           facebook-container
           multi-account-containers
