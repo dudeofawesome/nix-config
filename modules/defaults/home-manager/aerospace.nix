@@ -1,11 +1,6 @@
 { pkgs, lib, osConfig, ... }:
-let
-  doa-lib = import ../../../lib;
-  aerospace_installed = doa-lib.cask-installed { inherit osConfig; } "nikitabobko/tap/aerospace";
-  enable = aerospace_installed;
-in
 {
-  config = lib.mkIf (enable) {
+  config = {
     targets.darwin.defaults = {
       NSGlobalDomain = {
         # use ctrl+cmd to drag windows from anywhere
@@ -14,7 +9,8 @@ in
     };
 
     quartz.windowManager.aerospace = {
-      inherit enable;
+      enable = true;
+
       settings =
         let
           workspaces = {

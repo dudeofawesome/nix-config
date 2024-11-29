@@ -5,7 +5,6 @@
 
   homebrew = {
     taps = [
-      "nikitabobko/tap"
     ];
     casks =
       let
@@ -20,7 +19,6 @@
       in
       [
         "1password"
-        "nikitabobko/tap/aerospace"
         "affinity-photo"
         "arduino"
         "balenaetcher"

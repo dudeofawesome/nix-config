@@ -7,6 +7,8 @@ in
     quartz.windowManager.aerospace = {
       enable = mkEnableOption "AeroSpace tiling window manager";
 
+      package = lib.mkPackageOption pkgs "aerospace" { };
+
       settings = mkOption {
         description = "Configuration for AeroSpace";
         type = types.attrs;
@@ -47,6 +49,8 @@ in
   };
 
   config = lib.mkIf (cfg.enable) {
+    home.packages = [ cfg.package ];
+
     xdg.configFile.aerospace = {
       target = "aerospace/aerospace.toml";
       text = (lib.pipe [
@@ -62,9 +66,11 @@ in
       ]) + "\n";
     };
 
+    # TODO: the AeroSpace GUI bin has a `--config-path` flag
     home.activation.aerospace = lib.hm.dag.entryAfter [ "writeBoundary" ]
-      "/opt/homebrew/bin/aerospace reload-config";
+      "${cfg.package}/bin/aerospace reload-config";
 
+    # TODO: use `mkDefault` and `warnings` instead of `mkForce`
     targets.darwin.defaults = {
       "com.apple.dock" = {
         # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-mission-control
