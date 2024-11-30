@@ -4,6 +4,29 @@
     enable = machine-class == "pc";
     package = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin null;
 
+    policies = {
+      AutofillCreditCardEnabled = false;
+      AutofillAddressEnabled = false;
+
+      OfferToSaveLogins = false;
+      PasswordManagerEnabled = false;
+
+      SearchBar = "unified";
+
+      # disable junk
+      DisablePocket = true;
+      FirefoxHome = {
+        Search = true;
+        TopSites = true;
+        SponsoredTopSites = false;
+        Highlights = false;
+        Pocket = false;
+        SponsoredPocket = false;
+        Snippets = true;
+        Locked = true;
+      };
+    };
+
     profiles =
       let
         dudeofawesome = {
@@ -110,7 +133,7 @@
             # automatically enable the installed extensions
             "extensions.autoDisableScopes" = 0;
 
-            # disable advertising
+            # disable junk
             "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
             "browser.newtabpage.activity-stream.showSponsored" = false;
             "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
