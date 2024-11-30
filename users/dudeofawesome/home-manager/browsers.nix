@@ -35,7 +35,6 @@
             # clearurls
             darkreader
             facebook-container
-            multi-account-containers
             firefox-translations
             # GraphQL Network Inspector
             # iCloud Hide My Email
