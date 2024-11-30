@@ -7,6 +7,9 @@
       # ];
     };
 
+    programs.firefox.policies.DontCheckDefaultBrowser = true;
+    programs.chromium.commandLineArgs = [ "no-default-browser-check" ];
+
     xdg.configFile.finicky = {
       target = "finicky.js";
       source = lib.mkDefault ./finicky.js;
