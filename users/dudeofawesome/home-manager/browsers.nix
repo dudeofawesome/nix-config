@@ -51,6 +51,30 @@
             wayback-machine
           ];
 
+          containers = {
+            Secondary = {
+              id = 0;
+              color = "blue";
+              icon = "fingerprint";
+            };
+            Paciolan = {
+              id = 1;
+              color = "red";
+              icon = "briefcase";
+            };
+            Facebook = {
+              id = 2;
+              color = "blue";
+              icon = "fence";
+            };
+            TikTok = {
+              id = 3;
+              color = "purple";
+              icon = "fence";
+            };
+          };
+          containersForce = true;
+
           search = {
             default = "DuckDuckGo";
             privateDefault = "DuckDuckGo";
