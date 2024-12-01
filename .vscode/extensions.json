@@ -1,0 +1,10 @@
+// A list of recommended extensions for this workspace.
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "jnoortheen.nix-ide",
+    "github.vscode-github-actions",
+    "redhat.vscode-yaml"
+  ]
+}

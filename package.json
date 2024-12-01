@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@code-style/code-style": "^2.0.0-32"
+  }
+}

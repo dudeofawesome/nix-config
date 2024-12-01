@@ -1,2 +1,41 @@
+# compiled output
 /result
 /result/
+
+# dependencies
+node_modules/
+.npm
+
+# logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# caches
+.prettiercache
+
+# OS
+.DS_Store
+thumbs.db
+
+# IDEs and editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-workspace
+
+# Secrets
+*.env
+*.env.*
+*.bin
+*.key
+*_accessKeys.csv
+.npmrc

@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://github.com/dudeofawesome/code-style/releases/download/v2.0.0-32/codestylerc.schema.json
+
+version: 2.0.0-32
+project_type: cli
+languages:
+  - ts
+runtime: nodejs
+builder: esbuild
+input_dir: src
+output_dir: dist
+technologies:
+  - vs-code
+  - esm
+library: false
+lenient: false
+overwrite: true
