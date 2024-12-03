@@ -1,5 +1,5 @@
-{ pkgs, lib, config, ... }: {
-  home.packages = with pkgs; [
+{ pkgs, pkgs-unstable, lib, config, ... }: {
+  home.packages = with pkgs-unstable; [
     python3
     python3Packages.ipykernel
     python3Packages.jupyterlab
@@ -18,6 +18,8 @@
 
   programs = {
     vscode = {
+      package = pkgs-unstable.vscode;
+
       mutableExtensionsDir = lib.mkDefault false;
 
       keybindings = lib.concatLists [

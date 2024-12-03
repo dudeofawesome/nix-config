@@ -41,13 +41,6 @@
     inputs.nur.overlay
 
     (final: prev: {
-      stable = import inputs.nixpkgs-stable {
-        inherit system;
-        config.allowUnfree = true;
-      };
-    })
-
-    (final: prev: {
       mkalias = prev.mkalias.overrideAttrs (old: {
         src = prev.fetchFromGitHub {
           owner = "dudeofawesome";

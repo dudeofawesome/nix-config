@@ -5,20 +5,21 @@
 { inputs
 , lib
 , packageOverlays
+, systemlessSpecialArgs
 , hostname
 , arch
 , os
 , owner
 , machine-class
 , users
-, ...
 }:
 let
   doa-lib = import ../lib;
   distro = { "linux" = "nixos"; "darwin" = "darwin"; }."${os}";
   distroModules = "${distro}Modules";
+  system = "${arch}-${os}";
 
-  args = {
+  specialArgs = {
     inherit
       inputs
 
@@ -29,11 +30,10 @@ let
       machine-class
       users
       ;
-  };
+  } // (systemlessSpecialArgs system);
 in
 {
-  system = "${arch}-${os}";
-  specialArgs = args;
+  inherit system specialArgs;
   modules = [
     packageOverlays
 
@@ -51,6 +51,6 @@ in
 
     inputs.sops.${distroModules}.sops
     inputs.home-manager.${distroModules}.home-manager
-    (import ../modules/host-home-manager.nix args)
+    (import ../modules/host-home-manager.nix specialArgs)
   ];
 }

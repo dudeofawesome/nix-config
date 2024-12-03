@@ -13,6 +13,8 @@ let
       ;
 
     os = "linux";
+
+    systemlessSpecialArgs = import ../../overlays/pkgs.nix inputs;
   };
 in
 {

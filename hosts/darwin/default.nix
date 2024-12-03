@@ -13,6 +13,8 @@ let
       ;
 
     os = "darwin";
+
+    systemlessSpecialArgs = import ../../overlays/pkgs.nix inputs;
   };
 in
 {
