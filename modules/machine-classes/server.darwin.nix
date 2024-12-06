@@ -1,4 +1,4 @@
-{ pkgs, lib, os, ... }: with lib; {
+{ ... }: {
   homebrew = {
     casks = [
       "keka"

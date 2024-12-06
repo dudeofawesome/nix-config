@@ -1,4 +1,4 @@
-{ pkgs, lib, machine-class, ... }:
+{ pkgs, pkgs-unstable, lib, machine-class, ... }:
 {
   imports = [
     ../../../modules/defaults/home-manager
@@ -19,7 +19,7 @@
     # such as data conversion or moving files.
     stateVersion = "23.05"; # Did you read the comment?
 
-    packages = with pkgs; [
+    packages = with pkgs-unstable; [
       (if (machine-class == "pc") then _1password-cli else { })
     ];
 

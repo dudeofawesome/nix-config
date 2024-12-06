@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 
 let
   inherit (lib) mkEnableOption mkPackageOption mkIf mkOption types;
@@ -11,7 +11,7 @@ in
   options.programs.process-compose = {
     enable = mkEnableOption "process-compose";
 
-    package = mkPackageOption pkgs "process-compose" { };
+    package = mkPackageOption pkgs-unstable "process-compose" { };
 
     configDir = mkOption {
       type = types.str;

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ ... }: {
   targets.darwin.defaults =
     let
       trackpads = {

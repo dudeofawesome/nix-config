@@ -1,4 +1,4 @@
-{ pkgs, lib, machine-class, config, ... }:
+{ pkgs, pkgs-unstable, lib, machine-class, config, ... }:
 with lib;
 let
   userDir =
@@ -11,7 +11,7 @@ let
   vscodeConfigFilePath = "${userDir}/settings.json";
 in
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs-unstable; [
     rubyPackages.solargraph
     gitlab-ci-ls
   ];
@@ -20,9 +20,8 @@ in
     enable = lib.mkDefault (machine-class == "pc");
 
     extensions =
-      with pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace;
+      with pkgs.vscode-marketplace-extensions.extensions.${pkgs.system}.vscode-marketplace;
       [
-        pkgs.vscodeExtensions.extensions.${pkgs.system}.vscode-marketplace."1password".op-vscode
         alefragnani.bookmarks
         alesbrelih.gitlab-ci-ls
         antyos.openscad

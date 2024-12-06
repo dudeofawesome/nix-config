@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ ... }: {
   imports = [ ];
 
   networking = {
@@ -27,10 +27,5 @@
         "vfs objects" = "catia fruit streams_xattr";
       };
     };
-  };
-
-  environment = {
-    systemPackages = with pkgs; [
-    ];
   };
 }

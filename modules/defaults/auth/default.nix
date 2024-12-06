@@ -1,4 +1,4 @@
-{ os, users, pkgs, lib, ... }:
+{ os, users, lib, ... }:
 {
   imports = [
     ./default.${os}.nix

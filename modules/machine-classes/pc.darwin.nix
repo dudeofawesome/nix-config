@@ -1,6 +1,6 @@
-{ pkgs, lib, os, ... }: with lib; {
+{ pkgs-unstable, lib, os, ... }: with lib; {
   environment = {
-    systemPackages = with pkgs; [
+    systemPackages = with pkgs-unstable; [
       iina
       utm
     ];

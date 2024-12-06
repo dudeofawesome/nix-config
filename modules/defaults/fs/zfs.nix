@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   # Linux6.2 and later add DRM to exported symbols, which are required on aarch64
   removeLinuxDRM =
@@ -17,7 +17,7 @@ in
     };
 
     kernelPackages = (pkgs.zfs.override {
-      removeLinuxDRM = removeLinuxDRM;
+      inherit removeLinuxDRM;
     }).latestCompatibleLinuxPackages;
 
     supportedFilesystems = [ "zfs" ];

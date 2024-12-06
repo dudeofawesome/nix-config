@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, config, machine-class, os, ... }:
+{ pkgs, pkgs-unstable, lib, osConfig, config, machine-class, os, ... }:
 let
   doa-lib = import ../../../lib;
   pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
@@ -43,7 +43,7 @@ in
     packages = with pkgs; [
       act
       awscli2
-      d2
+      pkgs-unstable.d2
       eternal-terminal
       krew
       watchman
@@ -51,20 +51,20 @@ in
       # https://github.com/NixOS/nixpkgs/issues/254944
       # TODO: investigate using an activation script to copy the .app to /Applications
       # _1password-gui
-      _1password-cli
-      bruno
+      pkgs-unstable._1password-cli
+      pkgs-unstable.bruno
       cyberduck
-      discord
+      pkgs-unstable.discord
       drawio
       inkscape
       losslesscut-bin
       opentofu
-      raycast
-      rectangle
-      signal-desktop
-      spotify
-      tableplus
-      tailscale
+      pkgs-unstable.raycast
+      pkgs-unstable.rectangle
+      pkgs-unstable.signal-desktop
+      pkgs-unstable.spotify
+      pkgs-unstable.tableplus
+      pkgs-unstable.tailscale
     ] ++ (if (os == "linux") then cider else [ ])
     else [ ]) ++ (if (has_docker) then [ dive ] else [ ]);
 
@@ -145,16 +145,16 @@ in
         "/Applications/Firefox.app"
         "/System/Applications/Music.app"
         "/System/Applications/Messages.app"
-        "${pkgs.signal-desktop}/Applications/Signal.app"
-        "${pkgs.slack}/Applications/Slack.app"
-        "${pkgs.discord}/Applications/Discord.app"
+        "${pkgs-unstable.signal-desktop}/Applications/Signal.app"
+        "${pkgs-unstable.slack}/Applications/Slack.app"
+        "${pkgs-unstable.discord}/Applications/Discord.app"
         "/System/Applications/Mail.app"
         "/System/Applications/Calendar.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Reminders.app"
-        "${pkgs.vscode}/Applications/Visual Studio Code.app"
+        "${pkgs-unstable.vscode}/Applications/Visual Studio Code.app"
         "/Applications/Fork.app"
-        "${pkgs.wezterm}/Applications/WezTerm.app"
+        "${pkgs-unstable.wezterm}/Applications/WezTerm.app"
         "/System/Applications/System Settings.app"
       ];
     };

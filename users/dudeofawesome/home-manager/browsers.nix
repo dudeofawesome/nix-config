@@ -1,5 +1,5 @@
 # https://github.com/Kreyren/nixos-config/blob/central/src/nixos/users/kreyren/home/modules/web-browsers/firefox/firefox.nix
-{ lib, pkgs, machine-class, config, ... }: {
+{ lib, pkgs, pkgs-unstable, machine-class, config, ... }: {
   programs.firefox = {
     enable = machine-class == "pc";
     package = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin null;

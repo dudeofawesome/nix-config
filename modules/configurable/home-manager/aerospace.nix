@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, config, ... }:
+{ inputs, pkgs-unstable, lib, config, ... }:
 with lib; let
   cfg = config.quartz.windowManager.aerospace;
 in
@@ -7,7 +7,7 @@ in
     quartz.windowManager.aerospace = {
       enable = mkEnableOption "AeroSpace tiling window manager";
 
-      package = lib.mkPackageOption pkgs "aerospace" { };
+      package = lib.mkPackageOption pkgs-unstable "aerospace" { };
 
       settings = mkOption {
         description = "Configuration for AeroSpace";

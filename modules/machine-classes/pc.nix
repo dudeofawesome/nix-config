@@ -1,4 +1,4 @@
-{ pkgs, lib, os, ... }:
+{ pkgs, pkgs-unstable, lib, os, ... }:
 with lib;
 let doa-lib = import ../../lib; in
 {
@@ -11,7 +11,7 @@ let doa-lib = import ../../lib; in
     systemPackages = with pkgs; [
       docker
       # mitmproxy
-      moonlight-qt
+      pkgs-unstable.moonlight-qt
       watch
     ];
   };

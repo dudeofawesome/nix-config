@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, ... }: {
+{ lib, osConfig, ... }: {
   config = lib.mkIf osConfig.services.xserver.desktopManager.gnome.enable {
     dconf.settings = {
       "org/gnome/shell" = {

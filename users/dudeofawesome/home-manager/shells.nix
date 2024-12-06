@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, ... }: {
+{ ... }: {
   programs = {
     atuin = {
       enable = true;

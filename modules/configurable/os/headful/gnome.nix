@@ -36,13 +36,12 @@ in
         gnomeExtensions.wayland-or-x11
       ];
 
-      gnome.excludePackages = (with pkgs; [
+      gnome.excludePackages = (with pkgs pkgs.gnome; [
         gnome-connections
         gnome-photos
         gnome-tour
         snapshot
         xterm
-      ]) ++ (with pkgs.gnome; [
         cheese # webcam tool
         epiphany # web browser
         evince # document viewer

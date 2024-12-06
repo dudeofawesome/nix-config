@@ -1,4 +1,4 @@
-{ pkgs, os, ... }: {
+{ ... }: {
   imports = [
     ../defaults/containers/docker.nix
     ../defaults/containers/podman.nix

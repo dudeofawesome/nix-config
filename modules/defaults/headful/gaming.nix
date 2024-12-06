@@ -1,10 +1,10 @@
-{ pkgs, config, ... }: {
+{ pkgs-unstable, ... }: {
   imports = [
     ../8bitdo.nix
   ];
 
   environment = {
-    systemPackages = with pkgs; [
+    systemPackages = with pkgs-unstable; [
       antimicrox
       discord
       # gamescope

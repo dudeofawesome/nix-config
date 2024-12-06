@@ -1,13 +1,12 @@
-{ pkgs, lib, arch, os, ... }: with lib; {
+{ pkgs-unstable, lib, arch, os, ... }: with lib; {
   imports = [
     ../configurable/headful/gnome.nix
   ];
 
   environment = {
-    systemPackages = with pkgs; [
+    systemPackages = with pkgs-unstable; [
       # sublime4
       sunshine
-      vscode
     ]
     ++ (if (arch == "x86_64") then [
       cider

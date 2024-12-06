@@ -1,4 +1,4 @@
-{ pkgs, users, machine-class, ... }: {
+{ users, machine-class, ... }: {
   homebrew = {
     casks =
       let
@@ -14,7 +14,6 @@
       [
       ] ++ (if (machine-class == "pc") then [
         "figma"
-        "postman"
       ] else [ ]);
     masApps = { } // (
       if (machine-class == "pc") then {

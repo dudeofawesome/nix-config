@@ -1,4 +1,4 @@
-{ pkgs, lib, config, osConfig, ... }:
+{ pkgs, pkgs-unstable, lib, config, osConfig, ... }:
 with pkgs.stdenv.targetPlatform;
 let
   user = osConfig.users.users.${config.home.username};

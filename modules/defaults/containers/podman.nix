@@ -1,9 +1,9 @@
-{ pkgs, lib, config, ... }:
+{ pkgs-unstable, lib, config, ... }:
 let
   nvidia_enable = builtins.elem "nvidia" config.boot.kernelModules;
 in
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs-unstable; [
     podman
   ] ++ lib.optional nvidia_enable [ nvidia-podman ];
 

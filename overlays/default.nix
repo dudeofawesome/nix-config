@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, system, ... }: {
+{ inputs, ... }: {
   nixpkgs.config.packageOverrides = prev: {
     fishPlugins = prev.fishPlugins // {
       osx = {
@@ -29,7 +29,7 @@
 
     vimPlugins = prev.vimPlugins // { vim-lumen = inputs.vim-lumen; };
 
-    vscodeExtensions = inputs.vscode-extensions;
+    vscode-marketplace-extensions = inputs.vscode-extensions;
 
     dotfiles = {
       dudeofawesome = inputs.dudeofawesome_dotfiles;

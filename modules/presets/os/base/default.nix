@@ -1,4 +1,4 @@
-{ os, hostname, pkgs, lib, config, ... }:
+{ pkgs, pkgs-unstable, os, hostname, ... }:
 with pkgs.stdenv.targetPlatform;
 {
   imports = [
@@ -23,11 +23,11 @@ with pkgs.stdenv.targetPlatform;
       jq
       moar
       most
-      nil
+      pkgs-unstable.nil
       nix-du
       nix-tree
       # nixd
-      nixpkgs-fmt
+      nixfmt-rfc-style
       nodePackages.prettier
       pciutils
       ripgrep
@@ -39,7 +39,7 @@ with pkgs.stdenv.targetPlatform;
       fish
 
       # Runtimes
-      bun
+      pkgs-unstable.bun
       ruby
       nodejs_20 # this should always use the latest LTS
       python3
@@ -62,5 +62,4 @@ with pkgs.stdenv.targetPlatform;
       ];
     })
   ];
-
 }

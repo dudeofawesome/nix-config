@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, ... }:
+{ lib, osConfig, ... }:
 {
   config = {
     targets.darwin.defaults = {
