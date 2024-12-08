@@ -102,9 +102,19 @@
         usersModule = import ./users { inherit lib; };
         packageOverlays = ./overlays;
       };
+
+      forAllSystems = function:
+        lib.genAttrs lib.systems.flakeExposed (system:
+          function (import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          }));
     in
     {
       nixosConfigurations = import ./hosts/nixos params;
       darwinConfigurations = import ./hosts/darwin params;
+
+      # run `nix fmt` to format all files
+      formatter = forAllSystems (nixpkgs: nixpkgs.nixfmt-rfc-style);
     };
 }

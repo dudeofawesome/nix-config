@@ -330,7 +330,7 @@
   "nix.serverSettings": {
     "nil": {
       "formatting": {
-        "command": ["nixpkgs-fmt"]
+        "command": ["nixfmt"]
       }
     }
   },

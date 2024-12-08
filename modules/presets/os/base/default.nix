@@ -27,7 +27,7 @@ with pkgs.stdenv.targetPlatform;
       nix-du
       nix-tree
       # nixd
-      nixfmt-rfc-style
+      pkgs-unstable.nixfmt-rfc-style
       nodePackages.prettier
       pciutils
       ripgrep
