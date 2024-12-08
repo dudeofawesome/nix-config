@@ -1,8 +1,10 @@
-{ fs ? "ext4"
-, encrypted ? false
-, passwordFile ? null
-, lib
-}: with builtins;
+{
+  fs ? "ext4",
+  encrypted ? false,
+  passwordFile ? null,
+  lib,
+}:
+with builtins;
 if (!encrypted) then
   ({
     partition = {
@@ -20,7 +22,14 @@ if (!encrypted) then
 else
   (
     # use LUKS for filesystems that don't have native encryption support
-    if (!(elem fs [ "zfs" "bcachefs" ])) then
+    if
+      (
+        !(elem fs [
+          "zfs"
+          "bcachefs"
+        ])
+      )
+    then
       ({
         partition = {
           luks = {
@@ -53,7 +62,8 @@ else
             };
           };
         };
-      }) abort
+      })
+        abort
     # use bcachefs's native encryption
     else if (fs == "bcachefs") then
       ({
@@ -68,7 +78,8 @@ else
             };
           };
         };
-      }) abort
+      })
+        abort
     else
       abort
   )

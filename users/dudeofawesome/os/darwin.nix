@@ -1,20 +1,38 @@
-{ pkgs, users, machine-class, ... }: {
-  imports = [ ] ++ (if (machine-class == "pc") then [
-    ../../../modules/presets/os/paciolan.nix
-  ] else [ ]);
+{
+  pkgs,
+  users,
+  machine-class,
+  ...
+}:
+{
+  imports =
+    [ ]
+    ++ (
+      if (machine-class == "pc") then
+        [
+          ../../../modules/presets/os/paciolan.nix
+        ]
+      else
+        [ ]
+    );
 
   homebrew = {
-    taps = [
-    ];
+    taps =
+      [
+      ];
     casks =
       let
         skipSha = name: {
           inherit name;
-          args = { require_sha = false; };
+          args = {
+            require_sha = false;
+          };
         };
         noQuarantine = name: {
           inherit name;
-          args = { no_quarantine = true; };
+          args = {
+            no_quarantine = true;
+          };
         };
       in
       [

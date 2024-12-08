@@ -1,4 +1,9 @@
-{ pkgs, lib, osConfig, ... }:
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}:
 with pkgs.stdenv.targetPlatform;
 let
   doa-lib = import ../../../lib;

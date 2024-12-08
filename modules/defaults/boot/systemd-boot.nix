@@ -1,4 +1,5 @@
-{ lib, config, ... }: {
+{ lib, config, ... }:
+{
   config = lib.mkIf config.boot.loader.systemd-boot.enable {
     # Use the systemd-boot EFI boot loader.
     boot.loader = {

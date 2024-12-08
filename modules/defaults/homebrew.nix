@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   homebrew = {
     # Declare Homebrew using Nix-Darwin
     enable = true;

@@ -2,8 +2,7 @@
 let
   # Linux6.2 and later add DRM to exported symbols, which are required on aarch64
   removeLinuxDRM =
-    pkgs.stdenv.targetPlatform.isAarch64
-    && ((builtins.compareVersions pkgs.linux.version "6.2") != -1);
+    pkgs.stdenv.targetPlatform.isAarch64 && ((builtins.compareVersions pkgs.linux.version "6.2") != -1);
 in
 {
   environment.systemPackages = with pkgs; [
@@ -16,9 +15,10 @@ in
       allowHibernation = false;
     };
 
-    kernelPackages = (pkgs.zfs.override {
-      inherit removeLinuxDRM;
-    }).latestCompatibleLinuxPackages;
+    kernelPackages =
+      (pkgs.zfs.override {
+        inherit removeLinuxDRM;
+      }).latestCompatibleLinuxPackages;
 
     supportedFilesystems = [ "zfs" ];
   };

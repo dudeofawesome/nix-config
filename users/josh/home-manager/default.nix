@@ -1,4 +1,10 @@
-{ pkgs, pkgs-unstable, lib, machine-class, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  machine-class,
+  ...
+}:
 {
   imports = [
     ../../../modules/defaults/home-manager

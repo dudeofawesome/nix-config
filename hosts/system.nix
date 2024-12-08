@@ -2,20 +2,26 @@
 # system configuration. It defines the system based on a series of parameters
 # that are passed to it.
 
-{ inputs
-, lib
-, packageOverlays
-, systemlessSpecialArgs
-, hostname
-, arch
-, os
-, owner
-, machine-class
-, users
+{
+  inputs,
+  lib,
+  packageOverlays,
+  systemlessSpecialArgs,
+  hostname,
+  arch,
+  os,
+  owner,
+  machine-class,
+  users,
 }:
 let
   doa-lib = import ../lib;
-  distro = { "linux" = "nixos"; "darwin" = "darwin"; }."${os}";
+  distro =
+    {
+      "linux" = "nixos";
+      "darwin" = "darwin";
+    }
+    ."${os}";
   distroModules = "${distro}Modules";
   system = "${arch}-${os}";
 

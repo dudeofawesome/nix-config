@@ -1,5 +1,13 @@
 # https://github.com/Kreyren/nixos-config/blob/central/src/nixos/users/kreyren/home/modules/web-browsers/firefox/firefox.nix
-{ lib, pkgs, pkgs-unstable, machine-class, config, ... }: {
+{
+  lib,
+  pkgs,
+  pkgs-unstable,
+  machine-class,
+  config,
+  ...
+}:
+{
   programs.firefox = {
     enable = machine-class == "pc";
     package = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin null;
@@ -81,28 +89,49 @@
 
             engines = {
               "Kagi" = {
-                urls = [{
-                  template = "https://kagi.com/search";
-                  params = [{ name = "q"; value = "{searchTerms}"; }];
-                }];
+                urls = [
+                  {
+                    template = "https://kagi.com/search";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
 
                 iconUpdateURL = "https://kagi.com/favicon.ico";
               };
 
               "NPM" = {
-                urls = [{
-                  template = "https://www.npmjs.com/search";
-                  params = [{ name = "q"; value = "{searchTerms}"; }];
-                }];
+                urls = [
+                  {
+                    template = "https://www.npmjs.com/search";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
 
                 iconUpdateURL = "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png";
                 definedAliases = [ "@npm" ];
               };
               "Glassdoor" = {
-                urls = [{
-                  template = "https://www.glassdoor.com/Search/results.htm";
-                  params = [{ name = "keyword"; value = "{searchTerms}"; }];
-                }];
+                urls = [
+                  {
+                    template = "https://www.glassdoor.com/Search/results.htm";
+                    params = [
+                      {
+                        name = "keyword";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
 
                 iconUpdateURL = "https://www.glassdoor.com/favicon.ico";
                 definedAliases = [ "@gd" ];
@@ -117,25 +146,44 @@
               #   definedAliases = [ "@cb" ];
               # };
               "Nix Packages" = {
-                urls = [{
-                  template = "https://search.nixos.org/packages";
-                  params = [
-                    { name = "channel"; value = "unstable"; }
-                    { name = "query"; value = "{searchTerms}"; }
-                  ];
-                }];
+                urls = [
+                  {
+                    template = "https://search.nixos.org/packages";
+                    params = [
+                      {
+                        name = "channel";
+                        value = "unstable";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
 
                 icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                definedAliases = [ "@nix" "@nixp" ];
+                definedAliases = [
+                  "@nix"
+                  "@nixp"
+                ];
               };
               "Nix Options" = {
-                urls = [{
-                  template = "https://search.nixos.org/options";
-                  params = [
-                    { name = "channel"; value = "unstable"; }
-                    { name = "query"; value = "{searchTerms}"; }
-                  ];
-                }];
+                urls = [
+                  {
+                    template = "https://search.nixos.org/options";
+                    params = [
+                      {
+                        name = "channel";
+                        value = "unstable";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
 
                 icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@nixo" ];
@@ -173,7 +221,8 @@
             "browser.shell.checkDefaultBrowser" = false;
 
             "browser.urlbar.placeholderName" = config.programs.firefox.profiles.dudeofawesome.search.default;
-            "browser.urlbar.placeholderName.private" = config.programs.firefox.profiles.dudeofawesome.search.default;
+            "browser.urlbar.placeholderName.private" =
+              config.programs.firefox.profiles.dudeofawesome.search.default;
 
             # disable built-in password manager
             "signon.rememberSignons" = false;
@@ -182,17 +231,19 @@
       in
       {
         inherit dudeofawesome;
-        shopping-portals =
-          {
-            id = 1;
+        shopping-portals = {
+          id = 1;
 
-            extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          extensions =
+            with pkgs.nur.repos.rycee.firefox-addons;
+            [
               clearurls
               # topcashback-cashback-coupons
-            ] ++ dudeofawesome.extensions;
-            search = dudeofawesome.search;
-            settings = dudeofawesome.settings;
-          };
+            ]
+            ++ dudeofawesome.extensions;
+          search = dudeofawesome.search;
+          settings = dudeofawesome.settings;
+        };
       };
   };
 }

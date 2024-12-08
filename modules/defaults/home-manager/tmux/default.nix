@@ -1,4 +1,10 @@
-{ lib, config, osConfig, ... }: {
+{
+  lib,
+  config,
+  osConfig,
+  ...
+}:
+{
   programs.tmux = {
     enable = true;
 

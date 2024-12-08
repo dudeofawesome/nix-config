@@ -1,7 +1,12 @@
 # TODO: https://docs.k3s.io/advanced#nvidia-container-runtime-support
 # TODO: create k8s user accounts with certs: https://cloudhero.io/creating-users-for-your-kubernetes-cluster/
 
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   # https://github.com/NixOS/nixpkgs/pull/176520
   # k3s = pkgs.k3s.overrideAttrs
@@ -78,20 +83,22 @@ in
     firewall = {
       package = pkgs.iptables-legacy;
 
-      allowedTCPPorts = [
-        6443 # k8s API server
-      ]
-      # required if using a "High Availability Embedded etcd" configuration
-      ++ lib.optionals (ha) [
-        2379 # etcd clients
-        2380 # etcd peers
-      ];
+      allowedTCPPorts =
+        [
+          6443 # k8s API server
+        ]
+        # required if using a "High Availability Embedded etcd" configuration
+        ++ lib.optionals (ha) [
+          2379 # etcd clients
+          2380 # etcd peers
+        ];
 
-      allowedUDPPorts = [
-      ]
-      ++ lib.optionals (multi-node) [
-        8472 # k3s, flannel: required if using multi-node for inter-node networking
-      ];
+      allowedUDPPorts =
+        [
+        ]
+        ++ lib.optionals (multi-node) [
+          8472 # k3s, flannel: required if using multi-node for inter-node networking
+        ];
     };
 
     networkmanager.dns = "dnsmasq";

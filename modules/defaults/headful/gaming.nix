@@ -1,4 +1,5 @@
-{ pkgs-unstable, ... }: {
+{ pkgs-unstable, ... }:
+{
   imports = [
     ../8bitdo.nix
   ];

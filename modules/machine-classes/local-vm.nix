@@ -1,4 +1,11 @@
-{ pkgs, lib, config, owner, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  owner,
+  ...
+}:
+{
   environment = {
     systemPackages = with pkgs; [
       spice-vdagent
@@ -17,9 +24,7 @@
         >>> \n \4
       '';
       autologinUser =
-        if (!config.services.xserver.desktopManager.gnome.enable) then
-          lib.mkDefault owner
-        else null;
+        if (!config.services.xserver.desktopManager.gnome.enable) then lib.mkDefault owner else null;
     };
   };
 }

@@ -1,4 +1,11 @@
-{ lib, pkgs, config, ... }: with lib; let
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+with lib;
+let
   cfg = config.programs.awscli;
 in
 {

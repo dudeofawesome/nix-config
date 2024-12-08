@@ -1,5 +1,7 @@
 { pkgs, os, ... }:
-let doa-lib = import ../../lib; in
+let
+  doa-lib = import ../../lib;
+in
 {
   imports = [
     (doa-lib.try-import ./server.${os}.nix)

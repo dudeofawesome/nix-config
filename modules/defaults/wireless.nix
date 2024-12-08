@@ -1,26 +1,32 @@
 { lib, config, ... }:
 let
-  mkWirelessProfile = { uuid, ssid, psk }: {
-    connection = {
-      inherit uuid;
-      id = ssid;
-      type = "wifi";
+  mkWirelessProfile =
+    {
+      uuid,
+      ssid,
+      psk,
+    }:
+    {
+      connection = {
+        inherit uuid;
+        id = ssid;
+        type = "wifi";
+      };
+      wifi = {
+        inherit ssid;
+        mode = "infrastructure";
+      };
+      wifi-security = {
+        inherit psk;
+        key-mgmt = "wpa-psk";
+      };
+      ipv4 = {
+        method = "auto";
+      };
+      ipv6 = {
+        method = "auto";
+      };
     };
-    wifi = {
-      inherit ssid;
-      mode = "infrastructure";
-    };
-    wifi-security = {
-      inherit psk;
-      key-mgmt = "wpa-psk";
-    };
-    ipv4 = {
-      method = "auto";
-    };
-    ipv6 = {
-      method = "auto";
-    };
-  };
 in
 {
   # TODO: it might be possible to use sops-nix's templating to break out

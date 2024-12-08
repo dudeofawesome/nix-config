@@ -1,6 +1,14 @@
-{ pkgs, pkgs-unstable, lib, os, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  os,
+  ...
+}:
 with lib;
-let doa-lib = import ../../lib; in
+let
+  doa-lib = import ../../lib;
+in
 {
   imports = [
     (doa-lib.try-import ./pc.${os}.nix)

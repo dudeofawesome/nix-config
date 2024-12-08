@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   imports = [
     ../../../modules/defaults/wireless.nix
     ../../../modules/defaults/nvidia.nix

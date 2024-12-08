@@ -1,4 +1,10 @@
-{ pkgs, pkgs-unstable, os, hostname, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  os,
+  hostname,
+  ...
+}:
 with pkgs.stdenv.targetPlatform;
 {
   imports = [

@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   targets.darwin.defaults = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     NSGlobalDomain = {
       AppleShowAllExtensions = lib.mkDefault true;

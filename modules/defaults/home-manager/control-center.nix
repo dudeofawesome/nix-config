@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin = {
       defaults."com.apple.controlcenter" = {
@@ -15,7 +21,6 @@
       currentHostDefaults."com.apple.controlcenter" = {
         BatteryShowPercentage = true;
       };
-
 
       defaults."com.apple.systemuiserver" = {
         "NSStatusItem Visible com.apple.menuextra.vpn" = true;

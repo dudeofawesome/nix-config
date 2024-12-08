@@ -1,5 +1,14 @@
-{ users, owner, machine-class, config, pkgs, lib, ... }:
-with lib; let
+{
+  users,
+  owner,
+  machine-class,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib;
+let
   cfg = config.programs.gnome;
 in
 {
@@ -7,7 +16,8 @@ in
     programs.gnome = {
       autoLoginEnable = mkOption {
         type = types.bool;
-        default = (machine-class == "local-vm")
+        default =
+          (machine-class == "local-vm")
           || (config.services.xserver.desktopManager.gnome.enable && config.services.qemuGuest.enable);
         example = true;
         description = ''
@@ -36,27 +46,30 @@ in
         gnomeExtensions.wayland-or-x11
       ];
 
-      gnome.excludePackages = (with pkgs pkgs.gnome; [
-        gnome-connections
-        gnome-photos
-        gnome-tour
-        snapshot
-        xterm
-        cheese # webcam tool
-        epiphany # web browser
-        evince # document viewer
-        geary # email reader
-        gnome-calendar
-        gnome-characters
-        gnome-clocks
-        gnome-contacts
-        gnome-font-viewer
-        gnome-maps
-        gnome-music
-        gnome-weather
-        simple-scan
-        yelp
-      ]);
+      gnome.excludePackages = (
+        with pkgs pkgs.gnome;
+        [
+          gnome-connections
+          gnome-photos
+          gnome-tour
+          snapshot
+          xterm
+          cheese # webcam tool
+          epiphany # web browser
+          evince # document viewer
+          geary # email reader
+          gnome-calendar
+          gnome-characters
+          gnome-clocks
+          gnome-contacts
+          gnome-font-viewer
+          gnome-maps
+          gnome-music
+          gnome-weather
+          simple-scan
+          yelp
+        ]
+      );
     };
 
     # Select internationalisation properties.

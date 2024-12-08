@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ../../../modules/machine-classes/local-vm.nix
     ../../../modules/defaults/wireless.nix

@@ -1,9 +1,19 @@
-{ pkgs, pkgs-unstable, lib, config, osConfig, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  config,
+  osConfig,
+  ...
+}:
 with pkgs.stdenv.targetPlatform;
 let
   user = osConfig.users.users.${config.home.username};
   doa-lib = import ../../../lib;
-  pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
+  pkg-installed = doa-lib.pkg-installed {
+    inherit osConfig;
+    homeConfig = config;
+  };
   uses_k8s = pkg-installed pkgs.kubectl;
 in
 {
@@ -11,36 +21,56 @@ in
     fish = {
       enable = true;
 
-      plugins = with pkgs.fishPlugins;
+      plugins =
+        with pkgs.fishPlugins;
         map
           (pkg: {
             name = pkg.name;
             src = pkg.src;
           })
-          ([
-            tide
-            autopair
-            node-binpath
-            # node-version
-            fishtape_3
-            shell-integrations
-            editor-updater
-          ]
-          ++ (if isDarwin then [
-            osx
-          ] else [ ]));
+          (
+            [
+              tide
+              autopair
+              node-binpath
+              # node-version
+              fishtape_3
+              shell-integrations
+              editor-updater
+            ]
+            ++ (
+              if isDarwin then
+                [
+                  osx
+                ]
+              else
+                [ ]
+            )
+          );
 
       preferAbbrs = true;
-      shellAbbrs = {
-        "l" = "ls -lha";
-      } // (if (isLinux) then {
-        "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
-      } else { })
-      // (if (uses_k8s) then {
-        "k" = "kubectl";
-        "ktx" = "kubectx";
-        "kns" = "kubens";
-      } else { });
+      shellAbbrs =
+        {
+          "l" = "ls -lha";
+        }
+        // (
+          if (isLinux) then
+            {
+              "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
+            }
+          else
+            { }
+        )
+        // (
+          if (uses_k8s) then
+            {
+              "k" = "kubectl";
+              "ktx" = "kubectx";
+              "kns" = "kubens";
+            }
+          else
+            { }
+        );
 
       functions = {
         doa-ssh-keygen = {
@@ -98,11 +128,12 @@ in
 
           makeBinPathList = map (path: path + "/bin");
         in
-        lib.mkIf isDarwin
-          ''
-            fish_add_path --move --prepend --path ${lib.concatMapStringsSep " " dquote (makeBinPathList osConfig.environment.profiles)}
-            set fish_user_paths $fish_user_paths
-          '';
+        lib.mkIf isDarwin ''
+          fish_add_path --move --prepend --path ${
+            lib.concatMapStringsSep " " dquote (makeBinPathList osConfig.environment.profiles)
+          }
+          set fish_user_paths $fish_user_paths
+        '';
     };
 
     atuin = {
@@ -132,12 +163,11 @@ in
 
   # nix-darwin won't set an already-existing user's shell
   # https://daiderd.com/nix-darwin/manual/index.html#opt-users.users._name_.shell
-  home.activation.setShell = lib.mkIf isDarwin
-    ''
-      PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s \
-        "${user.shell}${user.shell.shellPath}" \
-        "${config.home.username}"
-    '';
+  home.activation.setShell = lib.mkIf isDarwin ''
+    PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s \
+      "${user.shell}${user.shell.shellPath}" \
+      "${config.home.username}"
+  '';
 
   xdg.configFile = lib.mkIf (config.programs.fish.enable) {
     dockerFishCompletion = {

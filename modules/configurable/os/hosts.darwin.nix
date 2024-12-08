@@ -4,10 +4,11 @@
 #
 # if you get an error saying operation not permitted, run the following command:
 # sudo chflags nouchg,noschg /etc/hosts
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   inherit (lib) types mkBefore;
@@ -81,7 +82,11 @@ in
           pkgs.writeText "string-hosts" (allToString (filterAttrs (_: v: v != [ ]) cfg.hosts));
         extraHosts = pkgs.writeText "extra-hosts" cfg.extraHosts;
       in
-      mkBefore [ localhostHosts stringHosts extraHosts ];
+      mkBefore [
+        localhostHosts
+        stringHosts
+        extraHosts
+      ];
 
     environment.etc.hosts = {
       source = pkgs.concatText "hosts" cfg.hostFiles;

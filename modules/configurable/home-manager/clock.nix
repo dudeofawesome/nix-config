@@ -1,5 +1,11 @@
-{ lib, config, pkgs, ... }:
-with lib; let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib;
+let
   cfg = config.programs.doa-system-clock;
 in
 {

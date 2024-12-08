@@ -1,4 +1,11 @@
-{ pkgs, pkgs-unstable, lib, config, ... }: {
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  config,
+  ...
+}:
+{
   home.packages = with pkgs-unstable; [
     python3
     python3Packages.ipykernel
@@ -244,9 +251,11 @@
     };
   };
 
-  home.activation.createVSCodeIntellicodeDir = lib.mkIf (config.programs.vscode.enable && pkgs.stdenv.targetPlatform.isDarwin) ''
-    path="/var/lib/vsintellicode/"
-    PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo mkdir -p "$path"
-    PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chown $(whoami) "$path"
-  '';
+  home.activation.createVSCodeIntellicodeDir =
+    lib.mkIf (config.programs.vscode.enable && pkgs.stdenv.targetPlatform.isDarwin)
+      ''
+        path="/var/lib/vsintellicode/"
+        PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo mkdir -p "$path"
+        PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chown $(whoami) "$path"
+      '';
 }

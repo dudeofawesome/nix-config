@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   targets.darwin.defaults = {
     NSGlobalDomain = {
       AppleEnableMouseSwipeNavigateWithScrolls = true;

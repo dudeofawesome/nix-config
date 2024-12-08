@@ -1,4 +1,14 @@
-{ machine-class, arch, os, hostname, pkgs, lib, config, ... }: {
+{
+  machine-class,
+  arch,
+  os,
+  hostname,
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   imports = [
     ../../../defaults/boot/systemd-boot.nix
     ../../../defaults/boot/ssh.nix
@@ -14,16 +24,22 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      cryptsetup
-      graphviz
-      lshw
-      usbutils
-    ]
-    ++ (if (machine-class == "pc") then [
-      zgrviewer
-    ] else [ ])
-    ;
+    systemPackages =
+      with pkgs;
+      [
+        cryptsetup
+        graphviz
+        lshw
+        usbutils
+      ]
+      ++ (
+        if (machine-class == "pc") then
+          [
+            zgrviewer
+          ]
+        else
+          [ ]
+      );
   };
 
   services = {

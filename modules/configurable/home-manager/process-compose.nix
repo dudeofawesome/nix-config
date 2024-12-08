@@ -1,7 +1,19 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 
 let
-  inherit (lib) mkEnableOption mkPackageOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkPackageOption
+    mkIf
+    mkOption
+    types
+    ;
 
   cfg = config.programs.process-compose;
 
@@ -15,7 +27,11 @@ in
 
     configDir = mkOption {
       type = types.str;
-      default = if (pkgs.stdenv.targetPlatform.isDarwin) then "Library/Application Support/process-compose/" else "$XDG_CONFIG_HOME/process-compose/";
+      default =
+        if (pkgs.stdenv.targetPlatform.isDarwin) then
+          "Library/Application Support/process-compose/"
+        else
+          "$XDG_CONFIG_HOME/process-compose/";
     };
 
     settings = mkOption {
@@ -55,13 +71,13 @@ in
       packages = [ cfg.package ];
 
       file.process-compose-settings = {
-        enable = ! builtins.isNull cfg.settings;
+        enable = !builtins.isNull cfg.settings;
         target = "${cfg.configDir}/settings.yaml";
         source = settingsFormat.generate "settings.yaml" cfg.settings;
       };
 
       file.process-compose-shortcuts = {
-        enable = ! builtins.isNull cfg.shortcuts;
+        enable = !builtins.isNull cfg.shortcuts;
         target = "${cfg.configDir}/shortcuts.yaml";
         source = settingsFormat.generate "shortcuts.yaml" {
           shortcuts = cfg.shortcuts;
@@ -69,7 +85,7 @@ in
       };
 
       file.process-compose-theme = {
-        enable = ! builtins.isNull cfg.theme;
+        enable = !builtins.isNull cfg.theme;
         target = "${cfg.configDir}/theme.yaml";
         source = settingsFormat.generate "theme.yaml" cfg.theme;
       };

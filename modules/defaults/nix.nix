@@ -1,31 +1,52 @@
-{ pkgs, lib, os, ... }:
+{
+  pkgs,
+  lib,
+  os,
+  ...
+}:
 with pkgs.stdenv.targetPlatform;
-let doa-lib = import ../../lib; in
+let
+  doa-lib = import ../../lib;
+in
 {
   imports = [ (doa-lib.try-import ./nix.${os}.nix) ];
 
   nix = {
     package = pkgs.nix;
 
-    gc = {
-      automatic = true;
-      options = lib.mkDefault "--delete-older-than 30d";
-    } // (if (isLinux) then {
-      dates = lib.mkDefault "weekly";
-    } else {
-      interval.Day = lib.mkDefault 7;
-    });
+    gc =
+      {
+        automatic = true;
+        options = lib.mkDefault "--delete-older-than 30d";
+      }
+      // (
+        if (isLinux) then
+          {
+            dates = lib.mkDefault "weekly";
+          }
+        else
+          {
+            interval.Day = lib.mkDefault 7;
+          }
+      );
 
-    optimise = {
-      automatic = lib.mkDefault true;
-    } // (if (isLinux) then {
-      dates = lib.mkDefault [ "03:45" ];
-    } else {
-      interval = lib.mkDefault {
-        Hour = 4;
-        Minute = 15;
-      };
-    });
+    optimise =
+      {
+        automatic = lib.mkDefault true;
+      }
+      // (
+        if (isLinux) then
+          {
+            dates = lib.mkDefault [ "03:45" ];
+          }
+        else
+          {
+            interval = lib.mkDefault {
+              Hour = 4;
+              Minute = 15;
+            };
+          }
+      );
 
     # disable the nix-channel command, which leads to non-reproducible envs
     channel.enable = false;
@@ -33,11 +54,17 @@ let doa-lib = import ../../lib; in
     settings = {
       experimental-features = "nix-command flakes";
 
-      trusted-users = lib.mkDefault ([ "root" ] ++ (
-        if (isLinux) then [ "@wheel" ]
-        else if (isDarwin) then [ "@admin" ]
-        else abort
-      ));
+      trusted-users = lib.mkDefault (
+        [ "root" ]
+        ++ (
+          if (isLinux) then
+            [ "@wheel" ]
+          else if (isDarwin) then
+            [ "@admin" ]
+          else
+            abort
+        )
+      );
 
       substituters = lib.mkDefault [
         "https://cache.nixos.org/"

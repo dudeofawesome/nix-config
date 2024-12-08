@@ -1,4 +1,5 @@
-{ pkgs-unstable }: {
+{ pkgs-unstable }:
+{
   environment = {
     systemPackages = with pkgs-unstable; [
       qmk

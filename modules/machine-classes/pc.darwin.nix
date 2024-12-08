@@ -1,4 +1,11 @@
-{ pkgs-unstable, lib, os, ... }: with lib; {
+{
+  pkgs-unstable,
+  lib,
+  os,
+  ...
+}:
+with lib;
+{
   environment = {
     systemPackages = with pkgs-unstable; [
       iina
@@ -11,11 +18,15 @@
       let
         skipSha = name: {
           inherit name;
-          args = { require_sha = false; };
+          args = {
+            require_sha = false;
+          };
         };
         noQuarantine = name: {
           inherit name;
-          args = { no_quarantine = true; };
+          args = {
+            no_quarantine = true;
+          };
         };
       in
       [

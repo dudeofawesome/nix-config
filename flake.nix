@@ -103,12 +103,17 @@
         packageOverlays = ./overlays;
       };
 
-      forAllSystems = function:
-        lib.genAttrs lib.systems.flakeExposed (system:
-          function (import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          }));
+      forAllSystems =
+        function:
+        lib.genAttrs lib.systems.flakeExposed (
+          system:
+          function (
+            import nixpkgs-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            }
+          )
+        );
     in
     {
       nixosConfigurations = import ./hosts/nixos params;

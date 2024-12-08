@@ -1,8 +1,20 @@
-{ pkgs, pkgs-stable, pkgs-unstable, lib, config, osConfig, hostname, ... }:
+{
+  pkgs,
+  pkgs-stable,
+  pkgs-unstable,
+  lib,
+  config,
+  osConfig,
+  hostname,
+  ...
+}:
 with pkgs.stdenv.targetPlatform;
 let
   doa-lib = import ../../../lib;
-  pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
+  pkg-installed = doa-lib.pkg-installed {
+    inherit osConfig;
+    homeConfig = config;
+  };
   has_1password =
     (pkg-installed pkgs-stable._1password-cli || pkg-installed pkgs-unstable._1password-cli)
     || (!isDarwin && pkg-installed pkgs._1password-gui);
@@ -42,18 +54,20 @@ in
 
       matchBlocks = {
         "*" =
-          if (has_1password) then {
-            # TODO: switch to this (instead of `extraConfig`) once https://github.com/nix-community/home-manager/issues/4134 is solved
-            # IdentityAgent = lib.mkDefault (
-            #   if (isDarwin) then "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-            #   else if (isLinux) then "~/.1password/agent.sock"
-            #   else abort
-            # );
-          }
-          else {
-            identityFile = lib.mkDefault "~/.ssh/${hostname}_ed25519";
-            identitiesOnly = lib.mkDefault true;
-          };
+          if (has_1password) then
+            {
+              # TODO: switch to this (instead of `extraConfig`) once https://github.com/nix-community/home-manager/issues/4134 is solved
+              # IdentityAgent = lib.mkDefault (
+              #   if (isDarwin) then "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+              #   else if (isLinux) then "~/.1password/agent.sock"
+              #   else abort
+              # );
+            }
+          else
+            {
+              identityFile = lib.mkDefault "~/.ssh/${hostname}_ed25519";
+              identitiesOnly = lib.mkDefault true;
+            };
 
         "git" = {
           match = "host *git*,*bitbucket*";
@@ -62,13 +76,21 @@ in
       };
 
       extraConfig = ''
-        ${if (has_1password) then (
-          "IdentityAgent = ${
-            if (isDarwin) then ''"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"''
-            else if (isLinux) then ''"~/.1password/agent.sock"''
-            else abort
-          }"
-        ) else ""}
+        ${
+          if (has_1password) then
+            (
+              "IdentityAgent = ${
+                if (isDarwin) then
+                  ''"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"''
+                else if (isLinux) then
+                  ''"~/.1password/agent.sock"''
+                else
+                  abort
+              }"
+            )
+          else
+            ""
+        }
       '';
     };
 
@@ -85,7 +107,9 @@ in
 
       extraConfig = {
         gpg.format = "ssh";
-        "gpg \"ssh\"".program = lib.mkIf (isDarwin && has_1password) "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+        "gpg \"ssh\"".program = lib.mkIf (
+          isDarwin && has_1password
+        ) "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       };
     };
 

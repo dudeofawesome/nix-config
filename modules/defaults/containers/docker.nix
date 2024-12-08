@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   nvidia_enable = builtins.elem "nvidia" config.boot.kernelModules;
 in

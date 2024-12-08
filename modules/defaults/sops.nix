@@ -1,4 +1,9 @@
-{ os, pkgs, lib, ... }:
+{
+  os,
+  pkgs,
+  lib,
+  ...
+}:
 with pkgs.stdenv.targetPlatform;
 {
   environment.systemPackages = with pkgs; [

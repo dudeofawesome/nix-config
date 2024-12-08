@@ -1,4 +1,8 @@
-{ device, pool ? "storage" }: {
+{
+  device,
+  pool ? "storage",
+}:
+{
   type = "disk";
   inherit device;
   content = {

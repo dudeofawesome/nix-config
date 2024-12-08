@@ -89,14 +89,18 @@
           #                 In this example, 24 is a default value when there is no match.
           #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
           #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
-          gaps = let gap = 6; in {
-            inner.horizontal = gap;
-            inner.vertical = gap;
-            outer.left = gap;
-            outer.bottom = gap;
-            outer.top = 0;
-            outer.right = gap;
-          };
+          gaps =
+            let
+              gap = 6;
+            in
+            {
+              inner.horizontal = gap;
+              inner.vertical = gap;
+              outer.left = gap;
+              outer.bottom = gap;
+              outer.top = 0;
+              outer.right = gap;
+            };
 
           # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
           # The 'accordion-padding' specifies the size of accordion padding
@@ -189,75 +193,82 @@
           # 'service' binding mode declaration.
           # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
           mode.service.binding = {
-            esc = [ "reload-config" "mode main" ];
-            r = [ "flatten-workspace-tree" "mode main" ]; # reset layout
-            f = [ "layout floating tiling" "mode main" ]; # Toggle between floating and tiling layout
-            backspace = [ "close-all-windows-but-current" "mode main" ];
+            esc = [
+              "reload-config"
+              "mode main"
+            ];
+            r = [
+              "flatten-workspace-tree"
+              "mode main"
+            ]; # reset layout
+            f = [
+              "layout floating tiling"
+              "mode main"
+            ]; # Toggle between floating and tiling layout
+            backspace = [
+              "close-all-windows-but-current"
+              "mode main"
+            ];
 
             # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
             #s = ["layout sticky tiling" "mode main"];
 
-            alt-shift-n = [ "join-with left" "mode main" ];
-            alt-shift-e = [ "join-with down" "mode main" ];
-            alt-shift-o = [ "join-with up" "mode main" ];
-            alt-shift-i = [ "join-with right" "mode main" ];
+            alt-shift-n = [
+              "join-with left"
+              "mode main"
+            ];
+            alt-shift-e = [
+              "join-with down"
+              "mode main"
+            ];
+            alt-shift-o = [
+              "join-with up"
+              "mode main"
+            ];
+            alt-shift-i = [
+              "join-with right"
+              "mode main"
+            ];
           };
 
           on-window-detected =
             let
-              apps-to-workspace = app-ids: workspace: (
-                builtins.map
-                  (app-id: {
-                    "if".app-id = app-id;
-                    run = "move-node-to-${workspace}";
-                  })
-                  app-ids
-              );
+              apps-to-workspace =
+                app-ids: workspace:
+                (builtins.map (app-id: {
+                  "if".app-id = app-id;
+                  run = "move-node-to-${workspace}";
+                }) app-ids);
             in
             lib.flatten [
-              (apps-to-workspace
-                [
-                  "org.mozilla.firefox"
-                  "com.apple.Safari"
-                  "com.google.Chrome"
-                ]
-                workspaces.browser
-              )
-              (apps-to-workspace
-                [
-                  "com.microsoft.VSCode"
-                  "com.apple.dt.Xcode"
-                  "com.github.wez.wezterm"
-                  "com.googlecode.iterm2"
-                ]
-                workspaces.code
-              )
-              (apps-to-workspace
-                [
-                  "us.zoom.xos"
-                  "com.apple.iCal"
-                  "com.apple.Notes"
-                  "com.apple.reminders"
-                ]
-                workspaces.misc
-              )
-              (apps-to-workspace
-                [
-                  "org.whispersystems.signal-desktop"
-                  "com.apple.MobileSMS"
-                  "com.apple.mail"
-                  "com.hnc.Discord"
-                  "com.tinyspeck.slackmacgap"
-                ]
-                workspaces.social
-              )
-              (apps-to-workspace
-                [
-                  "com.apple.Music"
-                  "com.spotify.client"
-                ]
-                workspaces.music
-              )
+              (apps-to-workspace [
+                "org.mozilla.firefox"
+                "com.apple.Safari"
+                "com.google.Chrome"
+              ] workspaces.browser)
+              (apps-to-workspace [
+                "com.microsoft.VSCode"
+                "com.apple.dt.Xcode"
+                "com.github.wez.wezterm"
+                "com.googlecode.iterm2"
+              ] workspaces.code)
+              (apps-to-workspace [
+                "us.zoom.xos"
+                "com.apple.iCal"
+                "com.apple.Notes"
+                "com.apple.reminders"
+              ] workspaces.misc)
+              (apps-to-workspace [
+                "org.whispersystems.signal-desktop"
+                "com.apple.MobileSMS"
+                "com.apple.mail"
+                "com.hnc.Discord"
+                "com.tinyspeck.slackmacgap"
+              ] workspaces.social)
+              (apps-to-workspace [
+                "com.apple.Music"
+                "com.spotify.client"
+              ] workspaces.music)
 
               # Automatically accordion new browser windows
               # [{

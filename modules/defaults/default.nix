@@ -1,4 +1,5 @@
-{ os, ... }: {
+{ os, ... }:
+{
   imports = [
     ./keyboard.nix
     ./sops.nix

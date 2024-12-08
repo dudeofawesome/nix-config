@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   nix = {
     linux-builder = {
       enable = lib.mkDefault true;

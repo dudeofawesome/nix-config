@@ -1,61 +1,69 @@
-{ lib, config, pkgs, ... }:
-with lib; let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib;
+let
   cfg = config.programs.dock;
 
-  othersOpts = { name, config, ... }: {
-    options = {
-      path = mkOption {
-        type = types.str;
-        description = lib.mdDoc ''
-          The path to a `.app` directory.
-        '';
+  othersOpts =
+    { name, config, ... }:
+    {
+      options = {
+        path = mkOption {
+          type = types.str;
+          description = lib.mdDoc ''
+            The path to a `.app` directory.
+          '';
+        };
+
+        fileType = mkOption {
+          type = with types; nullOr str;
+          default = 2;
+          description = lib.mdDoc ''
+            a
+          '';
+        };
+
+        arrangement = mkOption {
+          type = with types; nullOr str;
+          default = 1;
+          description = lib.mdDoc ''
+            a
+          '';
+        };
+
+        displayAs = mkOption {
+          type = with types; nullOr str;
+          default = 0;
+          description = lib.mdDoc ''
+            a
+          '';
+        };
+
+        showAs = mkOption {
+          type = with types; nullOr str;
+          default = 1;
+          description = lib.mdDoc ''
+            a
+          '';
+        };
+
+        arrangement2 = mkOption {
+          type = with types; nullOr str;
+          default = 2;
+          description = lib.mdDoc ''
+            a
+          '';
+        };
       };
 
-      fileType = mkOption {
-        type = with types; nullOr str;
-        default = 2;
-        description = lib.mdDoc ''
-          a
-        '';
-      };
-
-      arrangement = mkOption {
-        type = with types; nullOr str;
-        default = 1;
-        description = lib.mdDoc ''
-          a
-        '';
-      };
-
-      displayAs = mkOption {
-        type = with types; nullOr str;
-        default = 0;
-        description = lib.mdDoc ''
-          a
-        '';
-      };
-
-      showAs = mkOption {
-        type = with types; nullOr str;
-        default = 1;
-        description = lib.mdDoc ''
-          a
-        '';
-      };
-
-      arrangement2 = mkOption {
-        type = with types; nullOr str;
-        default = 2;
-        description = lib.mdDoc ''
-          a
-        '';
+      config = {
+        path = mkDefault name;
       };
     };
-
-    config = {
-      path = mkDefault name;
-    };
-  };
 in
 {
   options = {
@@ -107,7 +115,11 @@ in
         # clear dock
         defaults write com.apple.dock persistent-apps -array ""
 
-        ${concatMapStringsSep ";\n" (path: ''defaults write com.apple.dock persistent-apps -array-add "$(createTile '${path}')"'') cfg.apps}
+        ${
+          concatMapStringsSep ";\n" (
+            path: ''defaults write com.apple.dock persistent-apps -array-add "$(createTile '${path}')"''
+          ) cfg.apps
+        }
       }
 
       PATH="/usr/bin:$PATH" $DRY_RUN_CMD setDockApps
@@ -145,10 +157,12 @@ in
         defaults write com.apple.dock persistent-others -array ""
 
         ${
-          concatStringsSep ";\n"
-            (mapAttrsToList (key: val:
+          concatStringsSep ";\n" (
+            mapAttrsToList (
+              key: val:
               ''defaults write com.apple.dock persistent-others -array-add "$(createDirTile '${val.path}' ${val.fileType} ${val.arrangement} ${val.displayAs} ${val.showAs} ${val.arrangement2})"''
-            ) cfg.others)
+            ) cfg.others
+          )
         }
       }
 
@@ -156,7 +170,9 @@ in
     '';
 
     # restart Dock to show updates
-    home.activation.dockRestart = hm.dag.entryAfter [ "dockApps" "dockDirs" ]
-      ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD killall Dock'';
+    home.activation.dockRestart = hm.dag.entryAfter [
+      "dockApps"
+      "dockDirs"
+    ] ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD killall Dock'';
   };
 }

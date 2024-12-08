@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   targets.darwin.defaults =
     let
       trackpads = {

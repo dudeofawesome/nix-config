@@ -1,7 +1,19 @@
-{ pkgs, pkgs-unstable, lib, osConfig, config, machine-class, os, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  osConfig,
+  config,
+  machine-class,
+  os,
+  ...
+}:
 let
   doa-lib = import ../../../lib;
-  pkg-installed = doa-lib.pkg-installed { inherit osConfig; homeConfig = config; };
+  pkg-installed = doa-lib.pkg-installed {
+    inherit osConfig;
+    homeConfig = config;
+  };
   has_docker = pkg-installed pkgs.docker;
 in
 {
@@ -40,33 +52,42 @@ in
     # such as data conversion or moving files.
     stateVersion = "23.05"; # Did you read the comment?
 
-    packages = with pkgs; [
-      act
-      awscli2
-      pkgs-unstable.d2
-      eternal-terminal
-      krew
-      watchman
-    ] ++ (if (machine-class == "pc") then [
-      # https://github.com/NixOS/nixpkgs/issues/254944
-      # TODO: investigate using an activation script to copy the .app to /Applications
-      # _1password-gui
-      pkgs-unstable._1password-cli
-      pkgs-unstable.bruno
-      cyberduck
-      pkgs-unstable.discord
-      drawio
-      inkscape
-      losslesscut-bin
-      opentofu
-      pkgs-unstable.raycast
-      pkgs-unstable.rectangle
-      pkgs-unstable.signal-desktop
-      pkgs-unstable.spotify
-      pkgs-unstable.tableplus
-      pkgs-unstable.tailscale
-    ] ++ (if (os == "linux") then cider else [ ])
-    else [ ]) ++ (if (has_docker) then [ dive ] else [ ]);
+    packages =
+      with pkgs;
+      [
+        act
+        awscli2
+        pkgs-unstable.d2
+        eternal-terminal
+        krew
+        watchman
+      ]
+      ++ (
+        if (machine-class == "pc") then
+          [
+            # https://github.com/NixOS/nixpkgs/issues/254944
+            # TODO: investigate using an activation script to copy the .app to /Applications
+            # _1password-gui
+            pkgs-unstable._1password-cli
+            pkgs-unstable.bruno
+            cyberduck
+            pkgs-unstable.discord
+            drawio
+            inkscape
+            losslesscut-bin
+            opentofu
+            pkgs-unstable.raycast
+            pkgs-unstable.rectangle
+            pkgs-unstable.signal-desktop
+            pkgs-unstable.spotify
+            pkgs-unstable.tableplus
+            pkgs-unstable.tailscale
+          ]
+          ++ (if (os == "linux") then cider else [ ])
+        else
+          [ ]
+      )
+      ++ (if (has_docker) then [ dive ] else [ ]);
 
     keyboard = {
       layout = "us";
