@@ -17,6 +17,8 @@ let
   uses_k8s = pkg-installed pkgs.kubectl;
 in
 {
+  imports = [ ./starship ];
+
   programs = {
     fish = {
       enable = true;
@@ -30,7 +32,6 @@ in
           })
           (
             [
-              tide
               autopair
               node-binpath
               # node-version
@@ -99,24 +100,6 @@ in
           body = ''printf "🙅 Don't use nix-env!\n💁 Use `nix shell 'nixpkgs#your_pkg'` instead"'';
         };
       };
-
-      interactiveShellInit = ''
-        tide configure --auto \
-          --style=Rainbow \
-          --prompt_colors='True color' \
-          --show_time='24-hour format' \
-          --rainbow_prompt_separators=Vertical \
-          --powerline_prompt_heads=Sharp \
-          --powerline_prompt_tails=Flat \
-          --powerline_prompt_style='Two lines, character' \
-          --prompt_connection=Solid \
-          --powerline_right_prompt_frame=No \
-          --prompt_connection_andor_frame_color=Dark \
-          --prompt_spacing=Sparse \
-          --icons='Many icons' \
-          --transient=No \
-        ;
-      '';
 
       # HACK: fix fish PATH: https://github.com/LnL7/nix-darwin/issues/122
       loginShellInit =
