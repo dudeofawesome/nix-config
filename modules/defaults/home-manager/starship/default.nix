@@ -132,13 +132,13 @@
               "$fill"
 
               # right side
-              "([](fg:${colors.cloud})${
-                lib.strings.concatStrings (builtins.map (item: "\$${item}") (groups.clouds))
-              })"
               "([](bg:prev_bg fg:${colors.languages})${
                 lib.strings.concatStrings (
                   builtins.map (item: "\$${item}") (groups.languages ++ groups.package_managers)
                 )
+              })"
+              "([](bg:prev_bg fg:${colors.cloud})${
+                lib.strings.concatStrings (builtins.map (item: "\$${item}") (groups.clouds))
               })"
               "([](bg:prev_bg fg:${colors.duration})$cmd_duration)"
               "[](bg:prev_bg fg:${colors.time})$time"
@@ -173,7 +173,7 @@
 
         sudo = {
           disabled = false;
-          format = "$symbol ";
+          format = "$symbol";
           symbol = "󱐋";
           style = "fg:yellow";
         };
