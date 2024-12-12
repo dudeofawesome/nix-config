@@ -241,6 +241,14 @@
                 }) app-ids);
             in
             lib.flatten [
+              {
+                "if" = {
+                  app-id = "com.1password.1password";
+                  window-title-regex-substring = ".+ — 1Password";
+                };
+                run = "layout floating";
+              }
+
               (apps-to-workspace [
                 "org.mozilla.firefox"
                 "com.apple.Safari"
