@@ -118,7 +118,7 @@
             [
               # left side
               "[](fg:${colors.system})"
-              "[$sudo$os$username](bg:prev_fg)"
+              "[$os$username](bg:prev_fg)"
               "[](fg:prev_bg bg:${colors.directory})"
               "$directory"
               "([](fg:prev_bg bg:${colors.vcs})${
@@ -127,6 +127,7 @@
               "([](fg:prev_bg bg:${colors.context})${
                 lib.strings.concatStrings (builtins.map (ctx: "\$${ctx}") groups.contexts)
               })"
+              "([](fg:prev_bg bg:bright-yellow)[$sudo](fg:prev_fg bg:prev_gb))"
               "[](fg:prev_bg)"
 
               "$fill"
@@ -173,9 +174,8 @@
 
         sudo = {
           disabled = false;
-          format = "$symbol";
+          format = "[$symbol]($style)";
           symbol = "󱐋";
-          style = "fg:yellow";
         };
 
         # An alternative to the username module which displays a symbol that
@@ -193,7 +193,7 @@
 
         aws = {
           style = "bg:${colors.cloud}";
-          format = ''[$symbol ($profile )(\($region\) )(\[$duration\] )]($style)'';
+          format = ''[$symbol ($profile )($region )(\[$duration\] )]($style)'';
         };
 
         kubernetes = {
