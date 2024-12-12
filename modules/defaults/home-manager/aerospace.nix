@@ -244,7 +244,7 @@
               {
                 "if" = {
                   app-id = "com.1password.1password";
-                  window-title-regex-substring = ".+ — 1Password";
+                  window-title-regex-substring = "^[^—]+ — 1Password$";
                 };
                 run = "layout floating";
               }
