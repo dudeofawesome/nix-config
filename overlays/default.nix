@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 {
   nixpkgs.config.packageOverrides = prev: {
     fishPlugins = prev.fishPlugins // {
@@ -46,10 +51,10 @@
     (final: prev: {
       mkalias = prev.mkalias.overrideAttrs (old: {
         src = prev.fetchFromGitHub {
-          owner = "dudeofawesome";
+          owner = "vs49688";
           repo = "mkalias";
-          rev = "feat/stdout-hex-data";
-          hash = "sha256-pPIMLnbpx8A9nvKsrOFFcsSu2v260dLr+4HQAc8A9xc=";
+          rev = "v1.1.0";
+          hash = "sha256-kIVCtYGlWKS0d/Potwo6X8F7Hgc/1S1RQTEbJi+IL9U=";
         };
       });
     })
