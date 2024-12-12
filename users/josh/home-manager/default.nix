@@ -126,5 +126,8 @@
     };
   };
 
-  xdg.configFile.finicky.source = ./finicky.js;
+  programs.finicky = {
+    enable = true;
+    settings = builtins.readFile ./finicky.js;
+  };
 }
