@@ -127,7 +127,7 @@
               "([](fg:prev_bg bg:${colors.context})${
                 lib.strings.concatStrings (builtins.map (ctx: "\$${ctx}") groups.contexts)
               })"
-              "([](fg:prev_bg bg:bright-yellow)[$sudo](fg:prev_fg bg:prev_gb))"
+              "([](fg:prev_bg bg:red)[$sudo](fg:prev_fg bg:prev_gb))"
               "[](fg:prev_bg)"
 
               "$fill"
@@ -176,6 +176,7 @@
           disabled = false;
           format = "[$symbol]($style)";
           symbol = "󱐋";
+          style = "bg:red fg:white";
         };
 
         # An alternative to the username module which displays a symbol that
