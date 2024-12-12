@@ -28,22 +28,16 @@ in
 
     extensions =
       let
-        extensions = pkgs.vscode-marketplace-extensions.forVSCodeVersion config.programs.vscode.package.version;
-        stable = extensions.vscode-marketplace-release;
-        unstable = extensions.vscode-marketplace;
-        any-version = pkgs.vscode-marketplace-extensions.vscode-marketplace;
+        nix4vscode = (import ./extensions.nix) { inherit pkgs lib; };
       in
-      # prefer release extensions
-      with stable;
-      # fallback to pre-release
-      with unstable;
-      # finally, fallback to extensions for any version of vscode
-      with any-version;
+      # prefer nixpkgs extensions
+      with pkgs-unstable.vscode-extensions;
+      # fallback to nix4vscode
+      with nix4vscode;
       [
         alefragnani.bookmarks
         alesbrelih.gitlab-ci-ls
         antyos.openscad
-        ashrafhadden.dracula-dot-min
         beardedbear.beardedtheme
         bierner.markdown-mermaid
         bmalehorn.vscode-fish
@@ -63,7 +57,6 @@ in
         eamodio.gitlens
         editorconfig.editorconfig
         effectful-tech.effect-vscode
-        # equinusocio.vsc-material-theme
         equinusocio.vsc-material-theme-icons
         esbenp.prettier-vscode
         fabiospampinato.vscode-diff
@@ -111,7 +104,7 @@ in
         pkief.material-product-icons
         shopify.ruby-lsp
         redhat.ansible
-        redhat.vscode-yaml
+        pkgs-unstable.vscode-extensions.redhat.vscode-yaml
         ryu1kn.partial-diff
         seeker-dk.node-modules-viewer
         semanticdiff.semanticdiff

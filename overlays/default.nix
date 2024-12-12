@@ -37,8 +37,6 @@
       vim-lumen = inputs.vim-lumen;
     };
 
-    vscode-marketplace-extensions = inputs.vscode-extensions.extensions.${pkgs.system};
-
     dotfiles = {
       dudeofawesome = inputs.dudeofawesome_dotfiles;
       upaymeifixit = inputs.upaymeifixit_dotfiles;

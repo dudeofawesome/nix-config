@@ -37,7 +37,7 @@ in
     ../../../modules/defaults/home-manager/wezterm
 
     ./browsers.nix
-    ./vscode.nix
+    ./vscode
     ./shells.nix
   ];
 
