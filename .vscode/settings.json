@@ -6,24 +6,7 @@
 
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nil",
-  "nix.serverSettings": {
-    "nixd": {
-      "options": {
-        // Disable it if you are not writting modules.
-        "enable": true,
-        "target": {
-          "args": [],
-          // Example of NixOS options.
-          "installable": "<flakeref>#nixosConfigurations.badlands-vm.options"
-        }
-      },
-      "nil": {
-        "formatting": {
-          "command": ["nixfmt"]
-        }
-      }
-    }
-  },
+  "nix.formatterPath": ["nix", "fmt", "--", "--"],
 
   "[yaml]": {
     "editor.tabSize": 4
