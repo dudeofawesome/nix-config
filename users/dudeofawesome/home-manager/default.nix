@@ -200,7 +200,7 @@ in
             region = "us-west-2";
             output = "yaml-stream";
             credential_process = "${op_aws} 'rlfhru5fnw3crzq6be4dsx3qfu' 'Paciolan'";
-            cli_pager = "${pkgs.moar}/bin/moar --lang=yaml";
+            cli_pager = "${lib.getExe pkgs.moar} --lang=yaml";
           };
 
           "profile api1" = {

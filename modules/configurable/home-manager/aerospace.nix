@@ -81,7 +81,7 @@ in
     # TODO: the AeroSpace GUI bin has a `--config-path` flag
     home.activation.aerospace = lib.hm.dag.entryAfter [
       "writeBoundary"
-    ] "${cfg.package}/bin/aerospace reload-config";
+    ] "${lib.getExe cfg.package} reload-config";
 
     # TODO: use `mkDefault` and `warnings` instead of `mkForce`
     targets.darwin.defaults = {

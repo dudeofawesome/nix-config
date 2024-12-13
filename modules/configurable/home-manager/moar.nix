@@ -26,7 +26,7 @@ in
 
   config = mkIf (cfg.enable) {
     home.sessionVariables = mkIf cfg.defaultPager {
-      PAGER = "${pkgs.moar}/bin/moar";
+      PAGER = lib.getExe pkgs.moar;
     };
   };
 }

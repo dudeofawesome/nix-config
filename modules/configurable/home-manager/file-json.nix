@@ -68,7 +68,7 @@ in
         (map (value: ''
           # jq will fail if the original file doesn't exist
           $DRY_RUN_CMD ${pkgs.coreutils}/bin/touch '${value.target}'
-          $DRY_RUN_CMD ${pkgs.jq}/bin/jq \
+          $DRY_RUN_CMD ${lib.getExe pkgs.jq} \
             --raw-output \
             --null-input \
             --slurpfile original '${value.target}' \

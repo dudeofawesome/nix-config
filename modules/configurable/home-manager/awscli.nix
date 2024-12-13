@@ -18,10 +18,10 @@ in
       executable = true;
       target = ".aws/1password-awscli";
       text = ''
-        #!${pkgs.bash}/bin/bash
+        #!${lib.getExe pkgs.bash}
 
-        op=${pkgs._1password-cli}/bin/op
-        jq=${pkgs.jq}/bin/jq
+        op=${lib.getExe pkgs._1password-cli}
+        jq=${lib.getExe pkgs.jq}
 
         item_id="$1"
         vault="$2"
