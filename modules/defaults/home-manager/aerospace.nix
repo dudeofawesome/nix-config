@@ -284,6 +284,19 @@
               #   run = "layout accordion";
               # }]
             ];
+
+          workspace-to-monitor-force-assignment =
+            let
+              desk = {
+                center = "^38GL950G$";
+                right = "^DELL U2717D$";
+                builtin = "^Built-in Retina Display$";
+              };
+            in
+            {
+              ${lib.removePrefix "workspace " workspaces.code} = desk.center;
+              ${lib.removePrefix "workspace " workspaces.social} = desk.right;
+            };
         };
     };
   };
