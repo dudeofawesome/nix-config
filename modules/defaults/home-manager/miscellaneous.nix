@@ -1,7 +1,5 @@
 {
   pkgs,
-  pkgs-stable,
-  pkgs-unstable,
   lib,
   config,
   osConfig,
@@ -16,8 +14,9 @@ let
     homeConfig = config;
   };
   has_1password =
-    (pkg-installed pkgs-stable._1password-cli || pkg-installed pkgs-unstable._1password-cli)
-    || (!isDarwin && pkg-installed pkgs._1password-gui);
+    config.programs._1password-cli.enable
+    || config.programs._1password-gui.enable
+    || (isLinux && (osConfig.programs._1password.enable || osConfig.programs._1password-gui.enable));
   has_docker_desktop = pkg-installed pkgs.docker;
 in
 {

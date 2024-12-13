@@ -1,6 +1,8 @@
 { ... }:
 {
   imports = [
+    ./1password-cli.nix
+    ./1password-gui.nix
     ./aerospace.nix
     ./awscli.nix
     ./clock.nix

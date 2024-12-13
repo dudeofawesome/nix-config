@@ -1,19 +1,7 @@
-{
-  pkgs,
-  lib,
-  osConfig,
-  ...
-}:
-with pkgs.stdenv.targetPlatform;
-let
-  doa-lib = import ../../../lib;
-  cask-installed = doa-lib.cask-installed { inherit osConfig; };
-in
+{ ... }:
 {
   config = {
-    home.file-json._1password-gui = {
-      enable = isDarwin && (cask-installed "1password");
-      target = "Library/Group Containers/2BUA8C4S2C.com.1password/Library/Application Support/1Password/Data/settings/settings.json";
+    programs._1password-gui = {
       extraConfig = {
         "security.authenticatedUnlock.appleTouchId" = true;
         "security.authenticatedUnlock.enabled" = true;
@@ -33,11 +21,9 @@ in
         "sidebar.showCategories" = true;
 
         "app.SkipArchiveAlert" = true;
-        "app.defaultVaultForSaving" = "{\"VaultReference\":{\"vault_uuid\":\"rnjzxcl63xsr2niiycqwpmy26y\",\"account_uuid\":\"TWLWKGXBYVAUPAP2VKFNNGUFHQ\"}}";
         "app.nearbyItemsEnabled" = true;
         "sshAgent.commitSigningBannerDismissed" = true;
         "browsers.extension.enabled" = true;
-        "ui.quickAccess.collection" = "45qc7o7ua53ez6tqhwvqaxdvge";
 
         "passwordGenerator.type" = "password-generator-menu-entry-type-random-password";
         "passwordGenerator.size.words" = 8;

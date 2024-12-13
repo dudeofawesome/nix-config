@@ -67,8 +67,6 @@ in
           [
             # https://github.com/NixOS/nixpkgs/issues/254944
             # TODO: investigate using an activation script to copy the .app to /Applications
-            # _1password-gui
-            pkgs-unstable._1password-cli
             pkgs-unstable.bruno
             cyberduck
             pkgs-unstable.discord
@@ -157,6 +155,33 @@ in
           };
         }
       ];
+    };
+
+    _1password-cli = {
+      enable = machine-class == "pc";
+      package = pkgs-unstable._1password-cli;
+    };
+    _1password-gui = {
+      enable = machine-class == "pc";
+      package = pkgs-unstable._1password-gui;
+      extraConfig = {
+        "security.autolock.minutes" = 1;
+
+        "keybinds.quickAccess" = "Alt+CommandOrControl+[\\]\\";
+        "keybinds.autoFill" = "";
+
+        "app.defaultVaultForSaving" =
+          "{\"VaultReference\":{\"vault_uuid\":\"rnjzxcl63xsr2niiycqwpmy26y\",\"account_uuid\":\"TWLWKGXBYVAUPAP2VKFNNGUFHQ\"}}";
+        "ui.quickAccess.collection" = "45qc7o7ua53ez6tqhwvqaxdvge";
+
+        "passwordGenerator.type" = "password-generator-menu-entry-type-random-password";
+        "passwordGenerator.size.words" = 8;
+        "passwordGenerator.size.characters" = 16;
+        "passwordGenerator.size.pin" = 4;
+        "passwordGenerator.separatorType" = "password-generator-menu-entry-separator-spaces";
+        "passwordGenerator.capitalize" = true;
+        "passwordGenerator.includeSymbols" = true;
+      };
     };
 
     dock = {

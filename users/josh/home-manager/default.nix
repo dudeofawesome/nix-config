@@ -25,9 +25,7 @@
     # such as data conversion or moving files.
     stateVersion = "23.05"; # Did you read the comment?
 
-    packages = with pkgs-unstable; [
-      (if (machine-class == "pc") then _1password-cli else { })
-    ];
+    packages = with pkgs-unstable; [ ];
 
     keyboard = {
       layout = "us";
@@ -70,6 +68,15 @@
       userEmail = "josh@gibbs.tk";
 
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICWpH2swLUhFYS8ffRP7bviAwTroqaCACeAcp6kAtyO0";
+    };
+
+    _1password-cli = {
+      enable = machine-class == "pc";
+      package = pkgs-unstable._1password-cli;
+    };
+    _1password-gui = {
+      enable = machine-class == "pc";
+      package = pkgs-unstable._1password-gui;
     };
 
     dock = {
