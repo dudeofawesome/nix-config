@@ -7,6 +7,8 @@
     ./awscli.nix
     ./clock.nix
     ./dock.nix
+    ./docker-client.nix
+    ./docker-desktop.nix
     ./file-json.nix
     ./finicky.nix
     ./moar.nix

@@ -245,6 +245,8 @@ in
           };
         };
     };
+
+    docker-desktop.enable = true;
   };
 
   # services.home-manager.autoUpgrade.enable = true;

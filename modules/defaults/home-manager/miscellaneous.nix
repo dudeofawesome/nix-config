@@ -149,22 +149,6 @@ in
     };
   };
 
-  # TODO: figure out a better solution
-  # This cleans up a bunch of symlinks the macOS Docker Desktop app makes which
-  #   override the versions we install with Nix
-  home.activation.cleanupDockerDesktop = lib.mkIf (isDarwin && has_docker_desktop) (
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      cd /usr/local/bin/
-      PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo rm -f \
-        docker \
-        docker-compose \
-        docker-index \
-        kubectl \
-        kubectl.docker \
-        ;
-    ''
-  );
-
   home.activation.zzActivateSettings = lib.mkIf isDarwin ''
     $DRY_RUN_CMD /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     PATH="/usr/bin:$PATH" $DRY_RUN_CMD killall Dock ControlCenter
