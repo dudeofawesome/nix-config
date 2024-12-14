@@ -13,4 +13,6 @@ in
     ./sops.nix
     ./tmux
   ];
+
+  programs.kubectl.enable = true;
 }

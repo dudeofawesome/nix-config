@@ -8,12 +8,6 @@
 with pkgs.stdenv.targetPlatform;
 let
   user = osConfig.users.users.${config.home.username};
-  doa-lib = import ../../../lib;
-  pkg-installed = doa-lib.pkg-installed {
-    inherit osConfig;
-    homeConfig = config;
-  };
-  uses_k8s = pkg-installed pkgs.kubectl;
 in
 {
   imports = [ ./starship ];
@@ -57,16 +51,6 @@ in
           if (isLinux) then
             {
               "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
-            }
-          else
-            { }
-        )
-        // (
-          if (uses_k8s) then
-            {
-              "k" = "kubectl";
-              "ktx" = "kubectx";
-              "kns" = "kubens";
             }
           else
             { }
@@ -162,18 +146,6 @@ in
       enable = config.services.podman.enable || (isLinux && osConfig.virtualisation.podman.enable);
       target = "fish/completions/podman.fish";
       source = "${pkgs.podman}/share/fish/vendor_completions.d/podman.fish";
-    };
-
-    kubectxFishCompletion = {
-      enable = uses_k8s;
-      target = "fish/completions/kubectx.fish";
-      source = "${pkgs.kubectx}/share/fish/vendor_completions.d/kubectx.fish";
-    };
-
-    kubensFishCompletion = {
-      enable = uses_k8s;
-      target = "fish/completions/kubens.fish";
-      source = "${pkgs.kubectx}/share/fish/vendor_completions.d/kubens.fish";
     };
   };
 }
