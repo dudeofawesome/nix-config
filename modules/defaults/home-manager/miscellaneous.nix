@@ -8,16 +8,10 @@
 }:
 with pkgs.stdenv.targetPlatform;
 let
-  doa-lib = import ../../../lib;
-  pkg-installed = doa-lib.pkg-installed {
-    inherit osConfig;
-    homeConfig = config;
-  };
   has_1password =
     config.programs._1password-cli.enable
     || config.programs._1password-gui.enable
     || (isLinux && (osConfig.programs._1password.enable || osConfig.programs._1password-gui.enable));
-  has_docker_desktop = pkg-installed pkgs.docker;
 in
 {
   home = {

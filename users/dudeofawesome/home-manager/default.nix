@@ -8,14 +8,7 @@
   os,
   ...
 }:
-let
-  doa-lib = import ../../../lib;
-  pkg-installed = doa-lib.pkg-installed {
-    inherit osConfig;
-    homeConfig = config;
-  };
-  has_docker = pkg-installed pkgs.docker;
-in
+with pkgs.stdenv.targetPlatform;
 {
   imports = [
     ../../../modules/presets/home-manager/paciolan.nix
@@ -53,39 +46,40 @@ in
     stateVersion = "23.05"; # Did you read the comment?
 
     packages =
+      let
+        should_install_dive =
+          (isLinux && (with osConfig; virtualisation.docker.enable || virtualisation.podman.enable))
+          || (with config; services.podman.enable || programs.docker-client.enable);
+      in
       with pkgs;
-      [
+      lib.flatten ([
         act
         awscli2
         pkgs-unstable.d2
+        (lib.optional (should_install_dive) dive)
         eternal-terminal
         krew
         watchman
-      ]
-      ++ (
-        if (machine-class == "pc") then
-          [
-            # https://github.com/NixOS/nixpkgs/issues/254944
-            # TODO: investigate using an activation script to copy the .app to /Applications
-            pkgs-unstable.bruno
-            cyberduck
-            pkgs-unstable.discord
-            drawio
-            inkscape
-            losslesscut-bin
-            opentofu
-            pkgs-unstable.raycast
-            pkgs-unstable.rectangle
-            pkgs-unstable.signal-desktop
-            pkgs-unstable.spotify
-            pkgs-unstable.tableplus
-            pkgs-unstable.tailscale
-          ]
-          ++ (if (os == "linux") then cider else [ ])
-        else
-          [ ]
-      )
-      ++ (if (has_docker) then [ dive ] else [ ]);
+
+        (lib.optionals (machine-class == "pc") ([
+          # https://github.com/NixOS/nixpkgs/issues/254944
+          # TODO: investigate using an activation script to copy the .app to /Applications
+          pkgs-unstable.bruno
+          (lib.optional isLinux cider)
+          cyberduck
+          pkgs-unstable.discord
+          drawio
+          inkscape
+          losslesscut-bin
+          opentofu
+          pkgs-unstable.raycast
+          pkgs-unstable.rectangle
+          pkgs-unstable.signal-desktop
+          pkgs-unstable.spotify
+          pkgs-unstable.tableplus
+          pkgs-unstable.tailscale
+        ]))
+      ]);
 
     keyboard = {
       layout = "us";

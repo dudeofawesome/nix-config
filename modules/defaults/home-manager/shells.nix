@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   lib,
   config,
   osConfig,
@@ -154,13 +153,13 @@ in
 
   xdg.configFile = lib.mkIf (config.programs.fish.enable) {
     dockerFishCompletion = {
-      enable = pkg-installed pkgs.docker;
+      enable = config.programs.docker-client.enable || (isLinux && osConfig.virtualisation.docker.enable);
       target = "fish/completions/docker.fish";
       source = "${pkgs.docker}/share/fish/vendor_completions.d/docker.fish";
     };
 
     podmanFishCompletion = {
-      enable = pkg-installed pkgs.podman;
+      enable = config.services.podman.enable || (isLinux && osConfig.virtualisation.podman.enable);
       target = "fish/completions/podman.fish";
       source = "${pkgs.podman}/share/fish/vendor_completions.d/podman.fish";
     };
