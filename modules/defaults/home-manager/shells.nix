@@ -24,22 +24,15 @@ in
             src = pkg.src;
           })
           (
-            [
+            lib.flatten [
               autopair
               node-binpath
               # node-version
               fishtape_3
               shell-integrations
               editor-updater
+              (lib.optional isDarwin osx)
             ]
-            ++ (
-              if isDarwin then
-                [
-                  osx
-                ]
-              else
-                [ ]
-            )
           );
 
       preferAbbrs = true;

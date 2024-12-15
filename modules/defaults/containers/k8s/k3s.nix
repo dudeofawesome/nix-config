@@ -83,21 +83,19 @@ in
     firewall = {
       package = pkgs.iptables-legacy;
 
-      allowedTCPPorts =
-        [
-          6443 # k8s API server
-        ]
+      allowedTCPPorts = lib.flatten [
+        6443 # k8s API server
         # required if using a "High Availability Embedded etcd" configuration
-        ++ lib.optionals (ha) [
+        (lib.optionals (ha) [
           2379 # etcd clients
           2380 # etcd peers
-        ];
+        ])
+      ];
 
       allowedUDPPorts =
-        [
-        ]
-        ++ lib.optionals (multi-node) [
-          8472 # k3s, flannel: required if using multi-node for inter-node networking
+        # required if using a "High Availability Embedded etcd" configuration
+        lib.optionals (multi-node) [
+          8472 # k3s, flannel:
         ];
     };
 

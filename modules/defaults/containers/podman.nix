@@ -10,10 +10,10 @@ in
 {
   environment.systemPackages =
     with pkgs-unstable;
-    [
+    lib.flatten [
       podman
-    ]
-    ++ lib.optional nvidia_enable [ nvidia-podman ];
+      (lib.optional nvidia_enable nvidia-podman)
+    ];
 
   virtualisation.podman = {
     enable = true;

@@ -54,17 +54,17 @@ in
     settings = {
       experimental-features = "nix-command flakes";
 
-      trusted-users = lib.mkDefault (
-        [ "root" ]
-        ++ (
+      trusted-users = lib.mkDefault ([
+        "root"
+        (
           if (isLinux) then
-            [ "@wheel" ]
+            "@wheel"
           else if (isDarwin) then
-            [ "@admin" ]
+            "@admin"
           else
             abort
         )
-      );
+      ]);
 
       substituters = lib.mkDefault [
         "https://cache.nixos.org/"

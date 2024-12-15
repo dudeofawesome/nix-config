@@ -26,20 +26,13 @@
   environment = {
     systemPackages =
       with pkgs;
-      [
+      lib.flatten [
         cryptsetup
         graphviz
         lshw
         usbutils
-      ]
-      ++ (
-        if (machine-class == "pc") then
-          [
-            zgrviewer
-          ]
-        else
-          [ ]
-      );
+        (lib.optional (machine-class == "pc") zgrviewer)
+      ];
   };
 
   services = {

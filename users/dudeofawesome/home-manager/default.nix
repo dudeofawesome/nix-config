@@ -10,8 +10,8 @@
 }:
 with pkgs.stdenv.targetPlatform;
 {
-  imports = [
-    ../../../modules/presets/home-manager/paciolan.nix
+  imports = lib.flatten [
+    (lib.optional (machine-class == "pc") ../../../modules/presets/home-manager/paciolan.nix)
 
     ../../../modules/defaults/home-manager
     ../../../modules/defaults/home-manager/aerospace.nix

@@ -14,17 +14,10 @@ with lib;
   environment = {
     systemPackages =
       with pkgs-unstable;
-      [
+      lib.flatten [
         # sublime4
         sunshine
-      ]
-      ++ (
-        if (arch == "x86_64") then
-          [
-            cider
-          ]
-        else
-          [ ]
-      );
+        (lib.optional (pkgs.stdenv.targetPlatform.isx86) cider)
+      ];
   };
 }

@@ -1,4 +1,9 @@
-{ users, machine-class, ... }:
+{
+  lib,
+  users,
+  machine-class,
+  ...
+}:
 {
   homebrew = {
     casks =
@@ -16,16 +21,11 @@
           };
         };
       in
-      [
-      ]
-      ++ (
-        if (machine-class == "pc") then
-          [
-            "figma"
-          ]
-        else
-          [ ]
-      );
+      lib.flatten [
+        (lib.optionals (machine-class == "pc") [
+          "figma"
+        ])
+      ];
     masApps =
       { }
       // (

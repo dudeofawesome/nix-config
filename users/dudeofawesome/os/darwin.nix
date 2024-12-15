@@ -1,25 +1,18 @@
 {
   pkgs,
+  lib,
   users,
   machine-class,
   ...
 }:
 {
-  imports =
-    [ ]
-    ++ (
-      if (machine-class == "pc") then
-        [
-          ../../../modules/presets/os/paciolan.nix
-        ]
-      else
-        [ ]
-    );
+  imports = lib.flatten [
+    (lib.optional (machine-class == "pc") ../../../modules/presets/os/paciolan.nix)
+  ];
 
   homebrew = {
-    taps =
-      [
-      ];
+    taps = [
+    ];
     casks =
       let
         skipSha = name: {
