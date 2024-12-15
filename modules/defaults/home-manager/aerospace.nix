@@ -1,6 +1,6 @@
-{ lib, osConfig, ... }:
+{ pkgs, lib, ... }:
 {
-  config = {
+  config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin.defaults = {
       NSGlobalDomain = {
         # use ctrl+cmd to drag windows from anywhere

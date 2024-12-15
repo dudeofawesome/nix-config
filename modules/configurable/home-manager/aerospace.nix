@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   pkgs-unstable,
   lib,
   config,
@@ -55,7 +56,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable) {
+  config = lib.mkIf (cfg.enable && pkgs.stdenv.targetPlatform.isDarwin) {
     home.packages = [ cfg.package ];
 
     xdg.configFile.aerospace = {
