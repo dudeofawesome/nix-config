@@ -166,8 +166,8 @@
         # and use the os module below
         username = {
           show_always = false;
-          style_user = "bg:#prev_bg";
-          style_root = "bg:#prev_bg";
+          style_user = "bg:prev_bg";
+          style_root = "bg:red";
           format = "[$user ]($style)";
           disabled = false;
         };
