@@ -23,6 +23,7 @@ in
     home.packages = [
       cfg.package
       pkgs.kubectx
+      pkgs.kubectl-cnpg
     ];
 
     programs.fish.shellAbbrs = {

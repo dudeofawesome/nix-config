@@ -58,7 +58,6 @@ with pkgs.stdenv.targetPlatform;
         pkgs-unstable.d2
         (lib.optional (should_install_dive) dive)
         eternal-terminal
-        krew
         watchman
 
         (lib.optionals (machine-class == "pc") ([
