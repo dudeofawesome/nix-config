@@ -121,7 +121,7 @@
             [
               # left side
               "[](fg:${colors.system})"
-              "[$os$username](bg:prev_fg)"
+              "[$os$username(@$hostname)](bg:prev_fg)"
               "[](fg:prev_bg bg:${colors.directory})"
               "$directory"
               "([](fg:prev_bg bg:${colors.vcs})${
@@ -171,8 +171,13 @@
           show_always = false;
           style_user = "bg:prev_bg";
           style_root = "bg:red";
-          format = "[$user ]($style)";
+          format = "[$user]($style)";
           disabled = false;
+        };
+
+        hostname = {
+          format = "[$hostname]($style)";
+          style = "bg:${colors.system}";
         };
 
         sudo = {
