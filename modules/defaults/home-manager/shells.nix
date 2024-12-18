@@ -18,22 +18,17 @@ in
 
       plugins =
         with pkgs.fishPlugins;
-        map
-          (pkg: {
-            name = pkg.name;
-            src = pkg.src;
-          })
-          (
-            lib.flatten [
-              autopair
-              node-binpath
-              # node-version
-              fishtape_3
-              shell-integrations
-              editor-updater
-              (lib.optional isDarwin osx)
-            ]
-          );
+        map (pkg: { inherit (pkg) name src; }) (
+          lib.flatten [
+            autopair
+            node-binpath
+            # node-version
+            fishtape_3
+            shell-integrations
+            editor-updater
+            (lib.optional isDarwin osx)
+          ]
+        );
 
       preferAbbrs = true;
       shellAbbrs =
