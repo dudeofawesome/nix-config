@@ -1,10 +1,13 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [ ./nerdfont-icons.nix ];
 
   programs.starship = {
     enable = true;
     enableTransience = false;
+
+    # enable fish async-prompt support
+    # enableInteractive = false;
 
     settings =
       let
@@ -240,4 +243,14 @@
         format = "[ $symbol ($version) ]($style)";
       });
   };
+
+  # programs.fish = {
+  #   plugins = map (pkg: { inherit (pkg) name src; }) [
+  #     pkgs.fishPlugins.async-prompt
+  #   ];
+
+  #   interactiveShellInit = ''
+  #     set -U async_prompt_functions fish_prompt
+  #   '';
+  # };
 }
