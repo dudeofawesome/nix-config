@@ -14,5 +14,6 @@
     ./kubectl.nix
     ./moar.nix
     ./process-compose.nix
+    ./vscode.nix
   ];
 }
