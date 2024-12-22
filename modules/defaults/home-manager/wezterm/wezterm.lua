@@ -6,8 +6,8 @@ local system_appearance = wezterm.gui.get_appearance()
 local system_appearance_light = string.match(system_appearance, 'Light')
 
 config.color_scheme = system_appearance_light
-  and 'Ocean (light) (terminal.sexy)'
-  or 'Oceanic-Next'
+  and 'Material'
+  or 'MaterialDark'
 -- config.font = wezterm.font_with_fallback { 'Fira Code' }
 
 config.initial_rows = 60
