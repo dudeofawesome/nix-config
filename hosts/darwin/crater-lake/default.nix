@@ -1,5 +1,9 @@
 { ... }:
 {
+  imports = [
+    ../../../modules/defaults/headful/gaming.darwin.nix
+  ];
+
   homebrew = {
     casks = [
       "google-earth-pro"
