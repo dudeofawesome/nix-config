@@ -72,6 +72,8 @@ in
       #   };
       # };
 
+      # TODO: can we actually configure everything we think we can?
+      #   https://support.1password.com/settings-security/#considerations-for-system-administrators
       home.file-json._1password-gui = lib.mkIf (cfg.extraConfig != { }) {
         inherit (cfg) enable extraConfig;
         target =
