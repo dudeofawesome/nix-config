@@ -19,8 +19,11 @@ with pkgs.stdenv.targetPlatform;
         gitlab-runner
         pkgs-unstable.postman
         pkgs-unstable.slack
-        pkgs-unstable.tableplus
         pkgs-unstable.zoom-us
+
+        (lib.optionals isDarwin [
+          pkgs-unstable.tableplus
+        ])
       ])
     ];
 }

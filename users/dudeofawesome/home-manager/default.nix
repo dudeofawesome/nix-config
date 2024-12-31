@@ -5,7 +5,6 @@
   osConfig,
   config,
   machine-class,
-  os,
   ...
 }:
 with pkgs.stdenv.targetPlatform;
@@ -64,19 +63,23 @@ with pkgs.stdenv.targetPlatform;
           # https://github.com/NixOS/nixpkgs/issues/254944
           # TODO: investigate using an activation script to copy the .app to /Applications
           bruno
-          (lib.optional isLinux cider)
-          cyberduck
           pkgs-unstable.discord
           drawio
           inkscape
           losslesscut-bin
           opentofu
-          pkgs-unstable.raycast
-          pkgs-unstable.rectangle
           pkgs-unstable.signal-desktop
           pkgs-unstable.spotify
-          pkgs-unstable.tableplus
           pkgs-unstable.tailscale
+
+          (lib.optionals isLinux [ pkgs-unstable.cider ])
+
+          (lib.optionals isDarwin [
+            cyberduck
+            pkgs-unstable.raycast
+            pkgs-unstable.rectangle
+            pkgs-unstable.tableplus
+          ])
         ]))
       ]);
 
