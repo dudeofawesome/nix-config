@@ -26,6 +26,7 @@
   boot.kernelModules = [
     "kvm-intel"
     "wl"
+    "mt76"
   ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
