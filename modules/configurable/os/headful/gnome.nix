@@ -42,7 +42,7 @@ in
   config = {
     environment = {
       systemPackages = with pkgs; [
-        gnome.dconf-editor
+        dconf-editor
         gnomeExtensions.wayland-or-x11
       ];
 
