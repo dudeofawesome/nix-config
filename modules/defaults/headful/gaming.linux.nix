@@ -1,19 +1,19 @@
-{ pkgs-unstable, ... }:
+{ pkgs-stable, pkgs-unstable, ... }:
 {
   imports = [
   ];
 
   environment = {
-    systemPackages = with pkgs-unstable; [
+    systemPackages = with pkgs-stable; [
       antimicrox
       discord
       # gamescope
-      game-devices-udev-rules
+      pkgs-unstable.game-devices-udev-rules
       heroic
       parsec-bin
-      protontricks
-      protonup-qt
-      steam
+      pkgs-unstable.protontricks
+      pkgs-unstable.protonup-qt
+      pkgs-unstable.steam
       steam-rom-manager
       steam-tui
       steamguard-cli
