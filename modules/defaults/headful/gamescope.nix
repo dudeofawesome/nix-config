@@ -1,4 +1,4 @@
-{ pkgs-unstable }:
+{ pkgs-unstable, ... }:
 {
   # boot.kernelPackages = pkgs.linuxPackages; # (this is the default) some amdgpu issues on 6.10
 
