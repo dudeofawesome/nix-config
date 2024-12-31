@@ -18,8 +18,6 @@
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     extraPackages = [ config.boot.kernelPackages.nvidia_x11.out ];
     extraPackages32 = [ config.boot.kernelPackages.nvidia_x11.lib32 ];
   };
