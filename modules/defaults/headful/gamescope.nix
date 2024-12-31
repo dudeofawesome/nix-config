@@ -27,5 +27,7 @@
     steam.gamescopeSession.enable = true;
   };
 
-  environment.systemPackages = pkgs-unstable.mangohud;
+  environment.systemPackages = [
+    pkgs-unstable.mangohud
+  ];
 }
