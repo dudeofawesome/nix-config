@@ -47,8 +47,8 @@ in
       ];
 
       gnome.excludePackages = (
-        with pkgs;
         with pkgs.gnome;
+        with pkgs;
         [
           gnome-connections
           gnome-photos
