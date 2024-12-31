@@ -29,6 +29,7 @@
     "mt76"
   ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  hardware.usb-modeswitch.enable = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/cfb50db3-892a-4a60-b6bd-695918871205";
