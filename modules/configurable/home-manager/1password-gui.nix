@@ -78,7 +78,7 @@ in
           if (pkgs.stdenv.targetPlatform.isDarwin) then
             "Library/Group Containers/2BUA8C4S2C.com.1password/Library/Application Support/1Password/Data/settings/settings.json"
           else
-            abort;
+            ".config/1Password/settings/settings.json";
       };
     };
 }
