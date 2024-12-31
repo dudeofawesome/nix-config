@@ -1,7 +1,6 @@
 { pkgs-unstable, ... }:
 {
   imports = [
-    ../8bitdo.nix
   ];
 
   environment = {
