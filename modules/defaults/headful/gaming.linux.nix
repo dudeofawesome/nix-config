@@ -1,6 +1,7 @@
 { pkgs-stable, pkgs-unstable, ... }:
 {
   imports = [
+    ./gamescope.nix
   ];
 
   environment = {
@@ -15,7 +16,7 @@
       pkgs-unstable.protonup-qt
       pkgs-unstable.steam
       steam-rom-manager
-      steam-tui
+      pkgs-unstable.steam-tui
       steamguard-cli
       sunshine
     ];
