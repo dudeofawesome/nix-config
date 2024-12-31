@@ -16,7 +16,7 @@
   };
 
   # Enable OpenGL
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = [ config.boot.kernelPackages.nvidia_x11.out ];
     extraPackages32 = [ config.boot.kernelPackages.nvidia_x11.lib32 ];
