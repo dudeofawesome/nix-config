@@ -8,7 +8,7 @@
 with lib;
 {
   imports = [
-    ../configurable/headful/gnome.nix
+    ../../modules/configurable/os/headful/gnome.nix
   ];
 
   environment = {
