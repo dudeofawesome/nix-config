@@ -9,7 +9,7 @@
 }:
 {
   imports = [
-    ../../../defaults/pipewire.nix
+    ../../defaults/pipewire.nix
   ];
 
   config = {
