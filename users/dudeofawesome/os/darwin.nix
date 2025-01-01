@@ -41,6 +41,7 @@
         "firefox"
         "hammerspoon"
         "jordanbaird-ice"
+        "launchcontrol"
         "logitech-g-hub"
         "lulu"
         (noQuarantine "middleclick")
