@@ -55,6 +55,12 @@
           hash = "sha256-kIVCtYGlWKS0d/Potwo6X8F7Hgc/1S1RQTEbJi+IL9U=";
         };
       });
+
+      scrutiny-collector = prev.scrutiny-collector.overrideAttrs (old: {
+        meta = old.meta // {
+          platforms = lib.platforms.all;
+        };
+      });
     })
 
     # TODO: create overlays to make programs recognize configs in XDG's ~/.config
