@@ -53,6 +53,7 @@
         "private-internet-access"
         "steam"
         "stay"
+        "tailscale"
         "typora"
         "workman"
       ];
