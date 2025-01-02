@@ -34,7 +34,7 @@ with lib;
         bierner.markdown-mermaid
         bmalehorn.vscode-fish
         bpruitt-goddard.mermaid-markdown-syntax-highlighting
-        bradlc.vscode-tailwindcss
+        # bradlc.vscode-tailwindcss
         bruno-api-client.bruno
         castwide.solargraph
         codezombiech.gitignore
