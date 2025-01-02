@@ -102,6 +102,7 @@ with lib;
         semanticdiff.semanticdiff
         shd101wyy.markdown-preview-enhanced
         shopify.ruby-lsp
+        signageos.signageos-vscode-sops
         streetsidesoftware.code-spell-checker
         stylelint.vscode-stylelint
         tamasfe.even-better-toml
