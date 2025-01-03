@@ -335,6 +335,21 @@
     }
   },
 
+  "vscode-kubernetes.kubectl-path": "this should be replaced by nix",
+  "vscode-kubernetes.helm-path": "this should be replaced by nix",
+  "vscode-kubernetes.log-viewer.autorun": true,
+  "vscode-kubernetes.log-viewer.follow": true,
+  "vscode-kubernetes.log-viewer.wrap": true,
+  "vscode-kubernetes.log-viewer.tail": 100,
+  "vs-kubernetes": {
+    "vs-kubernetes.kubectlVersioning": "user-provided",
+    "vs-kubernetes.kubectl-path": "this should be replaced by nix",
+    "vs-kubernetes.helm-path": "this should be replaced by nix",
+    "vs-kubernetes.outputFormat": "yaml",
+    // "vs-kubernetes.kubeconfig": "this should be replaced by nix",
+    "checkForMinikubeUpgrade": false
+  },
+
   "[fish]": {
     "editor.defaultFormatter": "bmalehorn.vscode-fish",
     "editor.tabSize": 4,
