@@ -2,6 +2,7 @@
   os,
   users,
   lib,
+  config,
   ...
 }:
 {
@@ -13,8 +14,8 @@
     key: val:
     (
       { }
-      // (if (val.config ? "default") then val.config.default else { })
-      // (if (val.config ? "${os}") then val.config.${os} else { })
+      // (if (val.os ? "default") then (val.os.default { inherit config lib; }) else { })
+      // (if (val.os ? "${os}") then (val.os.${os} { inherit config lib; }) else { })
     )
   ) users;
 }
