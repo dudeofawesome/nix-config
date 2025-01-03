@@ -19,6 +19,7 @@ let
     str
     int
     submodule
+    path
     ;
   launchdTypes = import "${inputs.darwin}/modules/launchd/types.nix" { inherit config lib; };
 
@@ -45,6 +46,13 @@ in
           };
           description = ''
             How often to run the collector in launchd calendar format.
+          '';
+        };
+
+        api-endpoint-secret = mkOption {
+          type = nullOr path;
+          description = ''
+            A path to a file containing the Scrutiny server API endpoint
           '';
         };
 
@@ -103,14 +111,22 @@ in
       # };
 
       launchd.daemons.scrutiny-collector = {
-        serviceConfig = {
-          ProgramArguments = [
-            (getExe cfg.collector.package)
-            "run"
-            "--config"
-            (builtins.toString (settingsFormat.generate "scrutiny-collector.yaml" cfg.collector.settings))
-          ];
+        script =
+          let
+            settings = lib.filterAttrsRecursive (key: val: val != null) cfg.collector.settings;
+          in
+          lib.concatStringsSep " " (
+            lib.flatten [
+              (getExe cfg.collector.package)
+              "run"
+              ''--config "${settingsFormat.generate "scrutiny-collector.yaml" settings}"''
+              (lib.optional (
+                cfg.collector.api-endpoint-secret != null
+              ) ''--api-endpoint "$(cat "${cfg.collector.api-endpoint-secret}")"'')
+            ]
+          );
 
+        serviceConfig = {
           ProcessType = "Background";
 
           RunAtLoad = true;

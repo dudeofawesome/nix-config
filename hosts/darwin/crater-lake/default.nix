@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   imports = [
     ../../../modules/defaults/headful/gaming.darwin.nix
@@ -24,5 +24,14 @@
         ];
       }
     ];
+  };
+
+  services.scrutiny.collector = {
+    enable = true;
+    api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
+    settings = {
+      host.id = config.networking.hostName;
+      devices = [ { device = "/dev/disk0"; } ];
+    };
   };
 }
