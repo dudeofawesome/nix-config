@@ -347,21 +347,19 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs-stable"
-        ],
-        "nixpkgs-stable": []
+        ]
       },
       "locked": {
-        "lastModified": 1731814239,
-        "narHash": "sha256-TGnMXCeXS924w9W6CvRFtUCUFr8E/RK138lHxU3vcw8=",
+        "lastModified": 1735844895,
+        "narHash": "sha256-CIRlqX9tBK2awJkmVu2cKuap/0QziDXStQZ/u/+e8Z4=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "47fc1d8c72dbd69b32ecb2019b5b648da3dd20ce",
+        "rev": "24d89184adf76d7ccc99e659dc5f3838efb5ee32",
         "type": "github"
       },
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "47fc1d8c72dbd69b32ecb2019b5b648da3dd20ce",
         "type": "github"
       }
     },

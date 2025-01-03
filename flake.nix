@@ -27,9 +27,8 @@
     };
 
     sops = {
-      url = "github:Mic92/sops-nix/47fc1d8c72dbd69b32ecb2019b5b648da3dd20ce";
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      inputs.nixpkgs-stable.follows = "";
     };
 
     vscode-server = {
