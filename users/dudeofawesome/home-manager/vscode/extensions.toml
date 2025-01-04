@@ -1,4 +1,4 @@
-vscode_version = "1.95.3"
+vscode_version = "1.96.0"
 
 extensions = [
   { extension_name = 'gitlab-ci-ls', publisher_name = 'alesbrelih' },
