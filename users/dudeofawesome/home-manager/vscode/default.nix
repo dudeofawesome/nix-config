@@ -48,6 +48,7 @@ with lib;
         drknoxy.eslint-disable-snippets
         eamodio.gitlens
         editorconfig.editorconfig
+        eeyore.yapf
         effectful-tech.effect-vscode
         equinusocio.vsc-material-theme-icons
         esbenp.prettier-vscode
@@ -76,7 +77,6 @@ with lib;
         mrmlnc.vscode-scss
         ms-azuretools.vscode-docker
         ms-kubernetes-tools.vscode-kubernetes-tools
-        ms-python.black-formatter
         ms-python.python
         ms-python.vscode-pylance
         ms-toolsai.jupyter

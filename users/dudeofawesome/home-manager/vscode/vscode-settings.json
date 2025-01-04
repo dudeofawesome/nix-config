@@ -292,7 +292,7 @@
 
   "[python]": {
     "editor.formatOnPaste": false,
-    "editor.defaultFormatter": "ms-python.python",
+    "editor.defaultFormatter": "eeyore.yapf",
     "editor.formatOnType": true
   },
   "python.languageServer": "Pylance",

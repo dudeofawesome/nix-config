@@ -210,6 +210,12 @@ merge
             version = "0.0.26";
             sha256 = "13ml1zk8g5g56c74acq9xrhndyj1s1k1ayadlgv9hn1b18l28lwj";
           };
+          "eeyore"."yapf" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "yapf";
+            publisher = "eeyore";
+            version = "2024.12.104094746";
+            sha256 = "09rl3f3k0zbfkrhyn97kzavj5h42pdhkvk7l7g8z45xk2idcx3yn";
+          };
           "jnoortheen"."nix-ide" = vscode-utils.extensionFromVscodeMarketplace {
             name = "nix-ide";
             publisher = "jnoortheen";

@@ -10,6 +10,7 @@ extensions = [
   { extension_name = 'solargraph', publisher_name = 'castwide' },
   { extension_name = 'nodejs-testing', publisher_name = 'connor4312' },
   { extension_name = 'dart-code', publisher_name = 'dart-code' },
+  { extension_name = 'yapf', publisher_name = 'eeyore' },
   { extension_name = 'flutter', publisher_name = 'dart-code' },
   { extension_name = 'vscode-dash', publisher_name = 'deerawan' },
   { extension_name = 'eslint-disable-snippets', publisher_name = 'drknoxy' },
