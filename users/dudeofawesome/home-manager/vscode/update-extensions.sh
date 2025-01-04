@@ -7,7 +7,6 @@ cd "$(dirname $0)"
 input="extensions.toml"
 output="extensions.nix"
 
-
 # generate extension expressions
 nix4vscode "$input" --output "$output"
 
