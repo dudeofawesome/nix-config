@@ -250,12 +250,4 @@
       ];
     };
   };
-
-  home.activation.createVSCodeIntellicodeDir =
-    lib.mkIf (config.programs.vscode.enable && pkgs.stdenv.targetPlatform.isDarwin)
-      ''
-        path="/var/lib/vsintellicode/"
-        PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo mkdir -p "$path"
-        PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chown $(whoami) "$path"
-      '';
 }

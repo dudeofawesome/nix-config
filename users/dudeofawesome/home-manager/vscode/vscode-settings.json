@@ -103,18 +103,15 @@
   "editor.snippetSuggestions": "inline",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "vsintellicode.modelDownloadPath": "/var/lib/vsintellicode/",
 
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
   "editor.guides.indentation": true,
   "editor.colorDecorators": true,
 
-  "explorer.openEditors.visible": 0,
   "window.restoreWindows": "folders",
   "window.clickThroughInactive": false,
 
-  "debug.enableAllHovers": true,
   "debug.toolBarLocation": "docked",
   "debug.focusWindowOnBreak": false,
   "debug.console.acceptSuggestionOnEnter": "on",
@@ -141,8 +138,6 @@
   "terminal.external.windowsExec": "C:\\Users\\DudeOfAwesome\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.defaultProfile.osx": "fish",
-  "terminal.integrated.shell.windows": "arch.exe",
-  "terminal.integrated.shellArgs.windows": ["run"],
   "terminal.integrated.defaultProfile.linux": "fish",
   "terminal.integrated.shellIntegration.enabled": true,
   "terminal.integrated.scrollback": 10000,
@@ -192,7 +187,7 @@
     "**/.devenv/": true
   },
 
-  "testing.openTesting": "neverOpen",
+  "testing.automaticallyOpenTestResults": "neverOpen",
 
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
@@ -296,9 +291,7 @@
     "editor.formatOnType": true
   },
   "python.languageServer": "Pylance",
-  "python.jediEnabled": false,
   "python.defaultInterpreterPath": "python3",
-  "python.showStartPage": false,
   "jupyter.askForKernelRestart": false,
 
   "[rust]": {
@@ -347,7 +340,8 @@
     "vs-kubernetes.helm-path": "this should be replaced by nix",
     "vs-kubernetes.outputFormat": "yaml",
     // "vs-kubernetes.kubeconfig": "this should be replaced by nix",
-    "checkForMinikubeUpgrade": false
+    "checkForMinikubeUpgrade": false,
+    "vs-kubernetes.crd-code-completion": "enabled"
   },
 
   "[fish]": {
@@ -376,11 +370,11 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
     "editor.defaultFormatter": "Dart-Code.dart-code"
   },
   "dart.sdkPath": "/Users/dudeofawesome/Library/Developer/flutter/bin/cache/dart-sdk",
-  "dart.flutterHotReloadOnSave": "always",
+  "dart.flutterHotReloadOnSave": "all",
   "dart.debugSdkLibraries": true,
   "dart.debugExternalLibraries": false,
   "dart.showTodos": true,
