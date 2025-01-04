@@ -1,6 +1,5 @@
 #!/usr/bin/env nix
-#! nix shell nixpkgs#bash nixpkgs#gnused github:nix-community/nix4vscode/632927533fcf28419c12c6394efdf6592f886e4f --command bash
-# ^ https://github.com/nix-community/nix4vscode/issues/194
+#! nix shell nixpkgs#bash nixpkgs#gnused github:nix-community/nix4vscode --command bash
 set -e
 
 cd "$(dirname $0)"
