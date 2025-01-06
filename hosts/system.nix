@@ -44,7 +44,7 @@ in
     packageOverlays
 
     ./${distro}/${hostname}
-    (if (os == "linux") then ./${distro}/${hostname}/hardware-configuration.nix else { })
+    (doa-lib.try-import ./${distro}/${hostname}/hardware-configuration.nix)
     (doa-lib.try-import ./${distro}/${hostname}/disko.nix)
     ../modules/machine-classes/${machine-class}.nix
     ../modules/presets/os/base
