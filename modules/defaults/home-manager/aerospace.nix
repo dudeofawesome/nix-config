@@ -285,17 +285,45 @@
               # }]
             ];
 
+          # https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
           workspace-to-monitor-force-assignment =
             let
-              desk = {
+              removeWorkspacePrefix = lib.mapAttrs' (
+                name: value: lib.nameValuePair (lib.removePrefix "workspace " name) value
+              );
+
+              built-in = "^Built-in Retina Display$";
+              home = {
                 center = "^38GL950G$";
                 right = "^DELL U2717D$";
-                builtin = "^Built-in Retina Display$";
+              };
+              paciolan = {
+                left = "^DELL U2415 (2)$";
+                right = "^DELL U2415 (1)$";
               };
             in
-            {
-              ${lib.removePrefix "workspace " workspaces.code} = desk.center;
-              ${lib.removePrefix "workspace " workspaces.social} = desk.right;
+            removeWorkspacePrefix {
+              ${workspaces.code} = [
+                home.center
+                paciolan.right
+              ];
+              ${workspaces.browser} = [
+                home.center
+                paciolan.left
+              ];
+              ${workspaces.misc} = [
+                built-in
+              ];
+              ${workspaces.tmp} = [
+                built-in
+              ];
+              ${workspaces.social} = [
+                home.right
+                built-in
+              ];
+              ${workspaces.music} = [
+                built-in
+              ];
             };
         };
     };
