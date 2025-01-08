@@ -777,6 +777,38 @@
 
   "gitlab.duoCodeSuggestions.enabled": false,
   "gitlab.duoChat.enabled": false,
+  "gitlab.customQueries": [
+    // merge requests
+    {
+      "name": "All project merge requests",
+      "type": "merge_requests",
+      "scope": "all",
+      "state": "opened",
+      "noItemText": "The project has no merge requests"
+    },
+    {
+      "name": "Merge requests created by me",
+      "type": "merge_requests",
+      "scope": "created_by_me",
+      "state": "opened",
+      "noItemText": "No merge requests created by you."
+    },
+    // issues
+    {
+      "name": "Issues assigned to me",
+      "type": "issues",
+      "scope": "assigned_to_me",
+      "state": "opened",
+      "noItemText": "No issues assigned to you."
+    },
+    {
+      "name": "Issues created by me",
+      "type": "issues",
+      "scope": "created_by_me",
+      "state": "opened",
+      "noItemText": "No issues created by you."
+    }
+  ],
   "gitlabLs.executablePath": "this should be replaced by nix",
 
   "1password.editor.suggestStorage": false
