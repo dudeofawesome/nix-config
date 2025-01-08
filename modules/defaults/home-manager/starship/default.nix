@@ -214,7 +214,7 @@
         nix_shell = {
           heuristic = true;
           style = "bg:prev_bg";
-          format = "[ $symbol ]($style)";
+          format = "[ $symbol]($style)";
         };
 
         git_branch = {
