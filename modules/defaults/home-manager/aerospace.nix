@@ -261,11 +261,13 @@
                 "com.googlecode.iterm2"
               ] workspaces.code)
               (apps-to-workspace [
-                "us.zoom.xos"
                 "com.apple.iCal"
                 "com.apple.Notes"
                 "com.apple.reminders"
               ] workspaces.misc)
+              (apps-to-workspace [
+                "us.zoom.xos"
+              ] workspaces.tmp)
               (apps-to-workspace [
                 "org.whispersystems.signal-desktop"
                 "com.apple.MobileSMS"
@@ -298,8 +300,8 @@
                 right = "^DELL U2717D$";
               };
               paciolan = {
-                left = "^DELL U2415 (2)$";
-                right = "^DELL U2415 (1)$";
+                left = "^DELL U2415 \\(1\\)$";
+                right = "^DELL U2415 \\(2\\)$";
               };
             in
             removeWorkspacePrefix {
