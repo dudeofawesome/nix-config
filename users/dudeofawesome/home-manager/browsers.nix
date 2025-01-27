@@ -37,7 +37,7 @@
 
     profiles =
       let
-        dudeofawesome = {
+        dudeofawesome = rec {
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             onepassword-password-manager
             # clearurls
@@ -284,9 +284,8 @@
 
             "browser.shell.checkDefaultBrowser" = false;
 
-            "browser.urlbar.placeholderName" = config.programs.firefox.profiles.dudeofawesome.search.default;
-            "browser.urlbar.placeholderName.private" =
-              config.programs.firefox.profiles.dudeofawesome.search.default;
+            "browser.urlbar.placeholderName" = search.default;
+            "browser.urlbar.placeholderName.private" = search.privateDefault;
 
             # disable built-in password manager
             "signon.rememberSignons" = false;
