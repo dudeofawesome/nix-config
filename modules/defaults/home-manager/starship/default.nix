@@ -158,7 +158,7 @@
             ];
 
         fill = {
-          symbol = "";
+          symbol = "─";
           style = "bright-black";
         };
 
