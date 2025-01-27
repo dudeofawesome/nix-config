@@ -83,7 +83,7 @@
           containersForce = true;
 
           search = {
-            default = "DuckDuckGo";
+            default = "Kagi";
             privateDefault = "DuckDuckGo";
             force = true;
 
@@ -99,9 +99,27 @@
                       }
                     ];
                   }
+                  {
+                    template = "https://kagi.com/api/autosuggest";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                    type = "application/x-suggestions+json";
+                  }
                 ];
 
                 iconUpdateURL = "https://kagi.com/favicon.ico";
+                definedAliases = [
+                  "@kagi"
+                  "@k"
+                ];
+              };
+
+              "DuckDuckGo" = {
+                metaData.hidden = false;
               };
 
               "NPM" = {
@@ -120,6 +138,30 @@
                 iconUpdateURL = "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png";
                 definedAliases = [ "@npm" ];
               };
+
+              "GitHub" = {
+                urls = [
+                  {
+                    template = "https://github.com/search";
+                    params = [
+                      {
+                        name = "type";
+                        value = "code";
+                      }
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "https://github.com/favicon.ico";
+                definedAliases = [
+                  "@github"
+                  "@gh"
+                ];
+              };
+
               "Glassdoor" = {
                 urls = [
                   {
@@ -187,6 +229,28 @@
 
                 icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@nixo" ];
+              };
+              "Home Manager Options" = {
+                urls = [
+                  {
+                    template = "https://home-manager-options.extranix.com/";
+                    params = [
+                      {
+                        name = "release";
+                        value = "master";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "https://home-manager-options.extranix.com/images/favicon.png";
+                definedAliases = [
+                  "@home-manager"
+                  "@hmo"
+                ];
               };
 
               "Amazon".metaData.hidden = true;
