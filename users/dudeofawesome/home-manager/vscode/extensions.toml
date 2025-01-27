@@ -43,7 +43,7 @@ extensions = [
   { extension_name = 'yapf', publisher_name = 'eeyore' },
 
   { extension_name = 'vscode-yaml', publisher_name = 'redhat' },
-  { extension_name = 'vscode-json5', publisher_name = 'mrmlnc' },
+  { extension_name = 'better-json5', publisher_name = 'blueglassblock' },
   { extension_name = 'gitlab-ci-ls', publisher_name = 'alesbrelih' },
 
   { extension_name = 'vscode-mermaid-editor', publisher_name = 'tomoyukim' },

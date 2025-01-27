@@ -32,6 +32,7 @@ with lib;
         antyos.openscad
         beardedbear.beardedtheme
         bierner.markdown-mermaid
+        blueglassblock.better-json5
         bmalehorn.vscode-fish
         bpruitt-goddard.mermaid-markdown-syntax-highlighting
         # bradlc.vscode-tailwindcss
@@ -73,7 +74,6 @@ with lib;
         mads-hartmann.bash-ide-vscode
         mathiasfrohlich.kotlin
         mikestead.dotenv
-        mrmlnc.vscode-json5
         mrmlnc.vscode-scss
         ms-azuretools.vscode-docker
         ms-kubernetes-tools.vscode-kubernetes-tools
