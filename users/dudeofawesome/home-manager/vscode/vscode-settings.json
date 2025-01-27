@@ -812,5 +812,7 @@
   ],
   "gitlabLs.executablePath": "this should be replaced by nix",
 
+  "chat.commandCenter.enabled": false,
+
   "1password.editor.suggestStorage": false
 }
