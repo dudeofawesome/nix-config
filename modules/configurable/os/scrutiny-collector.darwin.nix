@@ -32,7 +32,7 @@ in
     services.scrutiny = {
       collector = {
         enable = mkEnableOption "the Scrutiny metrics collector" // {
-          default = cfg.enable;
+          default = false;
           defaultText = lib.literalExpression "config.services.scrutiny.enable";
         };
 

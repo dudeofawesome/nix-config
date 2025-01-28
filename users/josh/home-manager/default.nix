@@ -3,6 +3,7 @@
   pkgs-unstable,
   lib,
   machine-class,
+  config,
   ...
 }:
 {
@@ -25,7 +26,9 @@
     # such as data conversion or moving files.
     stateVersion = "23.05"; # Did you read the comment?
 
-    packages = with pkgs-unstable; [ ];
+    packages = with pkgs-unstable; [
+      gitlab-ci-ls
+    ];
 
     keyboard = {
       layout = "us";
@@ -85,25 +88,27 @@
       apps = [
         "/Applications/Google Chrome.app"
         "/Applications/Spotify.app"
+        "${config.home.homeDirectory}/Applications/Chrome Apps.localized/Gmail.app"
         "/Applications/Microsoft Outlook.app"
         "/Applications/zoom.us.app"
         "/Applications/Slack.app"
         "/Applications/Messenger.app"
         "/Applications/Signal.app"
+        "/System/Applications/Messages.app"
         "/Applications/Discord.app"
-        "/Applications/Sublime Text.app"
         "/Applications/Visual Studio Code.app"
         "/Applications/TablePlus.app"
         "/Applications/iTerm.app"
         "/Applications/Fork.app"
         "/Applications/Postman.app"
         "/Applications/Todoist.app"
-        "/System/Applications/Stickies.app"
+        "/System/Applications/Notes.app"
+        "/System/Applications/iPhone Mirroring.app"
       ];
 
       others = {
         # ~/Downloads
-        "/Users/'$(whoami)'/Downloads/" = {
+        "${config.home.homeDirectory}/Downloads/" = {
           fileType = "2";
           arrangement = "1";
           displayAs = "0";
