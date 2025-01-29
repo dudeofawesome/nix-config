@@ -45,7 +45,6 @@
         "logitech-g-hub"
         "lulu"
         (noQuarantine "middleclick")
-        "mitmproxy"
         "parsec"
         "plex"
         "plexamp"

@@ -18,7 +18,7 @@ in
   environment = {
     systemPackages = with pkgs; [
       docker
-      # mitmproxy
+      mitmproxy
       pkgs-unstable.moonlight-qt
       watch
     ];
