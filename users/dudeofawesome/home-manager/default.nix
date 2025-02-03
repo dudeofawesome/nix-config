@@ -94,6 +94,12 @@ with pkgs.stdenv.targetPlatform;
   #   sopsFile = ../../../hosts/nixos/monongahela/secrets.yaml;
   #   # path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
   # };
+  sops.secrets = {
+    "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-certificate-data".sopsFile =
+      ../secrets.yaml;
+    "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-key-data".sopsFile = ../secrets.yaml;
+    "users/dudeofawesome/kubeconfig/users/lorleans@paciolan.com/token".sopsFile = ../secrets.yaml;
+  };
 
   programs = {
     ssh.matchBlocks =
@@ -240,6 +246,21 @@ with pkgs.stdenv.targetPlatform;
             role_arn = "arn:aws:iam::046314659632:role/AssumeRole-Dev-ReadOnly";
           };
         };
+    };
+
+    kubeconfig = {
+      enable = true;
+      users = {
+        dudeofawesome = {
+          client-certificate-data =
+            config.sops.secrets."users/dudeofawesome/kubeconfig/users/dudeofawesome/client-certificate-data".path;
+          client-key-data =
+            config.sops.secrets."users/dudeofawesome/kubeconfig/users/dudeofawesome/client-key-data".path;
+        };
+        "lorleans@paciolan.com" = {
+          token = config.sops.secrets."users/dudeofawesome/kubeconfig/users/lorleans@paciolan.com/token".path;
+        };
+      };
     };
 
     docker-desktop.enable = true;

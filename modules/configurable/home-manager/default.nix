@@ -11,6 +11,7 @@
     ./docker-desktop.nix
     ./file-json.nix
     ./finicky.nix
+    ./kubeconfig.nix
     ./kubectl.nix
     ./moar.nix
     ./process-compose.nix
