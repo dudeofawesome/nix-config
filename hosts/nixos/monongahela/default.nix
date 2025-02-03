@@ -1,6 +1,8 @@
 { config, ... }:
 {
-  imports = [ ];
+  imports = [
+    ../../../modules/defaults/tailscale.nix
+  ];
 
   sops.secrets."hosts/nixos/monongahela/ssh-keys/dudeofawesome_nix-config/private" = {
     sopsFile = ./secrets.yaml;
