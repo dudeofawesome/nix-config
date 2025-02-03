@@ -100,7 +100,14 @@ with pkgs.stdenv.targetPlatform;
     "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-certificate-data".sopsFile =
       ../secrets.yaml;
     "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-key-data".sopsFile = ../secrets.yaml;
+
     "users/dudeofawesome/kubeconfig/users/lorleans@paciolan.com/token".sopsFile = ../secrets.yaml;
+
+    "users/dudeofawesome/kubeconfig/clusters/monongahela/server".sopsFile = ../secrets.yaml;
+    "users/dudeofawesome/kubeconfig/clusters/monongahela/certificate-authority-data".sopsFile =
+      ../secrets.yaml;
+
+    "users/dudeofawesome/kubeconfig/clusters/pac-rancher-eks/server".sopsFile = ../secrets.yaml;
   };
 
   programs = {
@@ -262,6 +269,15 @@ with pkgs.stdenv.targetPlatform;
         "lorleans@paciolan.com" = {
           token = config.sops.secrets."users/dudeofawesome/kubeconfig/users/lorleans@paciolan.com/token".path;
         };
+      };
+      clusters = {
+        monongahela = {
+          server = config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/monongahela/server".path;
+          certificate-authority-data =
+            config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/monongahela/certificate-authority-data".path;
+        };
+        pac-rancher-eks.server =
+          config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/pac-rancher-eks/server".path;
       };
     };
 

@@ -20,7 +20,7 @@
         };
 
         users = mkOption {
-          description = ''Extra config options for 1Password's settings.json'';
+          description = ''Users'';
           type = lib.types.attrsOf (
             lib.types.submodule {
               options = {
@@ -41,8 +41,35 @@
           );
           default = { };
           example = {
-            client-certificate-data = config.sops.secrets.kube-cert.path;
-            client-key-data = config.sops.secrets.kube-key.path;
+            dudeofawesome = {
+              client-certificate-data = config.sops.secrets.kube-cert.path;
+              client-key-data = config.sops.secrets.kube-key.path;
+            };
+          };
+        };
+
+        clusters = mkOption {
+          description = ''Clusters'';
+          type = lib.types.attrsOf (
+            lib.types.submodule {
+              options = {
+                server = mkOption {
+                  type = with lib.types; path;
+                  default = null;
+                };
+                certificate-authority-data = mkOption {
+                  type = with lib.types; nullOr path;
+                  default = null;
+                };
+              };
+            }
+          );
+          default = { };
+          example = {
+            monongahela = {
+              client-certificate-data = config.sops.secrets.kube-cert.path;
+              client-key-data = config.sops.secrets.kube-key.path;
+            };
           };
         };
       };
@@ -54,17 +81,47 @@
     in
     lib.mkIf cfg.enable {
       home.activation = {
-        kubeconfigSetUsers = lib.mkIf (cfg.users != { }) (
-          lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            $DRY_RUN_CMD mkdir -p "$(dirname ~/"$(dirname "${cfg.path}")")"
+        kubeconfigCreate = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          run mkdir -p "$(dirname ~/"$(dirname "${cfg.path}")")"
+          run touch ~/"${cfg.path}"
+        '';
 
-            $DRY_RUN_CMD ${lib.getExe pkgs.yq-go} -i \
+        kubeconfigSetUsers = lib.mkIf (cfg.users != { }) (
+          lib.hm.dag.entryAfter [ "writeBoundary" "kubeconfigCreate" "sops-nix" ] ''
+            run ${lib.getExe pkgs.yq-go} -i \
               '.users = ${
                 lib.pipe cfg.users [
                   (lib.mapAttrsToList (
                     name: settings: {
                       inherit name;
                       user = lib.pipe settings [
+                        (lib.filterAttrsRecursive (k: v: v != null))
+                        (lib.mapAttrsRecursive (
+                          key: value:
+                          if (builtins.isPath value || ((builtins.isString value) && (lib.hasPrefix "/" value))) then
+                            "'$(cat ${value})'"
+                          else
+                            value
+                        ))
+                      ];
+                    }
+                  ))
+                  builtins.toJSON
+                ]
+              }' \
+              ~/"${cfg.path}"
+          ''
+        );
+
+        kubeconfigSetClusters = lib.mkIf (cfg.clusters != { }) (
+          lib.hm.dag.entryAfter [ "writeBoundary" "kubeconfigCreate" "sops-nix" ] ''
+            run ${lib.getExe pkgs.yq-go} -i \
+              '.clusters = ${
+                lib.pipe cfg.clusters [
+                  (lib.mapAttrsToList (
+                    name: settings: {
+                      inherit name;
+                      cluster = lib.pipe settings [
                         (lib.filterAttrsRecursive (k: v: v != null))
                         (lib.mapAttrsRecursive (
                           key: value:
