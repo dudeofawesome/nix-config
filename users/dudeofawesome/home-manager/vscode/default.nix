@@ -22,61 +22,59 @@ with lib;
       let
         nix4vscode = (import ./extensions.nix) { inherit pkgs lib; };
       in
-      # prefer nixpkgs extensions
+      # fallback to nixpkgs
       with pkgs-unstable.vscode-extensions;
-      # fallback to nix4vscode
-      with nix4vscode;
       [
         alefragnani.bookmarks
-        alesbrelih.gitlab-ci-ls
+        nix4vscode.alesbrelih.gitlab-ci-ls
         antyos.openscad
-        beardedbear.beardedtheme
+        nix4vscode.beardedbear.beardedtheme
         bierner.markdown-mermaid
-        blueglassblock.better-json5
+        nix4vscode.blueglassblock.better-json5
         bmalehorn.vscode-fish
-        bpruitt-goddard.mermaid-markdown-syntax-highlighting
-        # bradlc.vscode-tailwindcss
-        bruno-api-client.bruno
-        castwide.solargraph
+        nix4vscode.bpruitt-goddard.mermaid-markdown-syntax-highlighting
+        # nix4vscode.bradlc.vscode-tailwindcss
+        nix4vscode.bruno-api-client.bruno
+        nix4vscode.castwide.solargraph
         codezombiech.gitignore
-        connor4312.nodejs-testing
+        nix4vscode.connor4312.nodejs-testing
         coolbear.systemd-unit-file
         dart-code.dart-code
         dart-code.flutter
         dbaeumer.vscode-eslint
-        deerawan.vscode-dash
+        nix4vscode.deerawan.vscode-dash
         donjayamanne.githistory
-        drknoxy.eslint-disable-snippets
+        nix4vscode.drknoxy.eslint-disable-snippets
         eamodio.gitlens
         editorconfig.editorconfig
-        eeyore.yapf
-        effectful-tech.effect-vscode
+        nix4vscode.eeyore.yapf
+        nix4vscode.effectful-tech.effect-vscode
         equinusocio.vsc-material-theme-icons
         esbenp.prettier-vscode
-        fabiospampinato.vscode-diff
+        nix4vscode.fabiospampinato.vscode-diff
         firefox-devtools.vscode-firefox-debug
-        flesler.url-encode
-        fwcd.kotlin
-        ghmcadams.lintlens
-        github.vscode-github-actions
-        github.vscode-pull-request-github
-        gitlab.gitlab-workflow
+        nix4vscode.flesler.url-encode
+        nix4vscode.fwcd.kotlin
+        nix4vscode.ghmcadams.lintlens
+        nix4vscode.github.vscode-github-actions
+        nix4vscode.github.vscode-pull-request-github
+        nix4vscode.gitlab.gitlab-workflow
         golang.go
-        gracefulpotato.rbs-syntax
-        graphql.vscode-graphql
-        graphql.vscode-graphql-execution
+        nix4vscode.gracefulpotato.rbs-syntax
+        nix4vscode.graphql.vscode-graphql
+        nix4vscode.graphql.vscode-graphql-execution
         graphql.vscode-graphql-syntax
         gruntfuggly.todo-tree
         hashicorp.terraform
-        idleberg.applescript
-        inferrinizzard.prettier-sql-vscode
-        jnoortheen.nix-ide
+        nix4vscode.idleberg.applescript
+        nix4vscode.inferrinizzard.prettier-sql-vscode
+        nix4vscode.jnoortheen.nix-ide
         mads-hartmann.bash-ide-vscode
         mathiasfrohlich.kotlin
         mikestead.dotenv
-        mrmlnc.vscode-scss
+        nix4vscode.mrmlnc.vscode-scss
         ms-azuretools.vscode-docker
-        ms-kubernetes-tools.vscode-kubernetes-tools
+        nix4vscode.ms-kubernetes-tools.vscode-kubernetes-tools
         ms-python.python
         ms-python.vscode-pylance
         ms-toolsai.jupyter
@@ -84,37 +82,37 @@ with lib;
         ms-vscode-remote.remote-ssh-edit
         ms-vscode-remote.remote-wsl
         ms-vscode.hexeditor
-        ms-vscode.remote-explorer
+        nix4vscode.ms-vscode.remote-explorer
         ms-vsliveshare.vsliveshare
-        msjsdiag.vscode-react-native
-        mxsdev.typescript-explorer
+        nix4vscode.msjsdiag.vscode-react-native
+        nix4vscode.mxsdev.typescript-explorer
         naumovs.color-highlight
-        novy.vsc-gcode
-        orta.vscode-jest
-        oven.bun-vscode
+        nix4vscode.novy.vsc-gcode
+        nix4vscode.orta.vscode-jest
+        nix4vscode.oven.bun-vscode
         pkief.material-icon-theme
         pkief.material-product-icons
         shopify.ruby-lsp
         redhat.ansible
-        pkgs-unstable.vscode-extensions.redhat.vscode-yaml
+        redhat.vscode-yaml
+        nix4vscode.rooveterinaryinc.roo-cline
         ryu1kn.partial-diff
-        seeker-dk.node-modules-viewer
-        semanticdiff.semanticdiff
+        nix4vscode.seeker-dk.node-modules-viewer
+        nix4vscode.semanticdiff.semanticdiff
         shd101wyy.markdown-preview-enhanced
         shopify.ruby-lsp
-        signageos.signageos-vscode-sops
+        # signageos.signageos-vscode-sops
         streetsidesoftware.code-spell-checker
         stylelint.vscode-stylelint
         tamasfe.even-better-toml
         tomoki1207.pdf
-        tomoyukim.vscode-mermaid-editor
-        tyriar.lorem-ipsum
-        ultram4rine.vscode-choosealicense
+        nix4vscode.tomoyukim.vscode-mermaid-editor
+        nix4vscode.tyriar.lorem-ipsum
+        nix4vscode.ultram4rine.vscode-choosealicense
         visualstudioexptteam.intellicode-api-usage-examples
         visualstudioexptteam.vscodeintellicode
-        vitest.explorer
-        wallabyjs.quokka-vscode
-        weaveworks.vscode-gitops-tools
+        nix4vscode.vitest.explorer
+        nix4vscode.weaveworks.vscode-gitops-tools
         wmaurer.change-case
         yoavbls.pretty-ts-errors
         yzhang.markdown-all-in-one

@@ -775,9 +775,6 @@
     }
   },
 
-  "gitlab.duoCodeSuggestions.enabled": false,
-  "gitlab.duoChat.enabled": false,
-  "gitlab.duo.enabledWithoutGitlabProject": false,
   "gitlab.customQueries": [
     // merge requests
     {
@@ -812,7 +809,13 @@
   ],
   "gitlabLs.executablePath": "this should be replaced by nix",
 
+  // disable LLM junk
   "chat.commandCenter.enabled": false,
+  "gitlab.duoChat.enabled": false,
+  "gitlab.duoCodeSuggestions.enabled": false,
+  "gitlab.duoCodeSuggestions.enabledSupportedLanguages": {},
+  "gitlab.duo.enabledWithoutGitlabProject": false,
+  "gitlab.duoCodeSuggestions.openTabsContext": false,
 
   "1password.editor.suggestStorage": false
 }

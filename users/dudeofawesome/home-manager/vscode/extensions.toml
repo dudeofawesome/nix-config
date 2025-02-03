@@ -1,74 +1,66 @@
-vscode_version = "1.96.0"
+vscode_version = "1.96.4"
 
 extensions = [
   # languages
-  { extension_name = 'bruno', publisher_name = 'bruno-api-client' },
+  { extension_name = 'bruno', publisher_name = 'bruno-api-client' }, # missing
 
-  { extension_name = 'dart-code', publisher_name = 'dart-code' },
-  { extension_name = 'flutter', publisher_name = 'dart-code' },
+  { extension_name = 'kotlin', publisher_name = 'fwcd' }, # missing
 
-  { extension_name = 'kotlin', publisher_name = 'fwcd' },
+  { extension_name = 'solargraph', publisher_name = 'castwide' }, # missing
+  { extension_name = 'rbs-syntax', publisher_name = 'gracefulpotato' }, # missing
 
-  { extension_name = 'solargraph', publisher_name = 'castwide' },
-  { extension_name = 'rbs-syntax', publisher_name = 'gracefulpotato' },
+  { extension_name = 'vscode-graphql', publisher_name = 'graphql' }, # much more up-to-date
+  { extension_name = 'vscode-graphql-execution', publisher_name = 'graphql' }, # missing
 
-  { extension_name = 'vscode-graphql', publisher_name = 'graphql' },
-  { extension_name = 'vscode-graphql-execution', publisher_name = 'graphql' },
-  { extension_name = 'vscode-graphql-syntax', publisher_name = 'graphql' },
+  { extension_name = 'applescript', publisher_name = 'idleberg' }, # missing
 
-  { extension_name = 'applescript', publisher_name = 'idleberg' },
+  { extension_name = 'prettier-sql-vscode', publisher_name = 'inferrinizzard' }, # missing
 
-  { extension_name = 'prettier-sql-vscode', publisher_name = 'inferrinizzard' },
+  { extension_name = 'nix-ide', publisher_name = 'jnoortheen' }, # much more up-to-date
 
-  { extension_name = 'nix-ide', publisher_name = 'jnoortheen' },
+  { extension_name = 'vscode-scss', publisher_name = 'mrmlnc' }, # missing
+  { extension_name = 'vscode-tailwindcss', publisher_name = 'bradlc' }, # much more up-to-date
 
-  { extension_name = 'vscode-scss', publisher_name = 'mrmlnc' },
-  { extension_name = 'vscode-tailwindcss', publisher_name = 'bradlc' },
+  { extension_name = 'eslint-disable-snippets', publisher_name = 'drknoxy' }, # missing
+  { extension_name = 'lintlens', publisher_name = 'ghmcadams' }, # missing
+  { extension_name = 'effect-vscode', publisher_name = 'effectful-tech' }, # much more up-to-date
+  { extension_name = 'vscode-react-native', publisher_name = 'msjsdiag' }, # missing
+  { extension_name = 'nodejs-testing', publisher_name = 'connor4312' }, # missing
+  { extension_name = 'bun-vscode', publisher_name = 'oven' }, # missing
+  { extension_name = 'vscode-jest', publisher_name = 'orta' }, # missing
+  { extension_name = 'explorer', publisher_name = 'vitest' }, # missing
+  { extension_name = 'typescript-explorer', publisher_name = 'mxsdev' }, # missing
+  { extension_name = 'node-modules-viewer', publisher_name = 'seeker-dk' }, # missing
 
-  { extension_name = 'prettier-vscode', publisher_name = 'esbenp' },
-  { extension_name = 'eslint-disable-snippets', publisher_name = 'drknoxy' },
-  { extension_name = 'lintlens', publisher_name = 'ghmcadams' },
-  { extension_name = 'effect-vscode', publisher_name = 'effectful-tech' },
-  { extension_name = 'vscode-react-native', publisher_name = 'msjsdiag' },
-  { extension_name = 'nodejs-testing', publisher_name = 'connor4312' },
-  { extension_name = 'bun-vscode', publisher_name = 'oven' },
-  { extension_name = 'vscode-jest', publisher_name = 'orta' },
-  { extension_name = 'explorer', publisher_name = 'vitest' },
-  { extension_name = 'typescript-explorer', publisher_name = 'mxsdev' },
-  { extension_name = 'pretty-ts-errors', publisher_name = 'yoavbls' },
-  { extension_name = 'node-modules-viewer', publisher_name = 'seeker-dk' },
-  { extension_name = 'quokka-vscode', publisher_name = 'wallabyjs' },
+  { extension_name = 'jupyter', publisher_name = 'ms-toolsai' }, # missing
+  { extension_name = 'yapf', publisher_name = 'eeyore' }, # missing
 
-  { extension_name = 'jupyter', publisher_name = 'ms-toolsai' },
-  { extension_name = 'yapf', publisher_name = 'eeyore' },
+  { extension_name = 'vscode-yaml', publisher_name = 'redhat' }, # ? https://github.com/nix-community/nix4vscode/issues/54
+  { extension_name = 'better-json5', publisher_name = 'blueglassblock' }, # missing
+  { extension_name = 'gitlab-ci-ls', publisher_name = 'alesbrelih' }, # missing
 
-  { extension_name = 'vscode-yaml', publisher_name = 'redhat' },
-  { extension_name = 'better-json5', publisher_name = 'blueglassblock' },
-  { extension_name = 'gitlab-ci-ls', publisher_name = 'alesbrelih' },
+  { extension_name = 'vscode-mermaid-editor', publisher_name = 'tomoyukim' }, # missing
+  { extension_name = 'mermaid-markdown-syntax-highlighting', publisher_name = 'bpruitt-goddard' }, # missing
 
-  { extension_name = 'vscode-mermaid-editor', publisher_name = 'tomoyukim' },
-  { extension_name = 'mermaid-markdown-syntax-highlighting', publisher_name = 'bpruitt-goddard' },
-
-  { extension_name = 'openscad', publisher_name = 'antyos' },
-  { extension_name = 'vsc-gcode', publisher_name = 'novy' },
+  { extension_name = 'vsc-gcode', publisher_name = 'novy' }, # missing
 
   # utilities
-  { extension_name = 'url-encode', publisher_name = 'flesler' },
-  { extension_name = 'hexeditor', publisher_name = 'ms-vscode' },
-  { extension_name = 'lorem-ipsum', publisher_name = 'tyriar' },
-  { extension_name = 'vscode-choosealicense', publisher_name = 'ultram4rine' },
+  { extension_name = 'url-encode', publisher_name = 'flesler' }, # missing
+  { extension_name = 'lorem-ipsum', publisher_name = 'tyriar' }, # missing
+  { extension_name = 'vscode-choosealicense', publisher_name = 'ultram4rine' }, # missing
 
   # views
-  { extension_name = 'vscode-dash', publisher_name = 'deerawan' },
-  { extension_name = 'vscode-diff', publisher_name = 'fabiospampinato' },
-  { extension_name = 'gitlab-workflow', publisher_name = 'gitlab' },
-  { extension_name = 'vscode-kubernetes-tools', publisher_name = 'ms-kubernetes-tools' },
-  { extension_name = 'remote-explorer', publisher_name = 'ms-vscode' },
-  { extension_name = 'semanticdiff', publisher_name = 'semanticdiff' },
-  { extension_name = 'vscode-gitops-tools', publisher_name = 'weaveworks' },
-  { extension_name = 'vscode-github-actions', publisher_name = 'github' },
-  { extension_name = 'vscode-pull-request-github', publisher_name = 'github' },
+  { extension_name = 'vscode-dash', publisher_name = 'deerawan' }, # missing
+  { extension_name = 'vscode-diff', publisher_name = 'fabiospampinato' }, # missing
+  { extension_name = 'gitlab-workflow', publisher_name = 'gitlab' }, # much more up-to-date
+  { extension_name = 'vscode-kubernetes-tools', publisher_name = 'ms-kubernetes-tools' }, # quick updates
+  { extension_name = 'remote-explorer', publisher_name = 'ms-vscode' }, # missing
+  { extension_name = 'semanticdiff', publisher_name = 'semanticdiff' }, # missing
+  { extension_name = 'vscode-gitops-tools', publisher_name = 'weaveworks' }, # missing
+  { extension_name = 'vscode-github-actions', publisher_name = 'github' }, # quick updates
+  { extension_name = 'vscode-pull-request-github', publisher_name = 'github' }, # much more up-to-date
+  { extension_name = 'roo-cline', publisher_name = 'rooveterinaryinc' }, # missing
 
   # themes
-  { extension_name = 'beardedtheme', publisher_name = 'beardedbear' },
+  { extension_name = 'beardedtheme', publisher_name = 'beardedbear' }, # missing
 ]
