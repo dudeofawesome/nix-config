@@ -67,6 +67,7 @@ with pkgs.stdenv.targetPlatform;
           drawio
           inkscape
           losslesscut-bin
+          pkgs-unstable.ollama
           opentofu
           pkgs-unstable.signal-desktop
           pkgs-unstable.spotify
