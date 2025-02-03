@@ -518,6 +518,7 @@
     ],
     "yaml": ["yaml", "chef", "ansible", "jinja"],
     "scss": ["sass", "compass", "bourbon", "neat", "susy", "css"],
+    "nix": ["nix", "nixpkgs", "nix-darwin", "nixos", "home-manager"],
     "cpp": ["arduino", "cpp", "c", "manpages"],
     "fish": ["fish"],
     "scad": ["OpenSCAD", "openscad", "scad"],
