@@ -6,6 +6,7 @@
 
   homebrew = {
     casks = [
+      "android-studio"
       "google-earth-pro"
     ];
   };
