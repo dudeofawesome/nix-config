@@ -1,0 +1,25 @@
+{
+  "$schema": "zed://schemas/settings/user",
+
+  "ui_font_size": 14,
+  "ui_font_family": "FiraCode Nerd Font Mono",
+  "buffer_font_size": 14,
+  "buffer_font_family": "FiraCode Nerd Font Mono",
+
+  "theme": {
+    "dark": "Andromeda",
+    "light": "One Light",
+    "mode": "system"
+  },
+
+  "languages": {
+    "Nix": {
+      "formatter": {
+        "external": {
+          "command": ["nixfmt"]
+        }
+      },
+      "language_servers": ["nil", "!nixd"]
+    }
+  }
+}

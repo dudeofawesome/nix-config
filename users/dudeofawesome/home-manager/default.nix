@@ -31,6 +31,7 @@ with pkgs.stdenv.targetPlatform;
     ./browsers.nix
     ./vscode
     ./shells.nix
+    ./zed-editor
   ];
 
   home = {
