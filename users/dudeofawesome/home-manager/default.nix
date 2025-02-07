@@ -63,7 +63,7 @@ with pkgs.stdenv.targetPlatform;
         (lib.optionals (machine-class == "pc") ([
           # https://github.com/NixOS/nixpkgs/issues/254944
           # TODO: investigate using an activation script to copy the .app to /Applications
-          bruno
+          pkgs-unstable.bruno
           pkgs-unstable.discord
           drawio
           inkscape
