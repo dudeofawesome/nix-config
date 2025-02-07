@@ -31,10 +31,7 @@ in
   options = {
     services.scrutiny = {
       collector = {
-        enable = mkEnableOption "the Scrutiny metrics collector" // {
-          default = cfg.enable;
-          defaultText = lib.literalExpression "config.services.scrutiny.enable";
-        };
+        enable = mkEnableOption "the Scrutiny metrics collector";
 
         package = mkPackageOption pkgs "scrutiny-collector" { };
 
