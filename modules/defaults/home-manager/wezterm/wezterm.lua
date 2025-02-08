@@ -3,11 +3,11 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 local system_appearance = wezterm.gui.get_appearance()
-local system_appearance_light = string.match(system_appearance, 'Light')
+local system_appearance_dark = string.match(system_appearance, 'Dark')
 
-config.color_scheme = system_appearance_light
-  and 'Material'
-  or 'MaterialDark'
+config.color_scheme = system_appearance_dark
+  and 'MaterialDesignColors'
+  or 'Edge Light (base16)'
 -- config.font = wezterm.font_with_fallback { 'Fira Code' }
 
 config.initial_rows = 60
