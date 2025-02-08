@@ -117,12 +117,31 @@
                   "@k"
                 ];
               };
+              "Kagi Assistant" = {
+                urls = [
+                  {
+                    template = "https://kagi.com/assistant";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+
+                iconUpdateURL = "https://kagi.com/favicon-assistant-32x32.png";
+                definedAliases = [
+                  "@kagiass"
+                  "@ka"
+                ];
+              };
 
               "DuckDuckGo" = {
                 metaData.hidden = false;
               };
 
-              "NPM" = {
+              "npm" = {
                 urls = [
                   {
                     template = "https://www.npmjs.com/search";
@@ -155,7 +174,7 @@
                     ];
                   }
                 ];
-                icon = "https://github.com/favicon.ico";
+                iconUpdateURL = "https://github.githubassets.com/favicons/favicon.png";
                 definedAliases = [
                   "@github"
                   "@gh"
@@ -187,6 +206,7 @@
               #   icon = "";
               #   definedAliases = [ "@cb" ];
               # };
+
               "Nix Packages" = {
                 urls = [
                   {
@@ -213,15 +233,11 @@
               "Nix Options" = {
                 urls = [
                   {
-                    template = "https://search.nixos.org/options";
+                    template = "https://mynixos.com/search";
                     params = [
                       {
-                        name = "channel";
-                        value = "unstable";
-                      }
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
+                        name = "q";
+                        value = "%2Foption%2F+{searchTerms}";
                       }
                     ];
                   }
@@ -230,37 +246,23 @@
                 icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@nixo" ];
               };
-              "Home Manager Options" = {
-                urls = [
-                  {
-                    template = "https://home-manager-options.extranix.com/";
-                    params = [
-                      {
-                        name = "release";
-                        value = "master";
-                      }
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
-                icon = "https://home-manager-options.extranix.com/images/favicon.png";
-                definedAliases = [
-                  "@home-manager"
-                  "@hmo"
-                ];
-              };
 
-              "Amazon".metaData.hidden = true;
               "Bing".metaData.hidden = true;
               "eBay".metaData.hidden = true;
             };
 
             order = [
+              "Kagi"
+              "Kagi Assistant"
               "DuckDuckGo"
               "Google"
+              "Amazon.com"
+              "Glassdoor"
+              "Wikipedia (en)"
+              "GitHub"
+              "npm"
+              "Nix Packages"
+              "Nix Options"
             ];
           };
 
@@ -275,6 +277,7 @@
             "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
             "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
             "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+            "extensions.pocket.enabled" = false;
             "browser.urlbar.suggest.quicksuggest.sponsored" = false;
 
             # highlight all search results
@@ -287,8 +290,11 @@
             "browser.urlbar.placeholderName" = search.default;
             "browser.urlbar.placeholderName.private" = search.privateDefault;
 
-            # disable built-in password manager
+            "browser.urlbar.scotchBonnet.enableOverride" = true;
+
+            # disable built-in autofill
             "signon.rememberSignons" = false;
+            "extensions.formautofill.creditCards.enabled" = false;
           };
         };
       in
