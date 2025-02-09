@@ -72,6 +72,31 @@
             };
           };
         };
+
+        contexts = mkOption {
+          description = ''Contexts to join clusters & users'';
+          type = lib.types.attrsOf (
+            lib.types.submodule {
+              options = {
+                cluster = mkOption {
+                  type = with lib.types; str;
+                  default = null;
+                };
+                user = mkOption {
+                  type = with lib.types; str;
+                  default = null;
+                };
+              };
+            }
+          );
+          default = { };
+          example = {
+            doa-cluster = {
+              cluster = "monongahela";
+              user = "dudeofawesome";
+            };
+          };
+        };
       };
     };
 
@@ -138,6 +163,52 @@
               }' \
               ~/"${cfg.path}"
           ''
+        );
+
+        kubeconfigSetContexts = lib.mkIf (cfg.contexts != { }) (
+          lib.hm.dag.entryAfter
+            [ "writeBoundary" "kubeconfigCreate" "kubeconfigSetClusters" "kubeconfigSetUsers" ]
+            ''
+              # store old contexts
+              old_ctx="$(
+                ${lib.getExe pkgs.yq-go} \
+                  --output-format json \
+                  '.contexts' \
+                  ~/"${cfg.path}"
+              )"
+              printf "$old_ctx"
+
+              run ${lib.getExe pkgs.yq-go} -i \
+                '.contexts = ${
+                  lib.pipe cfg.contexts [
+                    (lib.mapAttrsToList (
+                      name: context: {
+                        inherit name context;
+                      }
+                    ))
+                    builtins.toJSON
+                  ]
+                }' \
+                ~/"${cfg.path}"
+
+              # restore active namespaces
+              ${lib.pipe cfg.contexts [
+                (lib.mapAttrsToList (
+                  name: context: ''
+                    namespace="$(
+                      echo "$old_ctx" | ${lib.getExe pkgs.jq} \
+                        --raw-output \
+                        '.[] | select(.name == "${name}").context.namespace'
+                    )"
+                    echo "settings ns ${name}=$namespace"
+                    run ${lib.getExe pkgs.yq-go} -i \
+                      ".contexts[] |= select(.name == \"${name}\").context.namespace = \"$namespace\"" \
+                      ~/"${cfg.path}"
+                  ''
+                ))
+                (lib.concatStringsSep "\n")
+              ]}
+            ''
         );
       };
     };

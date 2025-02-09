@@ -279,6 +279,17 @@ with pkgs.stdenv.targetPlatform;
         pac-rancher-eks.server =
           config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/pac-rancher-eks/server".path;
       };
+
+      contexts = {
+        doa-cluster = {
+          cluster = "monongahela";
+          user = "dudeofawesome";
+        };
+        "pac/rancher-eks" = {
+          cluster = "pac-rancher-eks";
+          user = "lorleans@paciolan.com";
+        };
+      };
     };
 
     docker-desktop.enable = true;
