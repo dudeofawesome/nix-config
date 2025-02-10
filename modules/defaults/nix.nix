@@ -22,13 +22,11 @@ in
       }
       // (
         if (isLinux) then
-          {
-            dates = lib.mkDefault "weekly";
-          }
+          { dates = lib.mkDefault "weekly"; }
+        else if (isDarwin) then
+          { interval.Day = lib.mkDefault 7; }
         else
-          {
-            interval.Day = lib.mkDefault 7;
-          }
+          abort "Unsupported OS"
       );
 
     optimise =
@@ -37,16 +35,16 @@ in
       }
       // (
         if (isLinux) then
-          {
-            dates = lib.mkDefault [ "03:45" ];
-          }
-        else
+          { dates = lib.mkDefault [ "03:45" ]; }
+        else if (isDarwin) then
           {
             interval = lib.mkDefault {
               Hour = 4;
               Minute = 15;
             };
           }
+        else
+          abort "Unsupported OS"
       );
 
     # disable the nix-channel command, which leads to non-reproducible envs
@@ -63,7 +61,7 @@ in
           else if (isDarwin) then
             "@admin"
           else
-            abort
+            abort "Unsupported OS"
         )
       ]);
 
