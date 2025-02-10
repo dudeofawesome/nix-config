@@ -87,14 +87,20 @@ in
 
     # Entries here make package repos available via `nix shell <name>#<pkg>`
     registry = {
+      stable.flake = inputs.nixpkgs-stable;
+      unstable.flake = inputs.nixpkgs-unstable;
+      latest.to = {
+        type = "github";
+        owner = "nixos";
+        repo = "nixpkgs";
+        # TODO: figure out how to specify `nixos-unstable` branch
+      };
+
       node.to = {
         type = "github";
         owner = "fontis";
         repo = "nix-node";
       };
-
-      stable.flake = inputs.nixpkgs-stable;
-      unstable.flake = inputs.nixpkgs-unstable;
     };
   };
 
