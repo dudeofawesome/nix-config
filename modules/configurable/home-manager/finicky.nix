@@ -45,7 +45,7 @@ in
       target = "finicky.js";
       text = cfg.settings;
       onChange = ''
-        PATH="/usr/bin:$PATH" $DRY_RUN_CMD defaults write \
+        run /usr/bin/defaults write \
           net.kassett.finicky config_location_bookmark \
             -data "$(${lib.getExe pkgs.mkalias} -f hex "${config.home.homeDirectory}/${config.xdg.configFile.finicky.target}")"
       '';

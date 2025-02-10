@@ -144,7 +144,7 @@ in
   };
 
   home.activation.zzActivateSettings = lib.mkIf isDarwin ''
-    $DRY_RUN_CMD /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-    PATH="/usr/bin:$PATH" $DRY_RUN_CMD killall Dock ControlCenter
+    run /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+    run /usr/bin/killall Dock ControlCenter
   '';
 }

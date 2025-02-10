@@ -115,14 +115,12 @@ in
         # clear dock
         defaults write com.apple.dock persistent-apps -array ""
 
-        ${
-          concatMapStringsSep ";\n" (
-            path: ''defaults write com.apple.dock persistent-apps -array-add "$(createTile '${path}')"''
-          ) cfg.apps
-        }
+        ${concatMapStringsSep ";\n" (
+          path: ''defaults write com.apple.dock persistent-apps -array-add "$(createTile '${path}')"''
+        ) cfg.apps}
       }
 
-      PATH="/usr/bin:$PATH" $DRY_RUN_CMD setDockApps
+      PATH="/usr/bin:$PATH" run setDockApps
     '';
 
     home.activation.dockDirs = ''
@@ -156,23 +154,21 @@ in
         # clear dock
         defaults write com.apple.dock persistent-others -array ""
 
-        ${
-          concatStringsSep ";\n" (
-            mapAttrsToList (
-              key: val:
-              ''defaults write com.apple.dock persistent-others -array-add "$(createDirTile '${val.path}' ${val.fileType} ${val.arrangement} ${val.displayAs} ${val.showAs} ${val.arrangement2})"''
-            ) cfg.others
-          )
-        }
+        ${concatStringsSep ";\n" (
+          mapAttrsToList (
+            key: val:
+            ''defaults write com.apple.dock persistent-others -array-add "$(createDirTile '${val.path}' ${val.fileType} ${val.arrangement} ${val.displayAs} ${val.showAs} ${val.arrangement2})"''
+          ) cfg.others
+        )}
       }
 
-      PATH="/usr/bin:$PATH" $DRY_RUN_CMD setDockDirs
+      PATH="/usr/bin:$PATH" run setDockDirs
     '';
 
     # restart Dock to show updates
     home.activation.dockRestart = hm.dag.entryAfter [
       "dockApps"
       "dockDirs"
-    ] ''PATH="/usr/bin:$PATH" $DRY_RUN_CMD killall Dock'';
+    ] ''run /usr/bin/killall Dock'';
   };
 }

@@ -118,7 +118,7 @@ in
   # nix-darwin won't set an already-existing user's shell
   # https://daiderd.com/nix-darwin/manual/index.html#opt-users.users._name_.shell
   home.activation.setShell = lib.mkIf isDarwin ''
-    PATH="/usr/bin:$PATH" $DRY_RUN_CMD sudo chsh -s \
+    run /usr/bin/sudo /usr/bin/chsh -s \
       "${user.shell}${user.shell.shellPath}" \
       "${config.home.username}"
   '';

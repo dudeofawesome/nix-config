@@ -60,7 +60,7 @@ in
         lib.mkIf (pkgs.stdenv.targetPlatform.isDarwin) (
           lib.hm.dag.entryAfter [ "writeBoundary" ] ''
             pushd "${bin_path}" > /dev/null
-            $DRY_RUN_CMD /usr/bin/sudo rm -f \
+            run /usr/bin/sudo rm -f \
               docker \
               docker-compose \
               docker-index \

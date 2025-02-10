@@ -10,10 +10,10 @@
 
     home = {
       activation.middleclick = ''
-        run /usr/bin/osascript -e '
+        run --quiet /usr/bin/osascript -e '
           tell application "System Events" to make login item at end ¬
             with properties {path:"/Applications/MiddleClick.app", hidden:true}
-        ' > /dev/null
+        '
       '';
     };
   };
