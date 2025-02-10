@@ -44,7 +44,7 @@
   };
 
   nixpkgs.overlays = [
-    inputs.nur.overlay
+    inputs.nur.overlays.default
 
     (final: prev: {
       mkalias = prev.mkalias.overrideAttrs (old: {
