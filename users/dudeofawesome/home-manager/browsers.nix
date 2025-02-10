@@ -39,21 +39,22 @@
       let
         dudeofawesome = rec {
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            onepassword-password-manager
+            adaptive-tab-bar-colour
             # clearurls
             darkreader
-            facebook-container
+            # facebook-container
             firefox-translations
             # GraphQL Network Inspector
             # iCloud Hide My Email
             # Loggly Formatter
+            onepassword-password-manager
             react-devtools
             reddit-enhancement-suite
             reduxdevtools
             refined-github
             sidebery
             tab-stash
-            ublacklist
+            # ublacklist
             ublock-origin
             wayback-machine
           ];
