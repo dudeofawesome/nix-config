@@ -176,7 +176,6 @@
                   '.contexts' \
                   ~/"${cfg.path}"
               )"
-              printf "$old_ctx"
 
               run ${lib.getExe pkgs.yq-go} -i \
                 '.contexts = ${
@@ -200,7 +199,6 @@
                         --raw-output \
                         '.[] | select(.name == "${name}").context.namespace'
                     )"
-                    echo "settings ns ${name}=$namespace"
                     run ${lib.getExe pkgs.yq-go} -i \
                       ".contexts[] |= select(.name == \"${name}\").context.namespace = \"$namespace\"" \
                       ~/"${cfg.path}"
