@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   os,
@@ -86,10 +87,16 @@ in
       builders-use-substitutes = lib.mkDefault true;
     };
 
-    registry."node".to = {
-      type = "github";
-      owner = "fontis";
-      repo = "nix-node";
+    # Entries here make package repos available via `nix shell <name>#<pkg>`
+    registry = {
+      node.to = {
+        type = "github";
+        owner = "fontis";
+        repo = "nix-node";
+      };
+
+      stable.flake = inputs.nixpkgs-stable;
+      unstable.flake = inputs.nixpkgs-unstable;
     };
   };
 
