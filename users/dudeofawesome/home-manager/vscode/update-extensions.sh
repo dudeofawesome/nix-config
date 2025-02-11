@@ -7,6 +7,10 @@ cd "$(dirname $0)"
 input="extensions.toml"
 output="extensions.nix"
 
+# update vscode version
+sed -i 's/^\(vscode_version = \)"[0-9]\+\.[0-9]\+\.[0-9]\+"$/\1"'"$(code --version | head -n 1)"'"/' "$input"
+echo "Set vscode version" >&2
+
 # generate extension expressions
 nix4vscode "$input" --output "$output"
 
