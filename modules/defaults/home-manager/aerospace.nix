@@ -288,6 +288,7 @@
             ];
 
           # https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+          # Check the status bar for a list of display names
           workspace-to-monitor-force-assignment =
             let
               removeWorkspacePrefix = lib.mapAttrs' (
@@ -295,6 +296,7 @@
               );
 
               built-in = "^Built-in Retina Display$";
+              ipad = "^Sidecar Display";
               home = {
                 center = "^38GL950G$";
                 right = "^DELL U2717D$";
@@ -324,6 +326,7 @@
                 built-in
               ];
               ${workspaces.music} = [
+                ipad
                 built-in
               ];
             };
