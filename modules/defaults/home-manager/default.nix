@@ -8,6 +8,7 @@ in
 
     ./editors.nix
     ./miscellaneous.nix
+    ./git.nix
     ./nix
     ./shells.nix
     ./sops.nix

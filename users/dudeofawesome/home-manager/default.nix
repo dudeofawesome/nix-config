@@ -220,8 +220,6 @@ with pkgs.stdenv.targetPlatform;
       enable = true;
       plugins = with pkgs; [
         cachix
-        gh
-        glab
       ];
     };
 

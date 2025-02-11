@@ -87,30 +87,6 @@ in
       '';
     };
 
-    git = {
-      enable = true;
-
-      ignores = [
-        ".DS_Store"
-      ];
-
-      signing = {
-        signByDefault = true;
-      };
-
-      extraConfig = {
-        gpg.format = "ssh";
-        "gpg \"ssh\"".program = lib.mkIf (
-          isDarwin && has_1password
-        ) "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-      };
-    };
-
-    gh = {
-      enable = true;
-      settings.git_protocol = "ssh";
-    };
-
     doa-system-clock.enable = true;
   };
 
