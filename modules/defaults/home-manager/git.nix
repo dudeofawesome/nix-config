@@ -7,10 +7,13 @@
 }:
 with pkgs.stdenv.targetPlatform;
 let
+  doa-lib = import ../../../lib;
+
   has_1password =
     config.programs._1password-cli.enable
     || config.programs._1password-gui.enable
-    || (isLinux && (osConfig.programs._1password.enable || osConfig.programs._1password-gui.enable));
+    || (isLinux && (osConfig.programs._1password.enable || osConfig.programs._1password-gui.enable))
+    || (isDarwin && doa-lib.cask-installed "1password");
 in
 {
   programs = {
