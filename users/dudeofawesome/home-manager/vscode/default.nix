@@ -115,6 +115,7 @@ with lib;
         nix4vscode.weaveworks.vscode-gitops-tools
         wmaurer.change-case
         yoavbls.pretty-ts-errors
+        nix4vscode.yutengjing.open-in-external-app
         yzhang.markdown-all-in-one
 
         # angular.ng-template

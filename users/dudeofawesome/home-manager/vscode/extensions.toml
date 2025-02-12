@@ -48,6 +48,7 @@ extensions = [
   { extension_name = 'url-encode', publisher_name = 'flesler' }, # missing
   { extension_name = 'lorem-ipsum', publisher_name = 'tyriar' }, # missing
   { extension_name = 'vscode-choosealicense', publisher_name = 'ultram4rine' }, # missing
+  { extension_name = 'open-in-external-app', publisher_name = 'yutengjing' }, # missing
 
   # views
   { extension_name = 'vscode-dash', publisher_name = 'deerawan' }, # missing
