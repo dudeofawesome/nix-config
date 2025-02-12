@@ -33,10 +33,10 @@ in
     };
   };
 
-  config = {
+  config = mkIf cfg.autoLoginEnable {
     services.xserver = {
       displayManager.gdm.settings = {
-        daemon = mkIf cfg.autoLoginEnable {
+        daemon = {
           AutomaticLoginEnable = cfg.autoLoginEnable;
           AutomaticLogin = cfg.autoLoginUser;
         };
