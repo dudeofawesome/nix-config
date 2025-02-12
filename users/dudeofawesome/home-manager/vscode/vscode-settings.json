@@ -730,6 +730,8 @@
 
   "angular.experimental-ivy": true,
 
+  "partialDiff.enableTelemetry": false,
+  "gitlens.telemetry.enabled": false,
   "redhat.telemetry.enabled": false,
 
   "license.author": "Louis Orleans",
