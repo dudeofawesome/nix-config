@@ -97,17 +97,15 @@ with pkgs.stdenv.targetPlatform;
   #   # path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
   # };
   sops.secrets = {
-    "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-certificate-data".sopsFile =
-      ../secrets.yaml;
-    "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-key-data".sopsFile = ../secrets.yaml;
+    "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-certificate-data" = { };
+    "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-key-data" = { };
 
-    "users/dudeofawesome/kubeconfig/users/lorleans@paciolan.com/token".sopsFile = ../secrets.yaml;
+    "users/dudeofawesome/kubeconfig/users/lorleans@paciolan.com/token" = { };
 
-    "users/dudeofawesome/kubeconfig/clusters/monongahela/server".sopsFile = ../secrets.yaml;
-    "users/dudeofawesome/kubeconfig/clusters/monongahela/certificate-authority-data".sopsFile =
-      ../secrets.yaml;
+    "users/dudeofawesome/kubeconfig/clusters/monongahela/server" = { };
+    "users/dudeofawesome/kubeconfig/clusters/monongahela/certificate-authority-data" = { };
 
-    "users/dudeofawesome/kubeconfig/clusters/pac-rancher-eks/server".sopsFile = ../secrets.yaml;
+    "users/dudeofawesome/kubeconfig/clusters/pac-rancher-eks/server" = { };
   };
 
   programs = {
