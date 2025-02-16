@@ -107,8 +107,10 @@
     lib.mkIf cfg.enable {
       home.activation = {
         kubeconfigCreate = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          run mkdir -p ~/"$(dirname "${cfg.path}")"
-          run touch ~/"${cfg.path}"
+          kubeconfig=~/"${cfg.path}"
+          run mkdir -p "$(dirname "$kubeconfig")"
+          run touch "$kubeconfig"
+          run chmod 600 "$kubeconfig"
         '';
 
         kubeconfigSetUsers = lib.mkIf (cfg.users != { }) (
