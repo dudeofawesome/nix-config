@@ -819,6 +819,7 @@
   "gitlab.duoCodeSuggestions.enabledSupportedLanguages": {},
   "gitlab.duo.enabledWithoutGitlabProject": false,
   "gitlab.duoCodeSuggestions.openTabsContext": false,
+  "gitlab.keybindingHints.enabled": false,
 
   "1password.editor.suggestStorage": false
 }
