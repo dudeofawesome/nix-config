@@ -29,6 +29,7 @@ with pkgs.stdenv.targetPlatform;
     ../../../modules/defaults/home-manager/wezterm
 
     ./browsers.nix
+    ./kubeconfig.nix
     ./vscode
     ./shells.nix
     ./zed-editor
@@ -96,17 +97,6 @@ with pkgs.stdenv.targetPlatform;
   #   sopsFile = ../../../hosts/nixos/monongahela/secrets.yaml;
   #   # path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
   # };
-  sops.secrets = {
-    "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-certificate-data" = { };
-    "users/dudeofawesome/kubeconfig/users/dudeofawesome/client-key-data" = { };
-
-    "users/dudeofawesome/kubeconfig/users/lorleans@paciolan.com/token" = { };
-
-    "users/dudeofawesome/kubeconfig/clusters/monongahela/server" = { };
-    "users/dudeofawesome/kubeconfig/clusters/monongahela/certificate-authority-data" = { };
-
-    "users/dudeofawesome/kubeconfig/clusters/pac-rancher-eks/server" = { };
-  };
 
   programs = {
     ssh.matchBlocks =
@@ -251,41 +241,6 @@ with pkgs.stdenv.targetPlatform;
             role_arn = "arn:aws:iam::046314659632:role/AssumeRole-Dev-ReadOnly";
           };
         };
-    };
-
-    kubeconfig = {
-      enable = true;
-      users = {
-        dudeofawesome = {
-          client-certificate-data =
-            config.sops.secrets."users/dudeofawesome/kubeconfig/users/dudeofawesome/client-certificate-data".path;
-          client-key-data =
-            config.sops.secrets."users/dudeofawesome/kubeconfig/users/dudeofawesome/client-key-data".path;
-        };
-        "lorleans@paciolan.com" = {
-          token = config.sops.secrets."users/dudeofawesome/kubeconfig/users/lorleans@paciolan.com/token".path;
-        };
-      };
-      clusters = {
-        monongahela = {
-          server = config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/monongahela/server".path;
-          certificate-authority-data =
-            config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/monongahela/certificate-authority-data".path;
-        };
-        pac-rancher-eks.server =
-          config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/pac-rancher-eks/server".path;
-      };
-
-      contexts = {
-        doa-cluster = {
-          cluster = "monongahela";
-          user = "dudeofawesome";
-        };
-        "pac/rancher-eks" = {
-          cluster = "pac-rancher-eks";
-          user = "lorleans@paciolan.com";
-        };
-      };
     };
 
     docker-desktop.enable = true;
