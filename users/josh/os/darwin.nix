@@ -10,11 +10,13 @@
     casks = [
       "1password"
       "android-file-transfer"
+      "arduino-ide"
       "background-music"
       "balenaetcher"
       "barrier"
       "bettertouchtool"
       "cyberduck"
+      "cursor"
       "discord"
       "docker"
       "electrum"
