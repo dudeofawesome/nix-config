@@ -8,6 +8,8 @@
 with pkgs.stdenv.targetPlatform;
 let
   doa-lib = import ../../lib;
+
+  mkDarwinDefault = lib.mkOverride 99;
 in
 {
   imports = [ (doa-lib.try-import ./nix.${os}.nix) ];
@@ -53,7 +55,7 @@ in
     settings = {
       experimental-features = "nix-command flakes";
 
-      trusted-users = lib.mkDefault ([
+      trusted-users = mkDarwinDefault ([
         "root"
         (
           if (isLinux) then
@@ -65,24 +67,24 @@ in
         )
       ]);
 
-      substituters = lib.mkDefault [
+      substituters = mkDarwinDefault [
         "https://cache.nixos.org/"
         "https://nix-community.cachix.org"
         # nix-node by fontis
         "https://fontis.cachix.org/"
       ];
 
-      trusted-public-keys = lib.mkDefault [
+      trusted-public-keys = mkDarwinDefault [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         # nix-node by fontis
         "fontis.cachix.org-1:r6CU2oXo4iozCVo09V+hjJSpFlbUxQW/rDHYlLJ03Og="
       ];
 
-      min-free = lib.mkDefault (512 * 1024 * 1024);
-      max-free = lib.mkDefault (3000 * 1024 * 1024);
+      min-free = mkDarwinDefault (512 * 1024 * 1024);
+      max-free = mkDarwinDefault (3000 * 1024 * 1024);
 
-      builders-use-substitutes = lib.mkDefault true;
+      builders-use-substitutes = mkDarwinDefault true;
     };
 
     # Entries here make package repos available via `nix shell <name>#<pkg>`
