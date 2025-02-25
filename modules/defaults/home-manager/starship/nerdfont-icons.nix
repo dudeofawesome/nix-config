@@ -1,11 +1,4 @@
-{
-  pkgs,
-  pkgs-unstable,
-  lib,
-  config,
-  osConfig,
-  ...
-}:
+{ ... }:
 {
   programs = {
     starship = {

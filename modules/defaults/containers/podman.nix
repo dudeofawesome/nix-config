@@ -1,5 +1,5 @@
 {
-  pkgs-unstable,
+  pkgs,
   lib,
   config,
   ...
@@ -9,7 +9,7 @@ let
 in
 {
   environment.systemPackages =
-    with pkgs-unstable;
+    with pkgs;
     lib.flatten [
       podman
       (lib.optional nvidia_enable nvidia-podman)
