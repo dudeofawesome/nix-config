@@ -315,6 +315,11 @@
     "https://use.fontawesome.com/releases/v6.1.2/css/all.css"
   ],
 
+  "[d2]": {
+    "editor.defaultFormatter": "Terrastruct.d2"
+  },
+  "D2.execPath": "this should be replaced by nix",
+
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },

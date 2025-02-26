@@ -105,6 +105,7 @@ with lib;
         streetsidesoftware.code-spell-checker
         stylelint.vscode-stylelint
         tamasfe.even-better-toml
+        nix4vscode.terrastruct.d2
         tomoki1207.pdf
         nix4vscode.tomoyukim.vscode-mermaid-editor
         nix4vscode.tyriar.lorem-ipsum

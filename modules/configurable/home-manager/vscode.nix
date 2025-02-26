@@ -46,33 +46,16 @@ in
             # Read preferred color theme
             theme="$(grep -Po '(?<="workbench.preferred'"$os_theme"'ColorTheme": ").+(?=")' "${cfg.mutableUserSettings}")"
 
-            # Find Prettier
-            prettier_path="$(
-              echo "${pkgs.nodePackages.prettier}/lib/node_modules/prettier/" \
-              `# Escape slashes for later use in sed` \
-              | sed -Ee 's/\//\\\//gi'
-            )"
+            # Escape slashes for later use in sed
+            function escape_for_sed {
+              echo "$1" | sed -Ee 's/\//\\\//gi'
+            }
 
-            # Find kubectl
-            kubectl_path="$(
-              echo "${lib.getExe pkgs-stable.kubectl}" \
-              `# Escape slashes for later use in sed` \
-              | sed -Ee 's/\//\\\//gi'
-            )"
-
-            # Find Helm
-            helm_path="$(
-              echo "${lib.getExe pkgs-stable.kubernetes-helm}" \
-              `# Escape slashes for later use in sed` \
-              | sed -Ee 's/\//\\\//gi'
-            )"
-
-            # Find gitlab-ci-ls
-            gitlab_ci_ls_path="$(
-              echo "${lib.getExe pkgs-unstable.gitlab-ci-ls}" \
-              `# Escape slashes for later use in sed` \
-              | sed -Ee 's/\//\\\//gi'
-            )"
+            prettier_path="$(escape_for_sed "${pkgs.nodePackages.prettier}/lib/node_modules/prettier/")"
+            kubectl_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubectl}")"
+            helm_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubernetes-helm}")"
+            gitlab_ci_ls_path="$(escape_for_sed "${lib.getExe pkgs-unstable.gitlab-ci-ls}")"
+            d2_path="$(escape_for_sed "${lib.getExe pkgs-unstable.d2}")"
 
             run cat "${cfg.mutableUserSettings}" \
               `# Add header about nix` \
@@ -91,6 +74,8 @@ in
               | sed -Ee 's/("vs-kubernetes.helm-path"): "(.+)"/\1: "'"$helm_path"'"/i' \
               `# Point to nix's gitlab-ci-ls` \
               | sed -Ee 's/("gitlabLs.executablePath"): "(.+)"/\1: "'"$gitlab_ci_ls_path"'"/i' \
+              `# Point to nix's d2` \
+              | sed -Ee 's/("D2.execPath"): "(.+)"/\1: "'"$d2_path"'"/i' \
               \
               `# Overwrite VS Code settings` \
               | run --quiet tee "${config_file_path}"

@@ -1,4 +1,4 @@
-vscode_version = "1.96.4"
+vscode_version = "1.97.2"
 
 extensions = [
   # languages
@@ -41,6 +41,8 @@ extensions = [
 
   { extension_name = 'vscode-mermaid-editor', publisher_name = 'tomoyukim' }, # missing
   { extension_name = 'mermaid-markdown-syntax-highlighting', publisher_name = 'bpruitt-goddard' }, # missing
+
+  { extension_name = 'd2', publisher_name = 'terrastruct' }, # missing
 
   { extension_name = 'vsc-gcode', publisher_name = 'novy' }, # missing
 
