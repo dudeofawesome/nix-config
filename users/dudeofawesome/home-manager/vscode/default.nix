@@ -49,7 +49,6 @@ with lib;
         editorconfig.editorconfig
         nix4vscode.eeyore.yapf
         nix4vscode.effectful-tech.effect-vscode
-        equinusocio.vsc-material-theme-icons
         esbenp.prettier-vscode
         nix4vscode.fabiospampinato.vscode-diff
         firefox-devtools.vscode-firefox-debug
