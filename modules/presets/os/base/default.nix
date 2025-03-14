@@ -34,7 +34,7 @@ with pkgs.stdenv.targetPlatform;
       nix-tree
       # nixd
       pkgs-unstable.nixfmt-rfc-style
-      nodePackages.prettier
+      pkgs-unstable.nodePackages.prettier
       pciutils
       ripgrep
       rsync
