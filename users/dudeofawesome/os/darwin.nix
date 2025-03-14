@@ -30,6 +30,7 @@
       in
       [
         "1password"
+        "affinity-designer"
         "affinity-photo"
         "arduino"
         "balenaetcher"
@@ -54,6 +55,7 @@
         "steam"
         "stay"
         "tailscale"
+        "tidal"
         "typora"
         "workman"
       ];

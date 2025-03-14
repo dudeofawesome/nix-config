@@ -69,6 +69,7 @@ with pkgs.stdenv.targetPlatform;
           drawio
           inkscape
           losslesscut-bin
+          pkgs-unstable.obsidian
           pkgs-unstable.ollama
           opentofu
           pkgs-unstable.signal-desktop
