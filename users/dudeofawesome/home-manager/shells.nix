@@ -1,10 +1,16 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs = {
     atuin = {
       enable = true;
       settings.sync_address = "https://atuin.orleans.io";
     };
+
+    fish.plugins =
+      with pkgs.fishPlugins;
+      map (pkg: { inherit (pkg) name src; }) [
+        nvm-fish
+      ];
 
     moar.enable = true;
 
