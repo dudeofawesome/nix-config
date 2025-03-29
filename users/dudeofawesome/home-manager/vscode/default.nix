@@ -98,7 +98,6 @@ with lib;
         ryu1kn.partial-diff
         nix4vscode.seeker-dk.node-modules-viewer
         nix4vscode.semanticdiff.semanticdiff
-        shd101wyy.markdown-preview-enhanced
         shopify.ruby-lsp
         # signageos.signageos-vscode-sops
         streetsidesoftware.code-spell-checker
