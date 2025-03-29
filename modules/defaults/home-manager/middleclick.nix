@@ -2,9 +2,10 @@
 {
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin = {
-      defaults."com.rouge41.middleClick" = {
+      defaults."art.ginzburg.MiddleClick" = {
         needClick = false;
         fingers = 4;
+        allowMoreFingers = true;
       };
     };
 
