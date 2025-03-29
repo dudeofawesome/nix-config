@@ -319,6 +319,8 @@
     "editor.defaultFormatter": "Terrastruct.d2"
   },
   "D2.execPath": "this should be replaced by nix",
+  "D2.autoUpdate": false,
+  "D2.updateOnSave": true,
 
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
