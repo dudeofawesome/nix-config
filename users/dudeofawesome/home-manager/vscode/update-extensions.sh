@@ -1,5 +1,5 @@
 #!/usr/bin/env nix
-#! nix shell nixpkgs#bash nixpkgs#gnused github:nix-community/nix4vscode/nix4vscode-v0.0.2 --command bash
+#! nix shell nixpkgs#bash nixpkgs#gnused github:nix-community/nix4vscode/nix4vscode-v0.0.12 --command bash
 set -e
 
 nix4vscode --version
