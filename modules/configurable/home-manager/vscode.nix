@@ -56,6 +56,8 @@ in
             helm_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubernetes-helm}")"
             gitlab_ci_ls_path="$(escape_for_sed "${lib.getExe pkgs-unstable.gitlab-ci-ls}")"
             d2_path="$(escape_for_sed "${lib.getExe pkgs-unstable.d2}")"
+            plantuml_path="$(escape_for_sed "${pkgs-unstable.plantuml}/lib/plantuml.jar")"
+            # java_path="$(escape_for_sed "${pkgs-unstable.java}/lib/plantuml.jar")"
 
             run cat "${cfg.mutableUserSettings}" \
               `# Add header about nix` \

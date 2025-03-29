@@ -11,6 +11,7 @@ with lib;
   home.packages = with pkgs-unstable; [
     rubyPackages.solargraph
     gitlab-ci-ls
+    plantuml
   ];
 
   programs.vscode = {
@@ -67,6 +68,7 @@ with lib;
         hashicorp.terraform
         nix4vscode.idleberg.applescript
         nix4vscode.inferrinizzard.prettier-sql-vscode
+        jebbs.plantuml
         nix4vscode.jnoortheen.nix-ide
         mads-hartmann.bash-ide-vscode
         mathiasfrohlich.kotlin
