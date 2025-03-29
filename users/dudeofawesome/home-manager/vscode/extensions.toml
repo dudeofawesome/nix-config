@@ -2,68 +2,68 @@ vscode_version = "1.97.2"
 
 extensions = [
   # languages
-  { extension_name = 'bruno', publisher_name = 'bruno-api-client' }, # missing
+  'bruno-api-client.bruno', # missing
 
-  { extension_name = 'kotlin', publisher_name = 'fwcd' }, # missing
+  'fwcd.kotlin', # missing
 
-  { extension_name = 'solargraph', publisher_name = 'castwide' }, # missing
-  { extension_name = 'rbs-syntax', publisher_name = 'gracefulpotato' }, # missing
+  'castwide.solargraph', # missing
+  'gracefulpotato.rbs-syntax', # missing
 
-  { extension_name = 'vscode-graphql', publisher_name = 'graphql' }, # much more up-to-date
-  { extension_name = 'vscode-graphql-execution', publisher_name = 'graphql' }, # missing
+  'graphql.vscode-graphql', # much more up-to-date
+  'graphql.vscode-graphql-execution', # missing
 
-  { extension_name = 'applescript', publisher_name = 'idleberg' }, # missing
+  'idleberg.applescript', # missing
 
-  { extension_name = 'prettier-sql-vscode', publisher_name = 'inferrinizzard' }, # missing
+  'inferrinizzard.prettier-sql-vscode', # missing
 
-  { extension_name = 'nix-ide', publisher_name = 'jnoortheen' }, # much more up-to-date
+  'jnoortheen.nix-ide', # much more up-to-date
 
-  { extension_name = 'vscode-scss', publisher_name = 'mrmlnc' }, # missing
-  { extension_name = 'vscode-tailwindcss', publisher_name = 'bradlc' }, # much more up-to-date
+  'mrmlnc.vscode-scss', # missing
+  'bradlc.vscode-tailwindcss', # much more up-to-date
 
-  { extension_name = 'eslint-disable-snippets', publisher_name = 'drknoxy' }, # missing
-  { extension_name = 'lintlens', publisher_name = 'ghmcadams' }, # missing
-  { extension_name = 'effect-vscode', publisher_name = 'effectful-tech' }, # much more up-to-date
-  { extension_name = 'vscode-react-native', publisher_name = 'msjsdiag' }, # missing
-  { extension_name = 'nodejs-testing', publisher_name = 'connor4312' }, # missing
-  { extension_name = 'bun-vscode', publisher_name = 'oven' }, # missing
-  { extension_name = 'vscode-jest', publisher_name = 'orta' }, # missing
-  { extension_name = 'explorer', publisher_name = 'vitest' }, # missing
-  { extension_name = 'typescript-explorer', publisher_name = 'mxsdev' }, # missing
-  { extension_name = 'node-modules-viewer', publisher_name = 'seeker-dk' }, # missing
+  'drknoxy.eslint-disable-snippets', # missing
+  'ghmcadams.lintlens', # missing
+  'effectful-tech.effect-vscode', # much more up-to-date
+  'msjsdiag.vscode-react-native', # missing
+  'connor4312.nodejs-testing', # missing
+  'oven.bun-vscode', # missing
+  'orta.vscode-jest', # missing
+  'vitest.explorer', # missing
+  'mxsdev.typescript-explorer', # missing
+  'seeker-dk.node-modules-viewer', # missing
 
-  { extension_name = 'jupyter', publisher_name = 'ms-toolsai' }, # missing
-  { extension_name = 'yapf', publisher_name = 'eeyore' }, # missing
+  'ms-toolsai.jupyter', # missing
+  'eeyore.yapf', # missing
 
-  { extension_name = 'vscode-yaml', publisher_name = 'redhat' }, # ? https://github.com/nix-community/nix4vscode/issues/54
-  { extension_name = 'better-json5', publisher_name = 'blueglassblock' }, # missing
-  { extension_name = 'gitlab-ci-ls', publisher_name = 'alesbrelih' }, # missing
+  'redhat.vscode-yaml', # ? https://github.com/nix-community/nix4vscode/issues/54
+  'blueglassblock.better-json5', # missing
+  'alesbrelih.gitlab-ci-ls', # missing
 
-  { extension_name = 'vscode-mermaid-editor', publisher_name = 'tomoyukim' }, # missing
-  { extension_name = 'mermaid-markdown-syntax-highlighting', publisher_name = 'bpruitt-goddard' }, # missing
+  'tomoyukim.vscode-mermaid-editor', # missing
+  'bpruitt-goddard.mermaid-markdown-syntax-highlighting', # missing
 
-  { extension_name = 'd2', publisher_name = 'terrastruct' }, # missing
+  'terrastruct.d2', # missing
 
-  { extension_name = 'vsc-gcode', publisher_name = 'novy' }, # missing
+  'novy.vsc-gcode', # missing
 
   # utilities
-  { extension_name = 'url-encode', publisher_name = 'flesler' }, # missing
-  { extension_name = 'lorem-ipsum', publisher_name = 'tyriar' }, # missing
-  { extension_name = 'vscode-choosealicense', publisher_name = 'ultram4rine' }, # missing
-  { extension_name = 'open-in-external-app', publisher_name = 'yutengjing' }, # missing
+  'flesler.url-encode', # missing
+  'tyriar.lorem-ipsum', # missing
+  'ultram4rine.vscode-choosealicense', # missing
+  'yutengjing.open-in-external-app', # missing
 
   # views
-  { extension_name = 'vscode-dash', publisher_name = 'deerawan' }, # missing
-  { extension_name = 'vscode-diff', publisher_name = 'fabiospampinato' }, # missing
-  { extension_name = 'gitlab-workflow', publisher_name = 'gitlab' }, # much more up-to-date
-  { extension_name = 'vscode-kubernetes-tools', publisher_name = 'ms-kubernetes-tools' }, # quick updates
-  { extension_name = 'remote-explorer', publisher_name = 'ms-vscode' }, # missing
-  { extension_name = 'semanticdiff', publisher_name = 'semanticdiff' }, # missing
-  { extension_name = 'vscode-gitops-tools', publisher_name = 'weaveworks' }, # missing
-  { extension_name = 'vscode-github-actions', publisher_name = 'github' }, # quick updates
-  { extension_name = 'vscode-pull-request-github', publisher_name = 'github' }, # much more up-to-date
-  { extension_name = 'roo-cline', publisher_name = 'rooveterinaryinc' }, # missing
+  'deerawan.vscode-dash', # missing
+  'fabiospampinato.vscode-diff', # missing
+  'gitlab.gitlab-workflow', # much more up-to-date
+  'ms-kubernetes-tools.vscode-kubernetes-tools', # quick updates
+  'ms-vscode.remote-explorer', # missing
+  'semanticdiff.semanticdiff', # missing
+  'weaveworks.vscode-gitops-tools', # missing
+  'github.vscode-github-actions', # quick updates
+  'github.vscode-pull-request-github', # much more up-to-date
+  'rooveterinaryinc.roo-cline', # missing
 
   # themes
-  { extension_name = 'beardedtheme', publisher_name = 'beardedbear' }, # missing
+  'beardedbear.beardedtheme', # missing
 ]
