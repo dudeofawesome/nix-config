@@ -55,10 +55,14 @@ in
       enable = true;
       role = lib.mkDefault "server";
       # tokenFile = config.sops.
-      extraFlags = toString [
-        "--flannel-backend=host-gw"
-        "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
-      ];
+      configPath = pkgs.writers.writeYAML "k3s-config.yaml" {
+        # tls-san = [
+        #   "k8s.orleans.io"
+        # ];
+
+        flannel-backend = "host-gw";
+        container-runtime-endpoint = "unix:///run/containerd/containerd.sock";
+      };
     };
 
     dnsmasq = {
