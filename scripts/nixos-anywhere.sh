@@ -18,7 +18,7 @@ sops \
 
 nix run github:nix-community/nixos-anywhere -- \
   --flake .#"$flake" \
-  --build-on-remote \
+  --build-on remote \
   --copy-host-keys \
   --disk-encryption-keys \
     `# remote path` \
