@@ -3,7 +3,7 @@
   nix = {
     linux-builder = {
       enable = lib.mkDefault true;
-      maxJobs = lib.mkDefault 10;
+      config.virtualisation.cores = lib.mkDefault 4;
     };
   };
 
