@@ -1,0 +1,37 @@
+/**
+ * disable tab sidebar
+ */
+
+#sidebar-main {
+  display: none;
+}
+#sidebar-box {
+  padding-left: var(--space-small) !important;
+
+  #sidebar {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+#tabbrowser-tabbox {
+  box-shadow: none;
+  /* add padding around rendered page */
+  padding: 0 var(--space-small) var(--space-small) 0;
+
+  /* draw rendered page as paper */
+  & > #tabbrowser-tabpanels {
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--content-area-shadow);
+    overflow: hidden;
+    :root[inDOMFullscreen] & {
+      border-radius: 0;
+    }
+  }
+}
+/* remove sidebar button */
+toolbarbutton#sidebar-button {
+  display: none;
+}
+#nav-bar-customization-target > :is(toolbarbutton, toolbaritem):nth-child(2) {
+  padding-inline-start: var(--toolbar-start-end-padding);
+}
