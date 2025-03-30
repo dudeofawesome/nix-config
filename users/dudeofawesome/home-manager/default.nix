@@ -206,7 +206,7 @@ with pkgs.stdenv.targetPlatform;
     };
 
     _1password-shell-plugins = {
-      enable = true;
+      enable = config.programs._1password-cli.enable;
       plugins = with pkgs; [
         cachix
       ];
