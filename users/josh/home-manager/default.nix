@@ -71,6 +71,17 @@
       userEmail = "josh@gibbs.tk";
 
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICWpH2swLUhFYS8ffRP7bviAwTroqaCACeAcp6kAtyO0";
+
+      includes = [
+        {
+          condition = "gitdir:~/git/Paciolan/";
+          contents = {
+            user = {
+              email = "joshuagibbs@paciolan.com";
+            };
+          };
+        }
+      ];
     };
 
     _1password-cli = {
