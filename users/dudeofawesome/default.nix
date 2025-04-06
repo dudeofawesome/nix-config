@@ -11,30 +11,30 @@
     default =
       { config, lib, ... }:
       let
-        set = "users/dudeofawesome/scrutiny-api";
+        scrutiny = "users/dudeofawesome/scrutiny-api";
       in
       {
-        sops.secrets."${set}/endpoint/cluster/schema" = {
+        sops.secrets."${scrutiny}/endpoint/cluster/schema" = {
           sopsFile = ./secrets.yaml;
           # owner = config.launchd.daemons.scrutiny-collector.serviceConfig.UserName;
         };
-        sops.secrets."${set}/endpoint/cluster/origin" = {
+        sops.secrets."${scrutiny}/endpoint/cluster/origin" = {
           sopsFile = ./secrets.yaml;
           # owner = config.launchd.daemons.scrutiny-collector.serviceConfig.UserName;
         };
-        sops.secrets."${set}/endpoint/external/schema" = {
+        sops.secrets."${scrutiny}/endpoint/external/schema" = {
           sopsFile = ./secrets.yaml;
           # owner = config.launchd.daemons.scrutiny-collector.serviceConfig.UserName;
         };
-        sops.secrets."${set}/endpoint/external/origin" = {
+        sops.secrets."${scrutiny}/endpoint/external/origin" = {
           sopsFile = ./secrets.yaml;
           # owner = config.launchd.daemons.scrutiny-collector.serviceConfig.UserName;
         };
-        sops.secrets."${set}/username" = {
+        sops.secrets."${scrutiny}/username" = {
           sopsFile = ./secrets.yaml;
           # owner = config.launchd.daemons.scrutiny-collector.serviceConfig.UserName;
         };
-        sops.secrets."${set}/password" = {
+        sops.secrets."${scrutiny}/password" = {
           sopsFile = ./secrets.yaml;
           # owner = config.launchd.daemons.scrutiny-collector.serviceConfig.UserName;
         };
@@ -42,13 +42,29 @@
         sops.templates."scrutiny-endpoint".content =
           let
             tmpl = config.sops.placeholder;
-            set = "users/dudeofawesome/scrutiny-api";
+            scrutiny = "users/dudeofawesome/scrutiny-api";
           in
           lib.concatStrings [
-            "${tmpl."${set}/endpoint/external/schema"}://"
-            "${tmpl."${set}/username"}:${tmpl."${set}/password"}@"
-            "${tmpl."${set}/endpoint/external/origin"}"
+            "${tmpl."${scrutiny}/endpoint/external/schema"}://"
+            "${tmpl."${scrutiny}/username"}:${tmpl."${scrutiny}/password"}@"
+            "${tmpl."${scrutiny}/endpoint/external/origin"}"
           ];
+
+        sops.secrets."users/dudeofawesome/nix_access_tokens/github.com".sopsFile = ./secrets.yaml;
+        sops.templates."users/dudeofawesome/nix_access_tokens" = {
+          mode = "0440";
+          content =
+            let
+              tmpl = config.sops.placeholder;
+              tokens = "users/dudeofawesome/nix_access_tokens";
+            in
+            lib.concatStrings [
+              "extra-access-tokens = github.com=${tmpl."${tokens}/github.com"}"
+            ];
+        };
+        nix.extraOptions = ''
+          include ${config.sops.templates."users/dudeofawesome/nix_access_tokens".path}
+        '';
       };
   };
   user = {
