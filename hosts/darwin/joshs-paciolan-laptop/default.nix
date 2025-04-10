@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  # Temporary - this is broken for me, but I don't need to use it
+  nix.linux-builder.enable = false;
+
   imports =
     [
     ];
