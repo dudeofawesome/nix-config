@@ -14,16 +14,23 @@
   "cSpell.words": [
     "atuin",
     "awscli",
+    "binpath",
     "cachix",
     "disko",
+    "distro",
+    "fontis",
     "krew",
     "mkalias",
     "moar",
+    "mountpoint",
+    "nixfmt",
     "nixos",
     "nixpkgs",
     "pkgs",
     "stdenv",
+    "substituters",
     "upaymeifixit",
+    "vfat",
     "wezterm"
   ]
 }
