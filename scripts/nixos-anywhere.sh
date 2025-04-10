@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix
+#! nix shell nixpkgs#bash nixpkgs#sops github:nix-community/nixos-anywhere --command bash
 set -e
 
 # This script will run nixos-anywhere targeting the specified machine with the
@@ -27,7 +28,7 @@ sops \
   --output "$fde_password_file" \
   "hosts/nixos/$flake/secrets.yaml"
 
-nix run github:nix-community/nixos-anywhere -- \
+nixos-anywhere -- \
   --flake .#"$flake" \
   --build-on remote \
   --copy-host-keys \
