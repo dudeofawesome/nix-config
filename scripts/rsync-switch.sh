@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+# This script applies the specified flake to the target machine. Example:
+#   rsync-switch.sh soto-server
+#   rsync-switch.sh soto-server=nixos@10.0.1.10
+
 if [ "$1" == "--help" ]; then
   echo -e ""
   echo -e "Usage:\t$0 hostname[=ssh_connection] [nix_command] [path]"

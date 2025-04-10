@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+# This script will run nixos-anywhere targeting the specified machine with the
+# sops encryption keys already set up for your host. To use this script for a
+# host named soto-server at 10.0.1.10, run:
+#   nixos-anywhere.sh soto-server root@10.0.1.10
+
 flake="$1"
 ssh_conn="$2"
 
@@ -27,3 +32,11 @@ nix run github:nix-community/nixos-anywhere -- \
     "$fde_password_file" \
   --debug \
   "$ssh_conn"
+
+
+# TODO: clean up decrypted password files
+# Function to cleanup temporary directory on exit
+# cleanup() {
+#   rm -rf "$temp"
+# }
+# trap cleanup EXIT
