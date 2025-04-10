@@ -67,7 +67,7 @@ in
         )
       ]);
 
-      substituters = mkDarwinDefault [
+      trusted-substituters = mkDarwinDefault [
         "https://cache.nixos.org/"
         "https://nix-community.cachix.org"
         # nix-node by fontis
