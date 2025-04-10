@@ -6,6 +6,12 @@ set -e
 # host named soto-server at 10.0.1.10, run:
 #   nixos-anywhere.sh soto-server root@10.0.1.10
 
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0 <host> <ssh-destination>" 1>&2
+  echo "  eg: $0 badlands-vm root@10.0.0.100" 1>&2
+  exit 0
+fi
+
 flake="$1"
 ssh_conn="$2"
 
