@@ -68,6 +68,11 @@
             command = "list.find";
             when = "!filesExplorerFocus && listFocus && listSupportsFind";
           }
+          {
+            key = "cmd+/";
+            command = "-toggleExplainMode";
+            when = "suggestWidgetVisible";
+          }
         ]
         # tab control
         [
