@@ -434,7 +434,8 @@
   },
   "material-icon-theme.showUpdateMessage": false,
   "material-icon-theme.files.associations": {
-    "tsconfig.*.json": "tsconfig"
+    "tsconfig.*.json": "tsconfig",
+    "*.tst.ts": "test-ts"
   },
 
   "map.preview.defaultBaseLayer": "osm",
