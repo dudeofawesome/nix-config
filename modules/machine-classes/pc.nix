@@ -19,7 +19,7 @@ in
     systemPackages = with pkgs; [
       docker
       mitmproxy
-      pkgs-unstable.moonlight-qt
+      moonlight-qt
       watch
     ];
   };
