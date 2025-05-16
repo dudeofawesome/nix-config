@@ -676,6 +676,8 @@
     "xmlns"
   ],
 
+  "ansible.lightspeed.enabled": false,
+
   "sqlite.sqlite3": "/usr/bin/sqlite3",
 
   "peacock.favoriteColors": [
@@ -835,6 +837,8 @@
   "gitlab.duo.enabledWithoutGitlabProject": false,
   "gitlab.duoCodeSuggestions.openTabsContext": false,
   "gitlab.keybindingHints.enabled": false,
+  // now M$ is hiding Copilot settings behind obscure names…
+  "workbench.editor.empty.hint": "hidden",
 
   "1password.editor.suggestStorage": false
 }
