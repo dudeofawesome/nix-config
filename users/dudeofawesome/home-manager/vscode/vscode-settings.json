@@ -791,25 +791,25 @@
   "gitlab.customQueries": [
     // merge requests
     {
-      "name": "All project merge requests",
+      "name": "All project MRs",
       "type": "merge_requests",
       "scope": "all",
       "state": "opened",
-      "noItemText": "The project has no merge requests"
+      "noItemText": "The project has no MRs"
     },
     {
-      "name": "Merge requests created by me",
+      "name": "MRs created by me",
       "type": "merge_requests",
       "scope": "created_by_me",
       "state": "opened",
-      "noItemText": "No merge requests created by you."
+      "noItemText": "No MRs created by you."
     },
     {
-      "name": "Merge assigned to me",
+      "name": "MRs to review",
       "type": "merge_requests",
       "reviewer": "<current_user>",
       "state": "opened",
-      "noItemText": "No merge requests assigned to you."
+      "noItemText": "No MRs to review."
     },
     // issues
     {
