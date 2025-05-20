@@ -7,6 +7,7 @@
   homebrew = {
     casks = [
       "android-studio"
+      "autodesk-fusion"
       "google-earth-pro"
     ];
   };
