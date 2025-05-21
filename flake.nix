@@ -83,7 +83,7 @@
 
     _1password-shell-plugins = {
       url = "github:1Password/shell-plugins";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 

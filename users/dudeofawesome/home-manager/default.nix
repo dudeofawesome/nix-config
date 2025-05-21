@@ -159,7 +159,7 @@ with pkgs.stdenv.targetPlatform;
 
     _1password-cli = {
       enable = machine-class == "pc";
-      package = pkgs-unstable._1password-cli;
+      package = lib.hiPrio pkgs-unstable._1password-cli;
     };
     _1password-gui = {
       enable = machine-class == "pc";
