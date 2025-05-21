@@ -8,8 +8,6 @@
   ...
 }:
 {
-  environment.systemPackages = [ pkgs-unstable.xboxdrv ];
-
   # Udev rules to start or stop systemd service when controller is connected or disconnected
   services.udev.extraRules =
     with builtins;
@@ -40,12 +38,13 @@
         [ "3106" ]
     );
 
+  # TODO: how to do this with the [kernel driver](https://github.com/paroj/xpad)?
   # Systemd service which starts xboxdrv in xbox360 mode
-  systemd.services."8bitdo-ultimate-xinput@" = {
-    unitConfig.Description = "8BitDo Ultimate Controller XInput mode xboxdrv daemon";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${lib.getExe pkgs-unstable.xboxdrv} --mimic-xpad --silent --type xbox360 --device-by-id %I --force-feedback";
-    };
-  };
+  # systemd.services."8bitdo-ultimate-xinput@" = {
+  #   unitConfig.Description = "8BitDo Ultimate Controller XInput mode xboxdrv daemon";
+  #   serviceConfig = {
+  #     Type = "simple";
+  #     ExecStart = "${lib.getExe pkgs-unstable.xboxdrv} --mimic-xpad --silent --type xbox360 --device-by-id %I --force-feedback";
+  #   };
+  # };
 }

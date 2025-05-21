@@ -1,8 +1,8 @@
-{ pkgs-unstable, ... }:
+{ pkgs-stable, ... }:
 {
   programs.wezterm = {
     enable = true;
-    package = pkgs-unstable.wezterm;
+    package = pkgs-stable.wezterm;
     extraConfig = builtins.readFile ./wezterm.lua;
   };
 }

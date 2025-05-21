@@ -56,7 +56,7 @@ with pkgs.stdenv.targetPlatform;
       lib.flatten ([
         act
         awscli2
-        pkgs-unstable.d2
+        d2
         (lib.optional (should_install_dive) dive)
         eternal-terminal
         watchman
@@ -69,11 +69,11 @@ with pkgs.stdenv.targetPlatform;
           drawio
           inkscape
           losslesscut-bin
-          pkgs-unstable.obsidian
+          obsidian
           pkgs-unstable.ollama
           opentofu
-          pkgs-unstable.signal-desktop
-          pkgs-unstable.spotify
+          pkgs-unstable.signal-desktop-bin
+          spotify
           pkgs-unstable.tailscale
 
           (lib.optionals isLinux [ pkgs-unstable.cider ])
@@ -191,16 +191,16 @@ with pkgs.stdenv.targetPlatform;
         "/Applications/Firefox.app"
         "/System/Applications/Music.app"
         "/System/Applications/Messages.app"
-        "${pkgs-unstable.signal-desktop}/Applications/Signal.app"
+        "${pkgs-unstable.signal-desktop-bin}/Applications/Signal.app"
         "${pkgs-unstable.slack}/Applications/Slack.app"
         "${pkgs-unstable.discord}/Applications/Discord.app"
         "/System/Applications/Mail.app"
         "/System/Applications/Calendar.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Reminders.app"
-        "${pkgs-unstable.vscode}/Applications/Visual Studio Code.app"
+        "${config.programs.vscode.package}/Applications/Visual Studio Code.app"
         "/Applications/Fork.app"
-        "${pkgs-unstable.wezterm}/Applications/WezTerm.app"
+        "${config.programs.wezterm.package}/Applications/WezTerm.app"
         "/System/Applications/System Settings.app"
       ];
     };

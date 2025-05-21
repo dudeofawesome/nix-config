@@ -17,7 +17,7 @@ with pkgs.stdenv.targetPlatform;
       (lib.optionals (machine-class == "pc") [
         # ansible
         gitlab-runner
-        pkgs-unstable.postman
+        postman
         pkgs-unstable.slack
         pkgs-unstable.zoom-us
 

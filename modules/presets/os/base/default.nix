@@ -45,7 +45,7 @@ with pkgs.stdenv.targetPlatform;
       fish
 
       # Runtimes
-      pkgs-unstable.bun
+      bun
       ruby
       nodejs_20 # this should always use the latest LTS
       python3

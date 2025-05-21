@@ -54,8 +54,8 @@ in
             prettier_path="$(escape_for_sed "${pkgs-unstable.nodePackages.prettier}/lib/node_modules/prettier/")"
             kubectl_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubectl}")"
             helm_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubernetes-helm}")"
-            gitlab_ci_ls_path="$(escape_for_sed "${lib.getExe pkgs-unstable.gitlab-ci-ls}")"
-            d2_path="$(escape_for_sed "${lib.getExe pkgs-unstable.d2}")"
+            gitlab_ci_ls_path="$(escape_for_sed "${lib.getExe pkgs-stable.gitlab-ci-ls}")"
+            d2_path="$(escape_for_sed "${lib.getExe pkgs-stable.d2}")"
 
             run cat "${cfg.mutableUserSettings}" \
               `# Add header about nix` \
