@@ -72,7 +72,6 @@ with pkgs.stdenv.targetPlatform;
           obsidian
           pkgs-unstable.ollama
           opentofu
-          pkgs-unstable.signal-desktop-bin
           spotify
           pkgs-unstable.tailscale
 
@@ -187,20 +186,20 @@ with pkgs.stdenv.targetPlatform;
     dock = {
       enable = true;
 
-      apps = [
+      apps = lib.flatten [
         "/Applications/Firefox.app"
         "/System/Applications/Music.app"
         "/System/Applications/Messages.app"
-        "${pkgs-unstable.signal-desktop-bin}/Applications/Signal.app"
-        "${pkgs-unstable.slack}/Applications/Slack.app"
-        "${pkgs-unstable.discord}/Applications/Discord.app"
+        (lib.optional config.programs.signal-desktop.enable "${config.programs.signal-desktop.package}/Applications/Signal.app")
+        (lib.optional config.programs.slack.enable "${config.programs.slack.package}/Applications/Slack.app")
+        (lib.optional config.programs.discord.enable "${config.programs.discord.package}/Applications/Discord.app")
         "/System/Applications/Mail.app"
         "/System/Applications/Calendar.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Reminders.app"
-        "${config.programs.vscode.package}/Applications/Visual Studio Code.app"
+        (lib.optional config.programs.vscode.enable "${config.programs.vscode.package}/Applications/Visual Studio Code.app")
         "/Applications/Fork.app"
-        "${config.programs.wezterm.package}/Applications/WezTerm.app"
+        (lib.optional config.programs.wezterm.enable "${config.programs.wezterm.package}/Applications/WezTerm.app")
         "/System/Applications/System Settings.app"
       ];
     };
@@ -245,6 +244,15 @@ with pkgs.stdenv.targetPlatform;
     };
 
     docker-desktop.enable = true;
+
+    signal-desktop = {
+      enable = true;
+      package = pkgs-unstable.signal-desktop;
+    };
+    discord = {
+      enable = true;
+      package = pkgs-unstable.discord;
+    };
   };
 
   # services.home-manager.autoUpgrade.enable = true;

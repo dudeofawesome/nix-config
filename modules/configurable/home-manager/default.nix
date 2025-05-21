@@ -6,6 +6,7 @@
     ./aerospace.nix
     ./awscli.nix
     ./clock.nix
+    ./discord.nix
     ./dock.nix
     ./docker-client.nix
     ./docker-desktop.nix
@@ -15,6 +16,9 @@
     ./kubectl.nix
     ./moar.nix
     ./process-compose.nix
+    ./signal-desktop.nix
+    ./slack.nix
     ./vscode.nix
+    ./zoom-us.nix
   ];
 }

@@ -18,12 +18,21 @@ with pkgs.stdenv.targetPlatform;
         # ansible
         gitlab-runner
         postman
-        pkgs-unstable.slack
-        pkgs-unstable.zoom-us
 
         (lib.optionals isDarwin [
           pkgs-unstable.tableplus
         ])
       ])
     ];
+
+  programs = {
+    slack = {
+      enable = machine-class == "pc";
+      package = pkgs-unstable.slack;
+    };
+    zoom-us = {
+      enable = machine-class == "pc";
+      package = pkgs-unstable.zoom-us;
+    };
+  };
 }
