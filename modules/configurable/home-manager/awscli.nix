@@ -20,7 +20,7 @@ in
       text = ''
         #!${lib.getExe pkgs.bash}
 
-        op=${lib.getExe pkgs._1password-cli}
+        op=${lib.getExe config.programs._1password-cli.package}
         jq=${lib.getExe pkgs.jq}
 
         item_id="$1"
