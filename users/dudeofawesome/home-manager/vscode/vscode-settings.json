@@ -322,6 +322,11 @@
   "D2.autoUpdate": false,
   "D2.updateOnSave": true,
 
+  // PlantUMLServer: Render diagrams by server which is specified with "plantuml.server". It's much faster, but requires a server.
+  // Local is the default configuration.
+  "plantuml.render": "PlantUMLServer",
+  "plantuml.server": "https://www.plantuml.com/plantuml",
+
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
