@@ -36,6 +36,7 @@ with pkgs.stdenv.targetPlatform;
       pkgs-unstable.nixfmt-rfc-style
       pkgs-unstable.nodePackages.prettier
       pciutils
+      pstree
       ripgrep
       rsync
       tmux
