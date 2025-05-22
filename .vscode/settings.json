@@ -7,6 +7,33 @@
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nil",
   "nix.formatterPath": ["nix", "fmt", "--", "--"],
+  "nix.serverSettings": {
+    "nil": {
+      "nix": {
+        "flake": {
+          "autoArchive": true,
+          "autoEvalInputs": true,
+          "nixpkgsInputName": "nixpkgs-unstable"
+        }
+      },
+      "formatting": { "command": ["nixfmt"] }
+    },
+    "nixd": {
+      "options": {
+        // By default, this entry will be read from `import <nixpkgs> { }`.
+        // You can write arbitrary Nix expressions here, to produce valid "options" declaration result.
+        "nixos": {
+          "expr": "(builtins.getFlake \"${workspaceFolder}/flake.nix\").nixosConfigurations.badlands-vm.options"
+        },
+        "home-manager": {
+          "expr": "(builtins.getFlake \"${workspaceFolder}/flake.nix\").homeConfigurations.<name>.options"
+        },
+        "nix-darwin": {
+          "expr": "(builtins.getFlake \"${workspaceFolder}/flake.nix\").darwinConfigurations.crater-lake.options"
+        }
+      }
+    }
+  },
 
   "[yaml]": {
     "editor.tabSize": 4
