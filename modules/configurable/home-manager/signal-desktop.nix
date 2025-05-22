@@ -13,8 +13,7 @@ in
       enable = lib.mkEnableOption "Signal desktop app";
 
       package = lib.mkPackageOption pkgs "Private, simple, and secure messenger" {
-        # TODO: 25.05 changes the package name to signal-desktop-bin
-        default = [ "signal-desktop" ];
+        default = [ "signal-desktop-bin" ];
       };
     };
   };

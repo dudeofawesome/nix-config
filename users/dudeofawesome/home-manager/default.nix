@@ -247,7 +247,7 @@ with pkgs.stdenv.targetPlatform;
 
     signal-desktop = {
       enable = true;
-      package = pkgs-unstable.signal-desktop;
+      package = pkgs-unstable.signal-desktop-bin;
     };
     discord = {
       enable = true;
