@@ -4,10 +4,10 @@
   lib,
   ...
 }:
-
 let
 
   cfg = config.programs._1password-gui;
+  tomlFormat = pkgs.formats.toml { };
 
 in
 {
@@ -43,6 +43,21 @@ in
           "browsers.extension.enabled" = true;
         };
       };
+
+      sshAgentConfig = lib.mkOption {
+        type = tomlFormat.type;
+        default = { };
+        example = lib.literalExpression ''
+          "ssh-keys" = [
+            { vault = "Private"; }
+          ];
+        '';
+        description = ''
+          Configuration written to
+          {file}`$XDG_CONFIG_HOME/1Password/ssh/agent.toml`
+          See <https://developer.1password.com/docs/ssh/agent/config/> for more info.
+        '';
+      };
     };
   };
 
@@ -74,13 +89,17 @@ in
 
       # TODO: can we actually configure everything we think we can?
       #   https://support.1password.com/settings-security/#considerations-for-system-administrators
-      home.file-json._1password-gui = lib.mkIf (cfg.extraConfig != { }) {
+      home.file-json._1password-gui-settings = lib.mkIf (cfg.extraConfig != { }) {
         inherit (cfg) enable extraConfig;
         target =
           if (pkgs.stdenv.targetPlatform.isDarwin) then
             "Library/Group Containers/2BUA8C4S2C.com.1password/Library/Application Support/1Password/Data/settings/settings.json"
           else
             ".config/1Password/settings/settings.json";
+      };
+
+      xdg.configFile."1Password/ssh/agent.toml" = lib.mkIf (cfg.sshAgentConfig != { }) {
+        source = (tomlFormat.generate "agent.toml" cfg.sshAgentConfig);
       };
     };
 }

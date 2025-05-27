@@ -163,6 +163,7 @@ with pkgs.stdenv.targetPlatform;
     _1password-gui = {
       enable = machine-class == "pc";
       package = pkgs-unstable._1password-gui;
+
       extraConfig = {
         "security.autolock.minutes" = 1;
 
@@ -181,6 +182,10 @@ with pkgs.stdenv.targetPlatform;
         "passwordGenerator.capitalize" = true;
         "passwordGenerator.includeSymbols" = true;
       };
+
+      sshAgentConfig."ssh-keys" = [
+        { vault = "Private"; }
+      ];
     };
 
     dock = {
