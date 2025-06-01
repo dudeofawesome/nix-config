@@ -19,6 +19,10 @@ let
   homeDirectory = config.home.homeDirectory;
 in
 {
+  meta = {
+    maintainers = [ "dudeofawesome" ];
+  };
+
   options = {
     home.file-json = lib.mkOption {
       description = "Attribute set of ";
@@ -64,10 +68,13 @@ in
     home.activation.setJsonValues = lib.hm.dag.entryAfter [ "writeBoundary" ] (
       lib.pipe cfg [
         (attrValues)
+        # only run for enabled files
         (filter (v: v.enable))
+        # convert extraConfig into `jq` commands
         (map (value: ''
           # jq will fail if the original file doesn't exist
           run ${pkgs.coreutils}/bin/touch '${value.target}'
+          # set individual properties within a JSON file
           run ${lib.getExe pkgs.jq} \
             --raw-output \
             --null-input \

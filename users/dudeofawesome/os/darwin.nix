@@ -49,7 +49,6 @@
         "parsec"
         "plex"
         "plexamp"
-        "podman-desktop"
         "postico"
         "private-internet-access"
         "steam"

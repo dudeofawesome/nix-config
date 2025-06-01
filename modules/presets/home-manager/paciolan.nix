@@ -34,5 +34,14 @@ with pkgs.stdenv.targetPlatform;
       enable = machine-class == "pc";
       package = pkgs-unstable.zoom-us;
     };
+    podman-desktop = {
+      enable = machine-class == "pc";
+      extraConfig = {
+        "telemetry.enabled" = false;
+        "preferences.login.start" = false;
+        "podman.setting.rosetta" = true;
+        "preferences.update.reminder" = "never";
+      };
+    };
   };
 }

@@ -16,6 +16,7 @@
     ./kubeconfig.nix
     ./kubectl.nix
     ./moar.nix
+    ./podman-desktop.nix
     ./process-compose.nix
     ./signal-desktop.nix
     ./slack.nix
