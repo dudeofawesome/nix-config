@@ -193,18 +193,56 @@
     "*.ipynb": "jupyter-notebook"
   },
 
+  "diffEditor.ignoreTrimWhitespace": true,
+
   "git.confirmSync": false,
   "git.openRepositoryInParentFolders": "never",
-  "scm.diffDecorationsIgnoreTrimWhitespace": "true",
+  "scm.diffDecorationsIgnoreTrimWhitespace": "inherit",
+  "git.blame.editorDecoration.enabled": true,
+  "gitlens.statusBar.enabled": false,
+  "gitlens.menus": {
+    "editor": {
+      "blame": false,
+      "clipboard": true,
+      "compare": true,
+      "history": false,
+      "remote": false
+    },
+    "editorGroup": false,
+    "explorer": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": true
+    },
+    "scm": {
+      "authors": true
+    },
+    "scmGroupInline": {
+      "stash": true
+    },
+    "scmGroup": {
+      "compare": true,
+      "openClose": true,
+      "stash": true
+    },
+    "scmItem": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": false,
+      "stash": true
+    }
+  },
 
   "liveshare.featureSet": "insiders",
   "liveshare.allowGuestDebugControl": true,
 
-  "diffEditor.ignoreTrimWhitespace": false,
-
   "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
   "editor.formatOnType": true,
   "editor.formatOnPaste": true,
+  "editor.formatOnPasteMode": "file",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.prettierPath": "this should be replaced by nix",
 
@@ -756,42 +794,6 @@
   "leetcode.defaultLanguage": "typescript",
   "leetcode.hint.commandShortcut": false,
   "leetcode.hint.configWebviewMarkdown": false,
-
-  "gitlens.statusBar.enabled": false,
-  "gitlens.menus": {
-    "editor": {
-      "blame": false,
-      "clipboard": true,
-      "compare": true,
-      "history": false,
-      "remote": false
-    },
-    "editorGroup": false,
-    "explorer": {
-      "clipboard": true,
-      "compare": true,
-      "history": true,
-      "remote": true
-    },
-    "scm": {
-      "authors": true
-    },
-    "scmGroupInline": {
-      "stash": true
-    },
-    "scmGroup": {
-      "compare": true,
-      "openClose": true,
-      "stash": true
-    },
-    "scmItem": {
-      "clipboard": true,
-      "compare": true,
-      "history": true,
-      "remote": false,
-      "stash": true
-    }
-  },
 
   "gitlab.customQueries": [
     // merge requests
