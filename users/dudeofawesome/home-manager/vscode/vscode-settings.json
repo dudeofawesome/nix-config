@@ -154,7 +154,7 @@
     "announcement": "auto"
   },
 
-  "extensions.autoUpdate": true,
+  "extensions.autoUpdate": false,
 
   "files.associations": {
     ".env": "dotenv",
