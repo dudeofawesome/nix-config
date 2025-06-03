@@ -18,7 +18,6 @@ in
     systemPackages = with pkgs; [
       docker
       mitmproxy
-      moonlight-qt
       watch
     ];
   };

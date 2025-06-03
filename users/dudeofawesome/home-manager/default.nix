@@ -23,6 +23,7 @@ with pkgs.stdenv.targetPlatform;
     ../../../modules/defaults/home-manager/google-earth-pro.nix
     ../../../modules/defaults/home-manager/hammerspoon
     ../../../modules/defaults/home-manager/ice.nix
+    ../../../modules/defaults/home-manager/moonlight.nix
     ../../../modules/defaults/home-manager/middleclick.nix
     ../../../modules/defaults/home-manager/postico.nix
     ../../../modules/defaults/home-manager/typora.nix
