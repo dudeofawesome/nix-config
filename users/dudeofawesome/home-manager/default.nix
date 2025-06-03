@@ -157,10 +157,6 @@ with pkgs.stdenv.targetPlatform;
       ];
     };
 
-    _1password-cli = {
-      enable = machine-class == "pc";
-      package = lib.hiPrio pkgs-unstable._1password-cli;
-    };
     _1password-gui = {
       enable = machine-class == "pc";
       package = pkgs-unstable._1password-gui;
@@ -188,6 +184,16 @@ with pkgs.stdenv.targetPlatform;
         { vault = "Private"; }
       ];
     };
+    _1password-cli = {
+      enable = config.programs._1password-gui.enable;
+      package = lib.hiPrio pkgs-unstable._1password-cli;
+    };
+    _1password-shell-plugins = {
+      enable = config.programs._1password-cli.enable;
+      plugins = with pkgs; [
+        cachix
+      ];
+    };
 
     dock = {
       enable = true;
@@ -207,13 +213,6 @@ with pkgs.stdenv.targetPlatform;
         "/Applications/Fork.app"
         (lib.optional config.programs.wezterm.enable "${config.programs.wezterm.package}/Applications/WezTerm.app")
         "/System/Applications/System Settings.app"
-      ];
-    };
-
-    _1password-shell-plugins = {
-      enable = config.programs._1password-cli.enable;
-      plugins = with pkgs; [
-        cachix
       ];
     };
 
