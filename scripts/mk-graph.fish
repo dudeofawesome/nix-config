@@ -26,5 +26,7 @@ set dot_file (
     -e 's/fillcolor = "#ff0000"//g' \
 )
 
+echo "Found $(echo "$dot_file" | grep -o 'label = ' | wc -l | xargs) nodes"
+
 echo "$dot_file" | dot -Tsvg >"$output_svg"
 echo "$dot_file" | dot -Tpng -Gdpi=10 >"generation.png"
