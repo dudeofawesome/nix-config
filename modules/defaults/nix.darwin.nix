@@ -2,7 +2,7 @@
 {
   nix = {
     linux-builder = {
-      enable = lib.mkDefault true;
+      enable = lib.mkDefault false;
       config.virtualisation.cores = lib.mkDefault 4;
     };
   };

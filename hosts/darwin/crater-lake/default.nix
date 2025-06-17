@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   imports = [
     ../../../modules/defaults/headful/gaming.darwin.nix
@@ -13,10 +13,10 @@
   };
 
   nix = {
-    distributedBuilds = true;
+    distributedBuilds = lib.mkForce false;
     buildMachines = [
       {
-        hostName = "nix-builder";
+        hostName = "linux-builder";
         system = "aarch64-linux";
         maxJobs = 100;
         supportedFeatures = [
