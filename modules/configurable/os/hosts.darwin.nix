@@ -53,7 +53,7 @@ in
     };
   };
 
-  config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+  config = lib.mkIf (pkgs.stdenv.targetPlatform.isDarwin && false) {
     networking.hosts =
       let
         hasHostName = cfg.hostName != null && cfg.hostName != "";
