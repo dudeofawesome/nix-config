@@ -197,21 +197,24 @@
               "reload-config"
               "mode main"
             ];
+            # reset layout
             r = [
               "flatten-workspace-tree"
               "mode main"
-            ]; # reset layout
+            ];
+            # Toggle between floating and tiling layout
             f = [
               "layout floating tiling"
               "mode main"
-            ]; # Toggle between floating and tiling layout
+            ];
+            # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+            # s = [
+            #   "layout sticky tiling"
+            #   "mode main"
+            # ];
             backspace = [
-              "close-all-windows-but-current"
               "mode main"
             ];
-
-            # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-            #s = ["layout sticky tiling" "mode main"];
 
             alt-shift-n = [
               "join-with left"
