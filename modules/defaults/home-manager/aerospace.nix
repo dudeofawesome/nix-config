@@ -70,7 +70,7 @@
           # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
           # Fallback value (if you omit the key): on-focused-monitor-changed = []
           on-focused-monitor-changed = [
-            # "move-mouse monitor-lazy-center"
+            "move-mouse monitor-lazy-center"
           ];
 
           # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
