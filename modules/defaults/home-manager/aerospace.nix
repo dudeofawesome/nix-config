@@ -14,12 +14,12 @@
       settings =
         let
           workspaces = {
-            browser = "workspace browser";
-            code = "workspace code";
-            misc = "workspace misc";
-            tmp = "workspace tmp";
-            social = "workspace social";
-            music = "workspace music";
+            browser = "workspace 1_🌐";
+            code = "workspace 2_⌘";
+            misc = "workspace 3_misc";
+            tmp = "workspace 4_tmp";
+            social = "workspace 5_💬";
+            music = "workspace 6_🎵";
           };
 
           workman_layout = {
