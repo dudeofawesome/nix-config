@@ -48,15 +48,15 @@ merge
               {
                 name = "mermaid-markdown-syntax-highlighting";
                 publisher = "bpruitt-goddard";
-                version = "1.7.1";
-                sha256 = "0phbmbp0pzcr72jkdwx7f7wvvdmy4qalmvrcy950xpa7kk187cc0";
+                version = "1.7.4";
+                sha256 = "05943phx80bh9xl3xhdxr0qpp7grpja7z28virkm7kwvs3h7xpi0";
 
               };
           "bradlc"."vscode-tailwindcss" = vscode-utils.extensionFromVscodeMarketplace {
             name = "vscode-tailwindcss";
             publisher = "bradlc";
-            version = "0.14.17";
-            sha256 = "0rncrhci486m31fnsir81lr30p2bpdg9z2snk9c2f097iyv0x5pi";
+            version = "0.14.25";
+            sha256 = "0aanllx1fnjbd5wvaqx857xx2y32104czbfyi41nvs586i83nw1m";
 
           };
           "bruno-api-client"."bruno" = vscode-utils.extensionFromVscodeMarketplace {
@@ -97,15 +97,15 @@ merge
           "eeyore"."yapf" = vscode-utils.extensionFromVscodeMarketplace {
             name = "yapf";
             publisher = "eeyore";
-            version = "2025.3.107154559";
-            sha256 = "16w0s0hs2mfk18ifwva66gxphn1719m15c13g01ii9ccq8m7b4c8";
+            version = "2025.5.107163247";
+            sha256 = "0rq1aq1algw1bv3s5sjmi327zy0yzq2qhmy3xisig6fn1r20fc83";
 
           };
           "effectful-tech"."effect-vscode" = vscode-utils.extensionFromVscodeMarketplace {
             name = "effect-vscode";
             publisher = "effectful-tech";
-            version = "0.1.7";
-            sha256 = "0cc4gm5xyvs3y5zwvm77fdi4wypx8ffm7lrnnzzqjk022hxymd58";
+            version = "0.2.3";
+            sha256 = "0nh49k7s51i99m02d44jy8z3wjynmdigrsf8xa1jcn8y2lahd3k0";
 
           };
           "fabiospampinato"."vscode-diff" = vscode-utils.extensionFromVscodeMarketplace {
@@ -139,22 +139,22 @@ merge
           "github"."vscode-github-actions" = vscode-utils.extensionFromVscodeMarketplace {
             name = "vscode-github-actions";
             publisher = "github";
-            version = "0.27.1";
-            sha256 = "0pq97nl5h170r5cwsvps9z059lvj7a9aik2w84fnn3mjficrlwlq";
+            version = "0.27.2";
+            sha256 = "06afix94nxb9vbkgmygg02pyczb09cmvr1l8d2b9alsxhk2i0r69";
 
           };
           "github"."vscode-pull-request-github" = vscode-utils.extensionFromVscodeMarketplace {
             name = "vscode-pull-request-github";
             publisher = "github";
-            version = "0.108.0";
-            sha256 = "10p76fi8516gawjm9bvxgdw1val4mwrbmf3z7b7qld7kr5rlzlqq";
+            version = "0.112.0";
+            sha256 = "0gi9ib9cf5h7p3l1mxs1z4wjv69kwjxngw6fz071362q7215fp1g";
 
           };
           "gitlab"."gitlab-workflow" = vscode-utils.extensionFromVscodeMarketplace {
             name = "gitlab-workflow";
             publisher = "gitlab";
-            version = "6.13.1";
-            sha256 = "0f0qy20vnhfv3z6n1fby5m5m179s1vyl2w6w0ircn456yxj2gs5z";
+            version = "6.35.0";
+            sha256 = "0clm21yxyz2brzlqfc5dsysbvscs2hhh1bvpsh2344z1c7waim5j";
 
           };
           "gracefulpotato"."rbs-syntax" = vscode-utils.extensionFromVscodeMarketplace {
@@ -181,8 +181,8 @@ merge
           "idleberg"."applescript" = vscode-utils.extensionFromVscodeMarketplace {
             name = "applescript";
             publisher = "idleberg";
-            version = "0.27.1";
-            sha256 = "19fxs31h32qi96njrciq3mm6rahi0cw79bfrj5b2aba9xf7c4h1l";
+            version = "0.27.2";
+            sha256 = "14rqi7nlcj4lrpc697kc9kx195np8arcx13rf70z94dqyj2glbnz";
 
           };
           "inferrinizzard"."prettier-sql-vscode" = vscode-utils.extensionFromVscodeMarketplace {
@@ -195,8 +195,8 @@ merge
           "jnoortheen"."nix-ide" = vscode-utils.extensionFromVscodeMarketplace {
             name = "nix-ide";
             publisher = "jnoortheen";
-            version = "0.4.16";
-            sha256 = "0mhc58lzdn153yskqi6crvzx6pgi1d72mdhmnpc4qkbf1wx47l9i";
+            version = "0.4.22";
+            sha256 = "1ib8czlqhqq1rz6jrazfd9z3gfqdwqazxdvwmsyp765m0vf78xcg";
 
           };
           "mrmlnc"."vscode-scss" = vscode-utils.extensionFromVscodeMarketplace {
@@ -209,8 +209,8 @@ merge
           "ms-kubernetes-tools"."vscode-kubernetes-tools" = vscode-utils.extensionFromVscodeMarketplace {
             name = "vscode-kubernetes-tools";
             publisher = "ms-kubernetes-tools";
-            version = "1.3.23";
-            sha256 = "0kk8ilzf9a69pijyqg35l4lp8gm0cn9sk13xcxszfl7hwjx5zkgj";
+            version = "1.3.25";
+            sha256 = "0br5cvawffjddk5j7806pqilb09vfi34yja1blwasq8zjvs3a6k8";
 
           };
           "ms-vscode"."remote-explorer" = vscode-utils.extensionFromVscodeMarketplace {
@@ -244,8 +244,8 @@ merge
           "orta"."vscode-jest" = vscode-utils.extensionFromVscodeMarketplace {
             name = "vscode-jest";
             publisher = "orta";
-            version = "6.4.3";
-            sha256 = "1yq42qciwrchik1av2wll1s08rk42i3yfdprbg9215s00zl8g94x";
+            version = "6.4.4";
+            sha256 = "0djkrj2wbxm17z09n4c15208md70n1ihy5jsmhqq7dh0gkdbj138";
 
           };
           "oven"."bun-vscode" = vscode-utils.extensionFromVscodeMarketplace {
@@ -258,8 +258,8 @@ merge
           "rooveterinaryinc"."roo-cline" = vscode-utils.extensionFromVscodeMarketplace {
             name = "roo-cline";
             publisher = "rooveterinaryinc";
-            version = "3.17.2";
-            sha256 = "1ds15l531hnsawlkf4v4xndpva3vls0bf3abg42d1qijjmxzsbgi";
+            version = "3.23.16";
+            sha256 = "0p7rzfgdmpmmbz39n3iv83sbcyjd8yihxq9vbxqs1cxxfk31smkl";
 
           };
           "seeker-dk"."node-modules-viewer" = vscode-utils.extensionFromVscodeMarketplace {
@@ -300,8 +300,8 @@ merge
           "vitest"."explorer" = vscode-utils.extensionFromVscodeMarketplace {
             name = "explorer";
             publisher = "vitest";
-            version = "1.18.1";
-            sha256 = "1b3w4pj64jjphmxjn0i1yrn8w0ic59ljfzaw398713w5g7p85xrk";
+            version = "1.26.3";
+            sha256 = "06yxzx80flrl10n21y9gzafbwbhzskd21v7236738xdxd98nkm24";
 
           };
           "weaveworks"."vscode-gitops-tools" = vscode-utils.extensionFromVscodeMarketplace {
@@ -314,8 +314,8 @@ merge
           "yutengjing"."open-in-external-app" = vscode-utils.extensionFromVscodeMarketplace {
             name = "open-in-external-app";
             publisher = "yutengjing";
-            version = "0.10.0";
-            sha256 = "0kaimzfl7brmlwpjr98q4k3k1w99k5f7llshby2hwhppzfyb6b3i";
+            version = "0.11.0";
+            sha256 = "1fpz6mgfl9dk92larjqx9n6xlg5lixzi5a9qw2rkzazhi5m2ghms";
 
           };
         }
@@ -324,8 +324,8 @@ merge
             "ms-toolsai"."jupyter" = vscode-utils.extensionFromVscodeMarketplace {
               name = "jupyter";
               publisher = "ms-toolsai";
-              version = "2025.3.0";
-              sha256 = "0zhlfg8ycaji3icvc8y1b5f1vj5wcbrr3vs78y4632n8lkkz1i96";
+              version = "2025.4.1";
+              sha256 = "0k0nvkf3zhms9jha48a786z1jz1w0g8d5a4xmnvlil7aywr7y4v5";
               arch = "linux-x64";
 
             };
@@ -345,8 +345,8 @@ merge
           "ms-toolsai"."jupyter" = vscode-utils.extensionFromVscodeMarketplace {
             name = "jupyter";
             publisher = "ms-toolsai";
-            version = "2025.3.0";
-            sha256 = "0n4szirrgzlf6gj051l9l2d5askgy9a3mfzjhsc9yi77vws3f3hh";
+            version = "2025.4.1";
+            sha256 = "154jss8lk5g7r5bsqppwhr54pgwwf8w39yp9hl6bymkwdgmll7dc";
             arch = "linux-arm64";
 
           };
@@ -366,8 +366,8 @@ merge
         "ms-toolsai"."jupyter" = vscode-utils.extensionFromVscodeMarketplace {
           name = "jupyter";
           publisher = "ms-toolsai";
-          version = "2025.3.0";
-          sha256 = "0sylg5qv7g7jzgy0g3ry12mjbawhiyl8lgvy5s3fwc3dn8xykpqk";
+          version = "2025.4.1";
+          sha256 = "1yw01g6h1vc0jifk5lgg4q7vnfk0xjzp9vq3z4fnbdg21yqabcd3";
           arch = "darwin-x64";
 
         };
@@ -387,8 +387,8 @@ merge
       "ms-toolsai"."jupyter" = vscode-utils.extensionFromVscodeMarketplace {
         name = "jupyter";
         publisher = "ms-toolsai";
-        version = "2025.3.0";
-        sha256 = "1br9nd901qizgr5s72nxzhqi564n0syrz01wncgjzm8jpra0l2vh";
+        version = "2025.4.1";
+        sha256 = "12jj7mp18g12yaw106a8asn58nyvn5bcl3ni12alczcfw9pjiki5";
         arch = "darwin-arm64";
 
       };
