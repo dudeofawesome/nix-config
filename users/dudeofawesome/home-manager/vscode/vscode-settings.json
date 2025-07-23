@@ -843,6 +843,7 @@
   "gitlab.duoCodeSuggestions.enabledSupportedLanguages": {},
   "gitlab.duo.enabledWithoutGitlabProject": false,
   "gitlab.duoCodeSuggestions.openTabsContext": false,
+  "gitlab.duoAgentPlatform.enabled": false,
   "gitlab.keybindingHints.enabled": false,
   // now M$ is hiding Copilot settings behind obscure names…
   "workbench.editor.empty.hint": "hidden",
