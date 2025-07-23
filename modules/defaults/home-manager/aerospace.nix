@@ -137,9 +137,8 @@
             # ''
 
             # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-            alt-slash = "layout tiles horizontal vertical";
-            alt-period = "layout horizontal vertical"; # toggle orientation
-            alt-comma = "layout accordion horizontal vertical";
+            alt-period = "layout horizontal vertical"; # toggle layout orientation
+            alt-slash = "layout accordion tiles"; # toggle layout type
 
             ctrl-left = "workspace --wrap-around prev";
             ctrl-right = "workspace --wrap-around next";
