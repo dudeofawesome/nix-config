@@ -33,7 +33,7 @@ module.exports = {
       },
       {
         match: ['*.zoom.us/j/*', '*.zoom.us/my/*'],
-        browser: 'us.zoom.xos',
+        browser: zoom_path ?? 'us.zoom.xos',
       },
       {
         match: [/^slack:\/\/.*$/],
