@@ -1,10 +1,7 @@
 { config, os, ... }:
 {
   imports = [
-    ../../../modules/defaults/wireless.nix
     ../../../modules/defaults/nvidia.nix
-    ../../../modules/defaults/headful/gaming.${os}.nix
-    ../../../modules/defaults/headful/fingerprint.nix
     ../../../modules/defaults/tailscale.nix
   ];
 
