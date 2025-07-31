@@ -64,7 +64,7 @@ in
         hostname = "haleakala";
         arch = "x86_64";
         owner = "dudeofawesome";
-        machine-class = "pc";
+        machine-class = "server";
         users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
       }
       // base

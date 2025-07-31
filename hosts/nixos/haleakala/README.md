@@ -1,3 +1,3 @@
 # haleakala
 
-Louis' backup gaming desktop
+Louis' backup desktop server

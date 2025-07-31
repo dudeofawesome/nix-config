@@ -28,7 +28,9 @@
     "wl"
     "mt76"
   ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot.extraModulePackages = [
+    # config.boot.kernelPackages.broadcom_sta
+  ];
   hardware.usb-modeswitch.enable = true;
 
   fileSystems."/" = {
@@ -49,6 +51,8 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+
+  networking.enableB43Firmware = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
