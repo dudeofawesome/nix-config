@@ -53,9 +53,9 @@ with lib;
         nix4vscode.bpruitt-goddard.mermaid-markdown-syntax-highlighting
         # nix4vscode.bradlc.vscode-tailwindcss
         nix4vscode.bruno-api-client.bruno
-        nix4vscode.castwide.solargraph
+        castwide.solargraph
         codezombiech.gitignore
-        nix4vscode.connor4312.nodejs-testing
+        # nix4vscode.connor4312.nodejs-testing
         coolbear.systemd-unit-file
         dart-code.dart-code
         dart-code.flutter
