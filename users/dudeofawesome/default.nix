@@ -12,6 +12,7 @@
       { config, lib, ... }:
       let
         scrutiny = "users/dudeofawesome/scrutiny-api";
+        tokens = "users/dudeofawesome/nix_access_tokens";
       in
       {
         sops.secrets."${scrutiny}/endpoint/cluster/schema" = {
@@ -42,7 +43,6 @@
         sops.templates."scrutiny-endpoint".content =
           let
             tmpl = config.sops.placeholder;
-            scrutiny = "users/dudeofawesome/scrutiny-api";
           in
           lib.concatStrings [
             "${tmpl."${scrutiny}/endpoint/external/schema"}://"
@@ -50,20 +50,20 @@
             "${tmpl."${scrutiny}/endpoint/external/origin"}"
           ];
 
-        sops.secrets."users/dudeofawesome/nix_access_tokens/github.com".sopsFile = ./secrets.yaml;
-        sops.templates."users/dudeofawesome/nix_access_tokens" = {
+        sops.secrets."${tokens}/github.com".sopsFile = ./secrets.yaml;
+        sops.templates.${tokens} = {
+          # owner = ;
           mode = "0440";
           content =
             let
               tmpl = config.sops.placeholder;
-              tokens = "users/dudeofawesome/nix_access_tokens";
             in
             lib.concatStrings [
               "extra-access-tokens = github.com=${tmpl."${tokens}/github.com"}"
             ];
         };
         nix.extraOptions = ''
-          include ${config.sops.templates."users/dudeofawesome/nix_access_tokens".path}
+          include ${config.sops.templates.${tokens}.path}
         '';
       };
   };
