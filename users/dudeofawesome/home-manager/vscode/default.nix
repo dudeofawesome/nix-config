@@ -17,6 +17,24 @@ with lib;
     enable = lib.mkDefault (machine-class == "pc");
 
     mutableUserSettings = ./vscode-settings.json;
+    keybindings = [
+      {
+        key = "cmd+alt+n";
+        command = "workbench.action.focusLeftGroupWithoutWrap";
+      }
+      {
+        key = "cmd+alt+e";
+        command = "workbench.action.focusBelowGroupWithoutWrap";
+      }
+      {
+        key = "cmd+alt+o";
+        command = "workbench.action.focusAboveGroupWithoutWrap";
+      }
+      {
+        key = "cmd+alt+i";
+        command = "workbench.action.focusRightGroupWithoutWrap";
+      }
+    ];
 
     extensions =
       let
