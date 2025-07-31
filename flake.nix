@@ -117,6 +117,8 @@
       nixosConfigurations = import ./hosts/nixos params;
       darwinConfigurations = import ./hosts/darwin params;
 
+      # packages = import ./packages/default.nix { inherit inputs; };
+
       # run `nix fmt` to format all files
       formatter = forAllSystems (nixpkgs: nixpkgs.nixfmt-rfc-style);
     };
