@@ -17,37 +17,35 @@ in
   nix = {
     package = pkgs.nix;
 
-    gc =
-      {
-        automatic = true;
-        options = lib.mkDefault "--delete-older-than 30d";
-      }
-      // (
-        if (isLinux) then
-          { dates = lib.mkDefault "weekly"; }
-        else if (isDarwin) then
-          { interval.Day = lib.mkDefault 7; }
-        else
-          abort "Unsupported OS"
-      );
+    gc = {
+      automatic = true;
+      options = lib.mkDefault "--delete-older-than 30d";
+    }
+    // (
+      if (isLinux) then
+        { dates = lib.mkDefault "weekly"; }
+      else if (isDarwin) then
+        { interval.Day = lib.mkDefault 7; }
+      else
+        abort "Unsupported OS"
+    );
 
-    optimise =
-      {
-        automatic = lib.mkDefault true;
-      }
-      // (
-        if (isLinux) then
-          { dates = lib.mkDefault [ "03:45" ]; }
-        else if (isDarwin) then
-          {
-            interval = lib.mkDefault {
-              Hour = 4;
-              Minute = 15;
-            };
-          }
-        else
-          abort "Unsupported OS"
-      );
+    optimise = {
+      automatic = lib.mkDefault true;
+    }
+    // (
+      if (isLinux) then
+        { dates = lib.mkDefault [ "03:45" ]; }
+      else if (isDarwin) then
+        {
+          interval = lib.mkDefault {
+            Hour = 4;
+            Minute = 15;
+          };
+        }
+      else
+        abort "Unsupported OS"
+    );
 
     # disable the nix-channel command, which leads to non-reproducible envs
     channel.enable = false;
@@ -89,7 +87,8 @@ in
 
     # Entries here make package repos available via `nix shell <name>#<pkg>`
     registry = {
-      stable.flake = inputs.nixpkgs-stable;
+      stable.flake =
+        if (os == "darwin") then inputs.nixpkgs-darwin-stable else inputs.nixpkgs-linux-stable;
       unstable.flake = inputs.nixpkgs-unstable;
       latest.to = {
         type = "github";

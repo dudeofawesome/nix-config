@@ -3,38 +3,44 @@
 
   inputs = {
     # TODO: use `nixpkgs-YY.MM-darwin` for Darwin
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     nur = {
       url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      # TODO: how to follow nixpkgs-darwin-stable when on macOS?
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
     nix-std.url = "github:chessai/nix-std";
 
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:dudeofawesome/home-manager/fix/vscode-profile-dir-creation-25.05";
+      # TODO: how to follow nixpkgs-darwin-stable when on macOS?
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
     };
 
     sops = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      # TODO: how to follow nixpkgs-darwin-stable when on macOS?
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      # TODO: how to follow nixpkgs-darwin-stable when on macOS?
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
     dudeofawesome_dotfiles = {
@@ -89,9 +95,9 @@
   };
 
   outputs =
-    inputs@{ nixpkgs-stable, nixpkgs-unstable, ... }:
+    inputs@{ nixpkgs-linux-stable, nixpkgs-unstable, ... }:
     let
-      lib = nixpkgs-stable.lib;
+      lib = nixpkgs-linux-stable.lib;
       params = {
         inherit
           inputs
