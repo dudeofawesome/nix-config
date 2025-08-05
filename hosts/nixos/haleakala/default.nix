@@ -18,7 +18,9 @@
     mode = "0400";
   };
 
-  boot.extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
+  boot.extraModulePackages = [
+    # config.boot.kernelPackages.rtl88x2bu # WiFi
+  ];
 
   networking = {
     hostId = "1b29410c"; # head -c 8 /etc/machine-id
