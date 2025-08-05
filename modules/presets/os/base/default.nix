@@ -63,10 +63,6 @@ with pkgs.stdenv.targetPlatform;
   programs.fish.enable = true;
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-      ];
-    })
+    nerd-fonts.fira-code
   ];
 }

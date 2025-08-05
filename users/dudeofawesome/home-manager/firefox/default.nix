@@ -33,63 +33,137 @@
         Snippets = true;
         Locked = true;
       };
+      DisableSetDesktopBackground = true;
+      DontCheckDefaultBrowser = true;
+
+      ExtensionSettings = {
+        "uBlock0@raymondhill.net" = {
+          default_area = "navbar";
+          private_browsing = true;
+        };
+        # 1Password
+        "{d634138d-c276-4fc8-924b-40a0ea21d284}" = {
+          default_area = "navbar";
+          private_browsing = true;
+        };
+        # SideBerry
+        "{3c078156-979c-498b-8990-85f7987dd929}" = {
+          default_area = "navbar";
+          private_browsing = true;
+        };
+
+        "ATBC@EasonWong" = {
+          default_area = "menupanel";
+          private_browsing = false;
+        };
+        "addon@darkreader.org" = {
+          default_area = "menupanel";
+          private_browsing = false;
+        };
+        # Reddit Enhancement Suite
+        "jid1-xUfzOsOFlzSOXg@jetpack" = {
+          default_area = "menupanel";
+          private_browsing = false;
+        };
+        # Refined Github
+        "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = {
+          default_area = "menupanel";
+          private_browsing = false;
+        };
+        "tab-stash@condordes.net" = {
+          default_area = "menupanel";
+          private_browsing = false;
+        };
+        "wayback_machine@mozilla.org" = {
+          default_area = "menupanel";
+          private_browsing = false;
+        };
+        # Apollo Client Devtools
+        "{a5260852-8d08-4979-8116-38f1129dfd22}" = {
+          default_area = "menupanel";
+          private_browsing = false;
+        };
+        "@react-devtools" = {
+          default_area = "menupanel";
+          private_browsing = false;
+        };
+      };
+
+      Containers = {
+        Secondary = {
+          id = 0;
+          color = "blue";
+          icon = "fingerprint";
+        };
+        Paciolan = {
+          id = 1;
+          color = "red";
+          icon = "briefcase";
+        };
+        Facebook = {
+          id = 2;
+          color = "blue";
+          icon = "fence";
+        };
+        TikTok = {
+          id = 3;
+          color = "purple";
+          icon = "fence";
+        };
+      };
+
     };
 
     profiles =
       let
         dudeofawesome = rec {
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            adaptive-tab-bar-colour
-            # clearurls
-            darkreader
-            # facebook-container
-            firefox-translations
-            # GraphQL Network Inspector
-            # iCloud Hide My Email
-            # Loggly Formatter
-            onepassword-password-manager
-            react-devtools
-            reddit-enhancement-suite
-            reduxdevtools
-            refined-github
-            sidebery
-            tab-stash
-            # ublacklist
-            ublock-origin
-            wayback-machine
-          ];
+          extensions = {
+            packages = with pkgs.nur.repos.rycee.firefox-addons; [
+              adaptive-tab-bar-colour
+              # clearurls
+              darkreader
+              firefox-translations
+              # GraphQL Network Inspector
+              # iCloud Hide My Email
+              # Loggly Formatter
+              onepassword-password-manager
+              react-devtools
+              reddit-enhancement-suite
+              reduxdevtools
+              refined-github
+              sidebery
+              tab-stash
+              # ublacklist
+              ublock-origin
+              wayback-machine
+            ];
 
-          containers = {
-            Secondary = {
-              id = 0;
-              color = "blue";
-              icon = "fingerprint";
-            };
-            Paciolan = {
-              id = 1;
-              color = "red";
-              icon = "briefcase";
-            };
-            Facebook = {
-              id = 2;
-              color = "blue";
-              icon = "fence";
-            };
-            TikTok = {
-              id = 3;
-              color = "purple";
-              icon = "fence";
-            };
+            # enable settings management. can alternatively be applied per-extension
+            # force = true;
+            # settings = {
+            #   "uBlock0@raymondhill.net".settings = {
+            #     selectedFilterLists = [
+            #       "ublock-filters"
+            #       "ublock-badware"
+            #       "ublock-privacy"
+            #       "ublock-unbreak"
+            #       "ublock-quick-fixes"
+            #     ];
+            #   };
+            # };
           };
+
+          containers = config.programs.firefox.policies.Containers;
           containersForce = true;
 
           search = {
-            default = "Kagi";
-            privateDefault = "DuckDuckGo";
+            default = "kagi";
+            privateDefault = "ddg";
             force = true;
 
             engines = {
-              "Kagi" = {
+              kagi = {
+                name = "Kagi";
                 urls = [
                   {
                     template = "https://kagi.com/search";
@@ -112,13 +186,14 @@
                   }
                 ];
 
-                iconUpdateURL = "https://kagi.com/favicon.ico";
+                icon = "https://kagi.com/favicon.ico";
                 definedAliases = [
                   "@kagi"
                   "@k"
                 ];
               };
-              "Kagi Assistant" = {
+              kagi-assistant = {
+                name = "Kagi Assistant";
                 urls = [
                   {
                     template = "https://kagi.com/assistant";
@@ -131,18 +206,19 @@
                   }
                 ];
 
-                iconUpdateURL = "https://kagi.com/favicon-assistant-32x32.png";
+                icon = "https://kagi.com/favicon-assistant-32x32.png";
                 definedAliases = [
                   "@kagiass"
                   "@ka"
                 ];
               };
 
-              "DuckDuckGo" = {
+              ddg = {
                 metaData.hidden = false;
               };
 
-              "npm" = {
+              npm = {
+                name = "npm";
                 urls = [
                   {
                     template = "https://www.npmjs.com/search";
@@ -155,11 +231,12 @@
                   }
                 ];
 
-                iconUpdateURL = "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png";
+                icon = "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png";
                 definedAliases = [ "@npm" ];
               };
 
-              "GitHub" = {
+              github = {
+                name = "GitHub";
                 urls = [
                   {
                     template = "https://github.com/search";
@@ -175,14 +252,15 @@
                     ];
                   }
                 ];
-                iconUpdateURL = "https://github.githubassets.com/favicons/favicon.png";
+                icon = "https://github.githubassets.com/favicons/favicon.png";
                 definedAliases = [
                   "@github"
                   "@gh"
                 ];
               };
 
-              "Glassdoor" = {
+              glassdoor = {
+                name = "Glassdoor";
                 urls = [
                   {
                     template = "https://www.glassdoor.com/Search/results.htm";
@@ -195,7 +273,7 @@
                   }
                 ];
 
-                iconUpdateURL = "https://www.glassdoor.com/favicon.ico";
+                icon = "https://www.glassdoor.com/favicon.ico";
                 definedAliases = [ "@gd" ];
               };
               # "Crunchbase" = {
@@ -208,7 +286,8 @@
               #   definedAliases = [ "@cb" ];
               # };
 
-              "Nix Packages" = {
+              nix-packages = {
+                name = "Nix Packages";
                 urls = [
                   {
                     template = "https://search.nixos.org/packages";
@@ -231,7 +310,8 @@
                   "@nixp"
                 ];
               };
-              "Nix Options" = {
+              nix-options = {
+                name = "Nix Options";
                 urls = [
                   {
                     template = "https://mynixos.com/search";
@@ -248,22 +328,22 @@
                 definedAliases = [ "@nixo" ];
               };
 
-              "Bing".metaData.hidden = true;
-              "eBay".metaData.hidden = true;
+              bing.metaData.hidden = true;
+              ebay.metaData.hidden = true;
             };
 
             order = [
-              "Kagi"
-              "Kagi Assistant"
-              "DuckDuckGo"
-              "Google"
-              "Amazon.com"
-              "Glassdoor"
-              "Wikipedia (en)"
-              "GitHub"
+              "kagi"
+              "kagi-assistant"
+              "ddg"
+              "google"
+              "amazondotcom-us"
+              "glassdoor"
+              "wikipedia"
+              "github"
               "npm"
-              "Nix Packages"
-              "Nix Options"
+              "nix-packages"
+              "nix-options"
             ];
           };
 
@@ -309,13 +389,13 @@
         shopping-portals = {
           id = 1;
 
-          extensions =
+          extensions.packages =
             with pkgs.nur.repos.rycee.firefox-addons;
             [
               clearurls
               # topcashback-cashback-coupons
             ]
-            ++ dudeofawesome.extensions;
+            ++ dudeofawesome.extensions.packages;
           search = dudeofawesome.search;
           settings = dudeofawesome.settings;
         };

@@ -47,15 +47,6 @@
     inputs.nur.overlays.default
 
     (final: prev: {
-      mkalias = prev.mkalias.overrideAttrs (old: {
-        src = prev.fetchFromGitHub {
-          owner = "vs49688";
-          repo = "mkalias";
-          rev = "v1.1.0";
-          hash = "sha256-kIVCtYGlWKS0d/Potwo6X8F7Hgc/1S1RQTEbJi+IL9U=";
-        };
-      });
-
       scrutiny-collector = prev.scrutiny-collector.overrideAttrs (old: {
         meta = old.meta // {
           platforms = lib.platforms.all;
