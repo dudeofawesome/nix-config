@@ -109,6 +109,9 @@
   "editor.guides.indentation": true,
   "editor.colorDecorators": true,
 
+  "zenMode.fullScreen": false,
+  "zenMode.restore": false,
+
   "window.restoreWindows": "folders",
   "window.clickThroughInactive": false,
 
