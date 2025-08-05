@@ -10,7 +10,9 @@
   #   path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
   # };
 
-  boot.extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
+  boot.extraModulePackages = [
+    # config.boot.kernelPackages.rtl88x2bu # WiFi
+  ];
 
   networking = {
     hostId = "1b29410c"; # head -c 8 /etc/machine-id
