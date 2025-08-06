@@ -2,13 +2,17 @@
   pkgs,
   lib,
   config,
+  machine-class,
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    gwe
-    nvidia-vaapi-driver
-  ];
+  environment.systemPackages = lib.flatten (
+    with pkgs;
+    [
+      (lib.optional (machine-class == "pc") gwe)
+      nvidia-vaapi-driver
+    ]
+  );
 
   boot = {
     kernelModules = [ "nvidia" ];
@@ -18,17 +22,25 @@
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
-    extraPackages = [ config.boot.kernelPackages.nvidia_x11.out ];
-    extraPackages32 = [ config.boot.kernelPackages.nvidia_x11.lib32 ];
+    extraPackages = lib.flatten (
+      with config.boot.kernelPackages;
+      [
+        (lib.optional (machine-class == "pc") nvidia_x11.out)
+      ]
+    );
+    extraPackages32 = lib.flatten (
+      with config.boot.kernelPackages;
+      [
+        (lib.optional (machine-class == "pc") nvidia_x11.lib32)
+      ]
+    );
   };
 
   services = {
-    xserver = lib.mkIf config.services.xserver.enable {
-      # Load nvidia driver for Xorg and Wayland
-      videoDrivers = [ "nvidia" ];
-      # Nvidia doesn't want to work well with Wayland
-      displayManager.gdm.wayland = lib.mkIf config.services.xserver.displayManager.gdm.enable false;
-    };
+    # Load nvidia driver for Xorg and Wayland
+    xserver.videoDrivers = [ "nvidia" ];
+    # Nvidia doesn't want to work well with Wayland
+    xserver.displayManager.gdm.wayland = lib.mkIf config.services.xserver.displayManager.gdm.enable false;
   };
 
   hardware.nvidia = {
@@ -57,6 +69,6 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 }
