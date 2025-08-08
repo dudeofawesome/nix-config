@@ -238,14 +238,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1754422956,
-        "narHash": "sha256-+Qeut416A9NPHcTUQ/ntJ/kP36omGzx09quASvkYtuw=",
-        "path": "/Users/dudeofawesome/git/nix-community/home-manager",
-        "type": "path"
+        "lastModified": 1754431492,
+        "narHash": "sha256-CPM7zm6csUx7vSfKvzMDIjepEJv1u/usmaT7zydzbuI=",
+        "owner": "dudeofawesome",
+        "repo": "home-manager",
+        "rev": "0820b40e8a0d30dc018e90580f6cb27952fdca32",
+        "type": "github"
       },
       "original": {
-        "path": "/Users/dudeofawesome/git/nix-community/home-manager",
-        "type": "path"
+        "owner": "dudeofawesome",
+        "ref": "fix/vscode-profile-dir-creation-25.05",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "nix-std": {
