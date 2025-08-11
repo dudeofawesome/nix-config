@@ -39,7 +39,7 @@
           if (pkgs.stdenv.targetPlatform.isDarwin) then
             ".local/share/containers/podman-desktop/configuration/settings.json"
           else
-            throw "unsupported OS";
+            abort "unsupported OS ${pkgs.stdenv.targetPlatform.config}";
       };
 
       # TODO: should this be in the default value?

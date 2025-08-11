@@ -27,7 +27,7 @@ in
       else if (isDarwin) then
         { interval.Day = lib.mkDefault 7; }
       else
-        abort "Unsupported OS"
+        abort "unsupported OS ${pkgs.stdenv.targetPlatform.config}"
     );
 
     optimise = {
@@ -44,7 +44,7 @@ in
           };
         }
       else
-        abort "Unsupported OS"
+        abort "unsupported OS ${pkgs.stdenv.targetPlatform.config}"
     );
 
     # disable the nix-channel command, which leads to non-reproducible envs
@@ -61,7 +61,7 @@ in
           else if (isDarwin) then
             "@admin"
           else
-            abort "Unsupported OS"
+            abort "unsupported OS ${pkgs.stdenv.targetPlatform.config}"
         )
       ]);
 
