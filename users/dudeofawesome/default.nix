@@ -50,7 +50,7 @@
             "${tmpl."${scrutiny}/endpoint/external/origin"}"
           ];
 
-        sops.secrets."${tokens}/github.com".sopsFile = ./secrets.yaml;
+        sops.secrets."${tokens}_github.com".sopsFile = ./secrets.yaml;
         sops.templates.${tokens} = {
           # owner = ;
           mode = "0440";
@@ -59,12 +59,9 @@
               tmpl = config.sops.placeholder;
             in
             lib.concatStrings [
-              "extra-access-tokens = github.com=${tmpl."${tokens}/github.com"}"
+              "extra-access-tokens = github.com=${tmpl."${tokens}_github.com"}"
             ];
         };
-        nix.extraOptions = ''
-          include ${config.sops.templates.${tokens}.path}
-        '';
       };
   };
   user = {
