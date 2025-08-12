@@ -10,13 +10,30 @@ permissions:
   contents: 'read'
 
 jobs:
+  identify:
+    runs-on: 'ubuntu-24.04-arm'
+    outputs:
+      nixpkgs_version: '${{ steps.nixpkgs-version.outputs.version }}'
+    steps:
+      - name: 'Checkout Repository 🛎️'
+        uses: 'actions/checkout@v4'
+      - name: 'Identify nixpkgs version'
+        id: 'nixpkgs-version'
+        run: |
+          echo "version=$( \
+            jq --raw-output '.nodes["nixpkgs-linux-stable"].original.ref' flake.lock \
+          )" >> "$GITHUB_OUTPUT"
+
   build:
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-24.04'
+    needs:
+      - 'identify'
     services:
       nixos-vm:
         image: 'qemux/qemu'
         env:
-          BOOT: 'nixos'
+          BOOT: https://channels.nixos.org/${{ needs.identify.outputs.nixpkgs_version }}/latest-nixos-minimal-x86_64-linux.iso
+          # https://channels.nixos.org/${{ needs.identify.outputs.nixpkgs_version }}/latest-nixos-minimal-${{ fromJSON('{"X64": "x86_64"}')['X64'] }}-linux.iso
         options: '--cap-add NET_ADMIN --device /dev/kvm --device /dev/net/tun'
     steps:
       - name: 'Checkout Repository 🛎️'
