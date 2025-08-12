@@ -2,11 +2,14 @@
   inputs,
   pkgs,
   lib,
+  config,
   os,
+  owner,
   ...
 }:
-with pkgs.stdenv.targetPlatform;
 let
+  inherit (pkgs.stdenv.targetPlatform) isLinux isDarwin;
+
   doa-lib = import ../../lib;
 
   mkDarwinDefault = lib.mkOverride 99;
@@ -103,6 +106,14 @@ in
         repo = "nix-node";
       };
     };
+
+    extraOptions =
+      let
+        github_token_path = "users/${owner}/nix_access_tokens";
+      in
+      lib.mkIf (lib.trace github_token_path (config.sops.templates ? github_token_path)) ''
+        !include ${config.sops.templates.${github_token_path}.path}
+      '';
   };
 
   # Allow proprietary software.
