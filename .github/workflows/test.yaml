@@ -32,8 +32,9 @@ jobs:
       nixos-vm:
         image: 'qemux/qemu'
         env:
-          BOOT: https://channels.nixos.org/${{ needs.identify.outputs.nixpkgs_version }}/latest-nixos-minimal-x86_64-linux.iso
+          BOOT: 'https://channels.nixos.org/${{ needs.identify.outputs.nixpkgs_version }}/latest-nixos-minimal-x86_64-linux.iso'
           # https://channels.nixos.org/${{ needs.identify.outputs.nixpkgs_version }}/latest-nixos-minimal-${{ fromJSON('{"X64": "x86_64"}')['X64'] }}-linux.iso
+          # ARGUMENTS: -boot menu=off
         options: '--cap-add NET_ADMIN --device /dev/kvm --device /dev/net/tun'
     steps:
       - name: 'Checkout Repository 🛎️'
@@ -43,12 +44,15 @@ jobs:
         # with:
         #   nix_path: nixpkgs=channel:nixos-unstable
         uses: 'DeterminateSystems/determinate-nix-action@v3'
-      - name: Build NixOS flake
-        run: nix build .#nixosConfigurations.haleakala.config.system.build.toplevel
+      # - name: 'Build NixOS flake 🏗️'
+      #   run: nix build .#nixosConfigurations.haleakala.config.system.build.toplevel
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: nixos-vm
+          # timeout:
+          username: nixos
+          password: password
           script: |
             uname -ra
             echo $SHELL
