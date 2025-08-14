@@ -107,6 +107,15 @@ creation_rules:
           - *user_josh
           - *system_starling-vm
 
+  - path_regex: 'modules/presets/os/doa-cluster/secrets\.yaml$'
+    key_groups:
+      - age:
+          - *user_dudeofawesome
+          - *user_josh
+          - *system_monongahela
+          - *system_haleakala
+          - *system_soto-server
+
 stores:
   yaml:
     indent: 2
