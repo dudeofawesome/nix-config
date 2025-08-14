@@ -3,6 +3,7 @@
   imports = [
     ../../../modules/defaults/nvidia.nix
     ../../../modules/defaults/tailscale.nix
+    ../../../modules/presets/os/doa-cluster
   ];
 
   # sops.secrets."hosts/nixos/haleakala/ssh-keys/dudeofawesome_nix-config/private" = {

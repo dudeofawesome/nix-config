@@ -5,14 +5,24 @@
   pkgs,
   lib,
   config,
+  owner,
   ...
 }:
 let
   # https://github.com/NixOS/nixpkgs/pull/176520
   # k3s = pkgs.k3s.overrideAttrs
   #   (old: rec { buildInputs = old.buildInputs ++ [ pkgs.ipset ]; });
-  multi-node = config.services.k3s.token != null;
+  multi-node = config.services.k3s.token != null || config.services.k3s.tokenFile != null;
   ha = config.services.k3s.clusterInit != null;
+
+  k3s-config = {
+    # tls-san = [
+    #   "k8s.orleans.io"
+    # ];
+
+    flannel-backend = if multi-node then "wireguard-native" else "host-gw";
+    container-runtime-endpoint = "unix:///run/containerd/containerd.sock";
+  };
 in
 {
   imports = [
@@ -55,14 +65,14 @@ in
       enable = true;
       role = lib.mkDefault "server";
       # tokenFile = config.sops.
-      configPath = pkgs.writers.writeYAML "k3s-config.yaml" {
-        # tls-san = [
-        #   "k8s.orleans.io"
-        # ];
+      configPath = pkgs.writers.writeYAML "k3s-config.yaml" k3s-config;
 
-        flannel-backend = "host-gw";
-        container-runtime-endpoint = "unix:///run/containerd/containerd.sock";
-      };
+      extraFlags = lib.flatten [
+        (lib.optional (config.sops.templates ? "k3s-vpn-auth-file") ''
+          --vpn-auth-file=${config.sops.templates.k3s-vpn-auth-file.path}
+        '')
+      ];
+
     };
 
     dnsmasq = {
@@ -79,6 +89,10 @@ in
       "network-online.target"
     ];
     after = [ "containerd.service" ];
+
+    path = [
+      pkgs.tailscale
+    ];
   };
 
   # k8s doesn't work with nftables, so we need to revert to iptables.
