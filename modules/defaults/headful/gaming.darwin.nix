@@ -1,6 +1,6 @@
 { pkgs-unstable, ... }:
 {
   homebrew.casks = [
-    "whisky"
+    "crossover"
   ];
 }
