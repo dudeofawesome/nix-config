@@ -29,6 +29,7 @@
 
   config =
     let
+      inherit (pkgs.stdenv.targetPlatform) isDarwin;
       cfg = config.programs.podman-desktop;
       osCfg = osConfig.virtualisation.podman;
     in
@@ -40,6 +41,35 @@
             ".local/share/containers/podman-desktop/configuration/settings.json"
           else
             abort "unsupported OS ${pkgs.stdenv.targetPlatform.config}";
+      };
+
+      # point Podman Desktop to the podman-mac-helper bin
+      xdg.configFile.podman-desktop-containers-conf = {
+        enable = isDarwin;
+        target = "containers/containers.conf";
+        text =
+          let
+            # `lib.generators.toINI` doesn't support lists, so hack support for
+            #   them by turning them into strings
+            toINIWithLists = lib.generators.toINI {
+              mkKeyValue =
+                key: value:
+                if builtins.isList value then
+                  "${key}=[${lib.concatMapStringsSep "," (x: ''"${x}"'') value}]"
+                else
+                  lib.generators.mkKeyValueDefault { } key value;
+            };
+          in
+          toINIWithLists {
+            containers.helper_binaries_dir = [
+              "${lib.getBin pkgs.podman-mac-helper}/bin"
+            ];
+            engine.env = [ "no_proxy=local,169.254/16" ];
+            machine = { };
+            network = { };
+            secrets = { };
+            configmaps = { };
+          };
       };
 
       # TODO: should this be in the default value?

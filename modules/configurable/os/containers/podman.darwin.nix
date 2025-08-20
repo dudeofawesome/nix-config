@@ -47,7 +47,10 @@ in
         with pkgs;
         lib.flatten [
           cfg.package
-          (lib.optional (isLinux && cfg.desktop.enabled) podman-desktop)
+          (lib.optional cfg.desktop.enable [
+            (lib.optional isLinux cfg.desktop.package)
+            (lib.optional isDarwin pkgs.podman-mac-helper)
+          ])
         ];
 
       homebrew.casks = lib.mkIf (isDarwin && cfg.desktop.enable) [ cfg.desktop.package-darwin ];

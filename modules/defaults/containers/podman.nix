@@ -5,18 +5,23 @@
   ...
 }:
 let
+  inherit (pkgs.stdenv.targetPlatform) isLinux isDarwin;
+
   nvidia_enable = builtins.elem "nvidia" config.boot.kernelModules;
 in
 {
-  environment.systemPackages =
-    with pkgs;
-    lib.flatten [
-      podman
-      (lib.optional nvidia_enable nvidia-podman)
-    ];
+  environment.systemPackages = with pkgs; [
+    podman
+  ];
 
-  virtualisation.podman = {
+  virtualisation.podman = lib.mkIf isLinux {
     enable = true;
-    enableNvidia = nvidia_enable;
+  };
+
+  hardware = lib.mkIf isLinux {
+    nvidia-container-toolkit.enable = nvidia_enable;
+  };
+  services = lib.mkIf isLinux {
+    xserver.enable = true;
   };
 }

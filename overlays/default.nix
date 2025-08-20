@@ -6,6 +6,11 @@
 }:
 {
   nixpkgs.config.packageOverrides = prev: {
+    podman-mac-helper = import ../packages/podman-mac-helper {
+      inherit lib;
+      inherit (prev) buildGoModule fetchFromGitHub;
+    };
+
     fishPlugins = prev.fishPlugins // {
       osx = {
         name = "osx";
