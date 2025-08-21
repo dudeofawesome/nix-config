@@ -75,7 +75,7 @@ with pkgs.stdenv.targetPlatform;
           pkgs-unstable.ollama
           opentofu
           spotify
-          pkgs-unstable.tailscale
+          tailscale
 
           (lib.optionals isLinux [ pkgs-unstable.cider ])
 
