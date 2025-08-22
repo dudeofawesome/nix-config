@@ -81,7 +81,7 @@ in
 
     # TODO: the AeroSpace GUI bin has a `--config-path` flag
     home.activation.aerospace = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      if launchctl list | grep "aerospace"; then
+      if /bin/launchctl list | grep "aerospace" > /dev/null; then
         ${lib.getExe cfg.package} reload-config
       fi
     '';
