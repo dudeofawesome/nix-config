@@ -12,7 +12,7 @@ in
     extraSpecialArgs = params;
     sharedModules = [
       inputs.sops.homeManagerModules.sops
-      inputs._1password-shell-plugins.hmModules.default
+      inputs.op-shell-plugins.hmModules.default
 
       ./configurable/home-manager/default.nix
     ];

@@ -1,10 +1,10 @@
 {
   "nodes": {
-    "_1password-shell-plugins": {
+    "op-shell-plugins": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs-linux-stable"
         ]
       },
       "locked": {
@@ -338,7 +338,7 @@
     },
     "root": {
       "inputs": {
-        "_1password-shell-plugins": "_1password-shell-plugins",
+        "op-shell-plugins": "op-shell-plugins",
         "darwin": "darwin",
         "disko": "disko",
         "dudeofawesome_dotfiles": "dudeofawesome_dotfiles",
