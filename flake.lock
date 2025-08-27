@@ -1,26 +1,5 @@
 {
   "nodes": {
-    "op-shell-plugins": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs-linux-stable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1727269329,
-        "narHash": "sha256-GUqMvwmoVVCHq95WpZa2bIQ6sALL9qlld7HTxPWRcl0=",
-        "owner": "1Password",
-        "repo": "shell-plugins",
-        "rev": "36e4bf4d5b177dd059cafdafaed34bd3264e1e2e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "1Password",
-        "repo": "shell-plugins",
-        "type": "github"
-      }
-    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -200,11 +179,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
         "type": "github"
       },
       "original": {
@@ -336,9 +315,29 @@
         "type": "github"
       }
     },
+    "op-shell-plugins": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs-linux-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756301031,
+        "narHash": "sha256-9SPGngtQm/ukwjnraJYY8mw8kgq7frLIoYHiJbWZYXE=",
+        "owner": "1Password",
+        "repo": "shell-plugins",
+        "rev": "7efd8bcd98db308d9314d798cf5c0b6b0dba111f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "1Password",
+        "repo": "shell-plugins",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "op-shell-plugins": "op-shell-plugins",
         "darwin": "darwin",
         "disko": "disko",
         "dudeofawesome_dotfiles": "dudeofawesome_dotfiles",
@@ -354,6 +353,7 @@
         "nixpkgs-linux-stable": "nixpkgs-linux-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
+        "op-shell-plugins": "op-shell-plugins",
         "sops": "sops",
         "upaymeifixit_dotfiles": "upaymeifixit_dotfiles",
         "vim-lumen": "vim-lumen",
