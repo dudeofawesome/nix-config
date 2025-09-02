@@ -80,15 +80,15 @@ with lib;
           nix4vscode.gitlab.gitlab-workflow
           golang.go
           nix4vscode.gracefulpotato.rbs-syntax
-          nix4vscode.graphql.vscode-graphql
-          nix4vscode.graphql.vscode-graphql-execution
+          graphql.vscode-graphql
           graphql.vscode-graphql-syntax
+          nix4vscode.graphql.vscode-graphql-execution
           gruntfuggly.todo-tree
           hashicorp.terraform
           nix4vscode.idleberg.applescript
           nix4vscode.inferrinizzard.prettier-sql-vscode
           jebbs.plantuml
-          nix4vscode.jnoortheen.nix-ide
+          jnoortheen.nix-ide
           mads-hartmann.bash-ide-vscode
           mathiasfrohlich.kotlin
           mikestead.dotenv
@@ -102,7 +102,7 @@ with lib;
           ms-vscode-remote.remote-ssh-edit
           ms-vscode-remote.remote-wsl
           ms-vscode.hexeditor
-          nix4vscode.ms-vscode.remote-explorer
+          ms-vscode.remote-explorer
           ms-vsliveshare.vsliveshare
           nix4vscode.msjsdiag.vscode-react-native
           nix4vscode.mxsdev.typescript-explorer
@@ -115,7 +115,7 @@ with lib;
           shopify.ruby-lsp
           redhat.ansible
           redhat.vscode-yaml
-          nix4vscode.rooveterinaryinc.roo-cline
+          rooveterinaryinc.roo-cline
           ryu1kn.partial-diff
           nix4vscode.seeker-dk.node-modules-viewer
           nix4vscode.semanticdiff.semanticdiff

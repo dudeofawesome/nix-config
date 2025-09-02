@@ -6,17 +6,13 @@ extensions = [
 
   'fwcd.kotlin', # missing
 
-  'castwide.solargraph', # missing
   'gracefulpotato.rbs-syntax', # missing
 
-  'graphql.vscode-graphql', # much more up-to-date
   'graphql.vscode-graphql-execution', # missing
 
   'idleberg.applescript', # missing
 
   'inferrinizzard.prettier-sql-vscode', # missing
-
-  'jnoortheen.nix-ide', # much more up-to-date
 
   'mrmlnc.vscode-scss', # missing
   'bradlc.vscode-tailwindcss', # much more up-to-date
@@ -57,12 +53,10 @@ extensions = [
   'fabiospampinato.vscode-diff', # missing
   'gitlab.gitlab-workflow', # much more up-to-date
   'ms-kubernetes-tools.vscode-kubernetes-tools', # quick updates
-  'ms-vscode.remote-explorer', # missing
   'semanticdiff.semanticdiff', # missing
   'weaveworks.vscode-gitops-tools', # missing
   'github.vscode-github-actions', # quick updates
   'github.vscode-pull-request-github', # much more up-to-date
-  'rooveterinaryinc.roo-cline', # missing
 
   # themes
   'beardedbear.beardedtheme', # missing
