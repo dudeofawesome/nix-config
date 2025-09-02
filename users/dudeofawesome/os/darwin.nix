@@ -54,7 +54,6 @@
         "steam"
         "stay"
         "tailscale"
-        "tidal"
         "typora"
         "workman"
       ];
