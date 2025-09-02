@@ -59,6 +59,7 @@ in
         in
         lib.mkIf (pkgs.stdenv.targetPlatform.isDarwin) (
           lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            echo -e "\033[0;33mUsing sudo to clean up docker desktop's unwanted binaries:\033[0m"
             pushd "${bin_path}" > /dev/null
             run /usr/bin/sudo rm -f \
               docker \
