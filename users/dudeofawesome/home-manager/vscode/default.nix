@@ -8,6 +8,10 @@
 }:
 with lib;
 {
+  imports = [
+    ./extensions
+  ];
+
   home.packages = with pkgs-unstable; [
     rubyPackages.solargraph
     gitlab-ci-ls
