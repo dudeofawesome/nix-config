@@ -1,5 +1,5 @@
 #!/usr/bin/env nix
-#! nix shell nixpkgs#bash nixpkgs#sops github:nix-community/nixos-anywhere --command bash
+#! nix shell nixpkgs#bash nixpkgs#sops github:nix-community/nixos-anywhere/1.8.0 --command bash
 set -e
 
 # This script will run nixos-anywhere targeting the specified machine with the
