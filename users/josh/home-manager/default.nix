@@ -7,11 +7,24 @@
   ...
 }:
 {
-  imports = [
-    ../../../modules/defaults/home-manager
-    ../../../modules/defaults/home-manager/finicky
-    ../../dudeofawesome/home-manager/browsers.nix
+  imports = lib.flatten [
+    (lib.optional (machine-class == "pc") ../../../modules/presets/home-manager/paciolan.nix)
 
+    ../../../modules/defaults/home-manager
+    ../../../modules/defaults/home-manager/aerospace.nix
+    ../../../modules/defaults/home-manager/1password-gui.nix
+    ../../../modules/defaults/home-manager/docker-desktop.nix
+    ../../../modules/defaults/home-manager/finicky
+    ../../../modules/defaults/home-manager/fork.nix
+    ../../../modules/defaults/home-manager/gnome.nix
+    ../../../modules/defaults/home-manager/gitup.nix
+    ../../../modules/defaults/home-manager/google-earth-pro.nix
+    ../../../modules/defaults/home-manager/ice.nix
+    ../../../modules/defaults/home-manager/moonlight.nix
+    ../../../modules/defaults/home-manager/postico.nix
+    ../../../modules/defaults/home-manager/wezterm
+
+    ../../dudeofawesome/home-manager/browsers.nix
     ./shells.nix
   ];
 
@@ -91,6 +104,7 @@
     _1password-gui = {
       enable = machine-class == "pc";
       package = pkgs-unstable._1password-gui;
+      extraConfig."keybinds.quickAccess" = "Shift+CommandOrControl+Space";
     };
 
     dock = {
