@@ -55,6 +55,7 @@
     "nixos",
     "nixpkgs",
     "pkgs",
+    "raidz",
     "stdenv",
     "substituters",
     "upaymeifixit",
