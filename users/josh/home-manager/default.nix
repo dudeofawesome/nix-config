@@ -110,22 +110,21 @@
     dock = {
       enable = true;
 
-      apps = [
+      apps = lib.flatten [
         "/Applications/Google Chrome.app"
         "/Applications/Spotify.app"
         "${config.home.homeDirectory}/Applications/Chrome Apps.localized/Gmail.app"
         "/Applications/Microsoft Outlook.app"
-        "/Applications/zoom.us.app"
-        "/Applications/Slack.app"
+        (lib.optional config.programs.zoom-us.enable "${config.programs.zoom-us.package}/Applications/zoom.us.app")
+        (lib.optional config.programs.slack.enable "${config.programs.slack.package}/Applications/Slack.app")
         "/Applications/Messenger.app"
         "/Applications/Signal.app"
         "/System/Applications/Messages.app"
         "/Applications/Discord.app"
         "/Applications/Visual Studio Code.app"
-        "/Applications/TablePlus.app"
-        "/Applications/iTerm.app"
+        "${pkgs.tableplus}/Applications/TablePlus.app"
         "/Applications/Fork.app"
-        "/Applications/Postman.app"
+        "${pkgs.postman}/Applications/Postman.app"
         "/Applications/Todoist.app"
         "/System/Applications/Notes.app"
         "/System/Applications/iPhone Mirroring.app"

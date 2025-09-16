@@ -17,6 +17,7 @@
       k6
       lynx
       nmap
+      pkgs-unstable.claude-code
 
       # Languages
       go
@@ -27,7 +28,6 @@
 
   homebrew = {
     casks = [
-      "battery"
       "zoom"
     ];
   };
