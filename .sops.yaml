@@ -29,7 +29,7 @@ keys:
     - &system_crater-lake 'age1rqjddanhdhc3gvj9mj9ez5cm492uqtcnj9elljpp4uy4hx4p3sgqyyfxa6'
     - &system_monongahela 'age1r3z0gd3fmq5vu73l7k7jsseaz5ec8f88qq5sw0zvlexug6uzf4wsadjrhx'
     - &system_haleakala 'age1wy9vrp4k3w69dtjfeskayrn4m4m6fntjcj480junfvpjflnd0p8sg078qc'
-    - &system_joshs-paciolan-laptop 'age1ct6h645xhzamd5mfhs5ze8uza2k23tjat8wrrrn7k6sakr5uecjs7u8j35'
+    - &system_joshs-paciolan-laptop 'age1fwrw2vf0hfh7ug85p6j7ym6qln30yywy4e3nu6ep35scsfxl5ypsqnzlp5'
     - &system_soto-server 'age1a4z2qgdtv8aaqe0892clncuz4kpdqn9ph2qqg6k850hxl2lqrd2shu7mgs'
     # - &system_starling-vm 'age1nm4qzu0srzff2zylgr46j7fjpr5kprz7huvzwwwqxny42nr6ydvskejjx4' # Qemu VM
     # - &system_starling-vm 'age1w7ny9w9v5p5g4d6lcdcg2eayxm2gjrnvn55g6syrjkkqg98c9y6syz88ty' # Parallels VM (NixOS)
