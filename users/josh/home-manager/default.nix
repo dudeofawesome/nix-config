@@ -107,6 +107,9 @@
       extraConfig."keybinds.quickAccess" = "Shift+CommandOrControl+Space";
     };
 
+    # I'm using brew instead due to permission and deep linking issues when installed via nix
+    zoom-us.enable = false;
+
     dock = {
       enable = true;
 
