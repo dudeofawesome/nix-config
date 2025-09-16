@@ -73,6 +73,7 @@ in
         # convert extraConfig into `jq` commands
         (map (value: ''
           # jq will fail if the original file doesn't exist
+          run ${pkgs.coreutils}/bin/mkdir -p "$(${pkgs.coreutils}/bin/dirname '${value.target}')"
           run ${pkgs.coreutils}/bin/touch '${value.target}'
           # set individual properties within a JSON file
           run ${lib.getExe pkgs.jq} \
