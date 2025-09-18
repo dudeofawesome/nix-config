@@ -4,6 +4,8 @@
   config,
   osConfig,
   hostname,
+  distro,
+  owner,
   ...
 }:
 with pkgs.stdenv.targetPlatform;
@@ -65,6 +67,21 @@ in
         "git" = {
           match = "host *git*,*bitbucket*";
           user = "git";
+          identityFile =
+            let
+              # TODO: is `owner` right here? I think maybe we want user instead
+              secret_name = "hosts/${distro}/${hostname}/ssh-keys/${owner}_nix-config/private";
+
+              file =
+                if (config.sops.secrets ? ${secret_name}) then
+                  config.sops.secrets.${secret_name}.path
+                else if (osConfig.sops.secrets ? ${secret_name}) then
+                  osConfig.sops.secrets.${secret_name}.path
+                else
+                  null;
+            in
+            lib.mkIf (file != null) file;
+          identitiesOnly = true;
         };
       };
 
