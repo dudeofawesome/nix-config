@@ -1,4 +1,9 @@
-{ config, os, ... }:
+{
+  config,
+  os,
+  owner,
+  ...
+}:
 {
   imports = [
     ../../../modules/defaults/nvidia.nix
@@ -6,10 +11,12 @@
     ../../../modules/presets/os/doa-cluster
   ];
 
-  # sops.secrets."hosts/nixos/haleakala/ssh-keys/dudeofawesome_nix-config/private" = {
-  #   sopsFile = ./secrets.yaml;
-  #   path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
-  # };
+  sops.secrets."hosts/nixos/haleakala/ssh-keys/dudeofawesome_nix-config/private" = {
+    sopsFile = ./secrets.yaml;
+    path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
+    owner = owner;
+    mode = "0400";
+  };
 
   boot.extraModulePackages = [
     # config.boot.kernelPackages.rtl88x2bu # WiFi
