@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  pkgs-unstable,
   lib,
   ...
 }:
@@ -12,9 +12,11 @@ in
     programs.discord = {
       enable = lib.mkEnableOption "Discord desktop app";
 
-      package = lib.mkPackageOption pkgs "All-in-one cross-platform voice and text chat for gamers" {
-        default = [ "discord" ];
-      };
+      package =
+        lib.mkPackageOption pkgs-unstable "All-in-one cross-platform voice and text chat for gamers"
+          {
+            default = [ "discord" ];
+          };
     };
   };
 
