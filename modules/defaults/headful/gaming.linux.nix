@@ -7,7 +7,6 @@
   environment = {
     systemPackages = with pkgs-stable; [
       antimicrox
-      discord
       # gamescope
       pkgs-unstable.game-devices-udev-rules
       heroic
@@ -38,5 +37,7 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       gamescopeSession.enable = true;
     };
+
+    discord.enable = true;
   };
 }

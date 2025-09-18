@@ -67,7 +67,6 @@ with pkgs.stdenv.targetPlatform;
           # TODO: investigate using an activation script to copy the .app to /Applications
           pkgs-unstable.bruno
           pkgs-unstable.claude-code
-          pkgs-unstable.discord
           drawio
           inkscape
           losslesscut-bin
@@ -252,13 +251,10 @@ with pkgs.stdenv.targetPlatform;
     docker-desktop.enable = true;
 
     signal-desktop = {
-      enable = true;
+      enable = machine-class == "pc";
       package = pkgs-unstable.signal-desktop-bin;
     };
-    discord = {
-      enable = true;
-      package = pkgs-unstable.discord;
-    };
+    discord.enable = machine-class == "pc";
   };
 
   # services.home-manager.autoUpgrade.enable = true;
