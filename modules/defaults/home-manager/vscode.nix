@@ -82,6 +82,11 @@
               command = "workbench.action.toggleSidebarVisibility";
             }
             {
+              key = "cmd+shift+\\";
+              command = "workbench.action.toggleAuxiliaryBar";
+            }
+
+            {
               key = "cmd+b";
               command = "workbench.action.splitEditor";
             }
