@@ -117,7 +117,7 @@ with pkgs.stdenv.targetPlatform;
         };
         "haleakala" = {
           user = "dudeofawesome";
-          hostname = "192.168.254.49";
+          hostname = "10.0.1.203";
         };
         "steamdeck".user = "deck";
 
