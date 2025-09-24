@@ -4,12 +4,19 @@
   config,
   osConfig,
   hostname,
-  distro,
+  os,
   owner,
   ...
 }:
 with pkgs.stdenv.targetPlatform;
 let
+  distro =
+    {
+      "linux" = "nixos";
+      "darwin" = "darwin";
+    }
+    ."${os}";
+
   has_1password =
     config.programs._1password-cli.enable
     || config.programs._1password-gui.enable
