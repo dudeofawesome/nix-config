@@ -13,6 +13,10 @@
       let
         scrutiny = "users/dudeofawesome/scrutiny-api";
         tokens = "users/dudeofawesome/nix_access_tokens";
+        tmpl = config.sops.placeholder;
+
+        tokens_path = "users/dudeofawesome/nix_access_tokens";
+        github_path = "github.com";
       in
       {
         sops.secrets."${scrutiny}/endpoint/cluster/schema" = {
@@ -61,6 +65,18 @@
             lib.concatStrings [
               "extra-access-tokens = github.com=${tmpl."${tokens}_github.com"}"
             ];
+        };
+
+        sops = {
+          secrets."${tokens_path}_${github_path}".sopsFile = ./secrets.yaml;
+          templates."${tokens_path}" = {
+            # owner = ;
+            # file must be accessible (r) to all users, because only the build daemon runs as root and not nix evaluator itself(?)
+            mode = "0444";
+            content = lib.concatStrings [
+              "extra-access-tokens = github.com=${tmpl."${tokens_path}_${github_path}"}"
+            ];
+          };
         };
       };
   };
