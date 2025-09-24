@@ -53,11 +53,15 @@
     primaryUser =
       let
         name = lib.pipe users [
+          # Filter the users attribute set to find entries where the user's original_name matches the owner
           (lib.filterAttrs (k: v: v.original_name == owner))
+          # From the filtered set (owners), get the first (head) key from the attribute names and access its value
           (owners: owners.${builtins.head (builtins.attrNames owners)})
+          # Extract the user.name from the resulting owner object
           (owner: owner.user.name)
         ];
       in
+      # Log the primary user name for debugging and return it
       lib.trace "darwin primary user: ${name}" name;
   };
 }
