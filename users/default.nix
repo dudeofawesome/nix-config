@@ -24,7 +24,10 @@
           name: value:
           let
             username = (if (_names ? ${name}) then _names.${name} else name);
-            user_config = lib.recursiveUpdate value { user.name = username; };
+            user_config = lib.recursiveUpdate value {
+              original_name = name;
+              user.name = username;
+            };
           in
           {
             name = username;

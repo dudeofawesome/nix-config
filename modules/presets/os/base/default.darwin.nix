@@ -49,6 +49,15 @@
     # For more information, see https://daiderd.com/nix-darwin/manual/index.html#opt-system.stateVersion
     stateVersion = lib.mkDefault 4; # Did you read the comment?
 
-    primaryUser = lib.trace "darwin primary user: ${users.${owner}.user.name}" users.${owner}.user.name;
+    # Get the primary username given the owner and users attribute set
+    primaryUser =
+      let
+        name = lib.pipe users [
+          (lib.filterAttrs (k: v: v.original_name == owner))
+          (owners: owners.${builtins.head (builtins.attrNames owners)})
+          (owner: owner.user.name)
+        ];
+      in
+      lib.trace "darwin primary user: ${name}" name;
   };
 }
