@@ -71,7 +71,7 @@ with pkgs.stdenv.targetPlatform;
           inkscape
           losslesscut-bin
           obsidian
-          pkgs-unstable.ollama
+          ollama
           opentofu
           spotify
           tailscale

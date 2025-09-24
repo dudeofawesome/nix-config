@@ -19,6 +19,7 @@
     ./moonlight.nix
     ./podman-desktop.nix
     ./process-compose.nix
+    ./qdrant.nix
     ./signal-desktop.nix
     ./slack.nix
     ./vscode.nix

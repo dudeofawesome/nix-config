@@ -262,4 +262,12 @@
       };
     };
   };
+
+  services = {
+    qdrant.enable = true;
+    ollama = {
+      enable = true;
+      # package = lib.findFirst (pkg: pkg.name == "ollama") pkgs.ollama config.home.packages;
+    };
+  };
 }
