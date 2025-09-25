@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, ... }:
 {
   programs.finicky = {
     enable = true;
-    settings = builtins.readFile ./finicky.js;
+    settings = lib.mkDefault (builtins.readFile ./finicky.js);
   };
 }
