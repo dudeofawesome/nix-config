@@ -2,7 +2,7 @@
 // Learn more about configuration options:
 // https://github.com/johnste/finicky/wiki/Configuration
 
-module.exports = {
+export default {
   defaultBrowser: 'Google Chrome',
   handlers: [
     {
