@@ -118,7 +118,7 @@
         "/Applications/Spotify.app"
         "${config.home.homeDirectory}/Applications/Chrome Apps.localized/Gmail.app"
         "/Applications/Microsoft Outlook.app"
-        (lib.optional config.programs.zoom-us.enable "${config.programs.zoom-us.package}/Applications/zoom.us.app")
+        "/Applications/zoom.us.app"
         (lib.optional config.programs.slack.enable "${config.programs.slack.package}/Applications/Slack.app")
         "/Applications/Messenger.app"
         "/Applications/Signal.app"
