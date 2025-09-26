@@ -28,15 +28,15 @@ with pkgs.stdenv.targetPlatform;
 
   programs = {
     slack = {
-      enable = lib.mkDefault machine-class == "pc";
+      enable = lib.mkDefault (machine-class == "pc");
       package = pkgs-unstable.slack;
     };
     zoom-us = {
-      enable = lib.mkDefault machine-class == "pc";
+      enable = lib.mkDefault (machine-class == "pc");
       package = pkgs-unstable.zoom-us;
     };
     podman-desktop = {
-      enable = lib.mkDefault machine-class == "pc";
+      enable = lib.mkDefault (machine-class == "pc");
       extraConfig = {
         "telemetry.enabled" = false;
         "preferences.login.start" = false;
