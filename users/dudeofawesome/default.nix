@@ -66,18 +66,6 @@
               "extra-access-tokens = github.com=${tmpl."${tokens}_github.com"}"
             ];
         };
-
-        sops = {
-          secrets."${tokens_path}/${github_path}".sopsFile = ./secrets.yaml;
-          templates."${tokens_path}" = {
-            # owner = ;
-            # file must be accessible (r) to all users, because only the build daemon runs as root and not nix evaluator itself(?)
-            mode = "0444";
-            content = lib.concatStrings [
-              "extra-access-tokens = github.com=${tmpl."${tokens_path}/${github_path}"}"
-            ];
-          };
-        };
       };
   };
   user = {
