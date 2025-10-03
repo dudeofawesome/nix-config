@@ -125,6 +125,7 @@
               firefox-translations
               # GraphQL Network Inspector
               # iCloud Hide My Email
+              kagi-translate
               # Loggly Formatter
               onepassword-password-manager
               react-devtools
