@@ -6,6 +6,10 @@
 }:
 {
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+    programs.git-fork = {
+      enable = true;
+    };
+
     targets.darwin = {
       defaults."com.DanPristupov.Fork" = {
         defaultSourceFolder = "${config.home.homeDirectory}/git";

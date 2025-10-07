@@ -5,48 +5,57 @@
   ...
 }:
 {
-  nixpkgs.config.packageOverrides = prev: {
-    podman-mac-helper = import ../packages/podman-mac-helper {
-      inherit lib;
-      inherit (prev) buildGoModule fetchFromGitHub;
-    };
+  nixpkgs.config.packageOverrides =
+    prev:
+    let
+      build-inputs = (
+        prev
+        // {
+          inherit lib;
+        }
+      );
+    in
+    {
+      git-fork = import ../packages/git-fork build-inputs;
+      gitup = import ../packages/gitup build-inputs;
+      podman-mac-helper = import ../packages/podman-mac-helper build-inputs;
 
-    fishPlugins = prev.fishPlugins // {
-      osx = {
-        name = "osx";
-        src = inputs.fish-osx;
+      fishPlugins = prev.fishPlugins // {
+        osx = {
+          name = "osx";
+          src = inputs.fish-osx;
+        };
+        node-binpath = {
+          name = "node-binpath";
+          src = inputs.fish-node-binpath;
+        };
+        node-version = {
+          name = "node-version";
+          src = inputs.fish-node-version;
+        };
+        shell-integrations = {
+          name = "shell-integrations";
+          src = inputs.fish-shell-integrations;
+        };
+        editor-updater = {
+          name = "editor-updater";
+          src = inputs.fish-editor-updater;
+        };
+        nvm-fish = {
+          name = "nvm.fish";
+          src = inputs.fish-nvm;
+        };
       };
-      node-binpath = {
-        name = "node-binpath";
-        src = inputs.fish-node-binpath;
-      };
-      node-version = {
-        name = "node-version";
-        src = inputs.fish-node-version;
-      };
-      shell-integrations = {
-        name = "shell-integrations";
-        src = inputs.fish-shell-integrations;
-      };
-      editor-updater = {
-        name = "editor-updater";
-        src = inputs.fish-editor-updater;
-      };
-      nvm-fish = {
-        name = "nvm.fish";
-        src = inputs.fish-nvm;
-      };
-    };
 
-    vimPlugins = prev.vimPlugins // {
-      vim-lumen = inputs.vim-lumen;
-    };
+      vimPlugins = prev.vimPlugins // {
+        vim-lumen = inputs.vim-lumen;
+      };
 
-    dotfiles = {
-      dudeofawesome = inputs.dudeofawesome_dotfiles;
-      upaymeifixit = inputs.upaymeifixit_dotfiles;
+      dotfiles = {
+        dudeofawesome = inputs.dudeofawesome_dotfiles;
+        upaymeifixit = inputs.upaymeifixit_dotfiles;
+      };
     };
-  };
 
   nixpkgs.overlays = [
     inputs.nur.overlays.default

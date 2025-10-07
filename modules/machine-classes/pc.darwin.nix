@@ -33,8 +33,6 @@ with lib;
         "displaylink"
         "finicky"
         "firefox"
-        "fork"
-        "gitup"
         "google-chrome"
         "hex-fiend"
         "iterm2"

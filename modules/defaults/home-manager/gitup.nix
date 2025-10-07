@@ -6,11 +6,11 @@
 }:
 {
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
-    targets.darwin = {
-      defaults."co.gitup.mac" = {
-        GIPreferences_TerminalTool = "iTerm";
-        DiffWhitespaceMode = 1;
-      };
+    programs.gitup = {
+      enable = true;
+
+      externalTerminal = "iTerm";
+      diffGeneration = "ignoreWhitespaceAmount";
     };
   };
 }

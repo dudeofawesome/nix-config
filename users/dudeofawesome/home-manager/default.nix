@@ -210,7 +210,7 @@ with pkgs.stdenv.targetPlatform;
         "/System/Applications/Notes.app"
         "/System/Applications/Reminders.app"
         (lib.optional config.programs.vscode.enable "${config.programs.vscode.package}/Applications/Visual Studio Code.app")
-        "/Applications/Fork.app"
+        (lib.optional config.programs.git-fork.enable "${config.programs.git-fork.package}/Applications/Fork.app")
         (lib.optional config.programs.wezterm.enable "${config.programs.wezterm.package}/Applications/WezTerm.app")
         "/System/Applications/System Settings.app"
       ];

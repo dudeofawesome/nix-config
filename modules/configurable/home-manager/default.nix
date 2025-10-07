@@ -12,6 +12,8 @@
     ./docker-desktop.nix
     ./file-json.nix
     ./finicky.nix
+    ./git-fork.nix
+    ./gitup.nix
     ./homebrew.nix
     ./kubeconfig.nix
     ./kubectl.nix
