@@ -27,10 +27,26 @@ in
       signing.signByDefault = true;
 
       extraConfig = {
-        gpg.format = "ssh";
-        "gpg \"ssh\"".program = lib.mkIf (
-          isDarwin && has_1password
-        ) "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+        gpg = {
+          format = "ssh";
+          ssh = {
+            program = lib.mkIf (
+              isDarwin && has_1password
+            ) "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+
+            allowedSignersFile =
+              lib.pipe
+                {
+                  "${config.programs.git.userEmail}" = config.programs.git.signing.key;
+                }
+                [
+                  (lib.mapAttrsToList (name: value: ''${name} namespaces="git" ${value}''))
+                  (builtins.concatStringsSep "\n")
+                  (pkgs.writeText "git-allowed-signers")
+                  builtins.toString
+                ];
+          };
+        };
       };
 
       aliases = {
