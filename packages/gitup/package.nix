@@ -22,8 +22,9 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p "$out/Applications/"
+    mkdir -p "$out/"{bin,Applications}
     mv GitUp.app "$out/Applications/"
+    ln -s "$out/Applications/GitUp.app/Contents/SharedSupport/gitup" "$out/bin/gitup"
 
     runHook postInstall
   '';
@@ -37,5 +38,6 @@ stdenv.mkDerivation (finalAttrs: {
     # maintainers = with maintainers; [ dudeofawesome ];
     platforms = platforms.darwin;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
+    mainProgram = "gitup";
   };
 })

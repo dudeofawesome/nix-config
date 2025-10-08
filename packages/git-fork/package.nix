@@ -24,6 +24,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     mkdir -p "$out/Applications/"
     mv Fork.app "$out/Applications/"
+    ln -s "$out/Applications/Fork.app/Contents/MacOS/Fork" "$out/bin/fork"
 
     runHook postInstall
   '';
@@ -37,5 +38,6 @@ stdenv.mkDerivation (finalAttrs: {
     # maintainers = with maintainers; [ dudeofawesome ];
     platforms = platforms.darwin;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
+    mainProgram = "fork";
   };
 })
