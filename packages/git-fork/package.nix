@@ -1,8 +1,8 @@
 {
   lib,
+  stdenv,
   fetchurl,
   undmg,
-  stdenv,
   nix-update-script,
   ...
 }:
@@ -22,7 +22,7 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p "$out/Applications/"
+    mkdir -p "$out/"{bin,Applications}
     mv Fork.app "$out/Applications/"
     ln -s "$out/Applications/Fork.app/Contents/MacOS/Fork" "$out/bin/fork"
 
@@ -31,12 +31,12 @@ stdenv.mkDerivation (finalAttrs: {
 
   passthru.updateScript = nix-update-script { };
 
-  meta = with lib; {
+  meta = {
     description = "Git client";
     homepage = "https://git-fork.com";
-    license = licenses.unfree;
-    # maintainers = with maintainers; [ dudeofawesome ];
-    platforms = platforms.darwin;
+    license = lib.licenses.unfree;
+    # maintainers = with lib.maintainers; [ dudeofawesome ];
+    platforms = lib.platforms.darwin;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     mainProgram = "fork";
   };
