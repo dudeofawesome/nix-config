@@ -2,7 +2,6 @@
 {
   homebrew = {
     casks = [
-      "keka"
       "sublime-text"
     ];
     masApps = {

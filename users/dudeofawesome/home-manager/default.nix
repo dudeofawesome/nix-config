@@ -81,6 +81,7 @@ with pkgs.stdenv.targetPlatform;
           (lib.optionals isDarwin [
             cyberduck
             hexfiend
+            keka
             pkgs-unstable.ice-bar
             pkgs-unstable.raycast
             pkgs-unstable.rectangle

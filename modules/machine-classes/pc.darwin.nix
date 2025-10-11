@@ -34,7 +34,6 @@ with lib;
         "firefox"
         "google-chrome"
         "iterm2"
-        "keka"
         (noQuarantine "qlcolorcode")
         (noQuarantine "qlmarkdown")
         (noQuarantine "qlstephen")
