@@ -33,7 +33,6 @@ with lib;
         "displaylink"
         "firefox"
         "google-chrome"
-        "hex-fiend"
         "iterm2"
         "keka"
         (noQuarantine "qlcolorcode")
