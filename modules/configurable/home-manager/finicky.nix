@@ -33,22 +33,26 @@ in
 
   config = mkIf (cfg.enable && pkgs.stdenv.targetPlatform.isDarwin) {
     home = {
-      # packages = with pkgs; [
-      #   nixcasks.finicky
-      # ];
+      packages = with pkgs; [
+        finicky
+      ];
     };
 
     programs.firefox.policies.DontCheckDefaultBrowser = true;
     programs.chromium.commandLineArgs = [ "no-default-browser-check" ];
 
-    xdg.configFile.finicky = {
-      target = "finicky.js";
-      text = cfg.settings;
-      onChange = ''
-        run /usr/bin/defaults write \
-          net.kassett.finicky config_location_bookmark \
-            -data "$(${lib.getExe pkgs.mkalias} -f hex "${config.home.homeDirectory}/${config.xdg.configFile.finicky.target}")"
-      '';
-    };
+    xdg.configFile."finicky.ts" =
+      let
+        code_path = builtins.toFile "finicky-config.ts" cfg.settings;
+      in
+      {
+        target = "finicky.ts";
+        text = cfg.settings;
+        onChange = ''
+          run /usr/bin/defaults write \
+            net.kassett.finicky config_location_bookmark \
+              -data "$(${lib.getExe pkgs.mkalias} -f hex "${code_path}")"
+        '';
+      };
   };
 }

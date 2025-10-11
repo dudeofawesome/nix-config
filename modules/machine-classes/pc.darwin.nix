@@ -31,7 +31,6 @@ with lib;
       in
       [
         "displaylink"
-        "finicky"
         "firefox"
         "google-chrome"
         "hex-fiend"
