@@ -122,6 +122,7 @@
               adaptive-tab-bar-colour
               # clearurls
               darkreader
+              finicky
               firefox-translations
               # GraphQL Network Inspector
               # iCloud Hide My Email
@@ -394,7 +395,7 @@
             with pkgs.nur.repos.rycee.firefox-addons;
             [
               clearurls
-              # topcashback-cashback-coupons
+              topcashback-cashback-coupons
             ]
             ++ dudeofawesome.extensions.packages;
           search = dudeofawesome.search;
