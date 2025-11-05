@@ -90,6 +90,7 @@ in
               helm_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubernetes-helm}")"
               gitlab_ci_ls_path="$(escape_for_sed "${lib.getExe pkgs-stable.gitlab-ci-ls}")"
               d2_path="$(escape_for_sed "${lib.getExe pkgs-stable.d2}")"
+              jdk_path="$(escape_for_sed "${pkgs-stable.jdk}")"
 
               run cat "${cfg.mutableUserSettings}" \
                 `# Add header about nix` \
@@ -110,6 +111,8 @@ in
                 | sed -Ee 's/("gitlabLs.executablePath"): "(.+)"/\1: "'"$gitlab_ci_ls_path"'"/i' \
                 `# Point to nix's d2` \
                 | sed -Ee 's/("D2.execPath"): "(.+)"/\1: "'"$d2_path"'"/i' \
+                `# Point to nix's jdk` \
+                | sed -Ee 's/("java.jdt.ls.java.home"): "(.+)"/\1: "'"$jdk_path"'"/i' \
                 \
                 `# Overwrite VS Code settings` \
                 | run --quiet tee "${config_file_path}"

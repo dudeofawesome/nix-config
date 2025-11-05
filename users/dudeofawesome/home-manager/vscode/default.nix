@@ -118,6 +118,7 @@ with lib;
           pkief.material-product-icons
           shopify.ruby-lsp
           redhat.ansible
+          redhat.java
           redhat.vscode-yaml
           rooveterinaryinc.roo-cline
           ryu1kn.partial-diff
