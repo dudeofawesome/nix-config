@@ -42,7 +42,6 @@
       "postico"
       "private-internet-access"
       "raycast"
-      "rocket"
       "signal"
       "spotify"
       "stay"
@@ -60,7 +59,7 @@
     masApps = {
       # "Ubiquiti WiFiman" = 1385561119; # I keep on getting an error about the latest version being incompatible…
       "Microsoft Remote Desktop" = 1295203466;
-      "Microsoft Outlook" = 985367838;
+      # "Microsoft Outlook" = 985367838; # Installing keeps failing. I'll let this be managed by work.
       "Steam Link" = 1246969117;
       "Little Snitch Mini" = 1629008763;
     };
