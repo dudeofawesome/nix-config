@@ -21,7 +21,12 @@ in
       enable = true;
 
       ignores = [
+        # OS files
         ".DS_Store"
+        "thumbs.db"
+
+        # devenv
+        ".devenv*"
       ];
 
       signing.signByDefault = true;
