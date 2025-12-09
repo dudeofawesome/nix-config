@@ -15,6 +15,7 @@
       "balenaetcher"
       "bettertouchtool"
       "cleanmymac"
+      "conductor"
       "cursor"
       "cyberduck"
       "daisydisk"
