@@ -24,6 +24,7 @@
       lynx
       nmap
       pkgs-unstable.claude-code
+      pandoc
 
       # Languages
       go
