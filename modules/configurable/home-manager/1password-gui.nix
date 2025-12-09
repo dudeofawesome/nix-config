@@ -71,7 +71,7 @@ in
     lib.mkIf cfg.enable {
       home.packages =
         lib.mkIf
-          # _1password-gui is broken on Darwin
+          # _1password-gui is broken on Darwin (it "must" be installed in /Applications)
           (!pkgs.stdenv.targetPlatform.isDarwin)
           [ package ];
 
