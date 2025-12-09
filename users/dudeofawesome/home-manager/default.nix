@@ -67,6 +67,7 @@ with pkgs.stdenv.targetPlatform;
           # TODO: investigate using an activation script to copy the .app to /Applications
           pkgs-unstable.bruno
           pkgs-unstable.claude-code
+          pkgs-unstable.devenv
           drawio
           inkscape
           losslesscut-bin
