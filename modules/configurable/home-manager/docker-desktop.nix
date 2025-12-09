@@ -59,9 +59,9 @@ in
         in
         lib.mkIf (pkgs.stdenv.targetPlatform.isDarwin) (
           lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            echo -e "\033[0;33mUsing sudo to clean up docker desktop's unwanted binaries:\033[0m"
+            echo -e "\033[0;33mCleaning up docker desktop's unwanted binaries:\033[0m"
             pushd "${bin_path}" > /dev/null
-            run /usr/bin/sudo rm -f \
+            run rm -f \
               docker \
               docker-compose \
               docker-index \
