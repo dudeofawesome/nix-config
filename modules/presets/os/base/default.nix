@@ -29,7 +29,7 @@ with pkgs.stdenv.targetPlatform;
       jq
       moar
       most
-      pkgs-unstable.nil
+      nil
       nix-du
       nix-tree
       # nixd
