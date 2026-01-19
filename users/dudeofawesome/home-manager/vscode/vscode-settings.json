@@ -249,6 +249,9 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.prettierPath": "this should be replaced by nix",
 
+  "cSpell.useCustomDecorations": true,
+  "cSpell.showInRuler": false,
+
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
