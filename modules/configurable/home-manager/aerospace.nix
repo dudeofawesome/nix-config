@@ -80,11 +80,15 @@ in
     };
 
     # TODO: the AeroSpace GUI bin has a `--config-path` flag
-    home.activation.aerospace = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      if /bin/launchctl list | grep "aerospace" > /dev/null; then
-        ${lib.getExe cfg.package} reload-config
-      fi
-    '';
+    home.activation.aerospace =
+      let
+        bin = lib.getExe cfg.package;
+      in
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        if /bin/launchctl list | grep "aerospace" > /dev/null; then
+          ${bin} reload-config || echo "Failed to reload AeroSpace config."
+        fi
+      '';
 
     # TODO: use `mkDefault` and `warnings` instead of `mkForce`
     targets.darwin.defaults = {
