@@ -3,6 +3,7 @@
   environment = {
     systemPackages = with pkgs; [
       ntfs3g
+      cp210x-program
     ];
   };
 
@@ -14,15 +15,19 @@
       "background-music"
       "balenaetcher"
       "bettertouchtool"
+      "caprine"
+      "claude"
       "cleanmymac"
       "conductor"
       "cursor"
       "cyberduck"
       "daisydisk"
       "discord"
+      "draw-things"
       "electrum"
       "figma" # TODO: maybe this should be part of the Paciolan nix script
       "gifox"
+      "gitbutler"
       "google-drive"
       "google-earth-pro"
       "handbrake-app"
@@ -31,7 +36,6 @@
       "lm-studio"
       "logi-options+"
       "macfuse"
-      "messenger"
       "microsoft-remote-desktop"
       "miro"
       "monitorcontrol"

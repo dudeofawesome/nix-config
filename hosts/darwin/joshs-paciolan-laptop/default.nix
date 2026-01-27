@@ -24,7 +24,9 @@
       lynx
       nmap
       pkgs-unstable.claude-code
-      pandoc
+      pandoc # For Paciolan lift&shift
+      markdownlint-cli # For Paciolan lift&shift
+      ast-grep # For claude-code
 
       # Languages
       go
