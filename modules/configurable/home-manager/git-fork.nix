@@ -90,6 +90,12 @@ in
               description = "Whether to show hidden symbols in diffs";
               default = true;
             };
+
+            checkForUpdates = lib.mkOption {
+              type = lib.types.bool;
+              description = "Whether to check for updates";
+              default = false;
+            };
           };
         };
         default = { };
@@ -123,6 +129,9 @@ in
         # diff
         diffIgnoreWhitespaces = cfg.settings.diffIgnoreWhitespaces;
         diffShowHiddenSymbols = cfg.settings.diffShowHiddenSymbols;
+
+        # updates
+        SUEnableAutomaticChecks = cfg.settings.checkForUpdates;
       };
     };
   };
