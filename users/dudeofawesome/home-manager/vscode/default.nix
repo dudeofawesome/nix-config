@@ -13,8 +13,9 @@ with lib;
   ];
 
   home.packages = with pkgs-unstable; [
-    rubyPackages.solargraph
+    claude-code-bin
     gitlab-ci-ls
+    rubyPackages.solargraph
   ];
 
   programs.vscode = {
@@ -51,6 +52,7 @@ with lib;
         [
           alefragnani.bookmarks
           nix4vscode.alesbrelih.gitlab-ci-ls
+          anthropic.claude-code
           antyos.openscad
           nix4vscode.beardedbear.beardedtheme
           bierner.markdown-mermaid
@@ -120,7 +122,7 @@ with lib;
           redhat.ansible
           redhat.java
           redhat.vscode-yaml
-          rooveterinaryinc.roo-cline
+          nix4vscode.rooveterinaryinc.roo-cline
           ryu1kn.partial-diff
           nix4vscode.seeker-dk.node-modules-viewer
           nix4vscode.semanticdiff.semanticdiff

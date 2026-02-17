@@ -258,8 +258,8 @@ merge
           "rooveterinaryinc"."roo-cline" = vscode-utils.extensionFromVscodeMarketplace {
             name = "roo-cline";
             publisher = "rooveterinaryinc";
-            version = "3.23.16";
-            sha256 = "0p7rzfgdmpmmbz39n3iv83sbcyjd8yihxq9vbxqs1cxxfk31smkl";
+            version = "3.28.15";
+            sha256 = "sha256-ap1Jb+ibhb3kcNgoqPIGB8ZVdwos58kFlank6CT6h/M=";
 
           };
           "seeker-dk"."node-modules-viewer" = vscode-utils.extensionFromVscodeMarketplace {
