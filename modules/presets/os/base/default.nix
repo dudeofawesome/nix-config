@@ -48,7 +48,7 @@ with pkgs.stdenv.targetPlatform;
       # Runtimes
       bun
       ruby
-      nodejs_20 # this should always use the latest LTS
+      nodejs_24 # this should always use the latest LTS
       python3
 
       # Libraries
