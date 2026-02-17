@@ -18,7 +18,7 @@ in
       # };
 
       settings = lib.mkOption {
-        description = ''Settings for Docker Desktop's settings.json'';
+        description = "Settings for Docker Desktop's settings.json";
         type = lib.types.attrs;
         default = { };
         example = {
@@ -59,7 +59,7 @@ in
         in
         lib.mkIf (pkgs.stdenv.targetPlatform.isDarwin) (
           lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            echo -e "\033[0;33mCleaning up docker desktop's unwanted binaries:\033[0m"
+            echo -e "\033[0;33mCleaning up docker desktop's unwanted binaries\033[0m"
             pushd "${bin_path}" > /dev/null
             run rm -f \
               docker \
