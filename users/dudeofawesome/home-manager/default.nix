@@ -76,9 +76,18 @@ with pkgs.stdenv.targetPlatform;
           ollama
           opentofu
           spotify
-          tailscale
+          (
+            if isLinux then
+              tailscale
+            else if isDarwin then
+              pkgs-unstable.tailscale-gui
+            else
+              abort "unsupported OS ${pkgs.stdenv.targetPlatform.config}"
+          )
 
-          (lib.optionals isLinux [ pkgs-unstable.cider ])
+          (lib.optionals isLinux [
+            pkgs-unstable.cider
+          ])
 
           (lib.optionals isDarwin [
             cyberduck
@@ -88,6 +97,7 @@ with pkgs.stdenv.targetPlatform;
             pkgs-unstable.raycast
             pkgs-unstable.rectangle
             pkgs-unstable.tableplus
+            pkgs-unstable.typora
           ])
         ]))
       ]);

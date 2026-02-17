@@ -34,10 +34,9 @@
         "affinity-photo"
         "arduino"
         "balenaetcher"
-        "bettertouchtool"
         "dash"
         "displaylink"
-        "docker"
+        "docker-desktop"
         "figma"
         "firefox"
         "hammerspoon"
@@ -52,8 +51,6 @@
         "private-internet-access"
         "steam"
         "stay"
-        "tailscale"
-        "typora"
         "workman"
       ];
     masApps = {
