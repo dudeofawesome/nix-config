@@ -92,6 +92,11 @@
       url = "github:1Password/shell-plugins";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
+
+    claude-code-nix = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =

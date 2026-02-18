@@ -12,5 +12,10 @@ in
       (import inputs.nixpkgs-darwin-stable args)
     else
       (import inputs.nixpkgs-linux-stable args);
-  pkgs-unstable = import inputs.nixpkgs-unstable args;
+  pkgs-unstable = import inputs.nixpkgs-unstable (
+    args
+    // {
+      overlays = [ inputs.claude-code-nix.overlays.default ];
+    }
+  );
 }
