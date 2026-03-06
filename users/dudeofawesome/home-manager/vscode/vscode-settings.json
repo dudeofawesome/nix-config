@@ -478,6 +478,8 @@
     "background": "#FFBD2A",
     "type": "tag-and-subTag"
   },
+  "todo-tree.filtering.includeHiddenFiles": true,
+  "todo-tree.general.showActivityBarBadge": true,
   "material-icon-theme.showUpdateMessage": false,
   "material-icon-theme.files.associations": {
     "tsconfig.*.json": "tsconfig",
