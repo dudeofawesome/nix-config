@@ -20,6 +20,7 @@ let
     #   "k8s.orleans.io"
     # ];
 
+    disable = [ "traefik" ];
     flannel-backend = if multi-node then "wireguard-native" else "host-gw";
     container-runtime-endpoint = "unix:///run/containerd/containerd.sock";
   };
@@ -72,7 +73,6 @@ in
           --vpn-auth-file=${config.sops.templates.k3s-vpn-auth-file.path}
         '')
       ];
-
     };
 
     dnsmasq = {
