@@ -37,6 +37,7 @@ extensions = [
 
   'tomoyukim.vscode-mermaid-editor', # missing
   'bpruitt-goddard.mermaid-markdown-syntax-highlighting', # missing
+  'mermaidchart.vscode-mermaid-chart', # missing
 
   'terrastruct.d2', # missing
 

@@ -123,12 +123,12 @@ with pkgs.stdenv.targetPlatform;
         "unifi".user = "root";
         "unifi-remote" = {
           match = hostUnreachable "unifi";
-          hostname = "oc.orleans.io";
+          hostname = "red.orleans.io";
         };
         "monongahela".user = "dudeofawesome";
         "monongahela-remote" = {
           match = hostUnreachable "monongahela";
-          proxyJump = "oc.orleans.io";
+          proxyJump = "red.orleans.io";
         };
         "haleakala" = {
           user = "dudeofawesome";
@@ -136,6 +136,10 @@ with pkgs.stdenv.targetPlatform;
         };
         "steamdeck".user = "deck";
 
+        "badlands" = {
+          user = "lorleans";
+          hostname = "10.0.1.87";
+        };
         "badlands-vm".user = "dudeofawesome";
 
         "home.powell.place".user = "louis";

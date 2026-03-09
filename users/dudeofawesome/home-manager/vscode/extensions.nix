@@ -199,6 +199,13 @@ merge
             sha256 = "1ib8czlqhqq1rz6jrazfd9z3gfqdwqazxdvwmsyp765m0vf78xcg";
 
           };
+          "mermaidchart"."vscode-mermaid-chart" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "vscode-mermaid-chart";
+            publisher = "mermaidchart";
+            version = "2.5.8";
+            sha256 = "sha256-6pfnOjGpmGgQAnYMVACA3Xh6RX7CcxzmK3aFxUcXS4s=";
+
+          };
           "mrmlnc"."vscode-scss" = vscode-utils.extensionFromVscodeMarketplace {
             name = "vscode-scss";
             publisher = "mrmlnc";
@@ -255,11 +262,18 @@ merge
             sha256 = "0w31hmbc11xvw14k7lba32gqcpqlsj7md790m0h5vbfzlslallas";
 
           };
+          "openai"."chatgpt" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "chatgpt";
+            publisher = "openai";
+            version = "0.5.80";
+            sha256 = "sha256-fzx/joyhBGNVucLj7cJQz3j33TmPE1qGs8Uv1dVFFNE=";
+
+          };
           "rooveterinaryinc"."roo-cline" = vscode-utils.extensionFromVscodeMarketplace {
             name = "roo-cline";
             publisher = "rooveterinaryinc";
-            version = "3.28.15";
-            sha256 = "sha256-ap1Jb+ibhb3kcNgoqPIGB8ZVdwos58kFlank6CT6h/M=";
+            version = "3.50.5";
+            sha256 = "sha256-IXG9OducRPUM1TnARkrE5BhCU3gfRx4n0qnx3SugcLo=";
 
           };
           "seeker-dk"."node-modules-viewer" = vscode-utils.extensionFromVscodeMarketplace {
@@ -302,6 +316,13 @@ merge
             publisher = "vitest";
             version = "1.26.3";
             sha256 = "06yxzx80flrl10n21y9gzafbwbhzskd21v7236738xdxd98nkm24";
+
+          };
+          "vstirbu"."vscode-mermaid-preview" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "vscode-mermaid-preview";
+            publisher = "vstirbu";
+            version = "2.1.2";
+            sha256 = "0czqq90zzw9q81yghrlwwlyqinx562w6rbrjavhsp1n6h2sqacfd";
 
           };
           "weaveworks"."vscode-gitops-tools" = vscode-utils.extensionFromVscodeMarketplace {

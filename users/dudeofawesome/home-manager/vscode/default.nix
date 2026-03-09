@@ -97,6 +97,7 @@ with lib;
           jnoortheen.nix-ide
           mads-hartmann.bash-ide-vscode
           mathiasfrohlich.kotlin
+          nix4vscode.mermaidchart.vscode-mermaid-chart
           mikestead.dotenv
           nix4vscode.mrmlnc.vscode-scss
           ms-azuretools.vscode-docker
@@ -116,6 +117,7 @@ with lib;
           nix4vscode.novy.vsc-gcode
           nix4vscode.orta.vscode-jest
           nix4vscode.oven.bun-vscode
+          nix4vscode.openai.chatgpt
           pkief.material-icon-theme
           pkief.material-product-icons
           shopify.ruby-lsp
@@ -123,6 +125,7 @@ with lib;
           redhat.java
           redhat.vscode-yaml
           nix4vscode.rooveterinaryinc.roo-cline
+          rust-lang.rust-analyzer
           ryu1kn.partial-diff
           nix4vscode.seeker-dk.node-modules-viewer
           nix4vscode.semanticdiff.semanticdiff
@@ -139,6 +142,7 @@ with lib;
           visualstudioexptteam.intellicode-api-usage-examples
           visualstudioexptteam.vscodeintellicode
           nix4vscode.vitest.explorer
+          nix4vscode.vstirbu.vscode-mermaid-preview
           nix4vscode.weaveworks.vscode-gitops-tools
           wmaurer.change-case
           yoavbls.pretty-ts-errors

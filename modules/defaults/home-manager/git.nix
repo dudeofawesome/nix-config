@@ -32,6 +32,8 @@ in
       signing.signByDefault = true;
 
       extraConfig = {
+        diff.algorithm = "histogram";
+
         gpg = {
           format = "ssh";
           ssh = {

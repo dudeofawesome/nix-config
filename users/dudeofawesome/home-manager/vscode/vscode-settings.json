@@ -458,6 +458,9 @@
   "openscad.launchPath": "/Applications/OpenSCAD Beta.app/Contents/MacOS/OpenSCAD",
 
   "java.configuration.checkProjectSettingsExclusions": false,
+  "[java]": {
+    "editor.foldingImportsByDefault": true
+  },
 
   "kotlin.languageServer.enabled": false,
   "kotlin.debugAdapter.enabled": false,
@@ -843,6 +846,7 @@
 
   // disable LLM junk
   "chat.commandCenter.enabled": false,
+  "chat.disableAIFeatures": true,
   "gitlab.duoChat.enabled": false,
   "gitlab.duoCodeSuggestions.enabled": false,
   "gitlab.duoCodeSuggestions.enabledSupportedLanguages": {},
