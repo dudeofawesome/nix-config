@@ -74,6 +74,11 @@
               command = "-toggleExplainMode";
               when = "suggestWidgetVisible";
             }
+            {
+              key = "alt+cmd+k";
+              command = "-claude-code.insertAtMentioned";
+              when = "editorTextFocus";
+            }
           ]
           # tab control
           [
