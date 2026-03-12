@@ -1,14 +1,13 @@
 {
   pkgs,
   lib,
-  os,
   config,
-  osConfig,
+  users,
   ...
 }:
 with pkgs.stdenv.targetPlatform;
 let
-  user = osConfig.users.users.${config.home.username};
+  user = users.${config.home.username};
 in
 {
   sops =
@@ -33,7 +32,7 @@ in
 
       defaultSopsFile =
         let
-          path = ../../../users/${config.home.username}/secrets.yaml;
+          path = ../../../users/${user.original_name}/secrets.yaml;
         in
         lib.mkIf (builtins.pathExists path) path;
 
