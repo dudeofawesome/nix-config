@@ -32,7 +32,7 @@
         if (machine-class == "pc") then
           {
             # "Global Protect" = 1400555706; # TODO: https://github.com/mas-cli/mas/issues/321
-            "Microsoft Remote Desktop" = 1295203466;
+            # "Microsoft Remote Desktop" = 1295203466;
           }
         else
           { }

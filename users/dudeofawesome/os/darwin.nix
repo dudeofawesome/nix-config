@@ -54,10 +54,10 @@
         "workman"
       ];
     masApps = {
-      "1password for Safari" = 1569813296;
-      "AdGuard for Safari" = 1440147259;
-      # "Ubiquiti WiFiman" = 1385561119; # I keep on getting an error about the latest version being incompatible…
-      "Microsoft Remote Desktop" = 1295203466;
+      # "1password for Safari" = 1569813296;
+      # "AdGuard for Safari" = 1440147259;
+      # # "Ubiquiti WiFiman" = 1385561119; # I keep on getting an error about the latest version being incompatible…
+      # "Microsoft Remote Desktop" = 1295203466;
     };
   };
 }
