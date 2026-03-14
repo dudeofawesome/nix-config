@@ -8,10 +8,6 @@
 }:
 with lib;
 {
-  imports = [
-    ./extensions
-  ];
-
   home.packages = with pkgs-unstable; [
     claude-code
     gitlab-ci-ls
