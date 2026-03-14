@@ -26,6 +26,10 @@ with pkgs.stdenv.targetPlatform;
       ])
     ];
 
+  homebrew.casks = [
+    "claude"
+  ];
+
   programs = {
     slack = {
       enable = lib.mkDefault (machine-class == "pc");

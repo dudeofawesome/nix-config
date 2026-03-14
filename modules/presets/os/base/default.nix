@@ -50,6 +50,7 @@ with pkgs.stdenv.targetPlatform;
       ruby
       nodejs_24 # this should always use the latest LTS
       python3
+      uv
 
       # Libraries
       gcc
