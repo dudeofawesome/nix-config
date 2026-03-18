@@ -3,8 +3,8 @@
 
   inputs = {
     # TODO: use `nixpkgs-YY.MM-darwin` for Darwin
-    nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nur = {
@@ -21,13 +21,13 @@
     };
 
     home-manager = {
-      url = "github:dudeofawesome/home-manager/fix/vscode-profile-dir-creation-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       # TODO: how to follow nixpkgs-darwin-stable when on macOS?
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
     darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
     };
 

@@ -6,7 +6,6 @@
     ./aerospace.nix
     ./awscli.nix
     ./clock.nix
-    ./discord.nix
     ./dock.nix
     ./docker-client.nix
     ./docker-desktop.nix
