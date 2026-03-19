@@ -31,7 +31,7 @@ in
 
       signing.signByDefault = true;
 
-      extraConfig = {
+      settings = {
         diff.algorithm = "histogram";
 
         gpg = {
@@ -44,7 +44,7 @@ in
             allowedSignersFile =
               lib.pipe
                 {
-                  "${config.programs.git.userEmail}" = config.programs.git.signing.key;
+                  "${config.programs.git.settings.user.email}" = config.programs.git.signing.key;
                 }
                 [
                   (lib.mapAttrsToList (name: value: ''${name} namespaces="git" ${value}''))
@@ -54,38 +54,38 @@ in
                 ];
           };
         };
-      };
 
-      aliases = {
-        move-commits-to =
-          let
-            script = pkgs.writeShellScript "git-move-commits-to.sh" ''
-              new_branch="$1"
-              total_commits="''${2:-1}"
+        aliases = {
+          move-commits-to =
+            let
+              script = pkgs.writeShellScript "git-move-commits-to.sh" ''
+                new_branch="$1"
+                total_commits="''${2:-1}"
 
-              if [ "$new_branch" == "help" ]; then
-                echo "usage: git move-commits-to <new-branch> [<number-of-commits=1>]"
-                exit 0
-              fi
+                if [ "$new_branch" == "help" ]; then
+                  echo "usage: git move-commits-to <new-branch> [<number-of-commits=1>]"
+                  exit 0
+                fi
 
-              if [ -n "$(git status --porcelain=v1 2>/dev/null)" ]; then
-                echo "you have uncommitted changes which would be lost" >&2
-                exit 1
-              elif [ "$new_branch" == "" ]; then
-                echo "branch must be specified" >&2
-                exit 1
-              elif [ "$(git branch --list "$new_branch")" != "" ]; then
-                echo "branch $new_branch already exists" >&2
-                exit 1
-              fi
+                if [ -n "$(git status --porcelain=v1 2>/dev/null)" ]; then
+                  echo "you have uncommitted changes which would be lost" >&2
+                  exit 1
+                elif [ "$new_branch" == "" ]; then
+                  echo "branch must be specified" >&2
+                  exit 1
+                elif [ "$(git branch --list "$new_branch")" != "" ]; then
+                  echo "branch $new_branch already exists" >&2
+                  exit 1
+                fi
 
-              git switch -c "$new_branch"
-              git switch -
-              git reset --hard "HEAD~$total_commits"
-              git switch "$new_branch"
-            '';
-          in
-          "!${script}";
+                git switch -c "$new_branch"
+                git switch -
+                git reset --hard "HEAD~$total_commits"
+                git switch "$new_branch"
+              '';
+            in
+            "!${script}";
+        };
       };
     };
 

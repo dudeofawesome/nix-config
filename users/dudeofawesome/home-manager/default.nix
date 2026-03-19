@@ -159,8 +159,10 @@ with pkgs.stdenv.targetPlatform;
       };
 
     git = {
-      userName = "Louis Orleans";
-      userEmail = "louis@orleans.io";
+      settings.user = {
+        name = "Louis Orleans";
+        email = "louis@orleans.io";
+      };
 
       signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGD3VYzXLFPEC25hK7o5+NrV9cvNlyV7Y93UyAQospbw";
 
