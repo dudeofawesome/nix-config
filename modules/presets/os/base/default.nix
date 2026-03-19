@@ -27,7 +27,7 @@ with pkgs.stdenv.targetPlatform;
       git
       htop
       jq
-      moar
+      moor
       most
       nil
       nix-du

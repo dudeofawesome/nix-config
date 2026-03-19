@@ -12,7 +12,7 @@
         nvm-fish
       ];
 
-    moar.enable = true;
+    moor.enable = true;
 
     process-compose = {
       enable = true;

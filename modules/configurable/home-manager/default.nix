@@ -16,7 +16,7 @@
     ./homebrew.nix
     ./kubeconfig.nix
     ./kubectl.nix
-    ./moar.nix
+    ./moor.nix
     ./moonlight.nix
     ./podman-desktop.nix
     ./process-compose.nix

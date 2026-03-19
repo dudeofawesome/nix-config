@@ -246,7 +246,7 @@ with pkgs.stdenv.targetPlatform;
             region = "us-west-2";
             output = "yaml-stream";
             credential_process = "${op_aws} 'rlfhru5fnw3crzq6be4dsx3qfu' 'Paciolan'";
-            cli_pager = "${lib.getExe pkgs.moar} --lang=yaml";
+            cli_pager = "${lib.getExe pkgs.moor} --lang=yaml";
           };
 
           "profile api1" = {
