@@ -31,6 +31,7 @@ with pkgs.stdenv.targetPlatform;
 
     ./browsers.nix
     ./kubeconfig.nix
+    ./llms.nix
     ./vscode
     ./shells.nix
     ./zed-editor
@@ -273,7 +274,7 @@ with pkgs.stdenv.targetPlatform;
 
     signal-desktop = {
       enable = machine-class == "pc";
-      package = pkgs-unstable.signal-desktop-bin;
+      package = pkgs-unstable.signal-desktop;
     };
     discord.enable = machine-class == "pc";
   };
