@@ -20,6 +20,11 @@
     # Let's live life on the edge
     kernelPackages = pkgs.linuxPackages_latest;
 
+    kernelModules = [
+      "kvm-amd"
+      "kvm-intel"
+    ];
+
     loader.systemd-boot.enable = lib.mkDefault true;
   };
 
@@ -47,6 +52,8 @@
     # enable setting TTY keybaord layout
     useXkbConfig = true;
   };
+
+  virtualisation.libvirtd.enable = true;
 
   system = {
     # This option defines the first version of NixOS you have installed on this particular machine,
