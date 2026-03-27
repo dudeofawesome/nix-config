@@ -48,7 +48,7 @@ flake.nix
 - **`modules/machine-classes/`** - Machine type definitions (pc, server, local-vm) with OS-specific variants (e.g., `pc.darwin.nix`, `server.linux.nix`)
 - **`modules/defaults/`** - Applied to all systems unconditionally. Split into `os/` and `home-manager/` subdirectories
 - **`modules/configurable/`** - Optional modules users can enable. Split into `os/` and `home-manager/` subdirectories
-- **`modules/presets/`** - Pre-built module combinations (e.g., `base/`, `doa-cluster/`, `paciolan.nix`)
+- **`modules/presets/`** - Pre-built module combinations (e.g., `base/`, `doa-cluster/`, `paciolan/`)
 
 ### Key Patterns
 

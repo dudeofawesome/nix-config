@@ -12,7 +12,9 @@
         #   type = "http";
         #   url = "https://gitlabdev.paciolan.info/api/v4/mcp";
         # };
-
+        # aws
+        # k8s
+        # slack
       };
     };
 
@@ -29,7 +31,9 @@
       # settings = {
       #   permissions = { };
       # };
-      # skills = { };
+      skills = {
+        jira = ./skills/jira-defaults.md;
+      };
     };
 
     codex = {

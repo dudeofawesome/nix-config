@@ -7,6 +7,8 @@
 }:
 with pkgs.stdenv.targetPlatform;
 {
+  imports = [ ./llms ];
+
   home.packages =
     with pkgs;
     lib.flatten [

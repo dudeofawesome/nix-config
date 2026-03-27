@@ -8,7 +8,7 @@
 }:
 {
   imports = lib.flatten [
-    (lib.optional (machine-class == "pc") ../../../modules/presets/home-manager/paciolan.nix)
+    (lib.optional (machine-class == "pc") ../../../modules/presets/home-manager/paciolan)
 
     ../../../modules/defaults/home-manager
     ../../../modules/defaults/home-manager/1password-gui.nix

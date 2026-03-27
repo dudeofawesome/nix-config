@@ -10,7 +10,7 @@
 with pkgs.stdenv.targetPlatform;
 {
   imports = lib.flatten [
-    (lib.optional (machine-class == "pc") ../../../modules/presets/home-manager/paciolan.nix)
+    (lib.optional (machine-class == "pc") ../../../modules/presets/home-manager/paciolan)
 
     ../../../modules/defaults/home-manager
     ../../../modules/defaults/home-manager/aerospace.nix
@@ -31,7 +31,7 @@ with pkgs.stdenv.targetPlatform;
 
     ./browsers.nix
     ./kubeconfig.nix
-    ./llms.nix
+    ./llms
     ./vscode
     ./shells.nix
     ./zed-editor
