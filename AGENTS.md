@@ -5,9 +5,6 @@ Multi-machine, multi-arch, multi-user, multi-OS Nix flake configuration managing
 ## Common Commands
 
 ```sh
-# Format all Nix files (uses nixfmt-rfc-style)
-nix fmt
-
 # Build a specific host configuration (dry-run to validate)
 nix build .#nixosConfigurations.<hostname>.config.system.build.toplevel --dry-run
 nix build .#darwinConfigurations.<hostname>.config.system.build.toplevel --dry-run
@@ -59,6 +56,6 @@ flake.nix
 
 ## Code Style
 
-- Nix files are formatted with `nixfmt-rfc-style` (run `nix fmt`)
+- Nix files are formatted with  `nix fmt`
 - Other files use Prettier
 - YAML indentation: 4 spaces
