@@ -21,7 +21,7 @@
     claude-code = {
       enable = true;
       package = pkgs-unstable.claude-code;
-      # enableMcpIntegration = true;
+      enableMcpIntegration = true;
       # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.claude-code.agents
       # agents = { };
       # commands = { };

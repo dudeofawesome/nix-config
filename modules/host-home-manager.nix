@@ -13,6 +13,10 @@ in
     sharedModules = [
       inputs.sops.homeManagerModules.sops
       inputs.op-shell-plugins.hmModules.default
+      {
+        disabledModules = [ "programs/claude-code.nix" ];
+        imports = [ "${inputs.home-manager-master}/modules/programs/claude-code.nix" ];
+      }
 
       ./configurable/home-manager/default.nix
     ];

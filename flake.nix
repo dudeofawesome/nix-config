@@ -25,6 +25,10 @@
       # TODO: how to follow nixpkgs-darwin-stable when on macOS?
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
+    home-manager-master = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
+    };
 
     darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
