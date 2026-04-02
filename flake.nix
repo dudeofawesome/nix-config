@@ -134,6 +134,6 @@
       darwinConfigurations = import ./hosts/darwin params;
 
       # run `nix fmt` to format all files
-      formatter = forAllSystems (nixpkgs: nixpkgs.nixfmt-rfc-style);
+      formatter = forAllSystems (nixpkgs: nixpkgs.nixfmt);
     };
 }
