@@ -17,39 +17,6 @@ in
         type = with types; nullOr path;
         default = null;
       };
-
-      extensionSettings = {
-        "rooveterinaryinc.roo-cline" = {
-          mcpServers = mkOption {
-            type =
-              with types;
-              attrsOf (submodule {
-                options = {
-                  type = mkOption {
-                    type = with types; str;
-                    default = "stdio";
-                  };
-                  command = mkOption {
-                    type = types.str;
-                  };
-                  args = mkOption {
-                    type = with types; (listOf str);
-                    default = [ ];
-                  };
-                  env = mkOption {
-                    type = with types; (attrsOf str);
-                    default = { };
-                  };
-                  alwaysAllow = mkOption {
-                    type = with types; listOf str;
-                    default = [ ];
-                  };
-                };
-              });
-            default = { };
-          };
-        };
-      };
     };
   };
 
@@ -119,18 +86,6 @@ in
             ''
           );
         };
-
-        file.vscode_roo_mcp =
-          let
-            rooMcpCfg = cfg.extensionSettings."rooveterinaryinc.roo-cline".mcpServers;
-          in
-          {
-            enable = rooMcpCfg != { };
-            target = "${user_dir}/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json";
-            text = builtins.toJSON {
-              mcpServers = rooMcpCfg;
-            };
-          };
       };
     };
 }

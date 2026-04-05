@@ -120,7 +120,6 @@ with lib;
           redhat.ansible
           redhat.java
           redhat.vscode-yaml
-          nix4vscode.rooveterinaryinc.roo-cline
           rust-lang.rust-analyzer
           ryu1kn.partial-diff
           nix4vscode.seeker-dk.node-modules-viewer

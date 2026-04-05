@@ -269,13 +269,6 @@ merge
             sha256 = "sha256-fzx/joyhBGNVucLj7cJQz3j33TmPE1qGs8Uv1dVFFNE=";
 
           };
-          "rooveterinaryinc"."roo-cline" = vscode-utils.extensionFromVscodeMarketplace {
-            name = "roo-cline";
-            publisher = "rooveterinaryinc";
-            version = "3.50.5";
-            sha256 = "sha256-IXG9OducRPUM1TnARkrE5BhCU3gfRx4n0qnx3SugcLo=";
-
-          };
           "seeker-dk"."node-modules-viewer" = vscode-utils.extensionFromVscodeMarketplace {
             name = "node-modules-viewer";
             publisher = "seeker-dk";
