@@ -31,7 +31,7 @@
                     throw "No gitlab PAT source configured."
                 })"
 
-                exec ${lib.getExe' pkgs.bun "bunx"} -y @zereight/mcp-gitlab@2.0.35
+                exec ${lib.getExe pkgs.mcp-gitlab}
               ''
             );
           in

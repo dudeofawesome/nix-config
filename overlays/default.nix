@@ -19,6 +19,7 @@
       finicky = import ../packages/finicky/package.nix build-inputs;
       git-fork = import ../packages/git-fork/package.nix build-inputs;
       gitup = import ../packages/gitup/package.nix build-inputs;
+      mcp-gitlab = import ../packages/mcp-gitlab/package.nix build-inputs;
       podman-mac-helper = import ../packages/podman-mac-helper/package.nix build-inputs;
 
       fishPlugins = prev.fishPlugins // {
