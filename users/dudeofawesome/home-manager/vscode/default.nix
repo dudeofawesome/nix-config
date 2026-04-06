@@ -9,7 +9,6 @@
 with lib;
 {
   home.packages = with pkgs-unstable; [
-    claude-code
     gitlab-ci-ls
     rubyPackages.solargraph
   ];
