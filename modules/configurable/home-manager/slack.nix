@@ -20,5 +20,11 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
+
+    targets.darwin.defaults."com.tinyspeck.slackmacgap" = {
+      SlackNoAutoUpdates = true;
+      SUEnableAutomaticChecks = false;
+      SUAutomaticallyUpdate = false;
+    };
   };
 }
