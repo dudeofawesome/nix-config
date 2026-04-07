@@ -72,7 +72,12 @@ in
 
       apps = mkOption {
         default = [ ];
-        type = types.listOf types.str;
+        type =
+          with types;
+          listOf (oneOf [
+            str
+            attrs
+          ]);
         example = [ "/Applications/iTerm.app" ];
         description = lib.mdDoc ''
           Paths to `.app`s to put in the Dock.
@@ -115,9 +120,30 @@ in
         # clear dock
         defaults write com.apple.dock persistent-apps -array ""
 
-        ${concatMapStringsSep ";\n" (
-          path: ''defaults write com.apple.dock persistent-apps -array-add "$(createTile '${path}')"''
-        ) cfg.apps}
+        ${lib.pipe cfg.apps [
+          (builtins.map (
+            app:
+            if (app ? enable) then
+              lib.optional app.enable (
+                let
+                  inherit (config.targets.darwin) copyApps;
+                in
+                if (copyApps.enable) then
+                  # TODO: hopefully a better way to discover the .app's name arises
+                  ''"${copyApps.directory}/$(basename "${app.package}/Applications/"*".app")"''
+                else
+                  "'${app.package}/Applications/'*'.app'"
+              )
+            else if (builtins.isString app) then
+              "'${app}'"
+            else
+              throw "unsupported type for dock app"
+          ))
+          lib.flatten
+          (concatMapStringsSep ";\n" (
+            path: ''defaults write com.apple.dock persistent-apps -array-add "$(createTile ${path})"''
+          ))
+        ]}
       }
 
       PATH="/usr/bin:$PATH" run setDockApps
@@ -169,6 +195,6 @@ in
     home.activation.dockRestart = hm.dag.entryAfter [
       "dockApps"
       "dockDirs"
-    ] ''run /usr/bin/killall Dock'';
+    ] "run /usr/bin/killall Dock";
   };
 }

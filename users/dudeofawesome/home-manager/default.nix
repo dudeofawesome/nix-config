@@ -224,16 +224,16 @@ with pkgs.stdenv.targetPlatform;
         "/Applications/Firefox.app"
         "/System/Applications/Music.app"
         "/System/Applications/Messages.app"
-        (lib.optional config.programs.signal-desktop.enable "${config.programs.signal-desktop.package}/Applications/Signal.app")
-        (lib.optional config.programs.slack.enable "${config.programs.slack.package}/Applications/Slack.app")
-        (lib.optional config.programs.discord.enable "${config.programs.discord.package}/Applications/Discord.app")
+        config.programs.signal-desktop
+        config.programs.slack
+        config.programs.discord
         "/System/Applications/Mail.app"
         "/System/Applications/Calendar.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Reminders.app"
-        (lib.optional config.programs.vscode.enable "${config.programs.vscode.package}/Applications/Visual Studio Code.app")
-        (lib.optional config.programs.git-fork.enable "${config.programs.git-fork.package}/Applications/Fork.app")
-        (lib.optional config.programs.wezterm.enable "${config.programs.wezterm.package}/Applications/WezTerm.app")
+        config.programs.vscode
+        config.programs.git-fork
+        config.programs.wezterm
         "/System/Applications/System Settings.app"
       ];
     };
