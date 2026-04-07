@@ -52,7 +52,7 @@ in
                 echo "$1" | sed -Ee 's/\//\\\//gi'
               }
 
-              prettier_path="$(escape_for_sed "${pkgs-unstable.nodePackages.prettier}")"
+              prettier_path="$(escape_for_sed "${lib.getExe pkgs-stable.prettier}")"
               kubectl_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubectl}")"
               helm_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubernetes-helm}")"
               gitlab_ci_ls_path="$(escape_for_sed "${lib.getExe pkgs-stable.gitlab-ci-ls}")"

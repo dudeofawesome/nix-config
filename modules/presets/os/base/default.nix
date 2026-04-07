@@ -33,8 +33,8 @@ with pkgs.stdenv.targetPlatform;
       nix-du
       nix-tree
       # nixd
-      pkgs-unstable.nixfmt
-      pkgs-unstable.nodePackages.prettier
+      nixfmt
+      prettier
       pciutils
       pstree
       ripgrep
