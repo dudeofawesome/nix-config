@@ -123,27 +123,24 @@ with pkgs.stdenv.targetPlatform;
         hostUnreachable = (host: ''host ${host} !exec "ping -c1 -q -t1 '%h' 2> /dev/null"'');
       in
       {
+        "*".user = "dudeofawesome";
+
         "unifi".user = "root";
         "unifi-remote" = {
           match = hostUnreachable "unifi";
           hostname = "red.orleans.io";
         };
-        "monongahela".user = "dudeofawesome";
         "monongahela-remote" = {
           match = hostUnreachable "monongahela";
           proxyJump = "red.orleans.io";
         };
-        "haleakala" = {
-          user = "dudeofawesome";
-          hostname = "10.0.1.203";
-        };
+        "haleakala".hostname = "10.0.1.203";
         "steamdeck".user = "deck";
 
         "badlands" = {
           user = "lorleans";
           hostname = "10.0.1.87";
         };
-        "badlands-vm".user = "dudeofawesome";
 
         "home.powell.place".user = "louis";
 
