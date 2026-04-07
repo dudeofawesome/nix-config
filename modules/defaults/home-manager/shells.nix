@@ -31,18 +31,17 @@ in
         );
 
       preferAbbrs = true;
-      shellAbbrs =
-        {
-          "l" = "ls -lha";
-        }
-        // (
-          if (isLinux) then
-            {
-              "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
-            }
-          else
-            { }
-        );
+      shellAbbrs = {
+        "l" = "ls -lha";
+      }
+      // (
+        if (isLinux) then
+          {
+            "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
+          }
+        else
+          { }
+      );
 
       functions = {
         doa-ssh-keygen = {
