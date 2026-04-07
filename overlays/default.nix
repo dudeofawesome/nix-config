@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  pkgs-unstable,
   lib,
   ...
 }:
@@ -64,6 +65,9 @@
     inputs.nur.overlays.default
 
     (final: prev: {
+      # TODO: remove this once stable fish is fixed
+      fish = pkgs-unstable.fish;
+
       scrutiny-collector = prev.scrutiny-collector.overrideAttrs (old: {
         meta = old.meta // {
           platforms = lib.platforms.all;
