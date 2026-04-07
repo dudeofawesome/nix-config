@@ -1,4 +1,9 @@
-{ os, ... }:
+{
+  os,
+  lib,
+  config,
+  ...
+}:
 let
   doa-lib = import ../../../lib;
 in
@@ -16,4 +21,8 @@ in
   ];
 
   programs.kubectl.enable = true;
+
+  targets.darwin.copyApps.enable = true;
+  targets.darwin.copyApps.directory = "${config.home.homeDirectory}/Applications/Home Manager Apps";
+  targets.darwin.linkApps.enable = false;
 }
