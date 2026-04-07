@@ -118,6 +118,7 @@ with pkgs.stdenv.targetPlatform;
   # };
 
   programs = {
+    ssh.enableDefaultConfig = false; # hides deprecation warning
     ssh.matchBlocks =
       let
         hostUnreachable = (host: ''host ${host} !exec "ping -c1 -q -t1 '%h' 2> /dev/null"'');
