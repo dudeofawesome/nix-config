@@ -862,6 +862,8 @@
   "workbench.editor.empty.hint": "hidden",
 
   "claudeCode.useCtrlEnterToSend": true,
+  "claudeCode.claudeProcessWrapper": "this should be replaced by nix",
   "chatgpt.composerEnterBehavior": "cmdIfMultiline",
-  "1password.editor.suggestStorage": false
+
+  "1password.editor.suggestStorage": false,
 }

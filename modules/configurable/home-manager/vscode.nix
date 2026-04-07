@@ -52,6 +52,7 @@ in
                 echo "$1" | sed -Ee 's/\//\\\//gi'
               }
 
+              claude_path="$(escape_for_sed "${lib.getExe pkgs-unstable.claude-code}")"
               prettier_path="$(escape_for_sed "${lib.getExe pkgs-stable.prettier}")"
               kubectl_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubectl}")"
               helm_path="$(escape_for_sed "${lib.getExe pkgs-stable.kubernetes-helm}")"
@@ -66,6 +67,8 @@ in
                 `# Modify the selected theme to prevent jerk` \
                 | sed -Ee 's/("workbench.colorTheme"): "(.+)"/\1: "'"$theme"'"/i' \
                 \
+                `# Point to nix's claude-code` \
+                | sed -Ee 's/("claudeCode.claudeProcessWrapper"): "(.+)"/\1: "'"$claude_path"'"/i' \
                 `# Point to nix's Prettier` \
                 | sed -Ee 's/("prettier.prettierPath"): "(.+)"/\1: "'"$prettier_path"'"/i' \
                 `# Point to nix's kubectl` \
