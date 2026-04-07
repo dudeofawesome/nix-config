@@ -857,8 +857,11 @@
   "gitlab.duoCodeSuggestions.openTabsContext": false,
   "gitlab.duoAgentPlatform.enabled": false,
   "gitlab.keybindingHints.enabled": false,
+  "chatgpt.commentCodeLensEnabled": false,
   // now M$ is hiding Copilot settings behind obscure names…
   "workbench.editor.empty.hint": "hidden",
 
+  "claudeCode.useCtrlEnterToSend": true,
+  "chatgpt.composerEnterBehavior": "cmdIfMultiline",
   "1password.editor.suggestStorage": false
 }
