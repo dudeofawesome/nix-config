@@ -83,7 +83,7 @@
           {
             inherit command;
           };
-        # k8s
+        kubernetes.command = lib.getExe pkgs.kubernetes-mcp-server;
         # slack
       };
     };
