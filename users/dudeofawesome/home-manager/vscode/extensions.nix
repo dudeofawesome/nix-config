@@ -153,8 +153,8 @@ merge
           "gitlab"."gitlab-workflow" = vscode-utils.extensionFromVscodeMarketplace {
             name = "gitlab-workflow";
             publisher = "gitlab";
-            version = "6.35.0";
-            sha256 = "0clm21yxyz2brzlqfc5dsysbvscs2hhh1bvpsh2344z1c7waim5j";
+            version = "6.73.1";
+            sha256 = "sha256-MmWBi/bxC9b0zb2/whDadgVfJAnpMNdTwReq6baYO9M=";
 
           };
           "gracefulpotato"."rbs-syntax" = vscode-utils.extensionFromVscodeMarketplace {
@@ -265,8 +265,8 @@ merge
           "openai"."chatgpt" = vscode-utils.extensionFromVscodeMarketplace {
             name = "chatgpt";
             publisher = "openai";
-            version = "0.5.80";
-            sha256 = "sha256-fzx/joyhBGNVucLj7cJQz3j33TmPE1qGs8Uv1dVFFNE=";
+            version = "26.5401.11717";
+            sha256 = "sha256-PWSIKSl5Pv2jpTgriJjCfK/NM3Kkqev1l8ZgrhbPy5w=";
 
           };
           "seeker-dk"."node-modules-viewer" = vscode-utils.extensionFromVscodeMarketplace {
