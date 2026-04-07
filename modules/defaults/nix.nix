@@ -76,6 +76,8 @@ in
         "https://fontis.cachix.org/"
         # claude-code-nix
         "https://claude-code.cachix.org"
+        # codex-cli-nix
+        "https://codex-cli.cachix.org"
       ];
 
       trusted-public-keys = mkDarwinDefault [
@@ -85,6 +87,8 @@ in
         "fontis.cachix.org-1:r6CU2oXo4iozCVo09V+hjJSpFlbUxQW/rDHYlLJ03Og="
         # claude-code-nix
         "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
+        # codex-cli-nix
+        "codex-cli.cachix.org-1:1Br3H1hHoRYG22n//cGKJOk3cQXgYobUel6O8DgSing="
       ];
 
       min-free = mkDarwinDefault (512 * 1024 * 1024);

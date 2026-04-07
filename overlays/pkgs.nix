@@ -15,7 +15,10 @@ in
   pkgs-unstable = import inputs.nixpkgs-unstable (
     args
     // {
-      overlays = [ inputs.claude-code-nix.overlays.default ];
+      overlays = [
+        inputs.claude-code-nix.overlays.default
+        inputs.codex-cli-nix.overlays.default
+      ];
     }
   );
 }

@@ -17,6 +17,10 @@ in
         disabledModules = [ "programs/claude-code.nix" ];
         imports = [ "${inputs.home-manager-master}/modules/programs/claude-code.nix" ];
       }
+      {
+        disabledModules = [ "programs/codex.nix" ];
+        imports = [ "${inputs.home-manager-master}/modules/programs/codex.nix" ];
+      }
 
       ./configurable/home-manager/default.nix
     ];
