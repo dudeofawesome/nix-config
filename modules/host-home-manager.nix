@@ -25,4 +25,10 @@ in
       ./configurable/home-manager/default.nix
     ];
   };
+
+  # home-manager recommends setting this: https://nix-community.github.io/home-manager/options.xhtml#opt-xdg.portal.enable
+  environment.pathsToLink = [
+    "/share/xdg-desktop-portal"
+    "/share/applications"
+  ];
 }
