@@ -28,7 +28,14 @@ in
       if (isLinux) then
         { dates = lib.mkDefault "weekly"; }
       else if (isDarwin) then
-        { interval.Day = lib.mkDefault 7; }
+        {
+          interval = {
+            Weekday = lib.mkDefault 7;
+            # macOS supposedely won't schedule jobs without a minute set (FB7740271, can't find this ticket though)
+            Hour = lib.mkDefault 0;
+            Minute = lib.mkDefault 0;
+          };
+        }
       else
         abort "unsupported OS ${pkgs.stdenv.targetPlatform.config}"
     );
