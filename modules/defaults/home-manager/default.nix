@@ -20,7 +20,10 @@ in
     ./tmux
   ];
 
-  programs.kubectl.enable = true;
+  programs = {
+    kubectl.enable = true;
+    ssh.enableDefaultConfig = false; # hides deprecation warning
+  };
 
   targets.darwin.copyApps.enable = true;
   targets.darwin.copyApps.directory = "${config.home.homeDirectory}/Applications/Home Manager Apps";
