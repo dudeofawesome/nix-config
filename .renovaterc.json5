@@ -6,4 +6,41 @@
   nix: {
     enabled: true,
   },
+
+  packageRules: [
+    {
+      matchManagers: ['nix'],
+      matchDepNames: [
+        'nixpkgs-*',
+        'nur',
+        'op-shell-plugins',
+        'claude-code-nix',
+        'codex-cli-nix',
+      ],
+      groupName: 'binaries',
+      groupSlug: 'binaries',
+    },
+    {
+      matchManagers: ['nix'],
+      matchDepNames: ['home-manager', 'home-manager-master'],
+      groupName: 'home-manager',
+      groupSlug: 'home-manager',
+    },
+    {
+      matchManagers: ['nix'],
+      matchDepNames: [
+        'dudeofawesome_dotfiles',
+        'upaymeifixit_dotfiles',
+        'vim-lumen',
+        'fish-osx',
+        'fish-node-binpath',
+        'fish-node-version',
+        'fish-shell-integrations',
+        'fish-editor-updater',
+        'fish-nvm',
+      ],
+      groupName: 'shell and dotfiles',
+      groupSlug: 'shell-and-dotfiles',
+    },
+  ],
 }
