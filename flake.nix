@@ -26,13 +26,13 @@
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
-    # renovate-flake: datasource=git-refs depName=home-manager packageName=https://github.com/nix-community/home-manager versioning=git currentValue=release-25.11 currentDigest=0759e0e137305bc9d0c52c204c6d8dffe6f601a6
+    # renovate-flake: datasource=git-refs depName=home-manager packageName=https://github.com/nix-community/home-manager versioning=git currentValue=release-25.11 currentDigest=0d02ec1d0a05f88ef9e74b516842900c41f0f2fe
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       # TODO: how to follow nixpkgs-darwin-stable when on macOS?
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
-    # renovate-flake: datasource=git-refs depName=home-manager-master packageName=https://github.com/nix-community/home-manager versioning=git currentValue=master currentDigest=9df3a639007cfe0d074433f7fc225ea94f877d08
+    # renovate-flake: datasource=git-refs depName=home-manager-master packageName=https://github.com/nix-community/home-manager versioning=git currentValue=master currentDigest=7ba4ee4228ed36123c7cb75d50524b43514ef992
     home-manager-master = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
