@@ -4,12 +4,23 @@
   extends: ['config:best-practices'],
 
   nix: {
-    enabled: true,
+    enabled: false,
   },
+
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^flake\\.nix$/'],
+      matchStrings: [
+        '# renovate-flake: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) packageName=(?<packageName>\\S+)(?: versioning=(?<versioning>\\S+))?(?: currentValue=(?<currentValue>\\S+))? currentDigest=(?<currentDigest>\\S+)',
+      ],
+    },
+  ],
 
   packageRules: [
     {
-      matchManagers: ['nix'],
+      matchManagers: ['custom.regex'],
+      matchFileNames: ['flake.nix'],
       matchDepNames: [
         'nixpkgs-*',
         'nur',
@@ -17,17 +28,12 @@
         'claude-code-nix',
         'codex-cli-nix',
       ],
-      groupName: 'binaries',
-      groupSlug: 'binaries',
+      groupName: 'nix flake core',
+      groupSlug: 'nix-flake-core',
     },
     {
-      matchManagers: ['nix'],
-      matchDepNames: ['home-manager', 'home-manager-master'],
-      groupName: 'home-manager',
-      groupSlug: 'home-manager',
-    },
-    {
-      matchManagers: ['nix'],
+      matchManagers: ['custom.regex'],
+      matchFileNames: ['flake.nix'],
       matchDepNames: [
         'dudeofawesome_dotfiles',
         'upaymeifixit_dotfiles',
@@ -41,6 +47,22 @@
       ],
       groupName: 'shell and dotfiles',
       groupSlug: 'shell-and-dotfiles',
+    },
+    {
+      matchManagers: ['custom.regex'],
+      matchFileNames: ['flake.nix'],
+      matchDepNames: ['home-manager', 'home-manager-master'],
+      groupName: 'home-manager',
+      groupSlug: 'home-manager',
+    },
+    {
+      matchManagers: ['custom.regex'],
+      matchFileNames: ['flake.nix'],
+      postUpgradeTasks: {
+        commands: ['./scripts/renovate-update-flake-input.sh {{{depName}}}'],
+        fileFilters: ['flake.nix', 'flake.lock'],
+        executionMode: 'update',
+      },
     },
   ],
 }
