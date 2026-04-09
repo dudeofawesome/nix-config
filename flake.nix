@@ -20,7 +20,7 @@
     # renovate-flake: datasource=git-refs depName=nix-std packageName=https://github.com/chessai/nix-std versioning=git currentDigest=31bbc925750cc9d8f828fe55cee1a2bd985e0c00
     nix-std.url = "github:chessai/nix-std";
 
-    # renovate-flake: datasource=git-refs depName=disko packageName=https://github.com/nix-community/disko versioning=git currentDigest=0d8c6ad4a43906d14abd5c60e0ffe7b587b213de
+    # renovate-flake: datasource=git-refs depName=disko packageName=https://github.com/nix-community/disko versioning=git currentDigest=5ad85c82cc52264f4beddc934ba57f3789f28347
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
