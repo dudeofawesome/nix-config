@@ -51,27 +51,26 @@ Each author gets their own personalized summary based on the specific code of th
 
 ## Step 4: Look Up Authors on Slack
 
-**First, check the cache** at `.claude/scripts/.slack-cache.json`. This file maps git emails to Slack user IDs:
+**First, check the user cache** at `.claude/scripts/user-cache.yaml`. This file maps git emails to identities across Slack, GitLab, and Jira:
 
-```json
-{
-    "user@example.com": { "slackId": "U12345678", "name": "User Name" },
-    "former@example.com": { "skip": "No longer employed at Paciolan." },
-    "opted-out@example.com": {
-        "skip": "This user requested we not message them."
-    }
-}
+```yaml
+- name: User Name
+  emails: [user@example.com]
+  slack_id: U12345678
+  gitlab_username: username
+  jira_account_id: accountId
+  notes: Freeform context about this user
 ```
 
-The cache is loosely structured — entries may have any fields. Use your judgment when reading them:
+The cache is a flat list of entries. Match the git blame email against any value in an entry's `emails` list.
 
-- If an entry has a `slackId`, use it directly — no Slack search needed.
-- If an entry has a `skip` field, skip them silently. The value explains why.
+- If a matching entry has `slack_id`, use it directly — no Slack search needed.
+- Read `notes` for context — it may indicate the user should be skipped, messaged manually, etc. Use your judgment.
 - If the email is not in the cache, search Slack using `slack_search_users`:
     1. First search by full name
     2. If no results, search by email username (the part before `@`)
     3. If still no results, tell the user you could not find them and ask if they go by a different name. Search using the new name if one is provided.
-    4. If the user says to skip them, cache the email with a `skip` field explaining why.
+    4. If the user says to skip them, add a cache entry with a `notes` field explaining why.
 
 **After all lookups, update the cache file** with any new entries.
 
@@ -85,7 +84,7 @@ No obligation, but you may be interested in reviewing [<repo-name>!<MR#>](<full 
 
 > <personalized summary>
 
-(I'm testing a Claude command to automatically send this message when I modify someone's code. Sorry if it's weird. ¯\_(ツ)_/¯)
+(I'm testing a Claude command to automatically send this message when I modify someone's code. Sorry if it's weird. ¯\\_(ツ)_/¯)
 ```
 
 Replace:

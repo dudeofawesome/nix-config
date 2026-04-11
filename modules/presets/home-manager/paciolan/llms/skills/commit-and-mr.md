@@ -27,8 +27,9 @@ git branch --show-current
 1. Run `git status` to see all changes
 2. Run `git diff` to review the changes
 3. Stage all relevant changes with `git add`
-4. Create a commit with a descriptive message and use conventional commits
-    - If you are aware of a Jira story (e.g., INVT-1234), include it in the commit message
+4. If you are not already aware of a Jira issue associated with this work, use the `AskUserQuestion` tool to ask whether there is an associated Jira issue (e.g., INVT-1234), with options like "No Jira issue" and "Yes, I'll provide it". Wait for their response before proceeding.
+5. Create a commit with a descriptive message and use conventional commits
+    - If there is a Jira story (e.g., INVT-1234), include it in the commit message
 
 ## Step 3: Push Changes
 
@@ -50,4 +51,10 @@ Create a merge request on GitLab.
 
 Use the template from `.gitlab/merge_request_templates/Default.md`:
 
-Use the GitLab MCP tools or the GitLab CLI to create the merge request, then provide the user with the MR URL.
+Use actual newlines in the MR description string — never literal `\n` escape sequences.
+
+Assign the MR to the current user: run `whoami`, look up their GitLab user ID via `mcp__gitlab__get_users`, and pass it as `assignee_ids`. Assign reviewers per CLAUDE.md.
+
+Use the GitLab MCP tools to create the merge request, then provide the user with the MR URL.
+
+**Do not** pass `squash` or `remove_source_branch` when creating the merge request. Omitting these lets GitLab fall back to the repository's configured defaults (e.g., squash commit settings, branch deletion policy). Only include them if the user explicitly asks to override the project defaults for a specific MR.
