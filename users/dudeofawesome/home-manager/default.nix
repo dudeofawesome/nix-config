@@ -22,7 +22,6 @@ with pkgs.stdenv.targetPlatform;
     ../../../modules/defaults/home-manager/gitup.nix
     ../../../modules/defaults/home-manager/google-earth-pro.nix
     ../../../modules/defaults/home-manager/hammerspoon
-    ../../../modules/defaults/home-manager/ice.nix
     ../../../modules/defaults/home-manager/llms/codex.nix
     ../../../modules/defaults/home-manager/llms/claude-code.nix
     ../../../modules/defaults/home-manager/moonlight.nix
@@ -96,7 +95,6 @@ with pkgs.stdenv.targetPlatform;
             cyberduck
             hexfiend
             keka
-            pkgs-unstable.ice-bar
             pkgs-unstable.raycast
             pkgs-unstable.rectangle
             pkgs-unstable.tableplus
@@ -270,6 +268,8 @@ with pkgs.stdenv.targetPlatform;
     };
 
     docker-desktop.enable = true;
+
+    thaw.enable = true;
 
     signal-desktop = {
       enable = machine-class == "pc";

@@ -14,6 +14,7 @@
     ./git-fork.nix
     ./gitup.nix
     ./homebrew.nix
+    ./thaw.nix
     ./kubeconfig.nix
     ./kubectl.nix
     ./moor.nix

@@ -18,7 +18,6 @@
     ../../../modules/defaults/home-manager/gnome.nix
     ../../../modules/defaults/home-manager/gitup.nix
     ../../../modules/defaults/home-manager/google-earth-pro.nix
-    ../../../modules/defaults/home-manager/ice.nix
     ../../../modules/defaults/home-manager/moonlight.nix
     ../../../modules/defaults/home-manager/postico.nix
     ../../../modules/defaults/home-manager/wezterm
@@ -144,6 +143,11 @@
           arrangement2 = "2";
         };
       };
+    };
+
+    thaw = {
+      enable = true;
+      package = null;
     };
   };
 
