@@ -19,25 +19,6 @@ with lib;
     mutableUserSettings = ./vscode-settings.json;
 
     profiles.default = {
-      keybindings = [
-        {
-          key = "cmd+alt+n";
-          command = "workbench.action.focusLeftGroupWithoutWrap";
-        }
-        {
-          key = "cmd+alt+e";
-          command = "workbench.action.focusBelowGroupWithoutWrap";
-        }
-        {
-          key = "cmd+alt+o";
-          command = "workbench.action.focusAboveGroupWithoutWrap";
-        }
-        {
-          key = "cmd+alt+i";
-          command = "workbench.action.focusRightGroupWithoutWrap";
-        }
-      ];
-
       extensions =
         let
           nix4vscode = (import ./extensions.nix) { inherit pkgs lib; };

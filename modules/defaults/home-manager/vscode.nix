@@ -79,6 +79,16 @@
               command = "-claude-code.insertAtMentioned";
               when = "editorTextFocus";
             }
+            {
+              key = "ctrl+alt+[";
+              command = "-mermaid-editor.preview";
+              when = "resourceExtname == '.mermaid' || resourceExtname == '.mmd'";
+            }
+            {
+              key = "shift+cmd+v";
+              command = "preview.mermaidChart.preview";
+              when = "resourceExtname == '.mermaid' || resourceExtname == '.mmd'";
+            }
           ]
           # tab control
           [
@@ -121,6 +131,7 @@
               key = "cmd+shift+,";
               command = "workbench.action.openWorkspaceSettingsFile";
             }
+
             {
               key = "cmd+k left";
               command = "workbench.action.moveEditorToLeftGroup";
@@ -136,6 +147,23 @@
             {
               key = "cmd+k right";
               command = "workbench.action.moveEditorToRightGroup";
+            }
+
+            {
+              key = "cmd+alt+[KeyJ]";
+              command = "workbench.action.focusLeftGroupWithoutWrap";
+            }
+            {
+              key = "cmd+alt+[KeyK]";
+              command = "workbench.action.focusBelowGroupWithoutWrap";
+            }
+            {
+              key = "cmd+alt+[KeyL]";
+              command = "workbench.action.focusAboveGroupWithoutWrap";
+            }
+            {
+              key = "cmd+alt+[Semicolon]";
+              command = "workbench.action.focusRightGroupWithoutWrap";
             }
           ]
           # terminal control
