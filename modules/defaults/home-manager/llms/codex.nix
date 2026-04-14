@@ -1,11 +1,12 @@
-{ pkgs-unstable, ... }:
+{ lib, pkgs-unstable, ... }:
 {
   programs.codex = {
-    package = pkgs-unstable.codex;
+    package = lib.mkDefault pkgs-unstable.codex;
 
-    enableMcpIntegration = true;
+    enableMcpIntegration = lib.mkDefault true;
 
     settings = {
+      # TODO: make this also flash the screen if muted
       notify = [
         "bash"
         "-lc"

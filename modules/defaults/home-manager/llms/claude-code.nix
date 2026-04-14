@@ -1,9 +1,9 @@
-{ pkgs-unstable, ... }:
+{ lib, pkgs-unstable, ... }:
 {
   programs.claude-code = {
-    package = pkgs-unstable.claude-code;
+    package = lib.mkDefault pkgs-unstable.claude-code;
 
-    enableMcpIntegration = true;
+    enableMcpIntegration = lib.mkDefault true;
 
     settings = {
       permissions =
@@ -53,7 +53,7 @@
           ];
         };
 
-      autoInstallIdeExtension = false;
+      autoInstallIdeExtension = lib.mkDefault false;
     };
   };
 }
