@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   imports = [
     ./apple-calendar.nix
@@ -16,4 +16,8 @@
     ./spotlight.nix
     ./window-manager.darwin.nix
   ];
+
+  targets.darwin.copyApps.enable = true;
+  targets.darwin.copyApps.directory = "${config.home.homeDirectory}/Applications/Home Manager Apps";
+  targets.darwin.linkApps.enable = false;
 }
