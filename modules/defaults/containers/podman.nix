@@ -22,6 +22,7 @@ in
     nvidia-container-toolkit.enable = nvidia_enable;
   };
   services = lib.mkIf isLinux {
+    # TODO: why does podman need xserver?
     xserver.enable = true;
   };
 }

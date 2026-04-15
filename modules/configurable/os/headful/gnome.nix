@@ -16,7 +16,7 @@ in
         type = types.bool;
         default =
           (machine-class == "local-vm")
-          || (config.services.xserver.desktopManager.gnome.enable && config.services.qemuGuest.enable);
+          || (config.services.desktopManager.gnome.enable && config.services.qemuGuest.enable);
         example = true;
         description = ''
           Whether or not the specified user should be automatically logged in.
@@ -34,7 +34,7 @@ in
   };
 
   config = mkIf cfg.autoLoginEnable {
-    services.xserver = {
+    services = {
       displayManager.gdm.settings = {
         daemon = {
           AutomaticLoginEnable = cfg.autoLoginEnable;

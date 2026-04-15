@@ -24,7 +24,7 @@
         >>> \n \4
       '';
       autologinUser =
-        if (!config.services.xserver.desktopManager.gnome.enable) then lib.mkDefault owner else null;
+        if (!config.services.desktopManager.gnome.enable) then lib.mkDefault owner else null;
     };
   };
 }

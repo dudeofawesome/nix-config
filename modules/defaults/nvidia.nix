@@ -40,7 +40,7 @@
     # Load nvidia driver for Xorg and Wayland
     xserver.videoDrivers = [ "nvidia" ];
     # Nvidia doesn't want to work well with Wayland
-    xserver.displayManager.gdm.wayland = lib.mkIf config.services.xserver.displayManager.gdm.enable false;
+    displayManager.gdm.wayland = lib.mkIf config.services.displayManager.gdm.enable false;
   };
 
   hardware.nvidia = {
