@@ -1,15 +1,16 @@
 ---
 name: person-to-user-map
-description: Maps people to user IDs / names across platforms
+description: Maps people to user IDs / names across platforms. Use whenever trying to find the user name, ID, or email of someone.
 ---
 
 Read and written by LLM tooling — keep entries compact and updated.
 Lookup tips for users NOT in this cache:
-    Slack:   slack_search_users — search by full name, then by email prefix
-    GitLab:  mcp__gitlab__get_users — try first-initial + last name (dsakamoto),
-             then full first + last (joshuagibbs), then first name only (laercio)
-    Jira:    mcp__claude_ai_Atlassian__lookupJiraAccountId
-             cloudId: "paciolan.atlassian.net", search by full name
+
+- Slack: `slack_search_users` — search by full name, then by email prefix
+- GitLab: `mcp__gitlab__get_users` — try first-initial + last name (dsakamoto),
+  then full first + last (joshuagibbs), then first name only (laercio)
+- Jira: `mcp__claude_ai_Atlassian__lookupJiraAccountId`
+  cloudId: `paciolan.atlassian.net`, search by full name
 
 The map is a list of people with props such as name, emails, slack_id, gitlab_user id and username, jira_id
 eg:
