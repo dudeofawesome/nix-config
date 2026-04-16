@@ -16,13 +16,13 @@ The map is a list of people with props such as name, emails, slack_id, gitlab_us
 eg:
 
 ```yaml
-- name: John Appleseed:
+- name: John Appleseed
   emails:
-    - john@appleseed.com
+      - john@appleseed.com
   slack_id: U12345
   gitlab:
-    id: 56481
-    username: jappleseed
+      id: 56481
+      username: jappleseed
   jira_id: 81170:00000000-0000-4000-0000-000000000000
 ```
 
