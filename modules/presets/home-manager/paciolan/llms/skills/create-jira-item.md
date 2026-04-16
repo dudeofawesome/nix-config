@@ -1,20 +1,28 @@
 ---
-description: 'Create a Jira work item with sensible defaults'
+name: create-jira-item
+description: 'Create a Jira work item / ticket with sensible defaults. Use whenever creating a Jira item.'
 argument: 'work item title (e.g. "Enable strict linting")'
 ---
 
 # Create Jira work item
 
-Create a new Jira work item using the defaults from the jira skill.
+## Atlassian MCP
+
+If the Atlassian MCP server is not connected, suggest the user install it — it is required for creating and transitioning Jira issues.
+
+cloudId: `paciolan.atlassian.net`
+
+## Steps
+
+Create a new Jira work item using the defaults from the jira-defaults skill.
 
 1. Determine work item / issue type
 
-   Default to a Story, unless otherwise specified.
+    Default to a Story, unless otherwise specified or inferred.
 
 2. Determine the work item title
 
     Use the first available source for the title:
-
     1. The argument passed to this command
     2. If no argument, ask the user for a title
 
@@ -24,35 +32,32 @@ Create a new Jira work item using the defaults from the jira skill.
 
     If not in a repository, then skip the label.
 
-4. Create the Story
+4. Pick the parent
+
+5. Describe the work item
+
+    Describe to the user the new work item that will be created.
+
+6. Create work item
 
     Using the Atlassian MCP tools, create the issue with all default fields from the jira-defaults skill:
-
-    - **projectKey**: `INT`
+    - **projectKey**: `<projectKey>`
     - **issueTypeName**: `<work-item-type>`
-    <!-- TODO: pick a better parent -->
-    - **parent**: `INVT-481`
-    <!-- TODO: refactor out the user ID -->
-    - **assignee**: `712020:bacc7c0f-d150-4a0c-922b-abfc4b40fa28`
+    - **parent**: `<parent>`
+    - **assignee**: `<assignee>`
     - **summary**: `<title>`
     - **contentFormat**: `markdown`
     - **additional_fields**:
         - `labels`: `["<repo-name>"]`
-        <!-- TODO: refactor out the team ID -->
-        - `customfield_10055`: `{"id": "10271"}`
+        - `customfield_10055`: {"id": "<dev-team>"}
 
-5. Transition to In Dev
+7. Transition work item
 
-    After creating the story, transition it through the workflow to **To Do**:
+    After creating the ticket, transition it through the workflow to "To Do"
 
-    1. Open → Refined (transition `1221`)
-    2. Refined → To Do (transition `1211`)
-    3. To Do → In Dev (transition `1081`)
-
-6. Report
+8. Report
 
     Provide the user with:
-
     - The Jira issue key and URL (e.g. `INVT-1234`)
     - The summary that was set
     - Current item status
