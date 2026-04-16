@@ -96,7 +96,6 @@ with pkgs.stdenv.targetPlatform;
             hexfiend
             keka
             pkgs-unstable.raycast
-            pkgs-unstable.rectangle
             pkgs-unstable.tableplus
             pkgs-unstable.typora
           ])
