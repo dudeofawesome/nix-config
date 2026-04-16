@@ -34,6 +34,8 @@ Create a new Jira work item using the defaults from the jira-defaults skill.
 
 4. Pick the parent
 
+    Use jira-defaults if no parent can be inferred.
+
 5. Describe the work item
 
     Describe to the user the new work item that will be created.
