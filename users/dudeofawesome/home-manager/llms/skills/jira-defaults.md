@@ -9,6 +9,8 @@ disable-model-invocation: false
 
 ## Defaults
 
+cloudId: `paciolan.atlassian.net`
+
 Unless the user specifies otherwise, use these values when creating Jira work items:
 
 | Field               | Value                                               |
@@ -17,6 +19,7 @@ Unless the user specifies otherwise, use these values when creating Jira work it
 | parent              | `INT-128`                                           |
 | assignee            | `Louis Orleans`                                     |
 | Dev Team (required) | `customfield_10055`: {"id": "10279"} (Integrations) |
+| target-status       | To Do                                               |
 
 ### Custom Fields
 

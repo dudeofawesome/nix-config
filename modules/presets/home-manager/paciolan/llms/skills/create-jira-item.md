@@ -11,8 +11,6 @@ context: fork
 
 If the Atlassian MCP server is not connected, suggest the user install it — it is required for creating and transitioning Jira issues.
 
-cloudId: `paciolan.atlassian.net`
-
 ## Steps
 
 Create a new Jira work item using the defaults from the jira-defaults skill.
@@ -56,7 +54,7 @@ Create a new Jira work item using the defaults from the jira-defaults skill.
 
 7. Transition work item
 
-    After creating the ticket, transition it through the workflow to "To Do"
+    After creating the ticket, transition it through the workflow to "To Do" or <target-status> from jira-defaults
 
 8. Report
 
