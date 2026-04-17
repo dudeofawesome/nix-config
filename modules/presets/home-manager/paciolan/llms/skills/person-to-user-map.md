@@ -1,6 +1,14 @@
 ---
-name: person-to-user-map
-description: Maps people to user IDs / names across platforms. Use whenever trying to find the user name, ID, or email of someone.
+description: 'Maps people to user IDs / names across platforms.'
+when_to_use: 'Use whenever trying to find the user name, ID, or email of someone.'
+user-invocable: false
+disable-model-invocation: false
+allowed-tools:
+    - mcp__claude_ai_Atlassian__lookupJiraAccountId
+    - mcp__claude_ai_Slack__slack_search_users
+    - mcp__claude_ai_Gitlab__get_users
+    - mcp__gitlab__get_users
+    - mcp__plugin_claude-code-home-manager_gitlab__get_users
 ---
 
 Read and written by LLM tooling — keep entries compact and updated.

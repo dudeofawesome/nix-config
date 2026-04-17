@@ -1,7 +1,8 @@
 ---
-name: create-jira-item
-description: 'Create a Jira work item / ticket with sensible defaults. Use whenever creating a Jira item.'
+description: 'Create a Jira work item / ticket with sensible defaults.'
+when_to_use: 'Use whenever creating a Jira item.'
 argument: 'work item title (e.g. "Enable strict linting")'
+context: fork
 ---
 
 # Create Jira work item
