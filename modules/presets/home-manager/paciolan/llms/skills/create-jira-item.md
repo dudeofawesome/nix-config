@@ -54,7 +54,7 @@ Create a new Jira work item using the defaults from the jira-defaults skill.
 
 7. Transition work item
 
-    After creating the ticket, transition it through the workflow to "To Do" or <target-status> from jira-defaults
+    After creating the ticket, transition it through the workflow to <target-status> from jira-defaults` if available, otherwise "To Do"
 
 8. Report
 
