@@ -7,6 +7,7 @@
 {
   home.packages = with pkgs; [
     codex-desktop
+    remodex
   ];
 
   programs.codex = {
