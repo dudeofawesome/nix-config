@@ -1,6 +1,8 @@
 ---
-name: jira-defaults
-description: 'Use when creating, updating, or transitioning Jira work items. Provides default field values, workflow transition IDs, and custom field mappings.'
+description: 'Provides default field values, workflow transition IDs, and custom field mappings.'
+when_to_use: 'Use when creating, updating, or transitioning Jira work items.'
+user-invocable: false
+disable-model-invocation: false
 ---
 
 # Jira defaults
