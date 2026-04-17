@@ -28,7 +28,7 @@ with lib;
         [
           alefragnani.bookmarks
           nix4vscode.alesbrelih.gitlab-ci-ls
-          anthropic.claude-code
+          nix4vscode.anthropic.claude-code
           antyos.openscad
           nix4vscode.beardedbear.beardedtheme
           bierner.markdown-mermaid

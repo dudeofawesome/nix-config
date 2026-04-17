@@ -22,6 +22,13 @@ merge
     (merge
       (merge
         {
+          "anthropic"."claude-code" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "claude-code";
+            publisher = "anthropic";
+            version = "2.1.112";
+            sha256 = "ILNV8wZXgN+JmcoVqMn7NitdgBjEIqTHvWbE2D2WWn4=";
+
+          };
           "alesbrelih"."gitlab-ci-ls" = vscode-utils.extensionFromVscodeMarketplace {
             name = "gitlab-ci-ls";
             publisher = "alesbrelih";

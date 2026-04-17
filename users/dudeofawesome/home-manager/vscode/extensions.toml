@@ -50,6 +50,7 @@ extensions = [
   'yutengjing.open-in-external-app', # missing
 
   # views
+  'anthropic.claude-code', # more up-to-date
   'deerawan.vscode-dash', # missing
   'fabiospampinato.vscode-diff', # missing
   'gitlab.gitlab-workflow', # much more up-to-date
