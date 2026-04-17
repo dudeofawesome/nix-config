@@ -41,9 +41,8 @@ stdenv.mkDerivation (
     installPhase = ''
       runHook preInstall
 
-      mkdir -p "$out/"{bin,Applications}
+      mkdir -p "$out/Applications"
       mv Codex.app "$out/Applications/"
-      ln -s "$out/Applications/Codex.app/Contents/MacOS/Codex" "$out/bin/codex-desktop"
 
       runHook postInstall
     '';
@@ -59,7 +58,6 @@ stdenv.mkDerivation (
         "x86_64-darwin"
       ];
       sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-      mainProgram = "codex-desktop";
     };
   }
 )
