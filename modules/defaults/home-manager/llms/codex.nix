@@ -1,5 +1,14 @@
-{ lib, pkgs-unstable, ... }:
 {
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
+{
+  home.packages = with pkgs; [
+    codex-desktop
+  ];
+
   programs.codex = {
     package = lib.mkDefault pkgs-unstable.codex;
 

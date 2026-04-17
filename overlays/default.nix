@@ -17,6 +17,7 @@
       );
     in
     {
+      codex-desktop = import ../packages/codex-desktop/package.nix build-inputs;
       finicky = import ../packages/finicky/package.nix build-inputs;
       git-fork = import ../packages/git-fork/package.nix build-inputs;
       gitup = import ../packages/gitup/package.nix build-inputs;
