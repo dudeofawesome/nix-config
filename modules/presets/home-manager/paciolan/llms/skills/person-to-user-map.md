@@ -25,6 +25,8 @@ eg:
 
 ```yaml
 - name: John Appleseed
+  nicknames:
+      - Jonny
   emails:
       - john@appleseed.com
   slack_id: U12345
