@@ -24,6 +24,7 @@
 
     ../../dudeofawesome/home-manager/browsers.nix
     ./shells.nix
+    ./llms
   ];
 
   home = {
