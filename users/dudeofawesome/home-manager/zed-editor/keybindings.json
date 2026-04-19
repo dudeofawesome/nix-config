@@ -1,0 +1,8 @@
+[
+  {
+    "context": "",
+    "bindings": {
+      "cmd-shift-c": "terminal_panel::Toggle"
+    }
+  }
+]

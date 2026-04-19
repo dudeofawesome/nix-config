@@ -7,7 +7,7 @@
   "buffer_font_family": "FiraCode Nerd Font Mono",
 
   "theme": {
-    "dark": "Andromeda",
+    "dark": "Bearded Theme Arc",
     "light": "One Light",
     "mode": "system"
   },
@@ -16,7 +16,7 @@
     "Nix": {
       "formatter": {
         "external": {
-          "command": ["nixfmt"]
+          "command": "nixfmt"
         }
       },
       "language_servers": ["nil", "!nixd"]

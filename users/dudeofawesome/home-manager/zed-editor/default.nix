@@ -4,7 +4,10 @@
     enable = true;
     package = pkgs-unstable.zed-editor;
 
+    # enableMcpIntegration = true;
+
     extensions = [
+      "codex-acp"
       "dockerfile"
       "docker-compose"
       "bearded"
@@ -19,6 +22,7 @@
       "ssh-config"
     ];
 
+    userKeymaps = lib.importJSON ./keybindings.json;
     userSettings = lib.importJSON ./zed-settings.json;
   };
 }
