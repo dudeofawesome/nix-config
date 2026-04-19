@@ -25,6 +25,7 @@
         codexOnePasswordEnv = {
           # Match each environment variable to a 1Password secret reference.
           GITHUB_PAT = "op://Private/Github PAT - dudeofawesome/token";
+          HOME_ASSISTANT_TOKEN = "op://Private/poosdxwzsqeuvybjjasl25hp5m/credential";
         };
 
         codexPackage =
@@ -60,6 +61,10 @@
           github = {
             url = "https://api.githubcopilot.com/mcp/";
             bearer_token_env_var = "GITHUB_PAT";
+          };
+          home-assistant = {
+            url = "https://hass.red.orleans.io/api/mcp";
+            bearer_token_env_var = "HOME_ASSISTANT_TOKEN";
           };
         };
       };
