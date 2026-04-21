@@ -1,6 +1,6 @@
 ---
 description: 'Maps people to user IDs / names across platforms.'
-when_to_use: 'Use whenever trying to find the user name, ID, or email of someone.'
+when_to_use: 'Use before looking up any user ID, username, or email — including your own. Check the cache first; only hit external APIs on a miss.'
 user-invocable: false
 disable-model-invocation: false
 allowed-tools:

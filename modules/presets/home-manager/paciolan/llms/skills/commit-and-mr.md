@@ -53,8 +53,18 @@ Use the template from `.gitlab/merge_request_templates/Default.md`:
 
 Use actual newlines in the MR description string — never literal `\n` escape sequences.
 
-Assign the MR to the current user: run `whoami`, look up their GitLab user ID via `mcp__gitlab__get_users`, and pass it as `assignee_ids`. Assign reviewers per CLAUDE.md.
+Assign the MR to the current user: run `whoami` to get a starting username, then resolve it to a GitLab user ID and pass it as `assignee_ids`.
 
-Use the GitLab MCP tools to create the merge request, then provide the user with the MR URL.
+Create the merge request, then provide the user with the MR URL.
 
 **Do not** pass `squash` or `remove_source_branch` when creating the merge request. Omitting these lets GitLab fall back to the repository's configured defaults (e.g., squash commit settings, branch deletion policy). Only include them if the user explicitly asks to override the project defaults for a specific MR.
+
+## Step 5: Link MR on Jira Issue
+
+If a Jira issue was associated with this work (from Step 2), add a comment to the Jira issue with a link to the merge request.
+
+The comment should include the MR title and URL, e.g.:
+
+> Merge request: [<MR title>](<MR URL>)
+
+Skip this step if no Jira issue was associated with the work.
