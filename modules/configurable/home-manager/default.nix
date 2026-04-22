@@ -6,6 +6,7 @@
     ./aerospace.nix
     ./asimov.nix
     ./awscli.nix
+    ./claude-code.nix
     ./clock.nix
     ./dock.nix
     ./docker-client.nix
