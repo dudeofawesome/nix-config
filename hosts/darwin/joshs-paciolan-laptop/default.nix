@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   lib,
   machine-class,
   ...
@@ -23,7 +22,6 @@
       k6
       lynx
       nmap
-      pkgs-unstable.claude-code
       pandoc # For Paciolan lift&shift
       markdownlint-cli # For Paciolan lift&shift
       ast-grep # For claude-code
