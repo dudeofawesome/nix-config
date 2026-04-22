@@ -4,6 +4,7 @@
     systemPackages = with pkgs; [
       ntfs3g
       cp210x-program
+      tree
     ];
   };
 
@@ -36,6 +37,7 @@
       "lm-studio"
       "logi-options+"
       "macfuse"
+      "markedit"
       "thaw"
       "microsoft-remote-desktop"
       "miro"

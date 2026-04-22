@@ -13,6 +13,7 @@ with pkgs.stdenv.targetPlatform;
     with pkgs;
     lib.flatten [
       # Utilities
+      pkgs-unstable.acli
       awscli2
       glab
       k6
