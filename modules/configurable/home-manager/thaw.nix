@@ -12,9 +12,13 @@ in
     programs.thaw = {
       enable = lib.mkEnableOption "Thaw menu bar manager";
 
-      package = lib.mkPackageOption pkgs "Thaw menu bar manager" {
-        default = [ "thaw" ];
-      };
+      package =
+        (lib.mkPackageOption pkgs "Thaw menu bar manager" {
+          default = [ "thaw" ];
+        })
+        // {
+          type = with lib.types; nullOr package;
+        };
 
       autoRehide = lib.mkOption {
         type = lib.types.bool;
@@ -99,7 +103,7 @@ in
   };
 
   config = lib.mkIf (cfg.enable && pkgs.stdenv.targetPlatform.isDarwin) {
-    home.packages = [ cfg.package ];
+    home.packages = lib.mkIf (cfg.package != null) [ cfg.package ];
 
     targets.darwin.defaults."com.stonerl.Thaw" = {
       AutoRehide = cfg.autoRehide;

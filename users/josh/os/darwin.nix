@@ -36,6 +36,7 @@
       "lm-studio"
       "logi-options+"
       "macfuse"
+      "thaw"
       "microsoft-remote-desktop"
       "miro"
       "monitorcontrol"

@@ -146,6 +146,7 @@
       };
     };
 
+    # Install thaw via brew instead of nix
     thaw = {
       enable = true;
       package = null;
