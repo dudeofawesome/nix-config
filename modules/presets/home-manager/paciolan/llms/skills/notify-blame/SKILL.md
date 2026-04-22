@@ -10,7 +10,7 @@ Send a Slack DM to each person whose code was modified on this branch, linking t
 ## Step 1: Run the Blame Script
 
 ```bash
-python3 .claude/scripts/git-blame-authors.py
+python3 ~/.claude/skills/notify-blame/scripts/git-blame-authors.py
 ```
 
 This outputs JSON with:
