@@ -144,7 +144,6 @@
       create-jira-item = ./skills/create-jira-item.md;
       notify-blame = ./skills/notify-blame.md;
       person-to-user-map = ./skills/person-to-user-map.md;
-      strict-lint = ./skills/strict-lint.md;
     };
   };
 
