@@ -152,6 +152,8 @@
     };
   };
 
+  services.asimov.enable = true;
+
   # services.home-manager.autoUpgrade.enable = true;
   # specialisation.linux.configuration = {};
 

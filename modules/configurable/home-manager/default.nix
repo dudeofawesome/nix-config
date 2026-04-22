@@ -4,6 +4,7 @@
     ./1password-cli.nix
     ./1password-gui.nix
     ./aerospace.nix
+    ./asimov.nix
     ./awscli.nix
     ./clock.nix
     ./dock.nix
