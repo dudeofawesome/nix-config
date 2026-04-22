@@ -48,8 +48,8 @@ in
               };
 
               extraConfig = mkOption {
-                description = '''';
-                type = types.attrs;
+                description = "";
+                type = with types; either attrs str;
                 default = { };
               };
             };
@@ -80,7 +80,7 @@ in
             --raw-output \
             --null-input \
             --slurpfile original '${value.target}' \
-            --argjson patch '${builtins.toJSON value.extraConfig}' \
+            --argjson patch '${if isAttrs value.extraConfig then toJSON value.extraConfig else value.extraConfig}' \
             '($original[0] // {}) * $patch' \
           | run ${pkgs.moreutils}/bin/sponge '${value.target}'
         ''))
