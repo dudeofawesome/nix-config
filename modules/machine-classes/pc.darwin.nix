@@ -33,11 +33,10 @@ with lib;
         "displaylink"
         "firefox"
         "google-chrome"
-        "iterm2"
         (noQuarantine "qlcolorcode")
         (noQuarantine "qlmarkdown")
         (noQuarantine "qlstephen")
-        (noQuarantine "qlvideo")
+        (noQuarantine "quicklook-video")
         (noQuarantine "quicklook-json")
         "sublime-text"
       ];
