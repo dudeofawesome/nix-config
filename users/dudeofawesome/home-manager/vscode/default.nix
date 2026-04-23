@@ -22,13 +22,26 @@ with lib;
       extensions =
         let
           nix4vscode = (import ./extensions.nix) { inherit pkgs lib; };
+
+          claude-code = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+            name = "claude-code";
+            publisher = "anthropic";
+            version = config.programs.claude-code.package.version;
+            sha256 = "ic7GcsVcmy1pbiqn5mzdoak9sUqHTCotjOjw7NVfsjQ=";
+
+            postInstall = ''
+              mkdir -p "$out/$installPrefix/resources/native-binary"
+              rm -f "$out/$installPrefix/resources/native-binary/claude"*
+              ln -s "${config.programs.claude-code.package}/bin/claude" "$out/$installPrefix/resources/native-binary/claude"
+            '';
+          };
         in
         # fallback to nixpkgs
         with pkgs-unstable.vscode-extensions;
         [
           alefragnani.bookmarks
           nix4vscode.alesbrelih.gitlab-ci-ls
-          nix4vscode.anthropic.claude-code
+          claude-code
           antyos.openscad
           nix4vscode.beardedbear.beardedtheme
           bierner.markdown-mermaid
