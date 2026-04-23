@@ -25,8 +25,8 @@ merge
           "anthropic"."claude-code" = vscode-utils.extensionFromVscodeMarketplace {
             name = "claude-code";
             publisher = "anthropic";
-            version = "2.1.114";
-            sha256 = "rcEbeYsyhbhh5wj6Mo3kz2+K3uZe5XMBKpwmSaB9Pgc=";
+            version = "2.1.116";
+            sha256 = "47LEeYQGaeZiU+W+KGDi1g5OcTqDl/H4hW3TjeBMBbY=";
 
           };
           "alesbrelih"."gitlab-ci-ls" = vscode-utils.extensionFromVscodeMarketplace {
