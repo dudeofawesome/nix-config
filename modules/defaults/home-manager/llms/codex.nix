@@ -2,11 +2,12 @@
   lib,
   pkgs,
   pkgs-unstable,
+  machine-class,
   ...
 }:
 {
   home.packages = lib.flatten [
-    (lib.optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.codex-desktop) pkgs.codex-desktop)
+    (lib.optional (machine-class == "pc") pkgs.codex-desktop)
   ];
 
   programs.codex = {
