@@ -25,8 +25,8 @@ merge
           "anthropic"."claude-code" = vscode-utils.extensionFromVscodeMarketplace {
             name = "claude-code";
             publisher = "anthropic";
-            version = "2.1.116";
-            sha256 = "47LEeYQGaeZiU+W+KGDi1g5OcTqDl/H4hW3TjeBMBbY=";
+            version = "2.1.118";
+            sha256 = "ic7GcsVcmy1pbiqn5mzdoak9sUqHTCotjOjw7NVfsjQ=";
 
           };
           "alesbrelih"."gitlab-ci-ls" = vscode-utils.extensionFromVscodeMarketplace {
@@ -272,8 +272,8 @@ merge
           "openai"."chatgpt" = vscode-utils.extensionFromVscodeMarketplace {
             name = "chatgpt";
             publisher = "openai";
-            version = "26.5401.11717";
-            sha256 = "sha256-PWSIKSl5Pv2jpTgriJjCfK/NM3Kkqev1l8ZgrhbPy5w=";
+            version = "26.5417.40842";
+            sha256 = "7u5ohjtpZYHfsShvI0vqcRRF40quKxu+pm0pMfhcm8c=";
 
           };
           "seeker-dk"."node-modules-viewer" = vscode-utils.extensionFromVscodeMarketplace {
