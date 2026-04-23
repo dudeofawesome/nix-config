@@ -89,6 +89,17 @@ in
       };
     };
 
+    difftastic = {
+      enable = true;
+      git = {
+        enable = true;
+        diffToolMode = true;
+      };
+      options = {
+        tab-width = 2;
+      };
+    };
+
     gh = {
       enable = true;
       settings.git_protocol = "ssh";
