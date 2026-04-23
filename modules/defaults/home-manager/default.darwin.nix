@@ -17,7 +17,12 @@
     ./window-manager.darwin.nix
   ];
 
-  targets.darwin.copyApps.enable = true;
-  targets.darwin.copyApps.directory = "${config.home.homeDirectory}/Applications/Home Manager Apps";
+  targets.darwin.copyApps = {
+    enable = true;
+    directory = "${config.home.homeDirectory}/Applications/Home Manager Apps";
+    # disable checks as they're bugged
+    #   https://github.com/nix-community/home-manager/issues/8336
+    enableChecks = false;
+  };
   targets.darwin.linkApps.enable = false;
 }
