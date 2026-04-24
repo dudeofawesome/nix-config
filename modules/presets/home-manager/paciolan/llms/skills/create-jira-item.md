@@ -27,7 +27,7 @@ Create a new Jira work item using the defaults from the jira-defaults skill.
 
     Use the first available source for the title:
     1. The argument passed to this command
-    2. If no argument, ask the user for a title
+    2. If no argument, use the `AskUserQuestion` tool to propose 3 title suggestions. Each suggestion must follow the format `<project-name>: <gitmoji> <title>` (e.g. `templates-ms: ♻️ refactor pipeline`). The user can pick one or provide their own via "Other".
 
 4. Get the project name
 
