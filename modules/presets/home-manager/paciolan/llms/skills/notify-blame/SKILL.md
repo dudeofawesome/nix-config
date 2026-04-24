@@ -83,8 +83,6 @@ For each author found on Slack, send a DM using `slack_send_message` with this e
 No obligation, but you may be interested in reviewing [<repo-name>!<MR#>](<full MR URL>)
 
 > <personalized summary>
-
-(I'm testing a Claude command to automatically send this message when I modify someone's code. Sorry if it's weird. ¯\\_(ツ)_/¯)
 ```
 
 Replace:
