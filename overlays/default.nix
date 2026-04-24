@@ -15,18 +15,10 @@
           inherit lib;
         }
       );
+      customPackages = import ../packages { inherit lib; } build-inputs;
     in
-    {
-      asimov = import ../packages/asimov/package.nix build-inputs;
-      codex-desktop = import ../packages/codex-desktop/package.nix build-inputs;
-      finicky = import ../packages/finicky/package.nix build-inputs;
-      git-fork = import ../packages/git-fork/package.nix build-inputs;
-      gitup = import ../packages/gitup/package.nix build-inputs;
-      kubernetes-mcp-server = import ../packages/kubernetes-mcp-server/package.nix build-inputs;
-      mcp-gitlab = import ../packages/mcp-gitlab/package.nix build-inputs;
-      podman-mac-helper = import ../packages/podman-mac-helper/package.nix build-inputs;
-      thaw = import ../packages/thaw/package.nix build-inputs;
-
+    customPackages
+    // {
       fishPlugins = prev.fishPlugins // {
         osx = {
           name = "osx";

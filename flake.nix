@@ -137,6 +137,7 @@
     {
       nixosConfigurations = import ./hosts/nixos params;
       darwinConfigurations = import ./hosts/darwin params;
+      packages = forAllSystems (pkgs: import ./packages { inherit lib; } (pkgs // { inherit lib; }));
 
       # run `nix fmt` to format all files
       formatter = forAllSystems (nixpkgs: nixpkgs.nixfmt);
