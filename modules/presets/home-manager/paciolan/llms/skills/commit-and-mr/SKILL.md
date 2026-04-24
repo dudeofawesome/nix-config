@@ -45,7 +45,21 @@ git branch --show-current
         > "Push failed twice. Please check that you're connected to the VPN and let me know when you're ready to try again."
     - Wait for the user to confirm before retrying
 
-## Step 4: Open Merge Request
+## Step 4: Determine Reviewers from Git Blame
+
+Run the blame script to find authors of the code being modified on this branch:
+
+```bash
+python3 ~/.claude/skills/commit-and-mr/scripts/git-blame-authors.py
+```
+
+This outputs JSON with an `authors` list, each entry containing `name`, `email`, `lines`, and `files`. The current user is excluded automatically.
+
+For each blame author, resolve their email to a GitLab user ID. Skip any author who cannot be resolved (note them for the final report, but don't block MR creation).
+
+Collect the resolved GitLab user IDs to pass as `reviewer_ids` in the next step. If `authors` is empty, create the MR without reviewers.
+
+## Step 5: Open Merge Request
 
 Create a merge request on GitLab.
 
@@ -55,11 +69,13 @@ Use actual newlines in the MR description string — never literal `\n` escape s
 
 Assign the MR to the current user: run `whoami` to get a starting username, then resolve it to a GitLab user ID and pass it as `assignee_ids`.
 
+Pass the reviewer IDs collected in Step 4 as `reviewer_ids`.
+
 Create the merge request, then provide the user with the MR URL.
 
 **Do not** pass `squash` or `remove_source_branch` when creating the merge request. Omitting these lets GitLab fall back to the repository's configured defaults (e.g., squash commit settings, branch deletion policy). Only include them if the user explicitly asks to override the project defaults for a specific MR.
 
-## Step 5: Link MR on Jira Issue
+## Step 6: Link MR on Jira Issue
 
 If a Jira issue was associated with this work (from Step 2), add a comment to the Jira issue with a link to the merge request.
 

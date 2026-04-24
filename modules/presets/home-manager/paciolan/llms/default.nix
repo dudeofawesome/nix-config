@@ -140,7 +140,7 @@
     };
 
     skills = {
-      commit-and-mr = ./skills/commit-and-mr.md;
+      commit-and-mr = ./skills/commit-and-mr;
       create-jira-item = ./skills/create-jira-item.md;
       notify-blame = ./skills/notify-blame;
       person-to-user-map = ./skills/person-to-user-map.md;
