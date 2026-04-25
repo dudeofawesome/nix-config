@@ -130,8 +130,11 @@ def get_changed_ranges(base: str) -> list[tuple[str, int, int]]:
 
     Uses -M (rename detection) so renamed files are handled correctly.
     The '--- a/' path is the old path on the base commit, which is what we need for blame.
+
+    Uses --no-ext-diff to bypass any user-configured diff.external (e.g. difftastic),
+    which would otherwise produce non-unified output that this parser cannot read.
     """
-    diff_output = run(["git", "diff", f"{base}..HEAD", "--unified=0", "-M"])
+    diff_output = run(["git", "diff", "--no-ext-diff", f"{base}..HEAD", "--unified=0", "-M"])
     ranges: list[tuple[str, int, int]] = []
     current_file = None
 
@@ -161,7 +164,7 @@ def get_author_diffs(base: str, authors: list[dict]) -> None:
         diff_parts: list[str] = []
         for file in author["files"]:
             if file not in diff_cache:
-                diff_cache[file] = run(["git", "diff", f"{base}..HEAD", "-M", "--", file])
+                diff_cache[file] = run(["git", "diff", "--no-ext-diff", f"{base}..HEAD", "-M", "--", file])
             diff_parts.append(diff_cache[file])
         author["diff"] = "\n".join(diff_parts)
 
@@ -176,7 +179,7 @@ def blame_ranges(
 
     for file, start, end in ranges:
         result = subprocess.run(
-            ["git", "blame", "-L", f"{start},{end}", "--line-porcelain", base, "--", file],
+            ["git", "blame", "--no-ext-diff", "-L", f"{start},{end}", "--line-porcelain", base, "--", file],
             capture_output=True,
             text=True,
         )
