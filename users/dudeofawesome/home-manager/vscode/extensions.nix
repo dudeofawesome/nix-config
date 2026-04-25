@@ -262,11 +262,12 @@ merge
             sha256 = "0w31hmbc11xvw14k7lba32gqcpqlsj7md790m0h5vbfzlslallas";
 
           };
+          # https://marketplace.visualstudio.com/items?itemName=openai.chatgpt
           "openai"."chatgpt" = vscode-utils.extensionFromVscodeMarketplace {
             name = "chatgpt";
             publisher = "openai";
-            version = "26.5417.40842";
-            sha256 = "7u5ohjtpZYHfsShvI0vqcRRF40quKxu+pm0pMfhcm8c=";
+            version = "26.5422.30944";
+            sha256 = "z8kDagwiU1Rr5G+g6PwwhcBfLMHNwAnw0b647/ST+v0=";
 
           };
           "seeker-dk"."node-modules-viewer" = vscode-utils.extensionFromVscodeMarketplace {
