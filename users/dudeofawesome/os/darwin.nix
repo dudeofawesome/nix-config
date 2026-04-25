@@ -35,7 +35,6 @@
         "arduino"
         "balenaetcher"
         "dash"
-        "displaylink"
         "docker-desktop"
         "figma"
         "firefox"

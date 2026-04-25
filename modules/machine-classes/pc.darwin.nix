@@ -30,7 +30,6 @@ with lib;
         };
       in
       [
-        "displaylink"
         "firefox"
         "google-chrome"
         (noQuarantine "qlcolorcode")
