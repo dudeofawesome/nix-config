@@ -1,8 +1,8 @@
 ---
+name: create-jira-item
 description: 'Create a Jira work item / ticket with sensible defaults.'
 when_to_use: 'Use whenever creating a Jira item.'
-argument: 'work item title (e.g. "Enable strict linting")'
-context: fork
+argument-hint: '[work item title (e.g. "Enable strict linting")]'
 ---
 
 # Create Jira work item
@@ -26,8 +26,8 @@ Create a new Jira work item using the defaults from the jira-defaults skill.
 3. Determine the work item title
 
     Use the first available source for the title:
-    1. The argument passed to this command
-    2. If no argument, use the `AskUserQuestion` tool to propose 3 title suggestions. Each suggestion must follow the format `<project-name>: <gitmoji> <title>` (e.g. `templates-ms: ♻️ refactor pipeline`). The user can pick one or provide their own via "Other".
+    1. `$ARGUMENTS` (the argument passed to this command), if non-empty
+    2. Otherwise, use the `AskUserQuestion` tool to propose 3 title suggestions. Each suggestion must follow the format `<project-name>: <gitmoji> <title>` (e.g. `templates-ms: ♻️ refactor pipeline`). The user can pick one or provide their own via "Other".
 
 4. Get the project name
 

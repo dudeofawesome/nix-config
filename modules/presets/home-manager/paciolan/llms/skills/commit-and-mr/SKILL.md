@@ -1,3 +1,19 @@
+---
+name: commit-and-mr
+description: 'Commit the current changes, push to a branch, and open a GitLab merge request with reviewers picked from git blame.'
+when_to_use: 'Use when the user asks to commit and open an MR/PR, "ship this", "open a merge request", or wants the full commit-push-MR cycle. Skip for plain commits with no MR.'
+argument-hint: '[branch-name]'
+disable-model-invocation: true
+allowed-tools:
+    - Bash(git *)
+    - Bash(python3 *)
+    - Bash(whoami)
+    - Bash(glab *)
+    - AskUserQuestion
+    - Skill
+    - mcp__plugin_claude-code-home-manager_gitlab__get_users
+---
+
 # Commit Changes and Open Merge Request
 
 Follow these steps to create a branch, commit, push, and open a merge request for the current changes.
@@ -50,7 +66,7 @@ git branch --show-current
 Run the blame script to find authors of the code being modified on this branch:
 
 ```bash
-python3 ~/.claude/skills/commit-and-mr/scripts/git-blame-authors.py
+python3 ${CLAUDE_SKILL_DIR}/scripts/git-blame-authors.py
 ```
 
 This outputs JSON with an `authors` list, each entry containing `name`, `email`, `lines`, and `files`. The current user is excluded automatically.

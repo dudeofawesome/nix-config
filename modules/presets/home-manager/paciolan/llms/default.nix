@@ -144,6 +144,7 @@
       create-jira-item = ./skills/create-jira-item.md;
       notify-blame = ./skills/notify-blame;
       person-to-user-map = ./skills/person-to-user-map.md;
+      write-claude-tooling = ./skills/write-claude-tooling.md;
     };
   };
 

@@ -1,6 +1,16 @@
 ---
 name: write-claude-tooling
-description: "Use when writing or editing CLAUDE.md, AGENTS.md, skills, commands, hooks, or any Claude Code configuration files. Enforces token-efficient authoring for LLM-consumed docs."
+description: 'Token-efficient authoring rules for LLM-consumed docs and Claude Code configuration.'
+when_to_use: 'Use whenever authoring or editing Claude Code configuration: skills (SKILL.md), slash commands, hooks, agents, CLAUDE.md, AGENTS.md, settings.json. Trigger phrases: "write a skill", "add a command", "update CLAUDE.md", "make a hook", "edit my agent", "improve this skill".'
+paths:
+    - '**/CLAUDE.md'
+    - '**/AGENTS.md'
+    - '**/SKILL.md'
+    - '**/.claude/skills/**'
+    - '**/.claude/commands/**'
+    - '**/.claude/agents/**'
+    - '**/.claude/hooks/**'
+    - '**/.claude/settings*.json'
 ---
 
 # Writing Claude Tooling

@@ -1,6 +1,14 @@
 ---
-description: 'Notify git blame authors on Slack when you modify their code'
-argument: 'MR URL (e.g. https://gitlabdev.paciolan.info/.../merge_requests/306)'
+name: notify-blame
+description: 'Notify git blame authors on Slack when you modify their code.'
+when_to_use: 'Use when the user asks to message people whose code you touched in a given branch. Trigger phrases: "notify blame", "tell the blame authors", "ping the people I modified".'
+argument-hint: '[mr-url (e.g. https://gitlabdev.paciolan.info/.../merge_requests/306)]'
+allowed-tools:
+    - Bash(python3 *)
+    - Bash(glab mr list*)
+    - Bash(git *)
+    - mcp__claude_ai_Slack__slack_search_users
+    - Skill
 ---
 
 # Notify Blame Authors
@@ -10,7 +18,7 @@ Send a Slack DM to each person whose code was modified on this branch, linking t
 ## Step 1: Run the Blame Script
 
 ```bash
-python3 ~/.claude/skills/notify-blame/scripts/git-blame-authors.py
+python3 ${CLAUDE_SKILL_DIR}/scripts/git-blame-authors.py
 ```
 
 This outputs JSON with:
@@ -51,28 +59,9 @@ Each author gets their own personalized summary based on the specific code of th
 
 ## Step 4: Look Up Authors on Slack
 
-**First, check the user cache** at `.claude/scripts/user-cache.yaml`. This file maps git emails to identities across Slack, GitLab, and Jira:
+Invoke the `person-to-user-map` skill to resolve each blame author's git email to a Slack user ID. That skill handles cache lookups and falls back to `slack_search_users` (by full name, then email prefix) on misses, and updates the cache with new entries.
 
-```yaml
-- name: User Name
-  emails: [user@example.com]
-  slack_id: U12345678
-  gitlab_username: username
-  jira_account_id: accountId
-  notes: Freeform context about this user
-```
-
-The cache is a flat list of entries. Match the git blame email against any value in an entry's `emails` list.
-
-- If a matching entry has `slack_id`, use it directly — no Slack search needed.
-- Read `notes` for context — it may indicate the user should be skipped, messaged manually, etc. Use your judgment.
-- If the email is not in the cache, search Slack using `slack_search_users`:
-    1. First search by full name
-    2. If no results, search by email username (the part before `@`)
-    3. If still no results, tell the user you could not find them and ask if they go by a different name. Search using the new name if one is provided.
-    4. If the user says to skip them, add a cache entry with a `notes` field explaining why.
-
-**After all lookups, update the cache file** with any new entries.
+If a person cannot be resolved, note them for the final report and skip — do not block on missing entries.
 
 ## Step 5: Send DMs
 

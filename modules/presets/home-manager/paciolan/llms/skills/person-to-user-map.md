@@ -1,9 +1,12 @@
 ---
+name: person-to-user-map
 description: 'Maps people to user IDs / names across platforms.'
 when_to_use: 'Use before looking up any user ID, username, or email — including your own. Check the cache first; only hit external APIs on a miss.'
 user-invocable: false
-disable-model-invocation: false
 allowed-tools:
+    - Read
+    - Write
+    - Edit
     - mcp__claude_ai_Atlassian__lookupJiraAccountId
     - mcp__claude_ai_Slack__slack_search_users
     - mcp__claude_ai_Gitlab__get_users
@@ -15,7 +18,7 @@ Read and written by LLM tooling — keep entries compact and updated.
 Lookup tips for users NOT in this cache:
 
 - Slack: `slack_search_users` — search by full name, then by email prefix
-- GitLab: `mcp__gitlab__get_users` — try first-initial + last name (dsakamoto),
+- GitLab: `mcp__*_gitlab__get_users` — try first-initial + last name (dsakamoto),
   then full first + last (joshuagibbs), then first name only (laercio)
 - Jira: `mcp__claude_ai_Atlassian__lookupJiraAccountId`
   cloudId: `paciolan.atlassian.net`, search by full name
