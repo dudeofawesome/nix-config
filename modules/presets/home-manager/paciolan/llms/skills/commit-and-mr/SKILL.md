@@ -93,7 +93,9 @@ Pass the reviewer IDs collected in Step 4 as `reviewer_ids`.
 
 Create the merge request, then provide the user with the MR URL.
 
-**Do not** pass `squash` or `remove_source_branch` when creating the merge request. Omitting these lets GitLab fall back to the repository's configured defaults (e.g., squash commit settings, branch deletion policy). Only include them if the user explicitly asks to override the project defaults for a specific MR.
+Always pass `remove_source_branch: true` when creating the merge request — the GitLab API does not honor the project's "delete source branch" default, so it must be set explicitly.
+
+**Do not** pass `squash`. Omitting it lets GitLab fall back to the repository's configured squash commit settings. Only include it if the user explicitly asks to override the project default for a specific MR.
 
 ## Step 6: Link MR on Jira Issue
 
