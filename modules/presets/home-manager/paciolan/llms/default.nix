@@ -142,6 +142,7 @@
     skills = {
       commit-and-mr = ./skills/commit-and-mr;
       create-jira-item = ./skills/create-jira-item.md;
+      full-feature-workflow = ./skills/full-feature-workflow;
       notify-blame = ./skills/notify-blame;
       person-to-user-map = ./skills/person-to-user-map.md;
       write-claude-tooling = ./skills/write-claude-tooling.md;

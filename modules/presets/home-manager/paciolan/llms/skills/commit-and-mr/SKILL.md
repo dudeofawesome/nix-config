@@ -2,7 +2,7 @@
 name: commit-and-mr
 description: 'Commit the current changes, push to a branch, and open a GitLab merge request with reviewers picked from git blame.'
 when_to_use: 'Use when the user asks to commit and open an MR/PR, "ship this", "open a merge request", or wants the full commit-push-MR cycle. Skip for plain commits with no MR.'
-argument-hint: '[branch-name]'
+argument-hint: '[branch-name] [jira=<KEY>|jira=none]'
 disable-model-invocation: true
 allowed-tools:
     - Bash(git *)
@@ -43,7 +43,11 @@ git branch --show-current
 1. Run `git status` to see all changes
 2. Run `git diff` to review the changes
 3. Stage all relevant changes with `git add`
-4. If you are not already aware of a Jira issue associated with this work, use the `AskUserQuestion` tool to ask whether there is an associated Jira issue (e.g., INVT-1234), with options like "No Jira issue" and "Yes, I'll provide it". Wait for their response before proceeding.
+4. Determine the Jira issue:
+    - If `$ARGUMENTS` contains `jira=<KEY>` (e.g. `jira=INVT-1234`), use that key — do not ask.
+    - If `$ARGUMENTS` contains `jira=none`, treat as no Jira issue — do not ask.
+    - Otherwise, if a Jira key was already established earlier in the conversation, use it — do not ask.
+    - Otherwise, use the `AskUserQuestion` tool to ask whether there is an associated Jira issue (e.g., INVT-1234), with options like "No Jira issue" and "Yes, I'll provide it". Wait for their response before proceeding.
 5. Create a commit with a descriptive message and use conventional commits
     - If there is a Jira story (e.g., INVT-1234), include it in the commit message
 
