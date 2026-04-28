@@ -127,7 +127,7 @@ in
       let
         github_token_path = "users/${owner}/nix_access_tokens";
       in
-      lib.mkIf (lib.trace github_token_path (config.sops.templates ? github_token_path)) ''
+      lib.mkIf (config.sops.templates ? github_token_path) ''
         !include ${config.sops.templates.${github_token_path}.path}
       '';
   };
