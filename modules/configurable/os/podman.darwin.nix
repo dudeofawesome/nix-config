@@ -7,12 +7,10 @@
 let
   inherit (lib)
     mkIf
-    mkOption
     mkEnableOption
     mkPackageOption
-    types
     ;
-  inherit (pkgs.stdenv.targetPlatform) isLinux isDarwin;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin;
 in
 {
   meta = {
@@ -27,10 +25,6 @@ in
       desktop = {
         enable = mkEnableOption "podman-desktop";
         package = mkPackageOption pkgs "podman-desktop" { };
-        package-darwin = mkOption {
-          type = types.str;
-          default = "podman-desktop";
-        };
       };
 
       # TODO: consider `dockerCompat`, `dockerSocket`
@@ -42,17 +36,13 @@ in
     let
       cfg = config.virtualisation.podman;
     in
-    mkIf isDarwin {
-      environment.systemPackages =
-        with pkgs;
-        lib.flatten [
-          cfg.package
-          (lib.optional cfg.desktop.enable [
-            (lib.optional isLinux cfg.desktop.package)
-            (lib.optional isDarwin pkgs.podman-mac-helper)
-          ])
-        ];
-
-      homebrew.casks = lib.mkIf (isDarwin && cfg.desktop.enable) [ cfg.desktop.package-darwin ];
+    mkIf (isDarwin && cfg.enable) {
+      environment.systemPackages = lib.flatten [
+        cfg.package
+        (lib.optional cfg.desktop.enable [
+          cfg.desktop.package
+          (lib.optional isDarwin pkgs.podman-mac-helper)
+        ])
+      ];
     };
 }
