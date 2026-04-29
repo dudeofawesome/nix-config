@@ -206,10 +206,40 @@
               "resources_get"
               "resources_list"
             ])
+
+            # Read-only Bash. Trailing `*` (no space) is character-level —
+            # matches partial-word prefixes like `describe-instances`.
+            # Trailing `:*` (= ` *`) requires a whitespace boundary, so it's
+            # used when the prefix is a complete token (e.g. `aws s3 ls`).
+            (map (cmd: "Bash(${cmd})") [
+              "aws cloudformation describe-*"
+              "aws cloudformation get-*"
+              "aws cloudformation list-*"
+              "aws ec2 describe-*"
+              "aws ecs describe-*"
+              "aws ecs list-*"
+              "aws iam get-policy:*"
+              "aws iam get-policy-version:*"
+              "aws iam get-role:*"
+              "aws iam get-user:*"
+              "aws iam list-attached-role-policies:*"
+              "aws iam list-policies:*"
+              "aws iam list-role-policies:*"
+              "aws iam list-roles:*"
+              "aws lambda get-*"
+              "aws lambda list-*"
+              "aws logs describe-*"
+              "aws logs filter-*"
+              "aws logs get-*"
+              "aws logs tail:*"
+              "aws rds describe-*"
+              "aws s3 ls:*"
+              "aws s3api get-*"
+              "aws s3api list-*"
+              "aws sts get-*"
+            ])
           ];
         };
-
-      autoInstallIdeExtension = lib.mkDefault false;
     };
 
     skills = {
