@@ -92,47 +92,120 @@
       permissions =
         let
           hm-plugin-name = "plugin_claude-code-home-manager";
+          prefixed = prefix: map (tool: "${prefix}${tool}");
         in
         {
-          allow = [
-            # TODO: it looks like wildcards maybe don't work in the middle?
-            "mcp__claude_ai_Atlassian__get*"
-            "mcp__claude_ai_Atlassian__search*"
-            "mcp__claude_ai_Atlassian__lookup*"
-            "mcp__claude_ai_Atlassian__atlassianUserInfo"
-            "mcp__claude_ai_Atlassian__fetchAtlassian"
-            "mcp__${hm-plugin-name}_atlassian__get*"
-            "mcp__${hm-plugin-name}_atlassian__search*"
-            "mcp__${hm-plugin-name}_atlassian__lookup*"
-            "mcp__${hm-plugin-name}_atlassian__atlassianUserInfo"
-            "mcp__${hm-plugin-name}_atlassian__fetchAtlassian"
+          allow = lib.flatten [
+            (prefixed "mcp__claude_ai_Atlassian__" [
+              "atlassianUserInfo"
+              "fetch"
+              "getAccessibleAtlassianResources"
+              "getConfluenceCommentChildren"
+              "getConfluencePage"
+              "getConfluencePageDescendants"
+              "getConfluencePageFooterComments"
+              "getConfluencePageInlineComments"
+              "getConfluenceSpaces"
+              "getIssueLinkTypes"
+              "getJiraIssue"
+              "getJiraIssueRemoteIssueLinks"
+              "getJiraIssueTypeMetaWithFields"
+              "getJiraProjectIssueTypesMetadata"
+              "getPagesInConfluenceSpace"
+              "getTransitionsForJiraIssue"
+              "getVisibleJiraProjects"
+              "lookupJiraAccountId"
+              "search"
+              "searchConfluenceUsingCql"
+              "searchJiraIssuesUsingJql"
+            ])
 
-            "mcp__claude_ai_Slack__slack_read_*"
-            "mcp__claude_ai_Slack__slack_search*"
+            (prefixed "mcp__claude_ai_Slack__" [
+              "slack_read_canvas"
+              "slack_read_channel"
+              "slack_read_thread"
+              "slack_read_user_profile"
+              "slack_search_channels"
+              "slack_search_public"
+              "slack_search_public_and_private"
+              "slack_search_users"
+            ])
 
-            # mcp__plugin_claude-code-home-manager_gitlab__list_merge_requests
-            "mcp__${hm-plugin-name}_gitlab__download_*"
-            "mcp__${hm-plugin-name}_gitlab__get_*"
-            "mcp__${hm-plugin-name}_gitlab__list_*"
-            "mcp__${hm-plugin-name}_gitlab__search_*"
-            "mcp__${hm-plugin-name}_gitlab__verify_*"
+            (prefixed "mcp__${hm-plugin-name}_gitlab__" [
+              "download_attachment"
+              "download_job_artifacts"
+              "download_release_asset"
+              "get_branch_diffs"
+              "get_commit"
+              "get_commit_diff"
+              "get_deployment"
+              "get_draft_note"
+              "get_environment"
+              "get_file_contents"
+              "get_job_artifact_file"
+              "get_label"
+              "get_merge_request"
+              "get_merge_request_approval_state"
+              "get_merge_request_conflicts"
+              "get_merge_request_diffs"
+              "get_merge_request_file_diff"
+              "get_merge_request_note"
+              "get_merge_request_notes"
+              "get_merge_request_version"
+              "get_namespace"
+              "get_pipeline"
+              "get_pipeline_job"
+              "get_pipeline_job_output"
+              "get_project"
+              "get_project_events"
+              "get_release"
+              "get_repository_tree"
+              "get_users"
+              "list_commits"
+              "list_deployments"
+              "list_draft_notes"
+              "list_environments"
+              "list_events"
+              "list_group_iterations"
+              "list_group_projects"
+              "list_job_artifacts"
+              "list_labels"
+              "list_merge_request_changed_files"
+              "list_merge_request_diffs"
+              "list_merge_request_versions"
+              "list_merge_requests"
+              "list_namespaces"
+              "list_pipeline_jobs"
+              "list_pipeline_trigger_jobs"
+              "list_pipelines"
+              "list_project_members"
+              "list_projects"
+              "list_releases"
+              "search_code"
+              "search_group_code"
+              "search_project_code"
+              "search_repositories"
+              "verify_namespace"
+            ])
 
             "mcp__${hm-plugin-name}_aws__aws___suggest_aws_commands"
 
-            "mcp__${hm-plugin-name}_kubernetes__configuration_contexts_list"
-            "mcp__${hm-plugin-name}_kubernetes__configuration_view"
-            "mcp__${hm-plugin-name}_kubernetes__events_list"
-            "mcp__${hm-plugin-name}_kubernetes__namespaces_list"
-            "mcp__${hm-plugin-name}_kubernetes__nodes_log"
-            "mcp__${hm-plugin-name}_kubernetes__nodes_stats_summary"
-            "mcp__${hm-plugin-name}_kubernetes__nodes_top"
-            "mcp__${hm-plugin-name}_kubernetes__pods_get"
-            "mcp__${hm-plugin-name}_kubernetes__pods_list"
-            "mcp__${hm-plugin-name}_kubernetes__pods_list_in_namespace"
-            "mcp__${hm-plugin-name}_kubernetes__pods_log"
-            "mcp__${hm-plugin-name}_kubernetes__pods_top"
-            "mcp__${hm-plugin-name}_kubernetes__resources_get"
-            "mcp__${hm-plugin-name}_kubernetes__resources_list"
+            (prefixed "mcp__${hm-plugin-name}_kubernetes__" [
+              "configuration_contexts_list"
+              "configuration_view"
+              "events_list"
+              "namespaces_list"
+              "nodes_log"
+              "nodes_stats_summary"
+              "nodes_top"
+              "pods_get"
+              "pods_list"
+              "pods_list_in_namespace"
+              "pods_log"
+              "pods_top"
+              "resources_get"
+              "resources_list"
+            ])
           ];
         };
 
@@ -150,7 +223,7 @@
   };
 
   home.file = {
-    # "git/paciolan/AGENTS.md".source = ./memories/git-paciolan.md;
-    # "git/paciolan/CLAUDE.md".content = "@AGENTS.md";
+    "git/paciolan/AGENTS.md".source = ./memories/git-paciolan.md;
+    "git/paciolan/CLAUDE.md".text = "@AGENTS.md";
   };
 }
