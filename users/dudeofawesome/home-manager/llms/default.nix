@@ -24,7 +24,7 @@
       let
         codexOnePasswordEnv = {
           # Match each environment variable to a 1Password secret reference.
-          GITHUB_PAT = "op://Private/Github PAT - dudeofawesome/token";
+          GITHUB_PAT = "op://Private/Github PAT - dudeofawesome/credential";
           HOME_ASSISTANT_TOKEN = "op://Private/poosdxwzsqeuvybjjasl25hp5m/credential";
         };
 

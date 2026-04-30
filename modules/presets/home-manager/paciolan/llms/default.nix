@@ -29,7 +29,7 @@
                 if (config.sops.secrets ? "users/dudeofawesome/gitlabdev.paciolan.info/token") then
                   "cat ${config.sops.secrets."users/dudeofawesome/gitlabdev.paciolan.info/token".path}"
                 else if (op.enable) then
-                  "${lib.getExe op.package} item get 'GitLab Personal Access Token' --vault Paciolan --fields label='token' --reveal"
+                  "${lib.getExe op.package} item get 'GitLab Personal Access Token' --vault Paciolan --account orleans.1password.com --fields label='credential' --reveal"
                 else
                   throw "No gitlab PAT source configured."
               })"
@@ -67,6 +67,7 @@
               op_data="$(
                 ${op} item get 'AWS Access Key' \
                   --vault Paciolan \
+                  --account orleans.1password.com \
                   --fields label='access key id',label='secret access key',label='default region' \
                   --reveal --format json \
                 | ${jq} 'map({key: .label, value}) | from_entries'
