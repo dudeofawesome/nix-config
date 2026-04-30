@@ -39,10 +39,7 @@ in
     mkIf (isDarwin && cfg.enable) {
       environment.systemPackages = lib.flatten [
         cfg.package
-        (lib.optional cfg.desktop.enable [
-          cfg.desktop.package
-          (lib.optional isDarwin pkgs.podman-mac-helper)
-        ])
+        (lib.optional cfg.desktop.enable cfg.desktop.package)
       ];
     };
 }

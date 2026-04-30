@@ -62,6 +62,15 @@
     (final: prev: {
       # TODO: remove this once stable fish is fixed
       fish = pkgs-unstable.fish;
+      podman =
+        if prev.stdenv.targetPlatform.isDarwin then
+          prev.callPackage ./podman.nix {
+            podman = prev.podman;
+            podman-mac-helper = final.podman-mac-helper;
+            krunkit = if final ? krunkit then final.krunkit else null;
+          }
+        else
+          prev.podman;
 
       scrutiny-collector = prev.scrutiny-collector.overrideAttrs (old: {
         meta = old.meta // {
