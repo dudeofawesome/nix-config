@@ -14,6 +14,11 @@
 
     mcpServers = {
       atlassian.url = "https://mcp.atlassian.com/v1/mcp";
+      paciolan-client-database = {
+        type = "http";
+        url = "http://client-database-mcp-dev.eks.paciolan.info/mcp";
+        headers.Authorization = "Basic dGVzdDp0ZXN0MTIz";
+      };
       # gitlab = { # not yet supported by pac's gitlab deployment
       #   type = "http";
       #   url = "https://gitlabdev.paciolan.info/api/v4/mcp";
