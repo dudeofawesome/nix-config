@@ -20,6 +20,7 @@ with pkgs.stdenv.targetPlatform;
       terraform
       (lib.optionals (machine-class == "pc") [
         # ansible
+        claude-desktop
         gitlab-runner
         postman
 
@@ -30,7 +31,6 @@ with pkgs.stdenv.targetPlatform;
     ];
 
   homebrew.casks = [
-    "claude"
   ];
 
   programs = {
