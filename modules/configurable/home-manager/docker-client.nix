@@ -24,7 +24,7 @@ in
       };
 
       settings = lib.mkOption {
-        description = ''Settings for Docker Desktop's settings.json'';
+        description = "Settings for Docker Desktop's settings.json";
         type = lib.types.attrs;
         default = {
           credsStore =
@@ -49,8 +49,9 @@ in
         pkgs.docker-credential-helpers
       ];
 
-      file-json.docker-client-settings = lib.mkIf (cfg.settings != { }) {
+      file-mutable.docker-client-settings = lib.mkIf (cfg.settings != { }) {
         inherit (cfg) enable;
+        format = "json";
         target = "${cfg.dockerDir}/config.json";
         extraConfig = cfg.settings;
       };

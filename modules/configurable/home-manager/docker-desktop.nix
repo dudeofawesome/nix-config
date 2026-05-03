@@ -35,8 +35,9 @@ in
     programs.docker-client.enable = true;
 
     home = {
-      file-json.docker-desktop-settings = lib.mkIf (cfg.settings != { }) {
+      file-mutable.docker-desktop-settings = lib.mkIf (cfg.settings != { }) {
         inherit (cfg) enable;
+        format = "json";
         target =
           if (pkgs.stdenv.targetPlatform.isDarwin) then
             "Library/Group Containers/group.com.docker/settings.json"

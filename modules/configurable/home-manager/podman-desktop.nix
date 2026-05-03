@@ -28,8 +28,9 @@
       osCfg = osConfig.virtualisation.podman;
     in
     lib.mkIf cfg.enable {
-      home.file-json.podman-desktop-settings = lib.mkIf (cfg.extraConfig != { }) {
+      home.file-mutable.podman-desktop-settings = lib.mkIf (cfg.extraConfig != { }) {
         inherit (cfg) enable extraConfig;
+        format = "json";
         target =
           if (pkgs.stdenv.targetPlatform.isDarwin) then
             ".local/share/containers/podman-desktop/configuration/settings.json"

@@ -1,32 +1,9 @@
 { ... }:
+let
+  nixFiles = builtins.filter (
+    name: name != "default.nix" && (builtins.match ".*\\.nix" name != null)
+  ) (builtins.attrNames (builtins.readDir ./.));
+in
 {
-  imports = [
-    ./1password-cli.nix
-    ./1password-gui.nix
-    ./aerospace.nix
-    ./asimov.nix
-    ./awscli.nix
-    ./claude-code.nix
-    ./clock.nix
-    ./dock.nix
-    ./docker-client.nix
-    ./docker-desktop.nix
-    ./file-json.nix
-    ./finicky.nix
-    ./git-fork.nix
-    ./gitup.nix
-    ./homebrew.nix
-    ./thaw.nix
-    ./kubeconfig.nix
-    ./kubectl.nix
-    ./moor.nix
-    ./moonlight.nix
-    ./podman-desktop.nix
-    ./process-compose.nix
-    ./qdrant.nix
-    ./signal-desktop.nix
-    ./slack.nix
-    ./vscode.nix
-    ./zoom-us.nix
-  ];
+  imports = map (name: ./. + "/${name}") nixFiles;
 }

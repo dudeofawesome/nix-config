@@ -35,7 +35,7 @@ in
       };
 
       extraConfig = lib.mkOption {
-        description = ''Extra config options for 1Password's settings.json'';
+        description = "Extra config options for 1Password's settings.json";
         type = lib.types.attrs;
         default = { };
         example = {
@@ -89,8 +89,9 @@ in
 
       # TODO: can we actually configure everything we think we can?
       #   https://support.1password.com/settings-security/#considerations-for-system-administrators
-      home.file-json._1password-gui-settings = lib.mkIf (cfg.extraConfig != { }) {
+      home.file-mutable._1password-gui-settings = lib.mkIf (cfg.extraConfig != { }) {
         inherit (cfg) enable extraConfig;
+        format = "json";
         target =
           if (pkgs.stdenv.targetPlatform.isDarwin) then
             "Library/Group Containers/2BUA8C4S2C.com.1password/Library/Application Support/1Password/Data/settings/settings.json"
