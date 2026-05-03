@@ -56,6 +56,6 @@ flake.nix
 
 ## Code Style
 
-- Nix files are formatted with  `nix fmt`
+- Nix files are formatted with `nix fmt`
 - Other files use Prettier
-- YAML indentation: 4 spaces
+- before nix evaluation, new files must be staged with git
