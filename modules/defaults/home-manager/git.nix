@@ -12,7 +12,11 @@ let
     config.programs._1password-cli.enable
     || config.programs._1password-gui.enable
     || (isLinux && (osConfig.programs._1password.enable || osConfig.programs._1password-gui.enable))
-    || (isDarwin && doa-lib.cask-installed "1password");
+    || (isDarwin && doa-lib.cask-installed { inherit osConfig; } "1password");
+
+  gitEmail = config.programs.git.settings.user.email or null;
+  gitSigningKey = config.programs.git.signing.key or null;
+  hasGitSigningIdentity = gitEmail != null && gitSigningKey != null && gitSigningKey != "";
 in
 {
   programs = {
@@ -28,7 +32,7 @@ in
         ".devenv*"
       ];
 
-      signing.signByDefault = true;
+      signing.signByDefault = lib.mkDefault hasGitSigningIdentity;
 
       settings = {
         diff.algorithm = "histogram";
@@ -40,17 +44,18 @@ in
               isDarwin && has_1password
             ) "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
 
-            allowedSignersFile =
+            allowedSignersFile = lib.mkIf hasGitSigningIdentity (
               lib.pipe
                 {
-                  "${config.programs.git.settings.user.email}" = config.programs.git.signing.key;
+                  "${gitEmail}" = gitSigningKey;
                 }
                 [
                   (lib.mapAttrsToList (name: value: ''${name} namespaces="git" ${value}''))
                   (builtins.concatStringsSep "\n")
                   (pkgs.writeText "git-allowed-signers")
                   builtins.toString
-                ];
+                ]
+            );
           };
         };
 

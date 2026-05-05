@@ -3,6 +3,7 @@
   users = {
     "dudeofawesome" = import ./dudeofawesome;
     "josh" = import ./josh;
+    "lauren" = import ./lauren;
   };
 
   filterMap =
