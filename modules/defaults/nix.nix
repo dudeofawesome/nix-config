@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   lib,
+  doa-lib,
   config,
   os,
   owner,
@@ -9,8 +10,6 @@
 }:
 let
   inherit (pkgs.stdenv.targetPlatform) isLinux isDarwin;
-
-  doa-lib = import ../../lib;
 
   mkDarwinDefault = lib.mkOverride 99;
 in

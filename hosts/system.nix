@@ -29,6 +29,8 @@ let
     inherit
       inputs
 
+      doa-lib
+
       hostname
       arch
       os
@@ -36,7 +38,8 @@ let
       machine-class
       users
       ;
-  } // (systemlessSpecialArgs system);
+  }
+  // (systemlessSpecialArgs system);
 in
 {
   inherit system specialArgs;

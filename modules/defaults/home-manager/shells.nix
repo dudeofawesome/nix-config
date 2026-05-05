@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  doa-lib,
   config,
   osConfig,
   ...
@@ -31,17 +32,10 @@ in
         );
 
       preferAbbrs = true;
-      shellAbbrs = {
+      shellAbbrs = doa-lib.normalize {
         "l" = "ls -lha";
-      }
-      // (
-        if (isLinux) then
-          {
-            "lblk" = "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT";
-          }
-        else
-          { }
-      );
+        "lblk" = (lib.optional isLinux "lsblk --output NAME,SIZE,RM,FSTYPE,FSUSE%,SERIAL,MOUNTPOINT");
+      };
 
       functions = {
         doa-ssh-keygen = {

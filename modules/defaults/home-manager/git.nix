@@ -1,14 +1,13 @@
 {
   pkgs,
   lib,
+  doa-lib,
   config,
   osConfig,
   ...
 }:
 with pkgs.stdenv.targetPlatform;
 let
-  doa-lib = import ../../../lib;
-
   has_1password =
     config.programs._1password-cli.enable
     || config.programs._1password-gui.enable
