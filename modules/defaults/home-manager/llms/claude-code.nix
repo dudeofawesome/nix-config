@@ -17,6 +17,12 @@
         padding = 0;
         type = "command";
       };
+
+      permissions = {
+        allow = [
+          "Bash(bash -n *)"
+        ];
+      };
     };
   };
 }
