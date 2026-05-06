@@ -15,58 +15,61 @@
     };
 
     claude-code = {
+      context = ./user-memory.md;
       skills = {
         jira-defaults = ./skills/jira-defaults.md;
       };
     };
 
-    codex =
-      let
-        codexOnePasswordEnv = {
-          # Match each environment variable to a 1Password secret reference.
-          GITHUB_PAT = "op://Private/Github PAT - dudeofawesome/credential";
-          HOME_ASSISTANT_TOKEN = "op://Private/poosdxwzsqeuvybjjasl25hp5m/credential";
+    codex = {
+      enable = true;
+      package =
+        let
+          codexOnePasswordEnv = {
+            # Match each environment variable to a 1Password secret reference.
+            GITHUB_PAT = "op://Private/Github PAT - dudeofawesome/credential";
+            HOME_ASSISTANT_TOKEN = "op://Private/poosdxwzsqeuvybjjasl25hp5m/credential";
+          };
+
+          codexPackage =
+            let
+              op = lib.getExe config.programs._1password-cli.package;
+              wrappedCodex = pkgs.writeShellScript "codex" ''
+                set -euo pipefail
+
+                ${lib.concatLines (
+                  lib.mapAttrsToList (
+                    name: reference: ''export ${name}="$(${op} read ${lib.escapeShellArg reference})"''
+                  ) codexOnePasswordEnv
+                )}
+
+                exec ${lib.getExe pkgs-unstable.codex} "$@"
+              '';
+            in
+            pkgs.symlinkJoin {
+              name = "codex-with-1password-env";
+              paths = [ pkgs-unstable.codex ];
+              postBuild = ''
+                rm "$out/bin/codex"
+                ln -s ${wrappedCodex} "$out/bin/codex"
+              '';
+            };
+        in
+        codexPackage;
+
+      context = ./user-memory.md;
+
+      # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.codex.custom-instructions
+      settings.mcp_servers = {
+        github = {
+          url = "https://api.githubcopilot.com/mcp/";
+          bearer_token_env_var = "GITHUB_PAT";
         };
-
-        codexPackage =
-          let
-            op = lib.getExe config.programs._1password-cli.package;
-            wrappedCodex = pkgs.writeShellScript "codex" ''
-              set -euo pipefail
-
-              ${lib.concatLines (
-                lib.mapAttrsToList (
-                  name: reference: ''export ${name}="$(${op} read ${lib.escapeShellArg reference})"''
-                ) codexOnePasswordEnv
-              )}
-
-              exec ${lib.getExe pkgs-unstable.codex} "$@"
-            '';
-          in
-          pkgs.symlinkJoin {
-            name = "codex-with-1password-env";
-            paths = [ pkgs-unstable.codex ];
-            postBuild = ''
-              rm "$out/bin/codex"
-              ln -s ${wrappedCodex} "$out/bin/codex"
-            '';
-          };
-      in
-      {
-        enable = true;
-        package = codexPackage;
-
-        # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.codex.custom-instructions
-        settings.mcp_servers = {
-          github = {
-            url = "https://api.githubcopilot.com/mcp/";
-            bearer_token_env_var = "GITHUB_PAT";
-          };
-          home-assistant = {
-            url = "https://hass.red.orleans.io/api/mcp";
-            bearer_token_env_var = "HOME_ASSISTANT_TOKEN";
-          };
+        home-assistant = {
+          url = "https://hass.red.orleans.io/api/mcp";
+          bearer_token_env_var = "HOME_ASSISTANT_TOKEN";
         };
       };
+    };
   };
 }
