@@ -195,6 +195,6 @@ in
     home.activation.dockRestart = hm.dag.entryAfter [
       "dockApps"
       "dockDirs"
-    ] "run /usr/bin/killall Dock";
+    ] "run /bin/launchctl kickstart -k gui/$(id -u)/com.apple.Dock.agent";
   };
 }

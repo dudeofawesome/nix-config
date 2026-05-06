@@ -150,7 +150,11 @@ in
   };
 
   home.activation.zzActivateSettings = lib.mkIf isDarwin ''
-    run /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-    run /usr/bin/killall Dock ControlCenter
+    # check if user is logged in
+    if /bin/launchctl print "gui/$(id -u)" > /dev/null 2>&1; then
+      run /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+      run /bin/launchctl kickstart -k gui/$(id -u)/com.apple.Dock.agent
+      run /usr/bin/killall ControlCenter
+    fi
   '';
 }
