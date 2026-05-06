@@ -1,0 +1,664 @@
+{
+  "$schema": "vscode://schemas/settings/user",
+
+  "window.autoDetectColorScheme": true,
+
+  "workbench.list.horizontalScrolling": true,
+  "workbench.editor.enablePreview": true,
+  "workbench.commandPalette.preserveInput": true,
+  "workbench.editor.revealIfOpen": true,
+
+  "editor.fontSize": 12,
+
+  "editor.cursorBlinking": "smooth",
+
+  "editor.tabSize": 2,
+  "editor.rulers": [80, 120, 140],
+  "editor.autoIndent": "full",
+
+  "editor.minimap.enabled": false,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.showSlider": "always",
+  "editor.smoothScrolling": true,
+  "editor.scrollbar.scrollByPage": false,
+  "editor.stickyScroll.enabled": true,
+  "editor.mouseWheelScrollSensitivity": 0.4,
+
+  "editor.snippetSuggestions": "inline",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.indentation": true,
+  "editor.colorDecorators": true,
+
+  "zenMode.fullScreen": false,
+  "zenMode.restore": false,
+
+  "window.restoreWindows": "folders",
+  "window.clickThroughInactive": false,
+
+  "debug.toolBarLocation": "docked",
+  "debug.focusWindowOnBreak": false,
+  "debug.console.acceptSuggestionOnEnter": "on",
+  "debug.javascript.autoAttachFilter": "smart",
+
+  "terminal.integrated.rightClickBehavior": "default",
+  "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.smoothScrolling": false,
+  "terminal.integrated.macOptionClickForcesSelection": true,
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.minimumContrastRatio": 4.5,
+  // "terminal.integrated.mouseWheelScrollSensitivity": 1,
+  "accessibility.signals.terminalBell": {
+    "sound": "on",
+    "announcement": "auto"
+  },
+
+  "extensions.autoUpdate": false,
+
+  "files.associations": {
+    ".env": "dotenv",
+    ".npmignore": "gitignore",
+    "*.grule": "go",
+    "*.mustache": "handlebars",
+    "*.ign": "json",
+    ".htmlhintrc": "jsonc",
+    "**/sites-available/*.*": "NGINX",
+    "**/sites-enabled/*.*": "NGINX",
+    "**/snippets/*.*": "NGINX",
+    "Appfile": "ruby",
+    "Fastfile": "ruby",
+    "*.bu": "yaml",
+    ".prettierrc": "yaml",
+    "*.travis": "yaml",
+    "*.graphqlrc": "yaml"
+  },
+  "files.exclude": {
+    "**/.git/": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules/": true,
+    "**/build": true,
+    "**/dist/": true,
+    "**/coverage/": true,
+    "**/*.eslintcache": true,
+    "**/.devenv/": true
+  },
+
+  "testing.automaticallyOpenTestResults": "neverOpen",
+
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+
+  "diffEditor.ignoreTrimWhitespace": true,
+
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
+  "scm.diffDecorationsIgnoreTrimWhitespace": "inherit",
+  "git.blame.editorDecoration.enabled": true,
+  "gitlens.statusBar.enabled": false,
+  "gitlens.menus": {
+    "editor": {
+      "blame": false,
+      "clipboard": true,
+      "compare": true,
+      "history": false,
+      "remote": false
+    },
+    "editorGroup": false,
+    "explorer": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": true
+    },
+    "scm": {
+      "authors": true
+    },
+    "scmGroupInline": {
+      "stash": true
+    },
+    "scmGroup": {
+      "compare": true,
+      "openClose": true,
+      "stash": true
+    },
+    "scmItem": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": false,
+      "stash": true
+    }
+  },
+
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnPasteMode": "file",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.prettierPath": "this should be replaced by nix",
+
+  "cSpell.useCustomDecorations": true,
+  "cSpell.showInRuler": false,
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.format.enable": false,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  // "eslint.validate": [
+  //   "javascript",
+  //   "javascriptreact",
+  //   "typescript",
+  //   "typescriptreact"
+  // ],
+  "jest.runMode": {
+    "type": "on-demand"
+  },
+  "jest.outputConfig": {
+    "revealOn": "demand",
+    "revealWithFocus": "none",
+    "clearOnRun": "none"
+  },
+  "nodejs-testing.extensions": [
+    {
+      "extensions": ["mjs", "cjs", "js"],
+      "parameters": []
+    },
+    {
+      "extensions": ["mts", "cts", "ts"],
+      "parameters": ["--loader", "tsm"]
+    }
+  ],
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.format.enable": false,
+
+  "[ruby]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "ruby.useLanguageServer": true,
+  "ruby.useBundler": true,
+  "ruby.pathToBundler": "${userHome}/.rbenv/shims/bundler",
+
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["tsconfig.*.json"],
+      "url": "https://json.schemastore.org/tsconfig.json"
+    },
+    {
+      "fileMatch": [".angular-cli.json"],
+      "url": "./node_modules/@angular/cli/lib/config/schema.json"
+    },
+    {
+      "fileMatch": [".stylelintrc*"],
+      "url": "https://json.schemastore.org/stylelintrc.json"
+    }
+  ],
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "html.suggest.html5": true,
+  "htmlhint.documentSelector": ["html", "htm", "mustache"],
+
+  "[xml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[handlebars]": {
+    "editor.defaultFormatter": "mfeckies.handlebars-formatter"
+  },
+
+  "[python]": {
+    "editor.formatOnPaste": false,
+    "editor.defaultFormatter": "eeyore.yapf",
+    "editor.formatOnType": true
+  },
+  "python.languageServer": "Pylance",
+  "python.defaultInterpreterPath": "python3",
+  "jupyter.askForKernelRestart": true,
+
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+
+  "[markdown]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "editor.wordWrap": "bounded",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.wrappingIndent": "indent"
+  },
+  "markdown.extension.orderedList.marker": "one",
+  "markdown.preview.doubleClickToSwitchToEditor": false,
+  "markdown.styles": [
+    "https://use.fontawesome.com/releases/v6.1.2/css/all.css"
+  ],
+
+  "[d2]": {
+    "editor.defaultFormatter": "Terrastruct.d2"
+  },
+  "D2.execPath": "this should be replaced by nix",
+  "D2.autoUpdate": false,
+  "D2.updateOnSave": true,
+
+  // PlantUMLServer: Render diagrams by server which is specified with "plantuml.server". It's much faster, but requires a server.
+  // Local is the default configuration.
+  "plantuml.render": "PlantUMLServer",
+  "plantuml.server": "https://www.plantuml.com/plantuml",
+
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  },
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nil",
+  "nix.serverSettings": {
+    "nil": {
+      "formatting": {
+        "command": ["nixfmt"]
+      }
+    }
+  },
+
+  "vscode-kubernetes.kubectl-path": "this should be replaced by nix",
+  "vscode-kubernetes.helm-path": "this should be replaced by nix",
+  "vscode-kubernetes.log-viewer.autorun": true,
+  "vscode-kubernetes.log-viewer.follow": true,
+  "vscode-kubernetes.log-viewer.wrap": true,
+  "vscode-kubernetes.log-viewer.tail": 100,
+  "vs-kubernetes": {
+    "vs-kubernetes.kubectlVersioning": "user-provided",
+    "vs-kubernetes.kubectl-path": "this should be replaced by nix",
+    "vs-kubernetes.helm-path": "this should be replaced by nix",
+    "vs-kubernetes.outputFormat": "yaml",
+    // "vs-kubernetes.kubeconfig": "this should be replaced by nix",
+    "checkForMinikubeUpgrade": false,
+    "vs-kubernetes.crd-code-completion": "enabled"
+  },
+
+  "[fish]": {
+    "editor.defaultFormatter": "bmalehorn.vscode-fish",
+    "editor.tabSize": 4,
+    "editor.formatOnPaste": false
+  },
+
+  "[sql]": {
+    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode",
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|\\(\\*|--)\\s*($TAGS)"
+  },
+  "Prettier-SQL.SQLFlavourOverride": "postgresql",
+
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off",
+    "editor.defaultFormatter": "Dart-Code.dart-code"
+  },
+  "dart.sdkPath": "/Users/dudeofawesome/Library/Developer/flutter/bin/cache/dart-sdk",
+  "dart.flutterHotReloadOnSave": "all",
+  "dart.debugSdkLibraries": true,
+  "dart.debugExternalLibraries": false,
+  "dart.showTodos": true,
+  "dart.previewFlutterUiGuides": true,
+  // "dart.previewFlutterUiGuidesCustomTracking": true,
+  "dart.openDevTools": "never",
+  "dart.devToolsTheme": "dark",
+  "dart.debugExternalPackageLibraries": true,
+
+  "stylelint.enable": true,
+  "css.validate": false,
+  "scss.validate": false,
+
+  "arduino.path": "/Applications",
+  "arduino.commandPath": "Contents/MacOS/Arduino",
+  "arduino.logLevel": "info",
+  "arduino.enableUSBDetection": true,
+  "arduino.disableTestingOpen": false,
+  "arduino.skipHeaderProvider": false,
+  "arduino.additionalUrls": [
+    "https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json",
+    "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
+  ],
+  "arduino.defaultBaudRate": 115200,
+
+  "csharp.referencesCodeLens.enabled": false,
+
+  "openscad.launchPath": "/Applications/OpenSCAD Beta.app/Contents/MacOS/OpenSCAD",
+
+  "java.configuration.checkProjectSettingsExclusions": false,
+  "[java]": {
+    "editor.foldingImportsByDefault": true
+  },
+
+  "kotlin.languageServer.enabled": false,
+  "kotlin.debugAdapter.enabled": false,
+
+  "lua.format.linebreakMultipleAssignments": true,
+  "lua.format.lineWidth": 80,
+  "lua.format.singleQuote": true,
+  "lua.targetVersion": "5.2",
+
+  "gcode.general.machineType": "3D Printer",
+  "gcode.general.hovers.enabled": true,
+
+  "color-highlight.enable": true,
+  "color-highlight.markerType": "underline",
+  "color-highlight.markRuler": false,
+  "todo-tree.highlights.defaultHighlight": {
+    "foreground": "#FFF",
+    "background": "#FFBD2A",
+    "type": "tag-and-subTag"
+  },
+  "todo-tree.filtering.includeHiddenFiles": true,
+  "todo-tree.general.showActivityBarBadge": true,
+  "material-icon-theme.showUpdateMessage": false,
+  "material-icon-theme.files.associations": {
+    "tsconfig.*.json": "tsconfig",
+    "*.tst.ts": "test-ts"
+  },
+
+  "map.preview.defaultBaseLayer": "osm",
+
+  "dash.fileNameToDocsetMap": {
+    "*.test.js": [
+      "chai",
+      "express",
+      "gulp",
+      "javascript",
+      "jest",
+      "jsdoc",
+      "lodash",
+      "marionette",
+      "moment",
+      "nodejs",
+      "rxjs"
+    ],
+    "*.test.ts": [
+      "chai",
+      "express",
+      "gulp",
+      "javascript",
+      "jest",
+      "jsdoc",
+      "lodash",
+      "marionette",
+      "moment",
+      "nodejs",
+      "rxjs",
+      "typescript"
+    ],
+    "wezterm.lua": ["lua", "wezterm"]
+  },
+  "dash.languageIdToDocsetMap": {
+    "typescript": [
+      "angularjs",
+      "angularts",
+      "awsjs",
+      "backbone",
+      "bootstrap",
+      "chai",
+      "coffee",
+      "cordova",
+      "css",
+      "date-fns",
+      "dojo",
+      "d3",
+      "ember",
+      "express",
+      "extjs",
+      "foundation",
+      "gulp",
+      "grunt",
+      "html",
+      "ionic",
+      "jasmine",
+      "javascript",
+      "jquery",
+      "jquerym",
+      "jqueryui",
+      "jsdoc",
+      "knex",
+      "knockout",
+      "lodash",
+      "loopback",
+      "marionette",
+      "meteor",
+      "mongoose",
+      "moment",
+      "moo",
+      "nodejs",
+      "phonegap",
+      "prototype",
+      "require",
+      "rxjs",
+      "sails",
+      "sencha",
+      "sinon",
+      "sproutcore",
+      "svg",
+      "titanium",
+      "typescript",
+      "underscore",
+      "unity3d",
+      "yui",
+      "zepto"
+    ],
+    "yaml": ["yaml", "chef", "ansible", "jinja"],
+    "scss": ["sass", "compass", "bourbon", "neat", "susy", "css"],
+    "nix": ["nix", "nixpkgs", "nix-darwin", "nixos", "home-manager"],
+    "cpp": ["arduino", "cpp", "c", "manpages"],
+    "fish": ["fish"],
+    "scad": ["OpenSCAD", "openscad", "scad"],
+    "java": [
+      "java",
+      "javafx",
+      "grails",
+      "groovy",
+      "playjava",
+      "spring",
+      "cvj",
+      "processing",
+      "spigotmc-1.12.2:"
+    ],
+    "dockerfile": ["docker"]
+  },
+
+  "cSpell.enabled": true,
+  "cSpell.enableFiletypes": ["*"],
+  "cSpell.dictionaries": [
+    "en_us",
+    "companies",
+    "filetypes",
+    "misc",
+    "softwareTerms",
+    "typescript",
+    "node",
+    "html",
+    "css",
+    "fonts"
+  ],
+  "cSpell.allowCompoundWords": true,
+  "cSpell.userWords": [
+    "Absar",
+    "algo",
+    "angularjs",
+    "ansible",
+    "arduino",
+    "autocorrect",
+    "autofocus",
+    "Bayburtsyan",
+    "BTRFS",
+    "BYOC",
+    "checkboxes",
+    "Checkin",
+    "checkins",
+    "checkmark",
+    "codelyzer",
+    "curr",
+    "datasource",
+    "datetime",
+    "debuggable",
+    "dedent",
+    "denormalize",
+    "denormalized",
+    "devtools",
+    "docset",
+    "downvote",
+    "downvoted",
+    "dudeofawesome",
+    "Ecommerce",
+    "ethnicities",
+    "frameborder",
+    "Geofence",
+    "Geofences",
+    "geolocation",
+    "geopoint",
+    "Geoposition",
+    "gitignore",
+    "gmail",
+    "Haptic",
+    "hass",
+    "horiz",
+    "imagemagick",
+    "injectable",
+    "intellisense",
+    "ionicon",
+    "ionicons",
+    "iunu",
+    "Kubernetes",
+    "lerp",
+    "LTRB",
+    "luxon",
+    "mailto",
+    "manpages",
+    "Menlo",
+    "mikro",
+    "millis",
+    "Minecraft",
+    "minimap",
+    "Miras",
+    "mobileweb",
+    "monospace",
+    "msapplication",
+    "multiline",
+    "Multipart",
+    "nestjs",
+    "ngdoc",
+    "ngrx",
+    "normalizr",
+    "nospace",
+    "npmignore",
+    "npmjs",
+    "Objs",
+    "onboarded",
+    "onboarding",
+    "onesignal",
+    "paciolan",
+    "parameterize",
+    "pdfs",
+    "perc",
+    "plex",
+    "polyfills",
+    "portrayable",
+    "POSTGRES",
+    "quotemark",
+    "Rect",
+    "repo",
+    "RGBO",
+    "Roboarc",
+    "Searchbar",
+    "Serializable",
+    "Signup",
+    "splashscreen",
+    "Stateful",
+    "strikethrough",
+    "stylelint",
+    "Tigran",
+    "timeago",
+    "timestamptz",
+    "timezones",
+    "toolbars",
+    "Transcoder",
+    "tsdk",
+    "typeof",
+    "typeorm",
+    "unstarted",
+    "uploader",
+    "Upsert",
+    "upvote",
+    "upvoted",
+    "Validators",
+    "vals",
+    "venmo",
+    "videocam",
+    "vsync",
+    "xmlns"
+  ],
+
+  "ansible.lightspeed.enabled": false,
+
+  "sqlite.sqlite3": "/usr/bin/sqlite3",
+
+  "angular.experimental-ivy": true,
+
+  "partialDiff.enableTelemetry": false,
+  "gitlens.telemetry.enabled": false,
+  "redhat.telemetry.enabled": false,
+
+  "license.author": "Lauren Cunningham",
+  "license.year": "auto",
+
+  "leetcode.workspaceFolder": "~/Github/dudeofawesome/leetcode",
+  "leetcode.defaultLanguage": "typescript",
+  "leetcode.hint.commandShortcut": false,
+  "leetcode.hint.configWebviewMarkdown": false,
+
+  // disable LLM junk
+  "chat.commandCenter.enabled": false,
+  "chat.disableAIFeatures": true,
+  "chatgpt.commentCodeLensEnabled": false,
+  // now M$ is hiding Copilot settings behind obscure names…
+  "workbench.editor.empty.hint": "hidden",
+
+  "claudeCode.useCtrlEnterToSend": true,
+  "claudeCode.claudeProcessWrapper": "this should be replaced by nix",
+  "chatgpt.composerEnterBehavior": "cmdIfMultiline",
+
+  "1password.editor.suggestStorage": false
+}
