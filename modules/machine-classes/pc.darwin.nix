@@ -34,9 +34,7 @@ with lib;
         "google-chrome"
         (noQuarantine "qlcolorcode")
         (noQuarantine "qlmarkdown")
-        (noQuarantine "qlstephen")
         (noQuarantine "quicklook-video")
-        (noQuarantine "quicklook-json")
         "sublime-text"
       ];
     masApps = {

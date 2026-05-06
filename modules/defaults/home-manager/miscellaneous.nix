@@ -5,6 +5,7 @@
   osConfig,
   hostname,
   os,
+  machine-class,
   owner,
   ...
 }:
@@ -118,6 +119,9 @@ in
     };
 
     doa-system-clock.enable = true;
+
+    quicklook-json.enable = machine-class == "pc";
+    qlstephen.enable = machine-class == "pc";
   };
 
   # services.home-manager.autoUpgrade.enable = true;
