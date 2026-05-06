@@ -19,12 +19,12 @@ stdenv.mkDerivation (
       aarch64-darwin = {
         appcast = "https://persistent.oaistatic.com/codex-app-prod/appcast.xml";
         url = "https://persistent.oaistatic.com/codex-app-prod/Codex-darwin-arm64-${finalAttrs.version}.zip";
-        hash = "sha256-OmIp1/asWnoUfqT+NBAodKCtGoeJNH3gzq55e9hj3Jc=";
+        hash = "sha256-wyV0HsOKgBiJUY1irXVtt9bfEDXXVduQoEY3PJb7UZg=";
       };
       x86_64-darwin = {
         appcast = "https://persistent.oaistatic.com/codex-app-prod/appcast-x64.xml";
         url = "https://persistent.oaistatic.com/codex-app-prod/Codex-darwin-x64-${finalAttrs.version}.zip";
-        hash = null;
+        hash = "sha256-ntsQdDC9/iSsrWn1BkI1PuGepbN1MO5TYTH5+LP1XvM=";
       };
     };
 
@@ -34,7 +34,7 @@ stdenv.mkDerivation (
   in
   {
     pname = "codex-desktop";
-    version = "26.429.30905";
+    version = "26.429.61741";
 
     src = fetchurl {
       inherit (source) url hash;
