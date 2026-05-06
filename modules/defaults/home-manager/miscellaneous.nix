@@ -44,6 +44,10 @@ in
     stateVersion = lib.mkDefault "23.05"; # Did you read the comment?
 
     preferXdgDirectories = true;
+
+    packages = lib.optionals (isDarwin && machine-class == "pc") [
+      pkgs.qlmarkdown
+    ];
   };
 
   xdg.configFile.prettier = {

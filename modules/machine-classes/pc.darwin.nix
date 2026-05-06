@@ -33,7 +33,6 @@ with lib;
         "firefox"
         "google-chrome"
         (noQuarantine "qlcolorcode")
-        (noQuarantine "qlmarkdown")
         (noQuarantine "quicklook-video")
         "sublime-text"
       ];
