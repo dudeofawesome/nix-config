@@ -30,6 +30,17 @@ Add new packages in `packages/<name>/package.nix`.
 - Use `fetchFromGitHub` when the source is a GitHub repo; otherwise choose the narrowest fetcher that fits.
 - For package hashes use `lib.fakeHash`, build once (expecting a failure), and replace it with the reported value.
 
+## Custom Updaters
+
+- Write a custom update script when the upstream does not provide a stable source tag or URL pattern
+- This is common for Darwin GUI apps that publish appcast or release feed metadata instead of tag-based sources
+- Attempt to find the release feed via an appcast URL or squirrel feed for Darwin apps. Inspect the app package if necessary
+- Prefer `writeShellApplication` with focused feed parsers like `jq` or `xmllint`
+- Updaters should refresh the package `version`, source `url`, and hash together
+- Ensure the src url's value uses interpolation where possible
+- Don't set any meta values to the release feed URL
+- Verify by evaluating, building, and running the updater, then doing package dry-runs
+
 ## Validation
 
 Prefer this validation sequence:
