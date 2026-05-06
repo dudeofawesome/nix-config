@@ -26,7 +26,10 @@ in
         arch = "aarch64";
         owner = "dudeofawesome";
         machine-class = "pc";
-        users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
+        users = usersModule.filterMap [
+          "dudeofawesome"
+          "lauren"
+        ] usersModule.users;
       }
       // base
     )
