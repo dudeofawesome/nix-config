@@ -3,6 +3,7 @@
   buildNpmPackage,
   fetchFromGitHub,
   nodejs,
+  nix-update-script,
   ...
 }:
 
@@ -26,6 +27,8 @@ buildNpmPackage (finalAttrs: {
   postInstall = ''
     ln -s "$out/bin/@zereight/mcp-gitlab" "$out/bin/mcp-gitlab"
   '';
+
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "GitLab MCP server";

@@ -2,6 +2,7 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
+  nix-update-script,
   ...
 }:
 
@@ -21,6 +22,8 @@ buildGoModule rec {
   # VENDOR HASH PLACEHOLDER: You must calculate this hash for Go modules.
   # See instructions below.
   vendorHash = null;
+
+  passthru.updateScript = nix-update-script { };
 
   meta = with lib; {
     description = "Helper binary for running Podman on macOS";
