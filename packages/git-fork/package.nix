@@ -1,9 +1,14 @@
 {
   lib,
   stdenv,
+  cacert,
+  curl,
   fetchurl,
+  gnused,
+  libxml2,
+  openssl,
   undmg,
-  nix-update-script,
+  writeShellApplication,
   ...
 }:
 
@@ -29,7 +34,38 @@ stdenv.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  passthru.updateScript = nix-update-script { };
+  passthru.updateScript = lib.getExe (writeShellApplication {
+    name = "git-fork-update-script";
+    runtimeInputs = [
+      cacert
+      curl
+      gnused
+      libxml2
+      openssl
+    ];
+    text = ''
+      release_feed="https://fork.dev/update/feed.xml"
+
+      url="$(
+        curl --fail --location --silent "$release_feed" \
+          | xmllint --xpath 'string((//*[local-name()="item"][1]/*[local-name()="enclosure"]/@url)[1])' -
+      )"
+
+      version=''${url##*/Fork-}
+      version=''${version%.dmg}
+
+      hash="sha256-$(
+        curl --fail --location --silent "$url" \
+          | openssl dgst -sha256 -binary \
+          | openssl base64
+      )"
+
+      sed -i -E \
+        -e 's@(version = )"[0-9]+\.[0-9]+(\.[0-9]+)?";@\1"'"$version"'";@' \
+        -e 's@(hash = )("sha256-[A-Za-z0-9+/]+="|null);@\1"'"$hash"'";@' \
+        ./packages/git-fork/package.nix
+    '';
+  });
 
   meta = {
     description = "Git client";
