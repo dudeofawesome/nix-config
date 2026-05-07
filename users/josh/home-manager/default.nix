@@ -40,6 +40,7 @@
 
     packages = with pkgs-unstable; [
       gitlab-ci-ls
+      pkgs.launchcontrol
     ];
 
     keyboard = {

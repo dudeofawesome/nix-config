@@ -95,6 +95,7 @@ with pkgs.stdenv.targetPlatform;
             cyberduck
             hexfiend
             keka
+            launchcontrol
             pkgs-unstable.raycast
             pkgs-unstable.tableplus
             pkgs-unstable.typora

@@ -4,6 +4,7 @@
     systemPackages = with pkgs; [
       ntfs3g
       cp210x-program
+      launchcontrol
       tree
     ];
   };
@@ -33,7 +34,6 @@
       "google-earth-pro"
       "handbrake-app"
       "jordanbaird-ice"
-      "launchcontrol"
       "lm-studio"
       "logi-options+"
       "macfuse"

@@ -39,7 +39,6 @@
         "figma"
         "firefox"
         "hammerspoon"
-        "launchcontrol"
         "logitech-g-hub"
         "lulu"
         (noQuarantine "middleclick")
