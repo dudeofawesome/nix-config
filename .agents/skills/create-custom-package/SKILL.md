@@ -32,9 +32,8 @@ Add new packages in `packages/<name>/package.nix`.
 
 ## Custom Updaters
 
-- Write a custom update script when the upstream does not provide a stable source tag or URL pattern
-- This is common for Darwin GUI apps that publish appcast or release feed metadata instead of tag-based sources
-- Attempt to find the release feed via an appcast URL or squirrel feed for Darwin apps. Inspect the app package if necessary
+- When the upstream does not provide a stable source tag or URL pattern, write a custom update script
+- Attempt to find the release feed via an appcast URL or squirrel feed for Darwin apps. Inspect the app package if necessary (usually the Info.plist)
 - Prefer `writeShellApplication` with focused feed parsers like `jq` or `xmllint`
 - Updaters should refresh the package `version`, source `url`, and hash together
 - Ensure the src url's value uses interpolation where possible
@@ -43,10 +42,6 @@ Add new packages in `packages/<name>/package.nix`.
 
 ## Validation
 
-Prefer this validation sequence:
-
 ```sh
-nix fmt
-nix build .#<package-name> --dry-run
 nix build .#<package-name>
 ```
