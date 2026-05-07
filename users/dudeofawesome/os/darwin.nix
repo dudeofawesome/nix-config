@@ -47,7 +47,6 @@
         "postico"
         "private-internet-access"
         "steam"
-        "stay"
         "workman"
       ];
     masApps = {
