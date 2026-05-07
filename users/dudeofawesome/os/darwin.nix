@@ -44,7 +44,6 @@
         "parsec"
         "plex"
         "plexamp"
-        "postico"
         "private-internet-access"
         "steam"
         "workman"

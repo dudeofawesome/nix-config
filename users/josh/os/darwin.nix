@@ -47,7 +47,6 @@
       "openra"
       "parsec"
       "plex"
-      "postico"
       "private-internet-access"
       "raycast"
       "signal"

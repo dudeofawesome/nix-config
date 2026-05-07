@@ -6,6 +6,8 @@
 }:
 {
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+    home.packages = [ pkgs.postico ];
+
     targets.darwin = {
       defaults."at.eggerapps.Postico" = {
         AlternatingRows = true;
