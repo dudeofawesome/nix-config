@@ -22,6 +22,7 @@
     ../../../modules/defaults/home-manager/wezterm
 
     ../../dudeofawesome/home-manager/browsers.nix
+    ../../dudeofawesome/home-manager/zed-editor
     ./shells.nix
     ./llms
   ];

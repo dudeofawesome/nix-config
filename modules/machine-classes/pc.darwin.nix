@@ -34,7 +34,6 @@ with lib;
         "google-chrome"
         (noQuarantine "qlcolorcode")
         (noQuarantine "quicklook-video")
-        "sublime-text"
       ];
     masApps = {
       # "AdGuard for Safari" = 1440147259;
