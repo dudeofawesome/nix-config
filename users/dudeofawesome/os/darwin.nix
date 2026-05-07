@@ -38,7 +38,6 @@
         "docker-desktop"
         "figma"
         "firefox"
-        "hammerspoon"
         "logitech-g-hub"
         "lulu"
         (noQuarantine "middleclick")

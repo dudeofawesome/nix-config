@@ -93,6 +93,7 @@ with pkgs.stdenv.targetPlatform;
 
           (lib.optionals isDarwin [
             cyberduck
+            hammerspoon
             hexfiend
             keka
             launchcontrol
