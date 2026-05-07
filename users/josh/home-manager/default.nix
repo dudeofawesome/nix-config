@@ -19,7 +19,6 @@
     ../../../modules/defaults/home-manager/gitup.nix
     ../../../modules/defaults/home-manager/google-earth-pro.nix
     ../../../modules/defaults/home-manager/moonlight.nix
-    ../../../modules/defaults/home-manager/postico.nix
     ../../../modules/defaults/home-manager/wezterm
 
     ../../dudeofawesome/home-manager/browsers.nix
@@ -152,6 +151,8 @@
       enable = true;
       package = null;
     };
+
+    postico.enable = pkgs.stdenv.targetPlatform.isDarwin;
   };
 
   services.asimov.enable = true;

@@ -26,7 +26,6 @@ with pkgs.stdenv.targetPlatform;
     ../../../modules/defaults/home-manager/llms/claude-code.nix
     ../../../modules/defaults/home-manager/moonlight.nix
     ../../../modules/defaults/home-manager/middleclick.nix
-    ../../../modules/defaults/home-manager/postico.nix
     ../../../modules/defaults/home-manager/typora.nix
     ../../../modules/defaults/home-manager/wezterm
 
@@ -214,6 +213,8 @@ with pkgs.stdenv.targetPlatform;
         cachix
       ];
     };
+
+    postico.enable = pkgs.stdenv.targetPlatform.isDarwin;
 
     dock = {
       enable = true;
