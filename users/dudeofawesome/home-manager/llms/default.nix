@@ -18,6 +18,7 @@
       context = ./user-memory.md;
       skills = {
         jira-defaults = ./skills/jira-defaults.md;
+        grill-me = ./skills/grill-me.md;
       };
     };
 
@@ -58,6 +59,10 @@
         codexPackage;
 
       context = ./user-memory.md;
+
+      skills = {
+        grill-me = ./skills/grill-me.md;
+      };
 
       # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.codex.custom-instructions
       settings.mcp_servers = {
