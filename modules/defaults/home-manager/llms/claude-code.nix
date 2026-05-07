@@ -21,6 +21,10 @@
       permissions = {
         allow = [
           "Bash(bash -n *)"
+          "Bash(nix fmt *)"
+          "Bash(nix build *)"
+          "Bash(nix eval *)"
+          "Bash(nix-prefetch-url *)"
         ];
       };
     };
