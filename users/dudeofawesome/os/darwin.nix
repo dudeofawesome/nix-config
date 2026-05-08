@@ -46,7 +46,6 @@
         "plexamp"
         "private-internet-access"
         "steam"
-        "workman"
       ];
     masApps = {
       # "1password for Safari" = 1569813296;

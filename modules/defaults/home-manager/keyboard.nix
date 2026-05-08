@@ -1,4 +1,11 @@
 { pkgs, lib, ... }:
+let
+  workmanInputSource = {
+    InputSourceKind = "Keyboard Layout";
+    "KeyboardLayout ID" = 14844;
+    "KeyboardLayout Name" = "Workman";
+  };
+in
 {
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin = {
@@ -46,7 +53,14 @@
         };
 
         "com.apple.HIToolbox" = {
+          AppleCurrentKeyboardLayoutInputSourceID = "org.sil.ukelele.keyboardlayout.workman.workman";
+          AppleDefaultAsciiInputSource = workmanInputSource;
+          AppleCurrentAsciiInputSource = workmanInputSource;
+          AppleCurrentInputSource = workmanInputSource;
+          AppleEnabledInputSources = [ workmanInputSource ];
           AppleFnUsageType = 1; # Change Input Source
+          AppleInputSourceHistory = [ workmanInputSource ];
+          AppleSelectedInputSources = [ workmanInputSource ];
         };
       };
     };
