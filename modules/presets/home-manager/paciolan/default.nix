@@ -23,10 +23,6 @@ with pkgs.stdenv.targetPlatform;
         claude-desktop
         gitlab-runner
         postman
-
-        (lib.optionals isDarwin [
-          pkgs-unstable.tableplus
-        ])
       ])
     ];
 
@@ -51,6 +47,7 @@ with pkgs.stdenv.targetPlatform;
         "preferences.update.reminder" = "never";
       };
     };
+    tableplus.enable = lib.mkDefault (machine-class == "pc");
   };
 
   home.file.maven_settings = {

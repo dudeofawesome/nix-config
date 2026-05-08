@@ -121,14 +121,14 @@
         "${config.home.homeDirectory}/Applications/Chrome Apps.localized/Gmail.app"
         "/Applications/Microsoft Outlook.app"
         "/Applications/zoom.us.app"
-        (lib.optional config.programs.slack.enable "${config.programs.slack.package}/Applications/Slack.app")
+        config.programs.slack
         "/Applications/Caprine.app"
         "/Applications/Signal.app"
         "/System/Applications/Messages.app"
         "/Applications/Discord.app"
         "/Applications/Visual Studio Code.app"
-        "${pkgs.tableplus}/Applications/TablePlus.app"
-        "${pkgs.git-fork}/Applications/Fork.app"
+        config.programs.tableplus
+        config.programs.git-fork
         "${pkgs.postman}/Applications/Postman.app"
         "/Applications/Todoist.app"
         "/System/Applications/Notes.app"

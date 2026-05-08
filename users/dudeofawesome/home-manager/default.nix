@@ -97,7 +97,6 @@ with pkgs.stdenv.targetPlatform;
             keka
             launchcontrol
             pkgs-unstable.raycast
-            pkgs-unstable.tableplus
             pkgs-unstable.typora
           ])
         ]))
@@ -278,6 +277,8 @@ with pkgs.stdenv.targetPlatform;
       package = pkgs-unstable.signal-desktop;
     };
     discord.enable = machine-class == "pc";
+
+    tableplus.enable = machine-class == "pc";
   };
 
   # services.home-manager.autoUpgrade.enable = true;
