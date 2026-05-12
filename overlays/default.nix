@@ -60,7 +60,7 @@
     inputs.nur.overlays.default
 
     (final: prev: {
-      # TODO: remove this once stable fish is fixed
+      # TODO: remove this once stable fish is fixed https://github.com/NixOS/nixpkgs/issues/208951
       fish = pkgs-unstable.fish;
       podman =
         if prev.stdenv.targetPlatform.isDarwin then

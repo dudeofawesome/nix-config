@@ -19,12 +19,18 @@
       };
 
       permissions = {
-        allow = [
+        allow = lib.flatten [
+          "WebFetch"
+          "WebSearch"
+
           "Bash(bash -n *)"
-          "Bash(nix fmt *)"
-          "Bash(nix build *)"
-          "Bash(nix eval *)"
-          "Bash(nix-prefetch-url *)"
+
+          (map (cmd: "Bash(${cmd})") [
+            "nix fmt *"
+            "nix build *"
+            "nix eval *"
+            "nix-prefetch-url *"
+          ])
         ];
       };
     };
