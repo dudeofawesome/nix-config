@@ -5,6 +5,76 @@
   config,
   ...
 }:
+let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+
+  recordPrompt = pkgs.writeShellApplication {
+    name = "claude-record-prompt";
+    runtimeInputs = [ pkgs.jq ];
+    text = ''
+      state_dir="''${CLAUDE_STATE_DIR:-$HOME/.claude/state}"
+      mkdir -p "$state_dir"
+      session_id=$(jq -r '.session_id // "default"' <<<"$(cat)")
+      date +%s >"$state_dir/last-prompt-$session_id"
+    '';
+  };
+
+  notifyIfAway = pkgs.writeShellApplication {
+    name = "claude-notify-if-away";
+    runtimeInputs = [ pkgs.jq ];
+    text = ''
+      state_dir="''${CLAUDE_STATE_DIR:-$HOME/.claude/state}"
+      threshold="''${CLAUDE_NOTIFY_THRESHOLD:-30}"
+      default_message="''${1:-Claude Code needs you}"
+
+      input=$(cat)
+      session_id=$(jq -r '.session_id // "default"' <<<"$input")
+      message=$(jq -r --arg d "$default_message" '.message // $d' <<<"$input")
+
+      terminals=(
+        com.googlecode.iterm2
+        com.apple.Terminal
+        com.mitchellh.ghostty
+        net.kovidgoyal.kitty
+        com.github.wez.wezterm
+        com.microsoft.VSCode
+        com.microsoft.VSCodeInsiders
+        com.todesktop.230313mzl4w4u92
+        dev.zed.Zed
+      )
+
+      frontmost=$(/usr/bin/osascript \
+        -e 'tell application "System Events" to get bundle identifier of first process whose frontmost is true' \
+        2>/dev/null || true)
+
+      should_notify=1
+      if [ -n "$frontmost" ]; then
+        for term in "''${terminals[@]}"; do
+          if [ "$frontmost" = "$term" ]; then
+            should_notify=0
+            break
+          fi
+        done
+      else
+        stamp_file="$state_dir/last-prompt-$session_id"
+        if [ -r "$stamp_file" ]; then
+          last=$(cat "$stamp_file")
+          now=$(date +%s)
+          elapsed=$((now - last))
+          if [ "$elapsed" -lt "$threshold" ]; then
+            should_notify=0
+          fi
+        fi
+      fi
+
+      if [ "$should_notify" -eq 1 ]; then
+        escaped=$(printf '%s' "$message" | sed 's/["\\]/\\&/g')
+        /usr/bin/osascript \
+          -e "display notification \"$escaped\" with title \"Claude Code\" sound name \"Glass\""
+      fi
+    '';
+  };
+in
 {
   programs = {
     mcp = {
@@ -19,6 +89,39 @@
       skills = {
         jira-defaults = ./skills/jira-defaults.md;
         grill-me = ./skills/grill-me.md;
+      };
+
+      settings.hooks = lib.mkIf isDarwin {
+        UserPromptSubmit = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = lib.getExe recordPrompt;
+              }
+            ];
+          }
+        ];
+        Notification = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "${lib.getExe notifyIfAway} 'Claude Code is waiting for input'";
+              }
+            ];
+          }
+        ];
+        Stop = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "${lib.getExe notifyIfAway} 'Claude Code finished'";
+              }
+            ];
+          }
+        ];
       };
     };
 
