@@ -18,6 +18,7 @@ with pkgs.stdenv.targetPlatform;
       glab
       k6
       terraform
+      wdav-open-files
       (lib.optionals (machine-class == "pc") [
         # ansible
         claude-desktop
