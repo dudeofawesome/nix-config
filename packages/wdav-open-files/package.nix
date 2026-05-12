@@ -223,6 +223,13 @@ writeShellApplication {
       render_snapshot "''${1:-}" "''${2:-}"
     }
 
+    render_live_frame() {
+      printf '\033[H'
+      printf '%s\n' "$1" |
+        awk '{ printf "%s\033[K\n", $0 }'
+      printf '\033[J'
+    }
+
     case "$mode" in
       once)
         snapshot
@@ -285,7 +292,7 @@ writeShellApplication {
             fi
             printf '\nRefreshing every %s seconds. Press q to quit.\n' "$interval"
           )"
-          printf '\033[H%s\033[J' "$frame"
+          render_live_frame "$frame"
 
           if [ -t 0 ]; then
             remaining="$interval"
