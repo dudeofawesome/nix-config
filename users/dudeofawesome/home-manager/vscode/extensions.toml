@@ -53,6 +53,7 @@ extensions = [
   'anthropic.claude-code', # more up-to-date
   'deerawan.vscode-dash', # missing
   'fabiospampinato.vscode-diff', # missing
+  'ezoosk.claude-context-bar', # missing
   'gitlab.gitlab-workflow', # much more up-to-date
   'ms-kubernetes-tools.vscode-kubernetes-tools', # quick updates
   'semanticdiff.semanticdiff', # missing

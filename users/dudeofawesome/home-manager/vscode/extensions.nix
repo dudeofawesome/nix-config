@@ -108,6 +108,13 @@ merge
             sha256 = "0nh49k7s51i99m02d44jy8z3wjynmdigrsf8xa1jcn8y2lahd3k0";
 
           };
+          "ezoosk"."claude-context-bar" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "claude-context-bar";
+            publisher = "ezoosk";
+            version = "1.4.1";
+            sha256 = "kZiXfG10ox9R1VkCIjSmIwHfH8EzUfREjv+5nZ9odTw=";
+
+          };
           "fabiospampinato"."vscode-diff" = vscode-utils.extensionFromVscodeMarketplace {
             name = "vscode-diff";
             publisher = "fabiospampinato";

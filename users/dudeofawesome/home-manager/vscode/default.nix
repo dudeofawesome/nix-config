@@ -65,6 +65,7 @@ with lib;
           nix4vscode.eeyore.yapf
           nix4vscode.effectful-tech.effect-vscode
           esbenp.prettier-vscode
+          nix4vscode.ezoosk.claude-context-bar
           nix4vscode.fabiospampinato.vscode-diff
           firefox-devtools.vscode-firefox-debug
           nix4vscode.flesler.url-encode
