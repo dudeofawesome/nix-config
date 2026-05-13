@@ -3,6 +3,7 @@
   pkgs,
   pkgs-unstable,
   machine-class,
+  config,
   ...
 }:
 {
@@ -32,4 +33,46 @@
       ];
     };
   };
+}
+# WORKAROUND: https://github.com/openai/codex/issues/14767
+// {
+  home =
+    let
+      cfg = config.programs.codex;
+
+      packageVersion = if cfg.package != null then lib.getVersion cfg.package else "0.94.0";
+      useXdgDirectories = config.home.preferXdgDirectories && lib.versionAtLeast packageVersion "0.2.0";
+      xdgConfigHome = lib.removePrefix "${config.home.homeDirectory}/" config.xdg.configHome;
+      homeFileXdgConfigHome = lib.removePrefix config.home.homeDirectory config.xdg.configHome;
+      configDir = if useXdgDirectories then "${xdgConfigHome}/codex" else ".codex";
+      homeFileConfigDir = if useXdgDirectories then "${homeFileXdgConfigHome}/codex" else ".codex";
+      rulesDir = "${configDir}/rules";
+      homeFileRulesDir = "${homeFileConfigDir}/rules";
+
+      copyRuleFile =
+        name: _content:
+        let
+          target = lib.escapeShellArg "${config.home.homeDirectory}/${rulesDir}/${name}.rules";
+        in
+        ''
+          if [ -L ${target} ]; then
+            source="$(${lib.getExe' pkgs.coreutils "readlink"} ${target})"
+            run ${lib.getExe' pkgs.coreutils "rm"} ${target}
+            run ${lib.getExe' pkgs.coreutils "install"} -m 0644 "$source" ${target}
+          fi
+        '';
+    in
+    {
+      file = lib.mkIf cfg.enable (
+        lib.mapAttrs' (
+          name: _content: lib.nameValuePair "${homeFileRulesDir}/${name}.rules" { force = true; }
+        ) cfg.rules
+      );
+
+      activation.codexRules = lib.mkIf (cfg.enable && cfg.rules != { }) (
+        lib.hm.dag.entryAfter [ "linkGeneration" ] (
+          lib.concatStrings (lib.mapAttrsToList copyRuleFile cfg.rules)
+        )
+      );
+    };
 }
