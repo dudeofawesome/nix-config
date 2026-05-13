@@ -166,7 +166,8 @@ writeShellApplication {
       max_width="''${2:-0}"
       display_paths="''${3:-$paths}"
       display_label="''${4:-filtered open files}"
-      display_count="$(printf '%s\n' "$display_paths" | awk 'NF { count++ } END { print count + 0 }')"
+      display_count="''${5:-$(printf '%s\n' "$display_paths" | awk 'NF { count++ } END { print count + 0 }')}"
+      output_file_path="''${6:-}"
 
       printf 'wdav-open-files - %s\n' "$timestamp"
 
@@ -182,6 +183,10 @@ writeShellApplication {
         printf 'currently active after filters: %s\n' "$count"
       fi
 
+      if [ -n "$output_file_path" ]; then
+        printf 'output file: %s\n' "$output_file_path"
+      fi
+
       printf '\n'
 
       if [ "$lsof_status" -ne 0 ]; then
@@ -192,15 +197,16 @@ writeShellApplication {
         printf 'No non-internal open files found.\n'
       elif [ -n "$max_paths" ]; then
         printf '%s\n' "$display_paths" |
-          awk -v max="$max_paths" -v width="$max_width" '
+          awk -v max="$max_paths" -v width="$max_width" -v total="$display_count" '
             NF {
               seen++
 
               if (seen <= max) {
                 line = $0
+                limit = width - 1
 
-                if (width > 4 && length(line) > width) {
-                  line = substr(line, 1, width - 3) "..."
+                if (limit > 4 && length(line) > limit) {
+                  line = substr(line, 1, limit - 3) "..."
                 }
 
                 print line
@@ -208,8 +214,10 @@ writeShellApplication {
             }
 
             END {
-              if (seen > max) {
-                printf "... %d more paths hidden; use --once or --pager for full list.\n", seen - max
+              if (total > seen) {
+                printf "... %d more paths not shown.\n", total - seen
+              } else if (seen > max) {
+                printf "... %d more paths not shown.\n", seen - max
               }
             }
           '
@@ -230,6 +238,69 @@ writeShellApplication {
       printf '\033[J'
     }
 
+    write_current_output() {
+      if [ -z "$output_file" ]; then
+        return
+      fi
+
+      printf '%s\n' "$paths" > "$output_file"
+    }
+
+    append_new_output() {
+      if [ -z "$output_file" ]; then
+        return
+      fi
+
+      printf '%s\n' "$paths" |
+        awk -v seen_file="$seen_file" -v output_file="$output_file" '
+          BEGIN {
+            while ((getline line < seen_file) > 0) {
+              seen[line] = 1
+            }
+
+            close(seen_file)
+          }
+
+          NF && !seen[$0] {
+            print $0 >> output_file
+            print $0 >> seen_file
+            seen[$0] = 1
+          }
+        '
+    }
+
+    output_count() {
+      awk 'NF { count++ } END { print count + 0 }' "$output_file"
+    }
+
+    recent_output() {
+      awk -v max="$1" '
+        NF {
+          lines[++count] = $0
+        }
+
+        END {
+          start = count - max + 1
+
+          if (start < 1) {
+            start = 1
+          }
+
+          for (i = start; i <= count; i++) {
+            print lines[i]
+          }
+        }
+      ' "$output_file"
+    }
+
+    prepare_output_file() {
+      /bin/chmod 0644 "$output_file"
+
+      if [ -n "''${SUDO_UID:-}" ] && [ -n "''${SUDO_GID:-}" ]; then
+        /usr/sbin/chown "$SUDO_UID:$SUDO_GID" "$output_file" || true
+      fi
+    }
+
     case "$mode" in
       once)
         snapshot
@@ -239,7 +310,8 @@ writeShellApplication {
         ;;
       live)
         old_stty=""
-        history_paths=""
+        output_file=""
+        seen_file=""
 
         cleanup() {
           if [ -n "$old_stty" ]; then
@@ -251,6 +323,14 @@ writeShellApplication {
           else
             printf '\033[?25h'
           fi
+
+          if [ -n "$seen_file" ]; then
+            rm -f "$seen_file"
+          fi
+
+          if [ -n "$output_file" ]; then
+            printf '\nwdav-open-files output saved to %s\n' "$output_file"
+          fi
         }
 
         if [ -t 0 ]; then
@@ -261,6 +341,13 @@ writeShellApplication {
         trap cleanup EXIT
         trap 'exit' INT TERM
 
+        output_file="$(mktemp "''${TMPDIR:-/tmp}/wdav-open-files.XXXXXX")"
+        prepare_output_file
+
+        if [ "$append_new" = true ]; then
+          seen_file="$(mktemp "''${TMPDIR:-/tmp}/wdav-open-files-seen.XXXXXX")"
+        fi
+
         if [ -t 1 ]; then
           printf '\033[?1049h\033[?25l\033[H\033[2J'
         else
@@ -269,26 +356,27 @@ writeShellApplication {
 
         while true; do
           read -r rows cols < <(terminal_size)
-          max_paths="$(awk 'BEGIN { max = ARGV[1] - 9; print (max > 1 ? max : 1) }' "$rows")"
+          max_paths="$(awk 'BEGIN { max = ARGV[1] - 13; print (max > 1 ? max : 1) }' "$rows")"
 
           collect_snapshot
 
           if [ "$append_new" = true ]; then
-            history_paths="$(
-              {
-                printf '%s\n' "$history_paths"
-                printf '%s\n' "$paths"
-              } |
-                awk 'NF' |
-                sort -u
-            )"
+            append_new_output
+            display_total="$(output_count)"
+            display_paths="$(recent_output "$max_paths")"
+            display_label="opened files seen this run"
+          else
+            write_current_output
+            display_total="$(output_count)"
+            display_paths="$(recent_output "$max_paths")"
+            display_label="filtered open files"
           fi
 
           frame="$(
             if [ "$append_new" = true ]; then
-              render_snapshot "$max_paths" "$cols" "$history_paths" "opened files seen this run"
+              render_snapshot "$max_paths" "$cols" "$display_paths" "$display_label" "$display_total" "$output_file"
             else
-              render_snapshot "$max_paths" "$cols"
+              render_snapshot "$max_paths" "$cols" "$display_paths" "$display_label" "$display_total" "$output_file"
             fi
             printf '\nRefreshing every %s seconds. Press q to quit.\n' "$interval"
           )"
