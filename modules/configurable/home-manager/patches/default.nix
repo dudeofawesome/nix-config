@@ -5,5 +5,5 @@ let
   ) (builtins.attrNames (builtins.readDir ./.));
 in
 {
-  imports = (map (name: ./. + "/${name}") nixFiles) ++ [ ./patches ];
+  imports = map (name: ./. + "/${name}") nixFiles;
 }
