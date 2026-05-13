@@ -56,6 +56,6 @@ flake.nix
 
 ## Code Style
 
-- Nix files are formatted with `nix fmt`
+- Nix files are formatted with `nix fmt <file>`
 - Other files use Prettier
 - before nix evaluation, newly created files must be staged with git
