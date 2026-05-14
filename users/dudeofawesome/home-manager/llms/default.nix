@@ -100,8 +100,6 @@ let
           continue: true,
           hookSpecificOutput: {
             hookEventName: "PreToolUse",
-            permissionDecision: "allow",
-            permissionDecisionReason: "Formatted Bash command with shfmt for readability",
             updatedInput: {
               command: $formatted
             }
