@@ -74,6 +74,41 @@ let
       fi
     '';
   };
+
+  formatBashToolUse = pkgs.writeShellApplication {
+    name = "claude-format-bash-tool-use";
+    runtimeInputs = [
+      pkgs.jq
+      pkgs.shfmt
+    ];
+    text = ''
+      input=$(cat)
+      command=$(jq -r '.tool_input.command // .input.command // empty' <<<"$input")
+
+      if [ -z "$command" ]; then
+        exit 0
+      fi
+
+      formatted=$(printf '%s\n' "$command" | shfmt -ln=bash -i 2 -ci 2>/dev/null || printf '%s\n' "$command")
+      if [ "$formatted" = "$command" ]; then
+        exit 0
+      fi
+
+      jq -cn \
+        --arg formatted "$formatted" \
+        '{
+          continue: true,
+          hookSpecificOutput: {
+            hookEventName: "PreToolUse",
+            permissionDecision: "allow",
+            permissionDecisionReason: "Formatted Bash command with shfmt for readability",
+            updatedInput: {
+              command: $formatted
+            }
+          }
+        }'
+    '';
+  };
 in
 {
   programs = {
@@ -92,6 +127,17 @@ in
       };
 
       settings.hooks = lib.mkIf isDarwin {
+        PreToolUse = [
+          {
+            matcher = "Bash";
+            hooks = [
+              {
+                type = "command";
+                command = lib.getExe formatBashToolUse;
+              }
+            ];
+          }
+        ];
         UserPromptSubmit = [
           {
             hooks = [
