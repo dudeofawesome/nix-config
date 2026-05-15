@@ -102,28 +102,62 @@ writeShellApplication {
     }
 
     collect_memory() {
-      /bin/ps -axo rss=,comm= |
-        awk '
-          {
-            rss = $1
-            $1 = ""
-            sub(/^ +/, "")
-            command = $0
-            split(command, parts, "/")
-            basename = parts[length(parts)]
+      pid_args=()
 
-            if (basename ~ /^wdavdaemon/) {
-              totals[basename] += rss
+      while IFS= read -r pid; do
+        if [ -n "$pid" ]; then
+          pid_args+=("-pid" "$pid")
+        fi
+      done < <(
+        /bin/ps -axo pid=,comm= |
+          awk '
+            {
+              pid = $1
+              $1 = ""
+              sub(/^ +/, "")
+              command = $0
+              split(command, parts, "/")
+              basename = parts[length(parts)]
+
+              if (basename ~ /^wdavdaemon$/ \
+                || command ~ /Microsoft Defender/ \
+                || command ~ /com\.microsoft\.(wdav|mdatp|dlp)/) {
+                print pid
+              }
             }
+          '
+      )
+
+      if [ "''${#pid_args[@]}" -eq 0 ]; then
+        return
+      fi
+
+      /usr/bin/top -l 1 -stats pid,mem -ncols 400 "''${pid_args[@]}" 2>/dev/null |
+        awk '
+          BEGIN { in_data = 0 }
+
+          /^PID[[:space:]]+MEM/ { in_data = 1; next }
+
+          in_data && NF >= 2 {
+            val = $2
+            unit = substr(val, length(val), 1)
+            num = substr(val, 1, length(val) - 1) + 0
+
+            if (unit == "K") kb = num
+            else if (unit == "M") kb = num * 1024
+            else if (unit == "G") kb = num * 1024 * 1024
+            else if (unit == "T") kb = num * 1024 * 1024 * 1024
+            else kb = val + 0
+
+            total += kb
           }
 
           END {
-            for (b in totals) {
-              printf "%s\t%s\n", b, totals[b]
+            if (total > 0) {
+              printf "defender\t%d\n", total
             }
           }
-        ' |
-        sort
+        '
     }
 
     update_peak_data() {
@@ -466,7 +500,7 @@ writeShellApplication {
             append_new_output
             display_total="$(output_count)"
             display_paths="$(recent_output "$max_paths")"
-            display_label="opened files seen this run"
+            display_label=$'opened files \033[3mseen\033[23m this run'
           else
             write_current_output
             display_total="$(output_count)"
