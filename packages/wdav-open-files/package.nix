@@ -101,6 +101,102 @@ writeShellApplication {
         '
     }
 
+    collect_memory() {
+      /bin/ps -axo rss=,comm= |
+        awk '
+          {
+            rss = $1
+            $1 = ""
+            sub(/^ +/, "")
+            command = $0
+            split(command, parts, "/")
+            basename = parts[length(parts)]
+
+            if (basename ~ /^wdavdaemon/) {
+              totals[basename] += rss
+            }
+          }
+
+          END {
+            for (b in totals) {
+              printf "%s\t%s\n", b, totals[b]
+            }
+          }
+        ' |
+        sort
+    }
+
+    update_peak_data() {
+      if [ -z "$memory_info" ]; then
+        return
+      fi
+
+      peak_data="$(
+        {
+          if [ -n "$peak_data" ]; then
+            printf '%s\n' "$peak_data"
+          fi
+          printf '%s\n' "$memory_info"
+        } |
+          awk '
+            NF {
+              if ($2 + 0 > peak[$1] + 0) {
+                peak[$1] = $2
+              }
+            }
+
+            END {
+              for (b in peak) {
+                printf "%s\t%s\n", b, peak[b]
+              }
+            }
+          ' |
+          sort
+      )"
+    }
+
+    render_memory() {
+      info="$1"
+      peak="$2"
+      use_peak="$3"
+
+      if [ -z "$info" ]; then
+        return
+      fi
+
+      printf '%s\n' "$info" |
+        awk -v peak_data="$peak" -v use_peak="$use_peak" '
+          BEGIN {
+            if (use_peak == "true") {
+              n = split(peak_data, lines, "\n")
+
+              for (i = 1; i <= n; i++) {
+                if (lines[i] == "") continue
+                split(lines[i], parts, "\t")
+                total_peak += parts[2]
+              }
+            } else {
+              use_peak = ""
+            }
+          }
+
+          NF {
+            total_current += $2
+            count++
+          }
+
+          END {
+            if (count == 0) exit
+
+            if (use_peak) {
+              printf "memory: %.1f MB (peak %.1f MB)\n", total_current/1024, total_peak/1024
+            } else {
+              printf "memory: %.1f MB\n", total_current/1024
+            }
+          }
+        '
+    }
+
     filter_paths() {
       awk '
         /^n/ {
@@ -151,6 +247,7 @@ writeShellApplication {
       paths=""
       count=0
       lsof_status=0
+      memory_info="$(collect_memory)"
 
       if [ -z "$pids" ]; then
         return
@@ -182,6 +279,8 @@ writeShellApplication {
       if [ "$append_new" = true ] && [ "$display_label" != "filtered open files" ]; then
         printf 'currently active after filters: %s\n' "$count"
       fi
+
+      render_memory "$memory_info" "''${peak_data:-}" "''${track_peak:-}"
 
       if [ -n "$output_file_path" ]; then
         printf 'output file: %s\n' "$output_file_path"
@@ -312,6 +411,8 @@ writeShellApplication {
         old_stty=""
         output_file=""
         seen_file=""
+        peak_data=""
+        track_peak=true
 
         cleanup() {
           if [ -n "$old_stty" ]; then
@@ -356,9 +457,10 @@ writeShellApplication {
 
         while true; do
           read -r rows cols < <(terminal_size)
-          max_paths="$(awk 'BEGIN { max = ARGV[1] - 13; print (max > 1 ? max : 1) }' "$rows")"
+          max_paths="$(awk 'BEGIN { max = ARGV[1] - 15; print (max > 1 ? max : 1) }' "$rows")"
 
           collect_snapshot
+          update_peak_data
 
           if [ "$append_new" = true ]; then
             append_new_output
