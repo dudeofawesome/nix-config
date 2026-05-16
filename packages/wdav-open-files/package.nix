@@ -491,10 +491,27 @@ writeShellApplication {
 
         while true; do
           read -r rows cols < <(terminal_size)
-          max_paths="$(awk 'BEGIN { max = ARGV[1] - 15; print (max > 1 ? max : 1) }' "$rows")"
 
           collect_snapshot
           update_peak_data
+
+          # Fixed lines around the path list:
+          #   timestamp, PIDs, label, memory, output file, blank,
+          #   "more not shown" sentinel, blank, "Refreshing..." footer
+          reserve=9
+
+          if [ "$lsof_status" -ne 0 ]; then
+            reserve=$((reserve + 2))
+          fi
+
+          if [ "$append_new" = true ]; then
+            reserve=$((reserve + 1))
+          fi
+
+          max_paths="$(
+            awk -v rows="$rows" -v reserve="$reserve" \
+              'BEGIN { max = rows - reserve; print (max > 1 ? max : 1) }'
+          )"
 
           if [ "$append_new" = true ]; then
             append_new_output
