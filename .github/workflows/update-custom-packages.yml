@@ -17,6 +17,8 @@ jobs:
   update:
     name: Run package updaters
     runs-on: macos-latest
+    env:
+      CACHIX_CACHE_NAME: dudeofawesome
 
     steps:
       - name: Checkout
@@ -27,6 +29,12 @@ jobs:
 
       - name: Enable Nix cache
         uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Enable custom Cachix cache
+        uses: cachix/cachix-action@v17
+        with:
+          name: ${{ env.CACHIX_CACHE_NAME }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Run updaters
         shell: bash
@@ -105,6 +113,26 @@ jobs:
           if ((${#nix_files[@]})); then
             nix fmt "${nix_files[@]}"
           fi
+
+      - name: Build custom packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # shellcheck disable=SC2016
+          mapfile -t package_attrs < <(
+            nix eval --impure --raw --expr '
+              let
+                flake = builtins.getFlake (toString ./.);
+                packages = flake.packages.${builtins.currentSystem};
+              in
+                builtins.concatStringsSep "\n" (
+                  map (name: ".#" + name) (builtins.attrNames packages)
+                )
+            '
+          )
+
+          nix build --keep-going --no-link "${package_attrs[@]}"
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7

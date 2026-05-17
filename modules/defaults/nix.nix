@@ -84,6 +84,8 @@ in
         "https://claude-code.cachix.org"
         # codex-cli-nix
         "https://codex-cli.cachix.org"
+        # custom packages
+        "https://dudeofawesome.cachix.org"
       ];
 
       trusted-public-keys = mkDarwinDefault [
@@ -95,6 +97,8 @@ in
         "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
         # codex-cli-nix
         "codex-cli.cachix.org-1:1Br3H1hHoRYG22n//cGKJOk3cQXgYobUel6O8DgSing="
+        # custom packages
+        "dudeofawesome.cachix.org-1:IVxs6UcpdkiLlV4T4OXe+05E76NtMleflWxkhlo9eq4="
       ];
 
       min-free = mkDarwinDefault (512 * 1024 * 1024);
