@@ -3,6 +3,9 @@ name: Update custom packages
 on:
   schedule:
     - cron: "17 12 * * 1"
+  push:
+    paths:
+      - ".github/workflows/update-custom-packages.yml"
   workflow_dispatch:
 
 permissions:
@@ -65,7 +68,7 @@ jobs:
             )"
 
             if jq -e 'type == "array"' <<< "$update_script" >/dev/null; then
-              nix-update --flake --use-update-script "$package"
+              nix-update --flake "$package"
             else
               script="$(
                 jq --raw-output '.' <<< "$update_script"
@@ -98,7 +101,10 @@ jobs:
         run: |
           set -euo pipefail
 
-          mapfile -t nix_files < <(
+          nix_files=()
+          while IFS= read -r nix_file; do
+            nix_files+=("$nix_file")
+          done < <(
             git ls-files --modified --others --exclude-standard -- '*.nix'
           )
 
