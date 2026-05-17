@@ -79,6 +79,10 @@ jobs:
                 jq --raw-output '.[]' <<< "$update_script"
               )
 
+              if [[ "$(basename "${update_command[0]}")" == "nix-update" ]]; then
+                update_command[0]="nix-update"
+              fi
+
               "${update_command[@]}" --flake "$package"
             else
               script="$(
