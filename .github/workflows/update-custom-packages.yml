@@ -72,7 +72,14 @@ jobs:
             )"
 
             if jq -e 'type == "array"' <<< "$update_script" >/dev/null; then
-              nix-update --flake "$package"
+              update_command=()
+              while IFS= read -r argument; do
+                update_command+=("$argument")
+              done < <(
+                jq --raw-output '.[]' <<< "$update_script"
+              )
+
+              "${update_command[@]}" --flake "$package"
             else
               script="$(
                 jq --raw-output '.' <<< "$update_script"
