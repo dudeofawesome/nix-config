@@ -58,13 +58,17 @@ jobs:
             echo "::group::Updating $package"
 
             update_script="$(
-              nix eval --impure --json --expr "
-                let
-                  flake = builtins.getFlake (toString ./.);
-                  packages = flake.packages.\${builtins.currentSystem};
-                in
-                  (builtins.getAttr "${package}" packages).passthru.updateScript
-              "
+              PACKAGE="$package" nix eval \
+                --impure \
+                --json \
+                --expr '
+                  let
+                    package = builtins.getEnv "PACKAGE";
+                    flake = builtins.getFlake (toString ./.);
+                    packages = flake.packages.${builtins.currentSystem};
+                  in
+                    (builtins.getAttr package packages).passthru.updateScript
+                '
             )"
 
             if jq -e 'type == "array"' <<< "$update_script" >/dev/null; then
@@ -74,15 +78,19 @@ jobs:
                 jq --raw-output '.' <<< "$update_script"
               )"
               context="$(
-                nix eval --impure --json --expr "
-                  let
-                  flake = builtins.getFlake (toString ./.);
-                  packages = flake.packages.\${builtins.currentSystem};
-                in
-                    builtins.getContext (
-                      builtins.getAttr "${package}" packages
-                    ).passthru.updateScript
-                "
+                PACKAGE="$package" nix eval \
+                  --impure \
+                  --json \
+                  --expr '
+                    let
+                      package = builtins.getEnv "PACKAGE";
+                      flake = builtins.getFlake (toString ./.);
+                      packages = flake.packages.${builtins.currentSystem};
+                    in
+                      builtins.getContext (
+                        builtins.getAttr package packages
+                      ).passthru.updateScript
+                  '
               )"
 
               jq -r 'keys[]' <<< "$context" | while read -r drv; do
