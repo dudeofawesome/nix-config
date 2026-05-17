@@ -1,0 +1,119 @@
+name: Update custom packages
+
+on:
+  schedule:
+    - cron: "17 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-custom-packages
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Run package updaters
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Run updaters
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          nix shell nixpkgs#jq nixpkgs#nix-update -c bash <<'EOF'
+          set -euo pipefail
+
+          packages="$(
+            nix eval --impure --json --expr '
+              let
+                flake = builtins.getFlake (toString ./.);
+                packages = flake.packages.${builtins.currentSystem};
+                hasUpdater = name:
+                  let
+                    package = packages.${name};
+                  in
+                    package ? passthru && package.passthru ? updateScript;
+              in
+                builtins.filter hasUpdater (builtins.attrNames packages)
+            '
+          )"
+
+          jq -r '.[]' <<< "$packages" | while read -r package; do
+            echo "::group::Updating $package"
+
+            update_script="$(
+              nix eval --impure --json --expr "
+                let
+                  flake = builtins.getFlake (toString ./.);
+                  packages = flake.packages.\${builtins.currentSystem};
+                in
+                  (builtins.getAttr "${package}" packages).passthru.updateScript
+              "
+            )"
+
+            if jq -e 'type == "array"' <<< "$update_script" >/dev/null; then
+              nix-update --flake --use-update-script "$package"
+            else
+              script="$(
+                jq --raw-output '.' <<< "$update_script"
+              )"
+              context="$(
+                nix eval --impure --json --expr "
+                  let
+                  flake = builtins.getFlake (toString ./.);
+                  packages = flake.packages.\${builtins.currentSystem};
+                in
+                    builtins.getContext (
+                      builtins.getAttr "${package}" packages
+                    ).passthru.updateScript
+                "
+              )"
+
+              jq -r 'keys[]' <<< "$context" | while read -r drv; do
+                nix-store --realise "$drv"
+              done
+
+              "$script"
+            fi
+
+            echo "::endgroup::"
+          done
+          EOF
+
+      - name: Format Nix files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t nix_files < <(
+            git ls-files --modified --others --exclude-standard -- '*.nix'
+          )
+
+          if ((${#nix_files[@]})); then
+            nix fmt "${nix_files[@]}"
+          fi
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automation/update-custom-packages
+          commit-message: "chore: update custom packages"
+          title: "chore: update custom packages"
+          body: |
+            Automated custom package update.
+
+            This runs every Monday at 12:17 UTC and can also be triggered manually.
+          labels: dependencies
