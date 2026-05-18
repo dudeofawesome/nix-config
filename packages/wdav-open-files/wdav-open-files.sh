@@ -4,7 +4,7 @@ usage() {
   cat <<'USAGE'
 Usage: wdav-open-files [--once] [--pager] [--append-new] [--interval SECONDS] [--help]
 
-Show non-internal files currently opened by wdavdaemon* processes.
+Show non-internal files currently opened by wdavdaemon* and dlpdaemon* processes.
 
 Options:
   --once              Print one snapshot and exit.
@@ -77,7 +77,7 @@ find_wdav_pids() {
         split(command, parts, "/")
         basename = parts[length(parts)]
 
-        if (basename ~ /^wdavdaemon(_|$)/) {
+        if (basename ~ /^(wdavdaemon|dlpdaemon)(_|$)/) {
           print pid
         }
       }
@@ -102,7 +102,7 @@ collect_memory() {
           split(command, parts, "/")
           basename = parts[length(parts)]
 
-          if (basename ~ /^wdavdaemon$/ \
+          if (basename ~ /^(wdavdaemon|dlpdaemon)$/ \
             || command ~ /Microsoft Defender/ \
             || command ~ /com\.microsoft\.(wdav|mdatp|dlp)/) {
             print pid
@@ -219,17 +219,18 @@ filter_paths() {
     /^n/ {
       path = substr($0, 2)
 
-      if (path == "" || path == "/dev/null") next
+      if (path == "" || path == "/" || path == "/dev/null" || path == "/usr/lib/dyld") next
       if (path !~ "^/") next
       if (path ~ "^/Applications/Microsoft Defender([^/]*)?\\.app(/|$)") next
       if (path ~ "^/Library/Application Support/Microsoft/(Defender|DLP|mdatp|wdav|Windows Defender)(/|$)") next
       if (path ~ "^/Library/Caches/com\\.microsoft\\.(mdatp|wdav|wdavdaemon)(/|$)") next
-      if (path ~ "^/Library/Logs/Microsoft/(Defender|mdatp)(/|$)") next
+      if (path ~ "^/Library/Logs/Microsoft/(Defender|DLP|mdatp)(/|$)") next
       if (path ~ "^/Library/Preferences/com\\.microsoft\\.(mdatp|wdav)") next
       if (path ~ "^/Library/Launch(Agents|Daemons)/com\\.microsoft\\.(mdatp|wdav)") next
       if (path ~ "^/Library/Managed Preferences/.*com\\.microsoft\\.(mdatp|wdav)") next
       if (path ~ "^/private/var/db/com\\.microsoft\\.(mdatp|wdav)(/|$)") next
       if (path ~ "^/private/var/folders/.*/com\\.microsoft\\.(mdatp|wdav|wdavdaemon)(/|$)") next
+      if (path ~ "^/(private/)?var/run/(priv_)?wdavdaemon[^/]*\\.sock$") next
 
       print path
     }
@@ -286,11 +287,11 @@ render_snapshot() {
   printf 'wdav-open-files - %s\n' "$timestamp"
 
   if [ -z "$pids" ]; then
-    printf 'wdavdaemon* processes: none\n'
+    printf 'defender processes: none\n'
     return
   fi
 
-  printf 'wdavdaemon* PIDs: %s\n' "$pids"
+  printf 'defender PIDs: %s\n' "$pids"
   printf '%s: %s\n' "$display_label" "$display_count"
 
   if [ "$append_new" = true ] && [ "$display_label" != "filtered open files" ]; then
