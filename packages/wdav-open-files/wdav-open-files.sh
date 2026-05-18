@@ -4,7 +4,7 @@ usage() {
   cat <<'USAGE'
 Usage: wdav-open-files [--once] [--pager] [--append-new] [--interval SECONDS] [--help]
 
-Show non-internal files currently opened by wdavdaemon_* processes.
+Show non-internal files currently opened by wdavdaemon* processes.
 
 Options:
   --once              Print one snapshot and exit.
@@ -77,7 +77,7 @@ find_wdav_pids() {
         split(command, parts, "/")
         basename = parts[length(parts)]
 
-        if (basename ~ /^wdavdaemon_/) {
+        if (basename ~ /^wdavdaemon(_|$)/) {
           print pid
         }
       }
@@ -286,11 +286,11 @@ render_snapshot() {
   printf 'wdav-open-files - %s\n' "$timestamp"
 
   if [ -z "$pids" ]; then
-    printf 'wdavdaemon_* processes: none\n'
+    printf 'wdavdaemon* processes: none\n'
     return
   fi
 
-  printf 'wdavdaemon_* PIDs: %s\n' "$pids"
+  printf 'wdavdaemon* PIDs: %s\n' "$pids"
   printf '%s: %s\n' "$display_label" "$display_count"
 
   if [ "$append_new" = true ] && [ "$display_label" != "filtered open files" ]; then
