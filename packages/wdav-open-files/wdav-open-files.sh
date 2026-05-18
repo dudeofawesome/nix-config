@@ -15,6 +15,25 @@ Options:
 USAGE
 }
 
+if [ "$(id -u)" -ne 0 ]; then
+  for arg in "$@"; do
+    case "$arg" in
+      --help|-h)
+        usage
+        exit 0
+        ;;
+    esac
+  done
+
+  if ! command -v sudo >/dev/null 2>&1; then
+    echo "wdav-open-files: must be run as root (sudo not found)" >&2
+    exit 1
+  fi
+
+  echo "wdav-open-files: elevated privileges required; re-running with sudo..." >&2
+  exec sudo -- "$0" "$@"
+fi
+
 interval=5
 mode=live
 append_new=false
