@@ -28,6 +28,8 @@ extensions = [
   'mxsdev.typescript-explorer', # missing
   'seeker-dk.node-modules-viewer', # missing
 
+  'swiftlang.swift-vscode', # missing
+
   'ms-toolsai.jupyter', # missing
   'eeyore.yapf', # missing
 

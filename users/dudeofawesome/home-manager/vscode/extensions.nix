@@ -284,6 +284,13 @@ merge
             sha256 = "11ifaih53xb77mbjwqhhphpwglj6d41fy9s1yz67952251s93ab7";
 
           };
+          "swiftlang"."swift-vscode" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "swift-vscode";
+            publisher = "swiftlang";
+            version = "2.16.4";
+            sha256 = "sha256-r6KGXoZE55Zkqs4Tjl6y0zMmBvsRhnRciX0a6/c24gA=";
+
+          };
           "terrastruct"."d2" = vscode-utils.extensionFromVscodeMarketplace {
             name = "d2";
             publisher = "terrastruct";

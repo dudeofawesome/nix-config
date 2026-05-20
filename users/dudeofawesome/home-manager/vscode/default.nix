@@ -11,6 +11,7 @@ with lib;
   home.packages = with pkgs-unstable; [
     gitlab-ci-ls
     rubyPackages.solargraph
+    lldb
   ];
 
   programs.vscode = {
@@ -85,6 +86,7 @@ with lib;
           nix4vscode.inferrinizzard.prettier-sql-vscode
           jebbs.plantuml
           jnoortheen.nix-ide
+          llvm-vs-code-extensions.lldb-dap
           mads-hartmann.bash-ide-vscode
           mathiasfrohlich.kotlin
           nix4vscode.mermaidchart.vscode-mermaid-chart
@@ -122,6 +124,7 @@ with lib;
           # signageos.signageos-vscode-sops
           streetsidesoftware.code-spell-checker
           stylelint.vscode-stylelint
+          nix4vscode.swiftlang.swift-vscode
           tamasfe.even-better-toml
           nix4vscode.terrastruct.d2
           tomoki1207.pdf
