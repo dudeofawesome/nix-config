@@ -28,7 +28,7 @@ with lib;
             name = "claude-code";
             publisher = "anthropic";
             version = config.programs.claude-code.package.version;
-            sha256 = "sha256-W/sSZZNtYLIj7vJ0VGZz+kwn2f5m+JrQTti0kMAaV5o=";
+            sha256 = "sha256-uHlVeZ1RLjCN6KBSorzA/v4to+uqb75HPb8L5n7uHuc=";
 
             postInstall = ''
               mkdir -p "$out/$installPrefix/resources/native-binary"
