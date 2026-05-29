@@ -1,0 +1,56 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  nixos-hosts:
+    name: NixOS ${{ matrix.host }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        host:
+          - badlands-vm
+          - haleakala
+          - haleakala-sim
+          - kings-canyon
+          - monongahela
+          - soto-server
+          - starling-vm
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Evaluate host toplevel derivation
+        run: nix eval --raw .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel.drvPath
+
+  darwin-hosts:
+    name: Darwin ${{ matrix.host }}
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        host:
+          - badlands
+          - crater-lake
+          - joshs-paciolan-laptop
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Evaluate host toplevel derivation
+        run: nix eval --raw .#darwinConfigurations.${{ matrix.host }}.config.system.build.toplevel.drvPath
