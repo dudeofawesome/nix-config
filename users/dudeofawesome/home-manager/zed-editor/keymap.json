@@ -4,5 +4,21 @@
     "bindings": {
       "cmd-shift-c": "terminal_panel::Toggle"
     }
+  },
+
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-\\": "workspace::ToggleLeftDock"
+    },
+    "unbind": {
+      "cmd-b": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-\\": "pane::SplitRight"
+    }
   }
 ]
