@@ -22,7 +22,7 @@
       "ssh-config"
     ];
 
-    userKeymaps = lib.importJSON ./keybindings.json;
+    userKeymaps = lib.importJSON ./keymap.json;
     userSettings = lib.importJSON ./zed-settings.json;
   };
 }
