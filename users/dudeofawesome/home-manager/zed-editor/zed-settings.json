@@ -18,6 +18,8 @@
     "mode": "system"
   },
 
+  "colorize_brackets": true,
+
   "languages": {
     "Nix": {
       "formatter": {
