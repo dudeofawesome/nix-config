@@ -27,6 +27,11 @@ Inspiration & adaptation for flakes from @BriianPowell.
    6. Run `find . \( -wholename "*/secrets/*.yaml" -o -name "secrets.yaml" \) -type f -exec sops updatekeys --yes {} \;`
 8. Run `./scripts/rsync-switch.sh starling-vm=root@10.211.55.9` to apply your new configuration to your machine (replace IP address with your machine's address)
 
+## Fix Garbage Collection on Darwin
+Sometimes macOS does not give `nix store gc` permission to perform garbage collection. Follow this process to fix it. [[Github Issue](https://github.com/NixOS/nix/issues/6765#issuecomment-2869233182)]
+
+System Settings > Privacy & Security > Full Disk Access > "+" (bottom left) > "/run/current-system/sw/bin/nix"
+
 ## Set up nixos-anywhere
 
 1. Create a secrets.yaml in your host's folder by running `sops hosts/nixos/starling-vm/secrets.yaml`.
