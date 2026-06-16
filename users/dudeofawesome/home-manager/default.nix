@@ -75,6 +75,7 @@ with pkgs.stdenv.targetPlatform;
           losslesscut-bin
           obsidian
           ollama
+          pkgs-unstable.openscad-unstable
           opentofu
           spotify
           (

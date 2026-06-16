@@ -89,6 +89,7 @@ in
               gitlab_ci_ls_path="$(escape_for_sed "${lib.getExe pkgs-stable.gitlab-ci-ls}")"
               d2_path="$(escape_for_sed "${lib.getExe pkgs-stable.d2}")"
               jdk_path="$(escape_for_sed "${pkgs-stable.jdk}")"
+              openscad_path="$(escape_for_sed "${pkgs-unstable.openscad-unstable}")"
 
               mutated_settings="$(echo "$mutated_settings" \
                 `# Add header about nix` \
@@ -103,6 +104,8 @@ in
                 | ${lib.getExe pkgs.gnused} -Ee 's/("gitlabLs.executablePath"): "(.+)"/\1: "'"$gitlab_ci_ls_path"'"/i' \
                 `# Point to nix's d2` \
                 | ${lib.getExe pkgs.gnused} -Ee 's/("D2.execPath"): "(.+)"/\1: "'"$d2_path"'"/i' \
+                `# Point to nix's openscad` \
+                | ${lib.getExe pkgs.gnused} -Ee 's/("openscad.launchPath"): "(.+)"/\1: "'"$openscad_path"'\/Applications\/OpenSCAD.app\/Contents\/MacOS\/OpenSCAD"/i' \
                 `# Point to nix's jdk` \
                 | ${lib.getExe pkgs.gnused} -Ee 's/("java.jdt.ls.java.home"): "(.+)"/\1: "'"$jdk_path"'"/i' \
               )"

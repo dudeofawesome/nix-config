@@ -459,7 +459,7 @@
 
   "csharp.referencesCodeLens.enabled": false,
 
-  "openscad.launchPath": "/Applications/OpenSCAD Beta.app/Contents/MacOS/OpenSCAD",
+  "openscad.launchPath": "this should be replaced by nix",
 
   "java.configuration.checkProjectSettingsExclusions": false,
   "[java]": {
