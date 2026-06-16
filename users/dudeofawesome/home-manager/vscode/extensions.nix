@@ -273,8 +273,8 @@ merge
           "openai"."chatgpt" = vscode-utils.extensionFromVscodeMarketplace {
             name = "chatgpt";
             publisher = "openai";
-            version = "26.5519.32039";
-            sha256 = "sha256-hJhmLn3AvmY3X3RlbKlpeBX94w8PPm1cuPb3GNvgL/g=";
+            version = "26.5609.30741";
+            sha256 = "sha256-tV+CzebWhy9VCpMV5JirKj3ynAJ8BOyYWtb1ihAXB+c=";
 
           };
           "seeker-dk"."node-modules-viewer" = vscode-utils.extensionFromVscodeMarketplace {
