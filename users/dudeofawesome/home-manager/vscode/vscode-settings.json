@@ -861,6 +861,7 @@
   "gitlab.duoAgentPlatform.enabled": false,
   "gitlab.keybindingHints.enabled": false,
   "chatgpt.commentCodeLensEnabled": false,
+  "chatgpt.followUpQueueMode": "steer",
   // now M$ is hiding Copilot settings behind obscure names…
   "workbench.editor.empty.hint": "hidden",
 
