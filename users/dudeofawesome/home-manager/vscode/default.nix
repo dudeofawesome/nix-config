@@ -22,7 +22,53 @@ with lib;
     profiles.default = {
       extensions =
         let
-          nix4vscode = (import ./extensions.nix) { inherit pkgs lib; };
+          nix4vscodeExtensions = pkgs-unstable.nix4vscode.forVscode [
+            "alesbrelih.gitlab-ci-ls"
+            "beardedbear.beardedtheme"
+            "blueglassblock.better-json5"
+            "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
+            # "bradlc.vscode-tailwindcss"
+            "bruno-api-client.bruno"
+            "charliermarsh.ruff"
+            # "connor4312.nodejs-testing"
+            "deerawan.vscode-dash"
+            "drknoxy.eslint-disable-snippets"
+            "eeyore.yapf"
+            "effectful-tech.effect-vscode"
+            "ezoosk.claude-context-bar"
+            "fabiospampinato.vscode-diff"
+            "flesler.url-encode"
+            "fwcd.kotlin"
+            "ghmcadams.lintlens"
+            "github.vscode-github-actions"
+            "github.vscode-pull-request-github"
+            "gitlab.gitlab-workflow"
+            "gracefulpotato.rbs-syntax"
+            "graphql.vscode-graphql-execution"
+            "idleberg.applescript"
+            "inferrinizzard.prettier-sql-vscode"
+            "leathong.openscad-language-support"
+            "mermaidchart.vscode-mermaid-chart"
+            "mrmlnc.vscode-scss"
+            "ms-kubernetes-tools.vscode-kubernetes-tools"
+            "msjsdiag.vscode-react-native"
+            "mxsdev.typescript-explorer"
+            "novy.vsc-gcode"
+            "orta.vscode-jest"
+            "oven.bun-vscode"
+            "seeker-dk.node-modules-viewer"
+            "semanticdiff.semanticdiff"
+            "swiftlang.swift-vscode"
+            "terrastruct.d2"
+            "thijsdaniels.vscode-openscad-preview"
+            "tomoyukim.vscode-mermaid-editor"
+            "tyriar.lorem-ipsum"
+            "ultram4rine.vscode-choosealicense"
+            "vitest.explorer"
+            "vstirbu.vscode-mermaid-preview"
+            "weaveworks.vscode-gitops-tools"
+            "yutengjing.open-in-external-app"
+          ];
 
           claude-code = pkgs.vscode-utils.extensionFromVscodeMarketplace {
             name = "claude-code";
@@ -72,61 +118,33 @@ with lib;
         with pkgs-unstable.vscode-extensions;
         [
           alefragnani.bookmarks
-          nix4vscode.alesbrelih.gitlab-ci-ls
           claude-code
           antyos.openscad
-          nix4vscode.beardedbear.beardedtheme
           bierner.markdown-mermaid
-          nix4vscode.blueglassblock.better-json5
           bmalehorn.vscode-fish
-          nix4vscode.bpruitt-goddard.mermaid-markdown-syntax-highlighting
-          # nix4vscode.bradlc.vscode-tailwindcss
-          nix4vscode.bruno-api-client.bruno
           castwide.solargraph
-          nix4vscode.charliermarsh.ruff
           codezombiech.gitignore
-          # nix4vscode.connor4312.nodejs-testing
           coolbear.systemd-unit-file
           dart-code.dart-code
           dart-code.flutter
           dbaeumer.vscode-eslint
-          nix4vscode.deerawan.vscode-dash
           donjayamanne.githistory
-          nix4vscode.drknoxy.eslint-disable-snippets
           eamodio.gitlens
           editorconfig.editorconfig
-          nix4vscode.eeyore.yapf
-          nix4vscode.effectful-tech.effect-vscode
           esbenp.prettier-vscode
-          nix4vscode.ezoosk.claude-context-bar
-          nix4vscode.fabiospampinato.vscode-diff
           firefox-devtools.vscode-firefox-debug
-          nix4vscode.flesler.url-encode
-          nix4vscode.fwcd.kotlin
-          nix4vscode.ghmcadams.lintlens
-          nix4vscode.github.vscode-github-actions
-          nix4vscode.github.vscode-pull-request-github
-          nix4vscode.gitlab.gitlab-workflow
           golang.go
-          nix4vscode.gracefulpotato.rbs-syntax
           graphql.vscode-graphql
           graphql.vscode-graphql-syntax
-          nix4vscode.graphql.vscode-graphql-execution
           gruntfuggly.todo-tree
           hashicorp.terraform
-          nix4vscode.idleberg.applescript
-          nix4vscode.inferrinizzard.prettier-sql-vscode
           jebbs.plantuml
           jnoortheen.nix-ide
-          nix4vscode.leathong.openscad-language-support
           llvm-vs-code-extensions.lldb-dap
           mads-hartmann.bash-ide-vscode
           mathiasfrohlich.kotlin
-          nix4vscode.mermaidchart.vscode-mermaid-chart
           mikestead.dotenv
-          nix4vscode.mrmlnc.vscode-scss
           ms-azuretools.vscode-docker
-          nix4vscode.ms-kubernetes-tools.vscode-kubernetes-tools
           ms-python.python
           ms-python.vscode-pylance
           ms-toolsai.jupyter
@@ -136,12 +154,7 @@ with lib;
           ms-vscode.hexeditor
           ms-vscode.remote-explorer
           ms-vsliveshare.vsliveshare
-          nix4vscode.msjsdiag.vscode-react-native
-          nix4vscode.mxsdev.typescript-explorer
           naumovs.color-highlight
-          nix4vscode.novy.vsc-gcode
-          nix4vscode.orta.vscode-jest
-          nix4vscode.oven.bun-vscode
           codex
           pkief.material-icon-theme
           pkief.material-product-icons
@@ -151,28 +164,16 @@ with lib;
           redhat.vscode-yaml
           rust-lang.rust-analyzer
           ryu1kn.partial-diff
-          nix4vscode.seeker-dk.node-modules-viewer
-          nix4vscode.semanticdiff.semanticdiff
           shopify.ruby-lsp
           # signageos.signageos-vscode-sops
           streetsidesoftware.code-spell-checker
           stylelint.vscode-stylelint
-          nix4vscode.swiftlang.swift-vscode
           tamasfe.even-better-toml
-          nix4vscode.terrastruct.d2
-          nix4vscode.thijsdaniels.vscode-openscad-preview
           tomoki1207.pdf
-          nix4vscode.tomoyukim.vscode-mermaid-editor
-          nix4vscode.tyriar.lorem-ipsum
-          nix4vscode.ultram4rine.vscode-choosealicense
           visualstudioexptteam.intellicode-api-usage-examples
           visualstudioexptteam.vscodeintellicode
-          nix4vscode.vitest.explorer
-          nix4vscode.vstirbu.vscode-mermaid-preview
-          nix4vscode.weaveworks.vscode-gitops-tools
           wmaurer.change-case
           yoavbls.pretty-ts-errors
-          nix4vscode.yutengjing.open-in-external-app
           yzhang.markdown-all-in-one
 
           # angular.ng-template
@@ -193,7 +194,8 @@ with lib;
           # johnpapa.vscode-peacock
           # jumpinjackie.vscode-map-preview
           # jsayol.firebase-explorer
-        ];
+        ]
+        ++ nix4vscodeExtensions;
     };
   };
 }

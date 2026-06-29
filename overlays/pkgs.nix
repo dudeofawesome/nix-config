@@ -18,6 +18,7 @@ in
       overlays = [
         inputs.claude-code-nix.overlays.default
         inputs.codex-cli-nix.overlays.default
+        inputs.nix4vscode.overlays.default
       ];
     }
   );

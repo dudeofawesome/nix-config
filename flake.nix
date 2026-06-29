@@ -47,6 +47,11 @@
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
+    nix4vscode = {
+      url = "github:nix-community/nix4vscode";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     dudeofawesome_dotfiles = {
       url = "github:dudeofawesome/dotfiles";
       flake = false;
