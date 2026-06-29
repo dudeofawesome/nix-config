@@ -28,12 +28,43 @@ with lib;
             name = "claude-code";
             publisher = "anthropic";
             version = config.programs.claude-code.package.version;
-            sha256 = "sha256-HlikWBkhui1COUc+b6v3SNcuSVMo6JS6DwaU4moHPzI=";
+            sha256 = "sha256-443PFzX3FNJnNBtlOrS9sqhFDYyyn9JMwD8IbgtxSl0=";
 
             postInstall = ''
               mkdir -p "$out/$installPrefix/resources/native-binary"
               rm -f "$out/$installPrefix/resources/native-binary/claude"*
-              ln -s "${config.programs.claude-code.package}/bin/claude" "$out/$installPrefix/resources/native-binary/claude"
+              ln -s "${lib.getExe config.programs.claude-code.package}" "$out/$installPrefix/resources/native-binary/claude"
+            '';
+          };
+
+          # https://marketplace.visualstudio.com/items?itemName=openai.chatgpt
+          codex = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+            name = "chatgpt";
+            publisher = "openai";
+            version = "26.5623.42026";
+            sha256 = "sha256-ZQhX2EoTEGDYHSaQqOuLjMuSOVbo3Gzc8slmRm1iDMA=";
+
+            postInstall = ''
+              echo "ENV:"
+              env
+
+              case "$system" in
+                aarch64-linux)
+                  platformString="linux-aarch64"
+                  ;;
+                aarch64-darwin)
+                  platformString="macos-aarch64"
+                  ;;
+                *)
+                  echo "Unsupported system: $system" >&2
+                  exit 1
+                  ;;
+              esac
+
+              mkdir -p "$out/$installPrefix/bin/$platformString/"
+              rm -f "$out/$installPrefix/bin/"*/{codex,rg}
+              ln -s "${lib.getExe config.programs.codex.package}" "$out/$installPrefix/bin/$platformString/codex"
+              ln -s "${lib.getExe config.programs.ripgrep.package}" "$out/$installPrefix/bin/$platformString/rg"
             '';
           };
         in
@@ -110,7 +141,7 @@ with lib;
           nix4vscode.novy.vsc-gcode
           nix4vscode.orta.vscode-jest
           nix4vscode.oven.bun-vscode
-          nix4vscode.openai.chatgpt
+          codex
           pkief.material-icon-theme
           pkief.material-product-icons
           shopify.ruby-lsp

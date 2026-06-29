@@ -153,6 +153,7 @@ in
             pkgs.symlinkJoin {
               name = "codex-with-1password-env";
               paths = [ pkgs-unstable.codex ];
+              meta.mainProgram = "codex";
               postBuild = ''
                 rm "$out/bin/codex"
                 ln -s ${wrappedCodex} "$out/bin/codex"
