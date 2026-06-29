@@ -83,6 +83,7 @@ with lib;
           # nix4vscode.bradlc.vscode-tailwindcss
           nix4vscode.bruno-api-client.bruno
           castwide.solargraph
+          nix4vscode.charliermarsh.ruff
           codezombiech.gitignore
           # nix4vscode.connor4312.nodejs-testing
           coolbear.systemd-unit-file

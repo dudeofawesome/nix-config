@@ -73,6 +73,13 @@ merge
             sha256 = "121k1a3g6jz5iwjbkyr6iqgn7pfkckadr9nlgmccfjw2f6884ag5";
 
           };
+          "charliermarsh"."ruff" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "ruff";
+            publisher = "charliermarsh";
+            version = "2026.56.0";
+            sha256 = "sha256-HN4hB/J1I/Bo8Kr9i/uQIBvOSyn/t1EDQxOk9f3tQk4=";
+
+          };
           "connor4312"."nodejs-testing" = vscode-utils.extensionFromVscodeMarketplace {
             name = "nodejs-testing";
             publisher = "connor4312";
