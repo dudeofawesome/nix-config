@@ -86,6 +86,7 @@ with lib;
           nix4vscode.inferrinizzard.prettier-sql-vscode
           jebbs.plantuml
           jnoortheen.nix-ide
+          nix4vscode.leathong.openscad-language-support
           llvm-vs-code-extensions.lldb-dap
           mads-hartmann.bash-ide-vscode
           mathiasfrohlich.kotlin
@@ -127,6 +128,7 @@ with lib;
           nix4vscode.swiftlang.swift-vscode
           tamasfe.even-better-toml
           nix4vscode.terrastruct.d2
+          nix4vscode.thijsdaniels.vscode-openscad-preview
           tomoki1207.pdf
           nix4vscode.tomoyukim.vscode-mermaid-editor
           nix4vscode.tyriar.lorem-ipsum

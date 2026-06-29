@@ -460,6 +460,8 @@
   "csharp.referencesCodeLens.enabled": false,
 
   "openscad.launchPath": "this should be replaced by nix",
+  "openscad.executablePath": "this should be replaced by nix",
+  "scad-lsp.launchPath": "this should be replaced by nix",
 
   "java.configuration.checkProjectSettingsExclusions": false,
   "[java]": {

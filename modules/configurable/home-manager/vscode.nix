@@ -90,6 +90,7 @@ in
               d2_path="$(escape_for_sed "${lib.getExe pkgs-stable.d2}")"
               jdk_path="$(escape_for_sed "${pkgs-stable.jdk}")"
               openscad_path="$(escape_for_sed "${pkgs-unstable.openscad-unstable}")"
+              openscad_bin_path="$(escape_for_sed "${lib.getExe' pkgs-unstable.openscad-unstable "openscad-unstable"}")"
 
               mutated_settings="$(echo "$mutated_settings" \
                 `# Add header about nix` \
@@ -106,6 +107,8 @@ in
                 | ${lib.getExe pkgs.gnused} -Ee 's/("D2.execPath"): "(.+)"/\1: "'"$d2_path"'"/i' \
                 `# Point to nix's openscad` \
                 | ${lib.getExe pkgs.gnused} -Ee 's/("openscad.launchPath"): "(.+)"/\1: "'"$openscad_path"'\/Applications\/OpenSCAD.app\/Contents\/MacOS\/OpenSCAD"/i' \
+                | ${lib.getExe pkgs.gnused} -Ee 's/("openscad.executablePath"): "(.+)"/\1: "'"$openscad_path"'\/Applications\/OpenSCAD.app\/Contents\/MacOS\/OpenSCAD"/i' \
+                | ${lib.getExe pkgs.gnused} -Ee 's/("scad-lsp.launchPath"): "(.+)"/\1: "'"$openscad_bin_path"'"/i' \
                 `# Point to nix's jdk` \
                 | ${lib.getExe pkgs.gnused} -Ee 's/("java.jdt.ls.java.home"): "(.+)"/\1: "'"$jdk_path"'"/i' \
               )"

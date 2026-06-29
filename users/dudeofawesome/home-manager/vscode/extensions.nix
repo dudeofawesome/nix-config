@@ -206,6 +206,13 @@ merge
             sha256 = "1ib8czlqhqq1rz6jrazfd9z3gfqdwqazxdvwmsyp765m0vf78xcg";
 
           };
+          "leathong"."openscad-language-support" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "openscad-language-support";
+            publisher = "leathong";
+            version = "2.0.1";
+            sha256 = "sha256-GTvn97POOVmie7mOD/Q3ivEHXmqb+hvgiic9pTWYS0s=";
+
+          };
           "mermaidchart"."vscode-mermaid-chart" = vscode-utils.extensionFromVscodeMarketplace {
             name = "vscode-mermaid-chart";
             publisher = "mermaidchart";
@@ -296,6 +303,13 @@ merge
             publisher = "terrastruct";
             version = "0.8.8";
             sha256 = "12yj9ammrhrh0cnyr30x3d87d4n7q7j19cggdvyblbwmdln66ycy";
+
+          };
+          "thijsdaniels"."vscode-openscad-preview" = vscode-utils.extensionFromVscodeMarketplace {
+            name = "vscode-openscad-preview";
+            publisher = "thijsdaniels";
+            version = "0.7.0";
+            sha256 = "sha256-qGQ29DWQK69OLwjo0vwiHrbotdtaSoLR8cJBiTGeYOg=";
 
           };
           "tomoyukim"."vscode-mermaid-editor" = vscode-utils.extensionFromVscodeMarketplace {
