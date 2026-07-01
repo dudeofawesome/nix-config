@@ -16,7 +16,7 @@ keys:
   # Then add that value to a new key here:
   users:
     - &user_dudeofawesome 'age17dnfg660q6f6xv634dlsqzt9arungk5k3xytd68m2c94tqa3wqtqv7ew0d'
-    - &user_josh 'age1nu45m5ht7x7h59t4x8kalx9j084tqty27rw97xl63fp85l8w45qspgdqt0'
+    - &user_josh 'age1txghvjna8kldpeml3qaspqaf892rvrkctksqqn3xms8axuggyutqz0043g'
 
   # In order to generate a new public key for a new system, run the following commands:
   # ```sh
