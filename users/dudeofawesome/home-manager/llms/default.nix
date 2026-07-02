@@ -87,7 +87,6 @@ in
     claude-code = {
       context = ./user-memory.md;
       skills = {
-        jira-defaults = ./skills/jira-defaults.md;
         grill-me = ./skills/grill-me.md;
       };
 
