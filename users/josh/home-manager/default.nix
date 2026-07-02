@@ -147,11 +147,7 @@
       };
     };
 
-    # Install thaw via brew instead of nix
-    thaw = {
-      enable = true;
-      package = null;
-    };
+    thaw.enable = true;
 
     postico.enable = pkgs.stdenv.targetPlatform.isDarwin;
   };
