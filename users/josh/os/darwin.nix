@@ -37,7 +37,6 @@
       "logi-options+"
       "macfuse"
       "markedit"
-      "microsoft-remote-desktop"
       "miro"
       "monitorcontrol"
       "mounty"
