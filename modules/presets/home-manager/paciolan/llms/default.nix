@@ -67,35 +67,6 @@
             ];
           };
         };
-      aws =
-        let
-          op = lib.getExe config.programs._1password-cli.package;
-          jq = "${lib.getExe pkgs.jq} --raw-output";
-          command = lib.getExe (
-            pkgs.writeShellScriptBin "aws-mcp" ''
-              op_data="$(
-                ${op} item get 'AWS Access Key' \
-                  --vault Paciolan \
-                  --account orleans.1password.com \
-                  --fields label='access key id',label='secret access key',label='default region' \
-                  --reveal --format json \
-                | ${jq} 'map({key: .label, value}) | from_entries'
-              )"
-
-              export AWS_ACCESS_KEY_ID="$(echo "$op_data" | ${jq} '."access key id"')"
-              export AWS_SECRET_ACCESS_KEY="$(echo "$op_data" | ${jq} '."secret access key"')"
-              export AWS_DEFAULT_REGION="$(echo "$op_data" | ${jq} '."default region"')"
-
-              exec ${lib.getExe' pkgs.uv "uvx"} mcp-proxy-for-aws@latest \
-                "https://aws-mcp.us-east-1.api.aws/mcp" \
-                --metadata "AWS_REGION=$AWS_DEFAULT_REGION" \
-                --read-only
-            ''
-          );
-        in
-        {
-          inherit command;
-        };
       # slack
     };
     settings = {
@@ -197,8 +168,6 @@
               "search_repositories"
               "verify_namespace"
             ])
-
-            "mcp__${hm-plugin-name}_aws__aws___suggest_aws_commands"
 
             (prefixed "mcp__${hm-plugin-name}_kubernetes__" [
               "configuration_contexts_list"
