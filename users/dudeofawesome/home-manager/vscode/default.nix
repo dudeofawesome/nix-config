@@ -34,9 +34,6 @@ with lib;
                 };
                 "openai.chatgpt" = {
                   postInstall = ''
-                    echo "ENV:"
-                    env
-
                     case "$system" in
                       aarch64-linux)
                         platformString="linux-aarch64"
