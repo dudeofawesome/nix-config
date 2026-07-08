@@ -62,7 +62,6 @@ with lib;
                 "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
                 # "bradlc.vscode-tailwindcss"
                 "bruno-api-client.bruno"
-                "charliermarsh.ruff"
                 # "connor4312.nodejs-testing"
                 "deerawan.vscode-dash"
                 "drknoxy.eslint-disable-snippets"
@@ -73,9 +72,6 @@ with lib;
                 "flesler.url-encode"
                 "fwcd.kotlin"
                 "ghmcadams.lintlens"
-                "github.vscode-github-actions"
-                "github.vscode-pull-request-github"
-                "gitlab.gitlab-workflow"
                 "gracefulpotato.rbs-syntax"
                 "graphql.vscode-graphql-execution"
                 "idleberg.applescript"
@@ -83,7 +79,6 @@ with lib;
                 "leathong.openscad-language-support"
                 "mermaidchart.vscode-mermaid-chart"
                 "mrmlnc.vscode-scss"
-                "ms-kubernetes-tools.vscode-kubernetes-tools"
                 "msjsdiag.vscode-react-native"
                 "mxsdev.typescript-explorer"
                 "novy.vsc-gcode"
@@ -98,7 +93,6 @@ with lib;
                 "tomoyukim.vscode-mermaid-editor"
                 "tyriar.lorem-ipsum"
                 "ultram4rine.vscode-choosealicense"
-                "vitest.explorer"
                 "vstirbu.vscode-mermaid-preview"
                 "weaveworks.vscode-gitops-tools"
                 "yutengjing.open-in-external-app"
@@ -112,6 +106,7 @@ with lib;
           bierner.markdown-mermaid
           bmalehorn.vscode-fish
           castwide.solargraph
+          charliermarsh.ruff
           codezombiech.gitignore
           coolbear.systemd-unit-file
           dart-code.dart-code
@@ -122,6 +117,9 @@ with lib;
           editorconfig.editorconfig
           esbenp.prettier-vscode
           firefox-devtools.vscode-firefox-debug
+          github.vscode-github-actions
+          github.vscode-pull-request-github
+          gitlab.gitlab-workflow
           golang.go
           graphql.vscode-graphql
           graphql.vscode-graphql-syntax
@@ -134,6 +132,7 @@ with lib;
           mathiasfrohlich.kotlin
           mikestead.dotenv
           ms-azuretools.vscode-docker
+          ms-kubernetes-tools.vscode-kubernetes-tools
           ms-python.python
           ms-python.vscode-pylance
           ms-toolsai.jupyter
@@ -160,6 +159,7 @@ with lib;
           tomoki1207.pdf
           visualstudioexptteam.intellicode-api-usage-examples
           visualstudioexptteam.vscodeintellicode
+          vitest.explorer
           wmaurer.change-case
           yoavbls.pretty-ts-errors
           yzhang.markdown-all-in-one
