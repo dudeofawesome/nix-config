@@ -137,4 +137,17 @@ in
 
   # Allow proprietary software.
   nixpkgs.config.allowUnfree = lib.mkDefault true;
+
+  # Stores the git commit the current system config was built from
+  system.configurationRevision =
+    let
+      rev =
+        if (inputs.self ? dirtyRev) then
+          inputs.self.dirtyRev
+        else if (inputs.self ? rev) then
+          inputs.self.rev
+        else
+          null;
+    in
+    lib.mkIf (rev != null) rev;
 }
