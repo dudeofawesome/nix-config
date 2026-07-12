@@ -22,16 +22,11 @@ with lib;
     profiles.default = {
       extensions =
         let
+          claude-code-version = "anthropic.claude-code.${config.programs.claude-code.package.version}";
+
           nix4vscodeExtensions =
-            pkgs-unstable.nix4vscode.forVscodeExt
+            (pkgs-unstable.nix4vscode.forVscodeExt
               {
-                "anthropic.claude-code" = {
-                  postInstall = ''
-                    mkdir -p "$out/$installPrefix/resources/native-binary"
-                    rm -f "$out/$installPrefix/resources/native-binary/claude"*
-                    ln -s "${lib.getExe config.programs.claude-code.package}" "$out/$installPrefix/resources/native-binary/claude"
-                  '';
-                };
                 "openai.chatgpt" = {
                   postInstall = ''
                     case "$system" in
@@ -56,7 +51,6 @@ with lib;
               }
               [
                 "alesbrelih.gitlab-ci-ls"
-                "anthropic.claude-code.${config.programs.claude-code.package.version}"
                 "beardedbear.beardedtheme"
                 "blueglassblock.better-json5"
                 "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
@@ -96,7 +90,22 @@ with lib;
                 "vstirbu.vscode-mermaid-preview"
                 "weaveworks.vscode-gitops-tools"
                 "yutengjing.open-in-external-app"
-              ];
+              ]
+            )
+            ++ (pkgs-unstable.nix4vscode.forOpenVsxExt
+              {
+                "${claude-code-version}" = {
+                  postInstall = ''
+                    mkdir -p "$out/$installPrefix/resources/native-binary"
+                    rm -f "$out/$installPrefix/resources/native-binary/claude"*
+                    ln -s "${lib.getExe config.programs.claude-code.package}" "$out/$installPrefix/resources/native-binary/claude"
+                  '';
+                };
+              }
+              [
+                "${claude-code-version}"
+              ]
+            );
         in
         # fallback to nixpkgs
         with pkgs-unstable.vscode-extensions;
