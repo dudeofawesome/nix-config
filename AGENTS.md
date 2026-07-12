@@ -10,8 +10,8 @@ nix build .#nixosConfigurations.<hostname>.config.system.build.toplevel --dry-ru
 nix build .#darwinConfigurations.<hostname>.config.system.build.toplevel --dry-run
 
 # Apply configuration to local machine
-sudo nixos-rebuild switch --flake .#<hostname>    # NixOS
-sudo darwin-rebuild switch --flake .#<hostname>         # macOS
+nh os switch --flake .#<hostname> # NixOS
+nh darwin switch .#<hostname>     # macOS
 
 # Deploy to remote machine
 ./scripts/rsync-switch.sh <hostname>[=user@ip]
