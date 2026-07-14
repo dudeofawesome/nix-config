@@ -314,6 +314,30 @@
       "url": "https://json.schemastore.org/stylelintrc.json"
     }
   ],
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://*.json-schema.org": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://*.developer.microsoft.com": true,
+    "https://*.github.com": true,
+    "https://docs.renovatebot.com": true
+  },
+  "json5.schemaDownload.trustedDomains": {
+    "schemastore.azurewebsites.net": true,
+    "raw.githubusercontent.com": true,
+    "www.schemastore.org": true,
+    "json.schemastore.org": true,
+    "json-schema.org": true,
+    "*.json-schema.org": true,
+    "developer.microsoft.com": true,
+    "*.developer.microsoft.com": true,
+    "*.github.com": true,
+    "docs.renovatebot.com": true
+  },
 
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -873,5 +897,5 @@
   "claudeContextBar.contextLimit": 1000000,
 
   "1password.editor.suggestStorage": false,
-  "mermaidChart.showGenerateDiagramCodeLens": false,
+  "mermaidChart.showGenerateDiagramCodeLens": false
 }
