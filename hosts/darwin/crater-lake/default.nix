@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 {
   imports = [
     ../../../modules/defaults/headful/gaming.darwin.nix
@@ -12,21 +12,7 @@
     ];
   };
 
-  nix = {
-    distributedBuilds = lib.mkForce false;
-    buildMachines = [
-      {
-        hostName = "linux-builder";
-        system = "aarch64-linux";
-        maxJobs = 100;
-        supportedFeatures = [
-          "kvm"
-          "benchmark"
-          "big-parallel"
-        ];
-      }
-    ];
-  };
+  nix.linux-builder.enable = true;
 
   services.scrutiny.collector = {
     enable = true;
