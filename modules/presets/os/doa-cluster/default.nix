@@ -1,4 +1,12 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  ...
+}:
+let
+  agent-token-path = "kubernetes/doa-cluster/tokens/agent";
+  server-token-path = "kubernetes/doa-cluster/tokens/server";
+in
 {
   sops =
     let
@@ -7,7 +15,8 @@
       tailscale_path = "users/dudeofawesome/tailscale";
     in
     {
-      secrets."kubernetes/doa-cluster/tokens/server".sopsFile = ./secrets.yaml;
+      secrets.${agent-token-path}.sopsFile = ./secrets.yaml;
+      secrets.${server-token-path}.sopsFile = ./secrets.yaml;
 
       secrets."${tailscale_path}/auth_key".sopsFile = ../../../../users/dudeofawesome/secrets.yaml;
       templates.k3s-vpn-auth-file =
@@ -30,5 +39,13 @@
 
     };
 
-  services.k3s.tokenFile = config.sops.secrets."kubernetes/doa-cluster/tokens/server".path;
+  services.k3s = {
+    tokenFile =
+      config.sops.secrets.${
+        if config.services.k3s.role == "agent" then agent-token-path else server-token-path
+      }.path;
+    agentTokenFile = lib.mkIf (config.services.k3s.role == "server") (
+      config.sops.secrets.${agent-token-path}.path
+    );
+  };
 }
