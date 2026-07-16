@@ -21,6 +21,8 @@
         prefix_rule(pattern = ["nix", "fmt"], decision = "allow")
         prefix_rule(pattern = ["nix", "build"], decision = "allow")
         prefix_rule(pattern = ["nix", "eval"], decision = "allow")
+        prefix_rule(pattern = ["nix", "flake"], decision = "allow")
+        prefix_rule(pattern = ["nix", "flake", "update"], decision = "prompt")
         prefix_rule(pattern = ["nix-prefetch-url"], decision = "allow")
       '';
       kubernetes = /* python */ ''
