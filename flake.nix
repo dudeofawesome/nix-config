@@ -41,6 +41,11 @@
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/main";
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
+    };
+
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
       # TODO: how to follow nixpkgs-darwin-stable when on macOS?
