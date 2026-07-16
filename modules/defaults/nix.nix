@@ -16,10 +16,6 @@ in
 {
   imports = [ (doa-lib.try-import ./nix.${os}.nix) ];
 
-  environment.systemPackages = with pkgs; [
-    nh
-  ];
-
   nix = {
     package = pkgs.nix;
 
