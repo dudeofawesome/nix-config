@@ -13,6 +13,7 @@
     ./miscellaneous.nix
     ./git.nix
     ./nix
+    ./nh.nix
     ./shells.nix
     ./sops.nix
     ./tmux
