@@ -301,7 +301,8 @@
               ipad = "^Sidecar Display";
               home = {
                 center = "^38GL950G$";
-                right = "^DELL U2717D$";
+                left = "^DELL U2717D \\(1\\)$";
+                right = "^DELL U2717D \\(2\\)$";
               };
               paciolan = {
                 left = "^DELL U2415 \\(1\\)$";
@@ -314,7 +315,7 @@
                 paciolan.right
               ];
               ${workspaces.browser} = [
-                home.center
+                home.left
                 paciolan.left
               ];
               ${workspaces.misc} = [
