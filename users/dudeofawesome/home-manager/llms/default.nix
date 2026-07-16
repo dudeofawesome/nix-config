@@ -161,7 +161,10 @@ in
         in
         codexPackage;
 
-      context = ./user-memory.md;
+      context = ''
+        ${builtins.readFile ./user-memory.md}
+        ${builtins.readFile ./user-memory.codex.md}
+      '';
 
       skills = {
         grill-me = ./skills/grill-me.md;
