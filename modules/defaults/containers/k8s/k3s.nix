@@ -12,17 +12,24 @@ let
   # https://github.com/NixOS/nixpkgs/pull/176520
   # k3s = pkgs.k3s.overrideAttrs
   #   (old: rec { buildInputs = old.buildInputs ++ [ pkgs.ipset ]; });
-  multi-node = config.services.k3s.token != null || config.services.k3s.tokenFile != null;
-  ha = config.services.k3s.clusterInit != null;
+  multi-node =
+    config.services.k3s.token != ""
+    || config.services.k3s.tokenFile != null
+    || config.services.k3s.serverAddr != "";
+  server = config.services.k3s.role == "server";
+  embedded-etcd-node =
+    server && (config.services.k3s.clusterInit || config.services.k3s.serverAddr != "");
 
   k3s-config = {
+    container-runtime-endpoint = "unix:///run/containerd/containerd.sock";
+  }
+  // lib.optionalAttrs server {
     # tls-san = [
     #   "k8s.orleans.io"
     # ];
 
     disable = [ "traefik" ];
     flannel-backend = if multi-node then "wireguard-native" else "host-gw";
-    container-runtime-endpoint = "unix:///run/containerd/containerd.sock";
   };
 in
 {
@@ -102,18 +109,19 @@ in
       package = pkgs.iptables-legacy;
 
       allowedTCPPorts = lib.flatten [
-        6443 # k8s API server
+        10250 # kubelet metrics and API
+        (lib.optional server 6443) # k8s API server
         # required if using a "High Availability Embedded etcd" configuration
-        (lib.optionals (ha) [
+        (lib.optionals embedded-etcd-node [
           2379 # etcd clients
           2380 # etcd peers
         ])
       ];
 
       allowedUDPPorts =
-        # required if using a "High Availability Embedded etcd" configuration
+        # Flannel's WireGuard backend on multi-node IPv4 clusters.
         lib.optionals (multi-node) [
-          8472 # k3s, flannel:
+          51820
         ];
     };
 
