@@ -88,6 +88,8 @@ in
         "https://claude-code.cachix.org"
         # codex-cli-nix
         "https://codex-cli.cachix.org"
+        # nixos-raspberrypi
+        "https://nixos-raspberrypi.cachix.org"
       ];
 
       trusted-public-keys = mkDarwinDefault [
@@ -99,6 +101,8 @@ in
         "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
         # codex-cli-nix
         "codex-cli.cachix.org-1:1Br3H1hHoRYG22n//cGKJOk3cQXgYobUel6O8DgSing="
+        # nixos-raspberrypi
+        "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
       ];
 
       min-free = mkDarwinDefault (512 * 1024 * 1024);
