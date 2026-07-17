@@ -33,6 +33,7 @@ thumbs.db
 *.sublime-workspace
 
 # Secrets
+*.agekey
 *.env
 *.env.*
 *.bin
