@@ -84,6 +84,19 @@ in
     )
   );
 
+  capitol-reef = inputs.nixos-raspberrypi.lib.nixosSystem (
+    import ../system.nix (
+      {
+        hostname = "capitol-reef";
+        arch = "aarch64";
+        owner = "dudeofawesome";
+        machine-class = "server";
+        users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
+      }
+      // base
+    )
+  );
+
   soto-server = lib.nixosSystem (
     import ../system.nix (
       {
