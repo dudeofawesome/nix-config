@@ -5,9 +5,6 @@
   ...
 }:
 {
-  # Temporary - this is broken for me, but I don't need to use it
-  nix.linux-builder.enable = false;
-
   imports = lib.flatten [
     (lib.optional (machine-class == "pc") ../../../modules/presets/os/paciolan.nix)
   ];

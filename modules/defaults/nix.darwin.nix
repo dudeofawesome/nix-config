@@ -1,9 +1,16 @@
 { lib, ... }:
 {
-  nix = {
-    linux-builder = {
+  determinateNix = {
+    customSettings.auto-optimise-store = lib.mkDefault true;
+
+    nixosVmBasedLinuxBuilder = {
       enable = lib.mkDefault false;
-      config.virtualisation.cores = lib.mkDefault 4;
+    };
+
+    determinateNixd = {
+      builder.state = "disabled";
+
+      garbageCollector.strategy = "automatic";
     };
   };
 }

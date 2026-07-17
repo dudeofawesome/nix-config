@@ -52,7 +52,7 @@
           ];
 
           secrets."${tokens_path}/${github_path}".sopsFile = ./secrets.yaml;
-          templates."${tokens_path}" = {
+          templates."${tokens_path}.conf" = {
             # owner = ;
             # file must be accessible (r) to all users, because only the build daemon runs as root and not nix evaluator itself(?)
             mode = "0444";

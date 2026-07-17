@@ -12,15 +12,24 @@ let
   inherit (pkgs.stdenv.targetPlatform) isLinux isDarwin;
 
   mkDarwinDefault = lib.mkOverride 99;
+
+  githubTokenPath = "users/${owner}/nix_access_tokens.conf";
+  hasGithubToken = builtins.hasAttr githubTokenPath config.sops.templates;
+  githubTokenInclude = ''
+    !include ${config.sops.templates.${githubTokenPath}.path}
+  '';
 in
 {
   imports = [ (doa-lib.try-import ./nix.${os}.nix) ];
 
   nix = {
+    enable = !isDarwin;
+
     package = pkgs.nix;
 
     gc = {
-      automatic = true;
+      # Determinate Nix manages garbage collection on macOS.
+      automatic = !isDarwin;
       options = lib.mkDefault "--delete-older-than 30d";
     }
     // (
@@ -40,7 +49,8 @@ in
     );
 
     optimise = {
-      automatic = lib.mkDefault true;
+      # Determinate Nix uses auto-optimise-store on macOS instead.
+      automatic = lib.mkDefault (!isDarwin);
     }
     // (
       if (isLinux) then
@@ -126,14 +136,15 @@ in
       };
     };
 
-    extraOptions =
-      let
-        github_token_path = "users/${owner}/nix_access_tokens";
-      in
-      lib.mkIf (config.sops.templates ? github_token_path) ''
-        !include ${config.sops.templates.${github_token_path}.path}
-      '';
+    extraOptions = lib.mkIf hasGithubToken githubTokenInclude;
   };
+
+  # nix.extraOptions is not written when nix-darwin's Nix management is
+  # disabled. Keep the SOPS-generated access token outside the Nix store and
+  # include it from Determinate's custom configuration instead.
+  environment.etc."nix/nix.custom.conf".text = lib.mkIf (isDarwin && hasGithubToken) (
+    lib.mkAfter githubTokenInclude
+  );
 
   # Allow proprietary software.
   nixpkgs.config.allowUnfree = lib.mkDefault true;
