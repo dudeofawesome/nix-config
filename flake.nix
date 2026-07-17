@@ -7,6 +7,8 @@
     nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+
     nur = {
       url = "github:nix-community/NUR";
       # TODO: how to follow nixpkgs-darwin-stable when on macOS?

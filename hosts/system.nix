@@ -55,6 +55,8 @@ in
     (doa-lib.try-import ../users/${owner}/os/${os}.nix)
     ../modules/defaults/auth
 
+    (if (os == "darwin") then inputs.determinate.darwinModules.default else { })
+
     (if (os == "linux") then inputs.disko.nixosModules.disko else { })
     (if (os == "linux") then inputs.vscode-server.nixosModules.default else { })
 
