@@ -122,23 +122,27 @@ in
       };
 
     # Entries here make package repos available via `nix shell <name>#<pkg>`
-    registry = {
-      stable.flake =
-        if (os == "darwin") then inputs.nixpkgs-darwin-stable else inputs.nixpkgs-linux-stable;
-      unstable.flake = inputs.nixpkgs-unstable;
-      latest.to = {
-        type = "github";
-        owner = "nixos";
-        repo = "nixpkgs";
-        # TODO: figure out how to specify `nixos-unstable` branch
-      };
+    registry =
+      let
+        stable = if (os == "darwin") then inputs.nixpkgs-darwin-stable else inputs.nixpkgs-linux-stable;
+      in
+      {
+        nixpkgs.flake = stable;
+        stable.flake = stable;
+        unstable.flake = inputs.nixpkgs-unstable;
+        latest.to = {
+          type = "github";
+          owner = "nixos";
+          repo = "nixpkgs";
+          # TODO: figure out how to specify `nixos-unstable` branch
+        };
 
-      node.to = {
-        type = "github";
-        owner = "fontis";
-        repo = "nix-node";
+        node.to = {
+          type = "github";
+          owner = "fontis";
+          repo = "nix-node";
+        };
       };
-    };
 
     extraOptions = lib.mkIf hasGithubToken githubTokenInclude;
   };
