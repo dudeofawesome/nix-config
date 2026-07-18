@@ -147,13 +147,6 @@ in
     extraOptions = lib.mkIf hasGithubToken githubTokenInclude;
   };
 
-  # nix.extraOptions is not written when nix-darwin's Nix management is
-  # disabled. Keep the SOPS-generated access token outside the Nix store and
-  # include it from Determinate's custom configuration instead.
-  environment.etc."nix/nix.custom.conf".text = lib.mkIf (isDarwin && hasGithubToken) (
-    lib.mkAfter githubTokenInclude
-  );
-
   # Allow proprietary software.
   nixpkgs.config.allowUnfree = lib.mkDefault true;
 
