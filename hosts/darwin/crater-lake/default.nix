@@ -17,7 +17,7 @@
     config = {
       virtualisation = {
         darwin-builder = {
-          diskSize = 32 * 1024; # MiB
+          diskSize = 64 * 1024; # MiB
         };
       };
     };
