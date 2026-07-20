@@ -19,15 +19,6 @@ hosts/nixos/capitol-reef/capitol-reef.agekey
 Do not regenerate the identity without also replacing `system_capitol-reef` in
 `.sops.yaml` and updating the affected SOPS files' recipients.
 
-## Enable agent enrollment
-
-Apply the updated cluster preset to Haleakala before booting the Pi. This
-configures the new cluster-wide agent token on the k3s server:
-
-```sh
-nh os switch --flake .#haleakala
-```
-
 ## Build the image
 
 The image is an `aarch64-linux` derivation:
@@ -56,6 +47,12 @@ The compressed image is written under `result/sd-image/`.
 
 Flash the `.img.zst` file to the microSD card with a trusted imaging tool or
 `zstd` and `dd`. Double-check the destination device before writing it.
+
+```sh
+nix shell nixpkgs#zstd --command zstd -dc \
+  result/sd-image/nixos-image-rpi5-kernel.img.zst |
+  sudo dd of=/dev/DISKNUMBER bs=4m
+```
 
 After flashing, mount the FAT partition labeled `FIRMWARE` and copy the private
 identity to its root:
