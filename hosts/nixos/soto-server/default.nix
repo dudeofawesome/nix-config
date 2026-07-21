@@ -9,7 +9,7 @@
   services.samba = {
     enable = true;
     openFirewall = true;
-    shares = {
+    settings = {
       public = {
         path = "/";
         browseable = "yes";

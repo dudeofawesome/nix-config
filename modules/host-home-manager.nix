@@ -15,11 +15,11 @@ in
       inputs.op-shell-plugins.hmModules.default
       {
         disabledModules = [ "programs/claude-code.nix" ];
-        imports = [ "${inputs.home-manager-master}/modules/programs/claude-code.nix" ];
+        imports = [ "${inputs.home-manager-master}/modules/programs/claude-code" ];
       }
       {
         disabledModules = [ "programs/codex.nix" ];
-        imports = [ "${inputs.home-manager-master}/modules/programs/codex.nix" ];
+        imports = [ "${inputs.home-manager-master}/modules/programs/codex" ];
       }
 
       ./configurable/home-manager/default.nix

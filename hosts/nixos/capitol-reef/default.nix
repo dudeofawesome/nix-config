@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -20,25 +21,44 @@
 
   boot = {
     initrd = {
-      postMountCommands = ''
-        sops_key=/mnt-root/var/lib/sops-nix/key.txt
-        firmware_mount=/tmp/capitol-reef-firmware
-
-        if [ ! -e "$sops_key" ] && [ -e /dev/disk/by-label/FIRMWARE ]; then
-          mkdir -p "$firmware_mount"
-          mount -t vfat -o rw /dev/disk/by-label/FIRMWARE "$firmware_mount"
-
-          if [ -f "$firmware_mount/capitol-reef.agekey" ]; then
-            mkdir -p "$(dirname "$sops_key")"
-            cp "$firmware_mount/capitol-reef.agekey" "$sops_key"
-            chmod 0600 "$sops_key"
-            rm "$firmware_mount/capitol-reef.agekey"
-          fi
-
-          umount "$firmware_mount"
-        fi
-      '';
       supportedFilesystems = [ "vfat" ];
+      systemd.services.capitol-reef-migrate-sops-key = {
+        description = "Move the initial SOPS age key from the firmware partition";
+        wantedBy = [ "initrd.target" ];
+        after = [ "initrd-fs.target" ];
+        before = [ "initrd-switch-root.target" ];
+        conflicts = [ "initrd-switch-root.target" ];
+        unitConfig.DefaultDependencies = false;
+
+        path = [
+          pkgs.coreutils
+          pkgs.util-linux
+        ];
+
+        script = ''
+          sops_key=/sysroot/var/lib/sops-nix/key.txt
+          firmware_mount=/run/capitol-reef-firmware
+
+          if [ ! -e "$sops_key" ] && [ -e /dev/disk/by-label/FIRMWARE ]; then
+            mkdir -p "$firmware_mount"
+            mount -t vfat -o rw /dev/disk/by-label/FIRMWARE "$firmware_mount"
+
+            if [ -f "$firmware_mount/capitol-reef.agekey" ]; then
+              mkdir -p "$(dirname "$sops_key")"
+              cp "$firmware_mount/capitol-reef.agekey" "$sops_key"
+              chmod 0600 "$sops_key"
+              rm "$firmware_mount/capitol-reef.agekey"
+            fi
+
+            umount "$firmware_mount"
+          fi
+        '';
+
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
+      };
     };
 
     kernelPackages = lib.mkForce (inputs.nixos-raspberrypi.packages.aarch64-linux.linuxPackages_rpi5);

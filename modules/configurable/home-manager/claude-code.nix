@@ -16,7 +16,7 @@
   config =
     let
       cfg = config.programs.claude-code;
-      settings_path = ".claude/settings.json";
+      settings_path = "${cfg.configDir}/settings.json";
     in
     lib.mkIf (cfg.mutableSettings) {
       home.file.${settings_path}.enable = lib.mkForce false;

@@ -47,11 +47,6 @@ in
             ssid = "orleans";
             psk = "$orleans_psk";
           };
-          "Frontier0818" = mkWirelessProfile {
-            uuid = "a5d0b970-3641-4748-a68b-0627a691ac91";
-            ssid = "Frontier0818";
-            psk = "$Frontier0818_psk";
-          };
         };
       };
     };

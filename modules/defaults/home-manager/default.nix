@@ -23,4 +23,6 @@
     kubectl.enable = true;
     ssh.enableDefaultConfig = false; # hides deprecation warning
   };
+
+  manual.manpages.enable = false;
 }

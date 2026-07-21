@@ -38,10 +38,12 @@
     # such as data conversion or moving files.
     stateVersion = "23.05"; # Did you read the comment?
 
-    packages = with pkgs-unstable; [
-      gitlab-ci-ls
-      pkgs.launchcontrol
-    ];
+    packages =
+      with pkgs-unstable;
+      lib.flatten [
+        gitlab-ci-ls
+        (lib.optional pkgs.stdenv.targetPlatform.isDarwin pkgs.launchcontrol)
+      ];
 
     keyboard = {
       layout = "us";
@@ -51,30 +53,30 @@
 
   programs = {
     ssh = {
-      matchBlocks = {
+      settings = {
         "sftp-aws.paciolan.info" = {
-          user = "pacsftp-shift4";
-          identityFile = "~/.ssh/sftp-aws.paciolan.com_rsa";
+          User = "pacsftp-shift4";
+          IdentityFile = "~/.ssh/sftp-aws.paciolan.com_rsa";
         };
         "files.shift4.com" = {
-          user = "joshuagibbs";
-          identityFile = "~/.ssh/files.shift4.com_rsa";
+          User = "joshuagibbs";
+          IdentityFile = "~/.ssh/files.shift4.com_rsa";
         };
 
-        "gibbs.tk".user = "upaymeifixit";
-        "Joshs-Notebook.local".user = "Josh";
-        "home.powell.place".user = "josh";
+        "gibbs.tk".User = "upaymeifixit";
+        "Joshs-Notebook.local".User = "Josh";
+        "home.powell.place".User = "josh";
         "router" = {
-          user = "root";
-          hostname = "10.0.0.1";
+          User = "root";
+          HostName = "10.0.0.1";
         };
         "terracompute" = {
-          user = "vast";
-          hostname = "192.168.4.225";
+          User = "vast";
+          HostName = "192.168.4.225";
         };
         "soto-server" = {
-          user = "josh";
-          hostname = "10.0.15.144";
+          User = "josh";
+          HostName = "10.0.15.144";
         };
       };
     };
@@ -157,8 +159,8 @@
   # services.home-manager.autoUpgrade.enable = true;
   # specialisation.linux.configuration = {};
 
-  targets = {
-    darwin = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+  targets = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+    darwin = {
       search = "Google";
 
       defaults = {

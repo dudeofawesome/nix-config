@@ -3,8 +3,8 @@
 
   inputs = {
     # TODO: use `nixpkgs-YY.MM-darwin` for Darwin
-    nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
@@ -23,7 +23,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       # TODO: how to follow nixpkgs-darwin-stable when on macOS?
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
@@ -33,7 +33,7 @@
     };
 
     darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
     };
 
