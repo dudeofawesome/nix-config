@@ -31,6 +31,9 @@ with builtins;
         };
 
         boot.initrd = {
+          # TODO: migrate remote LUKS unlocking to the systemd-based initrd.
+          systemd.enable = false;
+
           # It may be necessary to wait a bit for devices to be initialized.
           # See https://github.com/NixOS/nixpkgs/issues/98741
           preLVMCommands = lib.mkOrder 400 "sleep 1";
@@ -82,11 +85,11 @@ with builtins;
 
           luks.forceLuksSupportInInitrd = true;
 
-          availableKernelModules = [
-            (lib.mkIf (config.boot.kernelPackages ? "aesni_intel") "aesni_intel")
+          availableKernelModules = lib.flatten [
             "cryptd"
             # enable USB storage for devices like a Pi
             "usb_storage"
+            (lib.optional (config.boot.kernelPackages ? "aesni_intel") "aesni_intel")
           ];
         };
       };

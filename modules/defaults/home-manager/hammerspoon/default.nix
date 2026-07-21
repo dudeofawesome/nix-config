@@ -8,7 +8,7 @@
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin = {
       defaults."org.hammerspoon.Hammerspoon" = {
-        MJConfigFile = ./init.lua;
+        MJConfigFile = "${./init.lua}";
       };
     };
   };

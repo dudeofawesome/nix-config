@@ -59,26 +59,28 @@ in
     ssh = {
       enable = true;
 
-      matchBlocks = {
+      settings = {
         "*" =
           if (has_1password) then
             {
-              # TODO: switch to this (instead of `extraConfig`) once https://github.com/nix-community/home-manager/issues/4134 is solved
-              # IdentityAgent = lib.mkDefault (
-              #   if (isDarwin) then "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-              #   else if (isLinux) then "~/.1password/agent.sock"
-              #   else abort
-              # );
+              IdentityAgent = lib.mkDefault (
+                if (isDarwin) then
+                  ''"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"''
+                else if (isLinux) then
+                  ''"~/.1password/agent.sock"''
+                else
+                  abort
+              );
             }
           else
             {
-              identityFile = lib.mkDefault "~/.ssh/${hostname}_ed25519";
-              identitiesOnly = lib.mkDefault true;
+              IdentityFile = lib.mkDefault "~/.ssh/${hostname}_ed25519";
+              IdentitiesOnly = lib.mkDefault true;
             };
 
         "git" = {
-          match = "host *git*,*bitbucket*";
-          user = "git";
+          header = "Match host *git*,*bitbucket*";
+          User = "git";
         }
         // (
           let
@@ -95,31 +97,13 @@ in
           in
           if (file != null) then
             {
-              identityFile = file;
-              identitiesOnly = true;
+              IdentityFile = file;
+              IdentitiesOnly = true;
             }
           else
             { }
         );
       };
-
-      extraConfig = ''
-        ${
-          if (has_1password) then
-            (
-              "IdentityAgent = ${
-                if (isDarwin) then
-                  ''"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"''
-                else if (isLinux) then
-                  ''"~/.1password/agent.sock"''
-                else
-                  abort
-              }"
-            )
-          else
-            ""
-        }
-      '';
     };
 
     doa-system-clock.enable = true;
@@ -131,8 +115,8 @@ in
   # services.home-manager.autoUpgrade.enable = true;
   # specialisation.linux.configuration = {};
 
-  targets = {
-    darwin = lib.mkIf isDarwin {
+  targets = lib.mkIf isDarwin {
+    darwin = {
       # keybindings = {
       #   "~f" = "moveWordForward:";
       # };

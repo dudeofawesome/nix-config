@@ -55,7 +55,7 @@ with pkgs.stdenv.targetPlatform;
           || (with config; services.podman.enable || programs.docker-client.enable);
       in
       with pkgs;
-      lib.flatten ([
+      lib.flatten [
         act
         awscli2
         d2
@@ -101,7 +101,7 @@ with pkgs.stdenv.targetPlatform;
             pkgs-unstable.typora
           ])
         ]))
-      ]);
+      ];
 
     keyboard = {
       layout = "us";
@@ -116,43 +116,43 @@ with pkgs.stdenv.targetPlatform;
   # };
 
   programs = {
-    ssh.matchBlocks =
+    ssh.settings =
       let
         hostUnreachable = (host: ''host ${host} !exec "ping -c1 -q -t1 '%h' 2> /dev/null"'');
       in
       {
-        "*".user = "dudeofawesome";
+        "*".User = "dudeofawesome";
 
-        "unifi".user = "root";
+        "unifi".User = "root";
         "unifi-remote" = {
-          match = hostUnreachable "unifi";
-          hostname = "red.orleans.io";
+          header = "Match ${hostUnreachable "unifi"}";
+          HostName = "red.orleans.io";
         };
         "monongahela-remote" = {
-          match = hostUnreachable "monongahela";
-          proxyJump = "red.orleans.io";
+          header = "Match ${hostUnreachable "monongahela"}";
+          ProxyJump = "red.orleans.io";
         };
-        "haleakala".hostname = "10.0.1.203";
-        "steamdeck".user = "deck";
+        "haleakala".HostName = "10.0.1.203";
+        "steamdeck".User = "deck";
 
         "badlands" = {
-          user = "lorleans";
-          hostname = "10.0.1.87";
+          User = "lorleans";
+          HostName = "10.0.1.87";
         };
 
-        "home.powell.place".user = "louis";
+        "home.powell.place".User = "louis";
 
         "home.saldivar.io" = {
-          user = "edgar";
-          port = 69;
+          User = "edgar";
+          Port = 69;
         };
         "terracompute" = {
-          hostname = "192.168.4.225";
-          user = "vast";
+          HostName = "192.168.4.225";
+          User = "vast";
         };
         "terracompute-remote" = {
-          match = hostUnreachable "192.168.4.225";
-          proxyJump = "home.saldivar.io";
+          header = "Match ${hostUnreachable "192.168.4.225"}";
+          ProxyJump = "home.saldivar.io";
         };
       };
 
@@ -285,8 +285,8 @@ with pkgs.stdenv.targetPlatform;
   # services.home-manager.autoUpgrade.enable = true;
   # specialisation.linux.configuration = {};
 
-  targets = {
-    darwin = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+  targets = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+    darwin = {
       search = "DuckDuckGo";
     };
   };

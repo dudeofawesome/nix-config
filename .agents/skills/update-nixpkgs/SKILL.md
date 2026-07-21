@@ -1,6 +1,6 @@
 ---
 name: update-nixpkgs
-description: 'Update nixpkgs flake inputs (linux-stable, darwin-stable, and unstable).'
+description: 'Update nixpkgs flake inputs (linux-stable, darwin-stable, and unstable) for minor versions.'
 when_to_use: 'Use when the user asks to "update nixpkgs", "bump nixpkgs", "update the flake inputs", or wants the three nixpkgs channels refreshed. Trigger phrases: "update nixpkgs", "bump flake", "refresh inputs", "update channels".'
 allowed-tools:
     - AskUserQuestion
