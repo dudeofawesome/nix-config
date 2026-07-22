@@ -18,7 +18,7 @@ let
       };
       wifi-security = {
         inherit psk;
-        key-mgmt = "wpa-psk";
+        key-mgmt = "sae";
       };
       ipv4 = {
         method = "auto";

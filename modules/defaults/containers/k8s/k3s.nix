@@ -124,7 +124,5 @@ in
           51820
         ];
     };
-
-    networkmanager.dns = "dnsmasq";
   };
 }
