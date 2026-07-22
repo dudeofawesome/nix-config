@@ -3,9 +3,6 @@ name: Update custom packages
 on:
   schedule:
     - cron: "17 12 * * 1"
-  push:
-    paths:
-      - ".github/workflows/update-custom-packages.yml"
   workflow_dispatch:
 
 permissions:
@@ -17,9 +14,49 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update:
-    name: Run package updaters
+  discover:
+    name: Discover package updaters
     runs-on: macos-latest
+    outputs:
+      packages: ${{ steps.packages.outputs.packages }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@a7ad9c4f0c65208097f4d34f3cfa1913b80cce5c # main
+
+      - name: Find packages with update scripts
+        id: packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # shellcheck disable=SC2016
+          packages="$(
+            nix eval --impure --json --expr '
+              let
+                flake = builtins.getFlake (toString ./.);
+                packages = flake.packages.${builtins.currentSystem};
+              in
+              builtins.filter (
+                name: packages.${name} ? updateScript
+              ) (builtins.attrNames packages)
+            '
+          )"
+
+          echo "packages=$(jq --compact-output . <<< "$packages")" \
+            >> "$GITHUB_OUTPUT"
+
+  update:
+    name: Update ${{ matrix.package }}
+    needs: discover
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.discover.outputs.packages) }}
 
     steps:
       - name: Checkout
@@ -31,91 +68,20 @@ jobs:
       - name: Enable Nix cache
         uses: DeterminateSystems/magic-nix-cache-action@76aaf8814cdb385b86597c32b8c51b66b69b0839 # main
 
-      - name: Run updaters
+      - name: Update package
+        id: update
+        continue-on-error: true
+        shell: bash
+        run: ./scripts/update-package.sh "${{ matrix.package }}"
+
+      - name: Report failed update
+        if: steps.update.outcome == 'failure'
         shell: bash
         run: |
-          set -euo pipefail
+          echo "::warning title=Package update failed::${{ matrix.package }} failed; continuing with other packages"
 
-          nix shell nixpkgs#jq nixpkgs#nix-update -c bash <<'EOF'
-          set -euo pipefail
-
-          packages="$(
-            nix eval --impure --json --expr '
-              let
-                flake = builtins.getFlake (toString ./.);
-                packages = flake.packages.${builtins.currentSystem};
-                hasUpdater = name:
-                  let
-                    package = packages.${name};
-                  in
-                    package ? passthru && package.passthru ? updateScript;
-              in
-                builtins.filter hasUpdater (builtins.attrNames packages)
-            '
-          )"
-
-          jq -r '.[]' <<< "$packages" | while read -r package; do
-            echo "::group::Updating $package"
-
-            update_script="$(
-              PACKAGE="$package" nix eval \
-                --impure \
-                --json \
-                --expr '
-                  let
-                    package = builtins.getEnv "PACKAGE";
-                    flake = builtins.getFlake (toString ./.);
-                    packages = flake.packages.${builtins.currentSystem};
-                  in
-                    (builtins.getAttr package packages).passthru.updateScript
-                '
-            )"
-
-            if jq -e 'type == "array"' <<< "$update_script" >/dev/null; then
-              update_command=()
-              while IFS= read -r argument; do
-                update_command+=("$argument")
-              done < <(
-                jq --raw-output '.[]' <<< "$update_script"
-              )
-
-              if [[ "$(basename "${update_command[0]}")" == "nix-update" ]]; then
-                update_command[0]="nix-update"
-              fi
-
-              "${update_command[@]}" --flake "$package"
-            else
-              script="$(
-                jq --raw-output '.' <<< "$update_script"
-              )"
-              context="$(
-                PACKAGE="$package" nix eval \
-                  --impure \
-                  --json \
-                  --expr '
-                    let
-                      package = builtins.getEnv "PACKAGE";
-                      flake = builtins.getFlake (toString ./.);
-                      packages = flake.packages.${builtins.currentSystem};
-                    in
-                      builtins.getContext (
-                        builtins.getAttr package packages
-                      ).passthru.updateScript
-                  '
-              )"
-
-              jq -r 'keys[]' <<< "$context" | while read -r drv; do
-                nix-store --realise "$drv"
-              done
-
-              "$script"
-            fi
-
-            echo "::endgroup::"
-          done
-          EOF
-
-      - name: Format Nix files
+      - name: Format changed Nix files
+        if: steps.update.outcome == 'success'
         shell: bash
         run: |
           set -euo pipefail
@@ -132,13 +98,15 @@ jobs:
           fi
 
       - name: Create pull request
+        if: steps.update.outcome == 'success'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
-          branch: automation/update-custom-packages
-          commit-message: "chore: update custom packages"
-          title: "chore: update custom packages"
+          branch: automation/update-${{ matrix.package }}
+          delete-branch: true
+          commit-message: "chore(${{ matrix.package }}): update package"
+          title: "chore(${{ matrix.package }}): update package"
           body: |
-            Automated custom package update.
+            Automated update for `${{ matrix.package }}`.
 
-            This runs every Monday at 12:17 UTC and can also be triggered manually.
+            This workflow runs every Monday at 12:17 UTC and can also be triggered manually.
           labels: dependencies
