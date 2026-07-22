@@ -14,10 +14,10 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "git-fork";
-  version = "2.66.6";
+  version = "2.69.0";
   src = fetchurl {
     url = "https://cdn.fork.dev/mac/Fork-${finalAttrs.version}.dmg";
-    hash = "sha256-KSigDYvVuvq344454rFhLoan08tI7+doahGb6XNvBeA=";
+    hash = "sha256-KmPGN3dkSWWYrUF1Ob3rFFLjZ6WdC0JBr/VkY/rHfDI=";
   };
 
   sourceRoot = ".";
