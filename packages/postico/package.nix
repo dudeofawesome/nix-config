@@ -14,12 +14,12 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "postico";
-  version = "2.3.3";
-  build = "9804";
+  version = "2.3-dev";
+  build = "9809";
 
   src = fetchurl {
     url = "https://downloads.eggerapps.at/postico/postico-${finalAttrs.build}.dmg";
-    hash = "sha256-NH/gbP8b4dypMPNLWxMkK0VfjiK8hc+m80+Jrkg98R4=";
+    hash = "sha256-DFYlQG6XlJQOVddqKcbyl7LapVF1sbm5aCFYPEl10bk=";
   };
 
   sourceRoot = ".";
