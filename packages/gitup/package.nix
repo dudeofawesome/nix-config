@@ -9,10 +9,10 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "gitup";
-  version = "1.4.3";
+  version = "1.5.0";
   src = fetchurl {
     url = "https://github.com/git-up/GitUp/releases/download/v${finalAttrs.version}/GitUp.zip";
-    hash = "sha256-8PGJba56F+P1H2hyzFenkGGrP0dpLWS1qCFs+23dtNw=";
+    hash = "sha256-Xh2RXtUzM04WkfnAHrPLnS5fRZ+3qiYxtxEg/1mtWFs=";
   };
 
   sourceRoot = ".";
