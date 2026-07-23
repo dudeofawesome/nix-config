@@ -58,8 +58,7 @@ After flashing, mount the FAT partition labeled `FIRMWARE` and copy the private
 identity to its root:
 
 ```sh
-cp hosts/nixos/capitol-reef/capitol-reef.agekey \
-  /path/to/FIRMWARE/capitol-reef.agekey
+cp hosts/nixos/capitol-reef/capitol-reef.agekey /Volumes/FIRMWARE/
 ```
 
 On first boot, the initrd moves the identity to
@@ -71,4 +70,10 @@ Once booted, verify the node from an existing cluster admin:
 
 ```sh
 kubectl get node capitol-reef -o wide
+```
+
+## Subsequent updates
+
+```sh
+nh os switch .#capitol-reef --target-host 10.0.16.238
 ```
