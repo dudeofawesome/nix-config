@@ -2,6 +2,8 @@
 {
   programs.nh = {
     enable = true;
+    clean.enable = true;
+    flake = "~/git/dudeofawesome/nix-config/";
   };
 
   home.sessionVariables = {

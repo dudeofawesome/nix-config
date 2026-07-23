@@ -1,7 +1,9 @@
 {
   inputs,
   lib,
+  doa-lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -76,6 +78,14 @@
   sops.age = {
     generateKey = false;
     keyFile = "/var/lib/sops-nix/key.txt";
+  };
+
+  networking = {
+    networkmanager.ensureProfiles.profiles."orleans-iot" = doa-lib.mkWirelessProfile {
+      uuid = "b22a8d4f-e22d-4f4b-adea-7791747d7fa2";
+      ssid = "orleans";
+      psk = "$orleans_psk";
+    };
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

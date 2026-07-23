@@ -35,6 +35,7 @@ in
 {
   imports = [
     ./user-utils.nix
+    ../../tailscale.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -125,4 +126,9 @@ in
         ];
     };
   };
+
+  boot.kernelParams = lib.mkIf (config.boot.loader.raspberry-pi.enable or false) [
+    "cgroup_enable=memory"
+    "cgroup_memory=1"
+  ];
 }
