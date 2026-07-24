@@ -19,6 +19,8 @@ in
 
     virtualisation.podman = {
       enable = true;
+    }
+    // lib.optionalAttrs (os == "darwin") {
       desktop.enable = lib.mkDefault (machine-class == "pc" || isDarwin);
     };
   }

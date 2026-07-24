@@ -5,7 +5,9 @@
 }:
 {
   programs.podman-desktop = {
-    enable = lib.mkDefault (osConfig.virtualisation.podman.desktop.enable);
+    enable = lib.mkDefault (
+      osConfig.virtualisation.podman ? desktop && osConfig.virtualisation.podman.desktop.enable
+    );
     extraConfig = {
       "telemetry.enabled" = false;
       "preferences.login.start" = false;

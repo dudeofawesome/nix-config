@@ -55,7 +55,6 @@ with pkgs.stdenv.targetPlatform;
       lib.flatten [
         act
         awscli2
-        d2
         (lib.optional (should_install_dive) dive)
         eternal-terminal
         watchman
@@ -68,6 +67,7 @@ with pkgs.stdenv.targetPlatform;
           pkgs-unstable.bruno
           pkgs-unstable.devenv
           drawio
+          d2
           inkscape
           losslesscut-bin
           obsidian
