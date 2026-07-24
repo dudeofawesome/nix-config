@@ -8,21 +8,24 @@
 }:
 {
   imports = lib.flatten [
-    (lib.optional (machine-class == "pc") ../../../modules/presets/home-manager/paciolan)
+    (lib.optionals (machine-class == "pc") [
+      ../../../modules/presets/home-manager/paciolan
+      ../../../modules/defaults/home-manager/1password-gui.nix
+      ../../../modules/defaults/home-manager/finicky
+      ../../../modules/defaults/home-manager/fork.nix
+      ../../../modules/defaults/home-manager/gnome.nix
+      ../../../modules/defaults/home-manager/gitup.nix
+      ../../../modules/defaults/home-manager/google-earth-pro.nix
+      ../../../modules/defaults/home-manager/moonlight.nix
+      ../../../modules/defaults/home-manager/wezterm
+
+      ../../dudeofawesome/home-manager/browsers.nix
+      ../../dudeofawesome/home-manager/zed-editor
+    ])
 
     ../../../modules/defaults/home-manager
-    ../../../modules/defaults/home-manager/1password-gui.nix
     ../../../modules/defaults/home-manager/docker-desktop.nix
-    ../../../modules/defaults/home-manager/finicky
-    ../../../modules/defaults/home-manager/fork.nix
-    ../../../modules/defaults/home-manager/gnome.nix
-    ../../../modules/defaults/home-manager/gitup.nix
-    ../../../modules/defaults/home-manager/google-earth-pro.nix
-    ../../../modules/defaults/home-manager/moonlight.nix
-    ../../../modules/defaults/home-manager/wezterm
 
-    ../../dudeofawesome/home-manager/browsers.nix
-    ../../dudeofawesome/home-manager/zed-editor
     ./shells.nix
     ./llms
   ];

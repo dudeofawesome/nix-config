@@ -10,29 +10,33 @@
 with pkgs.stdenv.targetPlatform;
 {
   imports = lib.flatten [
-    ../../../modules/defaults/home-manager
-    ../../../modules/defaults/home-manager/aerospace.nix
-    ../../../modules/defaults/home-manager/1password-gui.nix
-    ../../../modules/defaults/home-manager/docker-desktop.nix
-    ../../../modules/defaults/home-manager/finicky
-    ../../../modules/defaults/home-manager/fork.nix
-    ../../../modules/defaults/home-manager/gnome.nix
-    ../../../modules/defaults/home-manager/gitup.nix
-    ../../../modules/defaults/home-manager/google-earth-pro.nix
-    ../../../modules/defaults/home-manager/hammerspoon
-    ../../../modules/defaults/home-manager/llms/codex.nix
-    ../../../modules/defaults/home-manager/llms/opencode.nix
-    ../../../modules/defaults/home-manager/moonlight.nix
-    ../../../modules/defaults/home-manager/middleclick.nix
-    ../../../modules/defaults/home-manager/typora.nix
-    ../../../modules/defaults/home-manager/wezterm
+    (lib.optionals (machine-class == "pc") [
+      ../../../modules/defaults/home-manager/aerospace.nix
+      ../../../modules/defaults/home-manager/1password-gui.nix
+      ../../../modules/defaults/home-manager/finicky
+      ../../../modules/defaults/home-manager/fork.nix
+      ../../../modules/defaults/home-manager/gnome.nix
+      ../../../modules/defaults/home-manager/gitup.nix
+      ../../../modules/defaults/home-manager/google-earth-pro.nix
+      ../../../modules/defaults/home-manager/hammerspoon
+      ../../../modules/defaults/home-manager/llms/codex.nix
+      ../../../modules/defaults/home-manager/llms/opencode.nix
+      ../../../modules/defaults/home-manager/moonlight.nix
+      ../../../modules/defaults/home-manager/middleclick.nix
+      ../../../modules/defaults/home-manager/typora.nix
+      ../../../modules/defaults/home-manager/wezterm
 
-    ./browsers.nix
+      ./browsers.nix
+      ./llms
+      ./vscode
+      ./zed-editor
+    ])
+
+    ../../../modules/defaults/home-manager
+    ../../../modules/defaults/home-manager/docker-desktop.nix
+
     ./kubeconfig.nix
-    ./llms
-    ./vscode
     ./shells.nix
-    ./zed-editor
   ];
 
   home = {
