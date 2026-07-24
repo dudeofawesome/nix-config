@@ -61,7 +61,8 @@
 
     (final: prev: {
       # TODO: remove this once stable fish is fixed https://github.com/NixOS/nixpkgs/issues/208951
-      fish = pkgs-unstable.fish;
+      # fish = pkgs-unstable.fish;
+
       podman =
         if prev.stdenv.targetPlatform.isDarwin then
           prev.callPackage ./podman.nix {
