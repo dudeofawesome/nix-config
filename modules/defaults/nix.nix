@@ -151,6 +151,7 @@ in
   nixpkgs.config.allowUnfree = lib.mkDefault true;
 
   # Stores the git commit the current system config was built from
+  #   access via `nixos-version --json`
   system.configurationRevision =
     let
       rev =

@@ -890,7 +890,6 @@
   "workbench.editor.empty.hint": "hidden",
 
   "claudeCode.useCtrlEnterToSend": true,
-  "claudeCode.claudeProcessWrapper": "this should be replaced by nix",
   "chatgpt.composerEnterBehavior": "cmdIfMultiline",
 
   "claudeContextBar.showEmoji": false,

@@ -38,9 +38,4 @@
           { }
       );
   };
-
-  virtualisation.podman = {
-    enable = true;
-    desktop.enable = true;
-  };
 }

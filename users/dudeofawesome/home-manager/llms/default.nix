@@ -3,6 +3,7 @@
   pkgs,
   pkgs-unstable,
   config,
+  machine-class,
   ...
 }:
 let
@@ -76,7 +77,7 @@ let
   };
 in
 {
-  programs = {
+  programs = lib.mkIf (machine-class == "pc") {
     mcp = {
       enable = true;
       servers = {

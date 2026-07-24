@@ -7,7 +7,6 @@
 }:
 {
   imports = lib.flatten [
-    (lib.optional (machine-class == "pc") ../../../modules/presets/os/paciolan.nix)
   ];
 
   homebrew = {
@@ -36,7 +35,6 @@
         "balenaetcher"
         "dash"
         "docker-desktop"
-        "figma"
         "firefox"
         "logitech-g-hub"
         "lulu"

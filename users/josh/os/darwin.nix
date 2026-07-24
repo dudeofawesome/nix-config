@@ -27,7 +27,6 @@
       "discord"
       "draw-things"
       "electrum"
-      "figma" # TODO: maybe this should be part of the Paciolan nix script
       "gifox"
       "gitbutler"
       "google-drive"

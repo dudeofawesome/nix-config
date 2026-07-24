@@ -24,9 +24,16 @@ with lib;
         let
           claude-code-version = "anthropic.claude-code.${config.programs.claude-code.package.version}";
 
-          nix4vscodeExtensions =
-            (pkgs-unstable.nix4vscode.forVscodeExt
+          nix4vscodeExtensions = (
+            pkgs-unstable.nix4vscode.forVscodeExt
               {
+                "${claude-code-version}" = {
+                  postInstall = ''
+                    mkdir -p "$out/$installPrefix/resources/native-binary"
+                    rm -f "$out/$installPrefix/resources/native-binary/claude"*
+                    ln -s "${lib.getExe config.programs.claude-code.package}" "$out/$installPrefix/resources/native-binary/claude"
+                  '';
+                };
                 "openai.chatgpt" = {
                   postInstall = ''
                     case "$system" in
@@ -49,64 +56,53 @@ with lib;
                   '';
                 };
               }
-              [
-                "alesbrelih.gitlab-ci-ls"
-                "beardedbear.beardedtheme"
-                "blueglassblock.better-json5"
-                "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
-                # "bradlc.vscode-tailwindcss"
-                "bruno-api-client.bruno"
-                # "connor4312.nodejs-testing"
-                "coopermaruyama.nix-embedded-languages"
-                "deerawan.vscode-dash"
-                "drknoxy.eslint-disable-snippets"
-                "eeyore.yapf"
-                "effectful-tech.effect-vscode"
-                "ezoosk.claude-context-bar"
-                "fabiospampinato.vscode-diff"
-                "flesler.url-encode"
-                "fwcd.kotlin"
-                "ghmcadams.lintlens"
-                "gracefulpotato.rbs-syntax"
-                "graphql.vscode-graphql-execution"
-                "idleberg.applescript"
-                "inferrinizzard.prettier-sql-vscode"
-                "leathong.openscad-language-support"
-                "mermaidchart.vscode-mermaid-chart"
-                "mrmlnc.vscode-scss"
-                "msjsdiag.vscode-react-native"
-                "mxsdev.typescript-explorer"
-                "novy.vsc-gcode"
-                "openai.chatgpt"
-                "orta.vscode-jest"
-                "oven.bun-vscode"
-                "seeker-dk.node-modules-viewer"
-                "semanticdiff.semanticdiff"
-                "swiftlang.swift-vscode"
-                "terrastruct.d2"
-                "thijsdaniels.vscode-openscad-preview"
-                "tomoyukim.vscode-mermaid-editor"
-                "tyriar.lorem-ipsum"
-                "ultram4rine.vscode-choosealicense"
-                "vstirbu.vscode-mermaid-preview"
-                "weaveworks.vscode-gitops-tools"
-                "yutengjing.open-in-external-app"
-              ]
-            )
-            ++ (pkgs-unstable.nix4vscode.forOpenVsxExt
-              {
-                "${claude-code-version}" = {
-                  postInstall = ''
-                    mkdir -p "$out/$installPrefix/resources/native-binary"
-                    rm -f "$out/$installPrefix/resources/native-binary/claude"*
-                    ln -s "${lib.getExe config.programs.claude-code.package}" "$out/$installPrefix/resources/native-binary/claude"
-                  '';
-                };
-              }
-              [
-                "${claude-code-version}"
-              ]
-            );
+              (
+                lib.flatten [
+                  (lib.optional config.programs.claude-code.enable "${claude-code-version}")
+                  "alesbrelih.gitlab-ci-ls"
+                  "beardedbear.beardedtheme"
+                  "blueglassblock.better-json5"
+                  "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
+                  # "bradlc.vscode-tailwindcss"
+                  "bruno-api-client.bruno"
+                  # "connor4312.nodejs-testing"
+                  "coopermaruyama.nix-embedded-languages"
+                  "deerawan.vscode-dash"
+                  "drknoxy.eslint-disable-snippets"
+                  "eeyore.yapf"
+                  "effectful-tech.effect-vscode"
+                  "ezoosk.claude-context-bar"
+                  "fabiospampinato.vscode-diff"
+                  "flesler.url-encode"
+                  "fwcd.kotlin"
+                  "ghmcadams.lintlens"
+                  "gracefulpotato.rbs-syntax"
+                  "graphql.vscode-graphql-execution"
+                  "idleberg.applescript"
+                  "inferrinizzard.prettier-sql-vscode"
+                  "leathong.openscad-language-support"
+                  "mermaidchart.vscode-mermaid-chart"
+                  "mrmlnc.vscode-scss"
+                  "msjsdiag.vscode-react-native"
+                  "mxsdev.typescript-explorer"
+                  "novy.vsc-gcode"
+                  "openai.chatgpt"
+                  "orta.vscode-jest"
+                  "oven.bun-vscode"
+                  "seeker-dk.node-modules-viewer"
+                  "semanticdiff.semanticdiff"
+                  "swiftlang.swift-vscode"
+                  "terrastruct.d2"
+                  "thijsdaniels.vscode-openscad-preview"
+                  "tomoyukim.vscode-mermaid-editor"
+                  "tyriar.lorem-ipsum"
+                  "ultram4rine.vscode-choosealicense"
+                  "vstirbu.vscode-mermaid-preview"
+                  "weaveworks.vscode-gitops-tools"
+                  "yutengjing.open-in-external-app"
+                ]
+              )
+          );
         in
         # fallback to nixpkgs
         with pkgs-unstable.vscode-extensions;

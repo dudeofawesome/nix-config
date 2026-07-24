@@ -10,8 +10,6 @@
 with pkgs.stdenv.targetPlatform;
 {
   imports = lib.flatten [
-    (lib.optional (machine-class == "pc") ../../../modules/presets/home-manager/paciolan)
-
     ../../../modules/defaults/home-manager
     ../../../modules/defaults/home-manager/aerospace.nix
     ../../../modules/defaults/home-manager/1password-gui.nix
@@ -23,7 +21,6 @@ with pkgs.stdenv.targetPlatform;
     ../../../modules/defaults/home-manager/google-earth-pro.nix
     ../../../modules/defaults/home-manager/hammerspoon
     ../../../modules/defaults/home-manager/llms/codex.nix
-    ../../../modules/defaults/home-manager/llms/claude-code.nix
     ../../../modules/defaults/home-manager/moonlight.nix
     ../../../modules/defaults/home-manager/middleclick.nix
     ../../../modules/defaults/home-manager/typora.nix

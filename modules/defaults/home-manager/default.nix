@@ -14,6 +14,7 @@
     ./git.nix
     ./nix
     ./nh.nix
+    ./podman.nix
     ./shells.nix
     ./sops.nix
     ./tmux
