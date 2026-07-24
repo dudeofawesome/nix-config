@@ -183,5 +183,17 @@ in
         };
       };
     };
+
+    opencode = {
+      enable = true;
+
+      context = ''
+        ${builtins.readFile ./user-memory.md}
+      '';
+
+      skills = {
+        grill-me = ./skills/grill-me.md;
+      };
+    };
   };
 }
