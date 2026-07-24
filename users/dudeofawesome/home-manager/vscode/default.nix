@@ -9,6 +9,7 @@
 with lib;
 {
   home.packages = with pkgs-unstable; [
+    ast-grep
     gitlab-ci-ls
     rubyPackages.solargraph
     lldb
@@ -59,6 +60,7 @@ with lib;
               (
                 lib.flatten [
                   (lib.optional config.programs.claude-code.enable "${claude-code-version}")
+                  "ast-grep.ast-grep-vscode"
                   "alesbrelih.gitlab-ci-ls"
                   "beardedbear.beardedtheme"
                   "blueglassblock.better-json5"
