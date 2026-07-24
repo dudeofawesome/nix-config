@@ -15,7 +15,6 @@ with pkgs.stdenv.targetPlatform;
       # Utilities
       pkgs-unstable.acli
       awscli2
-      glab
       k6
       terraform
       (lib.optional isDarwin wdav-open-files)
@@ -31,6 +30,7 @@ with pkgs.stdenv.targetPlatform;
   ];
 
   programs = {
+    glab.enable = true;
     slack = {
       enable = lib.mkDefault (machine-class == "pc");
       package = pkgs-unstable.slack;

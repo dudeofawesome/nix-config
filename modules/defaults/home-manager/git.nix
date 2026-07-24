@@ -110,10 +110,12 @@ in
     };
 
     _1password-shell-plugins = {
-      plugins = with pkgs; [
-        gh
-        glab
-      ];
+      plugins =
+        with pkgs;
+        lib.flatten [
+          (lib.optional (config.programs.gh.enable) gh)
+          (lib.optional (config.programs.glab.enable) glab)
+        ];
     };
   };
 }
