@@ -2,7 +2,7 @@
 {
   imports = [
     ./vscode.nix
-    ./vim
+    ./helix.nix
   ];
 
   editorconfig = {
