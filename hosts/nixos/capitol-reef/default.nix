@@ -18,6 +18,7 @@
     ]
     ++ [
       ../../../modules/defaults/wireless.nix
+      ../../../modules/defaults/avahi/writable.nix
       ../../../modules/presets/os/doa-cluster
     ];
 
