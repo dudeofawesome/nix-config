@@ -2,7 +2,7 @@
  * disable tab sidebar
  */
 
-#sidebar-main {
+#sidebar-container {
   display: none;
 }
 #sidebar-box {
