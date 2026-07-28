@@ -2,7 +2,7 @@ name: Update custom packages
 
 on:
   schedule:
-    - cron: "17 12 * * 1"
+    - cron: '17 12 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -16,7 +16,7 @@ concurrency:
 jobs:
   discover:
     name: Discover package updaters
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     outputs:
       packages: ${{ steps.packages.outputs.packages }}
 
@@ -72,7 +72,9 @@ jobs:
         id: update
         continue-on-error: true
         shell: bash
-        run: ./scripts/update-package.sh "${{ matrix.package }}"
+        run: >-
+          nix run nixpkgs#nix-update --
+          --flake --use-update-script "${{ matrix.package }}"
 
       - name: Report failed update
         if: steps.update.outcome == 'failure'
@@ -103,8 +105,8 @@ jobs:
         with:
           branch: automation/update-${{ matrix.package }}
           delete-branch: true
-          commit-message: "chore(${{ matrix.package }}): update package"
-          title: "chore(${{ matrix.package }}): update package"
+          commit-message: 'chore(${{ matrix.package }}): update package'
+          title: 'chore(${{ matrix.package }}): update package'
           body: |
             Automated update for `${{ matrix.package }}`.
 
