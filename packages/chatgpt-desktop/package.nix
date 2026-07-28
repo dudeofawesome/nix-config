@@ -90,7 +90,7 @@ stdenv.mkDerivation (
           -e 's@(version = )"[0-9]+\.[0-9]+\.[0-9]+";@\1"'"$version"'";@' \
           -e '/aarch64-darwin = \{/,/};/ s@(hash = )("sha256-[A-Za-z0-9+/]+="|null);@\1"'"$arm_hash"'";@' \
           -e '/x86_64-darwin = \{/,/};/ s@(hash = )("sha256-[A-Za-z0-9+/]+="|null);@\1"'"$x86_hash"'";@' \
-          ./packages/chatgpt/package.nix
+          ./packages/chatgpt-desktop/package.nix
       '';
     });
 
