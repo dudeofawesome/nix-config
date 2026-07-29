@@ -5,6 +5,9 @@
   config,
   ...
 }:
+let
+  inherit (pkgs.stdenv.targetPlatform) isDarwin;
+in
 {
   home = {
     packages = with pkgs; [
@@ -27,12 +30,21 @@
 
   sops = {
     templates.opencodeWebEnv = {
-      content = ''
-        export OPENCODE_SERVER_USERNAME="${config.home.username}";
-        export OPENCODE_SERVER_PASSWORD="${
-          config.sops.placeholder."users/${config.home.username}/opencode/server/password"
-        }";
-      '';
+      content =
+        lib.pipe
+          {
+            OPENCODE_SERVER_USERNAME = config.home.username;
+            OPENCODE_SERVER_PASSWORD =
+              config.sops.placeholder."users/${config.home.username}/opencode/server/password";
+          }
+          [
+            (
+              let
+                export = if isDarwin then "export " else "";
+              in
+              lib.concatMapAttrsStringSep "\n" (name: value: "${export}${name}=${lib.escapeShellArg value};")
+            )
+          ];
     };
   };
 
