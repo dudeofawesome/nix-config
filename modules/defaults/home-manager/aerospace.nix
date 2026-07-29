@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  ...
+}:
 {
   config = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
     targets.darwin.defaults = {
@@ -8,8 +13,10 @@
       };
     };
 
-    quartz.windowManager.aerospace = {
+    programs.aerospace = {
       enable = true;
+      package = pkgs-unstable.aerospace;
+      launchd.enable = true;
 
       settings =
         let
@@ -64,6 +71,8 @@
           };
         in
         {
+          config-version = 2;
+
           # Mouse follows focus when focused monitor changes
           # Drop it from your config, if you don't like this behavior
           # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
