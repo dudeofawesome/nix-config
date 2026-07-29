@@ -42,7 +42,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
 
-    targets.darwin = {
+    targets.darwin = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
       defaults."co.gitup.mac" = {
         GIPreferences_TerminalTool = cfg.externalTerminal;
         DiffWhitespaceMode =

@@ -18,13 +18,15 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable ({
     home.packages = [ cfg.package ];
 
-    targets.darwin.defaults."com.tinyspeck.slackmacgap" = {
-      SlackNoAutoUpdates = true;
-      SUEnableAutomaticChecks = false;
-      SUAutomaticallyUpdate = false;
+    targets.darwin = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+      defaults."com.tinyspeck.slackmacgap" = {
+        SlackNoAutoUpdates = true;
+        SUEnableAutomaticChecks = false;
+        SUAutomaticallyUpdate = false;
+      };
     };
-  };
+  });
 }

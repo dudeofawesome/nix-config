@@ -107,7 +107,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
 
-    targets.darwin = {
+    targets.darwin = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
       defaults."com.DanPristupov.Fork" = {
         defaultSourceFolder = cfg.settings.defaultSourceFolder;
         NSNavLastRootDirectory = cfg.settings.defaultSourceFolder;
