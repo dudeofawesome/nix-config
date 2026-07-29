@@ -116,6 +116,7 @@ with pkgs.stdenv.targetPlatform;
   #   sopsFile = ../../../hosts/nixos/monongahela/secrets.yaml;
   #   # path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
   # };
+  sops.secrets."users/dudeofawesome/opencode/server/password".sopsFile = ../secrets.yaml;
 
   programs = {
     ssh.settings =
