@@ -56,7 +56,7 @@ in
     web = {
       enable = true;
 
-      environmentFile = lib.traceVal config.sops.templates.opencodeWebEnv.path;
+      environmentFile = config.sops.templates.opencodeWebEnv.path;
     };
 
     # rules = {

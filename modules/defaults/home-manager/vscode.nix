@@ -75,9 +75,13 @@
               when = "suggestWidgetVisible";
             }
             {
-              key = "alt+cmd+k";
+              key = "cmd+alt+k";
               command = "-claude-code.insertAtMentioned";
               when = "editorTextFocus";
+            }
+            {
+              key = "cmd+alt+k";
+              command = "-opencode.addFilepathToTerminal";
             }
             {
               key = "ctrl+alt+[";
