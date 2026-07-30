@@ -12,16 +12,6 @@
     ];
   };
 
-  determinateNix.nixosVmBasedLinuxBuilder = {
-    enable = true;
-    config = {
-      virtualisation = {
-        darwin-builder = {
-          diskSize = 64 * 1024; # MiB
-        };
-      };
-    };
-  };
 
   services.scrutiny.collector = {
     enable = true;

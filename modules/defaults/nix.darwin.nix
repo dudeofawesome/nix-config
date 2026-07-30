@@ -17,11 +17,13 @@ in
     };
 
     determinateNixd = {
-      builder.state = "disabled";
+      builder.state = lib.mkDefault "enabled";
 
       garbageCollector.strategy = "automatic";
     };
   };
+
+  nix.linux-builder.enable = lib.mkDefault false;
 
   # nix.extraOptions is not written when nix-darwin's Nix management is
   # disabled. Keep the SOPS-generated access token outside the Nix store and
