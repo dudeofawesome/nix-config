@@ -74,6 +74,11 @@ in
         substituters = [
           "https://cache.nixos.org/"
           "https://nix-community.cachix.org"
+          "https://cache.flakehub.com/"
+          "https://edge.cache.flakehub.com/"
+          "https://install.determinate.systems"
+        ];
+        extra-substituters = [
           # nix-node by fontis
           "https://fontis.cachix.org/"
           # claude-code-nix
@@ -100,8 +105,9 @@ in
           )
         ]);
 
-        extra-substituters = mkDarwinDefault substituters;
-        extra-trusted-substituters = mkDarwinDefault substituters;
+        substituters = substituters;
+        extra-substituters = mkDarwinDefault extra-substituters;
+        extra-trusted-substituters = mkDarwinDefault extra-substituters;
         extra-trusted-public-keys = mkDarwinDefault [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
