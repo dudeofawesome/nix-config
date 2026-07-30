@@ -4,7 +4,7 @@
   # before running disko.
   disko.devices.disk.primary = {
     type = "disk";
-    device = "/dev/disk/by-id/REPLACE-WITH-YOUR-GAMING-DISK";
+    device = "/dev/disk/by-id/nvme-CT2000P5SSD8_2323413368F7";
     content = {
       type = "gpt";
       partitions = {
