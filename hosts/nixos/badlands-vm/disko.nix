@@ -1,6 +1,5 @@
 { lib, config, ... }:
 let
-  esp = import ../../../modules/defaults/disko/esp.nix;
   root = import ../../../modules/defaults/disko/root.nix {
     inherit lib;
     encrypted = true;
@@ -19,7 +18,10 @@ in
         device = "/dev/vda";
         content = {
           type = "gpt";
-          partitions = esp // root.partition;
+          partitions = {
+            ESP = import ../../../modules/defaults/disko/esp.nix;
+          }
+          // root.partition;
         };
         imageSize = "25G";
       };
