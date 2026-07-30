@@ -12,7 +12,6 @@
     ];
   };
 
-
   services.scrutiny.collector = {
     enable = true;
     api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;

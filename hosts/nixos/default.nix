@@ -19,6 +19,13 @@ let
   };
 in
 {
+  custom-installer = lib.nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      ./custom-installer
+    ];
+  };
+
   olympus = lib.nixosSystem (
     import ../system.nix (
       {
