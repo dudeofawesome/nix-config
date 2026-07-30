@@ -64,22 +64,14 @@ else
         };
       })
         abort
-    # use bcachefs's native encryption
     else if (fs == "bcachefs") then
-      ({
-        partition = {
-          root = {
-            name = "root";
-            size = "100%";
-            content = {
-              type = "filesystem";
-              format = "bcachefs";
-              mountpoint = "/";
-            };
-          };
-        };
-      })
-        abort
+      import ./bcachefs.nix {
+        inherit
+          encrypted
+          lib
+          passwordFile
+          ;
+      }
     else
       abort
   )

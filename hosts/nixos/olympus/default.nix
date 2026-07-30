@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   lib,
   owner,
   pkgs,
@@ -23,11 +24,6 @@
   networking.networkmanager.enable = true;
   security.tpm2.enable = true;
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-partlabel/bcachefs-root";
-    fsType = "bcachefs";
-  };
-
   # Game Mode owns the graphical session; GDM from the PC machine class would
   # conflict with Jovian's autostart service.
   services = {
@@ -50,7 +46,7 @@
       ];
       clevis = {
         enable = true;
-        devices."/dev/disk/by-partlabel/bcachefs-root".secretFile = ./clevis.jwe;
+        devices.${config.fileSystems."/".device}.secretFile = ./clevis.jwe;
       };
     };
   };
