@@ -26,6 +26,7 @@ let
   system = "${arch}-${os}";
 
   specialArgs = {
+    # TODO; get rid of this
     nixos-raspberrypi = inputs.nixos-raspberrypi;
 
     inherit

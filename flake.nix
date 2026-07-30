@@ -22,6 +22,16 @@
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
+    jovian = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       # TODO: how to follow nixpkgs-darwin-stable when on macOS?

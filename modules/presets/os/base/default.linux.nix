@@ -53,7 +53,7 @@
     useXkbConfig = true;
   };
 
-  virtualisation.libvirtd.enable = lib.mkDefault (!config.boot.loader.raspberry-pi.enable);
+  virtualisation.libvirtd.enable = lib.mkDefault (!(config.boot.loader ? raspberry-pi));
 
   system = {
     # This option defines the first version of NixOS you have installed on this particular machine,

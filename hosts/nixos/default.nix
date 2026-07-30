@@ -19,6 +19,19 @@ let
   };
 in
 {
+  olympus = lib.nixosSystem (
+    import ../system.nix (
+      {
+        hostname = "olympus";
+        arch = "x86_64";
+        owner = "dudeofawesome";
+        machine-class = "pc";
+        users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
+      }
+      // base
+    )
+  );
+
   kings-canyon = lib.nixosSystem (
     import ../system.nix (
       {

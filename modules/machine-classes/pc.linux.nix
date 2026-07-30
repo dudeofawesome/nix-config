@@ -15,9 +15,7 @@ with lib;
     systemPackages =
       with pkgs-unstable;
       lib.flatten [
-        # sublime4
         sunshine
-        (lib.optional (pkgs.stdenv.targetPlatform.isx86) cider)
       ];
   };
 }
