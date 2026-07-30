@@ -57,7 +57,7 @@
   ];
 
   networking = {
-    # hostId = ""; # head -c 8 /etc/machine-id
+    hostId = "4164b7fd"; # head -c 8 /etc/machine-id
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
