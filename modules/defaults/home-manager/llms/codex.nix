@@ -8,7 +8,9 @@
 }:
 {
   home.packages = lib.flatten [
-    (lib.optional (machine-class == "pc") pkgs.chatgpt-desktop)
+    (lib.optional (
+      machine-class == "pc" && lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.chatgpt-desktop
+    ) pkgs.chatgpt-desktop)
   ];
 
   programs.codex = {
