@@ -1,3 +1,4 @@
+# TODO: use sysfs for compression settings (instead of mount options)
 {
   lib,
   encrypted ? false,
