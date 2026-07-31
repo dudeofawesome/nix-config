@@ -21,6 +21,12 @@ in
 {
   custom-installer = lib.nixosSystem {
     system = "x86_64-linux";
+    specialArgs = {
+      inherit inputs;
+      doa-lib = import ../../lib;
+      os = "linux";
+      owner = null;
+    };
     modules = [
       ./custom-installer
     ];

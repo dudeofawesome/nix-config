@@ -12,12 +12,6 @@ let
   inherit (pkgs.stdenv.targetPlatform) isLinux isDarwin;
 
   mkDarwinDefault = lib.mkOverride 99;
-
-  githubTokenPath = "users/${owner}/nix_access_tokens.conf";
-  hasGithubToken = builtins.hasAttr githubTokenPath config.sops.templates;
-  githubTokenInclude = ''
-    !include ${config.sops.templates.${githubTokenPath}.path}
-  '';
 in
 {
   imports = [ (doa-lib.try-import ./nix.${os}.nix) ];
@@ -150,7 +144,15 @@ in
         };
       };
 
-    extraOptions = lib.mkIf hasGithubToken githubTokenInclude;
+    extraOptions =
+      let
+        githubTokenPath = if owner != null then "users/${owner}/nix_access_tokens.conf" else "";
+        hasGithubToken = owner != null && (builtins.hasAttr githubTokenPath config.sops.templates);
+        githubTokenInclude = ''
+          !include ${config.sops.templates.${githubTokenPath}.path}
+        '';
+      in
+      lib.mkIf hasGithubToken githubTokenInclude;
   };
 
   # Allow proprietary software.

@@ -10,6 +10,9 @@
   environment.systemPackages = with pkgs; [
     fish
     tmux
+    clevis
+    keyutils
+    sbctl
   ];
 
   # https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD#Building_faster
