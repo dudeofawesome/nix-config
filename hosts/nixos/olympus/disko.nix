@@ -11,7 +11,7 @@ in
   disko.devices = {
     disk.primary = {
       type = "disk";
-      device = "/dev/disk/by-id/nvme-CT2000P5SSD8_2323413368F7";
+      device = "/dev/disk/by-id/nvme-CT2000P5PSSD8_2323413368F7";
       content = {
         type = "gpt";
         partitions = {
