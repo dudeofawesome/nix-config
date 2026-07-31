@@ -39,6 +39,7 @@ in
       size = "100%";
       content = {
         type = "bcachefs";
+        filesystem = "root";
         label = "root";
       };
     };
