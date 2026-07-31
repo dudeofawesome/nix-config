@@ -63,6 +63,7 @@
   home-manager.users.dudeofawesome = {
     programs.codex.enable = lib.mkForce false;
     programs.vscode.enable = lib.mkForce false;
+    programs.zed-editor.enable = lib.mkForce false;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
