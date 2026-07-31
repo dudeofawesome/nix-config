@@ -60,6 +60,11 @@
     hostId = "4164b7fd"; # head -c 8 /etc/machine-id
   };
 
+  home-manager.users.dudeofawesome = {
+    programs.codex.enable = lib.mkForce false;
+    programs.vscode.enable = lib.mkForce false;
+  };
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
