@@ -69,9 +69,12 @@
   };
 
   home-manager.users.dudeofawesome = {
-    programs.codex.enable = lib.mkForce false;
-    programs.vscode.enable = lib.mkForce false;
-    programs.zed-editor.enable = lib.mkForce false;
+    programs = {
+      codex.enable = lib.mkForce false;
+      vscode.enable = lib.mkForce false;
+      zed-editor.enable = lib.mkForce false;
+      fish.generateCompletions = false;
+    };
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
