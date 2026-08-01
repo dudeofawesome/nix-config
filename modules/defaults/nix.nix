@@ -129,10 +129,7 @@ in
       {
         nixpkgs = {
           flake = stable;
-          to = {
-            type = "path";
-            path = lib.mkForce stable.outPath;
-          };
+          to.path = lib.mkForce stable.outPath;
         };
         stable.flake = stable;
         unstable.flake = inputs.nixpkgs-unstable;
