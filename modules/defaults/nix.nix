@@ -127,7 +127,13 @@ in
         stable = if (os == "darwin") then inputs.nixpkgs-darwin-stable else inputs.nixpkgs-linux-stable;
       in
       {
-        nixpkgs.flake = stable;
+        nixpkgs = {
+          flake = stable;
+          to = {
+            type = "path";
+            path = lib.mkForce stable.outPath;
+          };
+        };
         stable.flake = stable;
         unstable.flake = inputs.nixpkgs-unstable;
         latest.to = {
