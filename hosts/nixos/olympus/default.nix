@@ -27,6 +27,7 @@
       user = owner;
     };
   };
+  nixpkgs.config.permittedInsecurePackages = [ "pnpm-9.15.9" ];
 
   networking.networkmanager.enable = true;
   security.tpm2.enable = true;
