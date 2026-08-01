@@ -1,6 +1,6 @@
 {
-  lib,
   inputs,
+  lib,
   usersModule,
   packageOverlays,
   ...
@@ -32,7 +32,7 @@ in
     ];
   };
 
-  olympus = lib.nixosSystem (
+  olympus = inputs.nixpkgs-unstable.lib.nixosSystem (
     import ../system.nix (
       {
         hostname = "olympus";

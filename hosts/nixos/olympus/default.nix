@@ -14,11 +14,18 @@
   ];
 
   # Jovian's Game Mode starts Steam Big Picture in Gamescope directly at boot.
-  jovian.steam = {
-    enable = true;
-    autoStart = true;
-    desktopSession = "gamescope-wayland";
-    user = owner;
+  jovian = {
+    hardware.has.amd.gpu = true;
+    steam = {
+      enable = true;
+      autoStart = true;
+      desktopSession = "gamescope-wayland";
+      user = owner;
+    };
+    decky-loader = {
+      enable = true;
+      user = owner;
+    };
   };
 
   networking.networkmanager.enable = true;
