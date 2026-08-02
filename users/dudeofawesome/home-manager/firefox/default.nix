@@ -7,10 +7,21 @@
   config,
   ...
 }:
+let
+  inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
+in
 {
   programs.firefox = {
     enable = machine-class == "pc";
     package = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin null;
+
+    configPath =
+      if isDarwin then
+        "Library/Application Support/Firefox"
+      else if isLinux then
+        "${config.xdg.configHome}/mozilla/firefox"
+      else
+        abort;
 
     policies = {
       AutofillCreditCardEnabled = false;
