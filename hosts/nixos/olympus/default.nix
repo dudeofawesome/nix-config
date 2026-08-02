@@ -16,6 +16,10 @@
   # Jovian's Game Mode starts Steam Big Picture in Gamescope directly at boot.
   jovian = {
     hardware.has.amd.gpu = true;
+    steamos = {
+      enableHdmiCecIntegration = false;
+    };
+
     steam = {
       enable = true;
       autoStart = true;
