@@ -105,6 +105,13 @@
       cfg = config.programs.kubeconfig;
     in
     lib.mkIf cfg.enable {
+      assertions = [
+        {
+          assertion = config.programs.kubectl.enable;
+          message = "`programs.kubeconfig` requires `programs.kubectl.enable = true`.";
+        }
+      ];
+
       home.activation = {
         kubeconfigCreate = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           kubeconfig=~/"${cfg.path}"

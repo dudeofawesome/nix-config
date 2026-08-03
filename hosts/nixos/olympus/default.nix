@@ -79,6 +79,7 @@
       zed-editor.enable = lib.mkForce false;
       fish.generateCompletions = false;
       kubectl.enable = lib.mkForce false;
+      kubeconfig.enable = lib.mkForce false;
     };
   };
 
