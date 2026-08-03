@@ -78,6 +78,7 @@
       vscode.enable = lib.mkForce false;
       zed-editor.enable = lib.mkForce false;
       fish.generateCompletions = false;
+      kubectl.enable = lib.mkForce false;
     };
   };
 
