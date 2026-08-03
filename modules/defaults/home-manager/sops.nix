@@ -10,33 +10,26 @@ let
   user = users.${config.home.username};
 in
 {
-  sops =
-    let
-      secrets_base =
-        if isLinux then
-          "/run/user/${config.home.username}"
-        else if isDarwin then
-          "/tmp/sops-secrets/${config.home.username}"
-        else
-          abort;
-    in
-    {
-      age.keyFile = lib.mkDefault (
-        if isLinux then
-          "${config.home.homeDirectory}/.config/sops/age/keys.txt"
-        else if isDarwin then
-          "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt"
-        else
-          abort
-      );
+  sops = {
+    age.keyFile = lib.mkDefault (
+      if isLinux then
+        "${config.home.homeDirectory}/.config/sops/age/keys.txt"
+      else if isDarwin then
+        "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt"
+      else
+        abort
+    );
 
-      defaultSopsFile =
-        let
-          path = ../../../users/${user.original_name}/secrets.yaml;
-        in
-        lib.mkIf (builtins.pathExists path) path;
+    defaultSopsFile =
+      let
+        path = ../../../users/${user.original_name}/secrets.yaml;
+      in
+      lib.mkIf (builtins.pathExists path) path;
 
-      defaultSymlinkPath = "${secrets_base}/secrets";
-      defaultSecretsMountPoint = "${secrets_base}/secrets.d";
-    };
+    # On Linux, keep sops-nix's defaults. They use /run/user/$UID; a path
+    # based on the username is not an XDG runtime directory and cannot be
+    # created by the user service.
+    defaultSymlinkPath = lib.mkIf isDarwin "/tmp/sops-secrets/${config.home.username}/secrets";
+    defaultSecretsMountPoint = lib.mkIf isDarwin "/tmp/sops-secrets/${config.home.username}/secrets.d";
+  };
 }
