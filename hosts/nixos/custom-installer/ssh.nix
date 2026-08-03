@@ -7,7 +7,7 @@ let
 in
 {
   systemd.services.sshd.wantedBy = lib.mkForce [ "multi-user.target" ];
-  users.users.root.openssh.authorizedKeys.keys = lib.pipe users [
+  users.users.nixos.openssh.authorizedKeys.keys = lib.pipe users [
     (map (user: user.user.openssh.authorizedKeys.keys))
     lib.flatten
   ];
