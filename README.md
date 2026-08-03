@@ -12,22 +12,21 @@ Inspiration & adaptation for flakes from @BriianPowell.
 2. Decide on a host name for your machine. In this example we will name our system **starling-vm**.
 3. Create a new folder named `starling-vm` under `hosts/nixos/`
 4. Create a `hosts/nixos/starling-vm/default.nix`
-   1. Copy the contents from an exmalpe machine, and replace `networking.hostId` with your machine's `hostId`
-5. SSH into your machine and copy /etc/nixos/hardware-configuration.nix to `hosts/nixos/starling-vm/default.nix`
+    1. Copy the contents from an example machine, and replace `networking.hostId` with your machine's `hostId`
+5. SSH into your machine running the nixos installer, generate the hardware config, and copy `/etc/nixos/hardware-configuration.nix` to `hosts/nixos/starling-vm/default.nix`
 6. Add your new host to hosts/nixos/default.nix with the appropriate settings
-   1. Valid values for `user` are any of ???
-   2. Valid values for `owner` are any of the folder names under `users/`
-   3. Valid values for `machine-class` are any of the file names under `modules/machine-classes/`
-7. Follow instructions in .sops.yaml.
-   1. Run `ssh-keyscan 10.211.55.9 2> /dev/null | ssh-to-age 2> /dev/null | sed -nEe 's/(age.+)/\1/mip'`
-   2. Add result under new line under systems
-   3. Add `- *system_starling-vm` under the first set of creation_rules
-   4. Add `- *system_starling-vm` under your user's creation rules under `# Users`
-   5. Add a new path_regex under `# Systems`
-   6. Run `find . \( -wholename "*/secrets/*.yaml" -o -name "secrets.yaml" \) -type f -exec sops updatekeys --yes {} \;`
-8. Run `./scripts/rsync-switch.sh starling-vm=root@10.211.55.9` to apply your new configuration to your machine (replace IP address with your machine's address)
+    1. Valid values for `user` are any of ???
+    2. Valid values for `owner` are any of the folder names under `users/`
+    3. Valid values for `machine-class` are any of the file names under `modules/machine-classes/`
+7. Follow instructions in .sops.yaml above `keys.systems`, then:
+    1. Add `- *system_starling-vm` under the first set of `creation_rules`
+    2. Add `- *system_starling-vm` under your user's creation rules under `# Users`
+    3. Add a new path_regex under `# Systems`
+    4. Run `find . \( -wholename "*/secrets/*.yaml" -o -name "secrets.yaml" \) -type f -exec sops updatekeys --yes {} \;`
+8. Run `nh os switch . --target-host root@10.211.55.9 --build-host root@10.211.55.9 starling-vm` to apply your new configuration to your machine (replace IP address with your machine's address)
 
 ## Fix Garbage Collection on Darwin
+
 Sometimes macOS does not give `nix store gc` permission to perform garbage collection. Follow this process to fix it. [[Github Issue](https://github.com/NixOS/nix/issues/6765#issuecomment-2869233182)]
 
 System Settings > Privacy & Security > Full Disk Access > "+" (bottom left) > "/run/current-system/sw/bin/nix"
