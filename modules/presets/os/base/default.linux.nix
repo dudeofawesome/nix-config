@@ -36,6 +36,7 @@
         graphviz
         lshw
         usbutils
+        lm_sensors
         (lib.optional (machine-class == "pc") zgrviewer)
       ];
   };
