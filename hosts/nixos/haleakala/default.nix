@@ -11,6 +11,9 @@
     ../../../modules/presets/os/doa-cluster
   ];
 
+  # Pascal GPUs are only supported by the 580.xx legacy driver.
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+
   sops.secrets."hosts/nixos/haleakala/ssh-keys/dudeofawesome_nix-config/private" = {
     sopsFile = ./secrets.yaml;
     path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
