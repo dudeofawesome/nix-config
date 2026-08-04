@@ -51,8 +51,8 @@
   security.tpm2.enable = true;
 
   services = {
-  # Game Mode owns the graphical session; GDM from the PC machine class would
-  # conflict with Jovian's autostart service.
+    # Game Mode owns the graphical session; GDM from the PC machine class would
+    #   conflict with Jovian's autostart service.
     displayManager.gdm.enable = false;
 
     hardware.openrgb = {
@@ -81,7 +81,23 @@
     };
 
     initrd = {
-      systemd.enable = lib.mkForce true;
+      systemd = {
+        enable = lib.mkForce true;
+        services =
+          let
+            rootUnlock = "unlock-bcachefs--.service";
+          in
+          lib.genAttrs
+            [
+              "unlock-bcachefs-home"
+              "unlock-bcachefs-nix"
+              "unlock-bcachefs-tmp"
+            ]
+            (_: {
+              requires = [ rootUnlock ];
+              after = [ rootUnlock ];
+            });
+      };
       availableKernelModules = [
         "tpm_crb"
         "tpm_tis"
