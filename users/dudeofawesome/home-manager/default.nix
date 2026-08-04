@@ -91,6 +91,7 @@ with pkgs.stdenv.targetPlatform;
 
           (lib.optionals isLinux [
             pkgs-unstable.cider-2
+            piper
           ])
 
           (lib.optionals isDarwin [

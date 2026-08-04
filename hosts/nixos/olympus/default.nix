@@ -60,6 +60,8 @@
 
       startupProfile = "orange";
     };
+
+    ratbagd.enable = true;
   };
 
   systemd.user.services.steamos-manager.environment.XDG_DATA_DIRS =
@@ -85,9 +87,9 @@
     };
   };
 
-  environment.systemPackages = [
-    pkgs.clevis
-    pkgs.sbctl
+  environment.systemPackages = with pkgs; [
+    clevis
+    sbctl
   ];
 
   networking = {
