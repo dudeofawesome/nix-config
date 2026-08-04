@@ -53,7 +53,6 @@
   # conflict with Jovian's autostart service.
   services = {
     displayManager.gdm.enable = lib.mkForce false;
-    desktopManager.gnome.enable = lib.mkForce false;
   };
 
   boot = {
