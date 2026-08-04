@@ -55,6 +55,9 @@
     displayManager.gdm.enable = lib.mkForce false;
   };
 
+  systemd.user.services.steamos-manager.environment.XDG_DATA_DIRS =
+    "${config.services.displayManager.sessionData.desktops}/share";
+
   boot = {
     loader.systemd-boot.enable = lib.mkForce false;
     lanzaboote = {
