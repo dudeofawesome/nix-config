@@ -160,6 +160,7 @@ in
 
   # Allow proprietary software.
   nixpkgs.config.allowUnfree = lib.mkDefault true;
+  environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
   # Stores the git commit the current system config was built from
   #   access via `nixos-version --json`
