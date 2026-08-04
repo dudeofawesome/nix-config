@@ -11,6 +11,7 @@
     inputs.jovian.nixosModules.default
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../../modules/defaults/fs/bcachefs.nix
+    ../../../modules/defaults/headful/gnome.nix
   ];
 
   # Jovian's Game Mode starts Steam Big Picture in Gamescope directly at boot.
@@ -23,7 +24,7 @@
     steam = {
       enable = true;
       autoStart = true;
-      desktopSession = "gamescope-wayland";
+      desktopSession = "gnome";
       user = owner;
     };
     decky-loader = {
