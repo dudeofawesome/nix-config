@@ -63,6 +63,11 @@
     };
 
     ratbagd.enable = true;
+
+    udev.extraRules = ''
+      # Prevent mouse movement from waking the system through the Logitech Lightspeed receiver.
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c539", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
+    '';
   };
 
   systemd.user.services.steamos-manager.environment.XDG_DATA_DIRS =
