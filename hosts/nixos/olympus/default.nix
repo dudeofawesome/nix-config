@@ -49,10 +49,17 @@
   networking.networkmanager.enable = true;
   security.tpm2.enable = true;
 
+  services = {
   # Game Mode owns the graphical session; GDM from the PC machine class would
   # conflict with Jovian's autostart service.
-  services = {
     displayManager.gdm.enable = lib.mkForce false;
+
+    hardware.openrgb = {
+      enable = true;
+      # package = pkgs.openrgb.withPlugins (with pkgs; [ openrgb-plugin-effects ]);
+
+      startupProfile = "orange";
+    };
   };
 
   systemd.user.services.steamos-manager.environment.XDG_DATA_DIRS =
