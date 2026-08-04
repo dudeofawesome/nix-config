@@ -97,6 +97,10 @@
   };
 
   home-manager.users.dudeofawesome = {
+    home.packages = with pkgs; [
+      er-save-manager
+    ];
+
     programs = {
       codex.enable = lib.mkForce false;
       opencode.enable = lib.mkForce false;
