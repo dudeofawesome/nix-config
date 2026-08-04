@@ -24,7 +24,8 @@
     steam = {
       enable = true;
       autoStart = true;
-      desktopSession = "gnome";
+      desktopSession =
+        if config.services.desktopManager.gnome.enable then "gnome" else "gamescope-wayland";
       user = owner;
     };
     decky-loader = {
