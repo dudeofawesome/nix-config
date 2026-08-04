@@ -59,3 +59,7 @@ flake.nix
 - Nix files are formatted with `nix fmt <file>`
 - Other files use Prettier
 - before nix evaluation, newly created files must be staged with git
+
+## Hosts
+
+Named hosts are usually available over SSH

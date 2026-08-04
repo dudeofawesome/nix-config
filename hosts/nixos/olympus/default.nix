@@ -52,7 +52,7 @@
   services = {
   # Game Mode owns the graphical session; GDM from the PC machine class would
   # conflict with Jovian's autostart service.
-    displayManager.gdm.enable = lib.mkForce false;
+    displayManager.gdm.enable = false;
 
     hardware.openrgb = {
       enable = true;
