@@ -1,6 +1,7 @@
 {
   "$schema": "vscode://schemas/settings/user",
 
+  "workbench.experimental.modernUI": false,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "material-product-icons",
   "workbench.colorTheme": "Bearded Themanopia (Experimental)",
@@ -9,7 +10,7 @@
   "window.autoDetectColorScheme": true,
   "workbench.colorCustomizations": {
     "[Material Night]": {
-      "editor.findMatchBackground": "#fff17695"
+      "editor.findMatchBackground": "#fff17695",
     },
     "[Material Theme Lighter]": {
       // "terminal.foreground": "#CCCCCC",
@@ -21,7 +22,7 @@
       // "debugConsole.sourceForeground": "#ff0000",
       // "debugConsole.infoForeground": "#ff0000",
       "debugConsole.warningForeground": "#FFB62C",
-      "debugConsole.errorForeground": "#F76D47"
+      "debugConsole.errorForeground": "#F76D47",
     },
     "[Material Theme]": {
       // "terminal.foreground": "#CCCCCC",
@@ -33,9 +34,9 @@
       // "debugConsole.sourceForeground": "#ff0000",
       // "debugConsole.infoForeground": "#ff0000",
       "debugConsole.warningForeground": "#FFB62C",
-      "debugConsole.errorForeground": "#F76D47"
+      "debugConsole.errorForeground": "#F76D47",
     },
-    "terminal.selectionBackground": "#ff00FF88"
+    "terminal.selectionBackground": "#ff00FF88",
   },
   "editor.tokenColorCustomizations": {
     "[Material Theme]": {
@@ -43,38 +44,38 @@
         {
           "scope": "keyword.control",
           "settings": {
-            "fontStyle": ""
-          }
-        }
-      ]
+            "fontStyle": "",
+          },
+        },
+      ],
     },
     "[Material Theme Lighter]": {
       "textMateRules": [
         {
           "scope": "keyword.control",
           "settings": {
-            "fontStyle": ""
-          }
+            "fontStyle": "",
+          },
         },
         {
           "scope": "string.quoted.other",
           "settings": {
             "foreground": "#91B859",
-            "fontStyle": "bold"
-          }
-        }
-      ]
+            "fontStyle": "bold",
+          },
+        },
+      ],
     },
     "[Material Theme Lighter High Contrast]": {
       "textMateRules": [
         {
           "scope": "keyword.control",
           "settings": {
-            "fontStyle": ""
-          }
-        }
-      ]
-    }
+            "fontStyle": "",
+          },
+        },
+      ],
+    },
   },
 
   "workbench.list.horizontalScrolling": true,
@@ -134,7 +135,7 @@
     "printer-pi": "linux",
     "home.saldivar.io": "linux",
     "doa-pi-lights": "linux",
-    "powell.place": "linux"
+    "powell.place": "linux",
   },
 
   "terminal.external.osxExec": "iTerm.app",
@@ -154,7 +155,7 @@
   // "terminal.integrated.mouseWheelScrollSensitivity": 1,
   "accessibility.signals.terminalBell": {
     "sound": "on",
-    "announcement": "auto"
+    "announcement": "auto",
   },
 
   "extensions.autoUpdate": false,
@@ -174,7 +175,7 @@
     "*.bu": "yaml",
     ".prettierrc": "yaml",
     "*.travis": "yaml",
-    "*.graphqlrc": "yaml"
+    "*.graphqlrc": "yaml",
   },
   "files.exclude": {
     "**/.git/": true,
@@ -187,13 +188,13 @@
     "**/dist/": true,
     "**/coverage/": true,
     "**/*.eslintcache": true,
-    "**/.devenv/": true
+    "**/.devenv/": true,
   },
 
   "testing.automaticallyOpenTestResults": "neverOpen",
 
   "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
+    "*.ipynb": "jupyter-notebook",
   },
 
   "diffEditor.ignoreTrimWhitespace": true,
@@ -209,33 +210,33 @@
       "clipboard": true,
       "compare": true,
       "history": false,
-      "remote": false
+      "remote": false,
     },
     "editorGroup": false,
     "explorer": {
       "clipboard": true,
       "compare": true,
       "history": true,
-      "remote": true
+      "remote": true,
     },
     "scm": {
-      "authors": true
+      "authors": true,
     },
     "scmGroupInline": {
-      "stash": true
+      "stash": true,
     },
     "scmGroup": {
       "compare": true,
       "openClose": true,
-      "stash": true
+      "stash": true,
     },
     "scmItem": {
       "clipboard": true,
       "compare": true,
       "history": true,
       "remote": false,
-      "stash": true
-    }
+      "stash": true,
+    },
   },
 
   "liveshare.featureSet": "insiders",
@@ -253,7 +254,7 @@
   "cSpell.showInRuler": false,
 
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "typescript.format.enable": false,
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
@@ -264,55 +265,55 @@
   //   "typescriptreact"
   // ],
   "jest.runMode": {
-    "type": "on-demand"
+    "type": "on-demand",
   },
   "jest.outputConfig": {
     "revealOn": "demand",
     "revealWithFocus": "none",
-    "clearOnRun": "none"
+    "clearOnRun": "none",
   },
   "nodejs-testing.extensions": [
     {
       "extensions": ["mjs", "cjs", "js"],
-      "parameters": []
+      "parameters": [],
     },
     {
       "extensions": ["mts", "cts", "ts"],
-      "parameters": ["--loader", "tsm"]
-    }
+      "parameters": ["--loader", "tsm"],
+    },
   ],
 
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "javascript.format.enable": false,
 
   "[ruby]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "ruby.useLanguageServer": true,
   "ruby.useBundler": true,
   "ruby.pathToBundler": "${userHome}/.rbenv/shims/bundler",
 
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "json.schemas": [
     {
       "fileMatch": ["tsconfig.*.json"],
-      "url": "https://json.schemastore.org/tsconfig.json"
+      "url": "https://json.schemastore.org/tsconfig.json",
     },
     {
       "fileMatch": [".angular-cli.json"],
-      "url": "./node_modules/@angular/cli/lib/config/schema.json"
+      "url": "./node_modules/@angular/cli/lib/config/schema.json",
     },
     {
       "fileMatch": [".stylelintrc*"],
-      "url": "https://json.schemastore.org/stylelintrc.json"
-    }
+      "url": "https://json.schemastore.org/stylelintrc.json",
+    },
   ],
   "json.schemaDownload.trustedDomains": {
     "https://schemastore.azurewebsites.net/": true,
@@ -342,30 +343,30 @@
   },
 
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "html.suggest.html5": true,
   "htmlhint.documentSelector": ["html", "htm", "mustache"],
 
   "[xml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   "[handlebars]": {
-    "editor.defaultFormatter": "mfeckies.handlebars-formatter"
+    "editor.defaultFormatter": "mfeckies.handlebars-formatter",
   },
 
   "[python]": {
     "editor.formatOnPaste": false,
     "editor.defaultFormatter": "eeyore.yapf",
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
   },
   "python.languageServer": "Pylance",
   "python.defaultInterpreterPath": "python3",
   "jupyter.askForKernelRestart": false,
 
   "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
   },
 
   "[markdown]": {
@@ -375,18 +376,18 @@
     "editor.quickSuggestions": {
       "comments": "off",
       "strings": "off",
-      "other": "off"
+      "other": "off",
     },
-    "editor.wrappingIndent": "indent"
+    "editor.wrappingIndent": "indent",
   },
   "markdown.extension.orderedList.marker": "one",
   "markdown.preview.doubleClickToSwitchToEditor": false,
   "markdown.styles": [
-    "https://use.fontawesome.com/releases/v6.1.2/css/all.css"
+    "https://use.fontawesome.com/releases/v6.1.2/css/all.css",
   ],
 
   "[d2]": {
-    "editor.defaultFormatter": "Terrastruct.d2"
+    "editor.defaultFormatter": "Terrastruct.d2",
   },
   "D2.execPath": "this should be replaced by nix",
   "D2.autoUpdate": false,
@@ -398,16 +399,16 @@
   "plantuml.server": "https://www.plantuml.com/plantuml",
 
   "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide"
+    "editor.defaultFormatter": "jnoortheen.nix-ide",
   },
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nil",
   "nix.serverSettings": {
     "nil": {
       "formatting": {
-        "command": ["nixfmt"]
-      }
-    }
+        "command": ["nixfmt"],
+      },
+    },
   },
 
   "vscode-kubernetes.kubectl-path": "this should be replaced by nix",
@@ -424,26 +425,26 @@
     // TODO: set this with nix
     // "vs-kubernetes.kubeconfig": "",
     "checkForMinikubeUpgrade": false,
-    "vs-kubernetes.crd-code-completion": "enabled"
+    "vs-kubernetes.crd-code-completion": "enabled",
   },
 
   "[fish]": {
     "editor.defaultFormatter": "bmalehorn.vscode-fish",
     "editor.tabSize": 4,
-    "editor.formatOnPaste": false
+    "editor.formatOnPaste": false,
   },
 
   "[sql]": {
     "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode",
-    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|\\(\\*|--)\\s*($TAGS)"
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|\\(\\*|--)\\s*($TAGS)",
   },
   "Prettier-SQL.SQLFlavourOverride": "postgresql",
 
   "[terraform]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "hashicorp.terraform",
   },
   "[terraform-vars]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "hashicorp.terraform",
   },
 
   "[dart]": {
@@ -454,7 +455,7 @@
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off",
-    "editor.defaultFormatter": "Dart-Code.dart-code"
+    "editor.defaultFormatter": "Dart-Code.dart-code",
   },
   "dart.sdkPath": "/Users/dudeofawesome/Library/Developer/flutter/bin/cache/dart-sdk",
   "dart.flutterHotReloadOnSave": "all",
@@ -479,7 +480,7 @@
   "arduino.skipHeaderProvider": false,
   "arduino.additionalUrls": [
     "https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json",
-    "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
+    "http://arduino.esp8266.com/stable/package_esp8266com_index.json",
   ],
   "arduino.defaultBaudRate": 115200,
 
@@ -491,7 +492,7 @@
 
   "java.configuration.checkProjectSettingsExclusions": false,
   "[java]": {
-    "editor.foldingImportsByDefault": true
+    "editor.foldingImportsByDefault": true,
   },
 
   "kotlin.languageServer.enabled": false,
@@ -511,14 +512,14 @@
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#FFF",
     "background": "#FFBD2A",
-    "type": "tag-and-subTag"
+    "type": "tag-and-subTag",
   },
   "todo-tree.filtering.includeHiddenFiles": true,
   "todo-tree.general.showActivityBarBadge": true,
   "material-icon-theme.showUpdateMessage": false,
   "material-icon-theme.files.associations": {
     "tsconfig.*.json": "tsconfig",
-    "*.tst.ts": "test-ts"
+    "*.tst.ts": "test-ts",
   },
 
   "map.preview.defaultBaseLayer": "osm",
@@ -535,7 +536,7 @@
       "marionette",
       "moment",
       "nodejs",
-      "rxjs"
+      "rxjs",
     ],
     "*.test.ts": [
       "chai",
@@ -549,9 +550,9 @@
       "moment",
       "nodejs",
       "rxjs",
-      "typescript"
+      "typescript",
     ],
-    "wezterm.lua": ["lua", "wezterm"]
+    "wezterm.lua": ["lua", "wezterm"],
   },
   "dash.languageIdToDocsetMap": {
     "typescript": [
@@ -605,7 +606,7 @@
       "underscore",
       "unity3d",
       "yui",
-      "zepto"
+      "zepto",
     ],
     "yaml": ["yaml", "chef", "ansible", "jinja"],
     "scss": ["sass", "compass", "bourbon", "neat", "susy", "css"],
@@ -622,9 +623,9 @@
       "spring",
       "cvj",
       "processing",
-      "spigotmc-1.12.2:"
+      "spigotmc-1.12.2:",
     ],
-    "dockerfile": ["docker"]
+    "dockerfile": ["docker"],
   },
 
   "cSpell.enabled": true,
@@ -639,7 +640,7 @@
     "node",
     "html",
     "css",
-    "fonts"
+    "fonts",
   ],
   "cSpell.allowCompoundWords": true,
   "cSpell.userWords": [
@@ -756,7 +757,7 @@
     "venmo",
     "videocam",
     "vsync",
-    "xmlns"
+    "xmlns",
   ],
 
   "ansible.lightspeed.enabled": false,
@@ -766,56 +767,56 @@
   "peacock.favoriteColors": [
     {
       "name": "Angular Red",
-      "value": "#b52e31"
+      "value": "#b52e31",
     },
     {
       "name": "Auth0 Orange",
-      "value": "#eb5424"
+      "value": "#eb5424",
     },
     {
       "name": "Azure Blue",
-      "value": "#007fff"
+      "value": "#007fff",
     },
     {
       "name": "C# Purple",
-      "value": "#68217A"
+      "value": "#68217A",
     },
     {
       "name": "Gatsby Purple",
-      "value": "#639"
+      "value": "#639",
     },
     {
       "name": "Go Cyan",
-      "value": "#5dc9e2"
+      "value": "#5dc9e2",
     },
     {
       "name": "Java Blue-Gray",
-      "value": "#557c9b"
+      "value": "#557c9b",
     },
     {
       "name": "JavaScript Yellow",
-      "value": "#f9e64f"
+      "value": "#f9e64f",
     },
     {
       "name": "Mandalorian Blue",
-      "value": "#1857a4"
+      "value": "#1857a4",
     },
     {
       "name": "Node Green",
-      "value": "#215732"
+      "value": "#215732",
     },
     {
       "name": "React Blue",
-      "value": "#00b3e6"
+      "value": "#00b3e6",
     },
     {
       "name": "Something Different",
-      "value": "#832561"
+      "value": "#832561",
     },
     {
       "name": "Vue Green",
-      "value": "#42b883"
-    }
+      "value": "#42b883",
+    },
   ],
 
   "reduxdev.hostname": "localhost",
@@ -842,21 +843,21 @@
       "type": "merge_requests",
       "scope": "all",
       "state": "opened",
-      "noItemText": "The project has no MRs"
+      "noItemText": "The project has no MRs",
     },
     {
       "name": "MRs created by me",
       "type": "merge_requests",
       "scope": "created_by_me",
       "state": "opened",
-      "noItemText": "No MRs created by you."
+      "noItemText": "No MRs created by you.",
     },
     {
       "name": "MRs to review",
       "type": "merge_requests",
       "reviewer": "<current_user>",
       "state": "opened",
-      "noItemText": "No MRs to review."
+      "noItemText": "No MRs to review.",
     },
     // issues
     {
@@ -864,15 +865,15 @@
       "type": "issues",
       "scope": "created_by_me",
       "state": "opened",
-      "noItemText": "No issues created by you."
+      "noItemText": "No issues created by you.",
     },
     {
       "name": "Issues assigned to me",
       "type": "issues",
       "scope": "assigned_to_me",
       "state": "opened",
-      "noItemText": "No issues assigned to you."
-    }
+      "noItemText": "No issues assigned to you.",
+    },
   ],
   "gitlabLs.executablePath": "this should be replaced by nix",
 

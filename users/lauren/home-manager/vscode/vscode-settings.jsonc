@@ -58,7 +58,7 @@
   // "terminal.integrated.mouseWheelScrollSensitivity": 1,
   "accessibility.signals.terminalBell": {
     "sound": "on",
-    "announcement": "auto"
+    "announcement": "auto",
   },
 
   "extensions.autoUpdate": false,
@@ -78,7 +78,7 @@
     "*.bu": "yaml",
     ".prettierrc": "yaml",
     "*.travis": "yaml",
-    "*.graphqlrc": "yaml"
+    "*.graphqlrc": "yaml",
   },
   "files.exclude": {
     "**/.git/": true,
@@ -91,13 +91,13 @@
     "**/dist/": true,
     "**/coverage/": true,
     "**/*.eslintcache": true,
-    "**/.devenv/": true
+    "**/.devenv/": true,
   },
 
   "testing.automaticallyOpenTestResults": "neverOpen",
 
   "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
+    "*.ipynb": "jupyter-notebook",
   },
 
   "diffEditor.ignoreTrimWhitespace": true,
@@ -113,33 +113,33 @@
       "clipboard": true,
       "compare": true,
       "history": false,
-      "remote": false
+      "remote": false,
     },
     "editorGroup": false,
     "explorer": {
       "clipboard": true,
       "compare": true,
       "history": true,
-      "remote": true
+      "remote": true,
     },
     "scm": {
-      "authors": true
+      "authors": true,
     },
     "scmGroupInline": {
-      "stash": true
+      "stash": true,
     },
     "scmGroup": {
       "compare": true,
       "openClose": true,
-      "stash": true
+      "stash": true,
     },
     "scmItem": {
       "clipboard": true,
       "compare": true,
       "history": true,
       "remote": false,
-      "stash": true
-    }
+      "stash": true,
+    },
   },
 
   "editor.formatOnSave": true,
@@ -154,7 +154,7 @@
   "cSpell.showInRuler": false,
 
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "typescript.format.enable": false,
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
@@ -165,82 +165,82 @@
   //   "typescriptreact"
   // ],
   "jest.runMode": {
-    "type": "on-demand"
+    "type": "on-demand",
   },
   "jest.outputConfig": {
     "revealOn": "demand",
     "revealWithFocus": "none",
-    "clearOnRun": "none"
+    "clearOnRun": "none",
   },
   "nodejs-testing.extensions": [
     {
       "extensions": ["mjs", "cjs", "js"],
-      "parameters": []
+      "parameters": [],
     },
     {
       "extensions": ["mts", "cts", "ts"],
-      "parameters": ["--loader", "tsm"]
-    }
+      "parameters": ["--loader", "tsm"],
+    },
   ],
 
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "javascript.format.enable": false,
 
   "[ruby]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "ruby.useLanguageServer": true,
   "ruby.useBundler": true,
   "ruby.pathToBundler": "${userHome}/.rbenv/shims/bundler",
 
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "json.schemas": [
     {
       "fileMatch": ["tsconfig.*.json"],
-      "url": "https://json.schemastore.org/tsconfig.json"
+      "url": "https://json.schemastore.org/tsconfig.json",
     },
     {
       "fileMatch": [".angular-cli.json"],
-      "url": "./node_modules/@angular/cli/lib/config/schema.json"
+      "url": "./node_modules/@angular/cli/lib/config/schema.json",
     },
     {
       "fileMatch": [".stylelintrc*"],
-      "url": "https://json.schemastore.org/stylelintrc.json"
-    }
+      "url": "https://json.schemastore.org/stylelintrc.json",
+    },
   ],
 
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "html.suggest.html5": true,
   "htmlhint.documentSelector": ["html", "htm", "mustache"],
 
   "[xml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   "[handlebars]": {
-    "editor.defaultFormatter": "mfeckies.handlebars-formatter"
+    "editor.defaultFormatter": "mfeckies.handlebars-formatter",
   },
 
   "[python]": {
     "editor.formatOnPaste": false,
     "editor.defaultFormatter": "eeyore.yapf",
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
   },
   "python.languageServer": "Pylance",
   "python.defaultInterpreterPath": "python3",
   "jupyter.askForKernelRestart": true,
 
   "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
   },
 
   "[markdown]": {
@@ -250,18 +250,18 @@
     "editor.quickSuggestions": {
       "comments": "off",
       "strings": "off",
-      "other": "off"
+      "other": "off",
     },
-    "editor.wrappingIndent": "indent"
+    "editor.wrappingIndent": "indent",
   },
   "markdown.extension.orderedList.marker": "one",
   "markdown.preview.doubleClickToSwitchToEditor": false,
   "markdown.styles": [
-    "https://use.fontawesome.com/releases/v6.1.2/css/all.css"
+    "https://use.fontawesome.com/releases/v6.1.2/css/all.css",
   ],
 
   "[d2]": {
-    "editor.defaultFormatter": "Terrastruct.d2"
+    "editor.defaultFormatter": "Terrastruct.d2",
   },
   "D2.execPath": "this should be replaced by nix",
   "D2.autoUpdate": false,
@@ -273,35 +273,35 @@
   "plantuml.server": "https://www.plantuml.com/plantuml",
 
   "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide"
+    "editor.defaultFormatter": "jnoortheen.nix-ide",
   },
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nil",
   "nix.serverSettings": {
     "nil": {
       "formatting": {
-        "command": ["nixfmt"]
-      }
-    }
+        "command": ["nixfmt"],
+      },
+    },
   },
 
   "[fish]": {
     "editor.defaultFormatter": "bmalehorn.vscode-fish",
     "editor.tabSize": 4,
-    "editor.formatOnPaste": false
+    "editor.formatOnPaste": false,
   },
 
   "[sql]": {
     "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode",
-    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|\\(\\*|--)\\s*($TAGS)"
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|\\(\\*|--)\\s*($TAGS)",
   },
   "Prettier-SQL.SQLFlavourOverride": "postgresql",
 
   "[terraform]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "hashicorp.terraform",
   },
   "[terraform-vars]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "hashicorp.terraform",
   },
 
   "[dart]": {
@@ -312,7 +312,7 @@
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off",
-    "editor.defaultFormatter": "Dart-Code.dart-code"
+    "editor.defaultFormatter": "Dart-Code.dart-code",
   },
   "dart.sdkPath": "/Users/dudeofawesome/Library/Developer/flutter/bin/cache/dart-sdk",
   "dart.flutterHotReloadOnSave": "all",
@@ -337,7 +337,7 @@
   "arduino.skipHeaderProvider": false,
   "arduino.additionalUrls": [
     "https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json",
-    "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
+    "http://arduino.esp8266.com/stable/package_esp8266com_index.json",
   ],
   "arduino.defaultBaudRate": 115200,
 
@@ -347,7 +347,7 @@
 
   "java.configuration.checkProjectSettingsExclusions": false,
   "[java]": {
-    "editor.foldingImportsByDefault": true
+    "editor.foldingImportsByDefault": true,
   },
 
   "kotlin.languageServer.enabled": false,
@@ -367,14 +367,14 @@
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#FFF",
     "background": "#FFBD2A",
-    "type": "tag-and-subTag"
+    "type": "tag-and-subTag",
   },
   "todo-tree.filtering.includeHiddenFiles": true,
   "todo-tree.general.showActivityBarBadge": true,
   "material-icon-theme.showUpdateMessage": false,
   "material-icon-theme.files.associations": {
     "tsconfig.*.json": "tsconfig",
-    "*.tst.ts": "test-ts"
+    "*.tst.ts": "test-ts",
   },
 
   "map.preview.defaultBaseLayer": "osm",
@@ -391,7 +391,7 @@
       "marionette",
       "moment",
       "nodejs",
-      "rxjs"
+      "rxjs",
     ],
     "*.test.ts": [
       "chai",
@@ -405,9 +405,9 @@
       "moment",
       "nodejs",
       "rxjs",
-      "typescript"
+      "typescript",
     ],
-    "wezterm.lua": ["lua", "wezterm"]
+    "wezterm.lua": ["lua", "wezterm"],
   },
   "dash.languageIdToDocsetMap": {
     "typescript": [
@@ -461,7 +461,7 @@
       "underscore",
       "unity3d",
       "yui",
-      "zepto"
+      "zepto",
     ],
     "yaml": ["yaml", "chef", "ansible", "jinja"],
     "scss": ["sass", "compass", "bourbon", "neat", "susy", "css"],
@@ -478,9 +478,9 @@
       "spring",
       "cvj",
       "processing",
-      "spigotmc-1.12.2:"
+      "spigotmc-1.12.2:",
     ],
-    "dockerfile": ["docker"]
+    "dockerfile": ["docker"],
   },
 
   "cSpell.enabled": true,
@@ -495,7 +495,7 @@
     "node",
     "html",
     "css",
-    "fonts"
+    "fonts",
   ],
   "cSpell.allowCompoundWords": true,
   "cSpell.userWords": [
@@ -612,7 +612,7 @@
     "venmo",
     "videocam",
     "vsync",
-    "xmlns"
+    "xmlns",
   ],
 
   "ansible.lightspeed.enabled": false,
@@ -643,5 +643,5 @@
   "claudeCode.useCtrlEnterToSend": true,
   "chatgpt.composerEnterBehavior": "cmdIfMultiline",
 
-  "1password.editor.suggestStorage": false
+  "1password.editor.suggestStorage": false,
 }

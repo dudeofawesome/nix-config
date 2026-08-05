@@ -4,4 +4,18 @@
  * In order to update the this config, update @code-style/code-style
  */
 import config from '@code-style/code-style/prettierrc';
-export default config;
+/**
+ * @see https://prettier.io/docs/configuration
+ * @type {import("prettier").Config}
+ */
+export default {
+  ...config,
+  overrides: [
+    {
+      files: '.vscode/settings.json',
+      options: {
+        parser: 'jsonc',
+      },
+    },
+  ],
+};

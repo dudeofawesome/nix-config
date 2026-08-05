@@ -18,7 +18,7 @@ with lib;
   programs.vscode = {
     enable = lib.mkDefault (machine-class == "pc");
 
-    mutableUserSettings = ./vscode-settings.json;
+    mutableUserSettings = ./vscode-settings.jsonc;
 
     profiles.default = {
       extensions =
