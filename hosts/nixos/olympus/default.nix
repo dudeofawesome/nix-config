@@ -129,9 +129,6 @@
       systemd = {
         enable = lib.mkForce true;
         services =
-          let
-            rootUnlock = "unlock-bcachefs--.service";
-          in
           lib.genAttrs
             [
               "unlock-bcachefs-home"
@@ -139,8 +136,9 @@
               "unlock-bcachefs-tmp"
             ]
             (_: {
-              requires = [ rootUnlock ];
-              after = [ rootUnlock ];
+              # All subvolumes share the root filesystem's encryption key. Skip
+              # their generated unlock attempts so they cannot race its mount.
+              serviceConfig.ExecCondition = lib.mkForce "${pkgs.coreutils}/bin/false";
             });
       };
       availableKernelModules = [
