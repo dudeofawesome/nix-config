@@ -5,41 +5,34 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
   "nix.enableLanguageServer": true,
-  "nix.serverPath": "nil",
+  "nix.serverPath": "nixd",
   "nix.formatterPath": ["nix", "fmt", "--", "--"],
   "nix.serverSettings": {
-    "nil": {
-      "nix": {
-        "flake": {
-          "autoArchive": true,
-          "autoEvalInputs": true,
-          "nixpkgsInputName": "nixpkgs-unstable"
-        }
-      },
-      "formatting": { "command": ["nixfmt"] }
-    },
     "nixd": {
+      "nixpkgs": {
+        "expr": "import (builtins.getFlake \"${workspaceFolder}\").inputs.nixpkgs-unstable { }",
+      },
       "options": {
-        // By default, this entry will be read from `import <nixpkgs> { }`.
-        // You can write arbitrary Nix expressions here, to produce valid "options" declaration result.
         "nixos": {
-          "expr": "(builtins.getFlake \"${workspaceFolder}/flake.nix\").nixosConfigurations.badlands-vm.options"
-        },
-        "home-manager": {
-          "expr": "(builtins.getFlake \"${workspaceFolder}/flake.nix\").homeConfigurations.<name>.options"
+          "expr": "(builtins.getFlake \"${workspaceFolder}\").nixosConfigurations.haleakala.options",
         },
         "nix-darwin": {
-          "expr": "(builtins.getFlake \"${workspaceFolder}/flake.nix\").darwinConfigurations.crater-lake.options"
-        }
-      }
-    }
+          "expr": "(builtins.getFlake \"${workspaceFolder}\").darwinConfigurations.crater-lake.options",
+        },
+        "home-manager": {
+          // "expr": "(builtins.getFlake \"${workspaceFolder}\").nixosConfigurations.haleakala.options.home-manager.users.type.getSubOptions []"
+          // "expr": "let flake = (builtins.getFlake \"${workspaceFolder}\"); in flake.inputs.home-manager.lib.homeManagerConfiguration flake.homeConfigurations.dudeofawesome.options"
+          "expr": "(builtins.getFlake \"${workspaceFolder}\").homeConfigurations.dudeofawesome.options",
+        },
+      },
+    },
   },
   "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide"
+    "editor.defaultFormatter": "jnoortheen.nix-ide",
   },
 
   "[yaml]": {
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
   },
   "cSpell.words": [
     "atuin",
@@ -63,6 +56,6 @@
     "substituters",
     "upaymeifixit",
     "vfat",
-    "wezterm"
-  ]
+    "wezterm",
+  ],
 }
