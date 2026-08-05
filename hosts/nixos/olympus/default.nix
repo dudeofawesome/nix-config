@@ -35,6 +35,20 @@
   };
   nixpkgs.config.permittedInsecurePackages = [ "pnpm-9.15.9" ];
 
+  systemd.services.decky-loader = {
+    restartTriggers = [ pkgs.decky-launch-options ];
+
+    preStart = lib.mkAfter ''
+      pluginDir="${config.jovian.decky-loader.stateDir}/plugins/decky-launch-options"
+
+      rm -rf -- "$pluginDir"
+      install -d -m 0755 "$pluginDir"
+      cp -R ${pkgs.decky-launch-options}/. "$pluginDir/"
+      chown -R "${config.jovian.decky-loader.user}:" "$pluginDir"
+      chmod -R u+w "$pluginDir"
+    '';
+  };
+
   # https://jovian-experiments.github.io/Jovian-NixOS/in-depth/decky-loader.html
   # Create Steam CEF debugging file if it doesn't exist for Decky Loader.
   systemd.services.steam-cef-debug = lib.mkIf config.jovian.decky-loader.enable {
