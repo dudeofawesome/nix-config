@@ -30,6 +30,14 @@
     };
     decky-loader = {
       enable = true;
+      extraPackages = with pkgs; [
+        procps
+        systemd
+      ];
+      # TODO: remove this backport https://github.com/SteamDeckHomebrew/decky-loader/pull/827
+      package = pkgs.decky-loader.overridePythonAttrs (old: {
+        patches = (old.patches or [ ]) ++ [ ./decky-loader-respect-path.patch ];
+      });
       user = owner;
     };
   };
