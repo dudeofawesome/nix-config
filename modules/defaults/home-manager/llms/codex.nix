@@ -66,6 +66,10 @@
         "-lc"
         "afplay --volume 3 /System/Library/Sounds/Bottle.aiff"
       ];
+
+      features = {
+        default_mode_request_user_input = true;
+      };
     };
   };
 }
