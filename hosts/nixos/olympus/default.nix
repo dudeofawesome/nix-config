@@ -84,6 +84,29 @@
     '';
   };
 
+  systemd.services.openrgb-profile = {
+    description = "Apply an OpenRGB profile";
+    requires = [ "openrgb.service" ];
+    after = [
+      "openrgb.service"
+      "systemd-hibernate.service"
+      "systemd-hybrid-sleep.service"
+      "systemd-suspend.service"
+      "systemd-suspend-then-hibernate.service"
+    ];
+    wantedBy = [
+      "hibernate.target"
+      "hybrid-sleep.target"
+      "multi-user.target"
+      "suspend.target"
+      "suspend-then-hibernate.target"
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${lib.getExe config.services.hardware.openrgb.package} --profile orange";
+    };
+  };
+
   systemd.user.services.steamos-manager.environment.XDG_DATA_DIRS =
     "${config.services.displayManager.sessionData.desktops}/share";
 
