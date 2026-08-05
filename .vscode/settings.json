@@ -20,9 +20,7 @@
           "expr": "(builtins.getFlake \"${workspaceFolder}\").darwinConfigurations.crater-lake.options",
         },
         "home-manager": {
-          // "expr": "(builtins.getFlake \"${workspaceFolder}\").nixosConfigurations.haleakala.options.home-manager.users.type.getSubOptions []"
-          // "expr": "let flake = (builtins.getFlake \"${workspaceFolder}\"); in flake.inputs.home-manager.lib.homeManagerConfiguration flake.homeConfigurations.dudeofawesome.options"
-          "expr": "(builtins.getFlake \"${workspaceFolder}\").homeConfigurations.dudeofawesome.options",
+          "expr": "(builtins.getFlake \"${workspaceFolder}\").darwinConfigurations.crater-lake.options.home-manager.users.type.getSubOptions []",
         },
       },
     },

@@ -131,7 +131,10 @@
   };
 
   outputs =
-    inputs@{ nixpkgs-linux-stable, nixpkgs-unstable, ... }:
+    inputs@{
+      nixpkgs-linux-stable,
+      ...
+    }:
     let
       lib = nixpkgs-linux-stable.lib;
       params = {
@@ -149,17 +152,34 @@
         lib.genAttrs lib.systems.flakeExposed (
           system:
           function (
-            import nixpkgs-unstable {
+            import nixpkgs-linux-stable {
               inherit system;
               config.allowUnfree = true;
             }
           )
         );
-    in
-    {
+
       nixosConfigurations = import ./hosts/nixos params;
       darwinConfigurations = import ./hosts/darwin params;
+    in
+    {
       packages = forAllSystems (pkgs: import ./packages { inherit lib; } (pkgs // { inherit lib; }));
+
+      inherit nixosConfigurations darwinConfigurations;
+      homeConfigurations = lib.pipe (nixosConfigurations // darwinConfigurations) [
+        (lib.filterAttrs (_: host: host.config ? home-manager))
+        (lib.mapAttrsToList (
+          hostname: host:
+          lib.mapAttrs' (username: config: {
+            name = "${username}@${hostname}";
+            value = {
+              activationPackage = config.home.activationPackage;
+              inherit config;
+            };
+          }) host.config.home-manager.users
+        ))
+        lib.mergeAttrsList
+      ];
 
       # run `nix fmt` to format all files
       formatter = forAllSystems (nixpkgs: nixpkgs.nixfmt);
