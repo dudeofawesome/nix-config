@@ -14,6 +14,10 @@
     ../../../modules/defaults/fs/snapper.nix
     ../../../modules/defaults/headful/gnome.nix
     ../../../modules/defaults/jovian.nix
+    ../../../modules/defaults/plymouth.nix
+    ../../../modules/defaults/secure-boot.nix
+    ./clevis.nix
+    ./openrgb.nix
   ];
 
   # Jovian's Game Mode starts Steam Big Picture in Gamescope directly at boot.
@@ -41,16 +45,8 @@
   };
 
   networking.networkmanager.enable = true;
-  security.tpm2.enable = true;
 
   services = {
-    hardware.openrgb = {
-      enable = true;
-      # package = pkgs.openrgb.withPlugins (with pkgs; [ openrgb-plugin-effects ]);
-
-      startupProfile = "orange";
-    };
-
     ratbagd.enable = true;
 
     udev.extraRules = ''
@@ -58,99 +54,6 @@
       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c539", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
     '';
   };
-
-  systemd.services.openrgb-profile = {
-    description = "Apply an OpenRGB profile";
-    requires = [ "openrgb.service" ];
-    after = [
-      "openrgb.service"
-      "systemd-hibernate.service"
-      "systemd-hybrid-sleep.service"
-      "systemd-suspend.service"
-      "systemd-suspend-then-hibernate.service"
-    ];
-    wantedBy = [
-      "hibernate.target"
-      "hybrid-sleep.target"
-      "multi-user.target"
-      "suspend.target"
-      "suspend-then-hibernate.target"
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      User = owner;
-      ExecStart = "${lib.getExe config.services.hardware.openrgb.package} --profile orange";
-    };
-  };
-
-  boot = {
-    loader.systemd-boot.enable = lib.mkForce false;
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/var/lib/sbctl";
-    };
-
-    initrd = {
-      # enable single-entry decrypt
-      systemd = {
-        enable = lib.mkForce true;
-        services =
-          lib.genAttrs
-            [
-              "unlock-bcachefs-home"
-              "unlock-bcachefs-nix"
-              "unlock-bcachefs-tmp"
-            ]
-            (_: {
-              # All subvolumes share the root filesystem's encryption key. Skip
-              # their generated unlock attempts so they cannot race its mount.
-              serviceConfig.ExecCondition = lib.mkForce "${pkgs.coreutils}/bin/false";
-            });
-      };
-
-      clevis = {
-        enable = true;
-        devices.${config.fileSystems."/".device}.secretFile = ./clevis.jwe;
-      };
-      availableKernelModules = [
-        "tpm_crb"
-        "tpm_tis"
-      ];
-    };
-
-    plymouth = {
-      enable = true;
-
-      theme = "nixos-bgrt";
-      themePackages = with pkgs; [
-        # By default we would install all themes
-        # (adi1090x-plymouth-themes.override {
-        #   selected_themes = [ "rings" ];
-        # })
-        nixos-bgrt-plymouth
-      ];
-
-      # HiDPI
-      # extraConfig = ''
-      #   [Daemon]
-      #   DeviceScale=1
-      # '';
-    };
-
-    # Enable "Silent boot"
-    consoleLogLevel = 3;
-    initrd.verbose = false;
-    kernelParams = [
-      "quiet"
-      "rd.udev.log_level=3"
-      "rd.systemd.show_status=auto"
-    ];
-  };
-
-  environment.systemPackages = with pkgs; [
-    clevis
-    sbctl
-  ];
 
   networking = {
     hostId = "4164b7fd"; # head -c 8 /etc/machine-id
