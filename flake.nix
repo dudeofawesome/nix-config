@@ -165,6 +165,16 @@
     {
       packages = forAllSystems (pkgs: import ./packages { inherit lib; } (pkgs // { inherit lib; }));
 
+      nixosModules.default = import ./modules/configurable/os {
+        inherit lib;
+        os = "linux";
+      };
+      darwinModules.default = import ./modules/configurable/os {
+        inherit lib;
+        os = "darwin";
+      };
+      homeModules.default = import ./modules/configurable/home-manager;
+
       inherit nixosConfigurations darwinConfigurations;
       homeConfigurations = lib.pipe (nixosConfigurations // darwinConfigurations) [
         (lib.filterAttrs (_: host: host.config ? home-manager))
