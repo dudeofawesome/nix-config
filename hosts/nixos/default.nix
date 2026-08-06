@@ -103,7 +103,7 @@ in
         hostname = "haleakala-sim";
         arch = "aarch64";
         owner = "dudeofawesome";
-        machine-class = "pc";
+        machine-class = "server";
         users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
       }
       // base
