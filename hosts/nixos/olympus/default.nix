@@ -13,6 +13,7 @@
     ../../../modules/defaults/fs/bcachefs.nix
     ../../../modules/defaults/fs/snapper.nix
     ../../../modules/defaults/headful/gnome.nix
+    ../../../modules/defaults/jovian.nix
   ];
 
   # Jovian's Game Mode starts Steam Big Picture in Gamescope directly at boot.
@@ -25,59 +26,28 @@
     steam = {
       enable = true;
       autoStart = true;
-      desktopSession =
-        if config.services.desktopManager.gnome.enable then "gnome" else "gamescope-wayland";
       user = owner;
     };
     decky-loader = {
       enable = true;
-      extraPackages = with pkgs; [
-        procps
-        systemd
-      ];
       # TODO: remove this backport https://github.com/SteamDeckHomebrew/decky-loader/pull/827
       package = pkgs.decky-loader.overridePythonAttrs (old: {
         patches = (old.patches or [ ]) ++ [ ./decky-loader-respect-path.patch ];
       });
+      extraPackages = with pkgs; [
+        procps
+        systemd
+      ];
       user = owner;
+
+      plugins = [ pkgs.decky-launch-options ];
     };
-  };
-  nixpkgs.config.permittedInsecurePackages = [ "pnpm-9.15.9" ];
-
-  systemd.services.decky-loader = {
-    restartTriggers = [ pkgs.decky-launch-options ];
-
-    preStart = lib.mkAfter ''
-      pluginDir="${config.jovian.decky-loader.stateDir}/plugins/decky-launch-options"
-
-      rm -rf -- "$pluginDir"
-      install -d -m 0755 "$pluginDir"
-      cp -R ${pkgs.decky-launch-options}/. "$pluginDir/"
-      chown -R "${config.jovian.decky-loader.user}:" "$pluginDir"
-      chmod -R u+w "$pluginDir"
-    '';
-  };
-
-  # https://jovian-experiments.github.io/Jovian-NixOS/in-depth/decky-loader.html
-  # Create Steam CEF debugging file if it doesn't exist for Decky Loader.
-  systemd.services.steam-cef-debug = lib.mkIf config.jovian.decky-loader.enable {
-    description = "Create Steam CEF debugging file";
-    serviceConfig = {
-      Type = "oneshot";
-      User = config.jovian.steam.user;
-      ExecStart = "/bin/sh -c 'mkdir -p ~/.steam/steam && [ ! -f ~/.steam/steam/.cef-enable-remote-debugging ] && touch ~/.steam/steam/.cef-enable-remote-debugging || true'";
-    };
-    wantedBy = [ "multi-user.target" ];
   };
 
   networking.networkmanager.enable = true;
   security.tpm2.enable = true;
 
   services = {
-    # Game Mode owns the graphical session; GDM from the PC machine class would
-    #   conflict with Jovian's autostart service.
-    displayManager.gdm.enable = false;
-
     hardware.openrgb = {
       enable = true;
       # package = pkgs.openrgb.withPlugins (with pkgs; [ openrgb-plugin-effects ]);
@@ -116,9 +86,6 @@
       ExecStart = "${lib.getExe config.services.hardware.openrgb.package} --profile orange";
     };
   };
-
-  systemd.user.services.steamos-manager.environment.XDG_DATA_DIRS =
-    "${config.services.displayManager.sessionData.desktops}/share";
 
   boot = {
     loader.systemd-boot.enable = lib.mkForce false;
