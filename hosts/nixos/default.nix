@@ -45,18 +45,18 @@ in
     )
   );
 
-  kings-canyon = lib.nixosSystem (
-    import ../system.nix (
-      {
-        hostname = "kings-canyon";
-        arch = "x86_64";
-        owner = "dudeofawesome";
-        machine-class = "server";
-        users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
-      }
-      // base
-    )
-  );
+  # kings-canyon = lib.nixosSystem (
+  #   import ../system.nix (
+  #     {
+  #       hostname = "kings-canyon";
+  #       arch = "x86_64";
+  #       owner = "dudeofawesome";
+  #       machine-class = "server";
+  #       users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
+  #     }
+  #     // base
+  #   )
+  # );
 
   badlands-vm = lib.nixosSystem (
     import ../system.nix (
