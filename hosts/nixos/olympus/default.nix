@@ -11,6 +11,7 @@
     inputs.jovian.nixosModules.default
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../../modules/defaults/fs/bcachefs.nix
+    ../../../modules/defaults/fs/snapper.nix
     ../../../modules/defaults/headful/gnome.nix
   ];
 
