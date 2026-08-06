@@ -1,0 +1,37 @@
+name: Check
+
+on:
+  push:
+    branches: ['*']
+    tags-ignore: ['*']
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check
+  cancel-in-progress: false
+
+jobs:
+  lint-flake:
+    name: Lint Flake
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@33c9ab3ef95cd57c164d9d6eb1f9a46338538d41 # main
+
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@55718cd9ebf1737a061487d5ada21abf31e99a98 # main
+
+      - name: Lint Flake
+        shell: bash
+        run: |
+          nix flake check \
+            --all-systems \
+            --no-build \
+            ;
