@@ -25,7 +25,7 @@
 
       settings_path = "${configDir}/${configFileName}";
     in
-    lib.mkIf (cfg.mutableSettings) {
+    lib.mkIf (cfg.enable && cfg.mutableSettings) {
       home.file."/${settings_path}".enable = lib.mkForce false;
       home.file-mutable.codex-settings = lib.mkIf (cfg.settings != { }) {
         inherit (cfg) enable;
