@@ -1,6 +1,5 @@
 {
   config,
-  os,
   owner,
   ...
 }:
@@ -9,6 +8,7 @@
     ../../../modules/defaults/nvidia.nix
     ../../../modules/defaults/tailscale.nix
     ../../../modules/presets/os/doa-cluster
+    ../../../modules/defaults/tang.nix
   ];
 
   sops.secrets."hosts/nixos/haleakala/ssh-keys/dudeofawesome_nix-config/private" = {
@@ -30,9 +30,5 @@
     firewall.enable = false;
   };
 
-  programs = {
-    gnome = {
-      # autoLoginEnable = true;
-    };
-  };
+  services.tang.ipAddressAllow = [ "10.0.0.0/20" ];
 }
