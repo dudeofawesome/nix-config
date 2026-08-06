@@ -63,3 +63,7 @@ flake.nix
 ## Hosts
 
 Named hosts are usually available over SSH
+
+## Rules
+
+Do not attempt to apply changes to running hosts without explicit permission
