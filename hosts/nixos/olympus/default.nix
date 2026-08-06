@@ -30,10 +30,6 @@
     };
     decky-loader = {
       enable = true;
-      # TODO: remove this backport https://github.com/SteamDeckHomebrew/decky-loader/pull/827
-      package = pkgs.decky-loader.overridePythonAttrs (old: {
-        patches = (old.patches or [ ]) ++ [ ./decky-loader-respect-path.patch ];
-      });
       extraPackages = with pkgs; [
         procps
         systemd
@@ -95,6 +91,7 @@
     };
 
     initrd = {
+      # enable single-entry decrypt
       systemd = {
         enable = lib.mkForce true;
         services =
@@ -110,14 +107,15 @@
               serviceConfig.ExecCondition = lib.mkForce "${pkgs.coreutils}/bin/false";
             });
       };
-      availableKernelModules = [
-        "tpm_crb"
-        "tpm_tis"
-      ];
+
       clevis = {
         enable = true;
         devices.${config.fileSystems."/".device}.secretFile = ./clevis.jwe;
       };
+      availableKernelModules = [
+        "tpm_crb"
+        "tpm_tis"
+      ];
     };
 
     plymouth = {
