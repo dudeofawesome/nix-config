@@ -111,6 +111,7 @@
     ];
     serviceConfig = {
       Type = "oneshot";
+      User = owner;
       ExecStart = "${lib.getExe config.services.hardware.openrgb.package} --profile orange";
     };
   };
