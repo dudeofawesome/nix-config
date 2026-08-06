@@ -81,13 +81,15 @@ jobs:
         shell: bash
         run: >-
           nix run nixpkgs#nix-update --
-          --flake --use-update-script "${{ matrix.package }}"
+          --flake
+          --use-update-script
+          "${{ matrix.package }}"
 
       - name: Report failed update
         if: steps.update.outcome == 'failure'
         shell: bash
         run: |
-          echo "::warning title=Package update failed::${{ matrix.package }} failed; continuing with other packages"
+          echo "::warning title=Package update failed::${{ matrix.package }} failed"
 
       - name: Format changed Nix files
         if: steps.update.outcome == 'success'
@@ -110,12 +112,11 @@ jobs:
         if: steps.update.outcome == 'success'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
-          branch: automation/update-${{ matrix.package }}
+          branch: chore/update-${{ matrix.package }}
           delete-branch: true
+          sign-commits: true
           commit-message: 'chore(${{ matrix.package }}): update package'
           title: 'chore(${{ matrix.package }}): update package'
           body: |
             Automated update for `${{ matrix.package }}`.
-
-            This workflow runs every Monday at 12:17 UTC and can also be triggered manually.
           labels: dependencies
