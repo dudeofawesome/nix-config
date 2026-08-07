@@ -5,14 +5,13 @@
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    clevis
+  imports = [
+    ../../../modules/defaults/clevis.nix
   ];
 
   boot = {
     initrd = {
       clevis = {
-        enable = true;
         devices.${config.fileSystems."/".device}.secretFile = ./clevis.jwe;
       };
 
