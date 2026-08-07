@@ -28,11 +28,11 @@
             root = fs."/";
           in
           lib.mkIf (fs ? "/" && (builtins.elem root.fsType snapshotting_fs)) (
-            {
+            default_timeline
+            // {
               SUBVOLUME = "/";
               FSTYPE = root.fsType;
             }
-            // default_timeline
           );
 
         home =
@@ -40,7 +40,8 @@
             home = fs."/home";
           in
           lib.mkIf (fs ? "/home" && (builtins.elem home.fsType snapshotting_fs)) (
-            {
+            default_timeline
+            // {
               SUBVOLUME = "/home";
               FSTYPE = home.fsType;
 
@@ -48,7 +49,6 @@
               TIMELINE_LIMIT_DAILY = 12;
               TIMELINE_LIMIT_WEEKLY = 7;
             }
-            // default_timeline
           );
       };
   };
