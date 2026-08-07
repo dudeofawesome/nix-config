@@ -94,6 +94,26 @@
         "type": "github"
       }
     },
+    "decky-openrgb": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786136867,
+        "narHash": "sha256-xyB/yPMKveEPb0/2/LzJ/M5+ak0h1vWRUNZ2eqZfgIY=",
+        "owner": "dudeofawesome",
+        "repo": "decky-openrgb",
+        "rev": "b6077b790b3bafe76abd6f71428a2a1851a69000",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dudeofawesome",
+        "repo": "decky-openrgb",
+        "type": "github"
+      }
+    },
     "determinate": {
       "inputs": {
         "determinate-nixd-aarch64-darwin": "determinate-nixd-aarch64-darwin",
@@ -862,6 +882,7 @@
         "claude-code-nix": "claude-code-nix",
         "codex-cli-nix": "codex-cli-nix",
         "darwin": "darwin",
+        "decky-openrgb": "decky-openrgb",
         "determinate": "determinate",
         "disko": "disko",
         "dudeofawesome_dotfiles": "dudeofawesome_dotfiles",

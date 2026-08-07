@@ -128,6 +128,11 @@
       url = "github:sadjow/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
+
+    decky-openrgb = {
+      url = "github:dudeofawesome/decky-openrgb";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =

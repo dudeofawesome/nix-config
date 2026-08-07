@@ -19,6 +19,9 @@ in
         inputs.claude-code-nix.overlays.default
         inputs.codex-cli-nix.overlays.default
         inputs.nix4vscode.overlays.default
+        (final: _: {
+          decky-openrgb = inputs.decky-openrgb.packages.${final.system}.decky-openrgb;
+        })
       ];
     }
   );

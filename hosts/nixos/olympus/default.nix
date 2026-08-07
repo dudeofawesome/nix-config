@@ -37,10 +37,14 @@
       extraPackages = with pkgs; [
         procps
         systemd
+        openrgb
       ];
       user = owner;
 
-      plugins = [ pkgs.decky-launch-options ];
+      plugins = [
+        pkgs.decky-launch-options
+        pkgs.decky-openrgb
+      ];
     };
   };
 
