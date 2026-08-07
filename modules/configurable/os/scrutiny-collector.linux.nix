@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -37,20 +38,27 @@ in
           COLLECTOR_API_ENDPOINT = lib.mkForce null;
         };
         serviceConfig = {
+          LoadCredential = lib.mkIf (cfg.collector.api-endpoint-secret != null) [
+            "api-endpoint:${cfg.collector.api-endpoint-secret}"
+          ];
           ExecStart = lib.mkForce (
-            lib.pipe
-              [
-                (getExe cfg.collector.package)
-                "run"
-                "--config /run/scrutiny-collector/config.yaml"
-                (lib.optional (
-                  cfg.collector.api-endpoint-secret != null
-                ) ''--api-endpoint "$(cat "${cfg.collector.api-endpoint-secret}")"'')
-              ]
-              [
-                lib.flatten
-                (lib.concatStringsSep " ")
-              ]
+            pkgs.writeShellScript "scrutiny-collector-start" ''
+              exec ${
+                lib.pipe
+                  [
+                    (getExe cfg.collector.package)
+                    "run"
+                    "--config /run/scrutiny-collector/config.yaml"
+                    (lib.optional (
+                      cfg.collector.api-endpoint-secret != null
+                    ) ''--api-endpoint "$(<"$CREDENTIALS_DIRECTORY/api-endpoint")"'')
+                  ]
+                  [
+                    lib.flatten
+                    (lib.concatStringsSep " ")
+                  ]
+              }
+            ''
           );
         };
       };
