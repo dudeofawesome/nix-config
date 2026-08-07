@@ -12,7 +12,7 @@ stdenv.mkDerivation (finalAttrs: {
   version = "1.2.0";
 
   src = fetchurl {
-    url = "https://github.com/stonerl/Thaw/releases/download/${finalAttrs.version}/Thaw_${finalAttrs.version}.zip";
+    url = "https://github.com/thaw-app/Thaw/releases/download/${finalAttrs.version}/Thaw_${finalAttrs.version}.zip";
     hash = "sha256-1n9NMe+foFeEmphUC4EM+kLgvGYBnTYFq9CORcaaoG8=";
   };
 
@@ -33,7 +33,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   meta = {
     description = "Powerful menu bar manager for macOS";
-    homepage = "https://github.com/stonerl/Thaw";
+    homepage = "https://github.com/thaw-app/Thaw";
     license = lib.licenses.gpl3Only;
     maintainers = with lib.maintainers; [ dudeofawesome ];
     platforms = lib.platforms.darwin;
