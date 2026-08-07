@@ -11,7 +11,7 @@
       # package = pkgs.openrgb.withPlugins (with pkgs; [ openrgb-plugin-effects ]);
       zone_sizes = ./openrgb-sizes.ors;
 
-      startupProfile = "orange";
+      startupProfile = "/home/dudeofawesome/.config/openrgb/orange";
     };
 
     ratbagd.enable = true;
@@ -45,5 +45,4 @@
       ExecStart = "${lib.getExe config.services.hardware.openrgb.package} --profile orange";
     };
   };
-
 }
