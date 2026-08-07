@@ -31,4 +31,13 @@
   };
 
   services.tang.ipAddressAllow = [ "10.0.0.0/20" ];
+
+  services.scrutiny.collector = {
+    enable = true;
+    api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
+    settings = {
+      host.id = config.networking.hostName;
+      devices = [ { device = "/dev/nvme1n1"; } ];
+    };
+  };
 }
