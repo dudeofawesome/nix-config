@@ -32,7 +32,10 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   passthru.updateScript = nix-update-script {
-    extraArgs = [ "--use-github-releases" ];
+    extraArgs = [
+      "--flake"
+      "--use-github-releases"
+    ];
   };
 
   meta = {

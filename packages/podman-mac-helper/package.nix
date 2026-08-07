@@ -23,7 +23,9 @@ buildGoModule rec {
   # See instructions below.
   vendorHash = null;
 
-  passthru.updateScript = nix-update-script { };
+  passthru.updateScript = nix-update-script {
+    extraArgs = [ "--flake" ];
+  };
 
   meta = with lib; {
     description = "Helper binary for running Podman on macOS";

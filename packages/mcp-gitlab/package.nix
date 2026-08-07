@@ -28,7 +28,9 @@ buildNpmPackage (finalAttrs: {
     ln -s "$out/bin/@zereight/mcp-gitlab" "$out/bin/mcp-gitlab"
   '';
 
-  passthru.updateScript = nix-update-script { };
+  passthru.updateScript = nix-update-script {
+    extraArgs = [ "--flake" ];
+  };
 
   meta = {
     description = "GitLab MCP server";

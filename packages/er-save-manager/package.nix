@@ -31,7 +31,9 @@ appimageTools.wrapType2 {
       $out/share/icons/hicolor/256x256/apps/er-save-manager.png
   '';
 
-  passthru.updateScript = nix-update-script { };
+  passthru.updateScript = nix-update-script {
+    extraArgs = [ "--flake" ];
+  };
 
   meta = {
     description = "Elden Ring save file editor, backup manager, and corruption fixer";
