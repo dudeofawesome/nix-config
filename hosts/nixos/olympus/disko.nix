@@ -15,7 +15,10 @@ in
       content = {
         type = "gpt";
         partitions = {
-          ESP = import ../../../modules/defaults/disko/esp.nix;
+          ESP = (import ../../../modules/defaults/disko/esp.nix) // {
+            # running unstable means more kernel changes
+            size = "2000M";
+          };
         }
         // root.partition;
       };

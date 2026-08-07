@@ -44,6 +44,19 @@
     };
   };
 
+  # TODO: remove this once the ESP partition is actually resized
+  disko.devices.disk.primary.content.partitions.ESP.size = lib.mkForce "500M";
+  boot.loader.systemd-boot.configurationLimit =
+    let
+      avg_initrd_size = 100;
+    in
+    (lib.pipe config.disko.devices.disk.primary.content.partitions.ESP.size [
+      (builtins.replaceStrings [ "M" ] [ "" ])
+      lib.toInt
+      (mb: mb / avg_initrd_size)
+      lib.floor
+    ]);
+
   networking.networkmanager.enable = true;
 
   services = {
