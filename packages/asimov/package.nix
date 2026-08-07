@@ -8,13 +8,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "asimov";
-  version = "0.8.0";
+  version = "0.12.0";
 
   src = fetchFromGitHub {
     owner = "stevegrunwell";
     repo = "asimov";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-wc/WndvZZlwco5b5q6f18r0Sh76ZjeHG3dSma4Ja+Hk=";
+    hash = "sha256-w3mmSu56vtiqoet6P2OFWcUVCdME2ckMTj3k7PRzw8I=";
   };
 
   dontBuild = true;
