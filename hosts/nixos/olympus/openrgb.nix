@@ -9,6 +9,7 @@
     hardware.openrgb = {
       enable = true;
       # package = pkgs.openrgb.withPlugins (with pkgs; [ openrgb-plugin-effects ]);
+      zone_sizes = ./openrgb-sizes.ors;
 
       startupProfile = "orange";
     };
