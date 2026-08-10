@@ -2,7 +2,6 @@
   inputs,
   config,
   lib,
-  owner,
   pkgs,
   ...
 }:
@@ -12,9 +11,7 @@
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../../modules/defaults/fs/bcachefs.nix
     ../../../modules/defaults/fs/snapper.nix
-    ../../../modules/defaults/headful/gnome.nix
-    ../../../modules/defaults/jovian.nix
-    ../../../modules/defaults/plymouth.nix
+    ../../../modules/defaults/headful/steamos.nix
     ../../../modules/defaults/secure-boot.nix
     ./clevis.nix
     ./openrgb.nix
@@ -27,22 +24,12 @@
       enableHdmiCecIntegration = false;
     };
 
-    steam = {
-      enable = true;
-      autoStart = true;
-      user = owner;
-    };
     decky-loader = {
-      enable = true;
       extraPackages = with pkgs; [
-        procps
-        systemd
         openrgb
       ];
-      user = owner;
 
       plugins = [
-        pkgs.decky-launch-options
         pkgs.decky-openrgb
       ];
     };
@@ -74,6 +61,16 @@
 
   networking = {
     hostId = "4164b7fd"; # head -c 8 /etc/machine-id
+  };
+
+  services.scrutiny.collector = {
+    enable = true;
+    api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
+    settings = {
+      host.id = config.networking.hostName;
+      # TODO: map over all disko disks
+      devices = [ { device = config.disko.devices.disk.primary.device; } ];
+    };
   };
 
   home-manager.users.dudeofawesome = {
