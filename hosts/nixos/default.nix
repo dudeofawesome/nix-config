@@ -45,6 +45,19 @@ in
     )
   );
 
+  lassen = inputs.nixpkgs-unstable.lib.nixosSystem (
+    import ../system.nix (
+      {
+        hostname = "lassen";
+        arch = "x86_64";
+        owner = "dudeofawesome";
+        machine-class = "pc";
+        users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
+      }
+      // base
+    )
+  );
+
   # kings-canyon = lib.nixosSystem (
   #   import ../system.nix (
   #     {
