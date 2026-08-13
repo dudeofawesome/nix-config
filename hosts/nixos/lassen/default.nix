@@ -43,15 +43,15 @@
     hostId = "426616de"; # head -c 8 /etc/machine-id
   };
 
-  services.scrutiny.collector = {
-    enable = true;
-    api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
-    settings = {
-      host.id = config.networking.hostName;
-      # TODO: map over all disko disks
-      devices = [ { device = config.disko.devices.disk.primary.device; } ];
-    };
-  };
+  # services.scrutiny.collector = {
+  #   enable = true;
+  #   api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
+  #   settings = {
+  #     host.id = config.networking.hostName;
+  #     # TODO: map over all disko disks
+  #     devices = [ { device = config.disko.devices.disk.primary.device; } ];
+  #   };
+  # };
 
   home-manager.users.dudeofawesome = {
     programs = {
