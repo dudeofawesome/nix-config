@@ -33,8 +33,8 @@ echo
 printf '%s' "$BCACHEFS_PASSPHRASE" | sudo install -m 600 /dev/stdin /tmp/bcachefs-password
 unset BCACHEFS_PASSPHRASE
 
-# sudo nix run github:nix-community/disko -- --mode disko /tmp/nix-config/hosts/nixos/olympus/disko.nix
-sudo nix run github:nix-community/disko -- --mode format --flake github:dudeofawesome/nix-config#olympus
+# sudo nix run github:nix-community/disko -- --mode disko /tmp/nix-config/hosts/nixos/lassen/disko.nix
+sudo nix run github:nix-community/disko -- --mode format --flake github:dudeofawesome/nix-config#lassen
 ```
 
 Disko creates and mounts the root, `/home`, `/nix`, and `/tmp` bcachefs

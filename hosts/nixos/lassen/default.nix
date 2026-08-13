@@ -19,7 +19,7 @@
 
   # Jovian's Game Mode starts Steam Big Picture in Gamescope directly at boot.
   jovian = {
-    steamdeck = {
+    devices.steamdeck = {
       enable = true;
       autoUpdate = true;
       # enableGyroDsuService = ;
