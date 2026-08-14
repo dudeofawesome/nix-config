@@ -29,12 +29,11 @@ The following command destroys all data on the Olympus system drive, `/dev/disk/
 
 ```sh
 read -rs BCACHEFS_PASSPHRASE
-echo
 printf '%s' "$BCACHEFS_PASSPHRASE" | sudo install -m 600 /dev/stdin /tmp/bcachefs-password
 unset BCACHEFS_PASSPHRASE
+sudo cat /tmp/bcachefs-password
 
-# sudo nix run github:nix-community/disko -- --mode disko /tmp/nix-config/hosts/nixos/olympus/disko.nix
-sudo nix run github:nix-community/disko -- --mode format --flake github:dudeofawesome/nix-config#olympus
+sudo nix run --inputs-from github:dudeofawesome/nix-config disko -- --mode destroy,format,mount --flake github:dudeofawesome/nix-config#olympus
 ```
 
 Disko creates and mounts the root, `/home`, `/nix`, and `/tmp` bcachefs

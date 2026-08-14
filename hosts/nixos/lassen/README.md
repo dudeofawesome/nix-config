@@ -29,12 +29,11 @@ The following command destroys all data on the Lassen system drive, `/dev/disk/b
 
 ```sh
 read -rs BCACHEFS_PASSPHRASE
-echo
 printf '%s' "$BCACHEFS_PASSPHRASE" | sudo install -m 600 /dev/stdin /tmp/bcachefs-password
 unset BCACHEFS_PASSPHRASE
+sudo cat /tmp/bcachefs-password
 
-# sudo nix run github:nix-community/disko -- --mode format --flake github:dudeofawesome/nix-config#lassen
-sudo nix run github:nix-community/disko/pull/1265/head -- --mode destroy,format,mount --flake github:dudeofawesome/nix-config#lassen
+sudo nix run --inputs-from github:dudeofawesome/nix-config disko -- --mode destroy,format,mount --flake github:dudeofawesome/nix-config#lassen
 ```
 
 Disko creates and mounts the root, `/home`, `/nix`, and `/tmp` bcachefs
@@ -92,7 +91,7 @@ Copy the repository contents into the installed system and run the installer:
 ```sh
 mkdir /mnt/etc/
 cp -a /tmp/nix-config/. /mnt/etc/nixos/
-nixos-install --flake /mnt/etc/nixos#lassen
+nixos-install --flake github:dudeofawesome/nix-config#lassen
 ```
 
 Reboot, enable Secure Boot in firmware, and boot Lassen. The initial
