@@ -13,7 +13,7 @@
     ../../../modules/defaults/fs/bcachefs.nix
     ../../../modules/defaults/fs/snapper.nix
     ../../../modules/defaults/headful/steamos.nix
-    ../../../modules/defaults/secure-boot.nix
+    # ../../../modules/defaults/secure-boot.nix
     ./clevis.nix
   ];
 
