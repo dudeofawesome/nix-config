@@ -31,7 +31,7 @@ keys:
     - &system_haleakala 'age1wy9vrp4k3w69dtjfeskayrn4m4m6fntjcj480junfvpjflnd0p8sg078qc'
     - &system_capitol-reef 'age1fgww42uw3uum68yarh9hc236neej3nc7hxttfzn9em2gw4mw24hsqvk0gk'
     - &system_olympus 'age168s8w29r5f80vhrcedqt25nmuj8zvh70876wjdfextaluyda3ezq6xffaj'
-    - &system_lassen 'age1z2qnhwfxdr0j47rxh2zp9esz5wfz9yuy5epynvh383lztxydeq4qgrafl9'
+    - &system_lassen 'age1wemy7s7r6ms2hxkk433yjzgpuhg5lakxnfg5298lyyaf62ewk32q36lrdh'
     - &system_joshs-paciolan-laptop 'age1fwrw2vf0hfh7ug85p6j7ym6qln30yywy4e3nu6ep35scsfxl5ypsqnzlp5'
     - &system_soto-server 'age1a4z2qgdtv8aaqe0892clncuz4kpdqn9ph2qqg6k850hxl2lqrd2shu7mgs'
     # - &system_starling-vm 'age1nm4qzu0srzff2zylgr46j7fjpr5kprz7huvzwwwqxny42nr6ydvskejjx4' # Qemu VM
