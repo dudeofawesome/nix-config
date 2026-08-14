@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   owner,
   ...
 }:
@@ -18,12 +19,25 @@
     mode = "0400";
   };
 
-  boot.extraModulePackages = [
-    # config.boot.kernelPackages.rtl88x2bu # WiFi
-  ];
-
   # Pascal GPUs are only supported by the 580.xx legacy driver.
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+  hardware = {
+    nct6775 = {
+      enable = true;
+      device = "nct6798";
+      channels = builtins.listToAttrs (
+        map (channel: {
+          name = toString channel;
+          value = {
+            mode = "smartFanIV";
+            stepUpTime = 3000;
+            stepDownTime = 15000;
+          };
+        }) (lib.range 1 4)
+      );
+    };
+
+    nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+  };
 
   networking = {
     hostId = "1b29410c"; # head -c 8 /etc/machine-id
