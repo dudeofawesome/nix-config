@@ -18,7 +18,8 @@
     nix-std.url = "github:chessai/nix-std";
 
     disko = {
-      url = "github:nix-community/disko";
+      # 1265 fixes bcachefs subvolume provisioning
+      url = "github:nix-community/disko/pull/1265/head";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
