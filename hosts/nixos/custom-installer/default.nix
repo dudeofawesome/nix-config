@@ -7,6 +7,8 @@
     ./ssh.nix
   ];
 
+  environment.enableAllTerminfo = true;
+
   environment.systemPackages = with pkgs; [
     fish
     tmux
