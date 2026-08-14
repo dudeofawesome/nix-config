@@ -26,6 +26,8 @@
     };
   };
 
+  security.tpm2.enable = true;
+
   boot.loader.systemd-boot.configurationLimit =
     let
       avg_initrd_size = 100;
