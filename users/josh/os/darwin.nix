@@ -57,6 +57,7 @@
       "vlc"
       "webull"
       "wireshark-app"
+      "whatcable"
       "zoom"
     ];
     masApps = {
