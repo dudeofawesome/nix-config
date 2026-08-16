@@ -8,10 +8,15 @@
 let
   cfg = config.services.games-on-whales.wolf;
 
-  wolfUdevRules = pkgs.fetchurl {
+  wolfUdevRulesSource = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/games-on-whales/wolf/stable/85-wolf.rules";
     hash = "sha256-KpLtA8SIHpEestXAWZya5SaWSksXSJbc+fv38wUay8I=";
   };
+
+  wolfUdevRules = pkgs.runCommand "wolf-udev-rules" { } ''
+    install -Dm644 ${wolfUdevRulesSource} \
+      $out/lib/udev/rules.d/85-wolf.rules
+  '';
 
   wolfNvidiaVolume = inputs.wolf-nvidia-vol.lib.mkWolfNvidiaVol {
     inherit pkgs;
@@ -71,7 +76,7 @@ in
     ]
     ++ lib.optional cfg.nvidia.enable "nvidia_uvm";
 
-    environment.etc."udev/rules.d/85-wolf.rules".source = wolfUdevRules;
+    services.udev.packages = [ wolfUdevRules ];
 
     networking.firewall = lib.mkIf cfg.openFirewall {
       allowedTCPPorts = [
