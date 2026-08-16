@@ -134,6 +134,11 @@
       url = "github:dudeofawesome/decky-openrgb";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    wolf-nvidia-vol = {
+      url = "github:altano/flakes?dir=wolf-nvidia-vol";
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
+    };
   };
 
   outputs =

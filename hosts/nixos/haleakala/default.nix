@@ -46,6 +46,11 @@
 
   services.tang.ipAddressAllow = [ "10.0.0.0/20" ];
 
+  services.games-on-whales.wolf = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.scrutiny.collector = {
     enable = true;
     api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;

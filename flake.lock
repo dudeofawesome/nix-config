@@ -908,7 +908,8 @@
         "sops": "sops",
         "upaymeifixit_dotfiles": "upaymeifixit_dotfiles",
         "vim-lumen": "vim-lumen",
-        "vscode-server": "vscode-server"
+        "vscode-server": "vscode-server",
+        "wolf-nvidia-vol": "wolf-nvidia-vol"
       }
     },
     "rust-overlay": {
@@ -1078,6 +1079,28 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixos-vscode-server",
+        "type": "github"
+      }
+    },
+    "wolf-nvidia-vol": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-linux-stable"
+        ]
+      },
+      "locked": {
+        "dir": "wolf-nvidia-vol",
+        "lastModified": 1786260313,
+        "narHash": "sha256-a1ru86k7dD+K3K1iIPnzXAdHZvDCNLxuRHRnBghJK8Q=",
+        "owner": "altano",
+        "repo": "flakes",
+        "rev": "88bb3b826adc670c8cecf4829b813a989968a2a4",
+        "type": "github"
+      },
+      "original": {
+        "dir": "wolf-nvidia-vol",
+        "owner": "altano",
+        "repo": "flakes",
         "type": "github"
       }
     }
