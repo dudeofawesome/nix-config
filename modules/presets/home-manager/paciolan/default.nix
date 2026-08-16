@@ -30,7 +30,13 @@ with pkgs.stdenv.targetPlatform;
   ];
 
   programs = {
-    glab.enable = true;
+    glab = {
+      enable = true;
+      settings = { 
+        host = "";
+        hosts = {};
+      };
+    };
     slack = {
       enable = lib.mkDefault (machine-class == "pc");
       package = pkgs-unstable.slack;
