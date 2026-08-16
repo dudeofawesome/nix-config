@@ -4,8 +4,16 @@
   pkgs,
   ...
 }:
-with lib;
 let
+  inherit (lib)
+    types
+    mkOption
+    mkEnableOption
+    mkIf
+    literalExpression
+    ;
+  yamlFormat = pkgs.formats.yaml { };
+
   cfg = config.programs.glab;
 in
 {
