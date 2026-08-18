@@ -94,27 +94,48 @@ cp -a /tmp/nix-config/. /mnt/etc/nixos/
 nixos-install --flake github:dudeofawesome/nix-config#lassen
 ```
 
-Reboot, enable Secure Boot in firmware, and boot Lassen. The initial
-[clevis.jwe](./clevis.jwe) is a placeholder, so the first boot safely falls
-back to the bcachefs recovery-passphrase prompt.
+> [!WARNING]  
+> The Steam Deck's "limited" RAM and the requirement to build large portions of the system mean that we can quickly run out of memory. I found better success doing a remote build:
+>
+> ```sh
+> # create key for installer and install on builder
+> ssh nixos@10.0.1.137 bash -c "'sudo ssh-keygen -t ed25519 -N \"\" -f /root/.ssh/id_ed25519 -y && sudo cat /root/.ssh/id_ed25519.pub'"
+>
+> # ensure installer trusts builder’s SSH host key
+> ssh nixos@10.0.1.137 sudo ssh dudeofawesome@haleakala
+>
+> sudo nixos-install \
+>   --max-jobs 0 \
+>   --cores 4 \
+>   --option builders \
+>     "ssh-ng://dudeofawesome@haleakala x86_64-linux /root/.ssh/id_ed25519 1 1 benchmark,big-parallel,kvm,nixos-test" \
+>   --option builders-use-substitutes true \
+>   --flake \
+>     "github:dudeofawesome/nix-config#lassen"
+> ```
+
+<!-- Reboot, enable Secure Boot in firmware, and boot Lassen.  -->
+
+The initial [clevis.jwe](./clevis.jwe) is a placeholder, so the first boot safely falls back to the bcachefs recovery-passphrase prompt.
 
 Once Lassen has booted with Secure Boot enabled, replace that placeholder
 with a TPM-bound JWE and rebuild:
 
-```sh
-sudo -i
+1. Generate JWE
 
-clevis encrypt tpm2 '{"pcr_ids":"7"}' \
-  < /root/bcachefs-password
-```
+    ```sh
+    sudo -i
 
-Put the output into `clevis.jwe`
+    clevis encrypt tpm2 '{"pcr_ids":"7"}' < /root/bcachefs-password
+    ```
 
-```sh
-sudo rm /root/bcachefs-password
-nh os switch github:dudeofawesome/nix-config
-sbctl verify
-```
+1. Put the output into `clevis.jwe`
+
+    ```sh
+    sudo rm /root/bcachefs-password
+    nh os switch github:dudeofawesome/nix-config
+    sbctl verify
+    ```
 
 Generating the JWE only after Secure Boot is active binds it to the final
 PCR-7 Secure Boot policy. Subsequent boots unlock bcachefs through Clevis and
