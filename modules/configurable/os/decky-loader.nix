@@ -63,7 +63,7 @@ in
         restartTriggers = cfg.plugins;
 
         preStart = lib.mkAfter (
-          map (pkg: ''
+          lib.concatMapStrings (pkg: ''
             pluginDir="${config.jovian.decky-loader.stateDir}/plugins/${pkg.name}"
 
             rm -rf -- "$pluginDir"
