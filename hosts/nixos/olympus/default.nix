@@ -8,6 +8,7 @@
 {
   imports = [
     inputs.jovian.nixosModules.default
+    inputs.decky-openrgb.nixosModules.default
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../../modules/defaults/fs/bcachefs.nix
     ../../../modules/defaults/fs/snapper.nix
@@ -25,13 +26,10 @@
     };
 
     decky-loader = {
-      extraPackages = with pkgs; [
-        openrgb
-      ];
-
-      plugins = [
-        pkgs.decky-openrgb
-      ];
+      modules = {
+        openrgb.enable = true;
+        themedeck.enable = true;
+      };
     };
   };
 

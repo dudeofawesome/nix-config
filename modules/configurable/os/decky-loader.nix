@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   options,
   os,
@@ -10,6 +11,29 @@ let
 in
 {
   options = lib.optionalAttrs (os == "linux") {
+    jovian.decky-loader.modules = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          steamback = {
+            enable = lib.mkEnableOption "steamback";
+            package = lib.mkPackageOption pkgs "steamback" {
+              default = [ "steamback" ];
+            };
+          };
+          themedeck = {
+            enable = lib.mkEnableOption "themedeck";
+            package = lib.mkPackageOption pkgs "themedeck" {
+              default = [ "themedeck" ];
+            };
+          };
+        };
+      };
+      default = { };
+      example = lib.literalExpression ''
+        { steamback.enable = true; };
+      '';
+    };
+
     jovian.decky-loader.plugins = lib.mkOption {
       type = with lib.types; listOf package;
       default = [ ];
@@ -23,8 +47,13 @@ in
     let
       cfg = config.jovian.decky-loader;
     in
-    lib.mkIf (has_jovian && cfg.enable && cfg.plugins != [ ]) {
-      systemd.services.decky-loader = {
+    lib.mkIf (has_jovian && cfg.enable) {
+      jovian.decky-loader.plugins = lib.pipe cfg.modules [
+        (lib.filterAttrs (name: mod: mod.enable))
+        (lib.mapAttrsToList (name: mod: mod.package))
+      ];
+
+      systemd.services.decky-loader = lib.mkIf (cfg.plugins != [ ]) {
         restartTriggers = cfg.plugins;
 
         preStart = lib.mkAfter (
