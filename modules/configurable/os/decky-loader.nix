@@ -7,7 +7,7 @@
   ...
 }:
 let
-  has_jovian = options ? jovian.enable;
+  has_jovian = options ? jovian;
 in
 {
   options = lib.optionalAttrs (os == "linux") {
