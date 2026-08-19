@@ -25,9 +25,10 @@
       ];
       user = owner;
 
-      plugins = [
-        pkgs.decky-launch-options
-      ];
+      modules = {
+        launch-options.enable = true;
+        themedeck.enable = true;
+      };
     };
   };
 }

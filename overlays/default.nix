@@ -78,6 +78,8 @@
           platforms = lib.platforms.all;
         };
       });
+
+      decky-openrgb = inputs.decky-openrgb.packages.${final.system}.decky-openrgb;
     })
 
     # TODO: create overlays to make programs recognize configs in XDG's ~/.config

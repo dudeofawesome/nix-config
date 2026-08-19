@@ -14,6 +14,12 @@ in
     jovian.decky-loader.modules = lib.mkOption {
       type = lib.types.submodule {
         options = {
+          launch-options = {
+            enable = lib.mkEnableOption "launch-options";
+            package = lib.mkPackageOption pkgs "decky-launch-options" {
+              default = [ "decky-launch-options" ];
+            };
+          };
           steamback = {
             enable = lib.mkEnableOption "steamback";
             package = lib.mkPackageOption pkgs "steamback" {

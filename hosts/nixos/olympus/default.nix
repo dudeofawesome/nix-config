@@ -28,7 +28,6 @@
     decky-loader = {
       modules = {
         openrgb.enable = true;
-        themedeck.enable = true;
       };
     };
   };
