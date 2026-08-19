@@ -12,7 +12,10 @@
   boot = {
     initrd = {
       clevis = {
-        devices.${config.fileSystems."/".device}.secretFile = ./clevis.jwe;
+        devices.${config.fileSystems."/".device}.secretFile = builtins.path {
+          path = ./clevis.jwe;
+          name = "lassen-clevis.jwe";
+        };
       };
 
       # enable single-entry decrypt
