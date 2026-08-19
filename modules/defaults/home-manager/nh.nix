@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ config, ... }:
 {
   programs.nh = {
     enable = true;
     clean.enable = true;
-    flake = "~/git/dudeofawesome/nix-config/";
+    flake = "${config.home.homeDirectory}/git/dudeofawesome/nix-config/";
   };
 
   home.sessionVariables = {
