@@ -79,7 +79,7 @@
         };
       });
 
-      decky-openrgb = inputs.decky-openrgb.packages.${final.system}.decky-openrgb;
+      decky-openrgb = inputs.decky-openrgb.packages.${final.stdenv.hostPlatform.system}.decky-openrgb;
     })
 
     # TODO: create overlays to make programs recognize configs in XDG's ~/.config
