@@ -3,6 +3,7 @@
   stdenvNoCC,
   fetchzip,
   nix-update-script,
+  yt-dlp,
   ...
 }:
 
@@ -26,8 +27,12 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  passthru.updateScript = nix-update-script {
-    extraArgs = [ "--flake" ];
+  passthru = {
+    runtimeDependencies = [ yt-dlp ];
+
+    updateScript = nix-update-script {
+      extraArgs = [ "--flake" ];
+    };
   };
 
   meta = {

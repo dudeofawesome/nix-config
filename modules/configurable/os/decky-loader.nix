@@ -31,9 +31,6 @@ in
             package = lib.mkPackageOption pkgs "themedeck" {
               default = [ "themedeck" ];
             };
-            yt-dlpPackage = lib.mkPackageOption pkgs "yt-dlp" {
-              default = [ "yt-dlp" ];
-            };
           };
         };
       };
@@ -64,9 +61,7 @@ in
 
       systemd.services.decky-loader = lib.mkIf (cfg.plugins != [ ]) {
         restartTriggers = cfg.plugins;
-        path = lib.flatten [
-          (lib.optional cfg.modules.themedeck.enable cfg.modules.themedeck.yt-dlpPackage)
-        ];
+        path = lib.concatMap (pkg: pkg.runtimeDependencies or [ ]) cfg.plugins;
 
         environment = {
           LD_LIBRARY_PATH = lib.makeLibraryPath config.systemd.services.decky-loader.path;
