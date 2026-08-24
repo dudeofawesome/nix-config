@@ -86,8 +86,18 @@ in
     dnsmasq = {
       enable = true;
       settings = {
-        # use CoreDNS to resolve cluster resources
-        server = [ "/cluster.local/10.42.0.8" ];
+        # Avoid dnsmasq -> Tailscale -> dnsmasq forwarding loops.
+        no-resolv = true;
+
+        # Use explicit upstreams because Tailscale's system-default fallback
+        # points back to dnsmasq on these hosts.
+        server = [
+          "1.1.1.1"
+          "1.0.0.1"
+
+          # use the stable CoreDNS service IP to resolve cluster resources
+          "/cluster.local/10.43.0.10"
+        ];
       };
     };
   };
