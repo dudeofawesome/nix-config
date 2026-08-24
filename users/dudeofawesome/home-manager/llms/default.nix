@@ -170,18 +170,6 @@ in
       skills = {
         grill-me = ./skills/grill-me.md;
       };
-
-      # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.codex.custom-instructions
-      settings.mcp_servers = {
-        github = {
-          url = "https://api.githubcopilot.com/mcp/";
-          bearer_token_env_var = "GITHUB_PAT";
-        };
-        home-assistant = {
-          url = "https://hass.red.orleans.io/api/mcp";
-          bearer_token_env_var = "HOME_ASSISTANT_TOKEN";
-        };
-      };
     };
 
     opencode = {
