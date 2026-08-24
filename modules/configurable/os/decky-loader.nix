@@ -7,7 +7,7 @@
   ...
 }:
 let
-  has_jovian = options ? jovian;
+  has_decky = options ? jovian.decky-loader.enable;
 in
 {
   options = lib.optionalAttrs (os == "linux") {
@@ -53,7 +53,7 @@ in
     let
       cfg = config.jovian.decky-loader;
     in
-    lib.mkIf (has_jovian && cfg.enable) {
+    lib.mkIf (has_decky && cfg.enable) {
       jovian.decky-loader.plugins = lib.pipe cfg.modules [
         (lib.filterAttrs (name: mod: mod.enable))
         (lib.mapAttrsToList (name: mod: mod.package))
