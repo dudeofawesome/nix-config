@@ -59,13 +59,15 @@
     };
 
     settings = {
-      # TODO: make this also flash the screen if muted
-      # TODO: make this alert only when codex is done with a turn or asking for permission
-      notify = [
-        "bash"
-        "-lc"
-        "afplay --volume 3 /System/Library/Sounds/Bottle.aiff"
-      ];
+      tui = {
+        # TODO: make this also flash the screen if muted
+        notifications = [
+          "agent-turn-complete"
+          "approval-requested"
+        ];
+        notification_condition = "always";
+        notification_method = "auto";
+      };
 
       features = {
         default_mode_request_user_input = true;
