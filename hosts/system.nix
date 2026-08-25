@@ -46,7 +46,7 @@ let
 in
 {
   inherit system specialArgs;
-  modules = [
+  modules = lib.flatten [
     packageOverlays
 
     ./${distro}/${hostname}
@@ -58,10 +58,12 @@ in
     (doa-lib.try-import ../users/${owner}/os/${os}.nix)
     ../modules/defaults/auth
 
-    (if (os == "darwin") then inputs.determinate.darwinModules.default else { })
+    (lib.optionals (os == "linux") [
+      inputs.disko.nixosModules.disko
+      inputs.vscode-server.nixosModules.default
+    ])
 
-    (if (os == "linux") then inputs.disko.nixosModules.disko else { })
-    (if (os == "linux") then inputs.vscode-server.nixosModules.default else { })
+    (lib.optional (os == "darwin") inputs.determinate.darwinModules.default)
 
     inputs.sops.${distroModules}.sops
     inputs.home-manager.${distroModules}.home-manager
