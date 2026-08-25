@@ -4,6 +4,11 @@ let
   args = {
     inherit system;
     config.allowUnfree = true;
+    overlays = [
+      inputs.claude-code-nix.overlays.default
+      inputs.codex-cli-nix.overlays.default
+      inputs.nix4vscode.overlays.default
+    ];
   };
 in
 {
@@ -12,17 +17,5 @@ in
       (import inputs.nixpkgs-darwin-stable args)
     else
       (import inputs.nixpkgs-linux-stable args);
-  pkgs-unstable = import inputs.nixpkgs-unstable (
-    args
-    // {
-      overlays = [
-        inputs.claude-code-nix.overlays.default
-        inputs.codex-cli-nix.overlays.default
-        inputs.nix4vscode.overlays.default
-        (final: _: {
-          decky-openrgb = inputs.decky-openrgb.packages.${final.system}.decky-openrgb;
-        })
-      ];
-    }
-  );
+  pkgs-unstable = import inputs.nixpkgs-unstable args;
 }
