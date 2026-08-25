@@ -20,6 +20,12 @@ in
               default = [ "decky-launch-options" ];
             };
           };
+          protondb-decky = {
+            enable = lib.mkEnableOption "protondb-decky";
+            package = lib.mkPackageOption pkgs "protondb-decky" {
+              default = [ "protondb-decky" ];
+            };
+          };
           steamback = {
             enable = lib.mkEnableOption "steamback";
             package = lib.mkPackageOption pkgs "steamback" {
