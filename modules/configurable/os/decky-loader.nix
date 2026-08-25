@@ -14,10 +14,22 @@ in
     jovian.decky-loader.modules = lib.mkOption {
       type = lib.types.submodule {
         options = {
+          css-loader = {
+            enable = lib.mkEnableOption "css-loader";
+            package = lib.mkPackageOption pkgs "sdh-css-loader" {
+              default = [ "sdh-css-loader" ];
+            };
+          };
           launch-options = {
             enable = lib.mkEnableOption "launch-options";
             package = lib.mkPackageOption pkgs "decky-launch-options" {
               default = [ "decky-launch-options" ];
+            };
+          };
+          pause-games = {
+            enable = lib.mkEnableOption "pause-games";
+            package = lib.mkPackageOption pkgs "sdh-pause-games" {
+              default = [ "sdh-pause-games" ];
             };
           };
           protondb-decky = {
@@ -30,6 +42,12 @@ in
             enable = lib.mkEnableOption "steamback";
             package = lib.mkPackageOption pkgs "steamback" {
               default = [ "steamback" ];
+            };
+          };
+          steamgriddb = {
+            enable = lib.mkEnableOption "steamgriddb";
+            package = lib.mkPackageOption pkgs "decky-steamgriddb" {
+              default = [ "decky-steamgriddb" ];
             };
           };
           tabmaster = {

@@ -28,8 +28,11 @@
       user = owner;
 
       modules = {
+        css-loader.enable = true;
         launch-options.enable = true;
+        pause-games.enable = true;
         protondb-decky.enable = true;
+        steamgriddb.enable = true;
         tabmaster.enable = true;
         themedeck.enable = true;
       };
