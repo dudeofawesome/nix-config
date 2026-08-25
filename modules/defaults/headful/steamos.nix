@@ -29,6 +29,7 @@
 
       modules = {
         launch-options.enable = true;
+        tabmaster.enable = true;
         themedeck.enable = true;
       };
     };

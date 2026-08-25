@@ -26,6 +26,12 @@ in
               default = [ "steamback" ];
             };
           };
+          tabmaster = {
+            enable = lib.mkEnableOption "tabmaster";
+            package = lib.mkPackageOption pkgs "tabmaster" {
+              default = [ "tabmaster" ];
+            };
+          };
           themedeck = {
             enable = lib.mkEnableOption "themedeck";
             package = lib.mkPackageOption pkgs "themedeck" {
