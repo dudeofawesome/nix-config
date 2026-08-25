@@ -310,8 +310,8 @@
               ipad = "^Sidecar Display";
               home = {
                 center = "^38GL950G$";
-                left = "^DELL U2717D \\(1\\)$";
-                right = "^DELL U2717D \\(2\\)$";
+                left = "^DELL U2717D \\(2\\)$";
+                right = "^DELL U2717D \\(1\\)$";
               };
               paciolan = {
                 left = "^DELL U2415 \\(1\\)$";
