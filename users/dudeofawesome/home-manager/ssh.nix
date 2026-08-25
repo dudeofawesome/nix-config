@@ -52,9 +52,7 @@
         HostName = "10.0.1.87";
       };
 
-      "olympus" = {
-        ProxyCommand = "${wake} 'olympus' 'c8:7f:54:6a:3f:56' 'c8:7f:54:6a:45:b7'";
-      };
+      "olympus".ProxyCommand = "${wake} 'olympus' 'c8:7f:54:6a:3f:56' 'c8:7f:54:6a:45:b7'";
 
       "home.powell.place".User = "louis";
 
