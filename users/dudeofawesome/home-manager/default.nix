@@ -37,6 +37,7 @@ with pkgs.stdenv.targetPlatform;
 
     ./kubeconfig.nix
     ./shells.nix
+    ./ssh.nix
   ];
 
   home = {
@@ -120,46 +121,6 @@ with pkgs.stdenv.targetPlatform;
   sops.secrets."users/dudeofawesome/opencode/server/password".sopsFile = ../secrets.yaml;
 
   programs = {
-    ssh.settings =
-      let
-        hostUnreachable = (host: ''host ${host} !exec "ping -c1 -q -t1 '%h' 2> /dev/null"'');
-      in
-      {
-        "*".User = "dudeofawesome";
-
-        "unifi".User = "root";
-        "unifi-remote" = {
-          header = "Match ${hostUnreachable "unifi"}";
-          HostName = "red.orleans.io";
-        };
-        "monongahela-remote" = {
-          header = "Match ${hostUnreachable "monongahela"}";
-          ProxyJump = "red.orleans.io";
-        };
-        "haleakala".HostName = "10.0.1.203";
-        "steamdeck".User = "deck";
-
-        "badlands" = {
-          User = "lorleans";
-          HostName = "10.0.1.87";
-        };
-
-        "home.powell.place".User = "louis";
-
-        "home.saldivar.io" = {
-          User = "edgar";
-          Port = 69;
-        };
-        "terracompute" = {
-          HostName = "192.168.4.225";
-          User = "vast";
-        };
-        "terracompute-remote" = {
-          header = "Match ${hostUnreachable "192.168.4.225"}";
-          ProxyJump = "home.saldivar.io";
-        };
-      };
-
     git = {
       settings.user = {
         name = "Louis Orleans";
