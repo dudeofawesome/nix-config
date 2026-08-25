@@ -4,6 +4,8 @@
     ./gamescope.nix
   ];
 
+  nixpkgs.overlays = [ (import ../../../overlays/discord-without-preload.nix) ];
+
   environment = {
     systemPackages = with pkgs-stable; [
       antimicrox

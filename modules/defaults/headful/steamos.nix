@@ -10,6 +10,8 @@
     ../plymouth.nix
   ];
 
+  nixpkgs.overlays = [ (import ../../../overlays/discord-without-preload.nix) ];
+
   # Jovian's Game Mode starts Steam Big Picture in Gamescope directly at boot.
   jovian = {
     steam = {
