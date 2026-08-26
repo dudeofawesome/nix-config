@@ -15,6 +15,7 @@ in
   options = lib.optionalAttrs (os == "linux") {
     jovian.decky-loader.modules = lib.mkOption {
       type = lib.types.submodule {
+        # TODO: decky-ludusavi, decky-wine-cellar, DiscordStatus, MagicPodsDecky, MusicControl, SDH-GameSync
         options = {
           css-loader = {
             enable = lib.mkEnableOption "css-loader";
@@ -78,6 +79,12 @@ in
   config = lib.optionalAttrs (os == "linux") (
     let
       cfg = config.jovian.decky-loader;
+      pluginsDir = pkgs.linkFarm "decky-loader-plugins" (
+        map (pkg: {
+          name = pkg.pname or (lib.getName pkg);
+          path = pkg;
+        }) cfg.plugins
+      );
     in
     lib.mkIf (has_decky && cfg.enable) {
       jovian.decky-loader.plugins = lib.pipe cfg.modules [
@@ -85,25 +92,38 @@ in
         (lib.mapAttrsToList (name: mod: mod.package))
       ];
 
-      systemd.services.decky-loader = lib.mkIf (cfg.plugins != [ ]) {
-        restartTriggers = cfg.plugins;
+      systemd.services.decky-loader = {
+        restartTriggers = [ pluginsDir ];
         path = lib.concatMap (pkg: pkg.runtimeDependencies or [ ]) cfg.plugins;
 
         environment = {
+          CHOWN_PLUGIN_PATH = "0";
           LD_LIBRARY_PATH = lib.makeLibraryPath config.systemd.services.decky-loader.path;
         };
 
-        preStart = lib.mkAfter (
-          lib.concatMapStrings (pkg: ''
-            pluginDir="${config.jovian.decky-loader.stateDir}/plugins/${pkg.name}"
+        preStart = lib.mkAfter ''
+          ${lib.concatMapStrings (
+            pkg:
+            let
+              pluginName = pkg.pname or (lib.getName pkg);
+            in
+            ''
+              for stateDir in settings data logs; do
+                versionedStateDir="${cfg.stateDir}/$stateDir/${pkg.name}"
+                stableStateDir="${cfg.stateDir}/$stateDir/${pluginName}"
 
-            rm -rf -- "$pluginDir"
-            install -d -m 0755 "$pluginDir"
-            cp -R ${pkg}/. "$pluginDir/"
-            chown -R "${config.jovian.decky-loader.user}:" "$pluginDir"
-            chmod -R u+w "$pluginDir"
-          '') cfg.plugins
-        );
+                if [ -d "$versionedStateDir" ] && [ ! -e "$stableStateDir" ]; then
+                  mv -- "$versionedStateDir" "$stableStateDir"
+                fi
+              done
+            ''
+          ) cfg.plugins}
+
+          pluginsDir="${cfg.stateDir}/plugins"
+
+          rm -rf -- "$pluginsDir"
+          ln -s ${pluginsDir} "$pluginsDir"
+        '';
       };
     }
   );
