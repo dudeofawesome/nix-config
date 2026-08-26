@@ -38,4 +38,34 @@
       };
     };
   };
+
+  services = {
+    geoclue2.appConfig.darkman = {
+      isAllowed = true;
+      isSystem = true;
+    };
+  };
+
+  # Steam's Gamescope session does not run GNOME Shell, so use Darkman as the
+  # system appearance source there. It switches at sunrise/sunset using
+  # GeoClue and implements the Settings portal used by Electron applications.
+  xdg.portal = {
+    extraPortals = [ pkgs.darkman ];
+    config = {
+      common = {
+        default = [
+          "gnome"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Settings" = [ "darkman" ];
+      };
+      gamescope = {
+        default = [
+          "gnome"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Settings" = [ "darkman" ];
+      };
+    };
+  };
 }

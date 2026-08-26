@@ -247,6 +247,30 @@ with pkgs.stdenv.targetPlatform;
     tableplus.enable = machine-class == "pc";
   };
 
+  services = {
+    darkman = lib.mkIf isLinux {
+      enable = true;
+      settings = {
+        usegeoclue = true;
+        dbusserver = true;
+        portal = true;
+      };
+
+      # Keep applications which read GNOME's preference directly in sync with
+      # the XDG Settings portal exposed by Darkman.
+      scripts.gnome-color-scheme = ''
+        case "$1" in
+          dark)
+            ${lib.getExe' pkgs.glib "gsettings"} set org.gnome.desktop.interface color-scheme prefer-dark
+            ;;
+          light)
+            ${lib.getExe' pkgs.glib "gsettings"} set org.gnome.desktop.interface color-scheme default
+            ;;
+        esac
+      '';
+    };
+  };
+
   # services.home-manager.autoUpgrade.enable = true;
   # specialisation.linux.configuration = {};
 
