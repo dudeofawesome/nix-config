@@ -3,9 +3,16 @@
   stdenvNoCC,
   fetchzip,
   nix-update-script,
-  yt-dlp,
+  python3,
   ...
 }:
+
+let
+  yt-dlp-with-pot-provider = python3.withPackages (python-pkgs: [
+    python-pkgs.bgutil-ytdlp-pot-provider
+    python-pkgs.yt-dlp
+  ]);
+in
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "themedeck";
@@ -28,7 +35,9 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   passthru = {
-    runtimeDependencies = [ yt-dlp ];
+    potProvider = lib.getExe' yt-dlp-with-pot-provider "bgutil-ytdlp-pot-provider";
+    runtimeDependencies = [ yt-dlp-with-pot-provider ];
+    ytDlp = yt-dlp-with-pot-provider;
 
     updateScript = nix-update-script {
       extraArgs = [ "--flake" ];

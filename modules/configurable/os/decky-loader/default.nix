@@ -10,6 +10,8 @@ let
   has_decky = options ? jovian.decky-loader.enable;
 in
 {
+  imports = lib.optionals (os == "linux") [ ./plugins ];
+
   options = lib.optionalAttrs (os == "linux") {
     jovian.decky-loader.modules = lib.mkOption {
       type = lib.types.submodule {
@@ -54,12 +56,6 @@ in
             enable = lib.mkEnableOption "tabmaster";
             package = lib.mkPackageOption pkgs "tabmaster" {
               default = [ "tabmaster" ];
-            };
-          };
-          themedeck = {
-            enable = lib.mkEnableOption "themedeck";
-            package = lib.mkPackageOption pkgs "themedeck" {
-              default = [ "themedeck" ];
             };
           };
         };
