@@ -139,6 +139,11 @@
       url = "github:altano/flakes?dir=wolf-nvidia-vol";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
+
+    pslinkd = {
+      url = "github:dudeofawesome/pslinkd";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =

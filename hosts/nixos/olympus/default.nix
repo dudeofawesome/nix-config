@@ -53,10 +53,13 @@
   services = {
     ratbagd.enable = true;
 
-    udev.extraRules = ''
-      # Prevent mouse movement from waking the system through the Logitech Lightspeed receiver.
-      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c539", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
-    '';
+    udev = {
+      packages = [ inputs.pslinkd.packages.${pkgs.stdenv.hostPlatform.system}.pslinkd ];
+      extraRules = ''
+        # Prevent mouse movement from waking the system through the Logitech Lightspeed receiver.
+        ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c539", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
+      '';
+    };
 
     scrutiny.collector = {
       enable = true;
@@ -69,6 +72,7 @@
     };
   };
 
+  users.groups.pslink.members = [ "dudeofawesome" ];
   home-manager.users.dudeofawesome = {
     home.packages = with pkgs; [
       er-save-manager
@@ -82,6 +86,14 @@
       fish.generateCompletions = false;
       kubectl.enable = lib.mkForce false;
       kubeconfig.enable = lib.mkForce false;
+    };
+
+    services.pslinkd = {
+      enable = true;
+      audio = {
+        headsetSink = "alsa_output.usb-Sony_Interactive_Entertainment_PlayStation_Link_Adapter_901c131a-6085-0492-06ec-d05027810150-00.analog-stereo";
+        fallbackSink = "alsa_output.pci-0000_03_00.1.hdmi-surround-extra3";
+      };
     };
   };
 

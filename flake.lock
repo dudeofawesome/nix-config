@@ -533,6 +533,27 @@
         "type": "github"
       }
     },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
+          "pslinkd",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787750582,
+        "narHash": "sha256-FfIAV44k33i+IjC1+new2KyjyVGUzGtV89VHVP4eK1U=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "0a364342a66bcecfc8a00d2fc38c6c29eee7bc5e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -878,6 +899,27 @@
         "type": "github"
       }
     },
+    "pslinkd": {
+      "inputs": {
+        "home-manager": "home-manager_2",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787776725,
+        "narHash": "sha256-Gehh59PokZAGKf3yuEVVKw8d7U2AZgYmOQGnA7CizKo=",
+        "owner": "dudeofawesome",
+        "repo": "pslinkd",
+        "rev": "c968babe4adea4e9372481cf886e6764e3cb99ed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dudeofawesome",
+        "repo": "pslinkd",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "claude-code-nix": "claude-code-nix",
@@ -905,6 +947,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "op-shell-plugins": "op-shell-plugins",
+        "pslinkd": "pslinkd",
         "sops": "sops",
         "upaymeifixit_dotfiles": "upaymeifixit_dotfiles",
         "vim-lumen": "vim-lumen",

@@ -13,6 +13,7 @@ in
     sharedModules = [
       inputs.sops.homeManagerModules.sops
       inputs.op-shell-plugins.hmModules.default
+      inputs.pslinkd.homeManagerModules.default
       {
         disabledModules = [ "programs/claude-code.nix" ];
         imports = [ "${inputs.home-manager-master}/modules/programs/claude-code" ];
