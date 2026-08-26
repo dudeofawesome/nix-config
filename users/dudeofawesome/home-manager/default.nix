@@ -274,7 +274,7 @@ with pkgs.stdenv.targetPlatform;
   # services.home-manager.autoUpgrade.enable = true;
   # specialisation.linux.configuration = {};
 
-  targets = lib.mkIf pkgs.stdenv.targetPlatform.isDarwin {
+  targets = lib.mkIf isDarwin {
     darwin = {
       search = "DuckDuckGo";
     };

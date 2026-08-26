@@ -45,12 +45,9 @@
       lib.floor
     ]);
 
-  networking.networkmanager.enable = true;
-
-  # Preserve Steam Input's desktop bindings on Wayland without requiring the
-  # Xwayland remote-input permission prompt.
-  programs.steam.package = pkgs.steam.override {
-    extraEnv.LD_PRELOAD = "${pkgs.pkgsi686Linux.extest}/lib/libextest.so";
+  networking = {
+    networkmanager.enable = true;
+    hostId = "4164b7fd"; # head -c 8 /etc/machine-id
   };
 
   services = {
@@ -60,19 +57,15 @@
       # Prevent mouse movement from waking the system through the Logitech Lightspeed receiver.
       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c539", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
     '';
-  };
 
-  networking = {
-    hostId = "4164b7fd"; # head -c 8 /etc/machine-id
-  };
-
-  services.scrutiny.collector = {
-    enable = true;
-    api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
-    settings = {
-      host.id = config.networking.hostName;
-      # TODO: map over all disko disks
-      devices = [ { device = config.disko.devices.disk.primary.device; } ];
+    scrutiny.collector = {
+      enable = true;
+      api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
+      settings = {
+        host.id = config.networking.hostName;
+        # TODO: map over all disko disks
+        devices = [ { device = config.disko.devices.disk.primary.device; } ];
+      };
     };
   };
 

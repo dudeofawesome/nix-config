@@ -39,6 +39,12 @@
     };
   };
 
+  # Preserve Steam Input's desktop bindings on Wayland without requiring the
+  # Xwayland remote-input permission prompt.
+  programs.steam.package = pkgs.steam.override {
+    extraEnv.LD_PRELOAD = "${pkgs.pkgsi686Linux.extest}/lib/libextest.so";
+  };
+
   services = {
     geoclue2.appConfig.darkman = {
       isAllowed = true;
