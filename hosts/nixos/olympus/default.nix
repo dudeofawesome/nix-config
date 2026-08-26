@@ -91,7 +91,6 @@
     services.pslinkd = {
       enable = true;
       audio = {
-        headsetSink = "alsa_output.usb-Sony_Interactive_Entertainment_PlayStation_Link_Adapter_901c131a-6085-0492-06ec-d05027810150-00.analog-stereo";
         fallbackSink = "alsa_output.pci-0000_03_00.1.hdmi-surround-extra3";
       };
     };
