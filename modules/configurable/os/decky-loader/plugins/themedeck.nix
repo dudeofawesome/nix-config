@@ -37,8 +37,6 @@ in
         serviceConfig = {
           DynamicUser = true;
           ExecStart = themedeck.package.potProvider;
-          IPAddressAllow = "localhost";
-          IPAddressDeny = "any";
           NoNewPrivileges = true;
           PrivateTmp = true;
           ProtectHome = true;
