@@ -4,14 +4,21 @@
   fetchzip,
   nix-update-script,
   python3,
+  writeShellScriptBin,
   ...
 }:
 
 let
-  yt-dlp-with-pot-provider = python3.withPackages (python-pkgs: [
+  yt-dlp-env = python3.withPackages (python-pkgs: [
     python-pkgs.bgutil-ytdlp-pot-provider
     python-pkgs.yt-dlp
   ]);
+
+  yt-dlp-with-pot-provider = writeShellScriptBin "yt-dlp" ''
+    exec ${lib.getExe' yt-dlp-env "yt-dlp"} \
+      --extractor-args "youtube:player-client=web_embedded" \
+      "$@"
+  '';
 in
 
 stdenvNoCC.mkDerivation (finalAttrs: {
@@ -35,7 +42,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   passthru = {
-    potProvider = lib.getExe' yt-dlp-with-pot-provider "bgutil-ytdlp-pot-provider";
+    potProvider = lib.getExe' yt-dlp-env "bgutil-ytdlp-pot-provider";
     runtimeDependencies = [ yt-dlp-with-pot-provider ];
     ytDlp = yt-dlp-with-pot-provider;
 
