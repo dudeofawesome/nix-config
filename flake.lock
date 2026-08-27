@@ -907,11 +907,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787808198,
-        "narHash": "sha256-PXrSp/6S9lci0xHnk0Y3t8UV3pUzzq9bwEhpduUcWhg=",
+        "lastModified": 1787809183,
+        "narHash": "sha256-DY1JPmgYswDwec9f2wlYmUh7xkdNltmBW++9eVjjQY4=",
         "owner": "dudeofawesome",
         "repo": "pslinkd",
-        "rev": "563d5616952749741fe49cd905ac24a7b57c5ee3",
+        "rev": "0ec7d949c7022ca06845598f502c65fb30182410",
         "type": "github"
       },
       "original": {
