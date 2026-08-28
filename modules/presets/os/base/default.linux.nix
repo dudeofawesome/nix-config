@@ -45,6 +45,7 @@
     automatic-timezoned.enable = true;
     avahi.enable = true;
     vscode-server.enable = true;
+    fwupd.enable = true;
   };
 
   console = {
