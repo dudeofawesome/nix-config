@@ -257,14 +257,18 @@ with pkgs.stdenv.targetPlatform;
       };
 
       # Keep applications which read GNOME's preference directly in sync with
-      # the XDG Settings portal exposed by Darkman.
+      # the XDG Settings portal exposed by Darkman. Electron still consults
+      # GTK 3 for native theme detection, and Gamescope does not run GNOME's
+      # settings daemon to bridge color-scheme to the legacy GTK theme.
       scripts.gnome-color-scheme = ''
         case "$1" in
           dark)
             ${lib.getExe' pkgs.glib "gsettings"} set org.gnome.desktop.interface color-scheme prefer-dark
+            ${lib.getExe' pkgs.glib "gsettings"} set org.gnome.desktop.interface gtk-theme Adwaita-dark
             ;;
           light)
             ${lib.getExe' pkgs.glib "gsettings"} set org.gnome.desktop.interface color-scheme default
+            ${lib.getExe' pkgs.glib "gsettings"} set org.gnome.desktop.interface gtk-theme Adwaita
             ;;
         esac
       '';
