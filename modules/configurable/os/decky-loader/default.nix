@@ -15,7 +15,7 @@ in
   options = lib.optionalAttrs (os == "linux") {
     jovian.decky-loader.modules = lib.mkOption {
       type = lib.types.submodule {
-        # TODO: decky-ludusavi, decky-wine-cellar, DiscordStatus, MusicControl, SDH-GameSync
+        # TODO: decky-wine-cellar, MusicControl
         options = {
           css-loader = {
             enable = lib.mkEnableOption "css-loader";
@@ -27,6 +27,12 @@ in
             enable = lib.mkEnableOption "launch-options";
             package = lib.mkPackageOption pkgs "decky-launch-options" {
               default = [ "decky-launch-options" ];
+            };
+          };
+          ludusavi = {
+            enable = lib.mkEnableOption "ludusavi";
+            package = lib.mkPackageOption pkgs "decky-ludusavi" {
+              default = [ "decky-ludusavi" ];
             };
           };
           magicpods = {
