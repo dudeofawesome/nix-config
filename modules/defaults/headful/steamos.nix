@@ -30,6 +30,7 @@
       modules = {
         css-loader.enable = true;
         launch-options.enable = true;
+        ludusavi.enable = true;
         pause-games.enable = true;
         protondb-decky.enable = true;
         steamgriddb.enable = true;
