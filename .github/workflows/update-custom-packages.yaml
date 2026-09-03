@@ -75,6 +75,9 @@ jobs:
 
       - name: Enable Nix cache
         uses: DeterminateSystems/magic-nix-cache-action@55718cd9ebf1737a061487d5ada21abf31e99a98 # main
+        with:
+          use-flakehub: disabled
+          use-gha-cache: enabled
 
       - name: Update package
         id: update
