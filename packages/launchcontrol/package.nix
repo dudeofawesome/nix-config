@@ -25,6 +25,11 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [ xz ];
 
+  # Preserve the upstream Developer ID signatures. Darwin's fixup phase
+  # modifies Mach-O binaries and replaces their signatures with ad-hoc ones,
+  # preventing macOS from registering the bundled privileged helper.
+  dontFixup = true;
+
   installPhase = ''
     runHook preInstall
 
