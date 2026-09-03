@@ -10,10 +10,6 @@ permissions:
   id-token: write
   contents: read
 
-concurrency:
-  group: check
-  cancel-in-progress: false
-
 jobs:
   lint-flake:
     name: Lint Flake
