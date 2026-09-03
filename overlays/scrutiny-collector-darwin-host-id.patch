@@ -1,6 +1,25 @@
 diff --git a/collector/pkg/detect/devices_darwin.go b/collector/pkg/detect/devices_darwin.go
-index 3903365..8162241 100644
 --- a/collector/pkg/detect/devices_darwin.go
 +++ b/collector/pkg/detect/devices_darwin.go
-@@ -84,0 +85 @@
+@@ -47,0 +48,3 @@
++		if !d.Config.IsAllowlistedDevice(DevicePrefix() + disk.Name) {
++			continue
++		}
+@@ -76 +79 @@
+-		for _, detectedDevice := range detectedDevices {
++		for ndx := range detectedDevices {
+@@ -78 +81,2 @@
+-			if detectedDevice.DeviceName == diskName {
++			if detectedDevices[ndx].DeviceName == diskName {
++				detectedDevices[ndx].Capacity = int64(disk.SizeBytes)
+@@ -84,0 +89,2 @@
 +				HostId:     d.Config.GetString("host.id"),
++				Capacity:   int64(disk.SizeBytes),
+diff --git a/collector/pkg/detect/detect.go b/collector/pkg/detect/detect.go
+--- a/collector/pkg/detect/detect.go
++++ b/collector/pkg/detect/detect.go
+@@ -79 +79,3 @@
+-	device.Capacity = availableDeviceInfo.Capacity()
++	if capacity := availableDeviceInfo.Capacity(); capacity > 0 {
++		device.Capacity = capacity
++	}
