@@ -1,0 +1,6 @@
+diff --git a/collector/pkg/detect/devices_darwin.go b/collector/pkg/detect/devices_darwin.go
+index 3903365..8162241 100644
+--- a/collector/pkg/detect/devices_darwin.go
++++ b/collector/pkg/detect/devices_darwin.go
+@@ -84,0 +85 @@
++				HostId:     d.Config.GetString("host.id"),

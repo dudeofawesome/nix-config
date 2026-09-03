@@ -17,7 +17,13 @@
     api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
     settings = {
       host.id = config.networking.hostName;
-      devices = [ { device = "/dev/disk0"; } ];
+      allow_listed_devices = [ "/dev/disk0" ];
+      devices = [
+        {
+          device = "/dev/disk0";
+          type = "nvme,0x1";
+        }
+      ];
     };
   };
 
