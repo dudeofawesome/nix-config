@@ -20,6 +20,40 @@ let
   embedded-etcd-node =
     server && (config.services.k3s.clusterInit || config.services.k3s.serverAddr != "");
 
+  authentication-config = (pkgs.formats.yaml { }).generate "authentication-config.yaml" {
+    apiVersion = "apiserver.config.k8s.io/v1";
+    kind = "AuthenticationConfiguration";
+    jwt = [
+      {
+        issuer = {
+          url = "https://auth.orleans.io/realms/sequoia";
+          audiences = [ "kubernetes" ];
+        };
+        claimMappings = {
+          username = {
+            claim = "preferred_username";
+            prefix = "oidc:";
+          };
+          groups = {
+            claim = "kubernetes_roles";
+            prefix = "oidc:kubernetes:";
+          };
+          uid.claim = "sub";
+        };
+        userValidationRules = [
+          {
+            expression = "!user.username.startsWith('system:')";
+            message = "username must not use the reserved system: prefix";
+          }
+          {
+            expression = "user.groups.all(group, !group.startsWith('system:'))";
+            message = "groups must not use the reserved system: prefix";
+          }
+        ];
+      }
+    ];
+  };
+
   k3s-config = {
     container-runtime-endpoint = "unix:///run/containerd/containerd.sock";
   }
@@ -30,6 +64,7 @@ let
 
     disable = [ "traefik" ];
     flannel-backend = if multi-node then "wireguard-native" else "host-gw";
+    kube-apiserver-arg = [ "authentication-config=${authentication-config}" ];
   };
 in
 {

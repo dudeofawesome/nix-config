@@ -24,6 +24,7 @@ in
       cfg.package
       pkgs.kubectx
       pkgs.kubectl-cnpg
+      pkgs.kubelogin-oidc
     ];
 
     programs.fish.shellAbbrs = {

@@ -14,13 +14,13 @@
         enable = mkEnableOption "kubeconfig";
 
         path = mkOption {
-          description = ''The path to put the kubeconfig at, relative to your home directory.'';
+          description = "The path to put the kubeconfig at, relative to your home directory.";
           type = lib.types.str;
           default = ".kube/config";
         };
 
         users = mkOption {
-          description = ''Users'';
+          description = "Users";
           type = lib.types.attrsOf (
             lib.types.submodule {
               options = {
@@ -36,6 +36,54 @@
                   type = with lib.types; nullOr path;
                   default = null;
                 };
+                exec = mkOption {
+                  type =
+                    with lib.types;
+                    nullOr (submodule {
+                      options = {
+                        apiVersion = mkOption {
+                          type = enum [
+                            "client.authentication.k8s.io/v1"
+                            "client.authentication.k8s.io/v1beta1"
+                          ];
+                          default = "client.authentication.k8s.io/v1";
+                        };
+                        command = mkOption {
+                          type = str;
+                        };
+                        args = mkOption {
+                          type = listOf str;
+                          default = [ ];
+                        };
+                        env = mkOption {
+                          type = listOf (submodule {
+                            options = {
+                              name = mkOption { type = str; };
+                              value = mkOption { type = str; };
+                            };
+                          });
+                          default = [ ];
+                        };
+                        installHint = mkOption {
+                          type = nullOr str;
+                          default = null;
+                        };
+                        interactiveMode = mkOption {
+                          type = enum [
+                            "Never"
+                            "IfAvailable"
+                            "Always"
+                          ];
+                          default = "IfAvailable";
+                        };
+                        provideClusterInfo = mkOption {
+                          type = bool;
+                          default = false;
+                        };
+                      };
+                    });
+                  default = null;
+                };
               };
             }
           );
@@ -49,7 +97,7 @@
         };
 
         clusters = mkOption {
-          description = ''Clusters'';
+          description = "Clusters";
           type = lib.types.attrsOf (
             lib.types.submodule {
               options = {
@@ -74,7 +122,7 @@
         };
 
         contexts = mkOption {
-          description = ''Contexts to join clusters & users'';
+          description = "Contexts to join clusters & users";
           type = lib.types.attrsOf (
             lib.types.submodule {
               options = {

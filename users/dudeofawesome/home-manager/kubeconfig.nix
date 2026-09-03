@@ -24,11 +24,13 @@
       kubeconfig = {
         enable = true;
         users = {
-          dudeofawesome = {
-            client-certificate-data =
-              config.sops.secrets."users/dudeofawesome/kubeconfig/users/dudeofawesome/client-certificate-data".path;
-            client-key-data =
-              config.sops.secrets."users/dudeofawesome/kubeconfig/users/dudeofawesome/client-key-data".path;
+          dudeofawesome.exec = {
+            command = "kubectl-oidc_login";
+            args = [
+              "get-token"
+              "--oidc-issuer-url=https://auth.orleans.io/realms/sequoia"
+              "--oidc-client-id=kubernetes"
+            ];
           };
           doa-cluster-admin = {
             client-certificate-data =
@@ -58,10 +60,6 @@
           doa-admin = {
             cluster = "doa";
             user = "doa-cluster-admin";
-          };
-          monongahela = {
-            cluster = "monongahela";
-            user = "dudeofawesome";
           };
         };
       };
