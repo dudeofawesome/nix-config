@@ -18,7 +18,9 @@
 
   boot = {
     # Let's live life on the edge
-    kernelPackages = pkgs.linuxPackages_latest;
+    # Keep this weaker than mkDefault so hardware-specific modules can select
+    # their own kernel without requiring a host-level override.
+    kernelPackages = lib.mkOverride 1100 pkgs.linuxPackages_latest;
 
     kernelModules = lib.optionals pkgs.stdenv.targetPlatform.isx86 [
       "kvm-amd"

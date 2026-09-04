@@ -64,7 +64,7 @@
       };
     };
 
-    kernelPackages = lib.mkForce (inputs.nixos-raspberrypi.packages.aarch64-linux.linuxPackages_rpi5);
+    kernelPackages = inputs.nixos-raspberrypi.packages.aarch64-linux.linuxPackages_rpi5;
     loader = {
       raspberry-pi.bootloader = "kernel";
       systemd-boot.enable = false;

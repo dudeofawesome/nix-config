@@ -15,10 +15,11 @@ in
       allowHibernation = false;
     };
 
-    kernelPackages =
+    kernelPackages = lib.mkOverride 900 (
       (pkgs.zfs.override {
         inherit removeLinuxDRM;
-      }).latestCompatibleLinuxPackages;
+      }).latestCompatibleLinuxPackages
+    );
 
     supportedFilesystems = [ "zfs" ];
   };
