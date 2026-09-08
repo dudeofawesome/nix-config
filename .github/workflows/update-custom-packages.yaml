@@ -89,6 +89,18 @@ jobs:
           --use-update-script
           "${{ matrix.package }}"
 
+      - name: Verify package update script
+        id: verify
+        if: steps.update.outcome == 'success'
+        env:
+          PACKAGE: ${{ matrix.package }}
+        shell: bash
+        run: >-
+          nix run nixpkgs#nix-update --
+          --flake
+          --use-update-script
+          "$PACKAGE"
+
       - name: Report failed update
         if: steps.update.outcome == 'failure'
         shell: bash
