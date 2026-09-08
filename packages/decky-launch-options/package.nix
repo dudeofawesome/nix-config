@@ -8,11 +8,11 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "decky-launch-options";
-  version = "1.14.0";
+  version = "1.15.0";
 
   src = fetchzip {
     url = "https://github.com/Wurielle/decky-launch-options/releases/download/v${finalAttrs.version}/decky-launch-options.zip";
-    hash = "sha256-ZZRrF/EdAv8tpuQWorZQ8r6OOzE5JKXI2JXEpL74ASE=";
+    hash = "sha256-tF1kxvTYAjHIdbR7MtXBjvOqBL6QqETCdw8apicFrg4=";
   };
 
   dontConfigure = true;
