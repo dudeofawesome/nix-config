@@ -59,6 +59,7 @@ jobs:
     runs-on: macos-latest
     permissions:
       contents: write
+      issues: write
       pull-requests: write
     strategy:
       fail-fast: false
@@ -102,10 +103,54 @@ jobs:
           "$PACKAGE"
 
       - name: Report failed update
-        if: steps.update.outcome == 'failure'
+        if: >-
+          !cancelled() &&
+          (steps.update.outcome == 'failure' || steps.verify.outcome == 'failure')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PACKAGE: ${{ matrix.package }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/attempts/${{ github.run_attempt }}
         shell: bash
         run: |
-          echo "::warning title=Package update failed::${{ matrix.package }} failed"
+          set -euo pipefail
+
+          echo "::warning title=Package update failed::$PACKAGE failed"
+          marker="<!-- update-custom-packages: $PACKAGE -->"
+
+          # Read every page directly to avoid search indexing delays and limits.
+          issues="$(
+            gh api --paginate \
+              "repos/$GH_REPO/issues?state=open&per_page=100"
+          )"
+          existing_issue="$(
+            jq --slurp --raw-output --arg marker "$marker" '
+              [
+                .[][]
+                | select(.pull_request == null)
+                | select((.body // "") | contains($marker))
+                | .html_url
+              ][0] // empty
+            ' <<< "$issues"
+          )"
+
+          body_file="$(mktemp)"
+          trap 'rm -f "$body_file"' EXIT
+          cat > "$body_file" <<EOF
+          $marker
+          The update script for \`$PACKAGE\` failed during the automated update
+          or verification run.
+
+          [View the latest failed workflow run]($RUN_URL).
+          EOF
+
+          if [[ -n "$existing_issue" ]]; then
+            gh issue edit "$existing_issue" --body-file "$body_file"
+          else
+            gh issue create \
+              --title "Update script failed: $PACKAGE" \
+              --body-file "$body_file"
+          fi
 
       - name: Format changed Nix files
         if: steps.update.outcome == 'success'
