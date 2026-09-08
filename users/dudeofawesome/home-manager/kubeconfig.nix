@@ -30,6 +30,7 @@
               "get-token"
               "--oidc-issuer-url=https://auth.orleans.io/realms/sequoia"
               "--oidc-client-id=kubernetes"
+              "--oidc-extra-scope=offline_access"
             ];
           };
           doa-cluster-admin = {
