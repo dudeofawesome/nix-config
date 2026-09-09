@@ -111,6 +111,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           PACKAGE: ${{ matrix.package }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/attempts/${{ github.run_attempt }}
+          PACKAGE_URL: ${{ github.server_url }}/${{ github.repository }}/tree/${{ github.event.repository.default_branch }}/packages/${{ matrix.package }}/package.nix
         shell: bash
         run: |
           set -euo pipefail
@@ -138,10 +139,11 @@ jobs:
           trap 'rm -f "$body_file"' EXIT
           cat > "$body_file" <<EOF
           $marker
-          The update script for \`$PACKAGE\` failed during the automated update
-          or verification run.
+          The update script for [\`$PACKAGE\`]($PACKAGE_URL) failed during the automated update or verification run.
 
           [View the latest failed workflow run]($RUN_URL).
+
+          <sub>This text will be replaced on next workflow run.</sub>
           EOF
 
           if [[ -n "$existing_issue" ]]; then
