@@ -14,11 +14,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "launchcontrol";
-  version = "2.10.5";
+  version = "2.11";
 
   src = fetchurl {
     url = "https://www.soma-zone.com/download/files/LaunchControl-${finalAttrs.version}_update.tar.xz";
-    hash = "sha256-J17yAywgq7HnpgwBAQdq7vnJRxwpmWuLZBMcBkk126g=";
+    hash = "sha256-1G6xVI546fgR4Im9I/D/+gpaj8fz7Sl2WM/1PSv1GeU=";
   };
 
   sourceRoot = ".";
