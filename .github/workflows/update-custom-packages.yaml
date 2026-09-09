@@ -75,7 +75,7 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@b074b4ad5f255f9c8a6a2414a2f07e7f4f2925a3 # main
 
       - name: Enable Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@77f0204d0bda4ee1e0bad6174bbdb9385cbf2049 # main
+        uses: DeterminateSystems/magic-nix-cache-action@fa09681925d1168f06a354b19c9b26a3fd560db7 # main
         with:
           use-flakehub: disabled
           use-gha-cache: enabled
