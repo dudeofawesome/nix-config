@@ -73,13 +73,8 @@
         else
           prev.podman;
 
-      scrutiny-collector = prev.scrutiny-collector.overrideAttrs (old: {
-        patches = (old.patches or [ ]) ++ [ ./scrutiny-collector-darwin-host-id.patch ];
-
-        meta = old.meta // {
-          platforms = lib.platforms.all;
-        };
-      });
+      scrutiny-collector = import ./patches/scrutiny-collector.nix { inherit lib prev; };
+      disko = import ./patches/disko.nix { inherit lib final prev; };
 
       decky-openrgb = inputs.decky-openrgb.packages.${final.stdenv.hostPlatform.system}.decky-openrgb;
     })
