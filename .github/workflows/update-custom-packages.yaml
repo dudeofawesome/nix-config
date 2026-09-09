@@ -58,6 +58,7 @@ jobs:
     needs: discover
     runs-on: macos-latest
     permissions:
+      actions: read
       contents: write
       issues: write
       pull-requests: write
@@ -110,7 +111,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           PACKAGE: ${{ matrix.package }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/attempts/${{ github.run_attempt }}
           PACKAGE_URL: ${{ github.server_url }}/${{ github.repository }}/tree/${{ github.event.repository.default_branch }}/packages/${{ matrix.package }}/package.nix
         shell: bash
         run: |
@@ -118,6 +118,19 @@ jobs:
 
           echo "::warning title=Package update failed::$PACKAGE failed"
           marker="<!-- update-custom-packages: $PACKAGE -->"
+
+          jobs_endpoint="repos/$GH_REPO/actions/runs/$GITHUB_RUN_ID"
+          jobs_endpoint+="/attempts/$GITHUB_RUN_ATTEMPT/jobs?per_page=100"
+          job_url="$(
+            gh api --paginate "$jobs_endpoint" |
+              jq --slurp --exit-status --raw-output \
+                --arg name "Update $PACKAGE" '
+                  [.[] | .jobs[] | select(.name == $name) | .html_url]
+                  | if length == 1 and .[0] != null then .[0]
+                    else error("Expected exactly one matching update job")
+                    end
+                '
+          )"
 
           # Read every page directly to avoid search indexing delays and limits.
           issues="$(
@@ -141,7 +154,7 @@ jobs:
           $marker
           The update script for [\`$PACKAGE\`]($PACKAGE_URL) failed during the automated update or verification run.
 
-          [View the latest failed workflow run]($RUN_URL).
+          [View the latest failed job]($job_url).
 
           <sub>This text will be replaced on next workflow run.</sub>
           EOF
