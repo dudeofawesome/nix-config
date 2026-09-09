@@ -84,24 +84,45 @@ jobs:
       - name: Update package
         id: update
         continue-on-error: true
+        env:
+          PACKAGE: ${{ matrix.package }}
         shell: bash
-        run: >-
-          nix run nixpkgs#nix-update --
-          --flake
-          --use-update-script
-          "${{ matrix.package }}"
+        run: |
+          set -euo pipefail
+
+          system="$(
+            nix eval --impure --raw --expr builtins.currentSystem
+          )"
+          old_version="$(
+            nix eval --raw ".#packages.$system.$PACKAGE.version"
+          )"
+          echo "old-version=$old_version" >> "$GITHUB_OUTPUT"
+          echo "system=$system" >> "$GITHUB_OUTPUT"
+
+          nix run nixpkgs#nix-update -- \
+            --flake \
+            --use-update-script \
+            "$PACKAGE"
 
       - name: Verify package update script
         id: verify
         if: steps.update.outcome == 'success'
         env:
           PACKAGE: ${{ matrix.package }}
+          SYSTEM: ${{ steps.update.outputs.system }}
         shell: bash
-        run: >-
-          nix run nixpkgs#nix-update --
-          --flake
-          --use-update-script
-          "$PACKAGE"
+        run: |
+          set -euo pipefail
+
+          nix run nixpkgs#nix-update -- \
+            --flake \
+            --use-update-script \
+            "$PACKAGE"
+
+          new_version="$(
+            nix eval --raw ".#packages.$SYSTEM.$PACKAGE.version"
+          )"
+          echo "new-version=$new_version" >> "$GITHUB_OUTPUT"
 
       - name: Report failed update
         if: >-
@@ -193,8 +214,8 @@ jobs:
           branch: chore/update-${{ matrix.package }}
           delete-branch: true
           sign-commits: true
-          commit-message: 'chore(${{ matrix.package }}): update package'
-          title: 'chore(${{ matrix.package }}): update package'
+          commit-message: 'chore(${{ matrix.package }}): ${{ steps.update.outputs.old-version }} → ${{ steps.verify.outputs.new-version }}'
+          title: 'chore(${{ matrix.package }}): ${{ steps.update.outputs.old-version }} → ${{ steps.verify.outputs.new-version }}'
           body: |
-            Automated update for `${{ matrix.package }}`.
+            Automated update for `${{ matrix.package }}`: `${{ steps.update.outputs.old-version }}` → `${{ steps.verify.outputs.new-version }}`.
           labels: dependencies
