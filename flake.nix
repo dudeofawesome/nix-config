@@ -2,8 +2,9 @@
   description = "My multi-machine, multi-arch, multi-user, multi-os Nix config";
 
   inputs = {
-    # TODO: use `nixpkgs-YY.MM-darwin` for Darwin
+    # renovate: datasource=git-refs depName=nixpkgs-linux-stable packageName=https://github.com/NixOS/nixpkgs versioning=nixpkgs
     nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    # renovate: datasource=git-refs depName=nixpkgs-darwin-stable packageName=https://github.com/NixOS/nixpkgs versioning=nixpkgs
     nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -18,6 +19,7 @@
     nix-std.url = "github:chessai/nix-std";
 
     disko = {
+      # renovate: datasource=github-tags depName=disko packageName=nix-community/disko versioning=semver-coerced
       url = "github:nix-community/disko/v1.13.0";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
@@ -28,11 +30,13 @@
     };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote";
+      # renovate: datasource=github-tags depName=lanzaboote packageName=nix-community/lanzaboote versioning=semver-coerced
+      url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
     home-manager = {
+      # renovate: datasource=git-refs depName=home-manager packageName=https://github.com/nix-community/home-manager versioning=regex:^release-(?<major>[0-9]+)[.](?<minor>[0-9]+)$
       url = "github:nix-community/home-manager/release-26.05";
       # TODO: how to follow nixpkgs-darwin-stable when on macOS?
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
@@ -43,6 +47,7 @@
     };
 
     darwin = {
+      # renovate: datasource=git-refs depName=darwin packageName=https://github.com/nix-darwin/nix-darwin versioning=regex:^nix-darwin-(?<major>[0-9]+)[.](?<minor>[0-9]+)$
       url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
     };

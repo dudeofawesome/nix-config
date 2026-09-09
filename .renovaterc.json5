@@ -10,13 +10,24 @@
     },
   },
 
+  // These matches update versioned URLs; regex updates do not regenerate flake.lock.
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^flake\\.nix$/'],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) packageName=(?<packageName>\\S+) versioning=(?<versioning>\\S+)\\r?\\n[ \\t]+(?:[\\w-]+\\.)?url = "github:[^/"\\s]+/[^/"\\s]+/(?<currentValue>[^"?\\s]+)";',
+      ],
+    },
+  ],
+
   packageRules: [
     {
-      matchManagers: ['nix'],
+      matchManagers: ['nix', 'custom.regex'],
       groupName: null,
     },
     {
-      matchManagers: ['nix'],
+      matchManagers: ['nix', 'custom.regex'],
       matchDepNames: [
         'nixpkgs-linux-stable',
         'nixpkgs-darwin-stable',
@@ -29,13 +40,13 @@
       groupSlug: 'nixpkgs-stable',
     },
     {
-      matchManagers: ['nix'],
+      matchManagers: ['nix', 'custom.regex'],
       matchDepNames: ['nixpkgs-unstable', 'jovian', 'home-manager-master'],
       groupName: 'nixpkgs unstable',
       groupSlug: 'nixpkgs-unstable',
     },
     {
-      matchManagers: ['nix'],
+      matchManagers: ['nix', 'custom.regex'],
       matchDepNames: ['nix4vscode', 'claude-code-nix', 'codex-cli-nix'],
       groupName: 'LLMs',
       groupSlug: 'llms',
