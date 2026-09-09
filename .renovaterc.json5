@@ -5,42 +5,40 @@
 
   nix: {
     enabled: true,
+    lockFileMaintenance: {
+      enabled: false,
+    },
   },
 
   packageRules: [
     {
       matchManagers: ['nix'],
-      matchDepNames: [
-        'nixpkgs-*',
-        'nur',
-        'op-shell-plugins',
-        'claude-code-nix',
-        'codex-cli-nix',
-      ],
-      groupName: 'binaries',
-      groupSlug: 'binaries',
-    },
-    {
-      matchManagers: ['nix'],
-      matchDepNames: ['home-manager', 'home-manager-master'],
-      groupName: 'home-manager',
-      groupSlug: 'home-manager',
+      groupName: null,
     },
     {
       matchManagers: ['nix'],
       matchDepNames: [
-        'dudeofawesome_dotfiles',
-        'upaymeifixit_dotfiles',
-        'vim-lumen',
-        'fish-osx',
-        'fish-node-binpath',
-        'fish-node-version',
-        'fish-shell-integrations',
-        'fish-editor-updater',
-        'fish-nvm',
+        'nixpkgs-linux-stable',
+        'nixpkgs-darwin-stable',
+        'lanzaboote',
+        'home-manager',
+        'darwin',
+        'nixos-raspberrypi',
       ],
-      groupName: 'shell and dotfiles',
-      groupSlug: 'shell-and-dotfiles',
+      groupName: 'nixpkgs stable',
+      groupSlug: 'nixpkgs-stable',
+    },
+    {
+      matchManagers: ['nix'],
+      matchDepNames: ['nixpkgs-unstable', 'jovian', 'home-manager-master'],
+      groupName: 'nixpkgs unstable',
+      groupSlug: 'nixpkgs-unstable',
+    },
+    {
+      matchManagers: ['nix'],
+      matchDepNames: ['nix4vscode', 'claude-code-nix', 'codex-cli-nix'],
+      groupName: 'LLMs',
+      groupSlug: 'llms',
     },
   ],
 }
