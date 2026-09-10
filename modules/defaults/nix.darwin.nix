@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   owner,
   ...
 }:
@@ -24,6 +25,15 @@ in
   };
 
   nix.linux-builder.enable = lib.mkDefault false;
+
+  # silence deprecation notice until 26.11
+  nixpkgs.config.allowDeprecatedx86_64Darwin =
+    lib.warnIf (lib.versionAtLeast (lib.versions.majorMinor pkgs.lib.version) "26.11")
+      ''
+        Remove nixpkgs.config.allowDeprecatedx86_64Darwin from
+        modules/defaults/nix.darwin.nix now that nixpkgs is 26.11 or newer.
+      ''
+      true;
 
   # nix.extraOptions is not written when nix-darwin's Nix management is
   # disabled. Keep the SOPS-generated access token outside the Nix store and
