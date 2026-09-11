@@ -8,10 +8,8 @@
 let
   cfg = config.services.games-on-whales.wolf;
 
-  wolfUdevRulesSource = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/games-on-whales/wolf/stable/85-wolf.rules";
-    hash = "sha256-KpLtA8SIHpEestXAWZya5SaWSksXSJbc+fv38wUay8I=";
-  };
+  # The source revision and hash are pinned together in flake.lock.
+  wolfUdevRulesSource = "${inputs.wolf-udev-rules}/85-wolf.rules";
 
   wolfUdevRules = pkgs.runCommand "wolf-udev-rules" { } ''
     install -Dm644 ${wolfUdevRulesSource} \

@@ -958,7 +958,8 @@
         "upaymeifixit_dotfiles": "upaymeifixit_dotfiles",
         "vim-lumen": "vim-lumen",
         "vscode-server": "vscode-server",
-        "wolf-nvidia-vol": "wolf-nvidia-vol"
+        "wolf-nvidia-vol": "wolf-nvidia-vol",
+        "wolf-udev-rules": "wolf-udev-rules"
       }
     },
     "rust-overlay": {
@@ -1150,6 +1151,23 @@
         "dir": "wolf-nvidia-vol",
         "owner": "altano",
         "repo": "flakes",
+        "type": "github"
+      }
+    },
+    "wolf-udev-rules": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788774066,
+        "narHash": "sha256-uPTb+IyOAQlD7nc86MTkRtI3xa3aJ2hwHV9a6RIbfl4=",
+        "owner": "games-on-whales",
+        "repo": "wolf",
+        "rev": "2273b2e64868e6a144daa225a85e85b216d3af2c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "games-on-whales",
+        "ref": "stable",
+        "repo": "wolf",
         "type": "github"
       }
     }

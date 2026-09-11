@@ -139,6 +139,12 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # Renovate's Nix manager updates the stable revision and NAR hash together.
+    wolf-udev-rules = {
+      url = "github:games-on-whales/wolf/stable";
+      flake = false;
+    };
+
     wolf-nvidia-vol = {
       url = "github:altano/flakes?dir=wolf-nvidia-vol";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
