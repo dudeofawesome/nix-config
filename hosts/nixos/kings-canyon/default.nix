@@ -18,8 +18,8 @@
 
   # Retain the repository deploy credential during the service migration.
   # Enroll kings-canyon as a recipient before installing (see README).
-  sops.secrets."hosts/nixos/haleakala/ssh-keys/dudeofawesome_nix-config/private" = {
-    sopsFile = ../haleakala/secrets.yaml;
+  sops.secrets."hosts/nixos/kings-canyon/ssh-keys/dudeofawesome_nix-config/private" = {
+    sopsFile = ./secrets.yaml;
     path = "/home/${owner}/.ssh/github_dudeofawesome_nix-config_ed25519";
     inherit owner;
     mode = "0400";

@@ -28,6 +28,7 @@ keys:
     - &system_badlands-vm 'age1dfekdgq7ksy6v96a2h2p5ml09emrgdlwxmcsm2d3c0am49y2vynqak40ss'
     - &system_crater-lake 'age1rqjddanhdhc3gvj9mj9ez5cm492uqtcnj9elljpp4uy4hx4p3sgqyyfxa6'
     - &system_monongahela 'age1r3z0gd3fmq5vu73l7k7jsseaz5ec8f88qq5sw0zvlexug6uzf4wsadjrhx'
+    - &system_kings-canyon 'age1va7wet0lvafjsdcyp79zrts8dqcnw4wfua3dwxf3lnteszkjhuws5jhvds'
     - &system_haleakala 'age1wy9vrp4k3w69dtjfeskayrn4m4m6fntjcj480junfvpjflnd0p8sg078qc'
     - &system_capitol-reef 'age1fgww42uw3uum68yarh9hc236neej3nc7hxttfzn9em2gw4mw24hsqvk0gk'
     - &system_olympus 'age168s8w29r5f80vhrcedqt25nmuj8zvh70876wjdfextaluyda3ezq6xffaj'
@@ -54,6 +55,7 @@ creation_rules:
           - *system_crater-lake
           - *system_badlands-vm
           - *system_monongahela
+          - *system_kings-canyon
           - *system_haleakala
           - *system_capitol-reef
           - *system_olympus
@@ -71,6 +73,7 @@ creation_rules:
           - *system_crater-lake
           - *system_badlands-vm
           - *system_monongahela
+          - *system_kings-canyon
           - *system_haleakala
           - *system_capitol-reef
           - *system_olympus
@@ -95,6 +98,11 @@ creation_rules:
       - age:
           - *user_dudeofawesome
           - *system_monongahela
+  - path_regex: 'hosts/nixos/kings-canyon/secrets\.yaml$'
+    key_groups:
+      - age:
+          - *user_dudeofawesome
+          - *system_kings-canyon
   - path_regex: 'hosts/nixos/haleakala/secrets\.yaml$'
     key_groups:
       - age:
@@ -122,6 +130,7 @@ creation_rules:
           - *user_dudeofawesome
           - *user_josh
           - *system_monongahela
+          - *system_kings-canyon
           - *system_haleakala
           - *system_capitol-reef
           - *system_soto-server
