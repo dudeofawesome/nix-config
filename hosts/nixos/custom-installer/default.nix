@@ -1,10 +1,46 @@
 {
   config,
+  inputs,
   modulesPath,
   pkgs,
   ...
 }:
 let
+  # Hash the flake source, including dirty tracked changes, without depending on
+  # the system derivation (which itself depends on the ISO label in the initrd).
+  installerId = builtins.substring 0 16 (builtins.hashString "sha256" (toString inputs.self.outPath));
+
+  # Upstream GRUB searches every disk for a shared marker. Give the marker the
+  # same identity as the ISO label, in both its creation and every menu search.
+  # Scope this runCommand wrapper to the ISO module so both the ISO tree and
+  # embedded EFI image consume the same patched EFI directory.
+  patchedIsoModule =
+    {
+      config,
+      lib,
+      utils,
+      pkgs,
+      ...
+    }@args:
+    import "${modulesPath}/installer/cd-dvd/iso-image.nix" (
+      args
+      // {
+        pkgs = pkgs // {
+          runCommand =
+            name: env: script:
+            pkgs.runCommand name env (
+              if name == "efi-directory" then
+                assert lib.assertMsg (lib.hasInfix "/EFI/nixos-installer-image" script)
+                  "The upstream ISO module changed; review the custom installer's GRUB marker patch.";
+                builtins.replaceStrings [ "/EFI/nixos-installer-image" ] [ "/EFI/${config.isoImage.volumeID}" ]
+                  script
+              else
+                script
+            );
+        };
+      }
+    );
+
   installerState =
     pkgs.runCommand "custom-installer-state.ext4"
       {
@@ -21,7 +57,10 @@ let
       '';
 in
 {
+  disabledModules = [ "installer/cd-dvd/iso-image.nix" ];
+
   imports = [
+    patchedIsoModule
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
     ../../../modules/defaults/nix.nix
 
@@ -43,6 +82,9 @@ in
   # nix.channel.enable does not disable the installer's bundled channel.
   # Avoid creating root channel profiles that nixos-install copies to the target.
   system.installer.channel.enable = false;
+
+  # ISO9660 volume IDs must fit in 32 characters (this is 29).
+  isoImage.volumeID = "doa-installer-${installerId}";
 
   # https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD#Building_faster
   # TODO: investigate zstd, eg: `zstd -Xcompression-level 3`
