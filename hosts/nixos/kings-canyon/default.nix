@@ -48,6 +48,18 @@
     };
   };
 
+  # Keep the GPU configuration ready while the NVIDIA card is not installed.
+  # Wait for driver loading and device creation before checking availability.
+  systemd.services.nvidia-container-toolkit-cdi-generator = {
+    after = [
+      "systemd-modules-load.service"
+      "systemd-udev-settle.service"
+    ];
+    wants = [ "systemd-udev-settle.service" ];
+    # The control device can exist even when no GPU was found.
+    unitConfig.ConditionPathExistsGlob = "/proc/driver/nvidia/gpus/*";
+  };
+
   # First boot is for enrollment and restoring state, before taking over services.
   systemd.services.k3s.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
   systemd.services.podman-wolf.unitConfig.ConditionPathExists =
