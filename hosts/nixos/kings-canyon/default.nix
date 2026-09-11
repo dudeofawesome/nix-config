@@ -1,1 +1,59 @@
-{ ... }: { }
+{
+  inputs,
+  config,
+  owner,
+  ...
+}:
+{
+  imports = [
+    inputs.lanzaboote.nixosModules.lanzaboote
+    ../../../modules/defaults/fs/bcachefs.nix
+    ../../../modules/defaults/secure-boot.nix
+    ../../../modules/defaults/nvidia.nix
+    ../../../modules/defaults/tailscale.nix
+    ../../../modules/defaults/tang.nix
+    ../../../modules/presets/os/doa-cluster
+    ./clevis.nix
+  ];
+
+  # Retain the repository deploy credential during the service migration.
+  # Enroll kings-canyon as a recipient before installing (see README).
+  sops.secrets."hosts/nixos/haleakala/ssh-keys/dudeofawesome_nix-config/private" = {
+    sopsFile = ../haleakala/secrets.yaml;
+    path = "/home/${owner}/.ssh/github_dudeofawesome_nix-config_ed25519";
+    inherit owner;
+    mode = "0400";
+  };
+
+  networking = {
+    hostId = "f5764075"; # head -c 8 /etc/machine-id
+    firewall.enable = false;
+  };
+
+  services = {
+    tang.ipAddressAllow = [ "10.0.0.0/20" ];
+
+    games-on-whales.wolf = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    scrutiny.collector = {
+      enable = true;
+      api-endpoint-secret = config.sops.templates."scrutiny-endpoint".path;
+      settings = {
+        host.id = config.networking.hostName;
+        devices = [ { device = config.disko.devices.disk.primary.device; } ];
+      };
+    };
+  };
+
+  # First boot is for enrollment and restoring state, before taking over services.
+  systemd.services.k3s.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
+  systemd.services.podman-wolf.unitConfig.ConditionPathExists =
+    "/var/lib/kings-canyon/migration-ready";
+  systemd.sockets.tangd.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
+
+  # Initial installation release; retain this across future upgrades.
+  system.stateVersion = "26.05";
+}
