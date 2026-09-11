@@ -8,6 +8,7 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [
+    "ixgbe" # Onboard Intel X550 Ethernet, needed for remote root unlocking.
     "xhci_pci"
     "ahci"
     "nvme"
