@@ -40,6 +40,10 @@ in
   users.users.nixos.shell = pkgs.fish;
   users.users.root.shell = pkgs.fish;
 
+  # nix.channel.enable does not disable the installer's bundled channel.
+  # Avoid creating root channel profiles that nixos-install copies to the target.
+  system.installer.channel.enable = false;
+
   # https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD#Building_faster
   # TODO: investigate zstd, eg: `zstd -Xcompression-level 3`
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
