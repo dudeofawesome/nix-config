@@ -30,12 +30,15 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-    fish
     tmux
     clevis
     keyutils
     sbctl
   ];
+
+  programs.fish.enable = true;
+  users.users.nixos.shell = pkgs.fish;
+  users.users.root.shell = pkgs.fish;
 
   # https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD#Building_faster
   # TODO: investigate zstd, eg: `zstd -Xcompression-level 3`
