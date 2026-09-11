@@ -178,14 +178,20 @@ Confirm that Secure Boot is enabled and the installed boot files verify. Re-ente
 Once booted with Secure Boot enabled, seal the recovery passphrase to this machine's TPM and replace the placeholder JWE:
 
 ```sh
-sudo -i
 cd /etc/nixos
-clevis encrypt tpm2 '{"pcr_ids":"7"}' \
-  < /root/bcachefs-password \
-  > hosts/nixos/kings-canyon/clevis.jwe
-nh os switch /etc/nixos#kings-canyon
-sbctl verify
-rm /root/bcachefs-password
+sudo clevis encrypt tpm2 '{"pcr_ids":"7"}' \
+  < /root/bcachefs-password
+mkdir -p ~/.config/sops/age
+sudo nix shell nixpkgs#ssh-to-age --command ssh-to-age \
+  -i /etc/ssh/ssh_host_ed25519_key --private-key > ~/.config/sops/age/keys.txt
+```
+
+commit to `clevis.jwe` and push
+
+```sh
+nh os switch github:dudeofawesome/nix-config#kings-canyon
+sudo sbctl verify
+sudo rm /root/bcachefs-password
 ```
 
 Build from this local checkout so that the new JWE is included in the initrd. Never commit the plaintext recovery passphrase or reuse olympus's JWE.
