@@ -90,6 +90,11 @@ in
   };
 
   services.openssh = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      PermitEmptyPasswords = false;
+    };
     generateHostKeys = false;
     hostKeys = [
       {
