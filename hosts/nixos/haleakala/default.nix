@@ -19,7 +19,6 @@
     mode = "0400";
   };
 
-  # Pascal GPUs are only supported by the 580.xx legacy driver.
   hardware = {
     nct6775 = {
       enable = true;
@@ -36,6 +35,7 @@
       );
     };
 
+    # Pascal GPUs are only supported by the 580.xx legacy driver.
     nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
