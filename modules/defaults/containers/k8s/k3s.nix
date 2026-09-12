@@ -112,9 +112,9 @@ in
       configPath = pkgs.writers.writeYAML "k3s-config.yaml" k3s-config;
 
       extraFlags = lib.flatten [
-        (lib.optional (config.sops.templates ? "k3s-vpn-auth-file") ''
-          --vpn-auth-file=${config.sops.templates.k3s-vpn-auth-file.path}
-        '')
+        (lib.optional (
+          config.sops.templates ? "k3s-vpn-auth-file"
+        ) "--vpn-auth-file=${config.sops.templates.k3s-vpn-auth-file.path}")
       ];
     };
 

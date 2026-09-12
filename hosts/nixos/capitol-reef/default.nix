@@ -73,7 +73,7 @@
 
   services.k3s = {
     role = "agent";
-    serverAddr = "https://10.0.1.203:6443";
+    serverAddr = "https://10.0.1.192:6443";
   };
 
   sops.age = {
