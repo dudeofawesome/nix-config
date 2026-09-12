@@ -9,7 +9,7 @@
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../../modules/defaults/fs/bcachefs.nix
     ../../../modules/defaults/secure-boot.nix
-    # ../../../modules/defaults/nvidia.nix
+    ../../../modules/defaults/nvidia.nix
     ../../../modules/defaults/tailscale.nix
     ../../../modules/defaults/tang.nix
     ../../../modules/presets/os/doa-cluster
