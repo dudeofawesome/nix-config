@@ -80,6 +80,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # These listening ports overlap Linux's ephemeral range. Reserve them so
+    # host-networked applications cannot claim them before Wolf starts.
+    boot.kernel.sysctl."net.ipv4.ip_local_reserved_ports" = "47984,47989,47999,48010,48100,48200";
+
     boot.kernelModules = [
       "uhid"
       "uinput"
