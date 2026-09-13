@@ -21,6 +21,9 @@ let
     nvidiaPackage = config.hardware.nvidia.package;
     extraLibs = [ pkgs.cudaPackages.cuda_nvrtc.lib ];
   };
+
+  steamPython = pkgs.python3.withPackages (ps: [ ps.tomlkit ]);
+  steamHook = "${cfg.stateDirectory}/40-shared-steam.sh";
 in
 {
   options.services.games-on-whales.wolf = {
@@ -36,6 +39,15 @@ in
       type = lib.types.str;
       default = "/var/lib/wolf";
       description = "Host directory containing Wolf's mutable configuration and state.";
+    };
+
+    sharedSteamLibrary = {
+      enable = lib.mkEnableOption "a shared Steam download library with private Proton data";
+      directory = lib.mkOption {
+        type = lib.types.str;
+        default = "/mnt/games/steamapps";
+        description = "Host steamapps directory shared by GOW Steam containers. App users must have write access (default UID/GID 1000).";
+      };
     };
 
     nvidia.enable = lib.mkOption {
@@ -98,6 +110,23 @@ in
     systemd.services.podman-wolf = {
       after = [ "podman.socket" ];
       requires = [ "podman.socket" ];
+      unitConfig.RequiresMountsFor = lib.mkIf cfg.sharedSteamLibrary.enable [
+        cfg.sharedSteamLibrary.directory
+      ];
+      preStart = lib.mkIf cfg.sharedSteamLibrary.enable (
+        lib.mkBefore ''
+          install -d -m 0770 -o 1000 -g 1000 \
+            ${lib.escapeShellArg cfg.sharedSteamLibrary.directory} \
+            ${lib.escapeShellArg "${cfg.sharedSteamLibrary.directory}/compatdata"} \
+            ${lib.escapeShellArg "${cfg.sharedSteamLibrary.directory}/shadercache"}
+          install -m 0644 ${./wolf/40-shared-steam.sh} ${lib.escapeShellArg steamHook}
+          ${steamPython}/bin/python ${./wolf/configure-steam.py} \
+            ${lib.escapeShellArg "${cfg.stateDirectory}/cfg/config.toml"} \
+            ${inputs.wolf-udev-rules}/src/moonlight-server/state/default/config.include.toml \
+            ${lib.escapeShellArg cfg.sharedSteamLibrary.directory} \
+            ${lib.escapeShellArg steamHook}
+        ''
+      );
     };
 
     virtualisation.oci-containers = {

@@ -36,6 +36,7 @@
     games-on-whales.wolf = {
       enable = true;
       openFirewall = true;
+      sharedSteamLibrary.enable = true;
     };
 
     scrutiny.collector = {
@@ -50,8 +51,6 @@
 
   # First boot is for enrollment and restoring state, before taking over services.
   systemd.services.k3s.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
-  systemd.services.podman-wolf.unitConfig.ConditionPathExists =
-    "/var/lib/kings-canyon/migration-ready";
   systemd.sockets.tangd.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
 
   # Initial installation release; retain this across future upgrades.
