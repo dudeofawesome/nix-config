@@ -13,13 +13,13 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "magicpods-decky";
-  version = "2.0.15";
+  version = "2.0.17";
 
-  artifactHash = "7799922e8ae4d9a119ade0f1fc562448e6c0ba78c1e9023508d97e80c5ebc7ee";
+  artifactHash = "24f7f668a293a672afde6eaaaa915023f56d57205a594344263b8c54560d6a9f";
 
   src = fetchzip {
     url = "https://cdn.tzatzikiweeb.moe/file/steam-deck-homebrew/versions/${finalAttrs.artifactHash}.zip";
-    hash = "sha256-bu5TYScPpWo21gy8h6TS0u9/o/k8+hNaH448Ta5WIck=";
+    hash = "sha256-IiQjrxkmzcqDwOnk+YkkVEMrlUTKwMo2rkG+DtADBHk=";
   };
 
   dontConfigure = true;
