@@ -31,6 +31,12 @@
   };
 
   services = {
+    iperf3 = {
+      enable = true;
+      # TODO: consider adding auth
+      openFirewall = true;
+    };
+
     tang.ipAddressAllow = [ "10.0.0.0/20" ];
 
     games-on-whales.wolf = {
