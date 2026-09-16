@@ -2,6 +2,8 @@
 {
   imports = [
     ../../../modules/defaults/tailscale.nix
+    # manually pull in lauren's OS settings
+    ((import ../../../users/lauren).os.linux)
   ];
 
   sops.secrets."hosts/nixos/monongahela/ssh-keys/dudeofawesome_nix-config/private" = {
