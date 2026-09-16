@@ -12,6 +12,7 @@
   networking = {
     hostId = "ab94e121"; # head -c 8 /etc/machine-id
     firewall.enable = false;
+    networkmanager.enable = true;
   };
 
   # services.scrutiny.collector = {
