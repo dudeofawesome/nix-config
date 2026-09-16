@@ -17,6 +17,7 @@ keys:
   users:
     - &user_dudeofawesome 'age17dnfg660q6f6xv634dlsqzt9arungk5k3xytd68m2c94tqa3wqtqv7ew0d'
     - &user_josh 'age1txghvjna8kldpeml3qaspqaf892rvrkctksqqn3xms8axuggyutqz0043g'
+    - &user_lauren 'age1qpxnak9gcualu972cahupauq5gjlkw73t79ajdwehdjrdx8w09fs5wxu4s'
 
   # In order to generate a new public key for a new system, run the following commands:
   # ```sh
@@ -86,6 +87,13 @@ creation_rules:
           - *system_joshs-paciolan-laptop
           - *system_soto-server
           - *system_starling-vm
+  - path_regex: 'users/lauren/secrets\.yaml$'
+    key_groups:
+      - age:
+          - *user_lauren
+          - *user_dudeofawesome
+          - *system_monongahela
+          - *system_crater-lake
 
   # Systems
   - path_regex: 'hosts/nixos/badlands-vm/secrets\.yaml$'
