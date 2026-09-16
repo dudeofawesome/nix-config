@@ -4,6 +4,11 @@
     ../../../modules/defaults/headful/gaming.darwin.nix
   ];
 
+  determinateNix = {
+    distributedBuilds = true;
+    buildMachines = import ../../nixos/kings-canyon/build-machines.nix;
+  };
+
   homebrew = {
     casks = [
       "android-studio"

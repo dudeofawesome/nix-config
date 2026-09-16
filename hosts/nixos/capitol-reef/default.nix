@@ -71,6 +71,13 @@
     };
   };
 
+  nix = {
+    distributedBuilds = true;
+    buildMachines = import ../kings-canyon/build-machines.nix;
+    # Keep compilation off the Pi and its microSD card.
+    settings.max-jobs = 0;
+  };
+
   services.k3s = {
     role = "agent";
     serverAddr = "https://10.0.1.192:6443";

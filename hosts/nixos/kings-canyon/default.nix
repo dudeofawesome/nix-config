@@ -30,6 +30,26 @@
     firewall.enable = false;
   };
 
+  # Run ARM64 Linux build tools through QEMU user-mode emulation.
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  nix.settings = {
+    max-jobs = 6;
+    cores = 4;
+  };
+
+  nix.sshServe = {
+    enable = true;
+    protocol = "ssh-ng";
+    trusted = true;
+    keys = [
+      # crater-lake's SSH host key, available to its Nix daemon without an agent.
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJGtkyoFwnxTApt260sBF9g/50KynGeLHbTDz3KyVyV"
+      # capitol-reef's SSH host key.
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdklCZR1fmPqxdCpV6CUZm+WtwI0pqOn1zeMWwJKGGb"
+    ];
+  };
+
   services = {
     iperf3 = {
       enable = true;
