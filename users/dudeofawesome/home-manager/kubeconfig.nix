@@ -41,11 +41,6 @@
           };
         };
         clusters = {
-          monongahela = {
-            server = config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/monongahela/server".path;
-            certificate-authority-data =
-              config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/monongahela/certificate-authority-data".path;
-          };
           doa = {
             server = config.sops.secrets."users/dudeofawesome/kubeconfig/clusters/doa-cluster/server".path;
             certificate-authority-data =
