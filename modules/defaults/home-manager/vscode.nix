@@ -6,22 +6,24 @@
   ...
 }:
 {
-  home.packages = with pkgs-unstable; [
-    python3
-    python3Packages.ipykernel
-    python3Packages.jupyterlab
-    python3Packages.pyzmq # Adding pyzmq explicitly
-    python3Packages.venvShellHook
-    python3Packages.pip
-    python3Packages.numpy
-    python3Packages.pandas
-    python3Packages.requests
+  home.packages =
+    with pkgs-unstable;
+    lib.mkIf (config.programs.vscode.enable) [
+      python3
+      python3Packages.ipykernel
+      python3Packages.jupyterlab
+      python3Packages.pyzmq # Adding pyzmq explicitly
+      python3Packages.venvShellHook
+      python3Packages.pip
+      python3Packages.numpy
+      python3Packages.pandas
+      python3Packages.requests
 
-    rubyPackages.prettier_print
-    rubyPackages.syntax_tree
-    rubyPackages.syntax_tree-haml
-    rubyPackages.syntax_tree-rbs
-  ];
+      rubyPackages.prettier_print
+      rubyPackages.syntax_tree
+      rubyPackages.syntax_tree-haml
+      rubyPackages.syntax_tree-rbs
+    ];
 
   programs = {
     vscode = {
