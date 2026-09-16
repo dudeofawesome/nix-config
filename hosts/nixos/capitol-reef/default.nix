@@ -89,10 +89,12 @@
   };
 
   networking = {
-    networkmanager.ensureProfiles.profiles."orleans-iot" = doa-lib.mkWirelessProfile {
-      uuid = "b22a8d4f-e22d-4f4b-adea-7791747d7fa2";
-      ssid = "orleans";
-      psk = "$orleans_psk";
+    wireless = {
+      # NetworkManager normally creates interfaces over D-Bus without loading
+      # nixos.conf. Pre-create them so the SAE setting applies to each adapter.
+      autoDetectInterfaces = lib.mkForce true;
+      # brcmfmac advertises H2E; allow it as well as hunting-and-pecking.
+      extraConfig = "sae_pwe=2";
     };
   };
 
