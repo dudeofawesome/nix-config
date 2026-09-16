@@ -15,6 +15,8 @@
     networkmanager.enable = true;
   };
 
+  security.tpm2.enable = true;
+
   # services.scrutiny.collector = {
   #   enable = true;
   #   # user = "root";
