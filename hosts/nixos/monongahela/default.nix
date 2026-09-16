@@ -1,4 +1,4 @@
-{ config, ... }:
+{ lib, config, ... }:
 {
   imports = [
     ../../../modules/defaults/tailscale.nix
@@ -7,15 +7,6 @@
   sops.secrets."hosts/nixos/monongahela/ssh-keys/dudeofawesome_nix-config/private" = {
     sopsFile = ./secrets.yaml;
     path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
-  };
-
-  sops.secrets."kubernetes/certificates/ca/certificate" = {
-    sopsFile = ./secrets.yaml;
-    path = "/var/lib/rancher/k3s/server/tls/root-ca.pem";
-  };
-  sops.secrets."kubernetes/certificates/ca/key" = {
-    sopsFile = ./secrets.yaml;
-    path = "/var/lib/rancher/k3s/server/tls/root-ca.key";
   };
 
   networking = {
