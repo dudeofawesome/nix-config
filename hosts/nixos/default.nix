@@ -90,8 +90,11 @@ in
         hostname = "monongahela";
         arch = "x86_64";
         owner = "dudeofawesome";
-        machine-class = "server";
-        users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
+        machine-class = "pc";
+        users = usersModule.filterMap [
+          "lauren"
+          "dudeofawesome"
+        ] usersModule.users;
       }
       // base
     )
