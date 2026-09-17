@@ -2,6 +2,7 @@
 {
   imports = [
     ../../../modules/defaults/home-manager
+    ../../../modules/defaults/home-manager/gnome.nix
     ./vscode
   ];
 

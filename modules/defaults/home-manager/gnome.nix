@@ -2,6 +2,9 @@
 {
   config = lib.mkIf osConfig.services.desktopManager.gnome.enable {
     dconf.settings = {
+      "org/gnome/desktop/wm/preferences" = {
+        button-layout = lib.mkDefault "appmenu:minimize,maximize,close";
+      };
       "org/gnome/shell" = {
         favorite-apps = [
           "org.gnome.Nautilus.desktop"
