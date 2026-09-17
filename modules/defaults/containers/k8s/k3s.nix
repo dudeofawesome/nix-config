@@ -75,7 +75,7 @@ in
 
   environment.systemPackages = with pkgs; [
     crun
-    iptables-legacy
+    iptables
     k3s
   ];
 
@@ -148,11 +148,12 @@ in
     ];
   };
 
-  # k8s doesn't work with nftables, so we need to revert to iptables.
+  # Keep the iptables firewall rules, using the nftables compatibility backend
+  # supplied by pkgs.iptables, as the k3s package does.
   networking = {
     nftables.enable = false;
     firewall = {
-      package = pkgs.iptables-legacy;
+      package = pkgs.iptables;
 
       allowedTCPPorts = lib.flatten [
         10250 # kubelet metrics and API
