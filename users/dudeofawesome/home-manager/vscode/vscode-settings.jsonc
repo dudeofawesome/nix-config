@@ -877,6 +877,12 @@
   ],
   "gitlabLs.executablePath": "this should be replaced by nix",
 
+  // make mermaid STFU
+  "mermaidChart.showGenerateDiagramCodeLens": false,
+  "mermaidChart.preCommitSync.enabled": false,
+  "mermaidChart.aiSkills.enabled": false,
+  "mermaidChart.createDiagramFromStage.enabled": false,
+
   // disable LLM junk
   "chat.commandCenter.enabled": false,
   "chat.disableAIFeatures": true,
@@ -899,6 +905,4 @@
   "claudeContextBar.contextLimit": 1000000,
 
   "1password.editor.suggestStorage": false,
-  "mermaidChart.showGenerateDiagramCodeLens": false,
-  "mermaidChart.preCommitSync.enabled": false,
 }
