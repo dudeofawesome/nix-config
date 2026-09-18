@@ -22,6 +22,16 @@
       ../../../modules/presets/os/doa-cluster
     ];
 
+  nixpkgs.overlays = lib.mkAfter [
+    (_final: prev: {
+      raspberrypiWirelessFirmware = prev.raspberrypiWirelessFirmware.overrideAttrs {
+        # Avoid chmod of Determinate's build directory and builder.json.
+        # installPhase locates both source trees through NIX_BUILD_TOP.
+        sourceRoot = "firmware-nonfree";
+      };
+    })
+  ];
+
   boot = {
     initrd = {
       supportedFilesystems = [ "vfat" ];
