@@ -78,7 +78,6 @@ with pkgs.stdenv.targetPlatform;
           losslesscut-bin
           obsidian
           ollama
-          pkgs-unstable.openscad-unstable
           opentofu
           spotify
           (
@@ -179,7 +178,8 @@ with pkgs.stdenv.targetPlatform;
       ];
     };
 
-    postico.enable = pkgs.stdenv.targetPlatform.isDarwin;
+    postico.enable = pkgs.stdenv.targetPlatform.isDarwin && machine-class == "pc";
+    openscad.enable = machine-class == "pc";
 
     dock = {
       enable = true;
