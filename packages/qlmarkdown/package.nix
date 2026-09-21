@@ -9,11 +9,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "qlmarkdown";
-  version = "1.5.3";
+  version = "1.5.4";
 
   src = fetchurl {
     url = "https://github.com/sbarex/QLMarkdown/releases/download/${finalAttrs.version}/QLMarkdown.zip";
-    hash = "sha256-AycaGq14ux5DqFTYIx8nC1W3WkDAq5RRlETz6DogduE=";
+    hash = "sha256-0ShtPUraDJDujEqv7vks/F7vzZjMVY1iNOnf8H5xIdk=";
   };
 
   sourceRoot = ".";
