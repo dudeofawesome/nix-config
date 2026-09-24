@@ -93,7 +93,6 @@ with lib;
                   "oven.bun-vscode"
                   "seeker-dk.node-modules-viewer"
                   "semanticdiff.semanticdiff"
-                  "sst-dev.opencode"
                   "swiftlang.swift-vscode"
                   "terrastruct.d2"
                   "thijsdaniels.vscode-openscad-preview"

@@ -20,7 +20,6 @@ with pkgs.stdenv.targetPlatform;
       ../../../modules/defaults/home-manager/google-earth-pro.nix
       ../../../modules/defaults/home-manager/hammerspoon
       ../../../modules/defaults/home-manager/llms/codex.nix
-      ../../../modules/defaults/home-manager/llms/opencode.nix
       ../../../modules/defaults/home-manager/moonlight.nix
       ../../../modules/defaults/home-manager/middleclick.nix
       ../../../modules/defaults/home-manager/typora.nix
@@ -117,7 +116,6 @@ with pkgs.stdenv.targetPlatform;
   #   sopsFile = ../../../hosts/nixos/monongahela/secrets.yaml;
   #   # path = "/home/dudeofawesome/.ssh/github_dudeofawesome_nix-config_ed25519";
   # };
-  sops.secrets."users/dudeofawesome/opencode/server/password".sopsFile = ../secrets.yaml;
 
   programs = {
     git = {
