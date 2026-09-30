@@ -63,6 +63,9 @@
       enable = true;
       openFirewall = true;
       sharedSteamLibrary.enable = true;
+      # Avoid CUDA context crashes on subsequent client connections.
+      # https://github.com/games-on-whales/wolf/issues/501
+      environment.WOLF_USE_ZERO_COPY = "FALSE";
     };
 
     scrutiny.collector = {
