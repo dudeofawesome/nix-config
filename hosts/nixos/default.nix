@@ -71,6 +71,19 @@ in
     )
   );
 
+  balsam-lake = lib.nixosSystem (
+    import ../system.nix (
+      {
+        hostname = "balsam-lake";
+        arch = "x86_64";
+        owner = "dudeofawesome";
+        machine-class = "server";
+        users = usersModule.filterMap [ "dudeofawesome" ] usersModule.users;
+      }
+      // base
+    )
+  );
+
   badlands-vm = lib.nixosSystem (
     import ../system.nix (
       {
