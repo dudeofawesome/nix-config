@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   ...
 }:
 {
@@ -76,6 +77,7 @@
   home-manager.users.dudeofawesome = {
     home.packages = with pkgs; [
       er-save-manager
+      pkgs-unstable.gale
     ];
 
     programs = {
