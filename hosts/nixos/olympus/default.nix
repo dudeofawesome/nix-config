@@ -76,6 +76,7 @@
   home-manager.users.dudeofawesome = {
     home.packages = with pkgs; [
       er-save-manager
+      pkgs-unstable.gale
     ];
 
     programs = {
