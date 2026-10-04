@@ -61,7 +61,6 @@ with pkgs.stdenv.targetPlatform;
         act
         awscli2
         (lib.optional (should_install_dive) dive)
-        eternal-terminal
         watchman
 
         (lib.optionals (isLinux) [ isd ])

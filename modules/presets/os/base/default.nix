@@ -22,7 +22,6 @@ with pkgs.stdenv.targetPlatform;
       bottom
       curl
       dua
-      eternal-terminal
       fd
       git
       htop

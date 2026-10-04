@@ -57,8 +57,6 @@ in
           X11Forwarding = false;
         };
       };
-
-      eternal-terminal.enable = true;
     };
   };
 }
