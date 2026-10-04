@@ -81,7 +81,6 @@
     ];
 
     programs = {
-      codex.enable = lib.mkForce false;
       vscode.enable = lib.mkForce false;
       zed-editor.enable = lib.mkForce false;
       fish.generateCompletions = false;
