@@ -101,11 +101,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787544929,
-        "narHash": "sha256-q4MpR/i5ilEH6EwAVDfR2Z/Bylz0kE0hj02usvDXZ3Q=",
+        "lastModified": 1787633737,
+        "narHash": "sha256-+/FcZwrBnFXqQNfib0DOVSjIDmnfbSqORPeKErTEvPo=",
         "owner": "dudeofawesome",
         "repo": "decky-openrgb",
-        "rev": "c96204dea9dc9749ef23d709ad1df0ec00ba94ce",
+        "rev": "36a4f59e25b6f89b9d352a421a7177ee9018dc08",
         "type": "github"
       },
       "original": {
