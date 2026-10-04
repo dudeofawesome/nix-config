@@ -5,7 +5,10 @@ _final: prev: {
     paths = [ prev.discord ];
     nativeBuildInputs = [ prev.makeWrapper ];
     postBuild = ''
-      wrapProgram $out/opt/Discord/Discord --unset LD_PRELOAD
+      # Wrap public launchers, including aliases, rather than the internal payload.
+      for executable in "$out"/bin/*; do
+        wrapProgram "$executable" --unset LD_PRELOAD
+      done
     '';
   };
 }
