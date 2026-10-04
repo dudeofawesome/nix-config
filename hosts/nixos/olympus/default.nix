@@ -28,7 +28,7 @@
 
     decky-loader = {
       modules = {
-        openrgb.enable = true;
+        # openrgb.enable = true;
       };
     };
   };
