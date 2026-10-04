@@ -24,7 +24,6 @@
         with pkgs;
         [
           gnome-connections
-          gnome-photos
           gnome-tour
           snapshot
           xterm
@@ -40,6 +39,7 @@
           gnome-maps
           gnome-music
           gnome-weather
+          loupe
           simple-scan
           yelp
         ]
