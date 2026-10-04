@@ -84,7 +84,10 @@ in
         ];
       in
       {
-        experimental-features = "nix-command flakes";
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
         use-xdg-base-directories = true;
 
         trusted-users = mkDarwinDefault ([
