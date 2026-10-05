@@ -8,11 +8,11 @@
 
 let
   pname = "er-save-manager";
-  version = "1.10.1";
+  version = "2.0.1";
 
   src = fetchurl {
     url = "https://github.com/Hapfel1/er-save-manager/releases/download/v${version}/er-save-manager_${version}_Linux.AppImage";
-    hash = "sha256-oAYa/ngDi4atgAXFiYmWWI3BacYAfvV0Cu2fBr//h0w=";
+    hash = "sha256-1MOqyWmwfhpAgoEZHFY6pRkuP7rIVV8GpFRgD1RXdzE=";
   };
 
   appimageContents = appimageTools.extractType2 {
