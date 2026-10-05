@@ -14,11 +14,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "claude-desktop";
-  version = "2.2553.1";
+  version = "2.19675.1";
 
   src = fetchurl {
-    url = "https://downloads.claude.ai/releases/darwin/universal/${finalAttrs.version}/Claude-c38127e27202ddc1c8c187102f7798a93b1b8ede.zip";
-    hash = "sha256-GMWR59il2fdnwjiNBO7lGyKtkiLFhyxtKoCh4b/g3dk=";
+    url = "https://downloads.claude.ai/releases/darwin/universal/${finalAttrs.version}/Claude-8613680e2e16d90700c039e084a7883f321ed4e3.zip";
+    hash = "sha256-/4W4r5BR1DjWpYtf/chx7t5+Qecw+4DyTj+OKiHZhIc=";
   };
 
   sourceRoot = ".";
