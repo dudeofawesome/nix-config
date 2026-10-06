@@ -1,0 +1,3 @@
+# Enable TLS 1.0 and legacy SHA-1 certificates only for this Java process.
+jdk.tls.disabledAlgorithms=SSLv3, TLSv1.1, RC4, DES, DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, ECDH, include jdk.disabled.namedCurves
+jdk.certpath.disabledAlgorithms=MD2, SHA1 jdkCA & usage TLSServer, RSA keySize < 1024, DSA keySize < 1024, EC keySize < 224, SHA1 usage SignedJAR & denyAfter 2019-01-01, include jdk.disabled.namedCurves
