@@ -127,40 +127,6 @@ in
 
     codex = {
       enable = true;
-      package =
-        let
-          codexOnePasswordEnv = {
-            # Match each environment variable to a 1Password secret reference.
-            GITHUB_PAT = "op://Private/Github PAT - dudeofawesome/credential";
-            HOME_ASSISTANT_TOKEN = "op://Private/poosdxwzsqeuvybjjasl25hp5m/credential";
-          };
-
-          codexPackage =
-            let
-              op = lib.getExe config.programs._1password-cli.package;
-              wrappedCodex = pkgs.writeShellScript "codex" ''
-                set -euo pipefail
-
-                ${lib.concatLines (
-                  lib.mapAttrsToList (
-                    name: reference: ''export ${name}="$(${op} read ${lib.escapeShellArg reference})"''
-                  ) codexOnePasswordEnv
-                )}
-
-                exec ${lib.getExe pkgs-unstable.codex} "$@"
-              '';
-            in
-            pkgs.symlinkJoin {
-              name = "codex-with-1password-env";
-              paths = [ pkgs-unstable.codex ];
-              meta.mainProgram = "codex";
-              postBuild = ''
-                rm "$out/bin/codex"
-                ln -s ${wrappedCodex} "$out/bin/codex"
-              '';
-            };
-        in
-        codexPackage;
 
       context = ''
         ${builtins.readFile ./user-memory.md}
