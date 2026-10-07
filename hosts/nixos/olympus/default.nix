@@ -80,6 +80,23 @@
       pkgs-unstable.gale
     ];
 
+    # TODO: remove this once fixed upstream
+    # The packaged launcher uses Exec=gale, dropping login callback URLs.
+    xdg.desktopEntries.Gale = {
+      name = "Gale";
+      comment = "A modern mod manager for Thunderstore";
+      exec = "${lib.getExe pkgs-unstable.gale} %U";
+      icon = "gale";
+      terminal = false;
+      categories = [ "Game" ];
+      mimeType = [
+        "application/x-r2z"
+        "x-scheme-handler/ror2mm"
+        "x-scheme-handler/gale"
+      ];
+      settings.StartupWMClass = "gale";
+    };
+
     programs = {
       vscode.enable = lib.mkForce false;
       zed-editor.enable = lib.mkForce false;
