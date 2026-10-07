@@ -12,13 +12,6 @@ in
   jovian.steam.desktopSession =
     if config.services.desktopManager.gnome.enable then "gnome" else "gamescope-wayland";
 
-  # TODO: remove this backport https://github.com/SteamDeckHomebrew/decky-loader/pull/827
-  jovian.decky-loader.package = lib.mkIf cfg.decky-loader.enable (
-    pkgs.decky-loader.overridePythonAttrs (old: {
-      patches = (old.patches or [ ]) ++ [ ./decky-loader-respect-path.patch ];
-    })
-  );
-
   # TODO: remove once decky-loader upgrades pnpm
   nixpkgs.config.permittedInsecurePackages = lib.mkIf cfg.decky-loader.enable [ "pnpm-9.15.9" ];
 
