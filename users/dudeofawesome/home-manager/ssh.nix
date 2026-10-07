@@ -61,11 +61,11 @@
         Port = 69;
       };
       "terracompute" = {
-        HostName = "192.168.4.225";
+        HostName = "10.50.0.2";
         User = "vast";
       };
       "terracompute-remote" = {
-        header = "Match ${hostUnreachable "192.168.4.225"}";
+        header = "Match ${hostUnreachable "10.50.0.2"}";
         ProxyJump = "home.saldivar.io";
       };
     };
