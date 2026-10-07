@@ -25,6 +25,13 @@
     mode = "0400";
   };
 
+  # IPMI out-of-band management credentials, used by scripts/ipmi.sh and
+  # scripts/redfish.sh.
+  hardware.bmc.onePassword = {
+    account = "orleans.1password.com";
+    item = "trmkkigsfelejx4oftj2am4xqm";
+  };
+
   networking = {
     hostId = "f5764075"; # head -c 8 /etc/machine-id
     firewall.enable = false;
