@@ -9,22 +9,18 @@
     ../../../../defaults/home-manager/llms/claude-code.nix
   ];
 
-  programs.claude-code = {
+  programs.mcp = {
     enable = true;
-
-    mcpServers = {
+    servers = {
       atlassian.url = "https://mcp.atlassian.com/v1/mcp";
       paciolan-client-database = {
-        type = "http";
         url = "http://client-database-mcp-dev.eks.paciolan.info/mcp";
         headers.Authorization = "Basic dGVzdDp0ZXN0MTIz";
       };
       pac-universe = {
-        type = "http";
         url = "http://pac-universe-mcp-ms-dev.kube1.paciolan.info/mcp";
       };
       # gitlab = { # not yet supported by pac's gitlab deployment
-      #   type = "http";
       #   url = "https://gitlabdev.paciolan.info/api/v4/mcp";
       # };
       gitlab =
@@ -69,6 +65,11 @@
         };
       # slack
     };
+  };
+
+  programs.claude-code = {
+    enable = true;
+
     settings = {
       permissions =
         let
