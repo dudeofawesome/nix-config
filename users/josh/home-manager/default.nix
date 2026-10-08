@@ -81,6 +81,13 @@
           User = "josh";
           HostName = "10.0.15.144";
         };
+        # My Paciolan UnDep VM
+        "10.231.22.204" = {
+          User = "psi";
+          IdentityAgent = "none";
+          IdentityFile = "~/.ssh/paciolan_automation_ed25519";
+          IdentitiesOnly = true;
+        };
       };
     };
 
