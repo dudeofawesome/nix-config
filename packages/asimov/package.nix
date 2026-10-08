@@ -22,7 +22,10 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    install -Dm755 asimov "$out/bin/asimov"
+    install -Dm755 bin/asimov "$out/bin/asimov"
+    mkdir -p "$out/libexec/asimov" "$out/share/asimov"
+    cp -R lib/asimov/. "$out/libexec/asimov/"
+    cp -R data/. "$out/share/asimov/"
     # install -Dm644 com.stevegrunwell.asimov.plist \
     #   "$out/Library/LaunchAgents/com.stevegrunwell.asimov.plist"
 
