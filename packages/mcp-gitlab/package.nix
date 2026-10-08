@@ -24,10 +24,6 @@ buildNpmPackage (finalAttrs: {
 
   npmBuildScript = "build";
 
-  postInstall = ''
-    ln -s "$out/bin/@zereight/mcp-gitlab" "$out/bin/mcp-gitlab"
-  '';
-
   passthru.updateScript = nix-update-script {
     extraArgs = [ "--flake" ];
   };
