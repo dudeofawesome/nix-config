@@ -10,7 +10,7 @@ nix build .#nixosConfigurations.<hostname>.config.system.build.toplevel --dry-ru
 nix build .#darwinConfigurations.<hostname>.config.system.build.toplevel --dry-run
 
 # Apply configuration to local machine
-nh os switch --flake .#<hostname> # NixOS
+nh os switch .#<hostname>     # NixOS
 nh darwin switch .#<hostname>     # macOS
 
 # Deploy to remote machine
