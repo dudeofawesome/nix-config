@@ -125,6 +125,11 @@
     # I'm using brew instead due to permission and deep linking issues when installed via nix
     zoom-us.enable = false;
 
+    glab = {
+      settings.hosts."gitlabdev.paciolan.info".user = "joshuagibbs";
+      hostTokenSecrets."gitlabdev.paciolan.info" = "users/josh/glab/paciolan/api_token";
+    };
+
     dock = {
       enable = true;
 

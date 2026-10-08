@@ -87,14 +87,48 @@ in
           '';
         };
 
+        hostTokenSecrets = mkOption {
+          type = types.attrsOf types.str;
+          default = { };
+          description = ''
+            Map of GitLab host to the name of the sops secret holding its API
+            token. When set, {file}`config.yml` is rendered by sops-nix with
+            mode 0600 instead of linked from the Nix store, since glab refuses
+            to read a config file it can't write.
+          '';
+          example = literalExpression ''
+            {
+              "gitlab.example.com" = "users/alice/glab/example/api_token";
+            }
+          '';
+        };
       };
     };
 
-  config = mkIf (cfg.enable) {
-    home.packages = [ cfg.package ];
+  config = mkIf (cfg.enable) (
+    let
+      useSops = cfg.hostTokenSecrets != { };
+      settings = lib.recursiveUpdate cfg.settings {
+        hosts = lib.mapAttrs (_: secret: {
+          token = config.sops.placeholder.${secret};
+        }) cfg.hostTokenSecrets;
+      };
+    in
+    {
+      home.packages = [ cfg.package ];
 
-    xdg.configFile = {
-      "glab-cli/config.yml".source = yamlFormat.generate "glab-config.yml" (cfg.settings);
-    };
-  };
+      xdg.configFile = mkIf (!useSops) {
+        "glab-cli/config.yml".source = yamlFormat.generate "glab-config.yml" cfg.settings;
+      };
+
+      sops = mkIf useSops {
+        secrets = lib.genAttrs (lib.attrValues cfg.hostTokenSecrets) (_: { });
+        templates."glab-cli-config.yml" = {
+          file = yamlFormat.generate "glab-config.yml" settings;
+          path = "${config.xdg.configHome}/glab-cli/config.yml";
+          mode = "0600";
+        };
+      };
+    }
+  );
 }
