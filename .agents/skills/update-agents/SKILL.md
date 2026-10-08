@@ -1,7 +1,7 @@
 ---
 name: update-agents
-description: 'Update the coding agent flake inputs (claude-code-nix, codex-cli-nix).'
-when_to_use: 'Use when the user asks to update Claude Code or Codex, or to bump the coding agents. Trigger phrases: "update claude code", "update codex", "update agents", "bump claude".'
+description: 'Update the coding agent and VS Code extension flake inputs (claude-code-nix, codex-cli-nix, nix4vscode).'
+when_to_use: 'Use when the user asks to update Claude Code, Codex, or VS Code extensions, or to bump the coding agents. Trigger phrases: "update claude code", "update codex", "update agents", "bump claude", "update nix4vscode", "update vscode extensions".'
 allowed-tools:
     - AskUserQuestion
     - Bash(nix flake update *)
@@ -9,16 +9,16 @@ allowed-tools:
 
 # Update coding agents
 
-Update the two coding agent flake inputs: `claude-code-nix` and `codex-cli-nix`.
+Update three flake inputs: `claude-code-nix`, `codex-cli-nix`, and `nix4vscode`.
 
 ## Step 1: Confirm
 
 Use `AskUserQuestion` to confirm before running. This modifies `flake.lock`.
 
-- Question: "Update the claude-code-nix and codex-cli-nix flake inputs?"
+- Question: "Update the claude-code-nix, codex-cli-nix, and nix4vscode flake inputs?"
 - Header: "Confirm update"
 - Options:
-    1. Yes, update both (Recommended)
+    1. Yes, update all three (Recommended)
     2. No, cancel
 
 If the user picks "No" or "Other" with anything other than clear consent, stop and report cancellation.
@@ -26,7 +26,7 @@ If the user picks "No" or "Other" with anything other than clear consent, stop a
 ## Step 2: Run
 
 ```sh
-nix flake update claude-code-nix codex-cli-nix
+nix flake update claude-code-nix codex-cli-nix nix4vscode
 ```
 
 ## Step 3: Report
