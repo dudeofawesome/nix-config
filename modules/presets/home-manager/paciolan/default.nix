@@ -32,9 +32,20 @@ with pkgs.stdenv.targetPlatform;
   programs = {
     glab = {
       enable = true;
-      settings = { 
-        host = "";
-        hosts = {};
+      settings = {
+        host = "gitlabdev.paciolan.info";
+        # Updates come from Nix.
+        check_update = false;
+        hosts."gitlabdev.paciolan.info" = {
+          api_host = "gitlabdev.paciolan.info";
+          api_protocol = "https";
+          git_protocol = "ssh";
+          container_registry_domains = lib.concatStringsSep "," [
+            "gitlabdev.paciolan.info"
+            "gitlabdev.paciolan.info:443"
+            "registry.gitlabdev.paciolan.info"
+          ];
+        };
       };
     };
     slack = {
