@@ -1,9 +1,19 @@
-{ ... }:
+{ config, pkgs, ... }:
 {
-  imports = [ ];
+  imports = [
+    ./disko.nix
+    ./offsite-backup.nix
+    ./ssd-state-backup.nix
+    ../../../modules/defaults/boot/bcachefs-unlock-once.nix
+    ../../../modules/defaults/fs/bcachefs.nix
+    ../../../modules/defaults/fs/snapper.nix
+    ../../../modules/defaults/fs/zfs.nix
+  ];
 
   networking = {
     hostId = "2fad05b5"; # head -c 8 /etc/machine-id
+    # DHCP on the first onboard NIC, in the initrd too (remote unlock over SSH port 222).
+    interfaces.eno1.useDHCP = true;
   };
 
   # iDRAC out-of-band management credentials, used by scripts/ipmi.sh and
@@ -26,6 +36,34 @@
     "console=ttyS1,115200n8"
   ];
 
+  # 1000M ESP, ~100M per generation.
+  boot.loader.systemd-boot.configurationLimit = 10;
+
+  # Hourly ZFS snapshots of everything in the storage pool. The offsite disks
+  # replicate these; keep enough history that a bad deletion is recoverable.
+  services.sanoid = {
+    enable = true;
+    templates.production = {
+      hourly = 48;
+      daily = 30;
+      monthly = 12;
+      yearly = 2;
+      autosnap = true;
+      autoprune = true;
+    };
+    datasets.storage = {
+      useTemplate = [ "production" ];
+      recursive = true;
+    };
+  };
+
+  # Top-level directories on the pool belong to josh.
+  systemd.tmpfiles.rules = [
+    "d /storage/photos 0750 josh users -"
+    "d /storage/media 0755 josh users -"
+    "d /storage/timemachine 0750 josh users -"
+  ];
+
   services.samba = {
     enable = true;
     openFirewall = true;
@@ -37,7 +75,7 @@
         comment = "Public samba share";
       };
       "Time Machine" = {
-        path = "/mnt/Shares/tm_share";
+        path = "/storage/timemachine";
         comment = "Remote Time Machine target";
         "valid users" = "josh";
         public = "no";
