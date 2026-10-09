@@ -21,7 +21,7 @@ let
               || abort "Username '${x}' is longer than 31 characters which is not allowed!"
             );
             x;
-          description = lib.mdDoc ''
+          description = ''
             The name of the user account. If undefined, the name of the
             attribute set will be used.
           '';
@@ -31,12 +31,11 @@ let
           type = with types; nullOr str;
           default = cfg.users.${name}.passwordFile;
           defaultText = literalExpression "null";
-          description = lib.mdDoc ''
+          description = ''
             The full path to a file that contains the plaintext of the user's
             password. The password file is read on each system activation. The
             file should contain exactly one line, which should be the password in
             plaintext that is suitable for the `smbpasswd` command.
-            ${passwordDescription}
           '';
         };
       };
@@ -59,7 +58,7 @@ in
             plaintextPasswordFile = "/secrets/alice";
           };
         };
-        description = lib.mdDoc ''
+        description = ''
           Additional user accounts to be created automatically by the system.
           This can also be used to set options for root.
         '';
@@ -74,16 +73,20 @@ in
     ];
 
     # create smb users
-    system.activationScripts.time-machine_set-passwords = concatMapStringsSep "; " (
-      key:
-      let
-        val = cfg.users.${key};
-      in
-      ''
-        { cat '${val.plaintextPasswordFile}'; echo ""; cat '${val.plaintextPasswordFile}'; echo ""; } \
-          | "${pkgs.samba}/bin/smbpasswd" -s -a '${val.name}'
-      ''
-    ) (builtins.attrNames cfg.users);
+    system.activationScripts.time-machine_set-passwords = {
+      # The password files usually come from sops-nix; make sure they exist first.
+      deps = [ "setupSecrets" ];
+      text = concatMapStringsSep "; " (
+        key:
+        let
+          val = cfg.users.${key};
+        in
+        ''
+          { cat '${val.plaintextPasswordFile}'; echo ""; cat '${val.plaintextPasswordFile}'; echo ""; } \
+            | "${pkgs.samba}/bin/smbpasswd" -s -a '${val.name}'
+        ''
+      ) (builtins.attrNames cfg.users);
+    };
 
     # users.users = builtins.mapAttrs
     #   (key: val: if config.users.users.${val.name} then { } else {
