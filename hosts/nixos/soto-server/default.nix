@@ -8,6 +8,8 @@
     ../../../modules/defaults/fs/bcachefs.nix
     ../../../modules/defaults/fs/snapper.nix
     ../../../modules/defaults/fs/zfs.nix
+    ../../../modules/configurable/os/samba-users.nix
+    ../../../modules/configurable/os/time-machine-server.linux.nix
   ];
 
   networking = {
@@ -57,34 +59,37 @@
     };
   };
 
-  # Top-level directories on the pool belong to josh.
+  # Top-level directories on the pool belong to josh (the Time Machine
+  # directory is managed by the time-machine module).
   systemd.tmpfiles.rules = [
     "d /storage/photos 0750 josh users -"
     "d /storage/media 0755 josh users -"
-    "d /storage/timemachine 0750 josh users -"
   ];
+
+  # Samba password for josh, separate from the login password. Set at every
+  # activation from this secret (modules/configurable/os/samba-users.nix).
+  sops.secrets."hosts/nixos/soto-server/samba_password_josh" = {
+    sopsFile = ./secrets.yaml;
+  };
 
   services.samba = {
     enable = true;
     openFirewall = true;
-    settings = {
-      public = {
-        path = "/";
-        browseable = "yes";
-        "guest ok" = "yes";
-        comment = "Public samba share";
-      };
-      "Time Machine" = {
-        path = "/storage/timemachine";
-        comment = "Remote Time Machine target";
-        "valid users" = "josh";
-        public = "no";
-        writeable = "yes";
-        "force user" = "josh";
-        "fruit:aapl" = "yes";
-        "fruit:time machine" = "yes";
-        "vfs objects" = "catia fruit streams_xattr";
-      };
+    users = {
+      enable = true;
+      users.josh.plaintextPasswordFile =
+        config.sops.secrets."hosts/nixos/soto-server/samba_password_josh".path;
+    };
+    time-machine = {
+      enable = true;
+      baseDir = "/storage/timemachine";
+      users = [ "josh" ];
+    };
+    settings.public = {
+      path = "/";
+      browseable = "yes";
+      "guest ok" = "yes";
+      comment = "Public samba share";
     };
   };
 }
