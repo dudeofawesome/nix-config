@@ -80,7 +80,7 @@
         };
         "soto-server" = {
           User = "josh";
-          HostName = "10.0.15.144";
+          HostName = "10.0.1.10";
         };
         # My Paciolan UnDep VM
         "10.231.22.204" = {
