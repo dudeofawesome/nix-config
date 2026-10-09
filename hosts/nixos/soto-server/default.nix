@@ -4,10 +4,10 @@
     ./disko.nix
     ./offsite-backup.nix
     ./ssd-state-backup.nix
-    ../../../modules/defaults/boot/bcachefs-unlock-once.nix
     ../../../modules/defaults/fs/bcachefs.nix
     ../../../modules/defaults/fs/snapper.nix
     ../../../modules/defaults/fs/zfs.nix
+    ../../../modules/configurable/os/zfs-snapshots.nix
     ../../../modules/configurable/os/samba-users.nix
     ../../../modules/configurable/os/time-machine-server.linux.nix
   ];
@@ -41,22 +41,11 @@
   # 1000M ESP, ~100M per generation.
   boot.loader.systemd-boot.configurationLimit = 10;
 
-  # Hourly ZFS snapshots of everything in the storage pool. The offsite disks
-  # replicate these; keep enough history that a bad deletion is recoverable.
-  services.sanoid = {
+  # Hourly ZFS snapshots of everything in the storage pool; the offsite disks
+  # replicate these.
+  services.zfs.snapshots = {
     enable = true;
-    templates.production = {
-      hourly = 48;
-      daily = 30;
-      monthly = 12;
-      yearly = 2;
-      autosnap = true;
-      autoprune = true;
-    };
-    datasets.storage = {
-      useTemplate = [ "production" ];
-      recursive = true;
-    };
+    datasets = [ "storage" ];
   };
 
   # Top-level directories on the pool belong to josh (the Time Machine
