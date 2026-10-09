@@ -2,8 +2,11 @@
 #
 #   NVMe (Micron 7300 1.92 TB, disk "primary")
 #     ESP 1 GB            /boot
-#     bcachefs 240 GB     encrypted root (member 1 of a future 2-member mirror;
-#                         a second SSD is added later with `bcachefs device add`)
+#     bcachefs 240 GB     encrypted root. Member 1 of a 2-member mirror: a
+#                         240 GB SATA SSD (223 GiB) joins later with
+#                         `bcachefs device add`. With replicas=2 the smaller
+#                         device sets the usable size, so growing this
+#                         partition only pays off once that SSD is replaced.
 #     zfs (rest)          L2ARC read cache for the `storage` pool (disposable)
 #
 #   3x 14 TB HDD behind the PERC H730 (bays 0-2, passthrough disks)

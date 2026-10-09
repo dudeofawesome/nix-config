@@ -43,9 +43,12 @@ encryption").
 ## Maintenance
 
 - **Replace a failed mirror member**: `zpool replace storage <old-id> /dev/disk/by-id/<new-id>`.
-- **Second SSD** (root mirror): partition it like the NVMe (ESP + bcachefs), then
+- **Second SSD** (root mirror; the planned one is a 240 GB SATA SSD, 223 GiB):
+  partition it as ESP + bcachefs on the rest, then
   `bcachefs device add / /dev/disk/by-id/<new>-part2`, set `replicas = 2` in
-  disko.nix and `bcachefs data rereplicate /`. Keep the second ESP in sync.
+  disko.nix and `bcachefs data rereplicate /`. It may be smaller than the NVMe's
+  root partition; the smaller device then sets the usable size. Keep the second
+  ESP in sync.
 - **Samba**: josh's password comes from sops (`samba_password_josh`) and is
   applied at every activation; the Time Machine share is `/storage/timemachine`.
 
