@@ -1,18 +1,22 @@
 # Scheduled ZFS snapshots with one retention policy for the whole repo.
 #
-#   services.zfs.snapshots = {
+#   services.zfs-snapshots = {
 #     enable = true;
 #     datasets = [ "storage" ];   # snapshotted recursively
 #   };
 #
 # Implemented with sanoid. Replication to other disks or hosts is a separate
 # concern (syncoid); see hosts/nixos/soto-server/offsite-backup.nix for one.
+#
+# Deliberately not under `services.zfs.*`: nixpkgs owns that namespace
+# (`services.zfs.autoSnapshot`, `autoScrub`, `trim`, ...) and could add a
+# `snapshots` option of its own.
 { config, lib, ... }:
 let
-  cfg = config.services.zfs.snapshots;
+  cfg = config.services.zfs-snapshots;
 in
 {
-  options.services.zfs.snapshots = {
+  options.services.zfs-snapshots = {
     enable = lib.mkEnableOption "scheduled ZFS snapshots (sanoid)";
 
     datasets = lib.mkOption {

@@ -31,7 +31,7 @@ encryption").
 
 ## Backups
 
-- Hourly ZFS snapshots of `storage` (`services.zfs.snapshots`, 48 h / 30 d / 12 m / 2 y).
+- Hourly ZFS snapshots of `storage` (`services.zfs-snapshots`, 48 h / 30 d / 12 m / 2 y).
 - Hourly restic backup of the SSD's state (`/var/lib`, `/home`, `/etc/ssh`) into
   `storage/backups/soto-ssd`, taken from read-only bcachefs snapshots:
   [ssd-state-backup.nix](ssd-state-backup.nix).

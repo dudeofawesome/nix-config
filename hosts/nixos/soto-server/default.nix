@@ -43,7 +43,7 @@
 
   # Hourly ZFS snapshots of everything in the storage pool; the offsite disks
   # replicate these.
-  services.zfs.snapshots = {
+  services.zfs-snapshots = {
     enable = true;
     datasets = [ "storage" ];
   };
