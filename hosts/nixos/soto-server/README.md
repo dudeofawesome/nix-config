@@ -1,63 +1,54 @@
-# soto-server runbook
+# soto-server
 
-Layout and rationale are in [disko.nix](disko.nix). Out-of-band access is in [AGENTS.md](AGENTS.md).
+Josh's home server: family photos, media, Time Machine target. The only place
+the photos live, hence the redundancy below.
 
-## Install / reinstall
+## Hardware
 
-Boot the machine into any NixOS installer with SSH (the official minimal ISO via
-iDRAC virtual media works; set a password for `nixos` on the console), then:
+- System: Dell PowerEdge T430, Xeon E5-2630 v3, 32 GB RAM, two 750 W PSUs
+- Boot: Micron 7300 PRO 1.92 TB NVMe (PCIe slot 4)
+- Storage: PERC H730 (passthrough disks) with 6× 14 TB WD drives, five bays used
+- Out-of-band: iDRAC 8 at 10.0.1.9, serial console on COM2/ttyS1, see [AGENTS.md](AGENTS.md)
 
-```sh
-./scripts/nixos-anywhere.sh soto-server nixos@10.0.1.10
-```
+## Disks
 
-The script decrypts `fde_password` from [secrets.yaml](secrets.yaml) and hands it
-to disko; the same passphrase encrypts the bcachefs root and the ZFS `storage` pool.
-The passphrase is in 1Password ("soto-server disk encryption").
+| Bay | Role                                            |
+| --- | ----------------------------------------------- |
+| 0–2 | ZFS 3-way mirror `storage` (encrypted)          |
+| 3   | cold spare, not in any pool                     |
+| 4   | offsite backup disk currently at home (A or B)  |
 
-Two gotchas when installing from the **stock** NixOS ISO (the custom installer
-in `hosts/nixos/custom-installer` avoids the first):
-
-1. Its kernel has no bcachefs module (bcachefs is out of tree). Before running
-   nixos-anywhere, on the installer:
-   ```sh
-   out=$(nix-build "<nixpkgs>" -A linuxPackages.bcachefs --no-out-link)
-   sudo modprobe lz4_compress lz4hc_compress libpoly1305 libchacha raid6_pq xor
-   xz -dc "$out"/lib/modules/*/updates/src/fs/bcachefs/bcachefs.ko.xz > /tmp/bcachefs.ko
-   sudo insmod /tmp/bcachefs.ko
-   ```
-2. disko (as of early 2026, [PR 1265](https://github.com/nix-community/disko/pull/1265)
-   unmerged) runs `bcachefs unlock` before every subvolume mount, and the second
-   unlock fails with "Device or resource busy" once the filesystem is mounted at
-   `/mnt`. Finish the remaining mounts by hand with the exact `mount -t bcachefs
-   -o X-mount.subdir=@…` lines from the disko log, mount the ESP at `/mnt/boot`,
-   run `zfs mount -a`, then rerun the wrapper with `--phases install,reboot`.
+The NVMe holds the ESP, a 240 GB encrypted bcachefs root and, in the remaining
+space, an L2ARC for the pool. Layout and rationale: [disko.nix](disko.nix).
 
 ## Boot
 
-The root filesystem asks for its passphrase in the initrd. Either type it on the
-console (iDRAC virtual console or `scripts/ipmi.sh soto-server sol activate`) or
-`ssh -p 222 root@10.0.1.10` and type it there. The ZFS pool unlocks itself
-afterwards from the same secret.
+The root filesystem asks for its passphrase once in the initrd. Type it on the
+console (iDRAC virtual console or `scripts/ipmi.sh soto-server sol activate`),
+or `ssh -p 222 root@10.0.1.10` and type it there. The ZFS pool then unlocks
+itself from the same secret. The passphrase is in 1Password ("soto-server disk
+encryption").
 
-## Drives
+## Backups
 
-| Bay | Role                                   |
-| --- | -------------------------------------- |
-| 0-2 | `storage` 3-way mirror                 |
-| 3   | cold spare (not in any pool)           |
-| 4   | offsite disk currently at home (A or B) |
+- Hourly ZFS snapshots of `storage` (`services.zfs.snapshots`, 48 h / 30 d / 12 m / 2 y).
+- Hourly restic backup of the SSD's state (`/var/lib`, `/home`, `/etc/ssh`) into
+  `storage/backups/soto-ssd`, taken from read-only bcachefs snapshots:
+  [ssd-state-backup.nix](ssd-state-backup.nix).
+- Offsite disks `backup-a` / `backup-b`: insert one, wait for
+  `journalctl -u 'offsite-backup@*'` to say "complete", pull it. First fill is
+  the whole pool; later runs are incremental. Creating a new offsite disk is
+  documented in [offsite-backup.nix](offsite-backup.nix).
+
+## Maintenance
 
 - **Replace a failed mirror member**: `zpool replace storage <old-id> /dev/disk/by-id/<new-id>`.
-- **Offsite rotation**: insert the disk, wait for `journalctl -u 'offsite-backup@*'` to say
-  "complete", pull it. First fill is the whole pool; later runs are incremental.
-  Creating a new offsite disk is documented in [offsite-backup.nix](offsite-backup.nix).
 - **Second SSD** (root mirror): partition it like the NVMe (ESP + bcachefs), then
   `bcachefs device add / /dev/disk/by-id/<new>-part2`, set `replicas = 2` in
   disko.nix and `bcachefs data rereplicate /`. Keep the second ESP in sync.
+- **Samba**: josh's password comes from sops (`samba_password_josh`) and is
+  applied at every activation; the Time Machine share is `/storage/timemachine`.
 
-## Backups of the SSD itself
+## Initial installation
 
-`ssd-state-backup.timer` copies `/var/lib`, `/home` and `/etc/ssh` hourly into
-`/storage/backups/soto-ssd` (see [ssd-state-backup.nix](ssd-state-backup.nix)).
-Add a database dump there when a database exists.
+[`docs/install.md`](./docs/install.md)
