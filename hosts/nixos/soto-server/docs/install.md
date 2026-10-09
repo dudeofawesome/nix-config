@@ -41,10 +41,24 @@ through iDRAC virtual media:
 2. disko ([PR 1265](https://github.com/nix-community/disko/pull/1265) unmerged)
    runs `bcachefs unlock` before every subvolume mount, and the second unlock
    fails with "Device or resource busy" once the filesystem is mounted at
-   `/mnt`. Finish the remaining mounts by hand with the exact
-   `mount -t bcachefs -o X-mount.subdir=@…` lines from the disko log, mount the
-   ESP at `/mnt/boot`, run `zfs mount -a`, then rerun the wrapper with
-   `--phases install,reboot`.
+   `/mnt`. If the log shows formatting, subvolume creation and the `/mnt`
+   mount succeeded, finish the remaining mounts without unlocking again (the
+   root UUID is in the disko log; it is fixed in `disko.nix`):
+   ```sh
+   root=/dev/disk/by-uuid/4813494d-137e-1631-bba3-01d5acab6e7b
+   for subvol in home nix tmp; do
+     if ! mountpoint -q "/mnt/$subvol"; then
+       sudo mount -t bcachefs \
+         -o "X-mount.mkdir,X-mount.subdir=@$subvol,noatime" \
+         "$root" "/mnt/$subvol"
+     fi
+   done
+   sudo mkdir -p /mnt/boot && sudo mount /dev/disk/by-partlabel/ESP /mnt/boot
+   sudo zfs mount -a
+   findmnt -R /mnt
+   ```
+   then rerun the wrapper with `--phases install,reboot`. Do not rerun the
+   disko phase for this failure.
 3. If the disks held a previous pool with the same name, clear its labels first
    (`zpool labelclear -f` on every member, then `wipefs -a`), or disko's
    "import existing pool" step can latch onto it.

@@ -61,6 +61,9 @@ in
               priority = 2;
               size = "240G";
             };
+            # The rest of the NVMe joins the `storage` pool as its L2ARC read
+            # cache (`cache = [ "primary" ]` in the topology below). Nothing is
+            # lost if it dies; the pool just gets slower.
             zfs = {
               priority = 3;
               size = "100%";
