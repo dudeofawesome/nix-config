@@ -33,7 +33,7 @@ in
         default = [ ];
         type = types.listOf types.str;
         example = [ "dudeofawesome" ];
-        description = lib.mdDoc ''
+        description = ''
           Usernames that should be allowed to back up to the Time Machine share.
         '';
       };
@@ -50,7 +50,7 @@ in
       samba = {
         enable = true;
         openFirewall = true;
-        shares = {
+        settings = {
           "Time Machine" = {
             path = cfg.baseDir;
             comment = "Remote Time Machine target";
