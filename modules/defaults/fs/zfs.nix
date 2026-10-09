@@ -1,6 +1,13 @@
 # ZFS support for data pools (not the root filesystem).
-# The kernel is left alone: the pinned nixpkgs builds the ZFS module for the
-# kernel the base preset selects, and evaluation fails loudly if it ever can't.
+#
+# nixpkgs removed `zfs.latestCompatibleLinuxPackages`, the attribute this
+# module used to pick the newest kernel ZFS supported. The replacement upstream
+# recommends is simply the default (LTS) kernel, which ZFS always supports, so
+# ZFS hosts override the base preset's `linuxPackages_latest` with it. A host
+# that needs a newer kernel can set `boot.kernelPackages` with a lower
+# mkOverride priority and evaluation fails loudly if ZFS can't build for it.
+#
+# Snapshot schedules: modules/configurable/os/zfs-snapshots.nix.
 {
   pkgs,
   config,
@@ -15,6 +22,7 @@ let
 in
 {
   boot = {
+    kernelPackages = lib.mkOverride 900 pkgs.linuxPackages;
     supportedFilesystems = [ "zfs" ];
     zfs = {
       inherit removeLinuxDRM;
