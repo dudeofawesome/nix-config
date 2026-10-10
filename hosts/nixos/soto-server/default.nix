@@ -65,7 +65,7 @@
     };
     time-machine = {
       enable = true;
-      baseDir = "/storage/timemachine";
+      baseDir = "/storage/backups/timemachine";
       users = [ "josh" ];
     };
     settings.public = {

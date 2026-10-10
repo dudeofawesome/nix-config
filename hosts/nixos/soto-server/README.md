@@ -24,10 +24,10 @@ space, an L2ARC for the pool. Layout and rationale: [disko.nix](disko.nix).
 The pool's root dataset is mounted at `/storage`, owned by josh: make folders
 there freely, they are snapshotted and replicated with everything else. Only
 things that need their own properties are separate datasets: `photos` and
-`media` (compression off, the files already are), `timemachine` (owned by the
-Time Machine user) and `backups` (root-owned restic repository). Ownership is
-set once by disko at installation; a dataset added by hand needs its own
-`chown`.
+`media` (compression off, the files already are) and, under `backups`,
+`timemachine` (the Mac's Time Machine share, owned by the Time Machine user)
+and `soto-ssd` (root-owned restic repository). Ownership is set once by disko
+at installation; a dataset added by hand needs its own `chown`.
 
 ## Boot
 
@@ -58,7 +58,7 @@ encryption").
   root partition; the smaller device then sets the usable size. Keep the second
   ESP in sync.
 - **Samba**: josh's password comes from sops (`samba_password_josh`) and is
-  applied at every activation; the Time Machine share is `/storage/timemachine`.
+  applied at every activation; the Time Machine share is `/storage/backups/timemachine`.
 
 ## Initial installation
 

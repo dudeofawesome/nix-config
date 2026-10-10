@@ -45,10 +45,7 @@ let
   # `users` rather than josh's primary group because its gid is a NixOS
   # constant, so ownership stays valid across a reinstall.
   josh =
-    let
-      inherit (config.users.users.josh) uid;
-      inherit (config.users.groups.users) gid;
-    in
+    with config.users.users.josh;
     assert uid != null;
     "${toString uid}:${toString gid}";
   dataset =
@@ -163,10 +160,11 @@ in
           owner = josh;
           compression = false;
         };
-        # Owned by the Time Machine user, set by the time-machine module.
-        timemachine = dataset "timemachine" { };
-        # Root-owned restic repository (ssd-state-backup.nix).
+        # Backups of other machines and of this one's SSD, root-owned.
         backups = dataset "backups" { };
+        # Time Machine share for Josh's Mac; the time-machine module owns it.
+        "backups/timemachine" = dataset "backups/timemachine" { };
+        # restic repository (ssd-state-backup.nix).
         "backups/soto-ssd" = dataset "backups/soto-ssd" { };
       };
     };
