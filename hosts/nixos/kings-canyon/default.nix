@@ -2,6 +2,7 @@
   inputs,
   config,
   owner,
+  pkgs-unstable,
   ...
 }:
 {
@@ -40,6 +41,10 @@
 
   # Run ARM64 Linux build tools through QEMU user-mode emulation.
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # Use unstable's newer NVIDIA driver, built against this host's kernel.
+  hardware.nvidia.package =
+    (pkgs-unstable.linuxPackagesFor config.boot.kernelPackages.kernel).nvidiaPackages.latest;
 
   nix.settings = {
     max-jobs = 6;
