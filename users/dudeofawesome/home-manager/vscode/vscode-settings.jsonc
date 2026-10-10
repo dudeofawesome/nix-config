@@ -415,7 +415,7 @@
     "editor.defaultFormatter": "jnoortheen.nix-ide",
   },
   "nix.enableLanguageServer": true,
-  "nix.serverPath": "nil",
+  "nix.serverPath": "this should be replaced by nix",
   "nix.serverSettings": {
     "nil": {
       "formatting": {
