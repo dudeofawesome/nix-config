@@ -54,6 +54,12 @@
 
       "olympus".ProxyCommand = "${wake} 'olympus' 'c8:7f:54:6a:3f:56' 'c8:7f:54:6a:45:b7'";
 
+      "sequoia-pdu" = {
+        KexAlgorithms = "+diffie-hellman-group-exchange-sha1";
+        HostKeyAlgorithms = "+ssh-rsa";
+        Ciphers = "+aes128-cbc";
+      };
+
       "home.powell.place".User = "louis";
 
       "home.saldivar.io" = {
