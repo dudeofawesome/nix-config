@@ -53,6 +53,7 @@ let
     {
       owner ? null,
       compression ? true,
+      extraOptions ? { },
     }:
     (import ../../../modules/defaults/disko/zfs_dataset.nix {
       inherit
@@ -60,6 +61,7 @@ let
         owner
         compression
         rootMountPoint
+        extraOptions
         ;
       name = "storage/${name}";
       mountpoint = "/storage/${name}";
@@ -161,9 +163,27 @@ in
           compression = false;
         };
         # Backups of other machines and of this one's SSD, root-owned.
-        backups = dataset "backups" { };
-        # Time Machine share for Josh's Mac; the time-machine module owns it.
-        "backups/timemachine" = dataset "backups/timemachine" { };
+        # Nothing here is ever executed, and dedup is explicitly off so it
+        # cannot be inherited by accident if it is ever enabled higher up.
+        backups = dataset "backups" {
+          extraOptions = {
+            dedup = "off";
+            exec = "off";
+            setuid = "off";
+            devices = "off";
+          };
+        };
+        # Time Machine share for the Macs; the time-machine module owns it.
+        # refquota (not quota: snapshots don't count) is what Time Machine
+        # sees as the disk size and thins itself against; without it the
+        # share would grow into the whole pool. Sparsebundle bands are 8 MB
+        # files written whole, hence the large records.
+        "backups/timemachine" = dataset "backups/timemachine" {
+          extraOptions = {
+            refquota = "2T";
+            recordsize = "1M";
+          };
+        };
         # restic repository (ssd-state-backup.nix).
         "backups/soto-ssd" = dataset "backups/soto-ssd" { };
       };
