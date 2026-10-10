@@ -22,5 +22,12 @@ in
     after = [ "nvidia-container-toolkit-cdi-generator.service" ];
   };
 
+  # NFD advertises runtime configuration to the Flux-managed RuntimeClass.
+  # Copy the file: a /nix/store symlink is not visible in the NFD container.
+  environment.etc."kubernetes/node-feature-discovery/features.d/nvidia-runtime" = {
+    mode = "0644";
+    text = "feature.node.kubernetes.io/nvidia-runtime.configured=true\n";
+  };
+
   # Flux owns the RuntimeClass and device-plugin release in doa-cluster-flux.
 }
