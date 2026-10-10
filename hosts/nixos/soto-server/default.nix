@@ -7,7 +7,6 @@
     ../../../modules/defaults/fs/bcachefs.nix
     ../../../modules/defaults/fs/snapper.nix
     ../../../modules/defaults/fs/zfs.nix
-    ../../../modules/configurable/os/zfs-snapshots.nix
     ../../../modules/configurable/os/samba-users.nix
     ../../../modules/configurable/os/time-machine-server.linux.nix
   ];

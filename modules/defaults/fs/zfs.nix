@@ -10,7 +10,7 @@
 # META file declares (pkgs/os-specific/linux/zfs/generic.nix), and the NixOS
 # zfs module asserts the module and userspace versions match.
 #
-# Snapshot schedules: modules/configurable/os/zfs-snapshots.nix.
+# Snapshot schedules: modules/configurable/os/zfs-snapshots.linux.nix.
 {
   pkgs,
   config,
@@ -29,7 +29,9 @@ in
     supportedFilesystems = [ "zfs" ];
     zfs = {
       inherit removeLinuxDRM;
-      allowHibernation = false;
+      unsafeAllowHibernation = false;
+      # No ZFS root here, and nixpkgs recommends false (the 26.11 default).
+      forceImportRoot = false;
     };
   };
 

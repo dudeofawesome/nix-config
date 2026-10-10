@@ -5,6 +5,9 @@
 #     datasets = [ "storage" ];   # snapshotted recursively
 #   };
 #
+# The .linux.nix suffix matters: modules/configurable/os/default.nix imports
+# every file here on every host, and nix-darwin has no `services.sanoid`.
+#
 # Implemented with sanoid. Replication to other disks or hosts is a separate
 # concern (syncoid); see hosts/nixos/soto-server/offsite-backup.nix for one.
 #
