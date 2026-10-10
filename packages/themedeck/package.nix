@@ -23,6 +23,7 @@ in
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "themedeck";
+  # renovate: datasource=github-releases depName=themedeck packageName=BrenticusMaximus/ThemeDeck
   version = "3.0.1";
 
   src = fetchzip {

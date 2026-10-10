@@ -15,6 +15,7 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "postico";
   version = "2.3-dev";
+  # renovate: datasource=custom.sparkle depName=postico packageName=postico
   build = "9809";
 
   src = fetchurl {

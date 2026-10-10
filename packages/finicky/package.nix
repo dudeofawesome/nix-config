@@ -9,6 +9,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "finicky";
+  # renovate: datasource=github-releases depName=finicky packageName=johnste/finicky
   version = "4.2.2";
   src = fetchurl {
     url = "https://github.com/johnste/finicky/releases/download/v${finalAttrs.version}/Finicky.dmg";

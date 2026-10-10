@@ -9,6 +9,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "thaw";
+  # renovate: datasource=github-releases depName=thaw packageName=thaw-app/Thaw
   version = "2.0.0";
 
   src = fetchurl {

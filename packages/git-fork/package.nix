@@ -14,6 +14,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "git-fork";
+  # renovate: datasource=custom.sparkle depName=git-fork packageName=git-fork
   version = "2.70.2";
   src = fetchurl {
     url = "https://cdn.fork.dev/mac/Fork-${finalAttrs.version}.dmg";

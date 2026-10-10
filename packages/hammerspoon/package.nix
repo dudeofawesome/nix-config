@@ -9,6 +9,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "hammerspoon";
+  # renovate: datasource=github-releases depName=hammerspoon packageName=Hammerspoon/hammerspoon
   version = "1.1.1";
 
   src = fetchurl {

@@ -14,6 +14,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "claude-desktop";
+  # renovate: datasource=custom.claude depName=claude-desktop packageName=claude-desktop
   version = "2.19675.1";
 
   src = fetchurl {

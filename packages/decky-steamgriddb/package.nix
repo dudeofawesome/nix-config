@@ -13,6 +13,7 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "decky-steamgriddb";
+  # renovate: datasource=custom.decky depName=decky-steamgriddb packageName=SteamGridDB
   version = "1.7.1";
 
   artifactHash = "6d6eca184677dc9ff7736439ee7a575ca8ab386c5ffb1627d446bc43dbd1ecf3";

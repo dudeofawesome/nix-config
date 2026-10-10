@@ -8,6 +8,7 @@
 
 let
   pname = "er-save-manager";
+  # renovate: datasource=github-releases depName=er-save-manager packageName=Hapfel1/er-save-manager
   version = "1.10.1";
 
   src = fetchurl {

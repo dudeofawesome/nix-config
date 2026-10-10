@@ -8,6 +8,7 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "protondb-decky";
+  # renovate: datasource=github-releases depName=protondb-decky packageName=bschelst/protondb-decky
   version = "1.3.4";
 
   src = fetchzip {

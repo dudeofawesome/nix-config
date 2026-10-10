@@ -9,6 +9,7 @@
 
 buildNpmPackage (finalAttrs: {
   pname = "mcp-gitlab";
+  # renovate: datasource=github-releases depName=mcp-gitlab packageName=zereight/gitlab-mcp
   version = "2.1.61";
 
   src = fetchFromGitHub {

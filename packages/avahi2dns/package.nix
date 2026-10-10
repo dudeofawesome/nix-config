@@ -8,6 +8,7 @@
 
 buildGoModule (finalAttrs: {
   pname = "avahi2dns";
+  # renovate: datasource=github-releases depName=avahi2dns packageName=LouisBrunner/avahi2dns
   version = "0.2.1";
 
   src = fetchFromGitHub {

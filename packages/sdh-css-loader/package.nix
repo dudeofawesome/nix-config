@@ -8,6 +8,7 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "sdh-css-loader";
+  # renovate: datasource=github-releases depName=sdh-css-loader packageName=DeckThemes/SDH-CssLoader
   version = "2.1.2";
 
   src = fetchzip {

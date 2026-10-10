@@ -13,6 +13,7 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "magicpods-decky";
+  # renovate: datasource=custom.decky depName=magicpods-decky packageName=MagicPods
   version = "2.0.17";
 
   artifactHash = "24f7f668a293a672afde6eaaaa915023f56d57205a594344263b8c54560d6a9f";

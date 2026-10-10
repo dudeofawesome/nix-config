@@ -8,6 +8,7 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "bosl";
+  # renovate: datasource=github-releases depName=bosl packageName=revarbat/BOSL
   version = "1.0.3";
 
   src = fetchFromGitHub {

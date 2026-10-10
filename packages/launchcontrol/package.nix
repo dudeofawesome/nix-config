@@ -14,6 +14,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "launchcontrol";
+  # renovate: datasource=custom.sparkle depName=launchcontrol packageName=launchcontrol
   version = "2.10.5";
 
   src = fetchurl {
