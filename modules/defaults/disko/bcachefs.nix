@@ -5,6 +5,9 @@
   passwordFile ? null,
   compression ? "zstd",
   noatime ? true,
+  # Number of copies of data+metadata across member devices. With more than one
+  # member, `degraded` lets the filesystem mount when a member is missing.
+  replicas ? 1,
 }:
 assert lib.assertMsg (
   !encrypted || passwordFile != null
@@ -12,6 +15,7 @@ assert lib.assertMsg (
 let
   mountOptionsAttrs = {
     inherit noatime compression;
+    degraded = replicas > 1;
   };
 
   convertMountOptions =
@@ -51,6 +55,7 @@ in
     inherit passwordFile;
     extraFormatArgs = lib.flatten [
       (lib.optional (compression != null) "--compression=${compression}")
+      (lib.optional (replicas > 1) "--replicas=${toString replicas}")
     ];
     subvolumes =
       let
