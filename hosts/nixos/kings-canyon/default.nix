@@ -14,6 +14,7 @@
     ../../../modules/defaults/tang.nix
     ../../../modules/presets/os/doa-cluster
     ./clevis.nix
+    ./k3s-gpu.nix
   ];
 
   # Retain the repository deploy credential during the service migration.
