@@ -36,7 +36,7 @@
     };
 
     # Pascal GPUs are only supported by the 580.xx legacy driver.
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+    nvidia.branch = "legacy_580";
   };
 
   networking = {
