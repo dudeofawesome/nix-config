@@ -47,12 +47,9 @@
     datasets = [ "storage" ];
   };
 
-  # Top-level directories on the pool belong to josh (the Time Machine
-  # directory is managed by the time-machine module).
-  systemd.tmpfiles.rules = [
-    "d /storage/photos 0750 josh users -"
-    "d /storage/media 0755 josh users -"
-  ];
+  # Pinned: files on the pool (and the offsite copies of it) are owned by
+  # number, and disko's one-time chown at installation uses it (disko.nix).
+  users.users.josh.uid = 1000;
 
   # Samba password for josh, separate from the login password. Set at every
   # activation from this secret (modules/configurable/os/samba-users.nix).

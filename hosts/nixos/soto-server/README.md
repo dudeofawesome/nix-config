@@ -21,6 +21,14 @@ the photos live, hence the redundancy below.
 The NVMe holds the ESP, a 240 GB encrypted bcachefs root and, in the remaining
 space, an L2ARC for the pool. Layout and rationale: [disko.nix](disko.nix).
 
+The pool's root dataset is mounted at `/storage`, owned by josh: make folders
+there freely, they are snapshotted and replicated with everything else. Only
+things that need their own properties are separate datasets: `photos` and
+`media` (compression off, the files already are), `timemachine` (owned by the
+Time Machine user) and `backups` (root-owned restic repository). Ownership is
+set once by disko at installation; a dataset added by hand needs its own
+`chown`.
+
 ## Boot
 
 The root filesystem asks for its passphrase once in the initrd. Type it on the

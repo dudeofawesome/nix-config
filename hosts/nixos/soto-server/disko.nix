@@ -13,11 +13,15 @@
 #     ZFS 3-way mirror `storage`, natively encrypted with the same passphrase as
 #     the root filesystem. Bays 3 and 4 are deliberately NOT here: bay 3 is the
 #     cold spare, bay 4 holds whichever offsite backup disk is at home.
+#     The pool's root dataset is mounted at /storage and owned by josh, so
+#     folders can be made there directly; only things that need their own
+#     properties are separate datasets. Ownership is set once, at
+#     installation (zfs_owner_hook.nix), because it lives in the dataset.
 #
 # The passphrase file path below is where scripts/nixos-anywhere.sh places the
 # `fde_password` secret during installation, and where sops-nix places it on the
 # running system, so the same path works for formatting and for key loading at boot.
-{ lib, ... }:
+{ config, lib, ... }:
 let
   # Literal rather than `config.sops.secrets.<name>.path`: the initrd SSH module
   # gates on disko's bcachefs passwordFile, and sops' option set includes that
@@ -34,14 +38,29 @@ let
     replicas = 1;
   };
   zfsDisk = import ../../../modules/defaults/disko/zfs_disk.nix;
+  ownerHook = import ../../../modules/defaults/disko/zfs_owner_hook.nix;
+  rootMountPoint = config.disko.rootMountPoint;
+  # josh:users, numeric because the hooks run in the installer. The uid is
+  # pinned in default.nix.
+  josh = "1000:100";
   dataset =
-    name: mountpoint:
+    name:
+    {
+      owner ? null,
+      compression ? true,
+    }:
     (import ../../../modules/defaults/disko/zfs_dataset.nix {
-      inherit lib mountpoint;
+      inherit
+        lib
+        owner
+        compression
+        rootMountPoint
+        ;
       name = "storage/${name}";
+      mountpoint = "/storage/${name}";
     })
     // {
-      inherit mountpoint;
+      mountpoint = "/storage/${name}";
     };
 in
 {
@@ -79,11 +98,8 @@ in
         };
       };
 
-      # Bay 0
       hdd0 = zfsDisk { device = "/dev/disk/by-id/ata-WDC_WD140EMFZ-11A0WA0_Z2HGS6JT"; };
-      # Bay 1
       hdd1 = zfsDisk { device = "/dev/disk/by-id/ata-WDC_WD140EDFZ-11A0VA0_9MGG29RK"; };
-      # Bay 2
       hdd2 = zfsDisk { device = "/dev/disk/by-id/ata-WDC_WD140EDFZ-11A0VA0_9MGG9K1K"; };
     };
 
@@ -110,6 +126,7 @@ in
         ashift = "12";
         autotrim = "on";
       };
+      mountpoint = "/storage";
       rootFsOptions = {
         compression = "zstd";
         atime = "off";
@@ -117,20 +134,32 @@ in
         acltype = "posixacl";
         dnodesize = "auto";
         normalization = "formD";
-        canmount = "off";
-        mountpoint = "none";
         encryption = "aes-256-gcm";
         keyformat = "passphrase";
         keylocation = "file://${passwordFile}";
         "com.sun:auto-snapshot" = "false";
       };
       datasets = {
-        photos = dataset "photos" "/storage/photos";
-        media = dataset "media" "/storage/media";
-        timemachine = dataset "timemachine" "/storage/timemachine";
-        backups = dataset "backups" "/storage/backups";
-        # Hourly copy of the SSD's non-reproducible state; see ssd-state-backup.nix
-        "backups/soto-ssd" = dataset "backups/soto-ssd" "/storage/backups/soto-ssd";
+        # The root dataset itself (disko's name for it), mounted at /storage.
+        "__root".postMountHook = ownerHook {
+          owner = josh;
+          mountpoint = "/storage";
+          inherit rootMountPoint;
+        };
+        # Photos and video are already compressed; don't spend CPU on them.
+        photos = dataset "photos" {
+          owner = josh;
+          compression = false;
+        };
+        media = dataset "media" {
+          owner = josh;
+          compression = false;
+        };
+        # Owned by the Time Machine user, set by the time-machine module.
+        timemachine = dataset "timemachine" { };
+        # Root-owned restic repository (ssd-state-backup.nix).
+        backups = dataset "backups" { };
+        "backups/soto-ssd" = dataset "backups/soto-ssd" { };
       };
     };
   };
