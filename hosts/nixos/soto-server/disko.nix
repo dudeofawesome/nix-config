@@ -41,8 +41,16 @@ let
   ownerHook = import ../../../modules/defaults/disko/zfs_owner_hook.nix;
   rootMountPoint = config.disko.rootMountPoint;
   # josh:users, numeric because the hooks run in the installer. The uid is
-  # pinned in default.nix.
-  josh = "1000:100";
+  # pinned in default.nix (an allocated one is unknown at evaluation time);
+  # `users` rather than josh's primary group because its gid is a NixOS
+  # constant, so ownership stays valid across a reinstall.
+  josh =
+    let
+      inherit (config.users.users.josh) uid;
+      inherit (config.users.groups.users) gid;
+    in
+    assert uid != null;
+    "${toString uid}:${toString gid}";
   dataset =
     name:
     {
