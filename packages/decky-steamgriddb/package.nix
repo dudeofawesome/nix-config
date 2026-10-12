@@ -14,13 +14,13 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "decky-steamgriddb";
   # renovate: datasource=custom.decky depName=decky-steamgriddb packageName=SteamGridDB
-  version = "1.7.1";
+  version = "1.8.1";
 
-  artifactHash = "6d6eca184677dc9ff7736439ee7a575ca8ab386c5ffb1627d446bc43dbd1ecf3";
+  artifactHash = "e84f5b1f111af8862b06218479491fbf61036e1bfd9f16f93f9901e9b9ebc5e0";
 
   src = fetchzip {
     url = "https://cdn.tzatzikiweeb.moe/file/steam-deck-homebrew/versions/${finalAttrs.artifactHash}.zip";
-    hash = "sha256-hYPsrC5QA0eX/fYkEnzIDB0p77Feo4IkKrJ6IKfjtFw=";
+    hash = "sha256-J/2vQhCAeBpWakz3jI3uihkrGNFCozYOLejTP4HVInU=";
   };
 
   dontConfigure = true;
