@@ -36,6 +36,6 @@
   #   };
   # };
 
-  # `spi-SYNA8003:00` is not supported by fprintd yet
-  services.fprintd.enable = false;
+  # Use the external Elan USB reader; the built-in `spi-SYNA8003:00` is unsupported.
+  services.fprintd.enable = true;
 }
