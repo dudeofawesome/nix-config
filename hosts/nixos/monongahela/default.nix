@@ -35,4 +35,7 @@
   #     ];
   #   };
   # };
+
+  # `spi-SYNA8003:00` is not supported by fprintd yet
+  services.fprintd.enable = false;
 }
