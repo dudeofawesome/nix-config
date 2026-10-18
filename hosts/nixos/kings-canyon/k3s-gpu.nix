@@ -5,8 +5,16 @@ in
 {
   hardware.nvidia-container-toolkit = {
     enable = true;
-    # Match deviceIDStrategy in doa-cluster-flux's NVIDIA device-plugin release.
+    # Keep index names for the device-plugin's current deviceIDStrategy and
+    #   for rollback.
     device-name-strategy = "index";
+    # doa-cluster-flux selects GPUs by UUID (its NVIDIA device plugin and
+    #   RTX 3090 pods); nvidia-ctk adds these names alongside the indexes.
+    #   https://github.com/dudeofawesome/doa-cluster-flux/pull/361
+    extraArgs = [
+      "--device-name-strategy"
+      "uuid"
+    ];
   };
 
   # K3s uses our external containerd, so its runtime auto-detection does not
