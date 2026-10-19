@@ -9,13 +9,13 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "bosl2";
   # renovate: datasource=github-releases depName=bosl2 packageName=BelfrySCAD/BOSL2
-  version = "2.0.766";
+  version = "2.0.774";
 
   src = fetchFromGitHub {
     owner = "BelfrySCAD";
     repo = "BOSL2";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-lTUvzFIvKE9PEtXSwL+9ISdQ4ez0uQ9aMoFV4IklP2U=";
+    hash = "sha256-h5nfbmCp0XKffZ5cvMTeasket1RE+VHanJfO7ALWwrk=";
   };
 
   dontBuild = true;
