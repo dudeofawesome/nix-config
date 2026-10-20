@@ -143,7 +143,21 @@ with lib;
           ms-kubernetes-tools.vscode-kubernetes-tools
           ms-python.python
           ms-python.vscode-pylance
-          ms-toolsai.jupyter
+          (ms-toolsai.jupyter.overrideAttrs (oldAttrs: {
+            postFixup = (oldAttrs.postFixup or "") + ''
+              extensionDir="$out/share/vscode/extensions/ms-toolsai.jupyter"
+              # VS Code follows Jupyter's temp -> /tmp symlink when computing
+              # extension size, which can recurse indefinitely and exhaust memory.
+              extensionSize="$(
+                ${pkgs-unstable.coreutils}/bin/du --bytes --summarize "$extensionDir" \
+                  | ${pkgs-unstable.coreutils}/bin/cut -f1
+              )"
+              ${lib.getExe pkgs-unstable.jq} --argjson size "$extensionSize" \
+                '.__metadata.size = $size' \
+                "$extensionDir/package.json" > "$extensionDir/package.json.tmp"
+              mv "$extensionDir/package.json.tmp" "$extensionDir/package.json"
+            '';
+          }))
           ms-vscode-remote.remote-ssh
           ms-vscode-remote.remote-ssh-edit
           ms-vscode-remote.remote-wsl
