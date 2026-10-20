@@ -13,9 +13,6 @@
       "users/dudeofawesome/kubeconfig/users/doa-cluster-admin/client-certificate-data" = { };
       "users/dudeofawesome/kubeconfig/users/doa-cluster-admin/client-key-data" = { };
 
-      "users/dudeofawesome/kubeconfig/clusters/monongahela/server" = { };
-      "users/dudeofawesome/kubeconfig/clusters/monongahela/certificate-authority-data" = { };
-
       "users/dudeofawesome/kubeconfig/clusters/doa-cluster/server" = { };
       "users/dudeofawesome/kubeconfig/clusters/doa-cluster/certificate-authority-data" = { };
     };
