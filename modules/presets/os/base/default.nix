@@ -31,7 +31,7 @@ with pkgs.stdenv.targetPlatform;
       nil
       nix-du
       nix-tree
-      # nixd
+      nixd
       nixfmt
       prettier
       pciutils
