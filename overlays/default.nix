@@ -58,6 +58,7 @@
 
   nixpkgs.overlays = [
     inputs.nur.overlays.default
+    (import ./patches/nix-output-monitor.nix)
 
     (final: prev: {
       # TODO: remove this once stable fish is fixed https://github.com/NixOS/nixpkgs/issues/208951
