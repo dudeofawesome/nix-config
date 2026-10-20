@@ -1,6 +1,6 @@
 final: prev: {
   nix-output-monitor =
-    assert prev.lib.assertMsg (prev.lib.versionAtMost prev.nix-output-monitor.version "2.2.0") ''
+    assert prev.lib.assertMsg (!prev.lib.versionOlder "2.2.0" prev.nix-output-monitor.version) ''
       Recheck and remove overlays/patches/nix-output-monitor.nix: nom is newer than 2.2.0.
       Upstream PR #321 fixes unknown Determinate Nix activity and result types.
     '';
