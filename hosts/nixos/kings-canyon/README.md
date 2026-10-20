@@ -8,9 +8,8 @@ Louis' home server
 - CPU: AMD EPYC 7443 (Milan / EPYC 7003)
 - RAM: 96 GB
 - GPUs:
-    <!-- - 1x Nvidia RTX 3080 10GB -->
-    <!-- - 1x Nvidia RTX 3090 24GB -->
     - 2x Nvidia RTX 3060 12GB
+    - 1x Nvidia RTX 3090 24GB
 - [Full parts list](https://pcpartpicker.com/user/dudeofawesome/saved/cF6wkL)
 
 ### Shared Steam library
