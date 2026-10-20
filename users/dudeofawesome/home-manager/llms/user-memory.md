@@ -7,7 +7,7 @@ Before running a bash command, format for readability if any apply:
 
 # Markdown
 
-Don't manually wrap paragraphs, diffs are larger
+Don't manually wrap paragraphs; diffs are larger
 
 # Summaries
 
