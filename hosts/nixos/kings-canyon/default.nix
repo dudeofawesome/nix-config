@@ -91,10 +91,6 @@
     };
   };
 
-  # First boot is for enrollment and restoring state, before taking over services.
-  systemd.services.k3s.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
-  systemd.sockets.tangd.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
-
   # Initial installation release; retain this across future upgrades.
   system.stateVersion = "26.05";
 }
