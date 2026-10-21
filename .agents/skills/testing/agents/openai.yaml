@@ -1,0 +1,4 @@
+interface:
+  display_name: 'testing'
+  short_description: 'Tests the flake for correctness'
+  default_prompt: 'Use $testing to test the flake for correctness'
