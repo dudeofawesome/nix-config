@@ -43,10 +43,11 @@ encryption").
 - Hourly restic backup of the SSD's state (`/var/lib`, `/home`, `/etc/ssh`) into
   `storage/backups/soto-ssd`, taken from read-only bcachefs snapshots:
   [ssd-state-backup.nix](ssd-state-backup.nix).
-- Offsite disks `backup-a` / `backup-b`: insert one, wait for
-  `journalctl -u 'offsite-backup@*'` to say "complete", pull it. First fill is
-  the whole pool; later runs are incremental. Creating a new offsite disk is
-  documented in [offsite-backup.nix](offsite-backup.nix).
+- Offsite disks `backup-a` / `backup-b`: insert one, wait for the bay's blue
+  locate LED (amber fault LED means it failed; `journalctl -u
+  'offsite-backup@*'` has the details), pull it. First fill is the whole pool;
+  later runs are incremental plus a scrub, about 1.5 h. Creating a new offsite
+  disk is documented in [offsite-backup.nix](offsite-backup.nix).
 
 ## Maintenance
 

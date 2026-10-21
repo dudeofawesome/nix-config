@@ -3,8 +3,9 @@
 # Slide one into a free bay and udev starts `offsite-backup@backup-a.service`,
 # which imports the pool, replicates every `storage` dataset as raw (still
 # encrypted) incremental sends, scrubs the disk, exports the pool and logs a
-# completion line. Only pull the disk after the export; `journalctl -u
-# 'offsite-backup@*'` shows progress and the final "complete" line.
+# completion line. When it is done the bay's blue locate LED comes on: pull
+# the disk (the backplane clears the LED). If it failed, the amber fault LED
+# comes on instead; `journalctl -u 'offsite-backup@*'` has the details.
 #
 # Creating a new backup disk (once, on the server, with the disk in a bay):
 #   zpool create -o ashift=12 -O compression=zstd -O atime=off -O canmount=off \
@@ -20,6 +21,9 @@ let
       pkgs.sanoid # provides syncoid
       pkgs.util-linux
       pkgs.systemd
+      pkgs.coreutils
+      pkgs.gawk
+      pkgs.gnused
     ];
     text = ''
       pool="$1"
@@ -28,9 +32,31 @@ let
         *) echo "refusing to use '$pool' as an offsite pool" >&2; exit 1 ;;
       esac
 
+      # Bay LEDs. The kernel exposes the backplane's slots under
+      # /sys/class/enclosure, and on this PERC in passthrough mode a disk's
+      # SCSI target id is its slot number.
+      slot=""
+      led() {
+        [ -n "$slot" ] || return 0
+        for e in /sys/class/enclosure/*; do
+          if [ -e "$e/$slot/$1" ]; then echo "$2" > "$e/$slot/$1" || true; fi
+        done
+      }
+      failed() {
+        echo "offsite backup to $pool FAILED; leaving the pool exported" >&2
+        zpool export "$pool" 2>/dev/null || true
+        led fault 1
+      }
+      trap failed ERR
+
       echo "importing $pool"
       zpool import -N "$pool"
-      trap 'zpool export "$pool" || true' EXIT
+      disk=$(zpool list -vHP "$pool" | awk 'NR == 2 { print $1 }')
+      blk=$(basename "$(readlink -f "$disk")" | sed 's/[0-9]*$//')
+      slot=$(basename "$(readlink -f "/sys/block/$blk/device")" | cut -d: -f3)
+      echo "$pool is $disk in bay $slot"
+      led locate 0
+      led fault 0
 
       echo "replicating storage -> $pool/storage (raw incremental sends)"
       syncoid \
@@ -45,9 +71,9 @@ let
       zpool scrub -w "$pool"
       zpool status "$pool"
 
-      trap - EXIT
       zpool export "$pool"
       echo "offsite backup to $pool complete; the disk can be removed"
+      led locate 1
     '';
   };
 in
