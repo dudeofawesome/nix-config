@@ -10,9 +10,49 @@
     },
   },
 
-  // These matches update versioned URLs; regex updates do not regenerate flake.lock.
   customManagers: [
     {
+      // Combine independent matches so attribute order and spacing can vary.
+      customType: 'regex',
+      managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
+      matchStringsStrategy: 'combination',
+      matchStrings: [
+        '(?:^|\\r?\\n)[ \\t]*pname\\s*=\\s*"(?<depName>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*version\\s*=\\s*"(?<currentValue>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetch(?:url|zip)\\s*\\{[^{}]*?\\burl\\s*=\\s*"https://github\\.com/(?<packageName>[^/"\\s]+/[^/"\\s]+)/releases/download/v?\\$\\{(?:finalAttrs\\.)?version\\}/[^"\\s]+";',
+      ],
+      // combination accepts partial matches, so require all three fields explicitly.
+      datasourceTemplate: '{{#if (and depName packageName currentValue)}}github-releases{{/if}}',
+      depTypeTemplate: 'custom-nix-package',
+      versioningTemplate: 'loose',
+    },
+    {
+      // Track releaseTag separately when the application version differs from its tag.
+      customType: 'regex',
+      managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
+      matchStringsStrategy: 'combination',
+      matchStrings: [
+        '(?:^|\\r?\\n)[ \\t]*pname\\s*=\\s*"(?<depName>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*releaseTag\\s*=\\s*"(?<currentValue>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetch(?:url|zip)\\s*\\{[^{}]*?\\burl\\s*=\\s*"https://github\\.com/(?<packageName>[^/"\\s]+/[^/"\\s]+)/releases/download/v?\\$\\{(?:finalAttrs\\.)?releaseTag\\}/[^"\\s]+";',
+      ],
+      datasourceTemplate: '{{#if (and depName packageName currentValue)}}github-releases{{/if}}',
+      depTypeTemplate: 'custom-nix-package',
+      versioningTemplate: 'loose',
+    },
+    {
+      // Sources without a GitHub release asset URL retain explicit annotations.
+      customType: 'regex',
+      managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) packageName=(?<packageName>\\S+)(?: versioning=(?<versioning>\\S+))?\\r?\\n[ \\t]+(?:version|build|releaseTag) = "(?<currentValue>[^"\\s]+)";',
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) packageName=(?<packageName>\\S+) versioning=(?<versioning>\\S+) currentValue=(?<currentValue>\\S+)\\r?\\n[ \\t]+rev = "(?<currentDigest>[a-f0-9]{40})";',
+      ],
+      depTypeTemplate: 'custom-nix-package',
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}loose{{/if}}',
+    },
+    {
+      // Versioned flake URLs are separate from package updates and their hashes.
       customType: 'regex',
       managerFilePatterns: ['/^flake\\.nix$/'],
       matchStrings: [
@@ -21,7 +61,69 @@
     },
   ],
 
+  customDatasources: {
+    claude: {
+      defaultRegistryUrlTemplate: 'https://downloads.claude.ai/releases/darwin/universal/RELEASES.json',
+      transformTemplates: ['{"releases": [{"version": currentRelease}]}'],
+    },
+    decky: {
+      defaultRegistryUrlTemplate: 'https://plugins.deckbrew.xyz/plugins?query={{packageName}}',
+      transformTemplates: [
+        '{"releases": [$map($[0].versions, function($v) { {"version": $v.name} })]}',
+      ],
+    },
+    sparkle: {
+      // Read the enclosure filenames: Fork's sparkle:version can differ from its download version.
+      format: 'plain',
+      transformTemplates: [
+        '{"releases": [$map($match($join(releases.version, "\\n"), /(?:Fork-|LaunchControl-|ChatGPT-darwin-(?:arm64|x64)-|postico-)([0-9]+(?:[.][0-9]+)*)(?:[.]dmg|[.]zip|_update)/), function($m) { {"version": $m.groups[0]} })]}',
+      ],
+    },
+  },
+
   packageRules: [
+    {
+      matchDepTypes: ['custom-nix-package'],
+      groupName: null,
+      semanticCommitType: 'chore',
+      semanticCommitScope: '{{depName}}',
+      postUpgradeTasks: {
+        commands: ['node scripts/renovate-nix-packages-update.mjs'],
+        dataFileTemplate: '{{{toJSON (toObject "depName" depName "packageFile" packageFile "newValue" newValue "newDigest" newDigest)}}}',
+        executionMode: 'update',
+        fileFilters: ['packages/**'],
+        installTools: { nix: {} },
+      },
+    },
+    {
+      matchDepTypes: ['custom-nix-package'],
+      matchDatasources: ['github-releases'],
+      extractVersion: '^v?(?<version>.+)$',
+    },
+    {
+      matchDatasources: ['custom.sparkle'],
+      matchDepNames: ['git-fork'],
+      registryUrls: ['https://fork.dev/update/feed.xml'],
+    },
+    {
+      matchDatasources: ['custom.sparkle'],
+      matchDepNames: ['chatgpt-desktop'],
+      registryUrls: [
+        'https://persistent.oaistatic.com/codex-app-prod/appcast.xml',
+      ],
+    },
+    {
+      matchDatasources: ['custom.sparkle'],
+      matchDepNames: ['launchcontrol'],
+      registryUrls: [
+        'https://www.soma-zone.com/LaunchControl/a/appcast-update-2.xml',
+      ],
+    },
+    {
+      matchDatasources: ['custom.sparkle'],
+      matchDepNames: ['postico'],
+      registryUrls: ['https://releases.eggerapps.at/postico2/appcast.xml'],
+    },
     {
       matchManagers: ['nix', 'custom.regex'],
       groupName: null,

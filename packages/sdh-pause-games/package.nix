@@ -15,7 +15,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "sdh-pause-games";
   version = "1.0.2";
 
-  # renovate: datasource=github-releases depName=sdh-pause-games packageName=wynn1212/SDH-PauseGames
   releaseTag = "20260723060434";
 
   src = fetchzip {

@@ -8,7 +8,6 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "tabmaster";
-  # renovate: datasource=github-releases depName=tabmaster packageName=Tormak9970/TabMaster
   version = "2.16.2";
 
   src = fetchzip {

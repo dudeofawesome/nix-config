@@ -9,7 +9,6 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "qlmarkdown";
-  # renovate: datasource=github-releases depName=qlmarkdown packageName=sbarex/QLMarkdown
   version = "1.5.7";
 
   src = fetchurl {

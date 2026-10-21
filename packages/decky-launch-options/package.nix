@@ -8,7 +8,6 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "decky-launch-options";
-  # renovate: datasource=github-releases depName=decky-launch-options packageName=Wurielle/decky-launch-options
   version = "1.16.1";
 
   src = fetchzip {

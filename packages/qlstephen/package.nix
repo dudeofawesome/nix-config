@@ -9,7 +9,6 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "qlstephen";
-  # renovate: datasource=github-releases depName=qlstephen packageName=whomwah/qlstephen
   version = "1.5.1";
 
   src = fetchurl {

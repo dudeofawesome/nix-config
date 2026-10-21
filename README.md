@@ -6,6 +6,18 @@ My multi-machine, multi-arch, multi-user, multi-os Nix config
 
 Inspiration & adaptation for flakes from @BriianPowell.
 
+## Custom package updates
+
+Renovate detects GitHub releases directly from `src = fetchurl` or `src = fetchzip` definitions whose URLs use `https://github.com/OWNER/REPO/releases/download/` and interpolate `version` or `releaseTag`, optionally through `finalAttrs` and with a `v` prefix. Independent matches read `pname`, the tracked assignment, and the source URL, so attributes can be reordered or separated by comments and other assignments. These packages need no Renovate annotation; their `pname` must match the package directory name.
+
+For other sources, put a `# renovate:` annotation immediately before the tracked `version`, `build`, or `releaseTag` assignment. The package's directory name and `depName` must match. Configure release feeds and package rules in [.renovaterc.json5](.renovaterc.json5).
+
+For branch snapshots, annotate `rev` with `datasource=git-refs`, `depName`, `packageName` (the Git URL), `versioning=git`, and `currentValue` (the branch name), in that order. Renovate tracks the commit digest while keeping the branch name in the annotation.
+
+The [package updater](scripts/renovate-update-package.mjs) refreshes hashes with the flake's locked `nix-update`, or runs the package's `writeShellApplication` update script for vendor feeds and branch snapshots. Vendor scripts must select the same release Renovate requested; a mismatch fails the update. Run its tests with `node --test scripts/renovate-update-package.test.mjs`.
+
+The self-hosted runner needs Nix and must allow `node scripts/renovate-update-package.mjs` in `allowedCommands`. Its deployment source is `apps/automation/renovate/job.yaml` in the sibling `doa-cluster-flux` repository.
+
 ## How to create a new host
 
 1. Decide on the host operating system. Valid options are `nixos` and `darwin`. In this example we'll use nixos, but if you choose another operating system simply replace `nixos` with your operating system in the following steps.

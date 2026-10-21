@@ -9,7 +9,6 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "gitup";
-  # renovate: datasource=github-releases depName=gitup packageName=git-up/GitUp
   version = "1.5.0";
   src = fetchurl {
     url = "https://github.com/git-up/GitUp/releases/download/v${finalAttrs.version}/GitUp.zip";
