@@ -64,6 +64,9 @@
   };
 
   services = {
+    # Allow more workloads on this host while leaving IP headroom in its /24 pod CIDR.
+    k3s.extraFlags = [ "--kubelet-arg=max-pods=200" ];
+
     iperf3 = {
       enable = true;
       # TODO: consider adding auth
