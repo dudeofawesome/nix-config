@@ -37,6 +37,13 @@ in
 
   environment.systemPackages = [ config.boot.zfs.package ];
 
+  # Every dataset is mounted by its own systemd mount unit (fileSystems, as
+  # disko generates them). zfs-mount.service (`zfs mount -a`) races those
+  # units at boot and, once a pool's root dataset is mountable, wins: the unit
+  # then fails with "dataset is busy", local-fs.target fails, and the boot
+  # stops in emergency mode until someone presses Enter on the console. Masked.
+  systemd.services.zfs-mount.enable = false;
+
   services.zfs = {
     # Weekly scrub of every imported pool.
     autoScrub.enable = true;
