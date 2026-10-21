@@ -3,9 +3,10 @@
 # Slide one into a free bay and udev starts `offsite-backup@backup-a.service`,
 # which imports the pool, replicates every `storage` dataset as raw (still
 # encrypted) incremental sends, scrubs the disk, exports the pool and logs a
-# completion line. When it is done the bay's blue locate LED comes on: pull
-# the disk (the backplane clears the LED). If it failed, the amber fault LED
-# comes on instead; `journalctl -u 'offsite-backup@*'` has the details.
+# completion line. When it is done the bay's status LED (the right one on
+# the carrier) blinks green twice a second, Dell's "identify" pattern: pull
+# the disk and the backplane clears it. If it failed, the same LED blinks
+# amber instead; `journalctl -u 'offsite-backup@*'` has the details.
 #
 # Creating a new backup disk (once, on the server, with the disk in a bay):
 #   zpool create -o ashift=12 -O compression=zstd -O atime=off -O canmount=off \
