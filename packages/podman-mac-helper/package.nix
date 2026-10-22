@@ -9,7 +9,7 @@
 buildGoModule rec {
   pname = "podman-mac-helper";
   # renovate: datasource=github-releases depName=podman-mac-helper packageName=containers/podman
-  version = "6.1.1";
+  version = "6.1.4";
 
   src = fetchFromGitHub {
     owner = "containers";
