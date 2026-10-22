@@ -37,6 +37,28 @@
   networking = {
     hostId = "f5764075"; # head -c 8 /etc/machine-id
     firewall.enable = false;
+
+    # Keep networkd running after initrd so timesyncd sees current link state.
+    useNetworkd = true;
+    useDHCP = true;
+  };
+
+  systemd.network = {
+    # Flannel and Tailscale own routes and policy rules outside networkd.
+    config.networkConfig = {
+      ManageForeignRoutes = false;
+      ManageForeignRoutingPolicyRules = false;
+    };
+
+    # A disconnected secondary NIC must not hold up network-online.target.
+    wait-online.anyInterface = true;
+
+    networks = {
+      # Extend NixOS's physical-Ethernet DHCP rule, excluding virtual links.
+      "99-ethernet-default-dhcp" = {
+        linkConfig.RequiredForOnline = "routable";
+      };
+    };
   };
 
   # Run ARM64 Linux build tools through QEMU user-mode emulation.
@@ -64,6 +86,9 @@
   };
 
   services = {
+    # Keep using dnsmasq with networkd. Our k3s is configured for dnsmasq for now.
+    resolved.enable = false;
+
     # Allow more workloads on this host while leaving IP headroom in its /24 pod CIDR.
     k3s.extraFlags = [ "--kubelet-arg=max-pods=200" ];
 
