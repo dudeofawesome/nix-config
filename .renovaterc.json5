@@ -12,6 +12,24 @@
 
   customManagers: [
     {
+      // Track conventional GitHub source tags without per-package annotations.
+      customType: 'regex',
+      managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
+      matchStringsStrategy: 'combination',
+      matchStrings: [
+        '(?:^|\\r?\\n)[ \\t]*pname\\s*=\\s*"(?<depName>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*version\\s*=\\s*"(?<currentValue>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetchFromGitHub\\s*\\{(?:[^{}]|\\$\\{[^{}]*\\})*?\\bowner\\s*=\\s*"(?<githubOwner>[^/"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetchFromGitHub\\s*\\{(?:[^{}]|\\$\\{[^{}]*\\})*?\\brepo\\s*=\\s*"(?<githubRepo>[^/"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetchFromGitHub\\s*\\{(?:[^{}]|\\$\\{[^{}]*\\})*?\\b(?:rev|tag)\\s*=\\s*(?<githubVersionReference>"v?\\$\\{(?:finalAttrs\\.)?version\\}"|(?:finalAttrs\\.)?version);',
+      ],
+      // Partial matches must not track packages with unrelated or fixed revisions.
+      datasourceTemplate: '{{#if (and depName currentValue githubOwner githubRepo githubVersionReference)}}github-tags{{/if}}',
+      packageNameTemplate: '{{githubOwner}}/{{githubRepo}}',
+      depTypeTemplate: 'custom-nix-package',
+      versioningTemplate: 'loose',
+    },
+    {
       // Combine independent matches so attribute order and spacing can vary.
       customType: 'regex',
       managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
@@ -41,7 +59,7 @@
       versioningTemplate: 'loose',
     },
     {
-      // Sources without a GitHub release asset URL retain explicit annotations.
+      // Sources outside the automatic GitHub patterns retain explicit annotations.
       customType: 'regex',
       managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
       matchStrings: [
@@ -97,7 +115,7 @@
     },
     {
       matchDepTypes: ['custom-nix-package'],
-      matchDatasources: ['github-releases'],
+      matchDatasources: ['github-releases', 'github-tags'],
       extractVersion: '^v?(?<version>.+)$',
     },
     {

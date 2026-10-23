@@ -8,7 +8,6 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "bosl2";
-  # renovate: datasource=github-releases depName=bosl2 packageName=BelfrySCAD/BOSL2
   version = "2.0.774";
 
   src = fetchFromGitHub {

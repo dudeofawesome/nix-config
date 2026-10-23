@@ -8,7 +8,6 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "asimov";
-  # renovate: datasource=github-releases depName=asimov packageName=stevegrunwell/asimov
   version = "0.12.0";
 
   src = fetchFromGitHub {
