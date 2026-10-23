@@ -37,7 +37,7 @@ jobs:
             ;
 
   test-renovate-nix-updater:
-    name: Lint Flake
+    name: Test custom package updater
     runs-on: ubuntu-latest
 
     steps:
