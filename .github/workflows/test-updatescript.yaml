@@ -4,7 +4,13 @@ on:
   push:
     branches: [main]
     tags-ignore: ['*']
+    paths:
+      - 'packages/**'
+      - 'scripts/check-package-updates.mjs'
   pull_request:
+    paths:
+      - 'packages/**'
+      - 'scripts/check-package-updates.mjs'
 
 permissions:
   id-token: write

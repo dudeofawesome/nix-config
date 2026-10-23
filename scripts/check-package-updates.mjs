@@ -34,11 +34,9 @@ function matrix(base, head) {
     true,
   ).split('\0');
   const checkAll = files.some((file) =>
-    [
-      'scripts/check-package-updates.mjs',
-      'packages/default.nix',
-      '.github/workflows/test-updatescript.yaml',
-    ].includes(file),
+    ['scripts/check-package-updates.mjs', 'packages/default.nix'].includes(
+      file,
+    ),
   );
   const names = checkAll
     ? readdirSync('packages', { withFileTypes: true })
