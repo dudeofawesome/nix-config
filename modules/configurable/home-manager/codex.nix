@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   options =
     let
@@ -25,13 +30,19 @@
 
       settings_path = "${configDir}/${configFileName}";
     in
-    lib.mkIf (cfg.enable && cfg.mutableSettings) {
-      home.file."/${settings_path}".enable = lib.mkForce false;
-      home.file-mutable.codex-settings = lib.mkIf (cfg.settings != { }) {
-        inherit (cfg) enable;
-        extraConfig = builtins.readFile config.home.file."/${settings_path}".source;
-        format = "toml";
-        target = settings_path;
-      };
-    };
+    lib.mkIf cfg.enable (
+      lib.mkMerge [
+        { home.packages = [ pkgs.codex-unlock ]; }
+
+        (lib.mkIf cfg.mutableSettings {
+          home.file."/${settings_path}".enable = lib.mkForce false;
+          home.file-mutable.codex-settings = lib.mkIf (cfg.settings != { }) {
+            inherit (cfg) enable;
+            extraConfig = builtins.readFile config.home.file."/${settings_path}".source;
+            format = "toml";
+            target = settings_path;
+          };
+        })
+      ]
+    );
 }

@@ -1,0 +1,5 @@
+#compdef codex-unlock
+
+local -a sessions
+sessions=("${(@f)$(codex-unlock --list)}")
+(( CURRENT == 2 )) && compadd -a sessions
