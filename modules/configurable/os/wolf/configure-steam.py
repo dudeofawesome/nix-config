@@ -1,4 +1,4 @@
-"""Configure Steam mounts while preserving Wolf's mutable configuration."""
+"""Configure Steam and XFCE mounts while preserving Wolf's mutable configuration."""
 
 import json
 import os
@@ -18,28 +18,40 @@ def configure(document, library, hook, sway_config):
     for app in apps:
         runner = app.get("runner", {})
         image = runner.get("image", "")
-        if runner.get("type", "").lower() != "docker" or not image.startswith(
-            "ghcr.io/games-on-whales/steam:"
-        ):
+        if runner.get("type", "").lower() != "docker":
+            continue
+        is_steam = image.startswith("ghcr.io/games-on-whales/steam:")
+        is_xfce = image.startswith("ghcr.io/games-on-whales/xfce:")
+        if not is_steam and not (is_xfce and library):
             continue
         mounts = runner.setdefault("mounts", [])
-        managed_mounts = [(sway_config, "/etc/sway/config.d/90-valheim.conf", "ro")]
+        managed_mounts = []
+        if is_steam:
+            managed_mounts.append((sway_config, "/etc/sway/config.d/90-valheim.conf", "ro"))
         if library:
+            managed_mounts.append((library, "/home/retro/Games/Steam/steamapps", "rw"))
+        if library and is_steam:
             managed_mounts.extend([
                 (library, "/var/lib/wolf-steamapps", "rw"),
                 (hook, "/etc/cont-init.d/40-shared-steam.sh", "ro"),
             ])
+        if is_xfce:
+            env = runner.setdefault("env", [])
+            for variable in list(env):
+                if variable.startswith("STEAM_DIR="):
+                    env.remove(variable)
+            env.append("STEAM_DIR=/home/retro/Games/Steam")
         for source, destination, mode in managed_mounts:
             # Replace only mounts owned by this module. An old direct library
             # mount would hide private prefixes before our hook can save them.
             for mount in list(mounts):
                 target = mount.split(":")[1].rstrip("/")
-                if library and target == "/home/retro/.steam/debian-installation/steamapps":
+                if library and is_steam and target == "/home/retro/.steam/debian-installation/steamapps":
                     raise ValueError("Remove the existing direct steamapps mount first")
                 if target == destination:
                     mounts.remove(mount)
             mounts.append(f"{source}:{destination}:{mode}")
-        if library:
+        if library and is_steam:
             options = json.loads(runner.get("base_create_json", "{}"))
             caps = options.setdefault("HostConfig", {}).setdefault("CapAdd", [])
             if "SYS_ADMIN" not in caps:

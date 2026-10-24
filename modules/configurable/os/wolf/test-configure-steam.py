@@ -1,4 +1,4 @@
-"""Run with Python and tomlkit: python -m unittest discover -p 'test-*.py'."""
+"""Run with Python and tomlkit: python test-configure-steam.py."""
 
 import importlib.util
 import json
@@ -32,6 +32,14 @@ title = "Other"
 [profiles.apps.runner]
 type = "process"
 run_cmd = "true"
+[[profiles.apps]]
+title = "Desktop (xfce)"
+[profiles.apps.runner]
+type = "docker"
+image = "ghcr.io/games-on-whales/xfce:edge"
+mounts = ["/downloads:/home/retro/Downloads:rw"]
+env = ["GOW_REQUIRED_DEVICES=/dev/dri/*", "STEAM_DIR=/old/steam"]
+base_create_json = '{"HostConfig":{"IpcMode":"host"}}'
 '''
 
 
@@ -59,10 +67,46 @@ class ConfigureSteamTests(unittest.TestCase):
         result = MODULE.configure(doc, "/games", "/hook", "/sway")
         for apps in [result["apps"]] + [p["apps"] for p in result["profiles"]]:
             self.assertIn("/games:/var/lib/wolf-steamapps:rw", apps[0]["runner"]["mounts"])
+            for app in (apps[0], apps[2]):
+                self.assertIn(
+                    "/games:/home/retro/Games/Steam/steamapps:rw",
+                    app["runner"]["mounts"],
+                )
+
+    def test_xfce_shares_games_and_preserves_desktop_settings(self):
+        original = tomlkit.parse(FIXTURE)
+        result = MODULE.configure(tomlkit.parse(FIXTURE), "/games", "/hook", "/sway")
+        runner = result["profiles"][0]["apps"][2]["runner"]
+        self.assertEqual(list(runner["mounts"]), [
+            "/downloads:/home/retro/Downloads:rw",
+            "/games:/home/retro/Games/Steam/steamapps:rw",
+        ])
+        self.assertEqual(list(runner["env"]), [
+            "GOW_REQUIRED_DEVICES=/dev/dri/*",
+            "STEAM_DIR=/home/retro/Games/Steam",
+        ])
+        self.assertEqual(
+            runner["base_create_json"],
+            original["profiles"][0]["apps"][2]["runner"]["base_create_json"],
+        )
+
+    def test_updates_shared_game_mounts(self):
+        doc = tomlkit.parse(FIXTURE)
+        for app in (doc["profiles"][0]["apps"][0], doc["profiles"][0]["apps"][2]):
+            app["runner"]["mounts"].append("/old:/home/retro/Games/Steam/steamapps/:ro")
+        result = MODULE.configure(doc, "/games", "/hook", "/sway")
+        for app in (result["profiles"][0]["apps"][0], result["profiles"][0]["apps"][2]):
+            mounts = list(app["runner"]["mounts"])
+            self.assertNotIn("/old:/home/retro/Games/Steam/steamapps/:ro", mounts)
+            self.assertEqual(mounts.count("/games:/home/retro/Games/Steam/steamapps:rw"), 1)
 
     def test_sway_without_shared_library(self):
         original = tomlkit.parse(FIXTURE)
         result = MODULE.configure(tomlkit.parse(FIXTURE), "", "/hook", "/sway")
+        self.assertEqual(
+            result["profiles"][0]["apps"][2],
+            original["profiles"][0]["apps"][2],
+        )
         runner = result["profiles"][0]["apps"][0]["runner"]
         self.assertEqual(list(runner["mounts"]), [
             "/run/udev:/run/udev:ro",

@@ -43,11 +43,11 @@ in
     };
 
     sharedSteamLibrary = {
-      enable = lib.mkEnableOption "a shared Steam download library with private Proton data";
+      enable = lib.mkEnableOption "a shared Steam library for Steam and XFCE with private Proton data";
       directory = lib.mkOption {
         type = lib.types.str;
         default = "/mnt/games/steamapps";
-        description = "Host steamapps directory shared by GOW Steam containers. App users must have write access (default UID/GID 1000).";
+        description = "Host steamapps directory shared by GOW Steam and XFCE containers, also available at /home/retro/Games/Steam/steamapps for mod managers. App users must have write access (default UID/GID 1000).";
       };
     };
 
