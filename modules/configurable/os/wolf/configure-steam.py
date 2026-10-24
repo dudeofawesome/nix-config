@@ -46,7 +46,10 @@ def configure(document, library, hook, sway_config):
             # mount would hide private prefixes before our hook can save them.
             for mount in list(mounts):
                 target = mount.split(":")[1].rstrip("/")
-                if library and is_steam and target == "/home/retro/.steam/debian-installation/steamapps":
+                if library and is_steam and target in (
+                    "/home/retro/.steam/steam/steamapps",
+                    "/home/retro/.steam/debian-installation/steamapps",
+                ):
                     raise ValueError("Remove the existing direct steamapps mount first")
                 if target == destination:
                     mounts.remove(mount)

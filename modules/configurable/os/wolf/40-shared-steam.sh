@@ -2,7 +2,9 @@
 # Sourced by GOW's root entrypoint after user setup, before Steam starts.
 set -e
 
-wolf_steam_home=/home/retro/.steam/debian-installation
+# Steam's data directory can be separate from its client installation.
+# Follow the data link even when it points at debian-installation.
+wolf_steam_home=/home/retro/.steam/steam
 wolf_steam_apps="$wolf_steam_home/steamapps"
 wolf_steam_private=/tmp/wolf-steam-private
 

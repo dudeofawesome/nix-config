@@ -126,15 +126,17 @@ class ConfigureSteamTests(unittest.TestCase):
             command = [sys.executable, str(SCRIPT), str(config), "unused", "/games", "/hook", "/sway"]
             subprocess.run(command, check=True)
             self.assertEqual(config.with_name("config.toml.before-shared-steam").read_text(), FIXTURE)
-            conflict = FIXTURE.replace(
-                "/run/udev:/run/udev:ro",
-                "/old:/home/retro/.steam/debian-installation/steamapps:rw",
-            )
-            config.write_text(conflict)
-            result = subprocess.run(command, capture_output=True)
-            self.assertNotEqual(result.returncode, 0)
-            self.assertEqual(config.read_text(), conflict)
-            self.assertEqual(config.with_name("config.toml.before-shared-steam").read_text(), FIXTURE)
+            for steam_home in ("steam", "debian-installation"):
+                with self.subTest(steam_home=steam_home):
+                    conflict = FIXTURE.replace(
+                        "/run/udev:/run/udev:ro",
+                        f"/old:/home/retro/.steam/{steam_home}/steamapps:rw",
+                    )
+                    config.write_text(conflict)
+                    result = subprocess.run(command, capture_output=True)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertEqual(config.read_text(), conflict)
+                    self.assertEqual(config.with_name("config.toml.before-shared-steam").read_text(), FIXTURE)
 
     def test_first_boot(self):
         with tempfile.TemporaryDirectory() as directory:
