@@ -38,7 +38,7 @@ run_cmd = "true"
 class ConfigureSteamTests(unittest.TestCase):
     def test_preserves_settings_and_is_idempotent(self):
         original = tomlkit.parse(FIXTURE)
-        result = MODULE.configure(tomlkit.parse(FIXTURE), "/games", "/hook")
+        result = MODULE.configure(tomlkit.parse(FIXTURE), "/games", "/hook", "/sway")
         self.assertEqual(result["paired_clients"], original["paired_clients"])
         self.assertEqual(result["uuid"], original["uuid"])
         apps = result["profiles"][0]["apps"]
@@ -50,21 +50,36 @@ class ConfigureSteamTests(unittest.TestCase):
         self.assertEqual(options["HostConfig"]["CapAdd"], ["SYS_NICE", "SYS_ADMIN"])
         first = tomlkit.dumps(result)
         self.assertIn("# Preserve this comment", first)
-        self.assertEqual(first, tomlkit.dumps(MODULE.configure(result, "/games", "/hook")))
+        self.assertEqual(first, tomlkit.dumps(MODULE.configure(result, "/games", "/hook", "/sway")))
 
     def test_legacy_apps_and_multiple_profiles(self):
         doc = tomlkit.parse(FIXTURE)
         doc["apps"] = doc["profiles"][0]["apps"].unwrap()
         doc["profiles"].append(doc["profiles"][0].unwrap())
-        result = MODULE.configure(doc, "/games", "/hook")
+        result = MODULE.configure(doc, "/games", "/hook", "/sway")
         for apps in [result["apps"]] + [p["apps"] for p in result["profiles"]]:
             self.assertIn("/games:/var/lib/wolf-steamapps:rw", apps[0]["runner"]["mounts"])
+
+    def test_sway_without_shared_library(self):
+        original = tomlkit.parse(FIXTURE)
+        result = MODULE.configure(tomlkit.parse(FIXTURE), "", "/hook", "/sway")
+        runner = result["profiles"][0]["apps"][0]["runner"]
+        self.assertEqual(list(runner["mounts"]), [
+            "/run/udev:/run/udev:ro",
+            "/sway:/etc/sway/config.d/90-valheim.conf:ro",
+        ])
+        self.assertEqual(
+            runner["base_create_json"],
+            original["profiles"][0]["apps"][0]["runner"]["base_create_json"],
+        )
+        first = tomlkit.dumps(result)
+        self.assertEqual(first, tomlkit.dumps(MODULE.configure(result, "", "/hook", "/sway")))
 
     def test_atomic_backup_and_conflict(self):
         with tempfile.TemporaryDirectory() as directory:
             config = Path(directory) / "config.toml"
             config.write_text(FIXTURE)
-            command = [sys.executable, str(SCRIPT), str(config), "unused", "/games", "/hook"]
+            command = [sys.executable, str(SCRIPT), str(config), "unused", "/games", "/hook", "/sway"]
             subprocess.run(command, check=True)
             self.assertEqual(config.with_name("config.toml.before-shared-steam").read_text(), FIXTURE)
             conflict = FIXTURE.replace(
@@ -82,7 +97,7 @@ class ConfigureSteamTests(unittest.TestCase):
             config = Path(directory) / "cfg/config.toml"
             default = Path(directory) / "default.toml"
             default.write_text('R"for_c++_include(' + FIXTURE + ')for_c++_include"')
-            command = [sys.executable, str(SCRIPT), str(config), str(default), "/games", "/hook"]
+            command = [sys.executable, str(SCRIPT), str(config), str(default), "/games", "/hook", "/sway"]
             subprocess.run(command, check=True)
             first = config.read_text()
             self.assertNotEqual(tomlkit.parse(first)["uuid"], "existing-host")

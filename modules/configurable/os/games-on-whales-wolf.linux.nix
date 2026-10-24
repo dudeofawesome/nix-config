@@ -24,6 +24,7 @@ let
 
   steamPython = pkgs.python3.withPackages (ps: [ ps.tomlkit ]);
   steamHook = "${cfg.stateDirectory}/40-shared-steam.sh";
+  steamSwayConfig = "${cfg.stateDirectory}/90-valheim.conf";
 in
 {
   options.services.games-on-whales.wolf = {
@@ -117,18 +118,24 @@ in
       unitConfig.RequiresMountsFor = lib.mkIf cfg.sharedSteamLibrary.enable [
         cfg.sharedSteamLibrary.directory
       ];
-      preStart = lib.mkIf cfg.sharedSteamLibrary.enable (
-        lib.mkBefore ''
+      preStart = lib.mkBefore (
+        lib.optionalString cfg.sharedSteamLibrary.enable ''
           install -d -m 0770 -o 1000 -g 1000 \
             ${lib.escapeShellArg cfg.sharedSteamLibrary.directory} \
             ${lib.escapeShellArg "${cfg.sharedSteamLibrary.directory}/compatdata"} \
             ${lib.escapeShellArg "${cfg.sharedSteamLibrary.directory}/shadercache"}
           install -m 0644 ${./wolf/40-shared-steam.sh} ${lib.escapeShellArg steamHook}
+        ''
+        + ''
+          install -m 0644 ${./wolf/90-valheim.conf} ${lib.escapeShellArg steamSwayConfig}
           ${steamPython}/bin/python ${./wolf/configure-steam.py} \
             ${lib.escapeShellArg "${cfg.stateDirectory}/cfg/config.toml"} \
             ${inputs.wolf-udev-rules}/src/moonlight-server/state/default/config.include.toml \
-            ${lib.escapeShellArg cfg.sharedSteamLibrary.directory} \
-            ${lib.escapeShellArg steamHook}
+            ${
+              lib.escapeShellArg (if cfg.sharedSteamLibrary.enable then cfg.sharedSteamLibrary.directory else "")
+            } \
+            ${lib.escapeShellArg steamHook} \
+            ${lib.escapeShellArg steamSwayConfig}
         ''
       );
     };
