@@ -101,6 +101,12 @@
 
   packageRules: [
     {
+      // Keep Determinate's documented FlakeHub URL; the Nix manager treats it as Git.
+      matchManagers: ['nix'],
+      matchDepNames: ['determinate'],
+      enabled: false,
+    },
+    {
       matchDepTypes: ['custom-nix-package'],
       groupName: null,
       semanticCommitType: 'chore',
