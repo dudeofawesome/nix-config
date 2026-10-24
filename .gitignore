@@ -19,6 +19,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # caches
 .prettiercache
+__pycache__/
 
 # OS
 .DS_Store
