@@ -177,6 +177,11 @@ in
           "--ipc=host"
           "--security-opt=label=disable"
         ]
+        # /dev is bind-mounted above, but each GPU still needs cgroup access.
+        # NVENC and Wolf's CUDA index mapping require all NVIDIA GPUs to be
+        # accessible, including /dev/nvidia1 and higher on multi-GPU hosts.
+        # https://github.com/games-on-whales/wolf/issues/233
+        ++ lib.optional cfg.nvidia.enable "--device-cgroup-rule=c 195:* rmw"
         ++ cfg.extraOptions;
       };
     };
