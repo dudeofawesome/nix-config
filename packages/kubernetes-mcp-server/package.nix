@@ -7,7 +7,7 @@
 
 buildGoModule (finalAttrs: {
   pname = "kubernetes-mcp-server";
-  version = "0.0.60";
+  version = "0.0.69";
 
   src = fetchFromGitHub {
     owner = "containers";
