@@ -1,0 +1,30 @@
+name: Merge gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  actions: read
+  checks: read
+  statuses: read
+
+concurrency:
+  group: merge-gate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  all-checks:
+    name: All checks passed
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+
+    steps:
+      # If another check is rerun after this gate finishes, rerun this gate too.
+      - name: Wait for checks and commit statuses
+        uses: wechuli/allcheckspassed@e4240aa9cc76fd6828ce27a71ad16c406c25adb3 # v2.5.0
+        with:
+          include_status_commits: true
+          ignore_superseded_runs: true
+          retries: 60
+          polling_interval: 1
