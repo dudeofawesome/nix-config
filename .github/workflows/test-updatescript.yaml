@@ -40,16 +40,20 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
           PUSH_BASE: ${{ github.event.before }}
         run: |
+          head=HEAD
           if [[ "$EVENT_NAME" == pull_request ]]; then
-            base=$(git merge-base "$PR_BASE" HEAD)
+            # Select PR changes even when the merge checkout includes newer main commits.
+            head=$PR_HEAD
+            base=$(git merge-base "$PR_BASE" "$head")
           elif [[ "$PUSH_BASE" =~ ^0+$ ]]; then
             base=$(git hash-object -t tree /dev/null)
           else
             base=$PUSH_BASE
           fi
-          node scripts/check-package-updates.mjs --matrix "$base" HEAD
+          node scripts/check-package-updates.mjs --matrix "$base" "$head"
 
   check-package-updates:
     name: Check updater (${{ matrix.package }})
