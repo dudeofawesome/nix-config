@@ -128,6 +128,7 @@
       matchDatasources: ['custom.sparkle'],
       matchDepNames: ['git-fork'],
       registryUrls: ['https://fork.dev/update/feed.xml'],
+      changelogUrl: 'https://fork.dev/releasenotes',
     },
     {
       matchDatasources: ['custom.sparkle'],
@@ -135,6 +136,7 @@
       registryUrls: [
         'https://persistent.oaistatic.com/codex-app-prod/appcast.xml',
       ],
+      changelogUrl: 'https://developers.openai.com/codex/changelog?type=codex-app',
     },
     {
       matchDatasources: ['custom.sparkle'],
@@ -142,11 +144,28 @@
       registryUrls: [
         'https://www.soma-zone.com/LaunchControl/a/appcast-update-2.xml',
       ],
+      changelogUrl: 'https://www.soma-zone.com/LaunchControl/ReleaseNotes.html',
     },
     {
       matchDatasources: ['custom.sparkle'],
       matchDepNames: ['postico'],
       registryUrls: ['https://releases.eggerapps.at/postico2/appcast.xml'],
+      changelogUrl: 'https://releases.eggerapps.at/postico2/changelog?update_channel=1',
+    },
+    {
+      matchDatasources: ['custom.claude'],
+      matchDepNames: ['claude-desktop'],
+      changelogUrl: 'https://support.claude.com/en/articles/12138966-release-notes',
+    },
+    {
+      matchDatasources: ['custom.decky'],
+      matchDepNames: ['magicpods-decky'],
+      changelogUrl: 'https://github.com/steam3d/MagicPodsDecky/releases',
+    },
+    {
+      matchDatasources: ['custom.decky'],
+      matchDepNames: ['decky-ludusavi'],
+      changelogUrl: 'https://github.com/GedasFX/decky-ludusavi/releases',
     },
     {
       matchManagers: ['nix', 'custom.regex'],
