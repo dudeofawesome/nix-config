@@ -8,13 +8,13 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "bosl2";
-  version = "2.0.779";
+  version = "2.0.780";
 
   src = fetchFromGitHub {
     owner = "BelfrySCAD";
     repo = "BOSL2";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-b2MWqKYiqjaaG/u6dcUpVszfGlASZ/04+qlVP9W5Swc=";
+    hash = "sha256-JjX1MPqBmp6ZduOwAqdO3W6bl4pHokQIfedocif8XaQ=";
   };
 
   dontBuild = true;
