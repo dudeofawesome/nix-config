@@ -15,11 +15,11 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "claude-desktop";
   # renovate: datasource=custom.claude depName=claude-desktop packageName=claude-desktop
-  version = "3.6556.2";
+  version = "4.29.0";
 
   src = fetchurl {
-    url = "https://downloads.claude.ai/releases/darwin/universal/${finalAttrs.version}/Claude-20c019a1e61fa5b687616af57d31f97bb3181723.zip";
-    hash = "sha256-Xz42vQxQDw4CzKhISPXK9FM3IRfsZkFT2xh7NydUxno=";
+    url = "https://downloads.claude.ai/releases/darwin/universal/${finalAttrs.version}/Claude-2609742292f7dbce2e259e76f53620cac4da9002.zip";
+    hash = "sha256-+AYHqjK6VZS80OMsQ0BnQB9QVTH0vlB52ZfWhLW0mig=";
   };
 
   sourceRoot = ".";
