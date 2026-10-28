@@ -32,6 +32,7 @@ jobs:
         shell: bash
         run: |
           nix flake check \
+            --no-update-lock-file \
             --all-systems \
             --keep-going \
             ;

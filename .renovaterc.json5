@@ -107,6 +107,19 @@
       enabled: false,
     },
     {
+      // Regex URL updates need their lock entries regenerated explicitly.
+      matchManagers: ['custom.regex'],
+      matchFileNames: ['flake.nix'],
+      postUpgradeTasks: {
+        commands: [
+          "nix --extra-experimental-features 'nix-command flakes' flake lock",
+        ],
+        executionMode: 'branch',
+        fileFilters: ['flake.lock'],
+        installTools: { nix: {} },
+      },
+    },
+    {
       matchDepTypes: ['custom-nix-package'],
       groupName: null,
       semanticCommitType: 'chore',
