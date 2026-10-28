@@ -1,0 +1,23 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+
+  customDatasources: {
+    claude: {
+      defaultRegistryUrlTemplate: 'https://downloads.claude.ai/releases/darwin/universal/RELEASES.json',
+      transformTemplates: ['{"releases": [{"version": currentRelease}]}'],
+    },
+    decky: {
+      defaultRegistryUrlTemplate: 'https://plugins.deckbrew.xyz/plugins?query={{packageName}}',
+      transformTemplates: [
+        '{"releases": [$map($[0].versions, function($v) { {"version": $v.name} })]}',
+      ],
+    },
+    sparkle: {
+      // Read the enclosure filenames: Fork's sparkle:version can differ from its download version.
+      format: 'plain',
+      transformTemplates: [
+        '{"releases": [$map($match($join(releases.version, "\\n"), /(?:Fork-|LaunchControl-|ChatGPT-darwin-(?:arm64|x64)-|postico-)([0-9]+(?:[.][0-9]+)*)(?:[.]dmg|[.]zip|_update)/), function($m) { {"version": $m.groups[0]} })]}',
+      ],
+    },
+  },
+}

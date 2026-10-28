@@ -1,0 +1,79 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+
+  nix: {
+    enabled: true,
+    lockFileMaintenance: {
+      enabled: false,
+    },
+  },
+
+  customManagers: [
+    {
+      // Track conventional GitHub source tags without per-package annotations.
+      customType: 'regex',
+      managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
+      matchStringsStrategy: 'combination',
+      matchStrings: [
+        '(?:^|\\r?\\n)[ \\t]*pname\\s*=\\s*"(?<depName>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*version\\s*=\\s*"(?<currentValue>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetchFromGitHub\\s*\\{(?:[^{}]|\\$\\{[^{}]*\\})*?\\bowner\\s*=\\s*"(?<githubOwner>[^/"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetchFromGitHub\\s*\\{(?:[^{}]|\\$\\{[^{}]*\\})*?\\brepo\\s*=\\s*"(?<githubRepo>[^/"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetchFromGitHub\\s*\\{(?:[^{}]|\\$\\{[^{}]*\\})*?\\b(?:rev|tag)\\s*=\\s*(?<githubVersionReference>"v?\\$\\{(?:finalAttrs\\.)?version\\}"|(?:finalAttrs\\.)?version);',
+      ],
+      // Partial matches must not track packages with unrelated or fixed revisions.
+      datasourceTemplate: '{{#if (and depName currentValue githubOwner githubRepo githubVersionReference)}}github-tags{{/if}}',
+      packageNameTemplate: '{{githubOwner}}/{{githubRepo}}',
+      depTypeTemplate: 'custom-nix-package',
+      versioningTemplate: 'loose',
+    },
+    {
+      // Combine independent matches so attribute order and spacing can vary.
+      customType: 'regex',
+      managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
+      matchStringsStrategy: 'combination',
+      matchStrings: [
+        '(?:^|\\r?\\n)[ \\t]*pname\\s*=\\s*"(?<depName>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*version\\s*=\\s*"(?<currentValue>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetch(?:url|zip)\\s*\\{[^{}]*?\\burl\\s*=\\s*"https://github\\.com/(?<packageName>[^/"\\s]+/[^/"\\s]+)/releases/download/v?\\$\\{(?:finalAttrs\\.)?version\\}/[^"\\s]+";',
+      ],
+      // combination accepts partial matches, so require all three fields explicitly.
+      datasourceTemplate: '{{#if (and depName packageName currentValue)}}github-releases{{/if}}',
+      depTypeTemplate: 'custom-nix-package',
+      versioningTemplate: 'loose',
+    },
+    {
+      // Track releaseTag separately when the application version differs from its tag.
+      customType: 'regex',
+      managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
+      matchStringsStrategy: 'combination',
+      matchStrings: [
+        '(?:^|\\r?\\n)[ \\t]*pname\\s*=\\s*"(?<depName>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*releaseTag\\s*=\\s*"(?<currentValue>[^"\\s]+)";',
+        '(?:^|\\r?\\n)[ \\t]*src\\s*=\\s*fetch(?:url|zip)\\s*\\{[^{}]*?\\burl\\s*=\\s*"https://github\\.com/(?<packageName>[^/"\\s]+/[^/"\\s]+)/releases/download/v?\\$\\{(?:finalAttrs\\.)?releaseTag\\}/[^"\\s]+";',
+      ],
+      datasourceTemplate: '{{#if (and depName packageName currentValue)}}github-releases{{/if}}',
+      depTypeTemplate: 'custom-nix-package',
+      versioningTemplate: 'loose',
+    },
+    {
+      // Sources outside the automatic GitHub patterns retain explicit annotations.
+      customType: 'regex',
+      managerFilePatterns: ['/^packages\\/[^/]+\\/package\\.nix$/'],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) packageName=(?<packageName>\\S+)(?: versioning=(?<versioning>\\S+))?\\r?\\n[ \\t]+(?:version|build|releaseTag) = "(?<currentValue>[^"\\s]+)";',
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) packageName=(?<packageName>\\S+) versioning=(?<versioning>\\S+) currentValue=(?<currentValue>\\S+)\\r?\\n[ \\t]+rev = "(?<currentDigest>[a-f0-9]{40})";',
+      ],
+      depTypeTemplate: 'custom-nix-package',
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}loose{{/if}}',
+    },
+    {
+      // Versioned flake URLs are separate from package updates and their hashes.
+      customType: 'regex',
+      managerFilePatterns: ['/^flake\\.nix$/'],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) packageName=(?<packageName>\\S+) versioning=(?<versioning>\\S+)\\r?\\n[ \\t]+(?:[\\w-]+\\.)?url = "github:[^/"\\s]+/[^/"\\s]+/(?<currentValue>[^"?\\s]+)";',
+      ],
+    },
+  ],
+}

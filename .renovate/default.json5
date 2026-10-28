@@ -1,0 +1,12 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+
+  extends: [
+    './managers.json5',
+    './datasources.json5',
+    './packages.json5',
+    './updates.json5',
+    './changelogs.json5',
+    './groups.json5',
+  ],
+}
