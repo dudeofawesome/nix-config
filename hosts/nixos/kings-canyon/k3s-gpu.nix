@@ -105,5 +105,10 @@ in
     text = "feature.node.kubernetes.io/nvidia-dra.configured=true\n";
   };
 
+  # CDI hooks execute on the NixOS host, outside the workload container.
+  # Give DRA a stable path to the Nix-packaged hook instead of its copied ELF.
+  environment.etc."nvidia-dra/nvidia-cdi-hook".source =
+    "${lib.getOutput "tools" toolkit}/bin/nvidia-cdi-hook";
+
   # Flux owns the RuntimeClass and GPU allocation components.
 }
