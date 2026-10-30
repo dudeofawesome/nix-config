@@ -1,9 +1,18 @@
-{ ... }:
+{ config, pkgs, ... }:
 {
-  imports = [ ];
+  imports = [
+    ./disko.nix
+    ./offsite-backup.nix
+    ./ssd-state-backup.nix
+    ../../../modules/defaults/fs/bcachefs.nix
+    ../../../modules/defaults/fs/snapper.nix
+    ../../../modules/defaults/fs/zfs.nix
+  ];
 
   networking = {
     hostId = "2fad05b5"; # head -c 8 /etc/machine-id
+    # DHCP on the first onboard NIC, in the initrd too (remote unlock over SSH port 222).
+    interfaces.eno1.useDHCP = true;
   };
 
   # iDRAC out-of-band management credentials, used by scripts/ipmi.sh and
@@ -26,27 +35,44 @@
     "console=ttyS1,115200n8"
   ];
 
+  # 1000M ESP, ~100M per generation.
+  boot.loader.systemd-boot.configurationLimit = 10;
+
+  # Hourly ZFS snapshots of everything in the storage pool; the offsite disks
+  # replicate these.
+  services.zfs-snapshots = {
+    enable = true;
+    datasets = [ "storage" ];
+  };
+
+  # Pinned: files on the pool (and the offsite copies of it) are owned by
+  # number, and disko's one-time chown at installation uses it (disko.nix).
+  users.users.josh.uid = 1000;
+
+  # Samba password for josh, separate from the login password. Set at every
+  # activation from this secret (modules/configurable/os/samba-users.nix).
+  sops.secrets."hosts/nixos/soto-server/samba_password_josh" = {
+    sopsFile = ./secrets.yaml;
+  };
+
   services.samba = {
     enable = true;
     openFirewall = true;
-    settings = {
-      public = {
-        path = "/";
-        browseable = "yes";
-        "guest ok" = "yes";
-        comment = "Public samba share";
-      };
-      "Time Machine" = {
-        path = "/mnt/Shares/tm_share";
-        comment = "Remote Time Machine target";
-        "valid users" = "josh";
-        public = "no";
-        writeable = "yes";
-        "force user" = "josh";
-        "fruit:aapl" = "yes";
-        "fruit:time machine" = "yes";
-        "vfs objects" = "catia fruit streams_xattr";
-      };
+    users = {
+      enable = true;
+      users.josh.plaintextPasswordFile =
+        config.sops.secrets."hosts/nixos/soto-server/samba_password_josh".path;
+    };
+    time-machine = {
+      enable = true;
+      baseDir = "/storage/backups/timemachine";
+      users = [ "josh" ];
+    };
+    settings.public = {
+      path = "/";
+      browseable = "yes";
+      "guest ok" = "yes";
+      comment = "Public samba share";
     };
   };
 }
