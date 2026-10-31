@@ -77,6 +77,10 @@ let
   };
 in
 {
+  sops.secrets = lib.mkIf (machine-class == "pc") {
+    "users/dudeofawesome/inference/api_token" = { };
+  };
+
   programs = lib.mkIf (machine-class == "pc") {
     mcp = {
       enable = true;
@@ -127,6 +131,23 @@ in
 
     codex = {
       enable = true;
+
+      # Select with: codex --profile orleans --model <served-model-id>
+      profiles.orleans = {
+        model_provider = "orleans";
+        web_search = "disabled";
+
+        model_providers.orleans = {
+          name = "Orleans inference";
+          base_url = "https://inference.orleans.io/v1";
+          wire_api = "responses";
+          supports_websockets = false;
+          auth = {
+            command = lib.getExe' pkgs.coreutils "cat";
+            args = [ config.sops.secrets."users/dudeofawesome/orleans_inference/api_token".path ];
+          };
+        };
+      };
 
       context = ''
         ${builtins.readFile ./user-memory.md}
