@@ -119,6 +119,42 @@ class ConfigureSteamTests(unittest.TestCase):
         first = tomlkit.dumps(result)
         self.assertEqual(first, tomlkit.dumps(MODULE.configure(result, "", "/hook", "/sway")))
 
+    def test_gale_mounts_only_selected_profiles_steam_runner(self):
+        doc = tomlkit.parse(FIXTURE)
+        doc["apps"] = doc["profiles"][0]["apps"].unwrap()
+        other = doc["profiles"][0].unwrap()
+        other["id"] = "bob"
+        doc["profiles"].append(other)
+        original = tomlkit.parse(tomlkit.dumps(doc))
+        gale = {"profiles": ["alice"], "bundle": "/nix/store/gale"}
+        result = MODULE.configure(doc, "", "/hook", "/sway", gale)
+        selected = result["profiles"][0]["apps"][0]["runner"]
+        for source, target in (
+            ("", "/opt/wolf-gale"),
+            ("/45-gale.sh", "/etc/cont-init.d/45-gale.sh"),
+            ("/91-gale.conf", "/etc/sway/config.d/91-gale.conf"),
+        ):
+            self.assertIn(f"/nix/store/gale{source}:{target}:ro", selected["mounts"])
+        for apps in (result["apps"], result["profiles"][1]["apps"]):
+            self.assertFalse(any("gale" in mount for mount in apps[0]["runner"]["mounts"]))
+        self.assertEqual(result["profiles"][0]["apps"][2], original["profiles"][0]["apps"][2])
+        first = tomlkit.dumps(result)
+        self.assertEqual(first, tomlkit.dumps(MODULE.configure(result, "", "/hook", "/sway", gale)))
+
+    def test_gale_upgrades_and_disabling_remove_old_mounts(self):
+        gale = {"profiles": ["alice"], "bundle": "/old/gale"}
+        doc = MODULE.configure(tomlkit.parse(FIXTURE), "/games", "/hook", "/sway", gale)
+        gale["bundle"] = "/new/gale"
+        doc = MODULE.configure(doc, "/games", "/hook", "/sway", gale)
+        mounts = doc["profiles"][0]["apps"][0]["runner"]["mounts"]
+        self.assertFalse(any(mount.startswith("/old/gale") for mount in mounts))
+        self.assertEqual(sum(mount.startswith("/new/gale") for mount in mounts), 3)
+        gale["profiles"] = []
+        doc = MODULE.configure(doc, "/games", "/hook", "/sway", gale)
+        mounts = doc["profiles"][0]["apps"][0]["runner"]["mounts"]
+        self.assertFalse(any("gale" in mount for mount in mounts))
+        self.assertIn("/games:/var/lib/wolf-steamapps:rw", mounts)
+
     def test_atomic_backup_and_conflict(self):
         with tempfile.TemporaryDirectory() as directory:
             config = Path(directory) / "config.toml"

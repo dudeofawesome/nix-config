@@ -25,6 +25,7 @@ let
   steamPython = pkgs.python3.withPackages (ps: [ ps.tomlkit ]);
   steamHook = "${cfg.stateDirectory}/40-shared-steam.sh";
   steamSwayConfig = "${cfg.stateDirectory}/90-valheim.conf";
+  galeBundle = import ./wolf/gale.nix { inherit pkgs; };
 in
 {
   options.services.games-on-whales.wolf = {
@@ -49,6 +50,13 @@ in
         default = "/mnt/games/steamapps";
         description = "Host steamapps directory shared by GOW Steam and XFCE containers, also available at /home/retro/Games/Steam/steamapps for mod managers. App users must have write access (default UID/GID 1000).";
       };
+    };
+
+    gale.profiles = lib.mkOption {
+      type = with lib.types; listOf str;
+      default = [ ];
+      example = [ "lauren" ];
+      description = "Wolf profile IDs whose GOW Steam containers receive Gale and a Steam library shortcut. Provisioning runs before Steam starts; an empty list disables Gale mounts.";
     };
 
     nvidia.enable = lib.mkOption {
@@ -81,6 +89,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.gale.profiles == [ ] || pkgs.stdenv.hostPlatform.isx86_64;
+        message = "Wolf's Gale AppImage is available only for x86_64 Linux hosts.";
+      }
+    ];
+
     # These listening ports overlap Linux's ephemeral range. Reserve them so
     # host-networked applications cannot claim them before Wolf starts.
     boot.kernel.sysctl."net.ipv4.ip_local_reserved_ports" = "47984,47989,47999,48010,48100,48200";
@@ -135,7 +150,13 @@ in
               lib.escapeShellArg (if cfg.sharedSteamLibrary.enable then cfg.sharedSteamLibrary.directory else "")
             } \
             ${lib.escapeShellArg steamHook} \
-            ${lib.escapeShellArg steamSwayConfig}
+            ${lib.escapeShellArg steamSwayConfig} \
+            ${lib.escapeShellArg (
+              builtins.toJSON {
+                profiles = cfg.gale.profiles;
+                bundle = if cfg.gale.profiles == [ ] then "" else toString galeBundle;
+              }
+            )}
         ''
       );
     };

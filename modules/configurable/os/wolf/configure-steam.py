@@ -11,11 +11,12 @@ import uuid
 import tomlkit
 
 
-def configure(document, library, hook, sway_config):
-    apps = list(document.get("apps", []))
+def configure(document, library, hook, sway_config, gale=None):
+    gale = gale or {"profiles": [], "bundle": ""}
+    apps = [(None, app) for app in document.get("apps", [])]
     for profile in document.get("profiles", []):
-        apps.extend(profile.get("apps", []))
-    for app in apps:
+        apps.extend((profile.get("id"), app) for app in profile.get("apps", []))
+    for profile_id, app in apps:
         runner = app.get("runner", {})
         image = runner.get("image", "")
         if runner.get("type", "").lower() != "docker":
@@ -28,6 +29,23 @@ def configure(document, library, hook, sway_config):
         managed_mounts = []
         if is_steam:
             managed_mounts.append((sway_config, "/etc/sway/config.d/90-valheim.conf", "ro"))
+            # Remove our old mounts when a profile is deselected, too. Steam
+            # apps in the global template never inherit a user's selection.
+            gale_targets = {
+                "/opt/wolf-gale",
+                "/etc/cont-init.d/45-gale.sh",
+                "/etc/sway/config.d/91-gale.conf",
+            }
+            for mount in list(mounts):
+                if mount.split(":")[1].rstrip("/") in gale_targets:
+                    mounts.remove(mount)
+            if profile_id in gale["profiles"]:
+                bundle = gale["bundle"]
+                managed_mounts.extend([
+                    (bundle, "/opt/wolf-gale", "ro"),
+                    (f"{bundle}/45-gale.sh", "/etc/cont-init.d/45-gale.sh", "ro"),
+                    (f"{bundle}/91-gale.conf", "/etc/sway/config.d/91-gale.conf", "ro"),
+                ])
         if library:
             managed_mounts.append((library, "/home/retro/Games/Steam/steamapps", "rw"))
         if library and is_steam:
@@ -64,7 +82,8 @@ def configure(document, library, hook, sway_config):
 
 
 def main():
-    config, default, library, hook, sway_config = sys.argv[1:]
+    config, default, library, hook, sway_config, *extra = sys.argv[1:]
+    gale = json.loads(extra[0]) if extra else None
     path = Path(config)
     original = path.read_text() if path.exists() else None
     if original is None:
@@ -75,7 +94,7 @@ def main():
         document["uuid"] = str(uuid.uuid4())
     else:
         document = tomlkit.parse(original)
-    result = tomlkit.dumps(configure(document, library, hook, sway_config))
+    result = tomlkit.dumps(configure(document, library, hook, sway_config, gale))
     if result == original:
         return
     path.parent.mkdir(parents=True, exist_ok=True)

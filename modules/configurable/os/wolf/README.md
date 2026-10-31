@@ -1,0 +1,11 @@
+# Wolf Steam applications
+
+Enable Gale for selected Wolf profile IDs with `services.games-on-whales.wolf.gale.profiles = [ "lauren" ];`. This applies to the standard GOW Steam image; profile IDs are the `id` values in Wolf's configuration.
+
+Nix downloads the official AppImage with a pinned checksum, extracts it during the build, and provides the application and its bundled libraries through read-only container mounts. Updating the version and hash in `gale.nix` updates the mounted application when Steam containers are recreated. Use Nix to update Gale; its in-app updater cannot replace the read-only application files.
+
+Wolf's startup configuration adds mounts for selected Steam runners. A container initialization hook then creates the launcher and desktop entry and merges a Gale shortcut into each existing Steam account's library before Steam starts. Other shortcuts, custom Gale shortcut settings, and Gale's preferences and mod profiles are preserved. Existing shortcut files are backed up once as `shortcuts.vdf.before-gale` before their first change. Managed Sway rules show Gale fullscreen above Steam Big Picture.
+
+Launch **Gale** from Steam's **Non-Steam** library. Its configuration and mod profiles stay in the app's persistent home. A new Steam account needs another session start after its first login before the hook can add its library shortcut.
+
+After enabling or changing this configuration, restart Wolf and recreate affected Steam containers to pick up the mounts. Removing a profile from `gale.profiles` removes its Gale mounts from the runner on Wolf startup; existing shortcuts and Gale data remain in its home.
