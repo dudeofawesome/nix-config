@@ -15,6 +15,8 @@ ICON = "/opt/wolf-gale/app/usr/share/icons/hicolor/128x128/apps/gale.png"
 WRAPPER = b"""#!/bin/sh
 set -eu
 unset LD_PRELOAD LD_LIBRARY_PATH
+# Gale treats the presence of this variable as Flatpak, including container=podman.
+unset container
 export APPDIR=/opt/wolf-gale/app
 export WEBKIT_DISABLE_DMABUF_RENDERER=1
 exec "$APPDIR/AppRun" "$@"

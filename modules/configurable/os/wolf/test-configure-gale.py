@@ -3,6 +3,7 @@
 import importlib.util
 import os
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 
@@ -102,6 +103,21 @@ class ConfigureGaleTests(unittest.TestCase):
         before = launcher.stat().st_mtime_ns
         self.configure()
         self.assertEqual(launcher.stat().st_mtime_ns, before)
+
+    def test_launcher_clears_podmans_false_flatpak_detection(self):
+        # Inspect the environment handed to AppRun without launching the UI.
+        wrapper = MODULE.WRAPPER.decode().replace(
+            'exec "$APPDIR/AppRun" "$@"', 'exec /usr/bin/env'
+        )
+        result = subprocess.run(
+            ["/bin/sh", "-c", wrapper],
+            env=os.environ | {"container": "podman", "DISPLAY": ":42"},
+            capture_output=True, text=True, check=True,
+        )
+        environment = dict(line.split("=", 1) for line in result.stdout.splitlines())
+        self.assertNotIn("container", environment)
+        self.assertEqual(environment["DISPLAY"], ":42")
+        self.assertEqual(environment["APPDIR"], "/opt/wolf-gale/app")
 
     def test_invalid_shortcuts_abort_before_changing_any_account(self):
         invalid = self.account("456")
