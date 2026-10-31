@@ -78,7 +78,7 @@ let
 in
 {
   sops.secrets = lib.mkIf (machine-class == "pc") {
-    "users/dudeofawesome/inference/api_token" = { };
+    "users/dudeofawesome/orleans_inference/api_token" = { };
   };
 
   programs = lib.mkIf (machine-class == "pc") {
