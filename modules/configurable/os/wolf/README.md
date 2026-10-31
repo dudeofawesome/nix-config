@@ -8,4 +8,6 @@ Wolf's startup configuration adds mounts for selected Steam runners. A container
 
 Launch **Gale** from Steam's **Non-Steam** library. Its configuration and mod profiles stay in the app's persistent home. A new Steam account needs another session start after its first login before the hook can add its library shortcut.
 
+For native Linux Valheim, set Steam's **Properties → General → Launch Options** to `./start_game_bepinex.sh %command%`, as described in the [BepInExPack Valheim instructions](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/). Launch modded games from Gale so it supplies the selected profile's preloader path. The script loads the native Doorstop library; Doorstop arguments alone do not load it. Do not paste the full `steam -applaunch` command into Steam's launch options.
+
 After enabling or changing this configuration, restart Wolf and recreate affected Steam containers to pick up the mounts. Removing a profile from `gale.profiles` removes its Gale mounts from the runner on Wolf startup; existing shortcuts and Gale data remain in its home.
