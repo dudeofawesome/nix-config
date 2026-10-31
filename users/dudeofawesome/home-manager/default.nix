@@ -77,6 +77,7 @@ with pkgs.stdenv.targetPlatform;
           obsidian
           ollama
           opentofu
+          snapmaker-orca
           spotify
           (
             if isLinux then
