@@ -59,6 +59,13 @@ in
       description = "Wolf profile IDs whose GOW Steam containers receive Gale and a Steam library shortcut. Provisioning runs before Steam starts; an empty list disables Gale mounts.";
     };
 
+    steamRenderNode = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "/dev/dri/by-path/pci-0000:82:00.0-render";
+      description = "GPU render node for all GOW Steam apps, including existing profile overrides. Device symlinks are resolved at Wolf startup. Null preserves existing assignments; clearing this option does not undo saved assignments.";
+    };
+
     nvidia.enable = lib.mkOption {
       type = lib.types.bool;
       default = config.hardware.nvidia.enabled;
@@ -151,12 +158,15 @@ in
             } \
             ${lib.escapeShellArg steamHook} \
             ${lib.escapeShellArg steamSwayConfig} \
-            ${lib.escapeShellArg (
-              builtins.toJSON {
-                profiles = cfg.gale.profiles;
-                bundle = if cfg.gale.profiles == [ ] then "" else toString galeBundle;
-              }
-            )}
+            ${
+              lib.escapeShellArg (
+                builtins.toJSON {
+                  profiles = cfg.gale.profiles;
+                  bundle = if cfg.gale.profiles == [ ] then "" else toString galeBundle;
+                }
+              )
+            } \
+            ${lib.escapeShellArg (if cfg.steamRenderNode == null then "" else cfg.steamRenderNode)}
         ''
       );
     };

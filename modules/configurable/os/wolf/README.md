@@ -1,5 +1,7 @@
 # Wolf Steam applications
 
+Set `services.games-on-whales.wolf.steamRenderNode` to select a GPU for every GOW Steam app, including existing profile overrides. Prefer a stable path such as `/dev/dri/by-path/pci-0000:82:00.0-render`; Wolf startup resolves it to the current render node. Restart Wolf and recreate Steam sessions to use the selected GPU. Setting the option back to `null` preserves the assignments already saved in Wolf's configuration.
+
 Enable Gale for selected Wolf profile IDs with `services.games-on-whales.wolf.gale.profiles = [ "lauren" ];`. This applies to the standard GOW Steam image; profile IDs are the `id` values in Wolf's configuration.
 
 Nix downloads the official AppImage with a pinned checksum, extracts it during the build, and provides the application and its bundled libraries through read-only container mounts. Updating the version and hash in `gale.nix` updates the mounted application when Steam containers are recreated. Use Nix to update Gale; its in-app updater cannot replace the read-only application files.

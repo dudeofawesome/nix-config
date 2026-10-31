@@ -44,6 +44,47 @@ base_create_json = '{"HostConfig":{"IpcMode":"host"}}'
 
 
 class ConfigureSteamTests(unittest.TestCase):
+    def test_gpu_override_updates_all_steam_apps_only(self):
+        doc = tomlkit.parse(FIXTURE)
+        doc["apps"] = doc["profiles"][0]["apps"].unwrap()
+        doc["profiles"][0]["apps"][0]["render_node"] = "/dev/dri/renderD128"
+        original = tomlkit.parse(tomlkit.dumps(doc))
+        node = "/dev/dri/renderD130"
+        result = MODULE.configure(doc, "", "/hook", "/sway", render_node=node)
+        for apps in (result["apps"], result["profiles"][0]["apps"]):
+            self.assertEqual(apps[0]["render_node"], node)
+            self.assertNotIn("render_node", apps[1])
+            self.assertNotIn("render_node", apps[2])
+        self.assertEqual(result["paired_clients"], original["paired_clients"])
+        first = tomlkit.dumps(result)
+        self.assertEqual(first, tomlkit.dumps(MODULE.configure(
+            result, "", "/hook", "/sway", render_node=node,
+        )))
+        # An unset option leaves saved user assignments alone.
+        self.assertEqual(first, tomlkit.dumps(MODULE.configure(result, "", "/hook", "/sway")))
+
+    def test_gpu_symlink_resolution_and_missing_device_preserve_config(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config = root / "config.toml"
+            config.write_text(FIXTURE)
+            device = root / "renderD130"
+            device.touch()
+            link = root / "pci-render"
+            link.symlink_to(device)
+            command = [
+                sys.executable, str(SCRIPT), str(config), "unused", "", "/hook", "/sway",
+                '{"profiles": [], "bundle": ""}', str(link),
+            ]
+            subprocess.run(command, check=True)
+            result = tomlkit.parse(config.read_text())
+            self.assertEqual(result["profiles"][0]["apps"][0]["render_node"], str(device.resolve()))
+            before = config.read_text()
+            device.unlink()
+            result = subprocess.run(command, capture_output=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(config.read_text(), before)
+
     def test_preserves_settings_and_is_idempotent(self):
         original = tomlkit.parse(FIXTURE)
         result = MODULE.configure(tomlkit.parse(FIXTURE), "/games", "/hook", "/sway")

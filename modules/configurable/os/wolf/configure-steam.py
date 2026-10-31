@@ -11,7 +11,7 @@ import uuid
 import tomlkit
 
 
-def configure(document, library, hook, sway_config, gale=None):
+def configure(document, library, hook, sway_config, gale=None, render_node=None):
     gale = gale or {"profiles": [], "bundle": ""}
     apps = [(None, app) for app in document.get("apps", [])]
     for profile in document.get("profiles", []):
@@ -28,6 +28,8 @@ def configure(document, library, hook, sway_config, gale=None):
         mounts = runner.setdefault("mounts", [])
         managed_mounts = []
         if is_steam:
+            if render_node:
+                app["render_node"] = render_node
             managed_mounts.append((sway_config, "/etc/sway/config.d/90-valheim.conf", "ro"))
             # Remove our old mounts when a profile is deselected, too. Steam
             # apps in the global template never inherit a user's selection.
@@ -84,6 +86,8 @@ def configure(document, library, hook, sway_config, gale=None):
 def main():
     config, default, library, hook, sway_config, *extra = sys.argv[1:]
     gale = json.loads(extra[0]) if extra else None
+    # Wolf expects the canonical renderD device name when identifying the GPU.
+    render_node = str(Path(extra[1]).resolve(strict=True)) if len(extra) > 1 and extra[1] else None
     path = Path(config)
     original = path.read_text() if path.exists() else None
     if original is None:
@@ -94,7 +98,7 @@ def main():
         document["uuid"] = str(uuid.uuid4())
     else:
         document = tomlkit.parse(original)
-    result = tomlkit.dumps(configure(document, library, hook, sway_config, gale))
+    result = tomlkit.dumps(configure(document, library, hook, sway_config, gale, render_node))
     if result == original:
         return
     path.parent.mkdir(parents=True, exist_ok=True)
