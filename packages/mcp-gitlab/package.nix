@@ -9,16 +9,16 @@
 
 buildNpmPackage (finalAttrs: {
   pname = "mcp-gitlab";
-  version = "2.3.15";
+  version = "2.3.16";
 
   src = fetchFromGitHub {
     owner = "zereight";
     repo = "gitlab-mcp";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-cewbEh3GnQ8jfwpK3oaV1wMeHZ/3cXq0x8cEsjRhGFw=";
+    hash = "sha256-b6vJDMCViyt5H/MJWPR2yaJLwLOLu1swDIn3WBGuO6o=";
   };
 
-  npmDepsHash = "sha256-Kcz0/fRNIALU0kHlIAi0NFMLiuaEG7z5eqlGZvIdzWc=";
+  npmDepsHash = "sha256-xnfLS38nbH1l17O0ScLdDq47BfT0LoaNbAE7NaCcf7E=";
 
   nativeBuildInputs = [ nodejs ];
 
