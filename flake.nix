@@ -134,6 +134,8 @@
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
+    gale.url = "github:Kesomannen/gale/pull/426/head";
+
     decky-openrgb = {
       url = "github:dudeofawesome/decky-openrgb";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

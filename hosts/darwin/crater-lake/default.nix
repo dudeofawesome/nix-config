@@ -1,8 +1,15 @@
-{ config, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../../../modules/defaults/headful/gaming.darwin.nix
   ];
+
+  environment.systemPackages = [ inputs.gale.packages.${pkgs.stdenv.hostPlatform.system}.gale ];
 
   determinateNix = {
     distributedBuilds = true;
