@@ -19,12 +19,12 @@ stdenv.mkDerivation (
       aarch64-darwin = {
         appcast = "https://persistent.oaistatic.com/codex-app-prod/appcast.xml";
         url = "https://persistent.oaistatic.com/codex-app-prod/ChatGPT-darwin-arm64-${finalAttrs.version}.zip";
-        hash = "sha256-k5k77tXuUqYRR8qXMpDiBSuw+j2hF2NNVxJnBxcgu10=";
+        hash = "sha256-oi6B/55S5/MAbGV/8gBsA0mCh2paigArv5wA+/gwfyM=";
       };
       x86_64-darwin = {
         appcast = "https://persistent.oaistatic.com/codex-app-prod/appcast-x64.xml";
         url = "https://persistent.oaistatic.com/codex-app-prod/ChatGPT-darwin-x64-${finalAttrs.version}.zip";
-        hash = "sha256-jpo5OwC8hwXBNEmTrZGJiThO8BnAShgBGwtvyW12HoY=";
+        hash = "sha256-bGptLrxpE2gVIdWlli+LVjjoctnyvYO3LES3Vw8QvRE=";
       };
     };
 
@@ -35,7 +35,7 @@ stdenv.mkDerivation (
   {
     pname = "chatgpt-desktop";
     # renovate: datasource=custom.sparkle depName=chatgpt-desktop packageName=chatgpt-desktop
-    version = "26.1027.51404";
+    version = "26.1027.61615";
 
     src = fetchurl {
       inherit (source) url hash;
