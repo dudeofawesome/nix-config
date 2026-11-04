@@ -23,7 +23,7 @@ in
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "themedeck";
-  version = "3.0.1";
+  version = "3.0.2";
 
   src = fetchzip {
     url = "https://github.com/BrenticusMaximus/ThemeDeck/releases/download/v${finalAttrs.version}/ThemeDeck-v${finalAttrs.version}.zip";
