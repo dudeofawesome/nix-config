@@ -78,6 +78,7 @@ with pkgs.stdenv.targetPlatform;
           ollama
           opentofu
           snapmaker-orca
+          solidcraft
           spotify
           (
             if isLinux then
