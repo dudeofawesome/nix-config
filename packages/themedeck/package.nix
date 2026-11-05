@@ -23,11 +23,11 @@ in
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "themedeck";
-  version = "3.1.4";
+  version = "3.1.7";
 
   src = fetchzip {
     url = "https://github.com/BrenticusMaximus/ThemeDeck/releases/download/v${finalAttrs.version}/ThemeDeck-v${finalAttrs.version}.zip";
-    hash = "sha256-zf7ia3dmST+w5/6vwayhBtDKteiTtjKTDR5FvVSeA/M=";
+    hash = "sha256-WeYvZuuugrQvs+ke7lkabIjQFbrFf3yhLSICLhH27LU=";
   };
 
   dontConfigure = true;
