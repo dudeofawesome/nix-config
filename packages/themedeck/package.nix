@@ -2,6 +2,7 @@
   lib,
   stdenvNoCC,
   fetchzip,
+  deno,
   nix-update-script,
   python3,
   writeShellScriptBin,
@@ -43,7 +44,10 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   passthru = {
     potProvider = lib.getExe' yt-dlp-env "bgutil-ytdlp-pot-provider";
-    runtimeDependencies = [ yt-dlp-with-pot-provider ];
+    runtimeDependencies = [
+      deno
+      yt-dlp-with-pot-provider
+    ];
     ytDlp = yt-dlp-with-pot-provider;
 
     updateScript = nix-update-script {
