@@ -12,6 +12,16 @@ Louis' home server
     - 1x Nvidia RTX 3090 24GB
 - [Full parts list](https://pcpartpicker.com/user/dudeofawesome/saved/cF6wkL)
 
+### GPUs
+
+| Card     | PCI address    | UUID                                       |
+| -------- | -------------- | ------------------------------------------ |
+| RTX 3060 | `0000:81:00.0` | `GPU-0e5f94ee-b735-84ad-6e2f-61ab731b442f` |
+| RTX 3090 | `0000:82:00.0` | `GPU-6dda6c74-00cd-a40f-442e-e952e7c54db1` |
+| RTX 3060 | `0000:c2:00.0` | `GPU-8b0b486f-fe4e-78fc-597f-2eaa9ec0b7a3` |
+
+doa-cluster-flux picks cards by UUID, so `k3s-gpu.nix` adds UUID names to the CDI spec (check with `nvidia-ctk cdi list`). Replacing a card changes its UUID; `nvidia-smi --query-gpu=name,pci.bus_id,uuid --format=csv` shows the current ones.
+
 ### Shared Steam library
 
 The Wolf module also mounts a managed Sway rule at `/etc/sway/config.d/90-valheim.conf` in GOW Steam containers, independently of library sharing. Native Valheim uses the window class `valheim.x86_64`, which misses GOW's `steam_app_.*` rule and can remain hidden behind Steam Big Picture. The workaround makes Valheim fullscreen and focuses it on launch, preserving each profile's custom Sway configuration. Related fullscreen controls discussion: [games-on-whales/gow#304](https://github.com/games-on-whales/gow/issues/304). After deployment, restart Wolf and recreate Steam sessions to pick up the mount; Lauren's existing profile workaround can remain until then.
