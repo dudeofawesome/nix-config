@@ -7,18 +7,18 @@
 
 buildGo127Module (finalAttrs: {
   pname = "kubernetes-mcp-server";
-  version = "0.1.1";
+  version = "0.1.2";
 
   src = fetchFromGitHub {
     owner = "containers";
     repo = "kubernetes-mcp-server";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-Rk6VqM2+YSYpHD9uwZwYzYpustErQfVojlNmYnWHifY=";
+    hash = "sha256-7BoixYxAhC9/rv+L1QRGdtqoYNUxyuAsWwbaSpqzoFY=";
   };
 
   subPackages = [ "cmd/kubernetes-mcp-server" ];
 
-  vendorHash = "sha256-ljyTvVY1cG3tHeoyOhNyl+vZWqgfqs+rIHQiKAAFnlk=";
+  vendorHash = "sha256-B8Mb0nyflZwQK1UxOlPwTxX2FjwVMM5RiAPJughaOWw=";
 
   meta = with lib; {
     description = "Model Context Protocol (MCP) server for Kubernetes and OpenShift";
