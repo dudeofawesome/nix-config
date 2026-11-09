@@ -16,6 +16,7 @@
     ../../../modules/presets/os/doa-cluster
     ./clevis.nix
     ./k3s-gpu.nix
+    ./gpu-unlock.nix
   ];
 
   # Retain the repository deploy credential during the service migration.
