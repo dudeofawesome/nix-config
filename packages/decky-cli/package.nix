@@ -9,7 +9,7 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "decky-cli";
-  version = "0.0.8";
+  version = "1.0.0";
 
   src = fetchFromGitHub {
     owner = "SteamDeckHomebrew";
