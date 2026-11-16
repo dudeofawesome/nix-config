@@ -26,6 +26,7 @@ in
             "users"
             "wheel"
             "disk"
+            "dialout"
           ]
           (if (val ? groups) then val.groups else [ ])
           (lib.optionals config.virtualisation.docker.enable [ "docker" ])
