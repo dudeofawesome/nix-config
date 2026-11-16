@@ -1,4 +1,4 @@
-# Bash
+# bash
 
 Before running a bash command, format for readability if any apply:
 
@@ -18,6 +18,10 @@ When debugging, show the main commands you used / steps you took to identify and
 CLIs may auth via 1Password even when a non-interactive or sandboxed invocation reports missing credentials. Use the integration before login, new creds, or config changes.
 
 - **Shell plugins (`gh`, `glab`, and other configured plugin CLIs):** invoke explicitly with `op plugin run -- <cli> <args>` with PTY
-- **SSH and Git remotes:** use the existing SSH config and 1Password SSH agent, rather than wrapping `ssh` or `git` in `op plugin run`
+- **SSH and Git remotes:** use the existing SSH config and 1Password SSH agent, rather than wrapping `ssh` or `git` in `op plugin run`. Run outside of sandbox
 - **AWS:** retrieves credentials through 1Password natively
 - **Execution environment:** use a PTY outside sandbox for auth flows that can prompt
+
+# git
+
+**Do not** modify git history (including committing, pushing) without clear approval
