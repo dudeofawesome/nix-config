@@ -43,6 +43,15 @@ let
       fi
     }
 
+    # Spotlight may have no index store for a volume at all (e.g. the Nix
+    # store, mounted `nobrowse`). `mdutil` then fails with -400; there is
+    # nothing to enable or disable, so skip it.
+    spotlightUntracked() {
+      local output
+      output=$(/usr/bin/mdutil -s "$1" 2>&1) || true
+      [[ "$output" == *"unknown indexing state"* ]]
+    }
+
     /bin/mkdir -p "$spotlightStateDir"
     spotlightTemporaryFile=$(/usr/bin/mktemp "$spotlightStateDir/excluded-volumes.XXXXXX")
     trap '/bin/rm -f "$spotlightTemporaryFile"' EXIT
@@ -60,12 +69,13 @@ let
     /bin/mv -f "$spotlightTemporaryFile" "$spotlightStateFile"
 
     for spotlightVolume in "''${spotlightPrevious[@]}"; do
-      if ! spotlightContains "$spotlightVolume" "''${spotlightDesired[@]}"; then
+      if ! spotlightContains "$spotlightVolume" "''${spotlightDesired[@]}" &&
+        ! spotlightUntracked "$spotlightVolume"; then
         spotlightMdutil -i on "$spotlightVolume"
       fi
     done
     for spotlightVolume in "''${spotlightDesired[@]}"; do
-      spotlightMdutil -d "$spotlightVolume"
+      spotlightUntracked "$spotlightVolume" || spotlightMdutil -d "$spotlightVolume"
     done
 
     spotlightTemporaryFile=$(/usr/bin/mktemp "$spotlightStateDir/excluded-volumes.XXXXXX")
