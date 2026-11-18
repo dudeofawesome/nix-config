@@ -8,11 +8,11 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "protondb-decky";
-  version = "1.3.4";
+  version = "1.4.0";
 
   src = fetchzip {
     url = "https://github.com/bschelst/protondb-decky/releases/download/v${finalAttrs.version}/protondb-decky.zip";
-    hash = "sha256-CApoReUtML6wxeJJeDZTi3k4a4wurAgsa3VxTwsXemc=";
+    hash = "sha256-gFBoXvxUMHU+srOikCLYvIqYEBjJNTx8vKWbBiINK+M=";
   };
 
   dontConfigure = true;
