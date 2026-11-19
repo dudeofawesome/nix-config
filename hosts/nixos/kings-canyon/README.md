@@ -12,6 +12,18 @@ Louis' home server
     - 1x Nvidia RTX 3090 24GB
 - [Full parts list](https://pcpartpicker.com/user/dudeofawesome/saved/cF6wkL)
 
+### GPU unlock
+
+[gpu-unlock](https://github.com/Zagitta/gpu-unlock) raises FP16/BF16/TF32 tensor throughput on the GeForce cards. It loads from the initrd and unlocks the cards listed in `gpu-unlock.nix` before `nvidia` binds them. It speeds up BF16 training and prompt processing on vLLM, and makes little difference to generation or quantized GGUF models.
+
+After a reboot, each listed card should log a successful unlock:
+
+```sh
+journalctl -k -b | grep gpu_unlock
+```
+
+To undo it, boot the previous generation from the boot menu over IPMI, then remove the import from `default.nix`. A cold power cycle clears any unlock.
+
 ### Shared Steam library
 
 The Wolf module also mounts a managed Sway rule at `/etc/sway/config.d/90-valheim.conf` in GOW Steam containers, independently of library sharing. Native Valheim uses the window class `valheim.x86_64`, which misses GOW's `steam_app_.*` rule and can remain hidden behind Steam Big Picture. The workaround makes Valheim fullscreen and focuses it on launch, preserving each profile's custom Sway configuration. Related fullscreen controls discussion: [games-on-whales/gow#304](https://github.com/games-on-whales/gow/issues/304). After deployment, restart Wolf and recreate Steam sessions to pick up the mount; Lauren's existing profile workaround can remain until then.
