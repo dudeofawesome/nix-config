@@ -15,10 +15,10 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "git-fork";
   # renovate: datasource=custom.sparkle depName=git-fork packageName=git-fork
-  version = "2.71.1";
+  version = "2.72.0";
   src = fetchurl {
     url = "https://cdn.fork.dev/mac/Fork-${finalAttrs.version}.dmg";
-    hash = "sha256-08tyNnZF5Vzz1yNXkbH/tg0Jj7rTDKcHrZFWePkId6I=";
+    hash = "sha256-vD4EnWOCDSkPhkBM9JNkaLafEi75QoaHiz6WQNR7/zc=";
   };
 
   sourceRoot = ".";
