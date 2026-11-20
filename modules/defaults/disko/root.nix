@@ -2,6 +2,7 @@
   fs ? "ext4",
   encrypted ? false,
   passwordFile ? null,
+  replicas ? 1,
   lib,
 }:
 with builtins;
@@ -70,6 +71,7 @@ else
           encrypted
           lib
           passwordFile
+          replicas
           ;
       }
     else
