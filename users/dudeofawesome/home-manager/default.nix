@@ -69,7 +69,6 @@ with pkgs.stdenv.targetPlatform;
           # https://github.com/NixOS/nixpkgs/issues/254944
           # TODO: investigate using an activation script to copy the .app to /Applications
           pkgs-unstable.bruno
-          pkgs-unstable.devenv
           drawio
           d2
           inkscape
