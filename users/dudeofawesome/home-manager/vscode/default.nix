@@ -69,6 +69,7 @@ with lib;
                   "bruno-api-client.bruno"
                   # "connor4312.nodejs-testing"
                   "coopermaruyama.nix-embedded-languages"
+                  "datakurre.devenv"
                   "deerawan.vscode-dash"
                   "drknoxy.eslint-disable-snippets"
                   "eeyore.yapf"
