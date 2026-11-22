@@ -34,7 +34,6 @@ in
       # Both LUKS and native bcachefs expose systemd password requests,
       # including the fallback when Clevis fails.
       systemd = {
-        enable = true;
         users.root.shell = "/bin/unlock-root";
         extraBin.unlock-root = pkgs.writeShellScript "unlock-root" ''
           exec /bin/systemd-tty-ask-password-agent --watch
