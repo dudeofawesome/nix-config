@@ -1050,11 +1050,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1792210252,
-        "narHash": "sha256-Mh0PUaIv4nFY+8wAGonaEh8iBzwsmdNlwjVHmFg1Biw=",
+        "lastModified": 1795234589,
+        "narHash": "sha256-f/VVvxf5RsQgWVhUtefoca5ktVg0DA2bnkMOcmSnozo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "09063bd1f2b36fd9fd793c36dfade7bd40a93dfc",
+        "rev": "2786a2a72088ecf32aea5b3ec52099e6a7cff78f",
         "type": "github"
       },
       "original": {
@@ -1208,6 +1208,7 @@
         "nur": "nur",
         "op-shell-plugins": "op-shell-plugins",
         "pslinkd": "pslinkd",
+        "solidcraft": "solidcraft",
         "sops": "sops",
         "upaymeifixit_dotfiles": "upaymeifixit_dotfiles",
         "vim-lumen": "vim-lumen",
@@ -1256,6 +1257,27 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "solidcraft": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795117925,
+        "narHash": "sha256-Y21eszk5TuK8JBSH55AccEpAhRtafAj8hCsUrIA0hT4=",
+        "owner": "tangency-labs",
+        "repo": "solidcraft",
+        "rev": "e8ce12ef78fe76281a04b7242a9ce059ff7d5067",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tangency-labs",
+        "ref": "v0.45.0",
+        "repo": "solidcraft",
         "type": "github"
       }
     },

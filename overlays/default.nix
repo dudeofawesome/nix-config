@@ -78,6 +78,12 @@
       disko = import ./patches/disko.nix { inherit lib final prev; };
 
       decky-openrgb = inputs.decky-openrgb.packages.${final.stdenv.hostPlatform.system}.decky-openrgb;
+
+      solidcraft = import ./patches/solidcraft.nix {
+        inherit lib;
+        pkgs = final;
+        package = inputs.solidcraft.packages.${final.stdenv.hostPlatform.system}.solidcraft;
+      };
     })
 
     # TODO: create overlays to make programs recognize configs in XDG's ~/.config

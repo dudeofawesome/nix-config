@@ -136,6 +136,12 @@
 
     gale.url = "github:Kesomannen/gale/pull/426/head";
 
+    solidcraft = {
+      # renovate: datasource=github-tags depName=solidcraft packageName=tangency-labs/solidcraft versioning=semver-coerced
+      url = "github:tangency-labs/solidcraft/v0.45.0";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     decky-openrgb = {
       url = "github:dudeofawesome/decky-openrgb";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
