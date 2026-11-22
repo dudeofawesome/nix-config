@@ -71,10 +71,7 @@ with pkgs.stdenv.targetPlatform;
           pkgs-unstable.bruno
           drawio
           d2
-          inkscape
           losslesscut-bin
-          obsidian
-          ollama
           opentofu
           snapmaker-orca
           solidcraft
