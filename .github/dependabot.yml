@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: nix
+    directory: /
+    schedule:
+      interval: daily
+    groups:
+      llms:
+        patterns:
+          - claude-code-nix
+          - codex-cli-nix
+          - nix4vscode
+      nixpkgs-stable:
+        patterns:
+          - nixpkgs-linux-stable
+          - nixpkgs-darwin-stable
+          - lanzaboote
+          - home-manager
+          - darwin
+          - nixos-raspberrypi
+      nixpkgs-unstable:
+        patterns:
+          - nixpkgs-unstable
+          - jovian
+          - home-manager-master

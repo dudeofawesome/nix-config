@@ -1,4 +1,4 @@
-"""Add shared-library mounts while preserving Wolf's mutable configuration."""
+"""Configure Steam and XFCE mounts while preserving Wolf's mutable configuration."""
 
 import json
 import os
@@ -11,42 +11,83 @@ import uuid
 import tomlkit
 
 
-def configure(document, library, hook):
-    apps = list(document.get("apps", []))
+def configure(document, library, hook, sway_config, gale=None, render_node=None):
+    gale = gale or {"profiles": [], "bundle": ""}
+    apps = [(None, app) for app in document.get("apps", [])]
     for profile in document.get("profiles", []):
-        apps.extend(profile.get("apps", []))
-    for app in apps:
+        apps.extend((profile.get("id"), app) for app in profile.get("apps", []))
+    for profile_id, app in apps:
         runner = app.get("runner", {})
         image = runner.get("image", "")
-        if runner.get("type", "").lower() != "docker" or not image.startswith(
-            "ghcr.io/games-on-whales/steam:"
-        ):
+        if runner.get("type", "").lower() != "docker":
+            continue
+        is_steam = image.startswith("ghcr.io/games-on-whales/steam:")
+        is_xfce = image.startswith("ghcr.io/games-on-whales/xfce:")
+        if not is_steam and not (is_xfce and library):
             continue
         mounts = runner.setdefault("mounts", [])
-        for source, destination in (
-            (library, "/var/lib/wolf-steamapps"),
-            (hook, "/etc/cont-init.d/40-shared-steam.sh"),
-        ):
+        managed_mounts = []
+        if is_steam:
+            if render_node:
+                app["render_node"] = render_node
+            managed_mounts.append((sway_config, "/etc/sway/config.d/90-valheim.conf", "ro"))
+            # Remove our old mounts when a profile is deselected, too. Steam
+            # apps in the global template never inherit a user's selection.
+            gale_targets = {
+                "/opt/wolf-gale",
+                "/etc/cont-init.d/45-gale.sh",
+                "/etc/sway/config.d/91-gale.conf",
+            }
+            for mount in list(mounts):
+                if mount.split(":")[1].rstrip("/") in gale_targets:
+                    mounts.remove(mount)
+            if profile_id in gale["profiles"]:
+                bundle = gale["bundle"]
+                managed_mounts.extend([
+                    (bundle, "/opt/wolf-gale", "ro"),
+                    (f"{bundle}/45-gale.sh", "/etc/cont-init.d/45-gale.sh", "ro"),
+                    (f"{bundle}/91-gale.conf", "/etc/sway/config.d/91-gale.conf", "ro"),
+                ])
+        if library:
+            managed_mounts.append((library, "/home/retro/Games/Steam/steamapps", "rw"))
+        if library and is_steam:
+            managed_mounts.extend([
+                (library, "/var/lib/wolf-steamapps", "rw"),
+                (hook, "/etc/cont-init.d/40-shared-steam.sh", "ro"),
+            ])
+        if is_xfce:
+            env = runner.setdefault("env", [])
+            for variable in list(env):
+                if variable.startswith("STEAM_DIR="):
+                    env.remove(variable)
+            env.append("STEAM_DIR=/home/retro/Games/Steam")
+        for source, destination, mode in managed_mounts:
             # Replace only mounts owned by this module. An old direct library
             # mount would hide private prefixes before our hook can save them.
             for mount in list(mounts):
                 target = mount.split(":")[1].rstrip("/")
-                if target == "/home/retro/.steam/debian-installation/steamapps":
+                if library and is_steam and target in (
+                    "/home/retro/.steam/steam/steamapps",
+                    "/home/retro/.steam/debian-installation/steamapps",
+                ):
                     raise ValueError("Remove the existing direct steamapps mount first")
                 if target == destination:
                     mounts.remove(mount)
-            mode = "ro" if source == hook else "rw"
             mounts.append(f"{source}:{destination}:{mode}")
-        options = json.loads(runner.get("base_create_json", "{}"))
-        caps = options.setdefault("HostConfig", {}).setdefault("CapAdd", [])
-        if "SYS_ADMIN" not in caps:
-            caps.append("SYS_ADMIN")
-        runner["base_create_json"] = json.dumps(options)
+        if library and is_steam:
+            options = json.loads(runner.get("base_create_json", "{}"))
+            caps = options.setdefault("HostConfig", {}).setdefault("CapAdd", [])
+            if "SYS_ADMIN" not in caps:
+                caps.append("SYS_ADMIN")
+            runner["base_create_json"] = json.dumps(options)
     return document
 
 
 def main():
-    config, default, library, hook = sys.argv[1:]
+    config, default, library, hook, sway_config, *extra = sys.argv[1:]
+    gale = json.loads(extra[0]) if extra else None
+    # Wolf expects the canonical renderD device name when identifying the GPU.
+    render_node = str(Path(extra[1]).resolve(strict=True)) if len(extra) > 1 and extra[1] else None
     path = Path(config)
     original = path.read_text() if path.exists() else None
     if original is None:
@@ -57,7 +98,7 @@ def main():
         document["uuid"] = str(uuid.uuid4())
     else:
         document = tomlkit.parse(original)
-    result = tomlkit.dumps(configure(document, library, hook))
+    result = tomlkit.dumps(configure(document, library, hook, sway_config, gale, render_node))
     if result == original:
         return
     path.parent.mkdir(parents=True, exist_ok=True)

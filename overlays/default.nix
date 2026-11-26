@@ -58,6 +58,7 @@
 
   nixpkgs.overlays = [
     inputs.nur.overlays.default
+    (import ./patches/nix-output-monitor.nix)
 
     (final: prev: {
       # TODO: remove this once stable fish is fixed https://github.com/NixOS/nixpkgs/issues/208951
@@ -77,6 +78,12 @@
       disko = import ./patches/disko.nix { inherit lib final prev; };
 
       decky-openrgb = inputs.decky-openrgb.packages.${final.stdenv.hostPlatform.system}.decky-openrgb;
+
+      solidcraft = import ./patches/solidcraft.nix {
+        inherit lib;
+        pkgs = final;
+        package = inputs.solidcraft.packages.${final.stdenv.hostPlatform.system}.solidcraft;
+      };
     })
 
     # TODO: create overlays to make programs recognize configs in XDG's ~/.config

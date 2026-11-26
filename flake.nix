@@ -31,7 +31,7 @@
 
     lanzaboote = {
       # renovate: datasource=github-tags depName=lanzaboote packageName=nix-community/lanzaboote versioning=semver-coerced
-      url = "github:nix-community/lanzaboote/v1.1.0";
+      url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
@@ -78,7 +78,6 @@
       url = "github:dudeofawesome/dotfiles";
       flake = false;
     };
-
     upaymeifixit_dotfiles = {
       url = "github:upaymeifixit/dotfiles";
       flake = false;
@@ -128,10 +127,20 @@
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
-
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
+    };
+
+    gale.url = "github:Kesomannen/gale/pull/426/head";
+    solidcraft = {
+      # renovate: datasource=github-tags depName=solidcraft packageName=tangency-labs/solidcraft versioning=semver-coerced
+      url = "github:tangency-labs/solidcraft/v0.45.0";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    pslinkd = {
+      url = "github:dudeofawesome/pslinkd";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     decky-openrgb = {
@@ -144,15 +153,9 @@
       url = "github:games-on-whales/wolf/stable";
       flake = false;
     };
-
     wolf-nvidia-vol = {
       url = "github:altano/flakes?dir=wolf-nvidia-vol";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
-    };
-
-    pslinkd = {
-      url = "github:dudeofawesome/pslinkd";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 

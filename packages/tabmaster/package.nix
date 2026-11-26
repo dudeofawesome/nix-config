@@ -8,11 +8,11 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "tabmaster";
-  version = "2.16.2";
+  version = "3.1.0";
 
   src = fetchzip {
     url = "https://github.com/Tormak9970/TabMaster/releases/download/v${finalAttrs.version}/TabMaster_v${finalAttrs.version}.zip";
-    hash = "sha256-kUfEJ3X8Bwv8FIIfOvTUeMvmwmFpZdRr9apmC6cfOzM=";
+    hash = "sha256-RAJOBmt6Pp3oQLbA8iL5oI6oNGmEhDmu0zKD9FYrqB0=";
   };
 
   dontConfigure = true;

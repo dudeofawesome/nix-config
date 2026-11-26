@@ -9,11 +9,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "thaw";
-  version = "2.0.0";
+  version = "2.1.0";
 
   src = fetchurl {
     url = "https://github.com/thaw-app/Thaw/releases/download/${finalAttrs.version}/Thaw_${finalAttrs.version}.zip";
-    hash = "sha256-R13j7Qlv75V5PKxc5upr/LqKajBj191khZ4vb+hY7Jw=";
+    hash = "sha256-I/6FDda24/girwCi2nbG1GE1wvqKDe746PoJ0e/T7sE=";
   };
 
   sourceRoot = ".";

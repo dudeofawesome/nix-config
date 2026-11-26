@@ -1,0 +1,31 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+
+  minimumReleaseAge: '3 days',
+  minimumReleaseAgeBehaviour: 'timestamp-required',
+
+  packageRules: [
+    {
+      description: 'Exempt Git refs without release timestamps from the cooldown',
+      matchDatasources: ['git-refs'],
+      minimumReleaseAge: null,
+    },
+    {
+      description: 'Exempt custom feeds that do not expose release timestamps',
+      matchDatasources: ['custom.claude', 'custom.decky', 'custom.sparkle'],
+      minimumReleaseAge: null,
+    },
+    {
+      description: 'Exempt update types without release-age validation from the cooldown',
+      matchUpdateTypes: [
+        'pin',
+        'lockFileMaintenance',
+        'lockfileUpdate',
+        'bump',
+        'rollback',
+        'replacement',
+      ],
+      minimumReleaseAge: null,
+    },
+  ],
+}

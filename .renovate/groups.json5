@@ -1,0 +1,35 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+
+  packageRules: [
+    {
+      matchManagers: ['nix', 'custom.regex'],
+      groupName: null,
+    },
+    {
+      matchManagers: ['nix', 'custom.regex'],
+      matchDepNames: [
+        'nixpkgs-linux-stable',
+        'nixpkgs-darwin-stable',
+        'lanzaboote',
+        'home-manager',
+        'darwin',
+        'nixos-raspberrypi',
+      ],
+      groupName: 'nixpkgs stable',
+      groupSlug: 'nixpkgs-stable',
+    },
+    {
+      matchManagers: ['nix', 'custom.regex'],
+      matchDepNames: ['nixpkgs-unstable', 'jovian', 'home-manager-master'],
+      groupName: 'nixpkgs unstable',
+      groupSlug: 'nixpkgs-unstable',
+    },
+    {
+      matchManagers: ['nix', 'custom.regex'],
+      matchDepNames: ['nix4vscode', 'claude-code-nix', 'codex-cli-nix'],
+      groupName: 'LLMs',
+      groupSlug: 'llms',
+    },
+  ],
+}

@@ -35,4 +35,14 @@
   #     ];
   #   };
   # };
+
+  # Use the external Elan USB reader; the built-in `spi-SYNA8003:00` is unsupported.
+  services.fprintd.enable = true;
+
+  home-manager.users.dudeofawesome = {
+    programs = {
+      codex.enable = lib.mkForce false;
+      vscode.enable = lib.mkForce false;
+    };
+  };
 }

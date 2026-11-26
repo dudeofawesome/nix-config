@@ -1,0 +1,88 @@
+name: Test updateScripts
+
+on:
+  push:
+    branches: [main]
+    tags-ignore: ['*']
+    paths:
+      - 'packages/**'
+      - 'scripts/check-package-updates.mjs'
+  pull_request:
+    paths:
+      - 'packages/**'
+      - 'scripts/check-package-updates.mjs'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  package-update-matrix:
+    name: Find package updaters
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      matrix: ${{ steps.packages.outputs.matrix }}
+      has-updates: ${{ steps.packages.outputs.has-updates }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@9383ce2bf08796b65508822f5982f49151badc4e # main
+
+      - name: Find changed packages
+        id: packages
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PUSH_BASE: ${{ github.event.before }}
+        run: |
+          head=HEAD
+          if [[ "$EVENT_NAME" == pull_request ]]; then
+            # Select PR changes even when the merge checkout includes newer main commits.
+            head=$PR_HEAD
+            base=$(git merge-base "$PR_BASE" "$head")
+          elif [[ "$PUSH_BASE" =~ ^0+$ ]]; then
+            base=$(git hash-object -t tree /dev/null)
+          else
+            base=$PUSH_BASE
+          fi
+          node scripts/check-package-updates.mjs --matrix "$base" "$head"
+
+  check-package-updates:
+    name: Check updater (${{ matrix.package }})
+    needs: package-update-matrix
+    if: needs.package-update-matrix.outputs.has-updates == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.package-update-matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@9383ce2bf08796b65508822f5982f49151badc4e # main
+
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@f69a2d3e148e90223fe63ab6e3f6331f2e7e33dc # main
+        with:
+          use-flakehub: disabled
+          use-gha-cache: enabled
+
+      - name: Run updater and verify convergence
+        env:
+          PACKAGE: ${{ matrix.package }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/check-package-updates.mjs --package "$PACKAGE"

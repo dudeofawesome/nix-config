@@ -1,0 +1,59 @@
+name: Automerge Dependabot flake updates
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+
+      - name: Check updated inputs against Renovate's flake allowlist
+        id: policy
+        if: >-
+          steps.metadata.outputs.package-ecosystem == 'nix' &&
+          (steps.metadata.outputs.dependency-group == 'llms' ||
+           steps.metadata.outputs.dependency-group == '')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          INPUT_NAMES: ${{ steps.metadata.outputs.dependency-names }}
+        shell: bash
+        run: |
+          allowed=$(
+            gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/$GITHUB_REPOSITORY/contents/.renovate/automerge.json5?ref=$BASE_SHA" |
+              npx --yes json5@2.2.3 |
+              jq --arg names "$INPUT_NAMES" '
+                [
+                  .packageRules[]
+                  | select(.matchManagers == ["nix"] and .automerge == true)
+                  | select(.matchUpdateTypes | index("digest") or index("lockfileUpdate"))
+                  | .matchDepNames[]
+                ] as $approved
+                | ($names | split(",") | map(trim)) as $updated
+                | ($updated | length > 0) and (($updated - $approved) == [])
+              '
+          )
+          echo "allowed=$allowed" >> "$GITHUB_OUTPUT"
+
+      - name: Enable auto-merge
+        if: steps.policy.outputs.allowed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          files=$(gh pr diff "$PR_URL" --name-only)
+          if [[ "$files" == "flake.lock" ]]; then
+            gh pr merge --auto --rebase --match-head-commit "$HEAD_SHA" "$PR_URL"
+          fi

@@ -1,0 +1,37 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+
+  packageRules: [
+    {
+      matchDepTypes: ['custom-nix-package'],
+      matchDatasources: ['github-releases', 'github-tags'],
+      extractVersion: '^v?(?<version>.+)$',
+    },
+    {
+      // Regex URL updates need their lock entries regenerated explicitly.
+      matchManagers: ['custom.regex'],
+      matchFileNames: ['flake.nix'],
+      postUpgradeTasks: {
+        commands: [
+          "nix --extra-experimental-features 'nix-command flakes' flake lock",
+        ],
+        executionMode: 'branch',
+        fileFilters: ['flake.lock'],
+        installTools: { nix: {} },
+      },
+    },
+    {
+      matchDepTypes: ['custom-nix-package'],
+      groupName: null,
+      semanticCommitType: 'chore',
+      semanticCommitScope: '{{depName}}',
+      postUpgradeTasks: {
+        commands: ['node scripts/renovate-nix-packages-update.mjs'],
+        dataFileTemplate: '{{{toJSON (toObject "depName" depName "packageFile" packageFile "newValue" newValue "newDigest" newDigest)}}}',
+        executionMode: 'update',
+        fileFilters: ['packages/**'],
+        installTools: { nix: {} },
+      },
+    },
+  ],
+}

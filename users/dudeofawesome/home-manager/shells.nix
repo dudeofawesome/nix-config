@@ -14,6 +14,11 @@
 
     moor.enable = true;
 
+    devenv = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     process-compose = {
       enable = true;
 

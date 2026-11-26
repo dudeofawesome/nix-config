@@ -24,6 +24,8 @@ let
 
   steamPython = pkgs.python3.withPackages (ps: [ ps.tomlkit ]);
   steamHook = "${cfg.stateDirectory}/40-shared-steam.sh";
+  steamSwayConfig = "${cfg.stateDirectory}/90-valheim.conf";
+  galeBundle = import ./wolf/gale.nix { inherit pkgs; };
 in
 {
   options.services.games-on-whales.wolf = {
@@ -42,12 +44,26 @@ in
     };
 
     sharedSteamLibrary = {
-      enable = lib.mkEnableOption "a shared Steam download library with private Proton data";
+      enable = lib.mkEnableOption "a shared Steam library for Steam and XFCE with private Proton data";
       directory = lib.mkOption {
         type = lib.types.str;
         default = "/mnt/games/steamapps";
-        description = "Host steamapps directory shared by GOW Steam containers. App users must have write access (default UID/GID 1000).";
+        description = "Host steamapps directory shared by GOW Steam and XFCE containers, also available at /home/retro/Games/Steam/steamapps for mod managers. App users must have write access (default UID/GID 1000).";
       };
+    };
+
+    gale.profiles = lib.mkOption {
+      type = with lib.types; listOf str;
+      default = [ ];
+      example = [ "lauren" ];
+      description = "Wolf profile IDs whose GOW Steam containers receive Gale and a Steam library shortcut. Provisioning runs before Steam starts; an empty list disables Gale mounts.";
+    };
+
+    steamRenderNode = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "/dev/dri/by-path/pci-0000:82:00.0-render";
+      description = "GPU render node for all GOW Steam apps, including existing profile overrides. Device symlinks are resolved at Wolf startup. Null preserves existing assignments; clearing this option does not undo saved assignments.";
     };
 
     nvidia.enable = lib.mkOption {
@@ -80,6 +96,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.gale.profiles == [ ] || pkgs.stdenv.hostPlatform.isx86_64;
+        message = "Wolf's Gale AppImage is available only for x86_64 Linux hosts.";
+      }
+    ];
+
     # These listening ports overlap Linux's ephemeral range. Reserve them so
     # host-networked applications cannot claim them before Wolf starts.
     boot.kernel.sysctl."net.ipv4.ip_local_reserved_ports" = "47984,47989,47999,48010,48100,48200";
@@ -117,18 +140,33 @@ in
       unitConfig.RequiresMountsFor = lib.mkIf cfg.sharedSteamLibrary.enable [
         cfg.sharedSteamLibrary.directory
       ];
-      preStart = lib.mkIf cfg.sharedSteamLibrary.enable (
-        lib.mkBefore ''
+      preStart = lib.mkBefore (
+        lib.optionalString cfg.sharedSteamLibrary.enable ''
           install -d -m 0770 -o 1000 -g 1000 \
             ${lib.escapeShellArg cfg.sharedSteamLibrary.directory} \
             ${lib.escapeShellArg "${cfg.sharedSteamLibrary.directory}/compatdata"} \
             ${lib.escapeShellArg "${cfg.sharedSteamLibrary.directory}/shadercache"}
           install -m 0644 ${./wolf/40-shared-steam.sh} ${lib.escapeShellArg steamHook}
+        ''
+        + ''
+          install -m 0644 ${./wolf/90-valheim.conf} ${lib.escapeShellArg steamSwayConfig}
           ${steamPython}/bin/python ${./wolf/configure-steam.py} \
             ${lib.escapeShellArg "${cfg.stateDirectory}/cfg/config.toml"} \
             ${inputs.wolf-udev-rules}/src/moonlight-server/state/default/config.include.toml \
-            ${lib.escapeShellArg cfg.sharedSteamLibrary.directory} \
-            ${lib.escapeShellArg steamHook}
+            ${
+              lib.escapeShellArg (if cfg.sharedSteamLibrary.enable then cfg.sharedSteamLibrary.directory else "")
+            } \
+            ${lib.escapeShellArg steamHook} \
+            ${lib.escapeShellArg steamSwayConfig} \
+            ${
+              lib.escapeShellArg (
+                builtins.toJSON {
+                  profiles = cfg.gale.profiles;
+                  bundle = if cfg.gale.profiles == [ ] then "" else toString galeBundle;
+                }
+              )
+            } \
+            ${lib.escapeShellArg (if cfg.steamRenderNode == null then "" else cfg.steamRenderNode)}
         ''
       );
     };
@@ -170,6 +208,11 @@ in
           "--ipc=host"
           "--security-opt=label=disable"
         ]
+        # /dev is bind-mounted above, but each GPU still needs cgroup access.
+        # NVENC and Wolf's CUDA index mapping require all NVIDIA GPUs to be
+        # accessible, including /dev/nvidia1 and higher on multi-GPU hosts.
+        # https://github.com/games-on-whales/wolf/issues/233
+        ++ lib.optional cfg.nvidia.enable "--device-cgroup-rule=c 195:* rmw"
         ++ cfg.extraOptions;
       };
     };

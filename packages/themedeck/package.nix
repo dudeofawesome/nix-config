@@ -2,6 +2,7 @@
   lib,
   stdenvNoCC,
   fetchzip,
+  deno,
   nix-update-script,
   python3,
   writeShellScriptBin,
@@ -23,11 +24,11 @@ in
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "themedeck";
-  version = "3.0.1";
+  version = "3.1.7";
 
   src = fetchzip {
     url = "https://github.com/BrenticusMaximus/ThemeDeck/releases/download/v${finalAttrs.version}/ThemeDeck-v${finalAttrs.version}.zip";
-    hash = "sha256-AY14QkqtyrQmtsArFrxcONfN4J8mOnCOHulI2ht2oVY=";
+    hash = "sha256-WeYvZuuugrQvs+ke7lkabIjQFbrFf3yhLSICLhH27LU=";
   };
 
   dontConfigure = true;
@@ -43,7 +44,10 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   passthru = {
     potProvider = lib.getExe' yt-dlp-env "bgutil-ytdlp-pot-provider";
-    runtimeDependencies = [ yt-dlp-with-pot-provider ];
+    runtimeDependencies = [
+      deno
+      yt-dlp-with-pot-provider
+    ];
     ytDlp = yt-dlp-with-pot-provider;
 
     updateScript = nix-update-script {

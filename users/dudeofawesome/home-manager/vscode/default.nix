@@ -69,10 +69,12 @@ with lib;
                   "bruno-api-client.bruno"
                   # "connor4312.nodejs-testing"
                   "coopermaruyama.nix-embedded-languages"
+                  "datakurre.devenv"
                   "deerawan.vscode-dash"
                   "drknoxy.eslint-disable-snippets"
                   "eeyore.yapf"
                   "effectful-tech.effect-vscode"
+                  "esphome.esphome-vscode"
                   "ezoosk.claude-context-bar"
                   "fabiospampinato.vscode-diff"
                   "flesler.url-encode"
@@ -143,7 +145,21 @@ with lib;
           ms-kubernetes-tools.vscode-kubernetes-tools
           ms-python.python
           ms-python.vscode-pylance
-          ms-toolsai.jupyter
+          (ms-toolsai.jupyter.overrideAttrs (oldAttrs: {
+            postFixup = (oldAttrs.postFixup or "") + ''
+              extensionDir="$out/share/vscode/extensions/ms-toolsai.jupyter"
+              # VS Code follows Jupyter's temp -> /tmp symlink when computing
+              # extension size, which can recurse indefinitely and exhaust memory.
+              extensionSize="$(
+                ${pkgs-unstable.coreutils}/bin/du --bytes --summarize "$extensionDir" \
+                  | ${pkgs-unstable.coreutils}/bin/cut -f1
+              )"
+              ${lib.getExe pkgs-unstable.jq} --argjson size "$extensionSize" \
+                '.__metadata.size = $size' \
+                "$extensionDir/package.json" > "$extensionDir/package.json.tmp"
+              mv "$extensionDir/package.json.tmp" "$extensionDir/package.json"
+            '';
+          }))
           ms-vscode-remote.remote-ssh
           ms-vscode-remote.remote-ssh-edit
           ms-vscode-remote.remote-wsl
@@ -168,7 +184,6 @@ with lib;
           visualstudioexptteam.intellicode-api-usage-examples
           visualstudioexptteam.vscodeintellicode
           vitest.explorer
-          wmaurer.change-case
           yoavbls.pretty-ts-errors
           yzhang.markdown-all-in-one
 

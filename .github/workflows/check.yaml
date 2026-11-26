@@ -20,10 +20,10 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # main
+        uses: DeterminateSystems/nix-installer-action@9383ce2bf08796b65508822f5982f49151badc4e # main
 
       - name: Enable Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@84c0677f58dcedf3b91f8223ce36a9ea5b3c84b7 # main
+        uses: DeterminateSystems/magic-nix-cache-action@f69a2d3e148e90223fe63ab6e3f6331f2e7e33dc # main
         with:
           use-flakehub: disabled
           use-gha-cache: enabled
@@ -32,6 +32,21 @@ jobs:
         shell: bash
         run: |
           nix flake check \
+            --no-update-lock-file \
             --all-systems \
             --keep-going \
             ;
+
+  test-renovate-nix-updater:
+    name: Test custom package updater
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Test custom package updater
+        run: |
+          node --test \
+            scripts/renovate-nix-packages-update.test.mjs \
+            scripts/check-package-updates.test.mjs

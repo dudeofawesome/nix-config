@@ -13,6 +13,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   src = fetchgit {
     url = "https://git.2ki.xyz/snow/overcast.git";
+    # renovate: datasource=git-refs depName=overcast packageName=https://git.2ki.xyz/snow/overcast.git versioning=git currentValue=trunk
     rev = "0a4a4019533fd84161726381ef31af482bc893d8";
     hash = "sha256-+60O71BcGg2deGuNXJVnge54PSXQmYpX2V3N2/shjMg=";
   };

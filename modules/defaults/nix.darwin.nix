@@ -10,6 +10,10 @@ let
   hasGithubToken = builtins.hasAttr githubTokenPath config.sops.templates;
 in
 {
+  # Keep rebuilds from triggering Spotlight indexing of the Nix volume.
+  # GUI apps are copied outside /nix so they remain searchable.
+  services.spotlight.excludedVolumes = lib.mkDefault [ "/nix" ];
+
   determinateNix = {
     customSettings.auto-optimise-store = lib.mkDefault true;
 

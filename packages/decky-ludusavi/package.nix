@@ -14,6 +14,7 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "decky-ludusavi";
+  # renovate: datasource=custom.decky depName=decky-ludusavi packageName=Ludusavi
   version = "1.2.2";
 
   artifactHash = "8a69f45aadce763406b5c27bfef194761006d5e01c5e8841badeb13a27dd0d88";

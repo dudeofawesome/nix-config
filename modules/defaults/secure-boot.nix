@@ -12,16 +12,9 @@
       pkiBundle = "/var/lib/sbctl";
     };
 
-    initrd = {
-      # enable single-entry decrypt
-      systemd = {
-        enable = lib.mkForce true;
-      };
-
-      availableKernelModules = [
-        "tpm_crb"
-        "tpm_tis"
-      ];
-    };
+    initrd.availableKernelModules = [
+      "tpm_crb"
+      "tpm_tis"
+    ];
   };
 }

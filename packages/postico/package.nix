@@ -15,11 +15,12 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "postico";
   version = "2.3-dev";
-  build = "9809";
+  # renovate: datasource=custom.sparkle depName=postico packageName=postico
+  build = "9821";
 
   src = fetchurl {
     url = "https://downloads.eggerapps.at/postico/postico-${finalAttrs.build}.dmg";
-    hash = "sha256-DFYlQG6XlJQOVddqKcbyl7LapVF1sbm5aCFYPEl10bk=";
+    hash = "sha256-ZCgL9VNT/mBTonglidnB/cGmjljFkgU1Os4Vs59aErk=";
   };
 
   sourceRoot = ".";

@@ -1,4 +1,5 @@
 {
+  lib,
   owner,
   pkgs,
   ...
@@ -42,9 +43,12 @@
 
   # Preserve Steam Input's desktop bindings on Wayland without requiring the
   # Xwayland remote-input permission prompt.
-  programs.steam.package = pkgs.steam.override {
-    extraEnv.LD_PRELOAD = "${pkgs.pkgsi686Linux.extest}/lib/libextest.so";
-  };
+  # Replace Jovian's package definition with its customized variant.
+  programs.steam.package = lib.mkForce (
+    pkgs.jovianPackages.steam.override {
+      extraEnv.LD_PRELOAD = "${pkgs.pkgsi686Linux.extest}/lib/libextest.so";
+    }
+  );
 
   services = {
     geoclue2.appConfig.darkman = {

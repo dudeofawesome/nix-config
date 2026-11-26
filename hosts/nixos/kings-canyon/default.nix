@@ -2,6 +2,7 @@
   inputs,
   config,
   owner,
+  pkgs-unstable,
   ...
 }:
 {
@@ -14,6 +15,7 @@
     ../../../modules/defaults/tang.nix
     ../../../modules/presets/os/doa-cluster
     ./clevis.nix
+    ./k3s-gpu.nix
   ];
 
   # Retain the repository deploy credential during the service migration.
@@ -35,10 +37,36 @@
   networking = {
     hostId = "f5764075"; # head -c 8 /etc/machine-id
     firewall.enable = false;
+
+    # Keep networkd running after initrd so timesyncd sees current link state.
+    useNetworkd = true;
+    useDHCP = true;
+  };
+
+  systemd.network = {
+    # Flannel and Tailscale own routes and policy rules outside networkd.
+    config.networkConfig = {
+      ManageForeignRoutes = false;
+      ManageForeignRoutingPolicyRules = false;
+    };
+
+    # A disconnected secondary NIC must not hold up network-online.target.
+    wait-online.anyInterface = true;
+
+    networks = {
+      # Extend NixOS's physical-Ethernet DHCP rule, excluding virtual links.
+      "99-ethernet-default-dhcp" = {
+        linkConfig.RequiredForOnline = "routable";
+      };
+    };
   };
 
   # Run ARM64 Linux build tools through QEMU user-mode emulation.
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # Use unstable's newer NVIDIA driver, built against this host's kernel.
+  hardware.nvidia.package =
+    (pkgs-unstable.linuxPackagesFor config.boot.kernelPackages.kernel).nvidiaPackages.latest;
 
   nix.settings = {
     max-jobs = 6;
@@ -58,6 +86,12 @@
   };
 
   services = {
+    # Keep using dnsmasq with networkd. Our k3s is configured for dnsmasq for now.
+    resolved.enable = false;
+
+    # Allow more workloads on this host while leaving IP headroom in its /24 pod CIDR.
+    k3s.extraFlags = [ "--kubelet-arg=max-pods=200" ];
+
     iperf3 = {
       enable = true;
       # TODO: consider adding auth
@@ -70,6 +104,13 @@
       enable = true;
       openFirewall = true;
       sharedSteamLibrary.enable = true;
+      # RTX 3090; resolve the PCI path at startup rather than pin renderD numbering.
+      steamRenderNode = "/dev/dri/by-path/pci-0000:82:00.0-render";
+      gale.profiles = [
+        "dudeofawesome"
+        "lauren"
+        "edgar"
+      ];
       # Avoid CUDA context crashes on subsequent client connections.
       # https://github.com/games-on-whales/wolf/issues/501
       environment.WOLF_USE_ZERO_COPY = "FALSE";
@@ -84,10 +125,6 @@
       };
     };
   };
-
-  # First boot is for enrollment and restoring state, before taking over services.
-  systemd.services.k3s.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
-  systemd.sockets.tangd.unitConfig.ConditionPathExists = "/var/lib/kings-canyon/migration-ready";
 
   # Initial installation release; retain this across future upgrades.
   system.stateVersion = "26.05";
