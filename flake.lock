@@ -376,11 +376,11 @@
     "fish-shell-integrations": {
       "flake": false,
       "locked": {
-        "lastModified": 1702667764,
-        "narHash": "sha256-fvtimmdxFDA+MQkZODMMQTnH7ICVHtsofPSk0fl7nm0=",
+        "lastModified": 1733300630,
+        "narHash": "sha256-j6BY1iJbSXdrn/ggbgXBwy2mp3BddcYmQTG2WtB3Q0A=",
         "owner": "dudeofawesome",
         "repo": "fish-plugin-shell-integrations",
-        "rev": "72c9c7a6d1e2923c8d70da02a0e440c24744e9e4",
+        "rev": "76143c5ed6d0fabce86836144bfd76f695a1fd9b",
         "type": "github"
       },
       "original": {
