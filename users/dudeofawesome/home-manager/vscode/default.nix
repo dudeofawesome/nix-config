@@ -74,6 +74,7 @@ with lib;
                   "drknoxy.eslint-disable-snippets"
                   "eeyore.yapf"
                   "effectful-tech.effect-vscode"
+                  "esphome.esphome-vscode"
                   "ezoosk.claude-context-bar"
                   "fabiospampinato.vscode-diff"
                   "flesler.url-encode"
@@ -183,7 +184,6 @@ with lib;
           visualstudioexptteam.intellicode-api-usage-examples
           visualstudioexptteam.vscodeintellicode
           vitest.explorer
-          wmaurer.change-case
           yoavbls.pretty-ts-errors
           yzhang.markdown-all-in-one
 
