@@ -6,4 +6,9 @@
     ':disableRateLimiting',
     'local>dudeofawesome/nix-config//.renovate/default.json5',
   ],
+
+  // Dependabot handles flake revisions. The regex manager tracks versioned URLs.
+  // Switch flake revisions back to Renovate once our runner supports per-input
+  // flake.lock updates for branch URLs: https://github.com/renovatebot/renovate/pull/45258
+  nix: { enabled: false },
 }
