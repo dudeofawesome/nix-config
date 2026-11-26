@@ -107,6 +107,7 @@
       # RTX 3090; resolve the PCI path at startup rather than pin renderD numbering.
       steamRenderNode = "/dev/dri/by-path/pci-0000:82:00.0-render";
       gale.profiles = [
+        "dudeofawesome"
         "lauren"
         "edgar"
       ];
