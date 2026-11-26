@@ -9,5 +9,6 @@
     './updates.json5',
     './changelogs.json5',
     './groups.json5',
+    './automerge.json5',
   ],
 }
