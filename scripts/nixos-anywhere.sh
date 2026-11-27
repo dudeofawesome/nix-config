@@ -8,27 +8,31 @@ set -e
 #   nixos-anywhere.sh soto-server root@10.0.1.10
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-  echo "Usage: $0 <host> <ssh-destination>" 1>&2
+  echo "Usage: $0 <host> <ssh-destination> [extra nixos-anywhere args...]" 1>&2
   echo "  eg: $0 badlands-vm root@10.0.0.100" 1>&2
+  echo "  eg: SSHPASS=... $0 soto-server nixos@10.0.1.10 --env-password" 1>&2
   exit 0
 fi
 
 flake="$1"
 ssh_conn="$2"
+shift 2
 
 # TODO: get the path from the config
 fde_password_file="/run/secrets/hosts/nixos/$flake/fde_password"
 fde_password_dir="$(dirname "$fde_password_file")"
 
-sudo mkdir -p "$fde_password_dir"
-sudo chown "$USER" "$fde_password_dir"
+if [[ ! -w "$fde_password_dir" ]]; then
+  sudo mkdir -p "$fde_password_dir"
+  sudo chown "$USER" "$fde_password_dir"
+fi
 sops \
   --decrypt \
   --extract '["hosts"]["nixos"]["'"$flake"'"]["fde_password"]' \
   --output "$fde_password_file" \
   "hosts/nixos/$flake/secrets.yaml"
 
-nixos-anywhere -- \
+nixos-anywhere \
   --flake .#"$flake" \
   --build-on remote \
   --copy-host-keys \
@@ -38,6 +42,7 @@ nixos-anywhere -- \
     `# local path` \
     "$fde_password_file" \
   --debug \
+  "$@" \
   "$ssh_conn"
 
 
