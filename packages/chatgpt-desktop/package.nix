@@ -35,7 +35,7 @@ stdenv.mkDerivation (
   {
     pname = "chatgpt-desktop";
     # renovate: datasource=custom.sparkle depName=chatgpt-desktop packageName=chatgpt-desktop
-    version = "26.1111.21308";
+    version = "26.1111.71704";
 
     src = fetchurl {
       inherit (source) url hash;
