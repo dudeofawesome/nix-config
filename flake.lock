@@ -344,11 +344,11 @@
     "fish-nvm": {
       "flake": false,
       "locked": {
-        "lastModified": 1726295624,
-        "narHash": "sha256-GTEkCm+OtxMS3zJI5gnFvvObkrpepq1349/LcEPQRDo=",
+        "lastModified": 1782130753,
+        "narHash": "sha256-SI30Md3OKCN5qZ3pT/ZcweB8njGZ9okJFnCLqmfmL44=",
         "owner": "jorgebucaran",
         "repo": "nvm.fish",
-        "rev": "a0892d0bb2304162d5faff561f030bb418cac34d",
+        "rev": "85cadd56f71b11574566dbd6c32e0027e361d085",
         "type": "github"
       },
       "original": {
