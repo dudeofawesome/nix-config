@@ -15,11 +15,11 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "launchcontrol";
   # renovate: datasource=custom.sparkle depName=launchcontrol packageName=launchcontrol
-  version = "2.12";
+  version = "2.13.1";
 
   src = fetchurl {
     url = "https://www.soma-zone.com/download/files/LaunchControl-${finalAttrs.version}_update.tar.xz";
-    hash = "sha256-ZaNnoxsp4FLSF2vehEuYIPO+kyR04nHlyTgZHgfBcxg=";
+    hash = "sha256-dyTAYAbp0oQhckTWPGykUeM6sxuLPiRFPYBBl4syrmE=";
   };
 
   sourceRoot = ".";
