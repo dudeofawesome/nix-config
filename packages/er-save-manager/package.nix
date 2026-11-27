@@ -24,7 +24,7 @@ appimageTools.wrapType2 {
 
   extraInstallCommands = ''
     install -Dm444 \
-      ${appimageContents}/er-save-manager.desktop \
+      ${appimageContents}/io.github.hapfel1.er_save_manager.desktop \
       $out/share/applications/er-save-manager.desktop
     install -Dm444 \
       ${appimageContents}/er-save-manager.png \
